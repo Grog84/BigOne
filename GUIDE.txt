@@ -1,0 +1,46 @@
+Directory Structure
+--------------------
+
+Here is a short guide about the repository directory structure.
+
+This structure should be replicated inside the macro subfolder named "Prototype",
+except for those folders that are not needed (i.e. Audio) and the 3rd parties folder.
+
+Do NOT create a folder without adding some content inside of it: this could mess up
+the repository. Create the directories, following the given structure,
+only when it is needed.
+
+- 3rd-Parties
+- Animations
+- Audio
+    : Music
+    : SFX
+- Materials
+- Models
+- Plugins
+- Prefabs
+- Resources (Remember, this is a special unity folder, do not use it if you don't know what you are doing)
+- Textures
+- Sandbox
+- _Scenes
+    : Levels
+    : Other
+- Scripts
+    : Editor
+- Shaders
+ 
+Scene hierarchy structure
+--------------------
+
+A brief rule of thumb on how to arrange the objects inside a scene.
+It is not mandatory to follow this scheme but consider it as a reference.
+ALL empty objects MUST be located at 0, 0, 0 in the world system of reference.
+
+- Management
+- GUI
+- Cameras
+- Lights
+- World
+    : Terrain
+    : Props
+- _Dynamic

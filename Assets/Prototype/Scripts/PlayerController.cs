@@ -53,8 +53,8 @@ public class PlayerController : MonoBehaviour {
 		controller.Move (moveDirection * Time.deltaTime);
 
 	
-		anim.SetBool ("isGrounded", controller.isGrounded);
-		anim.SetFloat ("speed", (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal")) ));
+		//anim.SetBool ("isGrounded", controller.isGrounded);
+		//anim.SetFloat ("speed", (Mathf.Abs(Input.GetAxis("Vertical")) + Mathf.Abs(Input.GetAxis("Horizontal")) ));
 
 		//Move PLayer in diferent directions
 		if(Input.GetAxis("Horizontal") != 0  && Input.GetAxis("Vertical") !=0 || Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") !=0 )

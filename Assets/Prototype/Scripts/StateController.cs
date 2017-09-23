@@ -14,7 +14,7 @@ public class StateController : MonoBehaviour {
     [HideInInspector] public NavMeshAgent navMeshAgent;
     [HideInInspector] public int nextWayPoint;
 
-    private bool isActive;
+    private bool isActive = true;
 
 	// Use this for initialization
 	void Awake () {

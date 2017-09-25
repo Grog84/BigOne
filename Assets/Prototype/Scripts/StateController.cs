@@ -10,9 +10,12 @@ public class StateController : MonoBehaviour {
     public EnemyStats enemyStats;
     public Transform eyes;
     public List<Transform> wayPointList;
+    public State remainState;
 
     [HideInInspector] public NavMeshAgent navMeshAgent;
     [HideInInspector] public int nextWayPoint;
+    [HideInInspector] public Transform chaseTarget;
+    [HideInInspector] public float stateTimeElapsed;
 
     private bool isActive = true;
 
@@ -32,12 +35,28 @@ public class StateController : MonoBehaviour {
 
 	}
 
-    private void OnDrawGizmos()
+    void OnDrawGizmos()
     {
         if (currentState != null && eyes != null)
         {
             Gizmos.color = currentState.sceneGizmosColor;
-            Gizmos.DrawSphere(eyes.position, 0.2f);
+            Gizmos.DrawWireSphere(eyes.position, enemyStats.lookSphereCastRadius);
         }
     }
+
+    public void TransitionToState(State nextState)
+    {
+        if (nextState != remainState)
+        {
+            currentState = nextState;
+            // this should/coud be moved in the state itself
+            OnExitState();
+        }
+    }
+
+    private void OnExitState()
+    {
+        stateTimeElapsed = 0;
+    }
+
 }

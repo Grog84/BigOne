@@ -11,6 +11,7 @@ public class EnemyStats : ScriptableObject {
     public float acceleration = 10f;
     public float stoppingDistance = 2f;
 
-    public float lookRange = 80f;
+    public float lookRange = 8f;
+    public float lookSphereCastRadius = 0.5f;
 
 }

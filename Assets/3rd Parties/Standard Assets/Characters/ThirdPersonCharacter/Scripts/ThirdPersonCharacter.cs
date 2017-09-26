@@ -118,8 +118,16 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		void UpdateAnimator(Vector3 move)
 		{
 			// update the animator parameters
-			m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
-			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+			    m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
+			    
+            }
+            else
+            {
+                m_Animator.SetFloat("Forward", Mathf.Clamp(m_ForwardAmount,0f, 0.5f), 0.1f, Time.deltaTime);
+            }
+            m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetBool("Crouch", m_Crouching);
 			m_Animator.SetBool("OnGround", m_IsGrounded);
 			if (!m_IsGrounded)

@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class StateController : MonoBehaviour {
 
     public State currentState;
-    public EnemyStats enemyStats;
+    public MyAgentStats agentStats;
     public Transform eyes;
     public List<Transform> wayPointList;
     public State remainState;
@@ -40,7 +40,7 @@ public class StateController : MonoBehaviour {
         if (currentState != null && eyes != null)
         {
             Gizmos.color = currentState.sceneGizmosColor;
-            Gizmos.DrawWireSphere(eyes.position, enemyStats.lookSphereCastRadius);
+            Gizmos.DrawWireSphere(eyes.position, agentStats.lookSphereCastRadius);
         }
     }
 

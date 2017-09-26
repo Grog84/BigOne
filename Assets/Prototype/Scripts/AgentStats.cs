@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName ="Prototype/Stats/Enemy")]
-public class EnemyStats : ScriptableObject {
+[CreateAssetMenu(menuName = "Prototype/AgentStats")]
+public class MyAgentStats : ScriptableObject {
 
     // Steering
     public float speed = 3.0f;

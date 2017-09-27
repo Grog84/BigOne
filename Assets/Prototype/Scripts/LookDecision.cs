@@ -18,6 +18,7 @@ public class LookDecision : Decision
 
         Debug.DrawRay(controller.eyes.position, controller.eyes.forward.normalized * controller.agentStats.lookRange, Color.green);
 
+        //condizoine per il fov
         if (Physics.SphereCast(controller.eyes.position, controller.agentStats.lookSphereCastRadius, controller.eyes.forward, out hit, controller.agentStats.lookRange)
             && hit.collider.CompareTag("Player"))
         {

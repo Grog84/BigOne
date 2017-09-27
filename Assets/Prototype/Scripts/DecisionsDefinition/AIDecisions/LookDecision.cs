@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/Look")]
+[CreateAssetMenu(menuName = "Prototype/Decisions/AI/Look")]
 public class LookDecision : Decision
 {
 

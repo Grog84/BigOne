@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu (menuName = "Prototype/State")]
 public class State : ScriptableObject {
 
-    public AIAction[] actions;
+    public _Action[] actions;
     public Transition[] transitions;
     public Color sceneGizmosColor = Color.gray;
 

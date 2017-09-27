@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Prototype/AIActions/Patrol")]
-public class PatrolAction : AIAction
+public class PatrolAction : _Action
 {
     public override void Execute(StateController controller)
     {

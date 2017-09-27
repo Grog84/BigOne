@@ -7,7 +7,8 @@ using UnityEngine.AI;
 public class StateController : MonoBehaviour {
 
     public State currentState;
-    public MyAgentStats agentStats;
+    public MyAgentStats agentStats;        // more controllers just for this issue?
+    public CharacterStats characterStats;  // more controllers just for this issue?
     public Transform eyes;
     public List<Transform> wayPointList;
     public State remainState;

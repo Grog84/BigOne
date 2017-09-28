@@ -6,6 +6,8 @@ using UnityEngine;
 public class State : ScriptableObject {
 
     public _Action[] actions;
+    public _Action[] exitActions;
+    public _Action[] enterActions;
     public Transition[] transitions;
     public Color sceneGizmosColor = Color.gray;
 
@@ -41,4 +43,19 @@ public class State : ScriptableObject {
         }
     }
 
+    public void OnExitState(StateController controller)
+    {
+        for (int i = 0; i < exitActions.Length; i++)
+        {
+            exitActions[i].Execute(controller);
+        }
+    }
+
+    public void OnEnterState(StateController controller)
+    {
+        for (int i = 0; i < enterActions.Length; i++)
+        {
+            enterActions[i].Execute(controller);
+        }
+    }
 }

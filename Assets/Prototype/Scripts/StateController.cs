@@ -50,8 +50,9 @@ public class StateController : MonoBehaviour {
     {
         if (nextState != remainState)
         {
+            currentState.OnExitState(this);
             currentState = nextState;
-            // this should/coud be moved in the state itself
+            currentState.OnEnterState(this);
             OnExitState();
         }
     }

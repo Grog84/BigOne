@@ -58,7 +58,7 @@ public class CrouchAction : _Action {
         m_ForwardAmount = move.z;
 
         ApplyExtraTurnRotation(controller);
-        ScaleCapsuleForCrouching(crouch);
+        //ScaleCapsuleForCrouching(crouch);
 
     }
 

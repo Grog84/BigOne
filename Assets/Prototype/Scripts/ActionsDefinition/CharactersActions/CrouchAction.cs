@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Walk")]
-public class WalkAction : _Action
-{
+[CreateAssetMenu(menuName = "Prototype/CharactersActions/Crouch")]
+public class CrouchAction : _Action {
 
     private Vector3 m_CamForward;             // The current forward direction of the camera
     private Vector3 m_Move;
@@ -15,10 +14,10 @@ public class WalkAction : _Action
 
     public override void Execute(StateController controller)
     {
-        Walk(controller);
+        Crouch(controller);
     }
 
-    private void Walk(StateController controller)
+    private void Crouch(StateController controller)
     {
         float h = CrossPlatformInputManager.GetAxis("Horizontal");
         float v = CrossPlatformInputManager.GetAxis("Vertical");
@@ -58,7 +57,8 @@ public class WalkAction : _Action
         m_TurnAmount = Mathf.Atan2(move.x, move.z);
         m_ForwardAmount = move.z;
 
-        ApplyExtraTurnRotation(controller);    
+        ApplyExtraTurnRotation(controller);
+        ScaleCapsuleForCrouching(crouch);
 
     }
 
@@ -70,4 +70,28 @@ public class WalkAction : _Action
         controller.characterObj.CharacterTansform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
     }
 
+    // Questo va messo come uscita dalla stato in piedi quando si entra in stato crouch. Bisogna inserire nello stato una generica azione di inizio
+    //void ScaleCapsuleForCrouching(bool crouch)
+    //{
+    //    if (crouch)
+    //    {
+    //        if (m_Crouching) return;
+    //        m_Capsule.height = m_Capsule.height / 2f;
+    //        m_Capsule.center = m_Capsule.center / 2f;
+    //        m_Crouching = true;
+    //    }
+    //    else
+    //    {
+    //        Ray crouchRay = new Ray(m_Rigidbody.position + Vector3.up * m_Capsule.radius * k_Half, Vector3.up);
+    //        float crouchRayLength = m_CapsuleHeight - m_Capsule.radius * k_Half;
+    //        if (Physics.SphereCast(crouchRay, m_Capsule.radius * k_Half, crouchRayLength, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+    //        {
+    //            m_Crouching = true;
+    //            return;
+    //        }
+    //        m_Capsule.height = m_CapsuleHeight;
+    //        m_Capsule.center = m_CapsuleCenter;
+    //        m_Crouching = crouch;
+    //    }
+    //}
 }

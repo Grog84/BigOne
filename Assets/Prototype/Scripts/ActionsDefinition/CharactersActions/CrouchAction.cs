@@ -9,8 +9,6 @@ public class CrouchAction : _Action {
     private Vector3 m_CamForward;             // The current forward direction of the camera
     private Vector3 m_Move;
     private Vector3 m_GroundNormal;
-    private float m_TurnAmount;
-    private float m_ForwardAmount;
 
     public override void Execute(StateController controller)
     {
@@ -41,8 +39,8 @@ public class CrouchAction : _Action {
         if (m_Move.magnitude > 1f) m_Move.Normalize();
         m_Move = controller.characterObj.CharacterTansform.InverseTransformDirection(m_Move);
         m_Move = Vector3.ProjectOnPlane(m_Move, m_GroundNormal);
-        m_TurnAmount = Mathf.Atan2(m_Move.x, m_Move.z);
-        m_ForwardAmount = m_Move.z;
+        controller.m_CharacterController.m_TurnAmount = Mathf.Atan2(m_Move.x, m_Move.z);
+        controller.m_CharacterController.m_ForwardAmount = m_Move.z;
     }
 
     public void Move(Vector3 move, StateController controller)
@@ -54,8 +52,8 @@ public class CrouchAction : _Action {
         if (move.magnitude > 1f) move.Normalize();
         move = controller.characterObj.CharacterTansform.InverseTransformDirection(move);
         move = Vector3.ProjectOnPlane(move, m_GroundNormal);
-        m_TurnAmount = Mathf.Atan2(move.x, move.z);
-        m_ForwardAmount = move.z;
+        controller.m_CharacterController.m_TurnAmount = Mathf.Atan2(move.x, move.z);
+        controller.m_CharacterController.m_ForwardAmount = move.z;
 
         ApplyExtraTurnRotation(controller);
         //ScaleCapsuleForCrouching(crouch);
@@ -66,8 +64,8 @@ public class CrouchAction : _Action {
     {
         // help the character turn faster (this is in addition to root rotation in the animation)
         float turnSpeed = Mathf.Lerp(controller.characterStats.m_StationaryTurnSpeed,
-            controller.characterStats.m_MovingTurnSpeed, m_ForwardAmount);
-        controller.characterObj.CharacterTansform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
+            controller.characterStats.m_MovingTurnSpeed, controller.m_CharacterController.m_ForwardAmount);
+        controller.characterObj.CharacterTansform.Rotate(0, controller.m_CharacterController.m_TurnAmount * turnSpeed * Time.deltaTime, 0);
     }
 
 

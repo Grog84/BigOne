@@ -8,4 +8,5 @@ public class CharacterObj : ScriptableObject {
     public Transform CharacterTansform;          // A reference to the character assigned to the state controller transform
     public Rigidbody m_Rigidbody;                // A reference to the rigidbody
     public CapsuleCollider m_Capsule;            // A reference to the capsule collider
+    public Animator m_Animator;
 }

@@ -14,6 +14,7 @@ public class StateController : MonoBehaviour {
     public List<Transform> wayPointList;
     public State remainState;
 
+    [HideInInspector] public _CharacterController m_CharacterController;
     [HideInInspector] public NavMeshAgent navMeshAgent;
     [HideInInspector] public int nextWayPoint;
     [HideInInspector] public Transform chaseTarget;

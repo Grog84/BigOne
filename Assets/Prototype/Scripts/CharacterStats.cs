@@ -9,7 +9,9 @@ public class CharacterStats : ScriptableObject { // nope...here stats only shoul
     public float m_JumpPower = 12f;
     [Range(1f, 4f)] public float m_GravityMultiplier = 2f;
     public float m_RunCycleLegOffset = 0.2f; //specific to the character in sample assets, will need to be modified to work with others
-    public float m_MoveSpeedMultiplier = 1f;
+    public float m_NormalSpeedMultiplier = 1f;
+    public float m_CrouchSpeedMultiplier = 0.8f;
+    public float m_RunSpeedMultiplier = 1.2f;
     public float m_AnimSpeedMultiplier = 1f;
     public float m_GroundCheckDistance = 0.1f;
 

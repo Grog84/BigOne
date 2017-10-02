@@ -6,8 +6,8 @@ using UnityEngine;
 public class State : ScriptableObject {
 
     public _Action[] actions;
-    public _Action[] exitActions;
     public _Action[] enterActions;
+    public _Action[] exitActions;
     public Transition[] transitions;
     public Color sceneGizmosColor = Color.gray;
 

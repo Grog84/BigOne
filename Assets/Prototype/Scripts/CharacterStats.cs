@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Prototype/CharactersStats")]
 public class CharacterStats : ScriptableObject { // nope...here stats only should be present, another SO should contain the gameobj refs
 
+    //Ethan
     public float m_MovingTurnSpeed = 360;
     public float m_StationaryTurnSpeed = 180;
     public float m_JumpPower = 12f;
@@ -16,4 +17,7 @@ public class CharacterStats : ScriptableObject { // nope...here stats only shoul
     public float m_AnimSpeedMultiplier = 1f;
     public float m_GroundCheckDistance = 0.1f;
 
+    //Giangiovanni
+    public float m_RotateSpeed = 3.0f;
+    public float m_Speed = 3.0f;
 }

@@ -22,19 +22,19 @@ public class _CharacterController : MonoBehaviour {
 		
 	}
 
-    public void OnAnimatorMove()
-    {
-        bool m_IsGrounded = controller.characterObj.m_Animator.GetBool("OnGround");
+    //public void OnAnimatorMove()
+    //{
+    //    bool m_IsGrounded = controller.characterObj.m_Animator.GetBool("OnGround");
 
-        // we implement this function to override the default root motion.
-        // this allows us to modify the positional speed before it's applied.
-        if (m_IsGrounded && Time.deltaTime > 0)
-        {
-            Vector3 v = (controller.characterObj.m_Animator.deltaPosition * m_MoveSpeedMultiplier) / Time.deltaTime;
+    //    // we implement this function to override the default root motion.
+    //    // this allows us to modify the positional speed before it's applied.
+    //    if (m_IsGrounded && Time.deltaTime > 0)
+    //    {
+    //        Vector3 v = (controller.characterObj.m_Animator.deltaPosition * m_MoveSpeedMultiplier) / Time.deltaTime;
 
-            // we preserve the existing y part of the current velocity.
-            v.y = controller.characterObj.m_Rigidbody.velocity.y;
-            controller.characterObj.m_Rigidbody.velocity = v;
-        }
-    }
+    //        // we preserve the existing y part of the current velocity.
+    //        v.y = controller.characterObj.m_Rigidbody.velocity.y;
+    //        controller.characterObj.m_Rigidbody.velocity = v;
+    //    }
+    //}
 }

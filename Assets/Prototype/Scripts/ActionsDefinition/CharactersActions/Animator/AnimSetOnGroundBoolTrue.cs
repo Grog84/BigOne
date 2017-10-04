@@ -6,12 +6,12 @@ using UnityEngine;
 public class AnimSetOnGroundBoolTrue : _Action
 {
 
-    public override void Execute(StateController controller)
+    public override void Execute(CharacterStateController controller)
     {
         UpdateAnimatorForGround(controller);
     }
 
-    private void UpdateAnimatorForGround(StateController controller)
+    private void UpdateAnimatorForGround(CharacterStateController controller)
     {
         controller.characterObj.m_Animator.SetBool("OnGround", true);
     }

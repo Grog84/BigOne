@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/AirbornMovement")]
-public class InAirAction : _Action {
+[CreateAssetMenu(menuName = "Prototype/CharactersActions/InAir")]
+public class InAirAction : _Action
+{
 
-    public override void Execute(StateController controller)
+    Vector3 m_Velocity;
+
+    public override void Execute(CharacterStateController controller)
     {
         AirbornMovement(controller);
     }
 
-    private void AirbornMovement(StateController controller)
+    private void AirbornMovement(CharacterStateController controller)
     {
-        // apply extra gravity from multiplier:
-        Vector3 extraGravityForce = (Physics.gravity * controller.characterStats.m_GravityMultiplier) - Physics.gravity;
-        controller.characterObj.m_Rigidbody.AddForce(extraGravityForce);
+        m_Velocity = controller.characterObj.m_CharController.velocity;
+        m_Velocity.y += controller.characterStats.m_Gravity * Time.deltaTime;
+        controller.characterObj.m_CharController.Move(m_Velocity * Time.deltaTime);
     }
 }

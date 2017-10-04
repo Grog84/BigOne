@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
 [CreateAssetMenu(menuName = "Prototype/CharactersActions/Jump")]
-public class JumpAction : _Action
+public class JumpAction_old : _Action
 {
-    Vector3 m_Velocity;
-
     public override void Execute(CharacterStateController controller)
     {
         Jump(controller);
@@ -19,8 +17,10 @@ public class JumpAction : _Action
 
         if (m_Jump)
         {
-            m_Velocity = controller.characterObj.m_CharController.velocity;
-            m_Velocity.y += Mathf.Sqrt(controller.characterStats.m_JumpHeight * -2f * controller.characterStats.m_Gravity);
+            // jump!
+            controller.characterObj.m_Rigidbody.velocity = new Vector3(controller.characterObj.m_Rigidbody.velocity.x,
+                controller.characterStats.m_JumpPower, controller.characterObj.m_Rigidbody.velocity.z);
+            controller.characterStats.m_GroundCheckDistance = 0.1f;
         }
     }
 }

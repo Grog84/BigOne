@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateCrouch")]
-public class AnimSetCrouchBoolFalse: _Action {
+public class AnimSetCrouchBoolFalse: _Action
+{
 
-    public override void Execute(StateController controller)
+    public override void Execute(CharacterStateController controller)
     {
         UpdateAnimatorForCrouch(controller);
     }
 
-    private void UpdateAnimatorForCrouch(StateController controller)
+    private void UpdateAnimatorForCrouch(CharacterStateController controller)
     {
         controller.characterObj.m_Animator.SetBool("Crouch", false);
     }

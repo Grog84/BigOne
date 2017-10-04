@@ -6,13 +6,13 @@ using UnityEngine;
 public class LookDecision : Decision
 {
 
-    public override bool Decide(StateController controller)
+    public override bool Decide(EnemiesAIStateController controller)
     {
         bool targetVisible = Look(controller);
         return targetVisible;
     }
 
-    private bool Look(StateController controller)
+    private bool Look(EnemiesAIStateController controller)
     {
         RaycastHit hit;
 

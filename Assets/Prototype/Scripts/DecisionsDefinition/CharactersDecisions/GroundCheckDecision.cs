@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/GroundCheck")]
-public class GroundCheckDecision : Decision {
+public class GroundCheckDecision : Decision
+{
 
-    public override bool Decide(StateController controller)
+    public override bool Decide(CharacterStateController controller)
     {
         bool isOnTheGround = CheckIsOnGround(controller);
         return isOnTheGround;
     }
 
-    private bool CheckIsOnGround(StateController controller)
+    private bool CheckIsOnGround(CharacterStateController controller)
     {
         RaycastHit hitInfo;
         #if UNITY_EDITOR

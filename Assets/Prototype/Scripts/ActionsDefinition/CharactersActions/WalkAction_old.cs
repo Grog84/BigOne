@@ -11,12 +11,12 @@ public class WalkAction_old : _Action
     private Vector3 m_Move;
     private Vector3 m_GroundNormal;
 
-    public override void Execute(StateController controller)
+    public override void Execute(CharacterStateController controller)
     {
         Walk(controller);
     }
 
-    private void Walk(StateController controller)
+    private void Walk(CharacterStateController controller)
     {
         float h = CrossPlatformInputManager.GetAxis("Horizontal");
         float v = CrossPlatformInputManager.GetAxis("Vertical");
@@ -44,7 +44,7 @@ public class WalkAction_old : _Action
         controller.m_CharacterController.m_ForwardAmount = m_Move.z;
     }
 
-    public void Move(Vector3 move, StateController controller)
+    public void Move(Vector3 move, CharacterStateController controller)
     {
 
         // convert the world relative moveInput vector into a local-relative
@@ -60,7 +60,7 @@ public class WalkAction_old : _Action
 
     }
 
-    void ApplyExtraTurnRotation(StateController controller)
+    void ApplyExtraTurnRotation(CharacterStateController controller)
     {
         // help the character turn faster (this is in addition to root rotation in the animation)
         float turnSpeed = Mathf.Lerp(controller.characterStats.m_StationaryTurnSpeed,

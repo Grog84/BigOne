@@ -5,12 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Prototype/AIActions/Patrol")]
 public class PatrolAction : _Action
 {
-    public override void Execute(StateController controller)
+    public override void Execute(EnemiesAIStateController controller)
     {
         Patrol(controller);
     }
 
-    private void Patrol(StateController controller)
+    private void Patrol(EnemiesAIStateController controller)
     {
         controller.navMeshAgent.destination = controller.wayPointList[controller.nextWayPoint].position;
         controller.navMeshAgent.isStopped = false;

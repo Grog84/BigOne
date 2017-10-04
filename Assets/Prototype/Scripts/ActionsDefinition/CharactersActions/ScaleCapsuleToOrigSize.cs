@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Prototype/CharactersActions/StateExit/ScaleCapsuleFromCrouching")]
-public class ScaleCapsuleFromCrouching : _Action {
+public class ScaleCapsuleToOrigSize : _Action
+{
 
-    public override void Execute(StateController controller)
+    public override void Execute(CharacterStateController controller)
     {
         ScaleCapsule(controller);
     }
 
 
-    void ScaleCapsule(StateController controller)
+    void ScaleCapsule(CharacterStateController controller)
     {
 
         controller.characterObj.m_Capsule.height = controller.characterObj.m_Capsule.height * 2f;

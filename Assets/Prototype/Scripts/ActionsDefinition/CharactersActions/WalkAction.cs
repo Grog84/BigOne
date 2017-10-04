@@ -6,22 +6,24 @@ using UnityStandardAssets.CrossPlatformInput;
 [CreateAssetMenu(menuName = "Prototype/CharactersActions/Walk")]
 public class WalkAction : _Action
 {
+    Vector3 m_Move;
 
-    private Vector3 m_CamForward;             // The current forward direction of the camera
-    private Vector3 m_Move;
-    private Vector3 m_GroundNormal;
-
-    public override void Execute(StateController controller)
+    public override void Execute(CharacterStateController controller)
     {
         Walk(controller);
     }
 
-    private void Walk(StateController controller)
+    private void Walk(CharacterStateController controller)
     {
-        controller.characterObj.CharacterTansform.Rotate(0, Input.GetAxis("Horizontal") * controller.characterStats.m_RotateSpeed, 0);
-        Vector3 forward = controller.characterObj.CharacterTansform.TransformDirection(Vector3.forward);
-        float curSpeed = controller.characterStats.m_Speed * Input.GetAxis("Vertical");
-        controller.characterObj.m_CharController.SimpleMove(forward * curSpeed);
+        m_Move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        controller.characterObj.m_CharController.Move(m_Move * Time.deltaTime * controller.characterStats.m_WalkSpeed);
+        if (m_Move != Vector3.zero)
+            controller.characterObj.CharacterTansform.forward = m_Move;
+
+        //controller.characterObj.CharacterTansform.Rotate(0, Input.GetAxis("Horizontal") * controller.characterStats.m_RotateSpeed, 0);
+        //Vector3 forward = controller.characterObj.CharacterTansform.TransformDirection(Vector3.forward);
+        //float curSpeed = controller.characterStats.m_Speed * Input.GetAxis("Vertical");
+        //controller.characterObj.m_CharController.SimpleMove(forward * curSpeed);
 
     }
 

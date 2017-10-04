@@ -17,7 +17,11 @@ public class CharacterStats : ScriptableObject { // nope...here stats only shoul
     public float m_AnimSpeedMultiplier = 1f;
     public float m_GroundCheckDistance = 0.1f;
 
-    //Giangiovanni
+    //New Implementation
     public float m_RotateSpeed = 3.0f;
-    public float m_Speed = 3.0f;
+    public float m_WalkSpeed = 3.0f;
+    public float m_CrouchSpeed = 3.0f;
+    public float m_RunSpeed = 3.0f;
+    public float m_Gravity = 3.0f;
+    public float m_JumpHeight = 3.0f;
 }

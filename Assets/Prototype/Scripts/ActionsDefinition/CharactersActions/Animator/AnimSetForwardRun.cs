@@ -6,12 +6,12 @@ using UnityEngine;
 public class AnimSetForwardRun : _Action
 {
 
-    public override void Execute(StateController controller)
+    public override void Execute(CharacterStateController controller)
     {
         SetForwardAmount(controller);
     }
 
-    private void SetForwardAmount(StateController controller)
+    private void SetForwardAmount(CharacterStateController controller)
     {
         controller.characterObj.m_Animator.SetFloat("Forward", controller.m_CharacterController.m_ForwardAmount, 0.1f, Time.deltaTime);
     }

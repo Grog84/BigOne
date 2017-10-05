@@ -7,8 +7,8 @@ public class ClimbDecision : Decision
 {
     public override bool Decide(CharacterStateController controller)
     {
-        bool isClimbing = CheckIfClimbing(controller);
-        return isClimbing;
+        //bool isClimbing = CheckIfClimbing(controller);
+        return true;
     }
 
     //private bool CheckIfClimbing(CharacterStateController controller)

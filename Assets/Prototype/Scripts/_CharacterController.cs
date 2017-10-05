@@ -15,7 +15,7 @@ public class _CharacterController : MonoBehaviour {
     void Start ()
     {
 
-        controller.GetComponent<StateController>();
+        controller = GetComponent<StateController>();
 
     }
 	

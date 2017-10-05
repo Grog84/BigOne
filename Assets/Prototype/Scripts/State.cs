@@ -24,6 +24,12 @@ public class State : ScriptableObject {
         CheckTransitions(controller);
     }
 
+    public void UpdateState(GMStateController controller)
+    {
+        DoActions(controller);
+        CheckTransitions(controller);
+    }
+
     protected virtual void DoActions(CharacterStateController controller)
     {
         for (int i = 0; i < actions.Length; i++)
@@ -33,6 +39,14 @@ public class State : ScriptableObject {
     }
 
     protected virtual void DoActions(EnemiesAIStateController controller)
+    {
+        for (int i = 0; i < actions.Length; i++)
+        {
+            actions[i].Execute(controller);
+        }
+    }
+
+    protected virtual void DoActions(GMStateController controller)
     {
         for (int i = 0; i < actions.Length; i++)
         {
@@ -74,6 +88,23 @@ public class State : ScriptableObject {
         }
     }
 
+    private void CheckTransitions(GMStateController controller)
+    {
+        for (int i = 0; i < transitions.Length; i++)
+        {
+            bool decisionSucceeded = transitions[i].decision.Decide(controller);
+
+            if (decisionSucceeded)
+            {
+                controller.TransitionToState(transitions[i].trueState);
+            }
+            else
+            {
+                controller.TransitionToState(transitions[i].falseState);
+            }
+        }
+    }
+
     public void OnExitState(CharacterStateController controller)
     {
         for (int i = 0; i < exitActions.Length; i++)
@@ -90,6 +121,14 @@ public class State : ScriptableObject {
         }
     }
 
+    public void OnExitState(GMStateController controller)
+    {
+        for (int i = 0; i < exitActions.Length; i++)
+        {
+            exitActions[i].Execute(controller);
+        }
+    }
+
     public void OnEnterState(CharacterStateController controller)
     {
         for (int i = 0; i < enterActions.Length; i++)
@@ -99,6 +138,14 @@ public class State : ScriptableObject {
     }
 
     public void OnEnterState(EnemiesAIStateController controller)
+    {
+        for (int i = 0; i < enterActions.Length; i++)
+        {
+            enterActions[i].Execute(controller);
+        }
+    }
+
+    public void OnEnterState(GMStateController controller)
     {
         for (int i = 0; i < enterActions.Length; i++)
         {

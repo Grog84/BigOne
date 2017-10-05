@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class GMController : MonoBehaviour {
 
-    public static GMController instance = null;
 
-    public Vector3 playerPosition;
-    public Vector3 lastSeenPlayerPosition;
+    public Animator FadeAnim;
+
+    [HideInInspector] public static GMController instance = null;
+    [HideInInspector] public Vector3 lastSeenPlayerPosition = new Vector3(1000f, 1000f, 1000f);
+
+    private bool isGameActive = false;
+
+    static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
+
 
     void Awake() 
     {
@@ -21,6 +27,19 @@ public class GMController : MonoBehaviour {
             Destroy(gameObject);
     }
 
+    public void ResetPlayerLastSeenPosition()
+    {
+        lastSeenPlayerPosition = resetPlayerPosition;
+    }
 
+    public void ActivateGame()
+    {
+        isGameActive = true;
+    }
+
+    public void DeactivateGame()
+    {
+        isGameActive = false;
+    }
 
 }

@@ -8,4 +8,6 @@ public class Decision : ScriptableObject {
 
     public virtual bool Decide(EnemiesAIStateController controller) { return true; }
 
+    public virtual bool Decide(GMStateController controller) { return true; }
+
 }

@@ -9,4 +9,6 @@ public class _Action : ScriptableObject
     public virtual void Execute(CharacterStateController controller) { }
 
     public virtual void Execute(EnemiesAIStateController controller) { }
+
+    public virtual void Execute(GMStateController controller) { }
 }

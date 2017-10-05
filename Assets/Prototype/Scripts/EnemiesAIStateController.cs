@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemiesAIStateController : StateController {
 
@@ -10,11 +11,11 @@ public class EnemiesAIStateController : StateController {
 
     [HideInInspector] public int nextWayPoint;
     [HideInInspector] public Transform chaseTarget;
+    [HideInInspector] public NavMeshAgent navMeshAgent;
 
-    // Is it necessary?
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     void OnDrawGizmos()

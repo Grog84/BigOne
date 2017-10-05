@@ -11,10 +11,10 @@ public class ClimbDecision : Decision
         return isClimbing;
     }
 
-    private bool CheckIfClimbing(CharacterStateController controller)
-    {
-        if()
-    }
+    //private bool CheckIfClimbing(CharacterStateController controller)
+    //{
+    //    if()
+    //}
 
 
 }

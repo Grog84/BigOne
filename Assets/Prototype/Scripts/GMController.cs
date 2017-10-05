@@ -50,7 +50,7 @@ public class GMController : MonoBehaviour {
 
     public void FadeIn()
     {
-        FadeAnim.SetBool("Fade", true);
+        FadeAnim.SetBool("Fade", false);
         StartCoroutine(WaitAndActivate());
         isFadeScreenVisible = false;
 
@@ -64,7 +64,7 @@ public class GMController : MonoBehaviour {
 
     public void FadeOut()
     {
-        FadeAnim.SetBool("Fade", false);
+        FadeAnim.SetBool("Fade", true);
         StartCoroutine(WaitAndDeactivate());
         isFadeScreenVisible = true;
 

@@ -12,6 +12,7 @@ public class FadeIn : _Action {
 
     private void StartFadeIn(GMStateController controller)
     {
-        controller.m_GM.FadeAnim.SetBool("Fade", true);
+        
+        controller.m_GM.FadeIn();
     }
 }

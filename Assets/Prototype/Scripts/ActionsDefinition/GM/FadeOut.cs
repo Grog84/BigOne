@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Prototype/GMActions/FadeOut")]
 public class FadeOut : _Action
 {
+
     public override void Execute(GMStateController controller)
     {
         StartFadeOut(controller);
@@ -12,6 +13,7 @@ public class FadeOut : _Action
 
     private void StartFadeOut(GMStateController controller)
     {
-        controller.m_GM.FadeAnim.SetBool("Fade", false);
+
+        controller.m_GM.FadeOut();
     }
 }

@@ -7,6 +7,6 @@ public class FadeOver : Decision {
     public override bool Decide(GMStateController controller)
     {
         
-        return true;
+        return controller.m_GM.GetGameStatus();
     }
 }

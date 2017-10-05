@@ -31,6 +31,7 @@ public class CharacterStateController : StateController {
             currentState.OnExitState(this);
             currentState = nextState;
             currentState.OnEnterState(this);
+            lastActiveState = currentState;
             OnExitState();
         }
     }
@@ -38,7 +39,18 @@ public class CharacterStateController : StateController {
     protected override void Update()
     {
         base.Update();
+
+        if (!checkIfGameActive.Decide(this) && currentState != inactiveState)
+        {
+            TransitionToState(inactiveState);
+        }
+        else if (checkIfGameActive.Decide(this) && currentState == inactiveState)
+        {
+            TransitionToState(lastActiveState);
+        }
+
         currentState.UpdateState(this);
+
     }
 
 }

@@ -7,12 +7,14 @@ using UnityEngine.AI;
 public class StateController : MonoBehaviour {
 
     public State currentState;
-
+    public State inactiveState;
     public State remainState;
+    public Decision checkIfGameActive;
+
     [HideInInspector] public float stateTimeElapsed;
+    [HideInInspector] public State lastActiveState;
 
     private bool isActive = true;
-
 	
 	// Update is called once per frame
 	protected virtual void Update () {

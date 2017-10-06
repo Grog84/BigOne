@@ -13,7 +13,7 @@ public class ClimbDecision : Decision
 
     private bool CheckIfClimbing(CharacterStateController controller)
     {
-        if (controller.GetComponent<_CharacterController>().isClimb == true)
+        if (controller.GetComponent<_CharacterController>().isClimbable == true)
         {
 
 

@@ -13,6 +13,6 @@ public class AnimSetJumpAmount : _Action
 
     private void SetJumpAmount(CharacterStateController controller)
     {
-        controller.characterObj.m_Animator.SetFloat("Jump", controller.characterObj.m_Rigidbody.velocity.y);
+        controller.m_CharacterController.m_Animator.SetFloat("Jump", controller.m_CharacterController.m_Rigidbody.velocity.y);
     }
 }

@@ -13,6 +13,6 @@ public class AnimSetCrouchBoolTrue : _Action
 
     private void UpdateAnimatorForCrouch(CharacterStateController controller)
     {
-        controller.characterObj.m_Animator.SetBool("Crouch", true);
+        controller.m_CharacterController.m_Animator.SetBool("Crouch", true);
     }
 }

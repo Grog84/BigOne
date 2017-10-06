@@ -14,7 +14,7 @@ public class NoiseWalkStep : _Action {
     {
         for (int i = 0; i < GMController.instance.allEnemiesTransform.Length; i++)
         {
-            float distance = Vector3.SqrMagnitude(controller.characterObj.CharacterTansform.position - GMController.instance.allEnemiesTransform[i].position);
+            float distance = Vector3.SqrMagnitude(controller.m_CharacterController.CharacterTansform.position - GMController.instance.allEnemiesTransform[i].position);
             if (distance < controller.m_WalkSoundrange_sq)
             {
                 EmitSound(controller);

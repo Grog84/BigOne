@@ -16,9 +16,9 @@ public class WalkAction : _Action
     private void Walk(CharacterStateController controller)
     {
         m_Move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        controller.characterObj.m_CharController.Move(m_Move * Time.deltaTime * controller.characterStats.m_WalkSpeed);
+        controller.m_CharacterController.m_CharController.Move(m_Move * Time.deltaTime * controller.characterStats.m_WalkSpeed);
         if (m_Move != Vector3.zero)
-            controller.characterObj.CharacterTansform.forward = m_Move;
+            controller.m_CharacterController.CharacterTansform.forward = m_Move;
 
         //controller.characterObj.CharacterTansform.Rotate(0, Input.GetAxis("Horizontal") * controller.characterStats.m_RotateSpeed, 0);
         //Vector3 forward = controller.characterObj.CharacterTansform.TransformDirection(Vector3.forward);

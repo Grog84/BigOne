@@ -17,8 +17,8 @@ public class ClimbAction : _Action
     private void Climb(CharacterStateController controller)
     {
         m_Move = new Vector3(0, 0, Input.GetAxis("Vertical"));
-        controller.characterObj.m_CharController.Move(m_Move * Time.deltaTime * controller.characterStats.m_ClimbSpeed);
+        controller.m_CharacterController.m_CharController.Move(m_Move * Time.deltaTime * controller.characterStats.m_ClimbSpeed);
         if (m_Move != Vector3.zero)
-            controller.characterObj.CharacterTansform.up = m_Move;
+            controller.m_CharacterController.CharacterTansform.up = m_Move;
     }
 }

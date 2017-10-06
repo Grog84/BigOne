@@ -13,6 +13,6 @@ public class AnimSetOnGroundBoolFalse: _Action
 
     private void UpdateAnimatorForGround(CharacterStateController controller)
     {
-        controller.characterObj.m_Animator.SetBool("OnGround", false);
+        controller.m_CharacterController.m_Animator.SetBool("OnGround", false);
     }
 }

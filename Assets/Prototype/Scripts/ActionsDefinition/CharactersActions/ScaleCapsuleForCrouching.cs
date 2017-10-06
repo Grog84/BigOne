@@ -15,8 +15,8 @@ public class ScaleCapsuleForCrouching : _Action
     void ScaleCapsule(CharacterStateController controller)
     {
 
-        controller.characterObj.m_Capsule.height = controller.characterObj.m_Capsule.height / 2f;
-        controller.characterObj.m_Capsule.center = controller.characterObj.m_Capsule.center / 2f;
+        controller.m_CharacterController.m_Capsule.height = controller.m_CharacterController.m_Capsule.height / 2f;
+        controller.m_CharacterController.m_Capsule.center = controller.m_CharacterController.m_Capsule.center / 2f;
         
     }
 }

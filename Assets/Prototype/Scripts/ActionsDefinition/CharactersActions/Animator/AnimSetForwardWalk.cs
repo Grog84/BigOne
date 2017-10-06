@@ -13,6 +13,6 @@ public class AnimSetForwardWalk : _Action
 
     private void SetForwardAmount(CharacterStateController controller)
     {
-        controller.characterObj.m_Animator.SetFloat("Forward", Mathf.Clamp(controller.m_CharacterController.m_ForwardAmount, 0f, 0.5f), 0.1f, Time.deltaTime);
+        controller.m_CharacterController.m_Animator.SetFloat("Forward", Mathf.Clamp(controller.m_CharacterController.m_ForwardAmount, 0f, 0.5f), 0.1f, Time.deltaTime);
     }
 }

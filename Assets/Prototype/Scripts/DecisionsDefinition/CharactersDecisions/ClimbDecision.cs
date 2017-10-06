@@ -16,7 +16,6 @@ public class ClimbDecision : Decision
         if (controller.GetComponent<_CharacterController>().isClimbable == true)
         {
 
-
             RaycastHit hit = new RaycastHit();
             float distance = controller.characterStats.m_RaycastClimb;
 

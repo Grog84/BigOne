@@ -18,8 +18,8 @@ public class JumpAction_old : _Action
         if (m_Jump)
         {
             // jump!
-            controller.characterObj.m_Rigidbody.velocity = new Vector3(controller.characterObj.m_Rigidbody.velocity.x,
-                controller.characterStats.m_JumpPower, controller.characterObj.m_Rigidbody.velocity.z);
+            controller.m_CharacterController.m_Rigidbody.velocity = new Vector3(controller.m_CharacterController.m_Rigidbody.velocity.x,
+                controller.characterStats.m_JumpPower, controller.m_CharacterController.m_Rigidbody.velocity.z);
             controller.characterStats.m_GroundCheckDistance = 0.1f;
         }
     }

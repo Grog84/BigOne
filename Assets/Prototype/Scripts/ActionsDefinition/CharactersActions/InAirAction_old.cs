@@ -15,6 +15,6 @@ public class InAirAction_old : _Action
     {
         // apply extra gravity from multiplier:
         Vector3 extraGravityForce = (Physics.gravity * controller.characterStats.m_GravityMultiplier) - Physics.gravity;
-        controller.characterObj.m_Rigidbody.AddForce(extraGravityForce);
+        controller.m_CharacterController.m_Rigidbody.AddForce(extraGravityForce);
     }
 }

@@ -4232,6 +4232,7 @@ MonoBehaviour:
   FadeAnim: {fileID: 1227558819}
   lastSeenPlayerPosition: {x: 1000, y: 1000, z: 1000}
   isFadeScreenVisible: 1
+  allEnemiesTransform: []
 --- !u!1 &986694220
 GameObject:
   m_ObjectHideFlags: 0
@@ -4971,7 +4972,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1127669354}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1277257337}
@@ -5936,7 +5937,14 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 0
   m_TurnAmount: 0
   m_ForwardAmount: 0
-  isClimb: 0
+  ray_length: 0
+  isClimbable: 0
+  m_Animator: {fileID: 0}
+  m_Camera: {fileID: 0}
+  CharacterTansform: {fileID: 0}
+  m_Rigidbody: {fileID: 0}
+  m_Capsule: {fileID: 0}
+  m_CharController: {fileID: 0}
 --- !u!114 &1277257333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5945,15 +5953,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1277257331}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0095ba69e7c2e4b46aabb09852b4789b, type: 3}
+  m_Script: {fileID: 11500000, guid: 75ec9bf1ccffab5468cbce2d3fc986ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: {fileID: 11400000, guid: 8dda0072a2675e24a9f06d4214821f6b, type: 2}
-  inactiveState: {fileID: 0}
+  inactiveState: {fileID: 11400000, guid: b30eb6d8f5e8c1149a106741d1bdb249, type: 2}
   remainState: {fileID: 11400000, guid: d53256cd8aa40054681d88aab19f56e8, type: 2}
-  checkIfGameActive: {fileID: 0}
+  checkIfGameActive: {fileID: 11400000, guid: bf3a05a8f8153d648af2b0cbbb1a72c7, type: 2}
   stateTimeElapsed: 0
   lastActiveState: {fileID: 0}
+  characterStats: {fileID: 11400000, guid: 7044672b7d5517440a5d90d540172779, type: 2}
+  m_CharacterController: {fileID: 0}
+  navMeshAgent: {fileID: 0}
+  m_WalkSoundrange_sq: 0
+  m_CrouchSoundrange_sq: 0
+  m_RunSoundrange_sq: 0
 --- !u!143 &1277257335
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6010,7 +6024,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh14012
+  m_Name: pb_Mesh17518
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2

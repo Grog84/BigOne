@@ -19,7 +19,7 @@ public class JumpAction : _Action
 
         if (m_Jump)
         {
-            m_Velocity = controller.characterObj.m_CharController.velocity;
+            m_Velocity = controller.m_CharacterController.m_CharController.velocity;
             m_Velocity.y += Mathf.Sqrt(controller.characterStats.m_JumpHeight * -2f * controller.characterStats.m_Gravity);
         }
     }

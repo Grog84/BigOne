@@ -10,6 +10,7 @@ public class GMController : MonoBehaviour {
     [HideInInspector] public static GMController instance = null;
     [HideInInspector] public Vector3 lastSeenPlayerPosition = new Vector3(1000f, 1000f, 1000f);
     [HideInInspector] public bool isFadeScreenVisible = true;
+    [HideInInspector] public Transform[] allEnemiesTransform;
 
     private bool isGameActive = false;
 
@@ -26,6 +27,13 @@ public class GMController : MonoBehaviour {
         //If instance already exists and it's not this:
         else if (instance != this)
             Destroy(gameObject);
+
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        allEnemiesTransform = new Transform[allEnemies.Length];
+        for (int i = 0; i < allEnemiesTransform.Length; i++)
+        {
+            allEnemiesTransform[i] = allEnemies[i].transform;
+        }
     }
 
     public void ResetPlayerLastSeenPosition()

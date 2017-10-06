@@ -9,13 +9,13 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public float m_ForwardAmount;
 
     [HideInInspector] public bool isClimb;
-    private StateController controller;
+
+    //private StateController controller;
 
     // Use this for initialization
     void Start ()
     {
-
-        controller = GetComponent<StateController>();
+        //controller = GetComponent<StateController>();
 
     }
 	
@@ -24,19 +24,4 @@ public class _CharacterController : MonoBehaviour {
 		
 	}
 
-    //public void OnAnimatorMove()
-    //{
-    //    bool m_IsGrounded = controller.characterObj.m_Animator.GetBool("OnGround");
-
-    //    // we implement this function to override the default root motion.
-    //    // this allows us to modify the positional speed before it's applied.
-    //    if (m_IsGrounded && Time.deltaTime > 0)
-    //    {
-    //        Vector3 v = (controller.characterObj.m_Animator.deltaPosition * m_MoveSpeedMultiplier) / Time.deltaTime;
-
-    //        // we preserve the existing y part of the current velocity.
-    //        v.y = controller.characterObj.m_Rigidbody.velocity.y;
-    //        controller.characterObj.m_Rigidbody.velocity = v;
-    //    }
-    //}
 }

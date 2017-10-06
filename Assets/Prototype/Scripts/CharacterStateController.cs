@@ -10,6 +10,10 @@ public class CharacterStateController : StateController {
     [HideInInspector] public _CharacterController m_CharacterController;
     [HideInInspector] public NavMeshAgent navMeshAgent;
 
+    [HideInInspector] public float m_WalkSoundrange_sq;   // squared value
+    [HideInInspector] public float m_CrouchSoundrange_sq; // squared value
+    [HideInInspector] public float m_RunSoundrange_sq;    // squared value
+
     // Use this for initialization
     protected void Awake ()
     {
@@ -22,6 +26,10 @@ public class CharacterStateController : StateController {
 
         GameObject m_CameraObj = GameObject.FindGameObjectsWithTag("MainCamera")[0];
         characterObj.m_Camera = m_CameraObj.transform;
+
+        m_WalkSoundrange_sq = characterStats.m_WalkSoundrange * characterStats.m_WalkSoundrange;   
+        m_CrouchSoundrange_sq = characterStats.m_CrouchSoundrange * characterStats.m_CrouchSoundrange;
+        m_RunSoundrange_sq = characterStats.m_RunSoundrange * characterStats.m_RunSoundrange;
     }
 
     public override void TransitionToState(State nextState)

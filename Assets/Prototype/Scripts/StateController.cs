@@ -14,15 +14,12 @@ public class StateController : MonoBehaviour {
     [HideInInspector] public float stateTimeElapsed;
     [HideInInspector] public State lastActiveState;
 
-    private bool isActive = true;
-	
-	// Update is called once per frame
-	protected virtual void Update () {
+    protected bool isActive = true;
 
-        if (!isActive)
-            return;
-
-	}
+    // Update is called once per frame
+    public virtual void Update()
+    {
+    }
 
     public virtual void TransitionToState(State nextState)
     {

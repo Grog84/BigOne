@@ -7,6 +7,7 @@ public class CharacterStateController : StateController {
 
     public CharacterStats characterStats;
     public CharacterObj characterObj;
+
     [HideInInspector] public _CharacterController m_CharacterController;
     [HideInInspector] public NavMeshAgent navMeshAgent;
 
@@ -30,6 +31,8 @@ public class CharacterStateController : StateController {
         m_WalkSoundrange_sq = characterStats.m_WalkSoundrange * characterStats.m_WalkSoundrange;   
         m_CrouchSoundrange_sq = characterStats.m_CrouchSoundrange * characterStats.m_CrouchSoundrange;
         m_RunSoundrange_sq = characterStats.m_RunSoundrange * characterStats.m_RunSoundrange;
+
+        lastActiveState = currentState;
     }
 
     public override void TransitionToState(State nextState)
@@ -44,7 +47,7 @@ public class CharacterStateController : StateController {
         }
     }
 
-    protected override void Update()
+    public override void Update()
     {
         base.Update();
 

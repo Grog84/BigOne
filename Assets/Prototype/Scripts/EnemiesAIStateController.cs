@@ -39,7 +39,7 @@ public class EnemiesAIStateController : StateController {
         }
     }
 
-    protected override void Update()
+    public override void Update()
     {
         base.Update();
 
@@ -54,4 +54,19 @@ public class EnemiesAIStateController : StateController {
 
         currentState.UpdateState(this);
     }
+
+    //void Update()
+    //{
+
+    //    if (!checkIfGameActive.Decide(this) && currentState != inactiveState)
+    //    {
+    //        TransitionToState(inactiveState);
+    //    }
+    //    else if (checkIfGameActive.Decide(this) && currentState == inactiveState)
+    //    {
+    //        TransitionToState(lastActiveState);
+    //    }
+
+    //    currentState.UpdateState(this);
+    //}
 }

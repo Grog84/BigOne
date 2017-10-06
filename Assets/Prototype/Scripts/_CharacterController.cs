@@ -8,14 +8,14 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public float m_TurnAmount;
     [HideInInspector] public float m_ForwardAmount;
 
-    [HideInInspector] public bool isClimb;
+    [HideInInspector] public bool isClimbable;
 
-    //private StateController controller;
+    private StateController controller;
 
     // Use this for initialization
     void Start ()
     {
-        //controller = GetComponent<StateController>();
+        controller = GetComponent<StateController>();
 
     }
 	

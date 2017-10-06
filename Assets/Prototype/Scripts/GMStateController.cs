@@ -22,7 +22,7 @@ public class GMStateController : StateController {
         }
     }
 
-    protected override void Update()
+    public override void Update()
     {
         base.Update();
         currentState.UpdateState(this);

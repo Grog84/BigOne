@@ -7,7 +7,8 @@ using UnityStandardAssets.CrossPlatformInput;
 public class ClimbAction : _Action
 {
     Vector3 m_Move;
-
+    float up;
+    float down;
 
     public override void Execute(CharacterStateController controller)
     {
@@ -16,9 +17,34 @@ public class ClimbAction : _Action
 
     private void Climb(CharacterStateController controller)
     {
-        m_Move = new Vector3(0, 0, Input.GetAxis("Vertical"));
-        controller.m_CharacterController.m_CharController.Move(m_Move * Time.deltaTime * controller.characterStats.m_ClimbSpeed);
-        if (m_Move != Vector3.zero)
-            controller.m_CharacterController.CharacterTansform.up = m_Move;
+         controller.m_CharacterController.charSize = controller.m_CharacterController.m_CharController.bounds.size.y;
+         controller.m_CharacterController.charDepth = controller.m_CharacterController.m_CharController.bounds.size.z;
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            up = Input.GetAxis("Vertical");
+        }
+        else
+        {
+            up = 0;
+        }
+
+        if (Input.GetKey(KeyCode.S))
+        {
+            down = Input.GetAxis("Vertical");
+        }
+        else
+        {
+            down = 0;
+        }
+
+        if (!controller.m_CharacterController.climbingTop)
+        {
+            controller.m_CharacterController.CharacterTansform.Translate(Vector3.up * up * controller.characterStats.m_ClimbSpeed * Time.deltaTime);//0.0.1
+        }
+        if (!controller.m_CharacterController.climbingBottom)
+        {
+            controller.m_CharacterController.CharacterTansform.Translate(Vector3.up * down * controller.characterStats.m_ClimbSpeed * Time.deltaTime);//0.0.1
+        }
     }
 }

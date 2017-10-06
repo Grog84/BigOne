@@ -13,25 +13,18 @@ public class ClimbDecision : Decision
 
     private bool CheckIfClimbing(CharacterStateController controller)
     {
-        if (controller.GetComponent<_CharacterController>().isClimbable == true)
+        if (controller.m_CharacterController.isInClimbArea && controller.m_CharacterController.isClimbDirectionRight && Input.GetKeyDown(KeyCode.E))
         {
 
-            RaycastHit hit = new RaycastHit();
-            float distance = controller.characterStats.m_RaycastClimb;
-
-            if (Physics.Raycast(controller.transform.position, controller.transform.forward, out hit, distance))
-            {
-                Debug.DrawLine(controller.transform.position, hit.point);
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Climbable"))
-                {
-                    return true;
-                }
-            }
+            return true;
 
 
         }
-
-        return false;
+        else
+        {
+            return false;
+        }
+       
     }
 
 

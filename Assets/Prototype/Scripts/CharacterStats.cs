@@ -25,7 +25,7 @@ public class CharacterStats : ScriptableObject { // nope...here stats only shoul
     public float m_RotateSpeed = 3.0f;
     [Space(10)]
     public float m_ClimbSpeed = 3.0f;
-    public float m_RaycastClimb = 3.0f;
+    public float m_DistanceFromWallClimbing = 4f; //public float m_RaycastClimb = 3.0f;
     [Space(10)]
     public float m_Gravity = 3.0f;
     public float m_JumpHeight = 3.0f;
@@ -34,4 +34,6 @@ public class CharacterStats : ScriptableObject { // nope...here stats only shoul
     public float m_WalkSoundrange = 3.0f;
     public float m_CrouchSoundrange = 1.0f;
     public float m_RunSoundrange = 5.0f;
+   
+    
 }

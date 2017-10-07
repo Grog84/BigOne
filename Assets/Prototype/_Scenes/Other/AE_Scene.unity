@@ -2964,7 +2964,7 @@ GameObject:
   - component: {fileID: 535034118}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Ladder_Bottom
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3033,6 +3033,34 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 535034116}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &577336842
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 577336843}
+  m_Layer: 0
+  m_Name: ClimbPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &577336843
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 577336842}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.189, z: -0.631}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1601429825}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &592777046
 GameObject:
   m_ObjectHideFlags: 0
@@ -5697,7 +5725,23 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 0
   m_TurnAmount: 0
   m_ForwardAmount: 0
-  isClimb: 0
+  ray_length: 0
+  isInClimbArea: 0
+  isClimbDirectionRight: 0
+  climbingBottom: 0
+  climbingTop: 0
+  charDepth: 0
+  charSize: 0
+  m_Animator: {fileID: 0}
+  m_Camera: {fileID: 0}
+  CharacterTansform: {fileID: 0}
+  m_Rigidbody: {fileID: 0}
+  m_Capsule: {fileID: 0}
+  m_CharController: {fileID: 0}
+  m_CharStats: {fileID: 0}
+  climbCollider: {fileID: 0}
+  climbAnchorTop: {fileID: 0}
+  climbAnchorBottom: {fileID: 0}
 --- !u!114 &1277257333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5710,9 +5754,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: {fileID: 11400000, guid: 8dda0072a2675e24a9f06d4214821f6b, type: 2}
+  inactiveState: {fileID: 0}
   remainState: {fileID: 11400000, guid: d53256cd8aa40054681d88aab19f56e8, type: 2}
+  checkIfGameActive: {fileID: 0}
   stateTimeElapsed: 0
-  navMeshAgent: {fileID: 0}
+  lastActiveState: {fileID: 0}
 --- !u!143 &1277257335
 CharacterController:
   m_ObjectHideFlags: 0
@@ -6996,7 +7042,7 @@ GameObject:
   - component: {fileID: 1560282418}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Ladder_Top
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7206,6 +7252,8 @@ Transform:
   m_Children:
   - {fileID: 535034117}
   - {fileID: 1560282417}
+  - {fileID: 2118520625}
+  - {fileID: 577336843}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9290,6 +9338,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 530399824}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2118520624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2118520625}
+  m_Layer: 0
+  m_Name: DescentPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2118520625
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2118520624}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.353, z: -0.755}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1601429825}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2122828761
 GameObject:

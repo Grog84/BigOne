@@ -25,6 +25,10 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public CharacterController m_CharController; // A reference to the capsule collider
                       public CharacterStats m_CharStats;
 
+    [HideInInspector] public GameObject climbCollider;
+    [HideInInspector] public Transform  climbAnchorTop;
+    [HideInInspector] public Transform  climbAnchorBottom;
+
     private StateController controller;
 
     private void Awake()
@@ -75,12 +79,14 @@ public class _CharacterController : MonoBehaviour {
     {
         if (other.tag == "Ladder_Bottom")
         {
+            climbCollider = other.gameObject;
             isInClimbArea = true;
             climbingBottom = true;
             Debug.Log("entro");
         }
         else if (other.tag == "Ladder_Top")
         {
+            climbCollider = other.gameObject;
             isInClimbArea = true;
             climbingTop = true;
             Debug.Log("entro");
@@ -91,12 +97,14 @@ public class _CharacterController : MonoBehaviour {
     {
         if (other.tag == "Ladder_Bottom")
         {
+            climbCollider = null;
             isInClimbArea = false;
             climbingBottom = false;
             Debug.Log("esco");
         }
         if (other.tag == "Ladder_Top")
         {
+            climbCollider = null;
             isInClimbArea = false;
             climbingTop = false;
             Debug.Log("esco");

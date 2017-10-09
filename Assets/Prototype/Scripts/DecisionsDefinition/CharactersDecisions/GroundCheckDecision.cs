@@ -25,6 +25,7 @@ public class GroundCheckDecision : Decision
         if (Physics.Raycast(controller.m_CharacterController.CharacterTansform.position + (Vector3.up * 0.1f), Vector3.down,
             out hitInfo, controller.characterStats.m_GroundCheckDistance))
         {
+            controller.m_CharacterController.floorNoiseMultiplier = hitInfo.transform.GetComponent<Floor>().GetNoiseMultiplier();
             return true;
         }
         else

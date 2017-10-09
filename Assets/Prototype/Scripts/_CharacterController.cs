@@ -33,6 +33,8 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public Transform  climbAnchorTop;
     [HideInInspector] public Transform  climbAnchorBottom;
 
+    [HideInInspector] public float floorNoiseMultiplier;
+
     public CharacterStats m_CharStats;
     public LayerMask m_WalkNoiseLayerMask;
 

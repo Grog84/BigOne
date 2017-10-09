@@ -14,7 +14,7 @@ public class CameraScriptShiny : MonoBehaviour
 
 
     public Transform lookAt;                    // object that the camera is looking at
-	public Transform camTransform;
+	private Transform camTransform;
     
 	private Camera cam;
     private float camDistance = 0.0f;

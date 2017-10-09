@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class StateController : MonoBehaviour {
 
     public State currentState;
-    public State inactiveState;
+    public State inactiveState, gameStartState;
     public State remainState;
     public Decision checkIfGameActive;
 

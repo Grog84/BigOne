@@ -24,6 +24,8 @@ public class CharacterStateController : StateController {
         m_RunSoundrange_sq = characterStats.m_RunSoundrange * characterStats.m_RunSoundrange;
 
         lastActiveState = currentState;
+
+        m_CharacterController = GetComponent<_CharacterController>();
     }
 
     public override void TransitionToState(State nextState)
@@ -42,7 +44,7 @@ public class CharacterStateController : StateController {
     {
         base.Update();
 
-        if (!checkIfGameActive.Decide(this) && currentState != inactiveState)
+        if (!checkIfGameActive.Decide(this) && (currentState != inactiveState && currentState != gameStartState))
         {
             TransitionToState(inactiveState);
         }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028346, g: 0.22571373, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -4217,6 +4217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: {fileID: 11400000, guid: 012a4ec6a8323d34196545eb8c56513a, type: 2}
   inactiveState: {fileID: 0}
+  gameStartState: {fileID: 0}
   remainState: {fileID: 11400000, guid: d53256cd8aa40054681d88aab19f56e8, type: 2}
   checkIfGameActive: {fileID: 0}
   stateTimeElapsed: 0
@@ -5942,13 +5943,22 @@ MonoBehaviour:
   m_TurnAmount: 0
   m_ForwardAmount: 0
   ray_length: 0
-  isClimbable: 0
+  isInClimbArea: 0
+  isClimbDirectionRight: 0
+  climbingBottom: 0
+  climbingTop: 0
+  charDepth: 0
+  charSize: 0
   m_Animator: {fileID: 0}
   m_Camera: {fileID: 0}
   CharacterTansform: {fileID: 0}
   m_Rigidbody: {fileID: 0}
   m_Capsule: {fileID: 0}
   m_CharController: {fileID: 0}
+  m_CharStats: {fileID: 0}
+  climbCollider: {fileID: 0}
+  climbAnchorTop: {fileID: 0}
+  climbAnchorBottom: {fileID: 0}
 --- !u!114 &1277257333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5960,8 +5970,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75ec9bf1ccffab5468cbce2d3fc986ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 11400000, guid: 8dda0072a2675e24a9f06d4214821f6b, type: 2}
+  currentState: {fileID: 11400000, guid: ea0236a3d39da8446b4c2a4613a07391, type: 2}
   inactiveState: {fileID: 11400000, guid: b30eb6d8f5e8c1149a106741d1bdb249, type: 2}
+  gameStartState: {fileID: 11400000, guid: ea0236a3d39da8446b4c2a4613a07391, type: 2}
   remainState: {fileID: 11400000, guid: d53256cd8aa40054681d88aab19f56e8, type: 2}
   checkIfGameActive: {fileID: 11400000, guid: bf3a05a8f8153d648af2b0cbbb1a72c7, type: 2}
   stateTimeElapsed: 0

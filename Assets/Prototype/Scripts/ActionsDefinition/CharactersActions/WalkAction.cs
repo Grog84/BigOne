@@ -16,12 +16,10 @@ public class WalkAction : _Action
 
     private void Walk(CharacterStateController controller)
     {
+        
         //float get from the axis used in the vector3 m_Move
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-
-        //used in the Move method of the Character Controller
-        //m_Move = new Vector3(h, 0, v);
 
         //calculate move direction to pass to character
         if (controller.m_CharacterController.m_Camera != null)
@@ -32,9 +30,12 @@ public class WalkAction : _Action
         }
         
         m_Move *= controller.characterStats.m_WalkSpeed;
-        Mathf.Clamp(m_Move.x + m_Move.z, 0, 1);
 
-        Debug.Log(m_Move);
+        if (h != 0 && v != 0)
+        {
+            m_Move *= 0.7f;
+        }
+
         //make the model face the camera direction
         if (m_Move != Vector3.zero)
             controller.m_CharacterController.CharacterTansform.forward = m_Move;

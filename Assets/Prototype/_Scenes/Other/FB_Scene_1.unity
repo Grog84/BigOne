@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -250,6 +250,7 @@ GameObject:
   - component: {fileID: 36773495}
   - component: {fileID: 36773494}
   - component: {fileID: 36773493}
+  - component: {fileID: 36773499}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -621,6 +622,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &36773499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 36773492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b984eca39029d4fa4e7a8426d7bfc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  floorDescription: {fileID: 0}
 --- !u!43 &80863650
 Mesh:
   m_ObjectHideFlags: 0
@@ -5947,6 +5960,9 @@ MonoBehaviour:
   isClimbDirectionRight: 0
   climbingBottom: 0
   climbingTop: 0
+  isInPushArea: 0
+  isPushDirectionRight: 0
+  isPushLimit: 0
   charDepth: 0
   charSize: 0
   m_Animator: {fileID: 0}
@@ -5955,13 +5971,15 @@ MonoBehaviour:
   m_Rigidbody: {fileID: 0}
   m_Capsule: {fileID: 0}
   m_CharController: {fileID: 0}
-  m_CharStats: {fileID: 0}
   climbCollider: {fileID: 0}
   climbAnchorTop: {fileID: 0}
   climbAnchorBottom: {fileID: 0}
+  floorNoiseMultiplier: 0
+  m_CharStats: {fileID: 0}
   m_WalkNoiseLayerMask:
     serializedVersion: 2
     m_Bits: 0
+  pushCollider: {fileID: 0}
 --- !u!114 &1277257333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6042,7 +6060,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh16166
+  m_Name: pb_Mesh14260
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2

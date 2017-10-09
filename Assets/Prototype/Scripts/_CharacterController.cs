@@ -29,6 +29,8 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public Transform  climbAnchorTop;
     [HideInInspector] public Transform  climbAnchorBottom;
 
+    public LayerMask m_WalkNoiseLayerMask;
+
     private StateController controller;
 
     private void Awake()

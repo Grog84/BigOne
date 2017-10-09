@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -5959,6 +5959,9 @@ MonoBehaviour:
   climbCollider: {fileID: 0}
   climbAnchorTop: {fileID: 0}
   climbAnchorBottom: {fileID: 0}
+  m_WalkNoiseLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1277257333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5971,10 +5974,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: {fileID: 11400000, guid: ea0236a3d39da8446b4c2a4613a07391, type: 2}
-  inactiveState: {fileID: 11400000, guid: b30eb6d8f5e8c1149a106741d1bdb249, type: 2}
-  gameStartState: {fileID: 11400000, guid: ea0236a3d39da8446b4c2a4613a07391, type: 2}
+  inactiveState: {fileID: 0}
+  gameStartState: {fileID: 0}
   remainState: {fileID: 11400000, guid: d53256cd8aa40054681d88aab19f56e8, type: 2}
-  checkIfGameActive: {fileID: 11400000, guid: bf3a05a8f8153d648af2b0cbbb1a72c7, type: 2}
+  checkIfGameActive: {fileID: 0}
   stateTimeElapsed: 0
   lastActiveState: {fileID: 0}
   characterStats: {fileID: 11400000, guid: 7044672b7d5517440a5d90d540172779, type: 2}
@@ -6039,7 +6042,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh17518
+  m_Name: pb_Mesh16166
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2

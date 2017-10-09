@@ -12,6 +12,7 @@ public class EnemiesAIStateController : StateController {
     [HideInInspector] public int nextWayPoint;
     [HideInInspector] public Transform chaseTarget;
     [HideInInspector] public NavMeshAgent navMeshAgent;
+    [HideInInspector] public _AgentController m_AgentController;
 
     protected void Awake()
     {

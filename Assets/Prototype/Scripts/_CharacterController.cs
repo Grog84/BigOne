@@ -26,18 +26,19 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public Transform CharacterTansform;          // A reference to the character assigned to the state controller transform
     [HideInInspector] public Rigidbody m_Rigidbody;                // A reference to the rigidbody
     [HideInInspector] public CapsuleCollider m_Capsule;            // A reference to the capsule collider
-    [HideInInspector] public CharacterController m_CharController; 
-                      public CharacterStats m_CharStats;
+    [HideInInspector] public CharacterController m_CharController;
+
 
     [HideInInspector] public GameObject climbCollider;
     [HideInInspector] public Transform  climbAnchorTop;
     [HideInInspector] public Transform  climbAnchorBottom;
 
-<<<<<<< HEAD
+    public CharacterStats m_CharStats;
     public LayerMask m_WalkNoiseLayerMask;
-=======
+
+
     [HideInInspector] public GameObject pushCollider;
->>>>>>> 75d2159b88f42b78c32812a16c5cb226c02ede70
+
 
     private StateController controller;
 

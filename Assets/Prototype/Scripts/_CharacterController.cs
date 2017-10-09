@@ -9,10 +9,14 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public float m_ForwardAmount;
     [HideInInspector] public float ray_length;
 
-    [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area
+    [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
     [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
     [HideInInspector] public bool climbingBottom;
     [HideInInspector] public bool climbingTop;
+
+    [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing
+    [HideInInspector] public bool isPushDirectionRight;            // The player is facing the pushable object
+    [HideInInspector] public bool isPushLimit;                     // The pushable object reach the limit point
 
     [HideInInspector] public float charDepth;
     [HideInInspector] public float charSize;
@@ -29,7 +33,11 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public Transform  climbAnchorTop;
     [HideInInspector] public Transform  climbAnchorBottom;
 
+<<<<<<< HEAD
     public LayerMask m_WalkNoiseLayerMask;
+=======
+    [HideInInspector] public GameObject pushCollider;
+>>>>>>> 75d2159b88f42b78c32812a16c5cb226c02ede70
 
     private StateController controller;
 
@@ -47,6 +55,7 @@ public class _CharacterController : MonoBehaviour {
     {
         controller = GetComponent<StateController>();
         isInClimbArea = false;
+        isInPushArea = false;
         ray_length = m_CharController.bounds.size.y / 2.0f + 0.1f;
 
     }
@@ -77,6 +86,32 @@ public class _CharacterController : MonoBehaviour {
         }
     }
 
+    void ActivatePushingChoice()
+    {
+        if (isInPushArea)
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, Vector3.forward, out hit, m_CharStats.m_DistanceFromPushableObject))
+            {
+                Debug.DrawRay(transform.position, Vector3.forward, Color.red);
+                Debug.Log("vedo");
+
+
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Pushable"))
+                {
+                    isPushDirectionRight = true;
+
+
+                }
+                else
+                {
+                    isPushDirectionRight = false;
+                }
+            }
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Ladder_Bottom")
@@ -92,6 +127,12 @@ public class _CharacterController : MonoBehaviour {
             isInClimbArea = true;
             climbingTop = true;
             Debug.Log("entro");
+        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("Pushable"))
+        {
+            pushCollider = other.gameObject;
+            isInPushArea = true;
+            Debug.Log("spingo");
         }
     }
 
@@ -111,10 +152,17 @@ public class _CharacterController : MonoBehaviour {
             climbingTop = false;
             Debug.Log("esco");
         }
+        if (other.gameObject.layer == LayerMask.NameToLayer("Pushable"))
+        {
+            pushCollider = null;
+            isInPushArea = true;
+            Debug.Log("spingo");
+        }
 
     }
     // Update is called once per frame
-    void Update () {
+    void Update ()
+    {
 		
 	}
 

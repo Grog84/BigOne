@@ -3671,6 +3671,22 @@ Transform:
   m_Father: {fileID: 458172924}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &758323097 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1214704782812396, guid: b9ee7ff804885ff4ea26ace0762399b0,
+    type: 2}
+  m_PrefabInternal: {fileID: 767966203}
+--- !u!114 &758323098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 758323097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd18829a09c3514d8c828b91a19d324, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &767966203
 Prefab:
   m_ObjectHideFlags: 0
@@ -5724,6 +5740,9 @@ MonoBehaviour:
   m_Capsule: {fileID: 0}
   m_CharController: {fileID: 0}
   m_CharStats: {fileID: 0}
+  climbCollider: {fileID: 0}
+  climbAnchorTop: {fileID: 0}
+  climbAnchorBottom: {fileID: 0}
 --- !u!114 &1277257333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5737,6 +5756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: {fileID: 11400000, guid: 8dda0072a2675e24a9f06d4214821f6b, type: 2}
   inactiveState: {fileID: 0}
+  gameStartState: {fileID: 0}
   remainState: {fileID: 11400000, guid: d53256cd8aa40054681d88aab19f56e8, type: 2}
   checkIfGameActive: {fileID: 0}
   stateTimeElapsed: 0
@@ -5797,7 +5817,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh22272
+  m_Name: pb_Mesh57280
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2

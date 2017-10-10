@@ -6,7 +6,7 @@ public class GMStateController : StateController {
 
     [HideInInspector] public GMController m_GM;
 
-    protected void Awake()
+    protected override void Awake()
     {
         m_GM = GetComponent<GMController>();
     }

@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class CharacterStateController : StateController {
 
     public CharacterStats characterStats;
+    public State gameStartState;
 
     [HideInInspector] public _CharacterController m_CharacterController;
     [HideInInspector] public NavMeshAgent navMeshAgent;
@@ -15,8 +16,9 @@ public class CharacterStateController : StateController {
     [HideInInspector] public float m_RunSoundrange_sq;    // squared value
 
     // Use this for initialization
-    protected void Awake ()
+    protected override void Awake ()
     {
+        base.Awake();
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         m_WalkSoundrange_sq = characterStats.m_WalkSoundrange * characterStats.m_WalkSoundrange;   

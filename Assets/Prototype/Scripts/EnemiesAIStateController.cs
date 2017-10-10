@@ -7,8 +7,10 @@ public class EnemiesAIStateController : StateController {
 
     [HideInInspector] public _AgentController m_AgentController;
 
-    protected void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        lastActiveState = currentState;
     }
 
     void OnDrawGizmos()

@@ -12,8 +12,18 @@ MonoBehaviour:
   m_Name: Walk
   m_EditorClassIdentifier: 
   actions:
-  - {fileID: 11400000, guid: 4764cd1fcd7fc9b42b367536b8332ba2, type: 2}
-  enterActions: []
+  - {fileID: 11400000, guid: 0a39d3bdc3f871542820292ebcdaa873, type: 2}
+  enterActions:
+  - {fileID: 11400000, guid: 5d8b4c4da72517245811b588530e7386, type: 2}
   exitActions: []
-  transitions: []
+  transitions:
+  - decision: {fileID: 11400000, guid: e3f1e894390157a45a922a97639d09f9, type: 2}
+    trueState: {fileID: 11400000, guid: 6c3239f84d41b844d9d4f409b3e1bb45, type: 2}
+    falseState: {fileID: 11400000, guid: d53256cd8aa40054681d88aab19f56e8, type: 2}
+  - decision: {fileID: 11400000, guid: 4a3842460d54aa24e8db6c0ab6a99057, type: 2}
+    trueState: {fileID: 11400000, guid: e8c643655c70761468ff922a034c1b2d, type: 2}
+    falseState: {fileID: 11400000, guid: d53256cd8aa40054681d88aab19f56e8, type: 2}
+  - decision: {fileID: 11400000, guid: fa058eae859c7c449ad5686d575a292f, type: 2}
+    trueState: {fileID: 11400000, guid: d53256cd8aa40054681d88aab19f56e8, type: 2}
+    falseState: {fileID: 11400000, guid: 7421e84aa60d8814c9e680d0cc5ecd90, type: 2}
   sceneGizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

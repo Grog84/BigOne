@@ -19,11 +19,13 @@ public class GroundCheckDecision : Decision
         // helper to visualise the ground check ray in the scene view
         Debug.DrawLine(controller.m_CharacterController.CharacterTansform.position, 
                         controller.m_CharacterController.CharacterTansform.position + (Vector3.down * controller.characterStats.m_GroundCheckDistance),Color.green);
-        #endif
+#endif
         // ray_lenght is a small offset to start the ray from inside the character
         // it is also good to note that the transform position in the sample assets is at the base of the character
-        if (Physics.Raycast(controller.m_CharacterController.CharacterTansform.position, (Vector3.down * controller.m_CharacterController.ray_length),
-            out hitInfo, controller.characterStats.m_GroundCheckDistance))
+        Debug.Log(Physics.Raycast(controller.m_CharacterController.CharacterTansform.position, Vector3.down,
+            out hitInfo, 10f));
+        if (Physics.Raycast(controller.m_CharacterController.CharacterTansform.position, Vector3.down,
+            out hitInfo))
         {
             controller.m_CharacterController.floorNoiseMultiplier = hitInfo.transform.GetComponent<Floor>().GetNoiseMultiplier();
             return true;

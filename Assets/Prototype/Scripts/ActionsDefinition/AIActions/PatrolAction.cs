@@ -12,12 +12,12 @@ public class PatrolAction : _Action
 
     private void Patrol(EnemiesAIStateController controller)
     {
-        controller.navMeshAgent.destination = controller.wayPointList[controller.nextWayPoint].position;
-        controller.navMeshAgent.isStopped = false;
+        controller.m_AgentController.navMeshAgent.destination = controller.m_AgentController.wayPointList[controller.m_AgentController.nextWayPoint].position;
+        controller.m_AgentController.navMeshAgent.isStopped = false;
 
-        if (controller.navMeshAgent.remainingDistance <= controller.navMeshAgent.stoppingDistance && !controller.navMeshAgent.pathPending)
+        if (controller.m_AgentController.navMeshAgent.remainingDistance <= controller.m_AgentController.navMeshAgent.stoppingDistance && !controller.m_AgentController.navMeshAgent.pathPending)
         {
-            controller.nextWayPoint = (controller.nextWayPoint + 1) % controller.wayPointList.Count;
+            controller.m_AgentController.nextWayPoint = (controller.m_AgentController.nextWayPoint + 1) % controller.m_AgentController.wayPointList.Count;
         }
     }
 }

@@ -12,7 +12,7 @@ public class ChaseAction : _Action
 
     private void Chase(EnemiesAIStateController controller)
     {
-        controller.navMeshAgent.destination = controller.chaseTarget.position;
-        controller.navMeshAgent.isStopped = false;
+        controller.m_AgentController.navMeshAgent.destination = controller.m_AgentController.chaseTarget.position;
+        controller.m_AgentController.navMeshAgent.isStopped = false;
     }
 }

@@ -5,26 +5,18 @@ using UnityEngine.AI;
 
 public class EnemiesAIStateController : StateController {
 
-    public MyAgentStats agentStats;
-    public List<Transform> wayPointList;
-    public Transform eyes;
-
-    [HideInInspector] public int nextWayPoint;
-    [HideInInspector] public Transform chaseTarget;
-    [HideInInspector] public NavMeshAgent navMeshAgent;
     [HideInInspector] public _AgentController m_AgentController;
 
     protected void Awake()
     {
-        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     void OnDrawGizmos()
     {
-        if (currentState != null && eyes != null)
+        if (currentState != null && m_AgentController.eyes != null)
         {
             Gizmos.color = currentState.sceneGizmosColor;
-            Gizmos.DrawWireSphere(eyes.position, agentStats.lookSphereCastRadius);
+            Gizmos.DrawWireSphere(m_AgentController.eyes.position, m_AgentController.agentStats.lookSphereCastRadius);
         }
     }
 
@@ -56,18 +48,4 @@ public class EnemiesAIStateController : StateController {
         currentState.UpdateState(this);
     }
 
-    //void Update()
-    //{
-
-    //    if (!checkIfGameActive.Decide(this) && currentState != inactiveState)
-    //    {
-    //        TransitionToState(inactiveState);
-    //    }
-    //    else if (checkIfGameActive.Decide(this) && currentState == inactiveState)
-    //    {
-    //        TransitionToState(lastActiveState);
-    //    }
-
-    //    currentState.UpdateState(this);
-    //}
 }

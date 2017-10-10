@@ -4540,10 +4540,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: {fileID: 11400000, guid: 012a4ec6a8323d34196545eb8c56513a, type: 2}
-  inactiveState: {fileID: 0}
-  gameStartState: {fileID: 0}
-  remainState: {fileID: 11400000, guid: d53256cd8aa40054681d88aab19f56e8, type: 2}
   checkIfGameActive: {fileID: 0}
+  inactiveState: {fileID: 0}
+  remainState: {fileID: 11400000, guid: d53256cd8aa40054681d88aab19f56e8, type: 2}
   stateTimeElapsed: 0
   lastActiveState: {fileID: 0}
   m_GM: {fileID: 0}
@@ -5886,6 +5885,9 @@ MonoBehaviour:
   isClimbDirectionRight: 0
   climbingBottom: 0
   climbingTop: 0
+  isInPushArea: 0
+  isPushDirectionRight: 0
+  isPushLimit: 0
   charDepth: 0
   charSize: 0
   m_Animator: {fileID: 0}
@@ -5894,10 +5896,15 @@ MonoBehaviour:
   m_Rigidbody: {fileID: 0}
   m_Capsule: {fileID: 0}
   m_CharController: {fileID: 0}
-  m_CharStats: {fileID: 11400000, guid: 7044672b7d5517440a5d90d540172779, type: 2}
   climbCollider: {fileID: 0}
   climbAnchorTop: {fileID: 0}
   climbAnchorBottom: {fileID: 0}
+  floorNoiseMultiplier: 0
+  m_CharStats: {fileID: 11400000, guid: 7044672b7d5517440a5d90d540172779, type: 2}
+  m_WalkNoiseLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  pushCollider: {fileID: 0}
 --- !u!114 &1277257333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5910,13 +5917,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: {fileID: 11400000, guid: ea0236a3d39da8446b4c2a4613a07391, type: 2}
-  inactiveState: {fileID: 11400000, guid: b30eb6d8f5e8c1149a106741d1bdb249, type: 2}
-  gameStartState: {fileID: 11400000, guid: ea0236a3d39da8446b4c2a4613a07391, type: 2}
-  remainState: {fileID: 11400000, guid: d53256cd8aa40054681d88aab19f56e8, type: 2}
   checkIfGameActive: {fileID: 11400000, guid: bf3a05a8f8153d648af2b0cbbb1a72c7, type: 2}
+  inactiveState: {fileID: 11400000, guid: b30eb6d8f5e8c1149a106741d1bdb249, type: 2}
+  remainState: {fileID: 11400000, guid: d53256cd8aa40054681d88aab19f56e8, type: 2}
   stateTimeElapsed: 0
   lastActiveState: {fileID: 0}
   characterStats: {fileID: 11400000, guid: 7044672b7d5517440a5d90d540172779, type: 2}
+  gameStartState: {fileID: 11400000, guid: ea0236a3d39da8446b4c2a4613a07391, type: 2}
   m_CharacterController: {fileID: 0}
   navMeshAgent: {fileID: 0}
   m_WalkSoundrange_sq: 0
@@ -5964,7 +5971,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1277257331}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.264, y: -0.52, z: -18.834793}
+  m_LocalPosition: {x: -0.264, y: -0.6009, z: -18.834793}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1123565600}

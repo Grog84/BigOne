@@ -29,6 +29,7 @@ public class WalkAction : _Action
             m_Move = (v * m_CamForward + h * controller.m_CharacterController.m_Camera.right);
         }
         
+
         m_Move *= controller.characterStats.m_WalkSpeed;
 
         if (h != 0 && v != 0)

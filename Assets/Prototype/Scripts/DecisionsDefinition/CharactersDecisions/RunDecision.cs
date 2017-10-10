@@ -7,7 +7,7 @@ public class RunDecision : Decision {
 
     public override bool Decide(CharacterStateController controller)
     {
-         return Input.GetKeyDown(KeyCode.LeftShift);
+         return Input.GetKey(KeyCode.LeftShift);
     }
 
 }

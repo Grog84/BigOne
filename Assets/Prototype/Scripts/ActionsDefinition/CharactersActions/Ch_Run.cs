@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ch_Run : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+[CreateAssetMenu(menuName = "Prototype/CharactersActions/Run")]
+public class Ch_Run : _Action
+{
+    public override void Execute(CharacterStateController controller)
+    {
+        Run(controller);
+    }
+
+    public void Run(CharacterStateController controller)
+    {
+        controller.characterStats.m_MovementSpeed = controller.characterStats.m_RunSpeed;    }
+
 }

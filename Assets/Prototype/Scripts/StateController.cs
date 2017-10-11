@@ -18,9 +18,8 @@ public class StateController : MonoBehaviour {
 
     protected virtual void Awake()
     {
-        State[] foundItems = (State[])Resources.FindObjectsOfTypeAll(typeof(State));
-        inactiveState = foundItems[0];
-        inactiveState = foundItems[1];
+        inactiveState = (State)Resources.Load("Inactive"); 
+        remainState = (State)Resources.Load("RemainInState");
     }
 
     // Update is called once per frame

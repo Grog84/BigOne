@@ -6,8 +6,8 @@ using UnityEngine.AI;
 public class CharacterStateController : StateController {
 
     public CharacterStats characterStats;
-    public State gameStartState;
 
+    [HideInInspector] public State gameStartState;
     [HideInInspector] public _CharacterController m_CharacterController;
     [HideInInspector] public NavMeshAgent navMeshAgent;
 
@@ -28,6 +28,8 @@ public class CharacterStateController : StateController {
         lastActiveState = currentState;
 
         m_CharacterController = GetComponent<_CharacterController>();
+
+        gameStartState = (State)Resources.Load("GameStart");
     }
 
     public override void TransitionToState(State nextState)

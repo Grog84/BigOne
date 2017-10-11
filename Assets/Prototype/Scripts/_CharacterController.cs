@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class _CharacterController : MonoBehaviour {
 
@@ -13,6 +14,7 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
     [HideInInspector] public bool climbingBottom;
     [HideInInspector] public bool climbingTop;
+    [HideInInspector] public bool startClimbAnimation;
 
     [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing
     [HideInInspector] public bool isPushDirectionRight;            // The player is facing the pushable object
@@ -32,6 +34,7 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public GameObject climbCollider;
     [HideInInspector] public Transform  climbAnchorTop;
     [HideInInspector] public Transform  climbAnchorBottom;
+    [HideInInspector] public Transform  endClimbAnchor;
 
     [HideInInspector] public float floorNoiseMultiplier;
 
@@ -69,16 +72,16 @@ public class _CharacterController : MonoBehaviour {
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, Vector3.forward, out hit, m_CharStats.m_DistanceFromWallClimbing))
+            if (Physics.Raycast(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, out hit, m_CharStats.m_DistanceFromWallClimbing))
             {
-                Debug.DrawRay(transform.position, Vector3.forward, Color.red);
-                Debug.Log("vedo");
+                Debug.DrawRay(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, Color.red);
+               
 
 
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Climbable"))
                 {
                     isClimbDirectionRight = true;
-                   
+                    Debug.Log("vedo");
 
                 }
                 else
@@ -104,14 +107,24 @@ public class _CharacterController : MonoBehaviour {
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Pushable"))
                 {
                     isPushDirectionRight = true;
-
-
                 }
                 else
                 {
                     isPushDirectionRight = false;
                 }
             }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Ladder_Bottom")
+        {
+            ActivateClimbingChoice();    
+        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("Pushable"))
+        {
+            ActivatePushingChoice();
         }
     }
 
@@ -122,7 +135,8 @@ public class _CharacterController : MonoBehaviour {
             climbCollider = other.gameObject;
             isInClimbArea = true;
             climbingBottom = true;
-            Debug.Log("entro");
+            ActivateClimbingChoice();
+           // Debug.Log("entro");
         }
         else if (other.tag == "Ladder_Top")
         {
@@ -135,6 +149,7 @@ public class _CharacterController : MonoBehaviour {
         {
             pushCollider = other.gameObject;
             isInPushArea = true;
+            ActivatePushingChoice();
             Debug.Log("spingo");
         }
     }
@@ -146,14 +161,14 @@ public class _CharacterController : MonoBehaviour {
             climbCollider = null;
             isInClimbArea = false;
             climbingBottom = false;
-            Debug.Log("esco");
+           // Debug.Log("esco");
         }
         if (other.tag == "Ladder_Top")
         {
             climbCollider = null;
             isInClimbArea = false;
             climbingTop = false;
-            Debug.Log("esco");
+           // Debug.Log("esco");
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Pushable"))
         {
@@ -163,10 +178,24 @@ public class _CharacterController : MonoBehaviour {
         }
 
     }
+    IEnumerator ReachPoint()
+    {
+        float climbTime = 1f;
+        startClimbAnimation = false;
+
+        m_CharController.enabled = false;
+        CharacterTansform.DOMove(climbAnchorTop.position, climbTime);
+        yield return new WaitForSeconds(climbTime);
+        m_CharController.enabled = true;
+        yield return null;
+    }
     // Update is called once per frame
     void Update ()
     {
-		
+		if(startClimbAnimation)
+        {
+            StartCoroutine(ReachPoint());
+        }
 	}
 
 }

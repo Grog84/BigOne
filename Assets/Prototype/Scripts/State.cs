@@ -62,10 +62,17 @@ public class State : ScriptableObject {
 
             if (decisionSucceeded)
             {
+                if (transitions[i].trueState == null)
+                {
+                    Debug.Log("ecco");
+                    Debug.Log(this);
+                }
                 controller.TransitionToState(transitions[i].trueState);
             }
             else
             {
+                if (transitions[i].falseState == null)
+                    Debug.Log("ecco");
                 controller.TransitionToState(transitions[i].falseState);
             }
         }

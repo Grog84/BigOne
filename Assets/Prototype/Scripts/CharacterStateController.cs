@@ -36,6 +36,8 @@ public class CharacterStateController : StateController {
     {
         if (nextState != remainState)
         {
+            if (nextState == null)
+                Debug.Log("ecco");
             currentState.OnExitState(this);
             currentState = nextState;
             currentState.OnEnterState(this);

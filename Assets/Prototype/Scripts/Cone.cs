@@ -7,10 +7,12 @@ public class Cone : MonoBehaviour {
     public ConeStats coneStats;
     public bool isDebug;
 
-	void Start () {
+    private _AgentController m_AgentController;
+
+    void Start() {
 
         transform.localScale.Set(coneStats.scaleX, coneStats.scaleY, coneStats.scaleZ);
-	}
+    }
 
     private void Update()
     {
@@ -18,6 +20,19 @@ public class Cone : MonoBehaviour {
         {
             transform.localScale.Set(coneStats.scaleX, coneStats.scaleY, coneStats.scaleZ);
         }
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+
+        }
+    }
+
+    private void LookForPlayer()
+    {
 
     }
 

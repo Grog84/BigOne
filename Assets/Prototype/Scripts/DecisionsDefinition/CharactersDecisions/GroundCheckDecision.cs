@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/GroundCheck")]
 public class GroundCheckDecision : Decision
 {
-
+    public float offset = 0.1f;
     public override bool Decide(CharacterStateController controller)
     {
         bool isOnTheGround = CheckIsOnGround(controller);
@@ -22,12 +22,10 @@ public class GroundCheckDecision : Decision
 #endif
         // ray_lenght is a small offset to start the ray from inside the character
         // it is also good to note that the transform position in the sample assets is at the base of the character
-        Debug.Log(Physics.Raycast(controller.m_CharacterController.CharacterTansform.position, Vector3.down,
-            out hitInfo, 10f));
-        if (Physics.Raycast(controller.m_CharacterController.CharacterTansform.position, Vector3.down,
-            out hitInfo))
+        Debug.Log(Physics.Raycast(controller.m_CharacterController.CharacterTansform.position + Vector3.up * offset, Vector3.down, out hitInfo, 0.15f));
+        if (Physics.Raycast(controller.m_CharacterController.CharacterTansform.position + Vector3.up*offset,Vector3.down,out hitInfo,0.15f))
         {
-            controller.m_CharacterController.floorNoiseMultiplier = hitInfo.transform.GetComponent<Floor>().GetNoiseMultiplier();
+            //controller.m_CharacterController.floorNoiseMultiplier = hitInfo.transform.GetComponent<Floor>().GetNoiseMultiplier();
             return true;
         }
         else

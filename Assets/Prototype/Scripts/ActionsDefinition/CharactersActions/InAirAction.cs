@@ -16,7 +16,7 @@ public class InAirAction : _Action
     private void AirbornMovement(CharacterStateController controller)
     {
         m_Velocity = controller.m_CharacterController.m_CharController.velocity;
-        m_Velocity.y += controller.characterStats.m_Gravity * Time.deltaTime;
+        m_Velocity.y -= controller.characterStats.m_Gravity * Time.deltaTime;
         controller.m_CharacterController.m_CharController.Move(m_Velocity * Time.deltaTime);
     }
 }

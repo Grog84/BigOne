@@ -19,6 +19,7 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing
     [HideInInspector] public bool isPushDirectionRight;            // The player is facing the pushable object
     [HideInInspector] public bool isPushLimit;                     // The pushable object reach the limit point
+    [HideInInspector] public bool canStep = true;
 
     [HideInInspector] public float charDepth;
     [HideInInspector] public float charSize;
@@ -178,7 +179,8 @@ public class _CharacterController : MonoBehaviour {
         }
 
     }
-    IEnumerator ReachPoint()
+
+    private IEnumerator ReachPoint()
     {
         float climbTime = 1f;
         startClimbAnimation = false;
@@ -189,12 +191,23 @@ public class _CharacterController : MonoBehaviour {
         m_CharController.enabled = true;
         yield return null;
     }
-    // Update is called once per frame
+
+    public IEnumerator MakeStep()
+    {
+        yield return new WaitForSeconds(1f);
+        canStep = true;
+    }
+
     void Update ()
     {
 		if(startClimbAnimation)
         {
             StartCoroutine(ReachPoint());
+        }
+
+        if (!canStep)
+        {
+            StartCoroutine(MakeStep());
         }
 	}
 

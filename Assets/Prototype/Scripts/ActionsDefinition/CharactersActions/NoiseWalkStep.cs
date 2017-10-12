@@ -12,13 +12,17 @@ public class NoiseWalkStep : _Action {
 
     private void Step(CharacterStateController controller)
     {
-        for (int i = 0; i < GMController.instance.allEnemiesTransform.Length; i++)
+        if (controller.m_CharacterController.canStep && Mathf.Abs(Input.GetAxis("Vertical")) > 0.1)
         {
-            Vector3 enemyPosition = GMController.instance.allEnemiesTransform[i].position;
-            float distance = Vector3.SqrMagnitude(controller.m_CharacterController.CharacterTansform.position - enemyPosition);
-            if (distance < controller.m_WalkSoundrange_sq * Mathf.Pow(controller.m_CharacterController.floorNoiseMultiplier, 2.0f))
+            controller.m_CharacterController.canStep = false;
+            for (int i = 0; i < GMController.instance.allEnemiesTransform.Length; i++)
             {
-                EmitSound(controller, enemyPosition);
+                Vector3 enemyPosition = GMController.instance.allEnemiesTransform[i].position;
+                float distance = Vector3.SqrMagnitude(controller.m_CharacterController.CharacterTansform.position - enemyPosition);
+                if (distance < controller.m_WalkSoundrange_sq * Mathf.Pow(controller.m_CharacterController.floorNoiseMultiplier, 2.0f))
+                {
+                    EmitSound(controller, enemyPosition);
+                }
             }
         }
     }

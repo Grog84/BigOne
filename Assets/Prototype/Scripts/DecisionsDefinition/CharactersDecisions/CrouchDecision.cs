@@ -10,11 +10,11 @@ public class CrouchDecision : Decision
     public override bool Decide(CharacterStateController controller)
     {
 
-        if(Input.GetKeyDown(KeyCode.C) && Crouch == false)
+        if(Input.GetButtonDown("Crouch") && Crouch == false)
         {
             Crouch = true;
         }
-        else if (Input.GetKeyDown(KeyCode.C) && Crouch == true)
+        else if (Input.GetButtonDown("Crouch") && Crouch == true)
         {
             Crouch = false;
         }

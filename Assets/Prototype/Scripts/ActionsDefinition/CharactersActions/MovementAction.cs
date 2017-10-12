@@ -20,7 +20,7 @@ public class MovementAction : _Action
         //float get from the axis used in the vector3 m_Move
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-
+         
         //calculate move direction to pass to character
         if (controller.m_CharacterController.m_Camera != null)
         {
@@ -29,13 +29,15 @@ public class MovementAction : _Action
             m_Move = (v * m_CamForward + h * controller.m_CharacterController.m_Camera.right);
         }
         
-
-        m_Move *= controller.characterStats.m_MovementSpeed;
-
-        if (h != 0 && v != 0)
+        
+        if(m_Move.sqrMagnitude >1)
         {
-            m_Move *= 0.7f;
+            m_Move = m_Move.normalized;
         }
+
+        Debug.Log(m_Move);
+        m_Move *= controller.characterStats.m_MovementSpeed;
+        
 
         //make the model face the camera direction
         if (m_Move != Vector3.zero)

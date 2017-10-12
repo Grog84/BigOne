@@ -40,6 +40,8 @@ public class NoiseWalkStep : _Action {
         {
             var enemyController = m_RayHit.transform.GetComponent<_AgentController>();
             enemyController.hasHeardPlayer = true;
+
+            GMController.instance.lastHeardPlayerPosition = controller.m_CharacterController.CharacterTansform.position;
         }
 
     }

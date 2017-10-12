@@ -13,6 +13,8 @@ public class MyAgentStats : ScriptableObject {
 
     public float fillingSpeed = 1.0f;
 
+    public float localSearchRange = 20f;
+
     public float lookRange = 8f;
     public float lookSphereCastRadius = 0.5f;
 

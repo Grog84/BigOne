@@ -12,7 +12,7 @@ public class CheckLastHeard : _Action {
 
     private void CheckLastHeardPosition(EnemiesAIStateController controller)
     {
-        controller.m_AgentController.m_NavMeshAgent.destination = GMController.instance.lastSeenPlayerPosition;
+        controller.m_AgentController.m_NavMeshAgent.destination = GMController.instance.lastHeardPlayerPosition;
         controller.m_AgentController.m_NavMeshAgent.isStopped = false;
     }
 }

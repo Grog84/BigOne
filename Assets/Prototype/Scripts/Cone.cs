@@ -32,7 +32,7 @@ public class Cone : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            m_AgentController.isInSight = true;
+            m_AgentController.isPlayerInSight = true;
         }
     }
 
@@ -40,7 +40,7 @@ public class Cone : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            m_AgentController.isInSight = false;
+            m_AgentController.isPlayerInSight = false;
         }
     }
 

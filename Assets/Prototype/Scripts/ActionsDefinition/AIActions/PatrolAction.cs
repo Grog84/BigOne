@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Prototype/AIActions/Patrol")]
 public class PatrolAction : _Action
 {
+    private bool waitingForPatrolStop = false;
+
     public override void Execute(EnemiesAIStateController controller)
     {
         Patrol(controller);
@@ -12,12 +14,25 @@ public class PatrolAction : _Action
 
     private void Patrol(EnemiesAIStateController controller)
     {
-        controller.m_AgentController.m_NavMeshAgent.destination = controller.m_AgentController.wayPointList[controller.m_AgentController.nextWayPoint].position;
+        controller.m_AgentController.m_NavMeshAgent.destination = controller.m_AgentController.wayPointListTransform[controller.m_AgentController.nextWayPoint].position;
         controller.m_AgentController.m_NavMeshAgent.isStopped = false;
 
-        if (controller.m_AgentController.m_NavMeshAgent.remainingDistance <= controller.m_AgentController.m_NavMeshAgent.stoppingDistance && !controller.m_AgentController.m_NavMeshAgent.pathPending)
+        if (!controller.m_AgentController.isCheckingNavPoint)
         {
-            controller.m_AgentController.nextWayPoint = (controller.m_AgentController.nextWayPoint + 1) % controller.m_AgentController.wayPointList.Count;
+            if (controller.m_AgentController.m_NavMeshAgent.remainingDistance <= controller.m_AgentController.m_NavMeshAgent.stoppingDistance && !controller.m_AgentController.m_NavMeshAgent.pathPending)
+            {
+                if (!waitingForPatrolStop)
+                {
+                    controller.m_AgentController.isCheckingNavPoint = true;
+                    waitingForPatrolStop = true;
+                }
+                else
+                {
+                    controller.m_AgentController.nextWayPoint = (controller.m_AgentController.nextWayPoint + 1) % controller.m_AgentController.wayPointList.Count;
+                    waitingForPatrolStop = false;
+                }
+            
+            }
         }
     }
 }

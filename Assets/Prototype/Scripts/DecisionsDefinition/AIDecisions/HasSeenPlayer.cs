@@ -8,9 +8,9 @@ public class HasSeenPlayer : Decision {
     public override bool Decide(EnemiesAIStateController controller)
     {
         if (controller.m_AgentController.sightPercentage >= 100f)
-            return false;
-        else
             return true;
+        else
+            return false;
     }
 
     

@@ -2,18 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class _AgentController : MonoBehaviour {
 
-    public List<Transform> wayPointList;
+    public List<NavPoint> wayPointList;
     public Transform eyes;
 
     [HideInInspector] public Transform[] lookAtPositions;
     [HideInInspector] public Transform lookAtPositionCentral;
+    [HideInInspector] public Transform[] wayPointListTransform;
     [HideInInspector] public bool hasHeardPlayer = false;
     [HideInInspector] public bool hasSeenPlayer = false;
-    [HideInInspector] public bool isInSight = false;
+
+    [HideInInspector] public bool isPlayerInSight = false;
+    [HideInInspector] public bool isSuspicious = false, isAlarmed = false;
+
     [HideInInspector] public int nextWayPoint = 0;
+    [HideInInspector] public bool isCheckingNavPoint = false;
+
     [HideInInspector] public Transform chaseTarget;
     [HideInInspector] public NavMeshAgent m_NavMeshAgent;
     [HideInInspector] public MyAgentStats agentStats;
@@ -37,6 +44,11 @@ public class _AgentController : MonoBehaviour {
         lookAtPositionCentral = GameObject.FindGameObjectsWithTag("LookAtPositionCentral")[0].transform;
         UpdateStats(patrolStats);
         perceptionBar = GetComponentInChildren<PerceptionBar>();
+        wayPointListTransform = new Transform[wayPointList.Count];
+        for (int i = 0; i < wayPointListTransform.Length; i++)
+        {
+            wayPointListTransform[i] = wayPointList[i].transform;
+        }
     }
 
     public void LoadNavmeshStats()
@@ -71,10 +83,22 @@ public class _AgentController : MonoBehaviour {
 
     }
 
+    private IEnumerator WaitAtNavPoint()
+    {
+        Vector3 oldDirection = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
+        float rotationDuration = 1f;
+        transform.DORotate(wayPointListTransform[nextWayPoint].eulerAngles, rotationDuration);
+        yield return new WaitForSeconds(rotationDuration);
+        yield return new WaitForSeconds(wayPointList[nextWayPoint].secondsStaying);
+        transform.DORotate(oldDirection, rotationDuration);
+        yield return new WaitForSeconds(rotationDuration);
+        isCheckingNavPoint = false;
+    }
+
     void Update()
     {
         bool noRaycastHitting = true;
-        if (isInSight && sightPercentage < 100f)
+        if (isPlayerInSight && sightPercentage < 100f)
         {
             Vector3 direction;
 
@@ -101,7 +125,11 @@ public class _AgentController : MonoBehaviour {
         {
             sightPercentage -= agentStats.fillingSpeed;
         }
-        
+
+        if (isCheckingNavPoint)
+        {
+            StartCoroutine(WaitAtNavPoint());
+        }
 
         sightPercentage = Mathf.Clamp(sightPercentage, 0f, 100f);
         perceptionBar.SetFillingPerc(sightPercentage);

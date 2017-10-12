@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class GMController : MonoBehaviour {
 
-
     public Animator FadeAnim;
 
     [HideInInspector] public static GMController instance = null;
     [HideInInspector] public Vector3 lastSeenPlayerPosition = new Vector3(1000f, 1000f, 1000f);
+    [HideInInspector] public Vector3 lastHeardPlayerPosition = new Vector3(1000f, 1000f, 1000f);
     [HideInInspector] public bool isFadeScreenVisible = true;
     [HideInInspector] public Transform[] allEnemiesTransform;
+    [HideInInspector] public int suspiciousGuards = 0, alarmedGuards = 0;
+
 
     private bool isGameActive = false;
 
     static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
-
 
     void Awake() 
     {

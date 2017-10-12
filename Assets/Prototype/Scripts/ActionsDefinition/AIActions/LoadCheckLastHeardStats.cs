@@ -12,6 +12,6 @@ public class LoadCheckLastHeardStats : _Action {
 
     private void LoadCheckPositionParams(EnemiesAIStateController controller)
     {
-        controller.m_AgentController.loadStats("checkForNoise");
+        controller.m_AgentController.UpdateStats("checkForNoise");
     }
 }

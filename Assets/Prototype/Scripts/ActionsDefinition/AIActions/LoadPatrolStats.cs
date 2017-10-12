@@ -13,6 +13,6 @@ public class LoadPatrolStats : _Action
 
     private void LoadPatrolParams(EnemiesAIStateController controller)
     {
-        controller.m_AgentController.loadStats("patrol");
+        controller.m_AgentController.UpdateStats("patrol");
     }
 }

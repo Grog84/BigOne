@@ -13,7 +13,7 @@ public class ClimbTopDecision : Decision
 
     private bool CheckIfClimbingTop(CharacterStateController controller)
     {
-        Debug.Log(controller.m_CharacterController.isInClimbArea + " " + controller.m_CharacterController.isClimbDirectionRight + " " + Input.GetKeyDown(KeyCode.E));
+        // Debug.Log(controller.m_CharacterController.isInClimbArea + " " + controller.m_CharacterController.isClimbDirectionRight + " " + Input.GetKeyDown(KeyCode.E));
         if (controller.m_CharacterController.isInClimbArea && controller.m_CharacterController.isClimbDirectionRight && Input.GetKeyDown(KeyCode.E))
         {
             

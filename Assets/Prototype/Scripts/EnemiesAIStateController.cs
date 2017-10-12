@@ -11,6 +11,7 @@ public class EnemiesAIStateController : StateController {
     {
         base.Awake();
         lastActiveState = currentState;
+        m_AgentController = GetComponent<_AgentController>();
     }
 
     void OnDrawGizmos()

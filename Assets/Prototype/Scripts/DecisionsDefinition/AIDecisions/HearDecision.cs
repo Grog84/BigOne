@@ -12,8 +12,8 @@ public class HearDecision : _Action {
 
     private void CheckLastHeard(EnemiesAIStateController controller)
     {
-        controller.m_AgentController.navMeshAgent.destination = GMController.instance.lastSeenPlayerPosition;
-        controller.m_AgentController.navMeshAgent.isStopped = false;
+        controller.m_AgentController.m_NavMeshAgent.destination = GMController.instance.lastSeenPlayerPosition;
+        controller.m_AgentController.m_NavMeshAgent.isStopped = false;
     }
 
 }

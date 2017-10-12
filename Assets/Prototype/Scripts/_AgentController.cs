@@ -5,54 +5,59 @@ using UnityEngine.AI;
 
 public class _AgentController : MonoBehaviour {
 
-    public MyAgentStats patrolStats;
-    public MyAgentStats checkForPositionStats;
-    public MyAgentStats agentStats;
     public List<Transform> wayPointList;
     public Transform eyes;
+    public GameObject player;
 
+    [HideInInspector] public GameObject[] lookAtPositions;
+    [HideInInspector] public GameObject lookAtPositionCentral;
     [HideInInspector] public bool hasHeardPlayer = false;
     [HideInInspector] public bool hasSeenPlayer = false;
-    [HideInInspector] public int nextWayPoint;
+    [HideInInspector] public int nextWayPoint = 0;
     [HideInInspector] public Transform chaseTarget;
-    [HideInInspector] public NavMeshAgent navMeshAgent;
+    [HideInInspector] public NavMeshAgent m_NavMeshAgent;
+    [HideInInspector] public MyAgentStats agentStats;
 
-    private NavMeshAgent m_NavMeshAgent;
+    public MyAgentStats patrolStats;
+    public MyAgentStats checkForPositionStats;
+
     private MyAgentStats loadingStats;
 
     private void Awake()
     {
-        m_NavMeshAgent.GetComponent<NavMeshAgent>();
+        m_NavMeshAgent = GetComponent<NavMeshAgent>();
+        UpdateStats(patrolStats);
     }
 
-    public void loadStats(MyAgentStats stats)
+    public void LoadNavmeshStats()
     {
-        m_NavMeshAgent.speed = stats.speed;
-        m_NavMeshAgent.angularSpeed = stats.angularSpeed;
-        m_NavMeshAgent.acceleration = stats.acceleration;
-        m_NavMeshAgent.stoppingDistance = stats.stoppingDistance;
-        
-
+        m_NavMeshAgent.speed = agentStats.speed;
+        m_NavMeshAgent.angularSpeed = agentStats.angularSpeed;
+        m_NavMeshAgent.acceleration = agentStats.acceleration;
+        m_NavMeshAgent.stoppingDistance = agentStats.stoppingDistance;
     }
 
-    public void loadStats(string statsName)
+    public void UpdateStats(MyAgentStats stats)
+    {
+        agentStats = stats;
+        LoadNavmeshStats();
+    }
+
+    public void UpdateStats(string statsName)
     {
         switch (statsName)
         {
             case "patrol":
-                loadingStats = patrolStats;
+                agentStats = patrolStats;
                 break;
             case "checkForNoise":
-                loadingStats = patrolStats;
+                agentStats = patrolStats;
                 break;
             default:
                 break;
         }
-        m_NavMeshAgent.speed = loadingStats.speed;
-        m_NavMeshAgent.angularSpeed = loadingStats.angularSpeed;
-        m_NavMeshAgent.acceleration = loadingStats.acceleration;
-        m_NavMeshAgent.stoppingDistance = loadingStats.stoppingDistance;
 
+        LoadNavmeshStats();
 
     }
 

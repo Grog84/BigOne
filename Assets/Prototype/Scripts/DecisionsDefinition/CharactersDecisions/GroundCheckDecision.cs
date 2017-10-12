@@ -22,7 +22,7 @@ public class GroundCheckDecision : Decision
 #endif
         // ray_lenght is a small offset to start the ray from inside the character
         // it is also good to note that the transform position in the sample assets is at the base of the character
-        Debug.Log(Physics.Raycast(controller.m_CharacterController.CharacterTansform.position + Vector3.up * offset, Vector3.down, out hitInfo, 0.15f));
+        // Debug.Log(Physics.Raycast(controller.m_CharacterController.CharacterTansform.position + Vector3.up * offset, Vector3.down, out hitInfo, 0.15f));
         if (Physics.Raycast(controller.m_CharacterController.CharacterTansform.position + Vector3.up*offset,Vector3.down,out hitInfo,0.15f))
         {
             //controller.m_CharacterController.floorNoiseMultiplier = hitInfo.transform.GetComponent<Floor>().GetNoiseMultiplier();

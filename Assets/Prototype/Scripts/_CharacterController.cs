@@ -10,8 +10,8 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public float m_ForwardAmount;
     [HideInInspector] public float ray_length;
 
-    [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
-    [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
+     public bool isInClimbArea;                   // The player is in the trigger area for Climbing
+     public bool isClimbDirectionRight;           // The player is facing the climbable object
     [HideInInspector] public bool climbingBottom;
     [HideInInspector] public bool climbingTop;
     [HideInInspector] public bool startClimbAnimation;
@@ -19,7 +19,14 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing
     [HideInInspector] public bool isPushDirectionRight;            // The player is facing the pushable object
     [HideInInspector] public bool isPushLimit;                     // The pushable object reach the limit point
-    [HideInInspector] public string pushableName;
+    [HideInInspector] public string pushableName;                  // Name of the object that the player is pushing
+
+    [HideInInspector] public bool isInDoorArea;
+    [HideInInspector] public bool isDoorDirectionRight;
+    [HideInInspector] public bool isInKeyArea;
+
+    [HideInInspector] public bool canStep = true;
+
 
     [HideInInspector] public float charDepth;
     [HideInInspector] public float charSize;
@@ -37,10 +44,15 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public Transform  climbAnchorBottom;
     [HideInInspector] public Transform  endClimbAnchor;
 
+    [HideInInspector] public GameObject doorCollider;
+    [HideInInspector] public GameObject KeyCollider;
+
     [HideInInspector] public float floorNoiseMultiplier;
 
     public CharacterStats m_CharStats;
     public LayerMask m_WalkNoiseLayerMask;
+
+    public List<GameObject> Keychain;                               // List of all the keys collected by the player
 
 
     [HideInInspector] public GameObject pushCollider;
@@ -65,6 +77,29 @@ public class _CharacterController : MonoBehaviour {
         isInPushArea = false;
         ray_length = m_CharController.bounds.size.y / 2.0f + 0.1f;
 
+    }
+
+    void ActivateDoors()
+    {
+        RaycastHit hit;
+
+        if (isInDoorArea)
+        {
+            if (Physics.Raycast(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, out hit, m_CharStats.m_DistanceFromWallClimbing))
+            {
+                Debug.DrawRay(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, Color.red);
+                Debug.Log("vedo");
+
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors"))
+                {
+                    isDoorDirectionRight = true;
+                }
+                else
+                {
+                    isDoorDirectionRight = false;
+                }
+            }
+        }
     }
 	
     void ActivateClimbingChoice()
@@ -128,6 +163,10 @@ public class _CharacterController : MonoBehaviour {
         {
             ActivatePushingChoice();
         }
+        if (other.tag == "UnlockedDoor" || other.tag == "LockedDoor")
+        {
+            ActivateDoors();
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -154,6 +193,18 @@ public class _CharacterController : MonoBehaviour {
             ActivatePushingChoice();
             Debug.Log("spingo");
         }
+        if (other.tag == "UnlockedDoor" || other.tag == "LockedDoor")
+        {
+            doorCollider = other.gameObject;
+            isInDoorArea = true;
+            Debug.Log("apro");
+        }
+        if (other.tag == "Key")
+        {
+            KeyCollider = other.gameObject;
+            isInKeyArea = true;
+            Debug.Log("prendo");
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -163,6 +214,7 @@ public class _CharacterController : MonoBehaviour {
             climbCollider = null;
             isInClimbArea = false;
             climbingBottom = false;
+            isClimbDirectionRight = false;
            // Debug.Log("esco");
         }
         if (other.tag == "Ladder_Top")
@@ -170,17 +222,33 @@ public class _CharacterController : MonoBehaviour {
             climbCollider = null;
             isInClimbArea = false;
             climbingTop = false;
+            isClimbDirectionRight = false;
            // Debug.Log("esco");
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Pushable"))
         {
             pushCollider = null;
-            isInPushArea = true;
+            isInPushArea = false;
+            isPushDirectionRight = false;
             Debug.Log("spingo");
+        }
+        if (other.tag == "UnlockedDoor" || other.tag == "LockedDoor")
+        {
+            doorCollider = null;
+            isInDoorArea = false;
+            isDoorDirectionRight = false;
+            Debug.Log("chiudo");
+        }
+        if (other.tag == "Key")
+        {
+            KeyCollider = null;
+            isInKeyArea = false;
+            Debug.Log("lascio");
         }
 
     }
-    IEnumerator ReachPoint()
+
+    private IEnumerator ReachPoint()
     {
         float climbTime = 1f;
         startClimbAnimation = false;
@@ -191,13 +259,25 @@ public class _CharacterController : MonoBehaviour {
         m_CharController.enabled = true;
         yield return null;
     }
-    // Update is called once per frame
+
+    public IEnumerator MakeStep()
+    {
+        yield return new WaitForSeconds(1f);
+        canStep = true;
+    }
+
     void Update ()
     {
 		if(startClimbAnimation)
         {
             StartCoroutine(ReachPoint());
         }
-	}
+
+        if (!canStep)
+        {
+            StartCoroutine(MakeStep());
+        }
+
+    }
 
 }

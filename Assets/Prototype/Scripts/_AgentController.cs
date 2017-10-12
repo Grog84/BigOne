@@ -17,7 +17,7 @@ public class _AgentController : MonoBehaviour {
     [HideInInspector] public Transform chaseTarget;
     [HideInInspector] public NavMeshAgent m_NavMeshAgent;
     [HideInInspector] public MyAgentStats agentStats;
-    public float sightPercentage = 0f;
+    [HideInInspector] public float sightPercentage = 0f;
 
     public MyAgentStats patrolStats;
     public MyAgentStats checkForPositionStats;
@@ -73,16 +73,19 @@ public class _AgentController : MonoBehaviour {
 
     void Update()
     {
+        bool noRaycastHitting = true;
         if (isInSight && sightPercentage < 100f)
         {
-            Vector3 direction; 
+            Vector3 direction;
+
             for (int i = 0; i < lookAtPositions.Length; i++)
             {
                 direction = (lookAtPositions[i].position - transform.position).normalized;
-                
+
                 if (Physics.Raycast(eyes.position, direction))
                 {
                     sightPercentage += agentStats.fillingSpeed;
+                    noRaycastHitting = false;
                 }
             }
 
@@ -90,8 +93,15 @@ public class _AgentController : MonoBehaviour {
             if (Physics.Raycast(eyes.position, direction))
             {
                 sightPercentage += agentStats.fillingSpeed * 10.0f;
+                noRaycastHitting = false;
             }
         }
+
+        if (noRaycastHitting && sightPercentage > 100f)
+        {
+            sightPercentage -= agentStats.fillingSpeed;
+        }
+        
 
         sightPercentage = Mathf.Clamp(sightPercentage, 0f, 100f);
         perceptionBar.SetFillingPerc(sightPercentage);

@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class EnemiesAIStateController : StateController {
 
     [HideInInspector] public _AgentController m_AgentController;
+    [HideInInspector] public float stateTimer = 0f;
 
     protected override void Awake()
     {

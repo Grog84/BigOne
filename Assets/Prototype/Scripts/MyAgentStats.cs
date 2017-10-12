@@ -11,6 +11,8 @@ public class MyAgentStats : ScriptableObject {
     public float acceleration = 10f;
     public float stoppingDistance = 2f;
 
+    public float fillingSpeed = 1.0f;
+
     public float lookRange = 8f;
     public float lookSphereCastRadius = 0.5f;
 

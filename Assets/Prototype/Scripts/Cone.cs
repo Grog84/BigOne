@@ -9,6 +9,11 @@ public class Cone : MonoBehaviour {
 
     private _AgentController m_AgentController;
 
+    private void Awake()
+    {
+        m_AgentController = GetComponentInParent<_AgentController>();
+    }
+
     void Start() {
 
         transform.localScale.Set(coneStats.scaleX, coneStats.scaleY, coneStats.scaleZ);
@@ -27,13 +32,16 @@ public class Cone : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-
+            m_AgentController.isInSight = true;
         }
     }
 
-    private void LookForPlayer()
+    private void OnTriggerExit(Collider other)
     {
-
+        if (other.tag == "Player")
+        {
+            m_AgentController.isInSight = false;
+        }
     }
 
 }

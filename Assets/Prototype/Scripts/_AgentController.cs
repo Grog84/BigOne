@@ -7,26 +7,36 @@ public class _AgentController : MonoBehaviour {
 
     public List<Transform> wayPointList;
     public Transform eyes;
-    public GameObject player;
 
-    [HideInInspector] public GameObject[] lookAtPositions;
-    [HideInInspector] public GameObject lookAtPositionCentral;
+    [HideInInspector] public Transform[] lookAtPositions;
+    [HideInInspector] public Transform lookAtPositionCentral;
     [HideInInspector] public bool hasHeardPlayer = false;
     [HideInInspector] public bool hasSeenPlayer = false;
+    [HideInInspector] public bool isInSight = false;
     [HideInInspector] public int nextWayPoint = 0;
     [HideInInspector] public Transform chaseTarget;
     [HideInInspector] public NavMeshAgent m_NavMeshAgent;
     [HideInInspector] public MyAgentStats agentStats;
+    public float sightPercentage = 0f;
 
     public MyAgentStats patrolStats;
     public MyAgentStats checkForPositionStats;
 
     private MyAgentStats loadingStats;
+    private PerceptionBar perceptionBar;
 
     private void Awake()
     {
         m_NavMeshAgent = GetComponent<NavMeshAgent>();
+        GameObject[] lookAtPositionsObj = GameObject.FindGameObjectsWithTag("LookAtPosition");
+        lookAtPositions = new Transform[lookAtPositionsObj.Length];
+        for (int i = 0; i < lookAtPositionsObj.Length; i++)
+        {
+            lookAtPositions[i] = lookAtPositionsObj[i].transform;
+        }
+        lookAtPositionCentral = GameObject.FindGameObjectsWithTag("LookAtPositionCentral")[0].transform;
         UpdateStats(patrolStats);
+        perceptionBar = GetComponentInChildren<PerceptionBar>();
     }
 
     public void LoadNavmeshStats()
@@ -58,6 +68,33 @@ public class _AgentController : MonoBehaviour {
         }
 
         LoadNavmeshStats();
+
+    }
+
+    void Update()
+    {
+        if (isInSight && sightPercentage < 100f)
+        {
+            Vector3 direction; 
+            for (int i = 0; i < lookAtPositions.Length; i++)
+            {
+                direction = (lookAtPositions[i].position - transform.position).normalized;
+                
+                if (Physics.Raycast(eyes.position, direction))
+                {
+                    sightPercentage += agentStats.fillingSpeed;
+                }
+            }
+
+            direction = (lookAtPositionCentral.position - transform.position).normalized;
+            if (Physics.Raycast(eyes.position, direction))
+            {
+                sightPercentage += agentStats.fillingSpeed * 10.0f;
+            }
+        }
+
+        sightPercentage = Mathf.Clamp(sightPercentage, 0f, 100f);
+        perceptionBar.SetFillingPerc(sightPercentage);
 
     }
 

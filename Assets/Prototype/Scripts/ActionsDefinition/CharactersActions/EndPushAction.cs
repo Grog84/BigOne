@@ -15,6 +15,7 @@ public class EndPushAction : _Action
 
     private void EndPush(CharacterStateController controller)
     {
+        controller.m_CharacterController.isPushLimit = false;
         controller.m_CharacterController.pushCollider.transform.parent = null;                       // Detach the pushable object from the Player
         controller.m_CharacterController.pushCollider.GetComponent<Rigidbody>().isKinematic = true;
     }

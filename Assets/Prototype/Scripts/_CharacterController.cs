@@ -19,6 +19,7 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing
     [HideInInspector] public bool isPushDirectionRight;            // The player is facing the pushable object
     [HideInInspector] public bool isPushLimit;                     // The pushable object reach the limit point
+    [HideInInspector] public string pushableName;
 
     [HideInInspector] public float charDepth;
     [HideInInspector] public float charSize;
@@ -98,15 +99,16 @@ public class _CharacterController : MonoBehaviour {
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(transform.position, Vector3.forward, out hit, m_CharStats.m_DistanceFromPushableObject))
+            if (Physics.Raycast(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, out hit, m_CharStats.m_DistanceFromPushableObject))
             {
-                Debug.DrawRay(transform.position, Vector3.forward, Color.red);
-                Debug.Log("vedo");
+               // Debug.DrawRay(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, Color.red);
+               // Debug.Log("vedo");
 
 
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Pushable"))
                 {
                     isPushDirectionRight = true;
+
                 }
                 else
                 {

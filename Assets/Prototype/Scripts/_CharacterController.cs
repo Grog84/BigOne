@@ -18,7 +18,7 @@ public class _CharacterController : MonoBehaviour {
 
     [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing
     [HideInInspector] public bool isPushDirectionRight;            // The player is facing the pushable object
-    [HideInInspector] public bool isPushLimit;                     // The pushable object reach the limit point
+    [HideInInspector] public bool isPushLimit;
     [HideInInspector] public string pushableName;                  // Name of the object that the player is pushing
 
     [HideInInspector] public bool isInDoorArea;

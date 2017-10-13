@@ -20,7 +20,9 @@ public class PushAction : _Action
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(controller.m_CharacterController.CharacterTansform.Find(controller.m_CharacterController.pushableName).position + Vector3.up * controller.m_CharacterController.m_CharController.bounds.size.y / 2.0f, controller.m_CharacterController.CharacterTansform.forward, out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromPushableObstacle))//, LayerMask.NameToLayer("Pushable")))
+        if (Physics.Raycast(controller.m_CharacterController.CharacterTansform.Find(controller.m_CharacterController.pushableName).position + 
+            Vector3.up * controller.m_CharacterController.m_CharController.bounds.size.y / 2.0f, controller.m_CharacterController.CharacterTansform.forward, 
+            out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromPushableObstacle))//, LayerMask.NameToLayer("Pushable")))
         {
             Debug.DrawRay(controller.m_CharacterController.CharacterTansform.Find(controller.m_CharacterController.pushableName).position + Vector3.up * controller.m_CharacterController.m_CharController.bounds.size.y / 2.0f, controller.m_CharacterController.CharacterTansform.forward, Color.red);
             
@@ -39,45 +41,47 @@ public class PushAction : _Action
             controller.m_CharacterController.isPushLimit = false;
             Debug.Log(controller.m_CharacterController.isPushLimit);
         }
+       
+        
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+            {
+                movement = Input.GetAxis("Vertical");
+            }
+            else
+            {
+                movement = 0;
+            }
 
-        if (Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.S))
-        {
-            movement = Input.GetAxis("Vertical");
-        }
-        else
-        {
-            movement = 0;
-        }
+            if (Input.GetKey(KeyCode.W))
+            {
+                forward = Input.GetAxis("Vertical");
+            }
+            else
+            {
+                forward = 0;
+            }
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            forward = Input.GetAxis("Vertical");
-        }
-        else
-        {
-            forward = 0;
-        }
+            if (Input.GetKey(KeyCode.S))
+            {
+                backward = Input.GetAxis("Vertical");
+            }
+            else
+            {
+                backward = 0;
+            }
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            backward = Input.GetAxis("Vertical");
-        }
-        else
-        {
-            backward = 0;
-        }
+            if (controller.m_CharacterController.isPushLimit)
+            {
+                controller.m_CharacterController.CharacterTansform.Translate(Vector3.forward * backward * controller.characterStats.m_PushSpeed * Time.deltaTime);//0.0.1          
+            }
+            else if (!controller.m_CharacterController.isPushLimit)
+            {
+                controller.m_CharacterController.CharacterTansform.Translate(Vector3.forward * forward * controller.characterStats.m_PushSpeed * Time.deltaTime);//0.0.1
+                controller.m_CharacterController.CharacterTansform.Translate(Vector3.forward * backward * controller.characterStats.m_PushSpeed * Time.deltaTime);//0.0.1
+            }
 
-        if (controller.m_CharacterController.isPushLimit)
-        {
-            controller.m_CharacterController.CharacterTansform.Translate(Vector3.forward * backward * controller.characterStats.m_PushSpeed * Time.deltaTime);//0.0.1          
-        }
-        else if(!controller.m_CharacterController.isPushLimit)
-        {
-            controller.m_CharacterController.CharacterTansform.Translate(Vector3.forward * forward * controller.characterStats.m_PushSpeed * Time.deltaTime);//0.0.1
-            controller.m_CharacterController.CharacterTansform.Translate(Vector3.forward * backward * controller.characterStats.m_PushSpeed * Time.deltaTime);//0.0.1
-        }
-
-        controller.m_CharacterController.m_ForwardAmount = movement;
+            controller.m_CharacterController.m_ForwardAmount = movement;
+        
     }
 }
 

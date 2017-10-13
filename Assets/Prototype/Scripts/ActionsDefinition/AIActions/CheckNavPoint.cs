@@ -17,7 +17,7 @@ public class CheckNavPoint : _Action {
         if(controller.m_AgentController.navPointTimer <= 2f)
         {
             float step = controller.m_AgentController.agentStats.angularSpeed * Time.deltaTime;
-            Vector3 newDir = Vector3.RotateTowards(controller.m_AgentController.transform.forward, controller.m_AgentController.wayPointList[controller.m_AgentController.checkingWayPoint].facingDirection, step, 0.0F);
+            Vector3 newDir = Vector3.RotateTowards(controller.m_AgentController.transform.forward, controller.m_AgentController.wayPointList[controller.m_AgentController.checkingWayPoint].facingDirection, step, 0.0f);
             controller.m_AgentController.transform.rotation = Quaternion.LookRotation(newDir);
         }
         else if (controller.m_AgentController.navPointTimer >= controller.m_AgentController.checkNavPointTime - 2f)

@@ -27,9 +27,12 @@ public class _AgentController : MonoBehaviour {
     [HideInInspector] public MyAgentStats agentStats;
     [HideInInspector] public float sightPercentage = 0f;
 
+    [Space(10)]
+    [Header("Agent States Parameters")]
     public MyAgentStats patrolStats;
     public MyAgentStats checkForPositionStats;
     public MyAgentStats checkNavPointStats;
+    public MyAgentStats chaseStats;
 
     private MyAgentStats loadingStats;
     private PerceptionBar perceptionBar;
@@ -80,6 +83,9 @@ public class _AgentController : MonoBehaviour {
             case "checkNavPoint":
                 agentStats = checkNavPointStats;
                 break;
+            case "chase":
+                agentStats = chaseStats;
+                break;
             default:
                 break;
         }
@@ -101,7 +107,7 @@ public class _AgentController : MonoBehaviour {
 
                 if (Physics.Raycast(eyes.position, direction))
                 {
-                    sightPercentage += agentStats.fillingSpeed;
+                    sightPercentage += agentStats.fillingSpeed * Time.deltaTime;
                     noRaycastHitting = false;
                 }
             }
@@ -109,14 +115,14 @@ public class _AgentController : MonoBehaviour {
             direction = (lookAtPositionCentral.position - transform.position).normalized;
             if (Physics.Raycast(eyes.position, direction))
             {
-                sightPercentage += agentStats.fillingSpeed * 10.0f;
+                sightPercentage += agentStats.fillingSpeed * agentStats.torsoMultiplier * Time.deltaTime;
                 noRaycastHitting = false;
             }
         }
 
-        if (noRaycastHitting && sightPercentage > 100f)
+        if (noRaycastHitting && sightPercentage > 0f)
         {
-            sightPercentage -= agentStats.fillingSpeed;
+            sightPercentage -= agentStats.fillingSpeed * agentStats.noSeeMultiplier * Time.deltaTime;
         }
 
         sightPercentage = Mathf.Clamp(sightPercentage, 0f, 100f);

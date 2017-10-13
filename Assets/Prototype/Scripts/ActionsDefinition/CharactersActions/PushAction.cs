@@ -9,6 +9,7 @@ public class PushAction : _Action
     //Vector3 m_Move;
     float forward;
     float backward;
+    float movement;
 
     public override void Execute(CharacterStateController controller)
     {
@@ -39,6 +40,15 @@ public class PushAction : _Action
             Debug.Log(controller.m_CharacterController.isPushLimit);
         }
 
+        if (Input.GetKey(KeyCode.W)|| Input.GetKey(KeyCode.S))
+        {
+            movement = Input.GetAxis("Vertical");
+        }
+        else
+        {
+            movement = 0;
+        }
+
         if (Input.GetKey(KeyCode.W))
         {
             forward = Input.GetAxis("Vertical");
@@ -66,6 +76,8 @@ public class PushAction : _Action
             controller.m_CharacterController.CharacterTansform.Translate(Vector3.forward * forward * controller.characterStats.m_PushSpeed * Time.deltaTime);//0.0.1
             controller.m_CharacterController.CharacterTansform.Translate(Vector3.forward * backward * controller.characterStats.m_PushSpeed * Time.deltaTime);//0.0.1
         }
+
+        controller.m_CharacterController.m_ForwardAmount = movement;
     }
 }
 

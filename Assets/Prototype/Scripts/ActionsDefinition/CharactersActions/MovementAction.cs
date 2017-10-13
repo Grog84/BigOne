@@ -44,5 +44,6 @@ public class MovementAction : _Action
             controller.m_CharacterController.CharacterTansform.forward = m_Move;
         
         controller.m_CharacterController.m_CharController.Move(m_Move * Time.deltaTime);
+       
     }
 }

@@ -10,8 +10,8 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public float m_ForwardAmount;
     [HideInInspector] public float ray_length;
 
-     public bool isInClimbArea;                   // The player is in the trigger area for Climbing
-     public bool isClimbDirectionRight;           // The player is facing the climbable object
+    [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
+    [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
     [HideInInspector] public bool climbingBottom;
     [HideInInspector] public bool climbingTop;
     [HideInInspector] public bool startClimbAnimation;
@@ -85,7 +85,7 @@ public class _CharacterController : MonoBehaviour {
 
         if (isInDoorArea)
         {
-            if (Physics.Raycast(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, out hit, m_CharStats.m_DistanceFromWallClimbing))
+            if (Physics.Raycast(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, out hit, m_CharStats.m_DistanceFromDoor))
             {
                 Debug.DrawRay(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, Color.red);
                 Debug.Log("vedo");

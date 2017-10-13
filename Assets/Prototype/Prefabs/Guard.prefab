@@ -1746,7 +1746,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1013249801369906}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 9.14, y: 3.72, z: -4.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4744573828020444}
@@ -2283,6 +2283,7 @@ MonoBehaviour:
   stateTimeElapsed: 0
   lastActiveState: {fileID: 0}
   m_AgentController: {fileID: 0}
+  stateTimer: 0
 --- !u!114 &114073364908913434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2362,10 +2363,17 @@ MonoBehaviour:
   eyes: {fileID: 4531830543544974}
   lookAtPositions: []
   lookAtPositionCentral: {fileID: 0}
+  wayPointListTransform: []
   hasHeardPlayer: 0
   hasSeenPlayer: 0
-  isInSight: 0
+  isPlayerInSight: 0
+  isSuspicious: 0
+  isAlarmed: 0
   nextWayPoint: 0
+  checkingWayPoint: 0
+  isCheckingNavPoint: 0
+  checkNavPointTime: 0
+  navPointTimer: 0
   chaseTarget: {fileID: 0}
   m_NavMeshAgent: {fileID: 0}
   agentStats: {fileID: 0}
@@ -2373,6 +2381,7 @@ MonoBehaviour:
   patrolStats: {fileID: 11400000, guid: 16fc282a03a17bb43b6ba81145ca893e, type: 2}
   checkForPositionStats: {fileID: 11400000, guid: 64400ebd243da1949a13960fd1b6db15,
     type: 2}
+  checkNavPointStats: {fileID: 11400000, guid: 5dd4ba0fc84cf324388ec028ae328bee, type: 2}
 --- !u!114 &114719919862951872
 MonoBehaviour:
   m_ObjectHideFlags: 1

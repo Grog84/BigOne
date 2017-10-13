@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using DG.Tweening;
 
 public class _AgentController : MonoBehaviour {
 
@@ -19,7 +18,9 @@ public class _AgentController : MonoBehaviour {
     [HideInInspector] public bool isSuspicious = false, isAlarmed = false;
 
     [HideInInspector] public int nextWayPoint = 0;
-    [HideInInspector] public bool isCheckingNavPoint = false;
+    [HideInInspector] public int checkingWayPoint = 0;
+    public bool isCheckingNavPoint = false;
+    public float checkNavPointTime = 0f, navPointTimer = 0f;
 
     [HideInInspector] public Transform chaseTarget;
     [HideInInspector] public NavMeshAgent m_NavMeshAgent;
@@ -28,6 +29,7 @@ public class _AgentController : MonoBehaviour {
 
     public MyAgentStats patrolStats;
     public MyAgentStats checkForPositionStats;
+    public MyAgentStats checkNavPointStats;
 
     private MyAgentStats loadingStats;
     private PerceptionBar perceptionBar;
@@ -75,24 +77,15 @@ public class _AgentController : MonoBehaviour {
             case "checkForNoise":
                 agentStats = patrolStats;
                 break;
+            case "checkNavPoint":
+                agentStats = checkNavPointStats;
+                break;
             default:
                 break;
         }
 
         LoadNavmeshStats();
 
-    }
-
-    private IEnumerator WaitAtNavPoint()
-    {
-        Vector3 oldDirection = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
-        float rotationDuration = 1f;
-        transform.DORotate(wayPointListTransform[nextWayPoint].eulerAngles, rotationDuration);
-        yield return new WaitForSeconds(rotationDuration);
-        yield return new WaitForSeconds(wayPointList[nextWayPoint].secondsStaying);
-        transform.DORotate(oldDirection, rotationDuration);
-        yield return new WaitForSeconds(rotationDuration);
-        isCheckingNavPoint = false;
     }
 
     void Update()
@@ -124,11 +117,6 @@ public class _AgentController : MonoBehaviour {
         if (noRaycastHitting && sightPercentage > 100f)
         {
             sightPercentage -= agentStats.fillingSpeed;
-        }
-
-        if (isCheckingNavPoint)
-        {
-            StartCoroutine(WaitAtNavPoint());
         }
 
         sightPercentage = Mathf.Clamp(sightPercentage, 0f, 100f);

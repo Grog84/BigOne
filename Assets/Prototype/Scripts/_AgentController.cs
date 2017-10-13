@@ -19,8 +19,8 @@ public class _AgentController : MonoBehaviour {
 
     [HideInInspector] public int nextWayPoint = 0;
     [HideInInspector] public int checkingWayPoint = 0;
-    public bool isCheckingNavPoint = false;
-    public float checkNavPointTime = 0f, navPointTimer = 0f;
+    [HideInInspector] public bool isCheckingNavPoint = false;
+    [HideInInspector] public float checkNavPointTime = 0f, navPointTimer = 0f;
 
     [HideInInspector] public Transform chaseTarget;
     [HideInInspector] public NavMeshAgent m_NavMeshAgent;

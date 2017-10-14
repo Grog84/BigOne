@@ -36,6 +36,9 @@ public class CharacterStats : ScriptableObject { // nope...here stats only shoul
     [Space(10)]
     public float m_Gravity = 3.0f;
     public float m_JumpHeight = 3.0f;
+    public float m_FallGravity = 3.0f;
+    public float m_StairsGravity = 3.0f;
+    [HideInInspector]public float m_DefaultGravity = 0f;
     [Space(10)]
     [Header("Character Noise Parameters")]
     public float m_WalkSoundrange = 3.0f;

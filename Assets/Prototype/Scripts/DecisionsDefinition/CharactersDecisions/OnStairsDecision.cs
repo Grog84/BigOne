@@ -24,12 +24,12 @@ public class OnStairsDecision : Decision
 
         if (Physics.Raycast(ray, out hitInfo, 0.5f, Stairs))
         {
-            //Debug.Log("eccomi");
+            Debug.Log("eccomi");
             return true;
         }
         else
         {
-            //Debug.Log("bugia");
+            Debug.Log("bugia");
             return false;
         }
         //Debug.Log("default");

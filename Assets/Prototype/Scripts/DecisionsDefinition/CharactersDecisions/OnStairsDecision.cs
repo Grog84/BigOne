@@ -6,12 +6,13 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/OnStairs")]
 public class OnStairsDecision : Decision
 {
+
+    LayerMask Stairs = 1 << 12;
+
     public override bool Decide(CharacterStateController controller)
     {
         bool isOnStairs = CheckIsOnStairs(controller);
         return isOnStairs;
-
-        
 
     }
 
@@ -19,20 +20,20 @@ public class OnStairsDecision : Decision
     {
         RaycastHit hitInfo;
         Ray ray = new Ray(controller.m_CharacterController.CharacterTansform.position, Vector3.down);
-        Physics.Raycast(ray, out hitInfo, 0.5f);
+        Physics.Raycast(ray, out hitInfo, 0.5f,Stairs);
 
-        if (hitInfo.collider.tag == "Stairs")
+        if (Physics.Raycast(ray, out hitInfo, 0.5f, Stairs))
         {
-            Debug.Log("eccomi");
+            //Debug.Log("eccomi");
             return true;
         }
-        else if (hitInfo.collider.tag != "Stairs")
+        else
         {
-            Debug.Log("bugia");
+            //Debug.Log("bugia");
             return false;
         }
-        Debug.Log("default");
-        return false;
+        //Debug.Log("default");
+        //return false;
        
         
 

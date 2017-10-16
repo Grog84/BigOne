@@ -14,8 +14,8 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
     [HideInInspector] public bool climbingBottom;
     [HideInInspector] public bool climbingTop;
-    [HideInInspector] public bool startClimbAnimation;
-
+    [HideInInspector] public bool startClimbAnimationTop;
+   
     [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing
     [HideInInspector] public bool isPushDirectionRight;            // The player is facing the pushable object
     [HideInInspector] public bool isPushLimit;
@@ -248,10 +248,10 @@ public class _CharacterController : MonoBehaviour {
 
     }
 
-    private IEnumerator ReachPoint()
+    private IEnumerator ReachPointTop()
     {
         float climbTime = 1f;
-        startClimbAnimation = false;
+        startClimbAnimationTop = false;
 
         m_CharController.enabled = false;
         CharacterTansform.DOMove(climbAnchorTop.position, climbTime);
@@ -268,9 +268,9 @@ public class _CharacterController : MonoBehaviour {
 
     void Update ()
     {
-		if(startClimbAnimation)
+		if(startClimbAnimationTop)
         {
-            StartCoroutine(ReachPoint());
+            StartCoroutine(ReachPointTop());
         }
 
         if (!canStep)

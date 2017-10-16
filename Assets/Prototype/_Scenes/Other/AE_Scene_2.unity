@@ -1340,10 +1340,6 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
---- !u!4 &199397919 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 400070, guid: ef45537893a9cad47aa72976ab5dc935, type: 3}
-  m_PrefabInternal: {fileID: 849272089}
 --- !u!1 &284918000
 GameObject:
   m_ObjectHideFlags: 0
@@ -2417,6 +2413,39 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 1566940108555272, guid: 070004452e5690e4bae213a568401a02, type: 2}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 1135058920978586, guid: 070004452e5690e4bae213a568401a02, type: 2}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 1716475114330698, guid: 070004452e5690e4bae213a568401a02, type: 2}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 1554359046126886, guid: 070004452e5690e4bae213a568401a02, type: 2}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 1486810582001972, guid: 070004452e5690e4bae213a568401a02, type: 2}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000,
+        type: 0}
+    - target: {fileID: 4184945845343532, guid: 070004452e5690e4bae213a568401a02, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.5435
+      objectReference: {fileID: 0}
+    - target: {fileID: 4824352721720020, guid: 070004452e5690e4bae213a568401a02, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.384
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 070004452e5690e4bae213a568401a02, type: 2}
   m_IsPrefabParent: 0
@@ -2619,7 +2648,7 @@ Prefab:
         type: 2}
       propertyPath: lookAt
       value: 
-      objectReference: {fileID: 199397919}
+      objectReference: {fileID: 1220701619}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 346ae395e2a32cb438d3e80fd1ac485d, type: 2}
   m_IsPrefabParent: 0
@@ -3663,6 +3692,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100138, guid: ef45537893a9cad47aa72976ab5dc935, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ef45537893a9cad47aa72976ab5dc935, type: 3}
   m_IsPrefabParent: 0
@@ -3933,6 +3966,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FadeAnim: {fileID: 1227558819}
+  playerTransform: {fileID: 0}
   lastSeenPlayerPosition: {x: 1000, y: 1000, z: 1000}
   lastHeardPlayerPosition: {x: 1000, y: 1000, z: 1000}
   isFadeScreenVisible: 1
@@ -4553,6 +4587,23 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1128953612}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1138377573 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1950189871103204, guid: ea71c997fcb66664a9838432e4ffed51,
+    type: 2}
+  m_PrefabInternal: {fileID: 1287879164}
+--- !u!65 &1138377581
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1138377573}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 1, z: 2.3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1150746179 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100138, guid: ef45537893a9cad47aa72976ab5dc935, type: 3}
@@ -4576,7 +4627,7 @@ MonoBehaviour:
   isClimbDirectionRight: 0
   climbingBottom: 0
   climbingTop: 0
-  startClimbAnimation: 0
+  startClimbAnimationTop: 0
   isInPushArea: 0
   isPushDirectionRight: 0
   isPushLimit: 0
@@ -4830,6 +4881,11 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
+--- !u!4 &1220701619 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4273567003512648, guid: ac2752dd92e2046499789efc8d2e61b2,
+    type: 2}
+  m_PrefabInternal: {fileID: 2050547844}
 --- !u!1 &1227558817
 GameObject:
   m_ObjectHideFlags: 0
@@ -5067,12 +5123,17 @@ Prefab:
     - target: {fileID: 65661655042120700, guid: ea71c997fcb66664a9838432e4ffed51,
         type: 2}
       propertyPath: m_Size.x
-      value: 2.36
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 114618899474991448, guid: ea71c997fcb66664a9838432e4ffed51,
         type: 2}
       propertyPath: objectName
       value: bo
+      objectReference: {fileID: 0}
+    - target: {fileID: 65661655042120700, guid: ea71c997fcb66664a9838432e4ffed51,
+        type: 2}
+      propertyPath: m_Size.z
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ea71c997fcb66664a9838432e4ffed51, type: 2}
@@ -8380,7 +8441,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1236579459611486, guid: ac2752dd92e2046499789efc8d2e61b2, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac2752dd92e2046499789efc8d2e61b2, type: 2}

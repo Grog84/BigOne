@@ -8,6 +8,7 @@ public class MovementAction : _Action
 {
     Vector3 m_Move;
     Vector3 m_CamForward;
+    
 
     public override void Execute(CharacterStateController controller)
     {
@@ -37,12 +38,15 @@ public class MovementAction : _Action
 
        // Debug.Log(m_Move);
         m_Move *= controller.characterStats.m_MovementSpeed;
+
         
 
         //make the model face the camera direction
         if (m_Move != Vector3.zero)
             controller.m_CharacterController.CharacterTansform.forward = m_Move;
         
+        //apply gravity if needed when walking
+        m_Move.y -= controller.characterStats.m_Gravity;
         controller.m_CharacterController.m_CharController.Move(m_Move * Time.deltaTime);
        
     }

@@ -26,7 +26,10 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public bool isInKeyArea;
 
     [HideInInspector] public bool canStep = true;
-
+    [HideInInspector] public float m_WalkSoundrange_sq;   // squared value
+    [HideInInspector] public float m_CrouchSoundrange_sq; // squared value
+    [HideInInspector] public float m_RunSoundrange_sq;    // squared value
+    [HideInInspector] public float floorNoiseMultiplier;
 
     [HideInInspector] public float charDepth;
     [HideInInspector] public float charSize;
@@ -38,7 +41,6 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public CapsuleCollider m_Capsule;            // A reference to the capsule collider
     [HideInInspector] public CharacterController m_CharController;
 
-
     [HideInInspector] public GameObject climbCollider;
     [HideInInspector] public Transform  climbAnchorTop;
     [HideInInspector] public Transform  climbAnchorBottom;
@@ -47,15 +49,13 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public GameObject doorCollider;
     [HideInInspector] public GameObject KeyCollider;
 
-    [HideInInspector] public float floorNoiseMultiplier;
+    [HideInInspector] public GameObject pushCollider;
 
     public CharacterStats m_CharStats;
     public LayerMask m_WalkNoiseLayerMask;
-
     public List<GameObject> Keychain;                               // List of all the keys collected by the player
 
-
-    [HideInInspector] public GameObject pushCollider;
+    private bool oneStepCoroutineController = true;                 // used to make sure only one step coroutine is runnin at a given time
 
 
     private StateController controller;
@@ -66,7 +66,7 @@ public class _CharacterController : MonoBehaviour {
         m_Animator = GetComponent<Animator>();
         m_CharController = GetComponent<CharacterController>();
         GameObject m_CameraObj = GameObject.FindGameObjectsWithTag("MainCamera")[0];
-        m_Camera = m_CameraObj.transform;
+        m_Camera = m_CameraObj.transform; 
     }
 
     // Use this for initialization
@@ -76,6 +76,7 @@ public class _CharacterController : MonoBehaviour {
         isInClimbArea = false;
         isInPushArea = false;
         ray_length = m_CharController.bounds.size.y / 2.0f + 0.1f;
+        UpdateSoundRange();
 
     }
 
@@ -248,6 +249,13 @@ public class _CharacterController : MonoBehaviour {
 
     }
 
+    private void UpdateSoundRange()
+    {
+        m_WalkSoundrange_sq = m_CharStats.m_WalkSoundrange * m_CharStats.m_WalkSoundrange;
+        m_CrouchSoundrange_sq = m_CharStats.m_CrouchSoundrange * m_CharStats.m_CrouchSoundrange;
+        m_RunSoundrange_sq = m_CharStats.m_RunSoundrange * m_CharStats.m_RunSoundrange;
+    }
+
     private IEnumerator ReachPointTop()
     {
         float climbTime = 1f;
@@ -262,8 +270,10 @@ public class _CharacterController : MonoBehaviour {
 
     public IEnumerator MakeStep()
     {
+        oneStepCoroutineController = false;
         yield return new WaitForSeconds(1f);
         canStep = true;
+        oneStepCoroutineController = true;
     }
 
     void Update ()
@@ -273,7 +283,8 @@ public class _CharacterController : MonoBehaviour {
             StartCoroutine(ReachPointTop());
         }
 
-        if (!canStep)
+        
+        if (!canStep && oneStepCoroutineController)
         {
             StartCoroutine(MakeStep());
         }

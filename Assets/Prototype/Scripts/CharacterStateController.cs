@@ -11,19 +11,11 @@ public class CharacterStateController : StateController {
     [HideInInspector] public _CharacterController m_CharacterController;
     [HideInInspector] public NavMeshAgent navMeshAgent;
 
-    [HideInInspector] public float m_WalkSoundrange_sq;   // squared value
-    [HideInInspector] public float m_CrouchSoundrange_sq; // squared value
-    [HideInInspector] public float m_RunSoundrange_sq;    // squared value
-
     // Use this for initialization
     protected override void Awake ()
     {
         base.Awake();
         navMeshAgent = GetComponent<NavMeshAgent>();
-
-        m_WalkSoundrange_sq = characterStats.m_WalkSoundrange * characterStats.m_WalkSoundrange;   
-        m_CrouchSoundrange_sq = characterStats.m_CrouchSoundrange * characterStats.m_CrouchSoundrange;
-        m_RunSoundrange_sq = characterStats.m_RunSoundrange * characterStats.m_RunSoundrange;
 
         lastActiveState = currentState;
 

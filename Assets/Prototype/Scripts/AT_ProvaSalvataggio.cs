@@ -1,16 +1,21 @@
-﻿using BayatGames.SaveGameFree;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public class AT_ProvaSalvataggio : MonoBehaviour
 {
+    [Header("Sezione Fade Out")]
+    [SerializeField]private Image blackScreen;
+    [Range(0.1f,1f)]
+    [SerializeField]private float fadeOutTime = 0.5f;
+    [Space]
     [Header("Parametri da salvare dell'oggetto")]
     [Tooltip("Salvare la rotazione di un oggetto?")]
     public bool savePosition = true;
     [Tooltip("Salvare la rotazione di un oggetto?")]
-   [HideInInspector] public bool saveRotation = true;//Necessita prova tecnica HardCoded
+     public bool saveRotation = false;//Necessita prova tecnica HardCoded
     [Space]
     [HideInInspector]public bool isOnCover = false;//Sperimentale
     [Header("Impostazioni caricamento / salvataggio")]
@@ -34,14 +39,16 @@ public class AT_ProvaSalvataggio : MonoBehaviour
     ObjectPosition ObjPos;
     private void Awake()
     {
-     if(setOnAwake)
+        if (setOnAwake)
         {
             LoadData();
         }
+        FadeFromBlack();
     }
     // Use this for initialization
     void Start()
     {
+ 
        // ObjPos = new ObjectPosition { x = 0, y = 0, z = 0, xRotation = 0, yRotation=0, zRotation=0 };
     }
     // Update is called once per frame
@@ -79,6 +86,7 @@ public class AT_ProvaSalvataggio : MonoBehaviour
                 Debug.Log("Caricate Coordinate di: " + this.gameObject.name + " x=" + ObjPos.x + " y=" + ObjPos.y + " z=" + ObjPos.z);
                 this.transform.position = new Vector3(PlayerPrefs.GetFloat(this.gameObject.name + "PositionX"), PlayerPrefs.GetFloat(this.gameObject.name + "PositionY"), PlayerPrefs.GetFloat(this.gameObject.name + "PositionZ"));
             }
+          
         }
         if(saveRotation)
         {
@@ -88,6 +96,8 @@ public class AT_ProvaSalvataggio : MonoBehaviour
                 this.transform.position = new Vector3(PlayerPrefs.GetFloat(this.gameObject.name + "RotationX"), PlayerPrefs.GetFloat(this.gameObject.name + "RotationY"), PlayerPrefs.GetFloat(this.gameObject.name + "RotationZ"));
             }
         }
+        FadeFromBlack();
+
 
     }
     //Salvataggio dati (Posizione), integrazione successica (Rotazioni, stato)
@@ -115,4 +125,22 @@ public class AT_ProvaSalvataggio : MonoBehaviour
 
         }
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+        if(collision.gameObject.tag=="Checkpoint")
+        {
+           // Debug.Log("Walked throw a checkpoint at"+C );
+            SaveData();
+        }
+    }
+    
+    #region 3rdPartyScript
+    void FadeFromBlack()
+    {
+      //  blackScreen.color = Color.black;
+        blackScreen.canvasRenderer.SetAlpha(1.0f);
+         blackScreen.CrossFadeAlpha(0.0f, fadeOutTime, false);
+    }
+    #endregion
 }

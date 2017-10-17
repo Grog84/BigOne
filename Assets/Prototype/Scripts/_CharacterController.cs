@@ -20,7 +20,6 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public bool isPushDirectionRight;            // The player is facing the pushable object
     [HideInInspector] public bool isPushLimit;
     [HideInInspector] public string pushableName;                  // Name of the object that the player is pushing
-    [HideInInspector] public bool isPushing;                       // Define the start push actions
 
     [HideInInspector] public bool isInDoorArea;
     [HideInInspector] public bool isDoorDirectionRight;
@@ -50,7 +49,6 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public GameObject doorCollider;
     [HideInInspector] public GameObject KeyCollider;
 
-    [HideInInspector] public GameObject pushObject;
     [HideInInspector] public GameObject pushCollider;
 
     public CharacterStats m_CharStats;
@@ -146,7 +144,7 @@ public class _CharacterController : MonoBehaviour {
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Pushable"))
                 {
                     isPushDirectionRight = true;
-                    pushObject = hit.transform.gameObject;
+
                 }
                 else
                 {
@@ -230,7 +228,7 @@ public class _CharacterController : MonoBehaviour {
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Pushable"))
         {
-            //pushCollider = null;
+            pushCollider = null;
             isInPushArea = false;
             isPushDirectionRight = false;
             Debug.Log("spingo");
@@ -278,20 +276,6 @@ public class _CharacterController : MonoBehaviour {
         oneStepCoroutineController = true;
     }
 
-    public IEnumerator GrabPushable()
-    {
-        Vector3 dir = pushObject.transform.position - pushCollider.transform.position;
-        dir.y = 0;
-        Vector3 newDir = Vector3.RotateTowards(CharacterTansform.forward, dir, 1f, 0.0f);
-
-        CharacterTansform.DOMove(pushCollider.transform.GetChild(0).position, 1f);
-        yield return new WaitForSeconds(1f);
-        isPushing = false;
-        pushObject.transform.SetParent(CharacterTansform);  // Set the pushable object as Child
-        pushObject.GetComponent<Rigidbody>().isKinematic = false;
-        yield return null;
-    }
-
     void Update ()
     {
 		if(startClimbAnimationTop)
@@ -303,11 +287,6 @@ public class _CharacterController : MonoBehaviour {
         if (!canStep && oneStepCoroutineController)
         {
             StartCoroutine(MakeStep());
-        }
-
-        if (isPushing)
-        {
-            StartCoroutine(GrabPushable());
         }
 
     }

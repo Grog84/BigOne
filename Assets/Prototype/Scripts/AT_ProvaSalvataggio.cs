@@ -6,12 +6,8 @@ using System;
 
 public class AT_ProvaSalvataggio : MonoBehaviour
 {
-    [Header("Sezione Fade Out")]
-    [SerializeField]private Image blackScreen;
-    [Range(0.1f,1f)]
-    [SerializeField]private float fadeOutTime = 0.5f;
-    [Space]
-    [Header("Parametri da salvare dell'oggetto")]
+   
+    [Header("Parametri da salvare dell'oggetto", order =1)]
     [Tooltip("Salvare la rotazione di un oggetto?")]
     public bool savePosition = true;
     [Tooltip("Salvare la rotazione di un oggetto?")]
@@ -43,7 +39,7 @@ public class AT_ProvaSalvataggio : MonoBehaviour
         {
             LoadData();
         }
-        FadeFromBlack();
+   
     }
     // Use this for initialization
     void Start()
@@ -96,11 +92,11 @@ public class AT_ProvaSalvataggio : MonoBehaviour
                 this.transform.position = new Vector3(PlayerPrefs.GetFloat(this.gameObject.name + "RotationX"), PlayerPrefs.GetFloat(this.gameObject.name + "RotationY"), PlayerPrefs.GetFloat(this.gameObject.name + "RotationZ"));
             }
         }
-        FadeFromBlack();
+    
 
 
     }
-    //Salvataggio dati (Posizione), integrazione successica (Rotazioni, stato)
+    //Salvataggio dati (Posizione,Rotazioni), integrazione successica (, stato)
     public void SaveData()
     {
         if (savePosition)
@@ -127,20 +123,26 @@ public class AT_ProvaSalvataggio : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        
-        if(collision.gameObject.tag=="Checkpoint")
+        if (collision.gameObject.tag == "Checkpoint")
         {
-           // Debug.Log("Walked throw a checkpoint at"+C );
+             Debug.Log("Saved checkpoint at x: "+collision.transform.position.x+" y: "+ collision.transform.position.y +" z: "+collision.transform.position.z);
             SaveData();
         }
     }
-    
-    #region 3rdPartyScript
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Checkpoint")
+        {
+             Debug.Log("Walked throw a checkpoint at"+ other.transform.position.x + " y: " + other.transform.position.y + " z: " + other.transform.position.z);
+            SaveData();
+        }
+    }
+   /* #region 3rdPartyScript
     void FadeFromBlack()
     {
       //  blackScreen.color = Color.black;
         blackScreen.canvasRenderer.SetAlpha(1.0f);
          blackScreen.CrossFadeAlpha(0.0f, fadeOutTime, false);
     }
-    #endregion
+    #endregion*/
 }

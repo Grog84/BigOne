@@ -18,10 +18,8 @@ public class ClimbAction : _Action
 
     private void Climb(CharacterStateController controller)
     {
-         controller.m_CharacterController.charSize = controller.m_CharacterController.m_CharController.bounds.size.y;
-         controller.m_CharacterController.charDepth = controller.m_CharacterController.m_CharController.bounds.size.z;
         // For Animator 
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+        if (Input.GetAxis("Vertical") != 0)
         {
            movement = Input.GetAxis("Vertical");
         }
@@ -29,8 +27,9 @@ public class ClimbAction : _Action
         {
             movement = 0;
         }
+        
         // For actual movement
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetAxis("Vertical") > 0)
         {
             up = Input.GetAxis("Vertical");
         }
@@ -39,7 +38,7 @@ public class ClimbAction : _Action
             up = 0;
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetAxis("Vertical") < 0)
         {
             down = Input.GetAxis("Vertical");
         }
@@ -51,15 +50,15 @@ public class ClimbAction : _Action
         if (!controller.m_CharacterController.climbingTop)
         {
              controller.m_CharacterController.CharacterTansform.Translate(Vector3.up * up * controller.characterStats.m_ClimbSpeed * Time.deltaTime);//0.0.1
-            //up = 0;
+          
         }
         if (!controller.m_CharacterController.climbingBottom)
         {
              controller.m_CharacterController.CharacterTansform.Translate(Vector3.up * down * controller.characterStats.m_ClimbSpeed * Time.deltaTime);//0.0.1
-            //down = 0;
+           
         }
         // Animator
         controller.m_CharacterController.m_ForwardAmount = movement;
-        //Debug.Log(controller.m_CharacterController.m_ClimbingForwardAmount);
+        //Debug.Log(controller.m_CharacterController.m_ForwardAmount);
     }
 }

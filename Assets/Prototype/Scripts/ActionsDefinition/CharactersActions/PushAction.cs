@@ -72,8 +72,8 @@ public class PushAction : _Action
             {
                 backward = 0;
             }
-        if (!controller.m_CharacterController.isPushing)
-        {
+        
+        
             if (controller.m_CharacterController.isPushLimit)
             {
                 controller.m_CharacterController.CharacterTansform.Translate(Vector3.forward * backward * controller.characterStats.m_PushSpeed * Time.deltaTime);//0.0.1          
@@ -85,7 +85,7 @@ public class PushAction : _Action
             }
             // For Animator
             controller.m_CharacterController.m_ForwardAmount = movement;
-        }
+        
         
     }
 }

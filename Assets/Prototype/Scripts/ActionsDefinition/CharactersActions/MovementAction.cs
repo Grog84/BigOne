@@ -21,7 +21,7 @@ public class MovementAction : _Action
         //float get from the axis used in the vector3 m_Move
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-         
+        
         //calculate move direction to pass to character
         if (controller.m_CharacterController.m_Camera != null)
         {
@@ -48,6 +48,15 @@ public class MovementAction : _Action
         //apply gravity if needed when walking
         m_Move.y -= controller.characterStats.m_Gravity;
         controller.m_CharacterController.m_CharController.Move(m_Move * Time.deltaTime);
-       
+
+        // For Animator
+        if (Input.GetAxis("Vertical") != 0)
+        {
+            controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(v);
+        }
+        if (Input.GetAxis("Horizontal") != 0)
+        {
+            controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(h);
+        }
     }
 }

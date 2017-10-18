@@ -13,23 +13,20 @@ public class EndPushDecision : Decision
 
     private bool CheckIfEndPushing(CharacterStateController controller)
     {
-        if(!controller.m_CharacterController.isPushing)
-        { if (controller.m_CharacterController.isInPushArea && controller.m_CharacterController.isPushDirectionRight && Input.GetKeyDown(KeyCode.E))
-            {
+       
+         if (controller.m_CharacterController.isInPushArea && controller.m_CharacterController.isPushDirectionRight && Input.GetKeyDown(KeyCode.E))
+         {
 
                 return true;
 
 
-            }
-            else
-            {
+         }
+         else
+         {
                 return false;
-            }
-        }
-        else
-        {
-                return false;
-        }
+         }
+        
+        
     }
 
 

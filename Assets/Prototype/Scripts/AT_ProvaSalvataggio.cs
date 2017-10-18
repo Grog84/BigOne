@@ -96,6 +96,7 @@ public class AT_ProvaSalvataggio : MonoBehaviour
 
 
     }
+
     //Salvataggio dati (Posizione,Rotazioni), integrazione successica (, stato)
     public void SaveData()
     {
@@ -121,22 +122,7 @@ public class AT_ProvaSalvataggio : MonoBehaviour
 
         }
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Checkpoint")
-        {
-             Debug.Log("Saved checkpoint at x: "+collision.transform.position.x+" y: "+ collision.transform.position.y +" z: "+collision.transform.position.z);
-            SaveData();
-        }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Checkpoint")
-        {
-             Debug.Log("Walked throw a checkpoint at"+ other.transform.position.x + " y: " + other.transform.position.y + " z: " + other.transform.position.z);
-            SaveData();
-        }
-    }
+
    /* #region 3rdPartyScript
     void FadeFromBlack()
     {

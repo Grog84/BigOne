@@ -15,6 +15,7 @@ public class AT_SalvaTutto : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
+
         if (Input.GetKeyDown(KeyCode.F5))
         {
             SaveAllObj();

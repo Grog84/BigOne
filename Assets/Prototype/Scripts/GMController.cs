@@ -15,6 +15,7 @@ public class GMController : MonoBehaviour {
     [HideInInspector] public int suspiciousGuards = 0, alarmedGuards = 0;
 
     private bool isGameActive = false;
+    private CheckPointManager m_CheckpointManager;
 
     static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
 
@@ -35,6 +36,9 @@ public class GMController : MonoBehaviour {
         {
             allEnemiesTransform[i] = allEnemies[i].transform;
         }
+
+        m_CheckpointManager = GetComponent<CheckPointManager>();
+
     }
 
     public void ResetPlayerLastSeenPosition()
@@ -83,5 +87,15 @@ public class GMController : MonoBehaviour {
     {
         yield return new WaitForSeconds(1f);
         DeactivateGame();
+    }
+
+    public void SaveCheckpoint()
+    {
+        m_CheckpointManager.SaveAllObj();
+    }
+
+    public void LoadCheckpoint()
+    {
+        m_CheckpointManager.LoadAllObj();
     }
 }

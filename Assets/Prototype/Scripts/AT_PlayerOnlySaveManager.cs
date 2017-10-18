@@ -22,9 +22,12 @@ public class AT_PlayerOnlySaveManager : AT_ProvaSalvataggio
  
     }
     // Update is called once per frame
+    private void Update()
+    {
+      
+    }
 
-   
-    
+
     private void LoadData()
     {
        
@@ -36,7 +39,7 @@ public class AT_PlayerOnlySaveManager : AT_ProvaSalvataggio
     #region 3rdPartyScript
     void FadeFromBlack()
     {
-      //  blackScreen.color = Color.black;
+       blackScreen.color = Color.black;
         blackScreen.canvasRenderer.SetAlpha(1.0f);
          blackScreen.CrossFadeAlpha(0.0f, fadeOutTime, false);
     }

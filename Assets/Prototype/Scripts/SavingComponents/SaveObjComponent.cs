@@ -60,7 +60,7 @@ public class SaveObjComponent : MonoBehaviour {
     }
 
     //Caricamento dati (Se presenti)
-    public void LoadData()
+    public virtual void LoadData()
     {
         if (savePosition)
         {
@@ -85,7 +85,7 @@ public class SaveObjComponent : MonoBehaviour {
     }
 
     //Salvataggio dati (Posizione,Rotazioni), integrazione successica (, stato)
-    public void SaveData()
+    public virtual void SaveData()
     {
         if (savePosition)
         {

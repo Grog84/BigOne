@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Decision : ScriptableObject
-{
-    public abstract bool Decide(StateController controller);
+public class Decision : ScriptableObject {
+
+    public virtual bool Decide(CharacterStateController controller) { return true; }
+
+    public virtual bool Decide(EnemiesAIStateController controller) { return true; }
+
+    public virtual bool Decide(GMStateController controller) { return true; }
+
 }

@@ -7,57 +7,31 @@ using UnityEngine.AI;
 public class StateController : MonoBehaviour {
 
     public State currentState;
-    public MyAgentStats agentStats;        // more controllers just for this issue?
-    public CharacterStats characterStats;  // more controllers just for this issue?
-    public CharacterObj characterObj;
-    public Transform eyes;
-    public List<Transform> wayPointList;
-    public State remainState;
+    public Decision checkIfGameActive;
 
-    [HideInInspector] public NavMeshAgent navMeshAgent;
-    [HideInInspector] public int nextWayPoint;
-    [HideInInspector] public Transform chaseTarget;
+    [HideInInspector] public State inactiveState;  // could it be loaded from te resources?
+    [HideInInspector] public State remainState;    // could it be loaded from te resources?
     [HideInInspector] public float stateTimeElapsed;
+    [HideInInspector] public State lastActiveState;
 
-    private bool isActive = true;
+    protected bool isActive = true;
 
-	// Use this for initialization
-	void Awake () {
-
-        navMeshAgent = GetComponent<NavMeshAgent>();
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-        if (!isActive)
-            return;
-        currentState.UpdateState(this);
-
-	}
-
-    void OnDrawGizmos()
+    protected virtual void Awake()
     {
-        if (currentState != null && eyes != null)
-        {
-            Gizmos.color = currentState.sceneGizmosColor;
-            Gizmos.DrawWireSphere(eyes.position, agentStats.lookSphereCastRadius);
-        }
+        inactiveState = (State)Resources.Load("Inactive"); 
+        remainState = (State)Resources.Load("RemainInState");
     }
 
-    public void TransitionToState(State nextState)
+    // Update is called once per frame
+    public virtual void Update()
     {
-        if (nextState != remainState)
-        {
-            currentState.OnExitState(this);
-            currentState = nextState;
-            currentState.OnEnterState(this);
-            OnExitState();
-        }
     }
 
-    private void OnExitState()
+    public virtual void TransitionToState(State nextState)
+    {
+    }
+
+    protected void OnExitState()
     {
         stateTimeElapsed = 0;
     }

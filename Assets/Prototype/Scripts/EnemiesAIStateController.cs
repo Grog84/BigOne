@@ -15,14 +15,14 @@ public class EnemiesAIStateController : StateController {
         m_AgentController = GetComponent<_AgentController>();
     }
 
-    void OnDrawGizmos()
-    {
-        if (currentState != null && m_AgentController.eyes != null)
-        {
-            Gizmos.color = currentState.sceneGizmosColor;
-            Gizmos.DrawWireSphere(m_AgentController.eyes.position, m_AgentController.agentStats.lookSphereCastRadius);
-        }
-    }
+    //void OnDrawGizmos()
+    //{
+    //    if (currentState != null && m_AgentController.eyes != null)
+    //    {
+    //        Gizmos.color = currentState.sceneGizmosColor;
+    //        Gizmos.DrawWireSphere(m_AgentController.eyes.position, m_AgentController.agentStats.lookSphereCastRadius);
+    //    }
+    //}
 
     public override void TransitionToState(State nextState)
     {

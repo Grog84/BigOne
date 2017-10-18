@@ -13,13 +13,19 @@ public class EndPushDecision : Decision
 
     private bool CheckIfEndPushing(CharacterStateController controller)
     {
+<<<<<<< HEAD
        
          if (controller.m_CharacterController.isInPushArea && controller.m_CharacterController.isPushDirectionRight && Input.GetKeyDown(KeyCode.E))
          {
+=======
+        if (controller.m_CharacterController.isInPushArea && controller.m_CharacterController.isPushDirectionRight && Input.GetKeyDown(KeyCode.E))
+        {
+>>>>>>> origin/master
 
-                return true;
+            return true;
 
 
+<<<<<<< HEAD
          }
          else
          {
@@ -27,6 +33,14 @@ public class EndPushDecision : Decision
          }
         
         
+=======
+        }
+        else
+        {
+            return false;
+        }
+
+>>>>>>> origin/master
     }
 
 

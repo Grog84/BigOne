@@ -18,34 +18,31 @@ public class PushAction : _Action
 
     private void Push(CharacterStateController controller)
     {
-        // inserire ciclo for per i 5 raycast
-       // for (int i = 0; i <= 5; i++)
-        //{
-            RaycastHit hit;
-            Debug.DrawRay(controller.m_CharacterController.pushObject.transform.position, controller.m_CharacterController.CharacterTansform.forward, Color.red);
+        RaycastHit hit;
 
+        if (Physics.Raycast(controller.m_CharacterController.CharacterTansform.Find(controller.m_CharacterController.pushableName).position + 
+            Vector3.up * controller.m_CharacterController.m_CharController.bounds.size.y / 2.0f, controller.m_CharacterController.CharacterTansform.forward, 
+            out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromPushableObstacle))//, LayerMask.NameToLayer("Pushable")))
+        {
+            Debug.DrawRay(controller.m_CharacterController.CharacterTansform.Find(controller.m_CharacterController.pushableName).position + Vector3.up * controller.m_CharacterController.m_CharController.bounds.size.y / 2.0f, controller.m_CharacterController.CharacterTansform.forward, Color.red);
+            
 
-            if (Physics.Raycast(controller.m_CharacterController.pushObject.transform.position, controller.m_CharacterController.CharacterTansform.forward,
-                out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromPushableObstacle))//, LayerMask.NameToLayer("Pushable")))
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Default") || hit.transform.gameObject.layer == LayerMask.NameToLayer("Climbable") ||
+                      hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors"))
             {
-
-
-                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Default") || hit.transform.gameObject.layer == LayerMask.NameToLayer("Climbable") ||
-                          hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors"))
-                {
-                    Debug.Log("vedo ostacolo");
-                    controller.m_CharacterController.isPushLimit = true;
-                    Debug.Log(controller.m_CharacterController.isPushLimit);
-                }
-
-            }
-            else
-            {
-                controller.m_CharacterController.isPushLimit = false;
+                Debug.Log("vedo ostacolo");
+                controller.m_CharacterController.isPushLimit = true;
                 Debug.Log(controller.m_CharacterController.isPushLimit);
             }
-       // }
-      
+           
+        }
+        else
+        {
+            controller.m_CharacterController.isPushLimit = false;
+            Debug.Log(controller.m_CharacterController.isPushLimit);
+        }
+       
+        
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
             {
                 movement = Input.GetAxis("Vertical");
@@ -72,8 +69,12 @@ public class PushAction : _Action
             {
                 backward = 0;
             }
+<<<<<<< HEAD
         
         
+=======
+
+>>>>>>> origin/master
             if (controller.m_CharacterController.isPushLimit)
             {
                 controller.m_CharacterController.CharacterTansform.Translate(Vector3.forward * backward * controller.characterStats.m_PushSpeed * Time.deltaTime);//0.0.1          
@@ -83,9 +84,12 @@ public class PushAction : _Action
                 controller.m_CharacterController.CharacterTansform.Translate(Vector3.forward * forward * controller.characterStats.m_PushSpeed * Time.deltaTime);//0.0.1
                 controller.m_CharacterController.CharacterTansform.Translate(Vector3.forward * backward * controller.characterStats.m_PushSpeed * Time.deltaTime);//0.0.1
             }
-            // For Animator
+
             controller.m_CharacterController.m_ForwardAmount = movement;
+<<<<<<< HEAD
         
+=======
+>>>>>>> origin/master
         
     }
 }

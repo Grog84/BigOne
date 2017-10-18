@@ -22,8 +22,11 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public bool isPushDirectionRight;            // The player is facing the pushable object
     [HideInInspector] public bool isPushLimit;
     [HideInInspector] public string pushableName;                  // Name of the object that the player is pushing
+<<<<<<< HEAD
     [HideInInspector] public bool isPushing;                       // Define the start push actions
     [HideInInspector] public bool isExitPush;
+=======
+>>>>>>> origin/master
 
     [HideInInspector] public bool isInDoorArea;
     [HideInInspector] public bool isDoorDirectionRight;
@@ -53,7 +56,6 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public GameObject doorCollider;
     [HideInInspector] public GameObject KeyCollider;
 
-    [HideInInspector] public GameObject pushObject;
     [HideInInspector] public GameObject pushCollider;
 
     public CharacterStats m_CharStats;
@@ -149,7 +151,7 @@ public class _CharacterController : MonoBehaviour {
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Pushable"))
                 {
                     isPushDirectionRight = true;
-                    pushObject = hit.transform.gameObject;
+
                 }
                 else
                 {
@@ -233,7 +235,7 @@ public class _CharacterController : MonoBehaviour {
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Pushable"))
         {
-            //pushCollider = null;
+            pushCollider = null;
             isInPushArea = false;
             isPushDirectionRight = false;
             Debug.Log("spingo");
@@ -332,6 +334,7 @@ public class _CharacterController : MonoBehaviour {
         oneStepCoroutineController = true;
     }
 
+<<<<<<< HEAD
     public IEnumerator GrabPushable()
     {
         float positionTime = 1f;
@@ -362,6 +365,8 @@ public class _CharacterController : MonoBehaviour {
         //pushCollider = null;
         yield return null;
     }
+=======
+>>>>>>> origin/master
     void Update ()
     {
         if (startClimbAnimationEnd)
@@ -384,6 +389,7 @@ public class _CharacterController : MonoBehaviour {
             StartCoroutine(MakeStep());
         }
 
+<<<<<<< HEAD
         if (isPushing)
         {
             StartCoroutine(GrabPushable());
@@ -394,6 +400,8 @@ public class _CharacterController : MonoBehaviour {
             StartCoroutine(DetachFromPushable());
         }
 
+=======
+>>>>>>> origin/master
     }
 
 }

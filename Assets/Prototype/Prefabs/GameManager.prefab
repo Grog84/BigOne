@@ -19,6 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4699908173629156}
+  - component: {fileID: 114430014747400976}
+  - component: {fileID: 114581267002960726}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -39,3 +41,40 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114430014747400976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1201084854281568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48a566457c7dc9143b78164992c9036d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: {fileID: 11400000, guid: 012a4ec6a8323d34196545eb8c56513a, type: 2}
+  checkIfGameActive: {fileID: 11400000, guid: bf3a05a8f8153d648af2b0cbbb1a72c7, type: 2}
+  inactiveState: {fileID: 0}
+  remainState: {fileID: 0}
+  stateTimeElapsed: 0
+  lastActiveState: {fileID: 0}
+  m_GM: {fileID: 0}
+--- !u!114 &114581267002960726
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1201084854281568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6c717b5cf866354eafb7484a38f0af4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FadeAnim: {fileID: 0}
+  playerTransform: {fileID: 0}
+  lastSeenPlayerPosition: {x: 1000, y: 1000, z: 1000}
+  lastHeardPlayerPosition: {x: 1000, y: 1000, z: 1000}
+  isFadeScreenVisible: 1
+  allEnemiesTransform: []
+  suspiciousGuards: 0
+  alarmedGuards: 0

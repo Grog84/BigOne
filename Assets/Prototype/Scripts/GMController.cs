@@ -15,7 +15,7 @@ public class GMController : MonoBehaviour {
     [HideInInspector] public int suspiciousGuards = 0, alarmedGuards = 0;
 
     private bool isGameActive = false;
-    private CheckPointManager m_CheckpointManager;
+    [HideInInspector] public CheckPointManager m_CheckpointManager;
 
     static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
 

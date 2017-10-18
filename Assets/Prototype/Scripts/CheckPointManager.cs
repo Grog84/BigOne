@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CheckPointManager : MonoBehaviour {
 
+    [HideInInspector] public bool SaveOnClose = true;
+
     private SaveObjComponent[] saveObjects;
 
     // Use this for initialization

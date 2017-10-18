@@ -53,6 +53,10 @@ public class SaveObjComponent : MonoBehaviour {
         {
             PlayerPrefs.Save();
         }
+        if (GMController.instance.m_CheckpointManager.SaveOnClose)
+        {
+            SaveData();
+        }
     }
 
     //Caricamento dati (Se presenti)

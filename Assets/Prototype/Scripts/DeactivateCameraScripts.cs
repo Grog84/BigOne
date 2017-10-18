@@ -10,7 +10,12 @@ public class DeactivateCameraScripts: MonoBehaviour {
 
     public void Activate()
     {
+        cameraScript.enabled = true;
+    }
 
+    public void Deactivate()
+    {
+        cameraScript.enabled = false;
     }
 
 }

@@ -13,6 +13,6 @@ public class DefeatPlayer : _Action
 
     private void DefeatPlayr(EnemiesAIStateController controller)
     {
-        
+        GMController.instance.DefeatPlayer();
     }
 }

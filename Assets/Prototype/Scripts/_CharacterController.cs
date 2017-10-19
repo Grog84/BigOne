@@ -57,6 +57,8 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public GameObject pushObject;
     [HideInInspector] public GameObject pushCollider;
 
+    [HideInInspector] public bool isDefeated = false;
+
     public CharacterStats m_CharStats;
     public LayerMask m_WalkNoiseLayerMask;
     public List<GameObject> Keychain;                               // List of all the keys collected by the player

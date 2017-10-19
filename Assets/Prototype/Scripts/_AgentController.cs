@@ -27,6 +27,8 @@ public class _AgentController : MonoBehaviour {
     [HideInInspector] public MyAgentStats agentStats;
     [HideInInspector] public float sightPercentage = 0f;
 
+    [HideInInspector] public GuardSaveComponent m_SaveComponent;
+
     [Space(10)]
     [Header("Agent States Parameters")]
     public MyAgentStats patrolStats;
@@ -54,6 +56,8 @@ public class _AgentController : MonoBehaviour {
         {
             wayPointListTransform[i] = wayPointList[i].transform;
         }
+
+        m_SaveComponent = gameObject.GetComponent<GuardSaveComponent>();
     }
 
     public void LoadNavmeshStats()

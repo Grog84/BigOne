@@ -12,8 +12,8 @@ public class _CharacterController : MonoBehaviour {
 
     [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
     [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
-    [HideInInspector] public bool climbingBottom;
-    [HideInInspector] public bool climbingTop;
+     public bool climbingBottom;
+     public bool climbingTop;
     [HideInInspector] public bool startClimbAnimationTop;          // Starts the descend from top
     [HideInInspector] public bool startClimbAnimationBottom;       // Starts the climb from bottom
     [HideInInspector] public bool startClimbAnimationEnd;          // Starts the end climb courutine
@@ -165,6 +165,7 @@ public class _CharacterController : MonoBehaviour {
     {
         if (other.tag == "Ladder_Bottom")
         {
+            //climbingBottom = true;
             ActivateClimbingChoice();    
         }
         if (other.tag == "Ladder_Top")

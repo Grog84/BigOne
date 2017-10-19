@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/Characters/EndExitPushDecision")]
-public class EndExitPushDecision : Decision
+
+[CreateAssetMenu(menuName = "Prototype/Decisions/Characters/EndExitClimbDecision")]
+public class EndExitClimbDecision : Decision
 {
     public override bool Decide(CharacterStateController controller)
     {
@@ -13,20 +14,20 @@ public class EndExitPushDecision : Decision
 
     private bool CheckIfEndPushing(CharacterStateController controller)
     {
-       
-         if (!controller.m_CharacterController.isExitPush)
-         {
 
-                return true;
+        if (!controller.m_CharacterController.startClimbAnimationEnd)
+        {
+
+            return true;
 
 
-         }
-         else
-         {
-                return false;
-         }
-        
-        
+        }
+        else
+        {
+            return false;
+        }
+
+
     }
 
 

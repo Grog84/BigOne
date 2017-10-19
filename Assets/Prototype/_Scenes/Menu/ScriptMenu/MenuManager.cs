@@ -3,14 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UIManger : MonoBehaviour
-{
-   
+public class MenuManager : MonoBehaviour {
 
     public void GameStart()
     {
         SceneManager.LoadScene("FG_MappaP_01");
     }
-    
-
 }

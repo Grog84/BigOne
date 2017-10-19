@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/AI/HasReachedHeardPosition")]
-public class HasReachedHeardPosition : Decision {
+[CreateAssetMenu(menuName = "Prototype/Decisions/AI/HasReachedPlayer")]
+public class HasReachedPlayer : Decision
+{
 
     public override bool Decide(EnemiesAIStateController controller)
     {
-        bool hasReachedPos = HasReachedHeardPos(controller);
-        return hasReachedPos;
+        bool hasReachedPlay = HasReachedPlayPos(controller);
+        return hasReachedPlay;
     }
 
-    private bool HasReachedHeardPos(EnemiesAIStateController controller)
+    private bool HasReachedPlayPos(EnemiesAIStateController controller)
     {
         bool hasReached = false;
 
@@ -19,14 +20,12 @@ public class HasReachedHeardPosition : Decision {
         if (!controller.m_AgentController.m_NavMeshAgent.pathPending)
         {
             if (controller.m_AgentController.m_NavMeshAgent.remainingDistance <= controller.m_AgentController.m_NavMeshAgent.stoppingDistance)
-            {
-                //if (!controller.m_AgentController.m_NavMeshAgent.hasPath || controller.m_AgentController.m_NavMeshAgent.velocity.sqrMagnitude == 0f)
-                //{
+            {                
                     hasReached = true;
-                //}
             }
         }
 
         return hasReached;
     }
+
 }

@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 195158568718383348}
   - component: {fileID: 114360159246085624}
   - component: {fileID: 114031046007957198}
+  - component: {fileID: 114743177448878892}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Enemy
@@ -1281,7 +1282,7 @@ Transform:
   m_GameObject: {fileID: 1675850199048792}
   m_LocalRotation: {x: 5.2040645e-18, y: -3.523657e-19, z: -2.7105054e-20, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4.5299997}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 4531830543544974}
   m_RootOrder: 0
@@ -2280,6 +2281,7 @@ MonoBehaviour:
   checkIfGameActive: {fileID: 11400000, guid: bf3a05a8f8153d648af2b0cbbb1a72c7, type: 2}
   inactiveState: {fileID: 0}
   remainState: {fileID: 0}
+  defeatedState: {fileID: 0}
   stateTimeElapsed: 0
   lastActiveState: {fileID: 0}
   m_AgentController: {fileID: 0}
@@ -2396,6 +2398,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coneStats: {fileID: 11400000, guid: 421b0b50551b7bc48ac3e5d4b26cb332, type: 2}
   isDebug: 0
+--- !u!114 &114743177448878892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1013249801369906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 243b5e208a319e445868a7d7117e9473, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Cone: {fileID: 1675850199048792}
+  xScale: 4
+  yScale: 4
+  zScale: 4
 --- !u!114 &114977494408815518
 MonoBehaviour:
   m_ObjectHideFlags: 1

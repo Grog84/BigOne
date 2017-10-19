@@ -13,6 +13,7 @@ public class Ch_Run : _Action
 
     public void Run(CharacterStateController controller)
     {
-        controller.characterStats.m_MovementSpeed = controller.characterStats.m_RunSpeed;    }
+        controller.characterStats.m_MovementSpeed = controller.characterStats.m_RunSpeed;
+    }
 
 }

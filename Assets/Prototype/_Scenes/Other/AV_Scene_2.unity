@@ -4258,7 +4258,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114581267002960726, guid: 8ec0accfb72c0344284d000f429e7850, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 8ec0accfb72c0344284d000f429e7850, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1064441332 stripped
@@ -4278,31 +4279,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FadeAnim: {fileID: 957179068}
-  playerTransform: {fileID: 0}
+  playerTransform: {fileID: 1196781793}
   lastSeenPlayerPosition: {x: 1000, y: 1000, z: 1000}
   lastHeardPlayerPosition: {x: 1000, y: 1000, z: 1000}
   isFadeScreenVisible: 1
   allEnemiesTransform: []
   suspiciousGuards: 0
   alarmedGuards: 0
---- !u!114 &1064441334
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1064441332}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48a566457c7dc9143b78164992c9036d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: {fileID: 11400000, guid: 012a4ec6a8323d34196545eb8c56513a, type: 2}
-  checkIfGameActive: {fileID: 0}
-  inactiveState: {fileID: 0}
-  remainState: {fileID: 0}
-  stateTimeElapsed: 0
-  lastActiveState: {fileID: 0}
-  m_GM: {fileID: 0}
+  m_CheckpointManager: {fileID: 0}
+  charController: {fileID: 0}
 --- !u!43 &1065161936
 Mesh:
   m_ObjectHideFlags: 0
@@ -4932,6 +4917,11 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
+--- !u!4 &1196781793 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4213731339692590, guid: ac2752dd92e2046499789efc8d2e61b2,
+    type: 2}
+  m_PrefabInternal: {fileID: 237742574}
 --- !u!43 &1204141926
 Mesh:
   m_ObjectHideFlags: 0

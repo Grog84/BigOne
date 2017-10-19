@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateFall")]
-public class AnimSetFallBoolFalse : _Action
+[CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateLanding")]
+public class AnimSetLandingBoolFalse : _Action
 {
 
     public override void Execute(CharacterStateController controller)
@@ -14,8 +14,8 @@ public class AnimSetFallBoolFalse : _Action
     private void UpdateAnimatorForFall(CharacterStateController controller)
     {
         
-            controller.m_CharacterController.m_Animator.SetBool("isFalling", false);
-
+            
+            controller.m_CharacterController.m_Animator.SetBool("isLanding", false);
 
 
     }

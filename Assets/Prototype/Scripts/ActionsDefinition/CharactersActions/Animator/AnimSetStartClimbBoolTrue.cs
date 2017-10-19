@@ -14,6 +14,5 @@ public class AnimSetStartClimbBoolTrue : _Action
     private void UpdateAnimatorForClimb(CharacterStateController controller)
     {
         controller.m_CharacterController.m_Animator.SetBool("isStartClimb", true);
-        Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isStartClimb"));
     }
 }

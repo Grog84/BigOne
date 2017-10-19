@@ -14,6 +14,5 @@ public class AnimSetClimbBoolFalse : _Action
     private void UpdateAnimatorForClimb(CharacterStateController controller)
     {
         controller.m_CharacterController.m_Animator.SetBool("isClimbing", false);
-        //Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isClimbing"));
     }
 }

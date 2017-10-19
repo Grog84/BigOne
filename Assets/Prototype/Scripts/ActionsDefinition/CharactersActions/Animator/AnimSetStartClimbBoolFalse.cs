@@ -13,10 +13,10 @@ public class AnimSetStartClimbBoolFalse : _Action
 
     private void UpdateAnimatorForClimb(CharacterStateController controller)
     {
-        if (controller.m_CharacterController.climbingTop)
-        {
+       // if (controller.m_CharacterController.climbingTop)
+       // {
             controller.m_CharacterController.m_Animator.SetBool("isStartClimb", false);
-        }
+       // }
         
     }
 }

@@ -104,5 +104,6 @@ public class GMController : MonoBehaviour {
     public void DefeatPlayer()
     {
         charController.isDefeated = true;
+
     }
 }

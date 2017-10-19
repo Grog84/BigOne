@@ -9,4 +9,8 @@ public class MenuManager : MonoBehaviour {
     {
         SceneManager.LoadScene("FG_MappaP_01");
     }
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }

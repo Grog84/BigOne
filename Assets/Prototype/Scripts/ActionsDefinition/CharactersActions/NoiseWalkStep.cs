@@ -36,14 +36,15 @@ public class NoiseWalkStep : _Action {
         Ray m_Ray = new Ray(origin, direction);
         RaycastHit m_RayHit = new RaycastHit();
 
-        Physics.Raycast(m_Ray, out m_RayHit, controller.m_CharacterController.m_WalkNoiseLayerMask);
-
-        if (m_RayHit.transform.tag == "Enemy")
+        if(Physics.Raycast(m_Ray, out m_RayHit, controller.m_CharacterController.m_WalkNoiseLayerMask))
         {
-            var enemyController = m_RayHit.transform.GetComponent<_AgentController>();
-            enemyController.hasHeardPlayer = true;
+            if (m_RayHit.transform.tag == "Enemy")
+            {
+                var enemyController = m_RayHit.transform.GetComponent<_AgentController>();
+                enemyController.hasHeardPlayer = true;
 
-            GMController.instance.lastHeardPlayerPosition = controller.m_CharacterController.CharacterTansform.position;
+                GMController.instance.lastHeardPlayerPosition = controller.m_CharacterController.CharacterTansform.position;
+            }
         }
 
     }

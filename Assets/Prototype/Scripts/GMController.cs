@@ -98,11 +98,14 @@ public class GMController : MonoBehaviour {
 
     public void LoadCheckpoint()
     {
+        FadeOut();
         m_CheckpointManager.LoadAllObj();
+        FadeIn();
     }
 
     public void DefeatPlayer()
     {
         charController.isDefeated = true;
+
     }
 }

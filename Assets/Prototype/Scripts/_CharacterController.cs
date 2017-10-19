@@ -12,8 +12,8 @@ public class _CharacterController : MonoBehaviour {
 
     [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
     [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
-    public bool climbingBottom;
-    public bool climbingTop;
+     public bool climbingBottom;
+     public bool climbingTop;
     [HideInInspector] public bool startClimbAnimationTop;
     [HideInInspector] public bool startClimbAnimationBottom;
     [HideInInspector] public bool startClimbAnimationEnd;
@@ -168,6 +168,11 @@ public class _CharacterController : MonoBehaviour {
         {
             ActivateClimbingChoice();    
         }
+        if (other.tag == "Ladder_Top")
+        {
+            climbingTop = true;
+            ActivateClimbingChoice();
+        }
         if (other.gameObject.layer == LayerMask.NameToLayer("Pushable"))
         {
             ActivatePushingChoice();
@@ -267,12 +272,11 @@ public class _CharacterController : MonoBehaviour {
     private IEnumerator ReachPointEnd()
     {
         float climbTime = 1f;
-        //Vector3 end = endClimbAnchor.position - CharacterTansform.position;
+
 
         m_CharController.enabled = false;
         CharacterTansform.DOMove(endClimbAnchor.position, climbTime);
-        //CharacterTansform.DOBlendableMoveBy(new Vector3(end.x,0, end.z) , climbTime);
-       // CharacterTansform.DOBlendableMoveBy(new Vector3(0, end.y, 0), 0.5f);
+     
         yield return new WaitForSeconds(climbTime);
         startClimbAnimationEnd = false;
         m_CharController.enabled = true;
@@ -291,22 +295,12 @@ public class _CharacterController : MonoBehaviour {
         m_CharController.enabled = false;
         CharacterTansform.DOMove(climbAnchorTop.position, climbTime);
         yield return new WaitForSeconds(climbTime);
+        climbingTop = false;
         startClimbAnimationTop = false;
         m_CharController.enabled = true;
         yield return null;
     }
 
-    IEnumerator RotateToward(Vector3 finalDirection)
-    {
-        float rotatingSpeed = 10f;
-        while((CharacterTansform.forward - finalDirection).sqrMagnitude > 0.01f)
-        {
-            float step = rotatingSpeed * Time.deltaTime;
-            Vector3 newDir = Vector3.RotateTowards(CharacterTansform.forward, finalDirection, step, 0.0f);
-            CharacterTansform.rotation = Quaternion.LookRotation(newDir);
-            yield return null;
-        }
-    }
 
     private IEnumerator ReachPointBottom()
     {
@@ -318,7 +312,7 @@ public class _CharacterController : MonoBehaviour {
         yield return StartCoroutine(RotateToward(bot));
 
         m_CharController.enabled = false;
-        //CharacterTansform.DOLookAt(bottom, climbTime);
+       
         CharacterTansform.DOMove(climbAnchorBottom.position, climbTime);
         yield return new WaitForSeconds(climbTime);
         climbingBottom = false;
@@ -346,7 +340,7 @@ public class _CharacterController : MonoBehaviour {
 
         yield return StartCoroutine(RotateToward(dir));
 
-        //CharacterTansform.DORotate(dir, positionTime);
+       
 
         CharacterTansform.DOMove(pushCollider.transform.GetChild(0).position, positionTime);
         yield return new WaitForSeconds(1f);
@@ -367,6 +361,17 @@ public class _CharacterController : MonoBehaviour {
         yield return null;
     }
 
+    IEnumerator RotateToward(Vector3 finalDirection)
+    {
+        float rotatingSpeed = 10f;
+        while((CharacterTansform.forward - finalDirection).sqrMagnitude > 0.01f)
+        {
+            float step = rotatingSpeed * Time.deltaTime;
+            Vector3 newDir = Vector3.RotateTowards(CharacterTansform.forward, finalDirection, step, 0.0f);
+            CharacterTansform.rotation = Quaternion.LookRotation(newDir);
+            yield return null;
+        }
+    }
     void Update ()
     {
         if (startClimbAnimationEnd)

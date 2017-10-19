@@ -19,7 +19,6 @@ public class EndClimbingAction : _Action
         { 
             controller.m_CharacterController.endClimbAnchor = controller.m_CharacterController.climbCollider.transform.parent.transform.GetChild(4);
             controller.m_CharacterController.startClimbAnimationEnd = true;
-            //controller.m_CharacterController.CharacterTansform.DOMove(controller.m_CharacterController.endClimbAnchor.position, 1f);
         }
     }
 }

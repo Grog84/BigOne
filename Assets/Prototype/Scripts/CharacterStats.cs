@@ -31,6 +31,8 @@ public class CharacterStats : ScriptableObject { // nope...here stats only shoul
     public float m_PushSpeed = 3.0f;
     public float m_DistanceFromPushableObject = 4f;
     public float m_DistanceFromPushableObstacle = 5f;
+    [Range(-1,1)]
+    public float m_PushableObjectRaycastOffset = 0;
     [Space(10)]
     public float m_DistanceFromDoor = 4f;
     [Space(10)]

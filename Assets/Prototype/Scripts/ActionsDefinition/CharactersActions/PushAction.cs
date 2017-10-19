@@ -18,13 +18,13 @@ public class PushAction : _Action
 
     private void Push(CharacterStateController controller)
     {
+        Debug.DrawRay(controller.m_CharacterController.pushObject.transform.position + new Vector3(0,controller.characterStats.m_PushableObjectRaycastOffset,0), controller.m_CharacterController.CharacterTansform.forward, Color.red);
         RaycastHit hit;
 
-        if (Physics.Raycast(controller.m_CharacterController.CharacterTansform.Find(controller.m_CharacterController.pushableName).position + 
-            Vector3.up * controller.m_CharacterController.m_CharController.bounds.size.y / 2.0f, controller.m_CharacterController.CharacterTansform.forward, 
-            out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromPushableObstacle))//, LayerMask.NameToLayer("Pushable")))
+        if (Physics.Raycast(controller.m_CharacterController.pushObject.transform.position +
+            new Vector3(0, controller.characterStats.m_PushableObjectRaycastOffset, 0), controller.m_CharacterController.CharacterTansform.forward, 
+            out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromPushableObstacle))
         {
-            Debug.DrawRay(controller.m_CharacterController.CharacterTansform.Find(controller.m_CharacterController.pushableName).position + Vector3.up * controller.m_CharacterController.m_CharController.bounds.size.y / 2.0f, controller.m_CharacterController.CharacterTansform.forward, Color.red);
             
 
             if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Default") || hit.transform.gameObject.layer == LayerMask.NameToLayer("Climbable") ||
@@ -34,12 +34,16 @@ public class PushAction : _Action
                 controller.m_CharacterController.isPushLimit = true;
                 Debug.Log(controller.m_CharacterController.isPushLimit);
             }
-           
+            else
+            {
+                controller.m_CharacterController.isPushLimit = false;
+                Debug.Log(controller.m_CharacterController.isPushLimit);
+            }
+
         }
         else
         {
             controller.m_CharacterController.isPushLimit = false;
-            Debug.Log(controller.m_CharacterController.isPushLimit);
         }
        
         

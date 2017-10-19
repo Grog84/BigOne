@@ -20,16 +20,12 @@ public class StartClimbingAction : _Action
             controller.m_CharacterController.climbAnchorTop = controller.m_CharacterController.climbCollider.transform.parent.transform.GetChild(2);
             Debug.Log("Scendo");
             controller.m_CharacterController.startClimbAnimationTop = true;
-           // controller.m_CharacterController.CharacterTansform.position = controller.m_CharacterController.climbAnchorTop.position;
         }
         else if(controller.m_CharacterController.climbingBottom)
         {
             controller.m_CharacterController.climbAnchorBottom = controller.m_CharacterController.climbCollider.transform.parent.transform.GetChild(3);
             Debug.Log("Salgo");
             controller.m_CharacterController.startClimbAnimationBottom = true;
-            //controller.m_CharacterController.CharacterTansform.position = controller.m_CharacterController.climbAnchorBottom.position;
-            //controller.m_CharacterController.CharacterTansform.DOMove(controller.m_CharacterController.climbAnchorBottom.position, 1f);
-
         }
     }
 

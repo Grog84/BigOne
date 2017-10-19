@@ -6,29 +6,28 @@ using DG.Tweening;
 public class _CharacterController : MonoBehaviour {
 
     [HideInInspector] public float m_MoveSpeedMultiplier;
-    [HideInInspector] public float m_TurnAmount;
+    [HideInInspector] public float m_TurnAmount;                   // Unutilized for the moment
     [HideInInspector] public float m_ForwardAmount;
     [HideInInspector] public float ray_length;
 
     [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
     [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
-     public bool climbingBottom;
-     public bool climbingTop;
-    [HideInInspector] public bool startClimbAnimationTop;
-    [HideInInspector] public bool startClimbAnimationBottom;
-    [HideInInspector] public bool startClimbAnimationEnd;
+    [HideInInspector] public bool climbingBottom;
+    [HideInInspector] public bool climbingTop;
+    [HideInInspector] public bool startClimbAnimationTop;          // Starts the descend from top
+    [HideInInspector] public bool startClimbAnimationBottom;       // Starts the climb from bottom
+    [HideInInspector] public bool startClimbAnimationEnd;          // Starts the end climb courutine
 
     [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing
     [HideInInspector] public bool isPushDirectionRight;            // The player is facing the pushable object
-    [HideInInspector] public bool isPushLimit;
-    [HideInInspector] public string pushableName;                  // Name of the object that the player is pushing
+    [HideInInspector] public bool isPushLimit;                     // Detect push limits like obstacles
 
     [HideInInspector] public bool isPushing;                       // Define the start push actions
     [HideInInspector] public bool isExitPush;
 
-    [HideInInspector] public bool isInDoorArea;
-    [HideInInspector] public bool isDoorDirectionRight;
-    [HideInInspector] public bool isInKeyArea;
+    [HideInInspector] public bool isInDoorArea;                    // Detect if the player is in the Door trigger area
+    [HideInInspector] public bool isDoorDirectionRight;            // Detect if the player is looking toward the door
+    [HideInInspector] public bool isInKeyArea;                     // Detect if the player is in the key object interactable area
 
     [HideInInspector] public bool canStep = true;
     [HideInInspector] public float m_WalkSoundrange_sq;   // squared value

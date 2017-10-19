@@ -3789,7 +3789,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 100138, guid: ef45537893a9cad47aa72976ab5dc935, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100138, guid: ef45537893a9cad47aa72976ab5dc935, type: 3}
       propertyPath: m_TagString
@@ -4812,6 +4812,7 @@ MonoBehaviour:
   checkIfGameActive: {fileID: 11400000, guid: bf3a05a8f8153d648af2b0cbbb1a72c7, type: 2}
   inactiveState: {fileID: 0}
   remainState: {fileID: 0}
+  defeatedState: {fileID: 0}
   stateTimeElapsed: 0
   lastActiveState: {fileID: 0}
   characterStats: {fileID: 11400000, guid: 6548a679fde78b44d9641d8ff222c908, type: 2}
@@ -8874,8 +8875,13 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1236579459611486, guid: ac2752dd92e2046499789efc8d2e61b2, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 95539346152527064, guid: ac2752dd92e2046499789efc8d2e61b2,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 681cc6ed53bd78047beb82110a893fb8, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac2752dd92e2046499789efc8d2e61b2, type: 2}
   m_IsPrefabParent: 0

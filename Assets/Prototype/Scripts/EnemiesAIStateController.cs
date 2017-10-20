@@ -8,21 +8,17 @@ public class EnemiesAIStateController : StateController {
     [HideInInspector] public _AgentController m_AgentController;
     [HideInInspector] public float stateTimer = 0f;
 
+    [Space(5)]
+    [Header("States For Saving")]
+    public State patrolState;
+    public State checkNavPoint;
+
     protected override void Awake()
     {
         base.Awake();
         lastActiveState = currentState;
         m_AgentController = GetComponent<_AgentController>();
     }
-
-    //void OnDrawGizmos()
-    //{
-    //    if (currentState != null && m_AgentController.eyes != null)
-    //    {
-    //        Gizmos.color = currentState.sceneGizmosColor;
-    //        Gizmos.DrawWireSphere(m_AgentController.eyes.position, m_AgentController.agentStats.lookSphereCastRadius);
-    //    }
-    //}
 
     public override void TransitionToState(State nextState)
     {

@@ -7,17 +7,17 @@ public class SaveObjComponent : MonoBehaviour {
     public string saveObjName;
     [Space]
 
-    [Header("Parametri da salvare dell'oggetto", order = 1)]
-    [Tooltip("Salvare la rotazione di un oggetto?")]
+    [Header("Position parameters", order = 1)]
+    [Tooltip("Save the object position")]
     public bool savePosition = true;
-    [Tooltip("Salvare la rotazione di un oggetto?")]
+    [Tooltip("Save the object rotation")]
     public bool saveRotation = false;//Necessita prova tecnica HardCoded
     [Space]
     
-    [Header("Impostazioni caricamento / salvataggio")]
-    [Tooltip("Caricare ultima posizione ('se disponibile') all'avvio della applicazione?")]
+    [Header("Saving settings")]
+    [Tooltip("Load the object position (if available) when the scene start")]
     public bool setOnAwake = false;
-    [Tooltip("Salvare le impostazioni memorizate alla chiusura della applicazione?")]
+    [Tooltip("Save the object when the applicatio is closed")]
     public bool memorizeOnClose = true;
 
 

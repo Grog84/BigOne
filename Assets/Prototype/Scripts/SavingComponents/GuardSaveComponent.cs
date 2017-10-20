@@ -12,7 +12,6 @@ public class GuardSaveComponent : SaveObjComponent
 
     [HideInInspector] public GuardStates activeState;
 
-
     private void Awake()
     {
         m_Controller = GetComponent<EnemiesAIStateController>();

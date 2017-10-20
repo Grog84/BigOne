@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114360159246085624}
   - component: {fileID: 114031046007957198}
   - component: {fileID: 114743177448878892}
-  - component: {fileID: 114937375790086344}
+  - component: {fileID: 114301279847743488}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Enemy
@@ -2278,7 +2278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed805285629075d4886e5bcd28670b27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 11400000, guid: 96b9c524bfb65d14b8a1b64165429806, type: 2}
+  currentState: {fileID: 11400000, guid: 56a194c2119de0148934f6b01b647ccb, type: 2}
   checkIfGameActive: {fileID: 11400000, guid: bf3a05a8f8153d648af2b0cbbb1a72c7, type: 2}
   inactiveState: {fileID: 0}
   remainState: {fileID: 0}
@@ -2348,6 +2348,23 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114301279847743488
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1013249801369906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d03df075d7c1c245b28de4986d70077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveObjName: Guard
+  savePosition: 1
+  saveRotation: 1
+  setOnAwake: 0
+  memorizeOnClose: 1
+  activeState: 0
 --- !u!114 &114360159246085624
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2383,6 +2400,7 @@ MonoBehaviour:
   m_NavMeshAgent: {fileID: 0}
   agentStats: {fileID: 0}
   sightPercentage: 0
+  m_Animator: {fileID: 0}
   m_SaveComponent: {fileID: 0}
   patrolStats: {fileID: 11400000, guid: 16fc282a03a17bb43b6ba81145ca893e, type: 2}
   checkForPositionStats: {fileID: 11400000, guid: 64400ebd243da1949a13960fd1b6db15,
@@ -2417,22 +2435,6 @@ MonoBehaviour:
   xScale: 4
   yScale: 4
   zScale: 4
---- !u!114 &114937375790086344
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1013249801369906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4ee2060df983a5498644df49f2bd2cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  saveObjName: Guard1
-  savePosition: 1
-  saveRotation: 1
-  setOnAwake: 0
-  memorizeOnClose: 1
 --- !u!114 &114977494408815518
 MonoBehaviour:
   m_ObjectHideFlags: 1

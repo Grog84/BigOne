@@ -14,7 +14,7 @@ public class GMController : MonoBehaviour {
     [HideInInspector] public Transform[] allEnemiesTransform;
     [HideInInspector] public int suspiciousGuards = 0, alarmedGuards = 0;
 
-    private bool isGameActive = false;
+    public bool isGameActive = false;
     [HideInInspector] public CheckPointManager m_CheckpointManager;
 
     [HideInInspector] public _CharacterController charController;
@@ -59,6 +59,11 @@ public class GMController : MonoBehaviour {
     public void ResetPlayerLastSeenPosition()
     {
         lastSeenPlayerPosition = resetPlayerPosition;
+    }
+
+    public void ResetPlayerLastHeardPosition()
+    {
+        lastHeardPlayerPosition = resetPlayerPosition;
     }
 
     public void ActivateGame()
@@ -124,11 +129,17 @@ public class GMController : MonoBehaviour {
         StartCoroutine(WaitAndRestart());
     }
 
+    public void RevivePlayer()
+    {
+        charController.isDefeated = false;
+    }
+
     private IEnumerator WaitAndRestart()
     {
         yield return new WaitForSeconds(deathAnimationTime);
         FadeOut();
         yield return new WaitForSeconds(fadeOutTime);
+        RevivePlayer();
         LoadCheckpoint();
         FadeIn();
 

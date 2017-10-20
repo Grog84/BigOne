@@ -2718,7 +2718,8 @@ Prefab:
       value: 
       objectReference: {fileID: 11400000, guid: 56a194c2119de0148934f6b01b647ccb,
         type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114937375790086344, guid: 8e2af980bfbe67542a70c190d0256c02, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 8e2af980bfbe67542a70c190d0256c02, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &733670127 stripped
@@ -2965,6 +2966,28 @@ Transform:
   m_Father: {fileID: 372732431}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &805624153 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1013249801369906, guid: 8e2af980bfbe67542a70c190d0256c02,
+    type: 2}
+  m_PrefabInternal: {fileID: 723565014}
+--- !u!114 &805624154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 805624153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d03df075d7c1c245b28de4986d70077, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveObjName: 
+  savePosition: 1
+  saveRotation: 1
+  setOnAwake: 0
+  memorizeOnClose: 1
+  activeState: 0
 --- !u!43 &836230850
 Mesh:
   m_ObjectHideFlags: 0

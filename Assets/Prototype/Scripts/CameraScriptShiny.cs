@@ -19,7 +19,7 @@ public class CameraScriptShiny : MonoBehaviour
 	private Camera cam;
     private float camDistance = 0.0f;
     //camera variables for the position 
-	public float height = 0.0f;
+	private float nearClipPlaneDistance = 0.1f;
     public float distance = 2.5f;
     // position of the camera assigned in the camera movement
     private float currentX = 0.0f;
@@ -39,6 +39,7 @@ public class CameraScriptShiny : MonoBehaviour
 		camTransform = transform;
 		cam = Camera.main;
         Cursor.lockState = CursorLockMode.Locked;
+        cam.nearClipPlane = nearClipPlaneDistance;
     }
 
 	private void Update ()

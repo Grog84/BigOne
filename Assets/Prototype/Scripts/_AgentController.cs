@@ -27,6 +27,8 @@ public class _AgentController : MonoBehaviour {
     [HideInInspector] public MyAgentStats agentStats;
     [HideInInspector] public float sightPercentage = 0f;
 
+    [HideInInspector] public Animator m_Animator;
+
     [HideInInspector] public GuardSaveComponent m_SaveComponent;
 
     [Space(10)]
@@ -58,6 +60,7 @@ public class _AgentController : MonoBehaviour {
         }
 
         m_SaveComponent = gameObject.GetComponent<GuardSaveComponent>();
+        m_Animator = GetComponent<Animator>();
     }
 
     public void LoadNavmeshStats()

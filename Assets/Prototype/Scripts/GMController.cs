@@ -39,6 +39,9 @@ public class GMController : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
+        m_CheckpointManager = GetComponent<CheckPointManager>();
+        charController = GameObject.FindGameObjectWithTag("Player").GetComponent<_CharacterController>();
+
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         allEnemiesTransform = new Transform[allEnemies.Length];
         for (int i = 0; i < allEnemiesTransform.Length; i++)
@@ -46,8 +49,6 @@ public class GMController : MonoBehaviour {
             allEnemiesTransform[i] = allEnemies[i].transform;
         }
 
-        m_CheckpointManager = GetComponent<CheckPointManager>();
-        charController = GameObject.FindGameObjectWithTag("Player").GetComponent<_CharacterController>();
     }
 
     private void Start()
@@ -128,6 +129,7 @@ public class GMController : MonoBehaviour {
         yield return new WaitForSeconds(deathAnimationTime);
         FadeOut();
         yield return new WaitForSeconds(fadeOutTime);
+        LoadCheckpoint();
         FadeIn();
 
     }

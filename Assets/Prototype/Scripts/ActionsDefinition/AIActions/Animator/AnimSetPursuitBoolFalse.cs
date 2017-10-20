@@ -6,14 +6,14 @@ using UnityEngine;
 public class AnimSetPursuitBoolFalse : _Action
 {
 
-    public override void Execute(CharacterStateController controller)
+    public override void Execute(EnemiesAIStateController controller)
     {
         UpdateAnimatorForStartPursuit(controller);
     }
 
-    private void UpdateAnimatorForStartPursuit(CharacterStateController controller)
+    private void UpdateAnimatorForStartPursuit(EnemiesAIStateController controller)
     {
-        controller.m_CharacterController.m_Animator.SetBool("isChasing", false);
+        controller.m_AgentController.m_Animator.SetBool("isChasing", false);
 
     }
 }

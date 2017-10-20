@@ -6,14 +6,14 @@ using UnityEngine;
 public class AnimSetPatrolBoolTrue : _Action
 {
 
-    public override void Execute(CharacterStateController controller)
+    public override void Execute(EnemiesAIStateController controller)
     {
         UpdateAnimatorForStartPatrol(controller);
     }
 
-    private void UpdateAnimatorForStartPatrol(CharacterStateController controller)
+    private void UpdateAnimatorForStartPatrol(EnemiesAIStateController controller)
     {
-        controller.m_CharacterController.m_Animator.SetBool("isPatrolling", true);
+        controller.m_AgentController.m_Animator.SetBool("isPatrolling", true);
 
     }
 }

@@ -293,6 +293,7 @@ GameObject:
   - component: {fileID: 143626487709842166}
   - component: {fileID: 114099655126269870}
   - component: {fileID: 114342614479072684}
+  - component: {fileID: 114325067217114250}
   m_Layer: 0
   m_Name: Boy
   m_TagString: Player
@@ -2262,7 +2263,7 @@ Animator:
   m_GameObject: {fileID: 1236579459611486}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e0184e438c3183e49ae01f4653f6ef00, type: 3}
-  m_Controller: {fileID: 9100000, guid: d4d45df36939c1a4b8163808f9ee7488, type: 2}
+  m_Controller: {fileID: 9100000, guid: 681cc6ed53bd78047beb82110a893fb8, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2285,12 +2286,29 @@ MonoBehaviour:
   checkIfGameActive: {fileID: 11400000, guid: bf3a05a8f8153d648af2b0cbbb1a72c7, type: 2}
   inactiveState: {fileID: 0}
   remainState: {fileID: 0}
+  defeatedState: {fileID: 0}
   stateTimeElapsed: 0
   lastActiveState: {fileID: 0}
   characterStats: {fileID: 11400000, guid: 6548a679fde78b44d9641d8ff222c908, type: 2}
   gameStartState: {fileID: 11400000, guid: ea0236a3d39da8446b4c2a4613a07391, type: 2}
   m_CharacterController: {fileID: 0}
   navMeshAgent: {fileID: 0}
+--- !u!114 &114325067217114250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236579459611486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4ee2060df983a5498644df49f2bd2cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveObjName: 
+  savePosition: 1
+  saveRotation: 1
+  setOnAwake: 0
+  memorizeOnClose: 1
 --- !u!114 &114342614479072684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2311,10 +2329,13 @@ MonoBehaviour:
   climbingBottom: 0
   climbingTop: 0
   startClimbAnimationTop: 0
+  startClimbAnimationBottom: 0
+  startClimbAnimationEnd: 0
   isInPushArea: 0
   isPushDirectionRight: 0
   isPushLimit: 0
-  pushableName: 
+  isPushing: 0
+  isExitPush: 0
   isInDoorArea: 0
   isDoorDirectionRight: 0
   isInKeyArea: 0
@@ -2337,7 +2358,9 @@ MonoBehaviour:
   endClimbAnchor: {fileID: 0}
   doorCollider: {fileID: 0}
   KeyCollider: {fileID: 0}
+  pushObject: {fileID: 0}
   pushCollider: {fileID: 0}
+  isDefeated: 0
   m_CharStats: {fileID: 11400000, guid: 6548a679fde78b44d9641d8ff222c908, type: 2}
   m_WalkNoiseLayerMask:
     serializedVersion: 2

@@ -4004,7 +4004,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c717b5cf866354eafb7484a38f0af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FadeAnim: {fileID: 1227558819}
   playerTransform: {fileID: 1150746184}
   lastSeenPlayerPosition: {x: 1000, y: 1000, z: 1000}
   lastHeardPlayerPosition: {x: 1000, y: 1000, z: 1000}
@@ -4012,8 +4011,10 @@ MonoBehaviour:
   allEnemiesTransform: []
   suspiciousGuards: 0
   alarmedGuards: 0
+  isGameActive: 0
   m_CheckpointManager: {fileID: 0}
   charController: {fileID: 0}
+  charStateController: {fileID: 0}
   fadeInTime: 1
   fadeOutTime: 1
   deathAnimationTime: 1
@@ -4710,11 +4711,11 @@ MonoBehaviour:
   checkIfGameActive: {fileID: 11400000, guid: bf3a05a8f8153d648af2b0cbbb1a72c7, type: 2}
   inactiveState: {fileID: 0}
   remainState: {fileID: 0}
-  defeatedState: {fileID: 0}
   stateTimeElapsed: 0
   lastActiveState: {fileID: 0}
   characterStats: {fileID: 11400000, guid: 6548a679fde78b44d9641d8ff222c908, type: 2}
   gameStartState: {fileID: 0}
+  defeatedState: {fileID: 0}
   m_CharacterController: {fileID: 0}
   navMeshAgent: {fileID: 0}
 --- !u!143 &1150746182
@@ -5416,6 +5417,52 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
+--- !u!1001 &1376179201
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4157347818636804, guid: 070004452e5690e4bae213a568401a02, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 7.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157347818636804, guid: 070004452e5690e4bae213a568401a02, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.27
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157347818636804, guid: 070004452e5690e4bae213a568401a02, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -16.96012
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157347818636804, guid: 070004452e5690e4bae213a568401a02, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157347818636804, guid: 070004452e5690e4bae213a568401a02, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157347818636804, guid: 070004452e5690e4bae213a568401a02, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157347818636804, guid: 070004452e5690e4bae213a568401a02, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4157347818636804, guid: 070004452e5690e4bae213a568401a02, type: 2}
+      propertyPath: m_RootOrder
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 1670251057642206, guid: 070004452e5690e4bae213a568401a02, type: 2}
+      propertyPath: m_Name
+      value: Climbable (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 070004452e5690e4bae213a568401a02, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1392699284
 GameObject:
   m_ObjectHideFlags: 0

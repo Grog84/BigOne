@@ -21,6 +21,13 @@ public class GMController : MonoBehaviour {
 
     static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
 
+    [Range(0.5f, 5f)]
+    public float fadeInTime = 1f;
+    [Range(0.5f, 5f)]
+    public float fadeOutTime = 1f;
+    [Range(0.5f, 5f)]
+    public float deathAnimationTime = 1f;
+
     void Awake() 
     {
         //Singleton
@@ -41,6 +48,11 @@ public class GMController : MonoBehaviour {
 
         m_CheckpointManager = GetComponent<CheckPointManager>();
         charController = GameObject.FindGameObjectWithTag("Player").GetComponent<_CharacterController>();
+    }
+
+    private void Start()
+    {
+        SaveCheckpoint();
     }
 
     public void ResetPlayerLastSeenPosition()
@@ -73,7 +85,8 @@ public class GMController : MonoBehaviour {
 
     private IEnumerator WaitAndActivate()
     {
-        yield return new WaitForSeconds(1f);
+        // Wait and Activate
+        yield return new WaitForSeconds(fadeInTime);
         ActivateGame();
     }
 
@@ -87,8 +100,9 @@ public class GMController : MonoBehaviour {
 
     private IEnumerator WaitAndDeactivate()
     {
-        yield return new WaitForSeconds(1f);
+        // Deactivate and wait
         DeactivateGame();
+        yield return new WaitForSeconds(fadeOutTime);
     }
 
     public void SaveCheckpoint()
@@ -106,6 +120,15 @@ public class GMController : MonoBehaviour {
     public void DefeatPlayer()
     {
         charController.isDefeated = true;
+        StartCoroutine(WaitAndRestart());
+    }
+
+    private IEnumerator WaitAndRestart()
+    {
+        yield return new WaitForSeconds(deathAnimationTime);
+        FadeOut();
+        yield return new WaitForSeconds(fadeOutTime);
+        FadeIn();
 
     }
 }

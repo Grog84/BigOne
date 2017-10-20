@@ -8,6 +8,7 @@ public class CharacterStateController : StateController {
     public CharacterStats characterStats;
 
     [HideInInspector] public State gameStartState;
+    [HideInInspector] public State defeatedState;
     [HideInInspector] public _CharacterController m_CharacterController;
     [HideInInspector] public NavMeshAgent navMeshAgent;
 
@@ -22,6 +23,8 @@ public class CharacterStateController : StateController {
         m_CharacterController = GetComponent<_CharacterController>();
 
         gameStartState = (State)Resources.Load("GameStart");
+        defeatedState = (State)Resources.Load("Defeated");
+
     }
 
     public override void TransitionToState(State nextState)
@@ -42,7 +45,7 @@ public class CharacterStateController : StateController {
     {
         base.Update();
 
-        if (!checkIfGameActive.Decide(this) && (currentState != inactiveState && currentState != gameStartState))
+        if (!checkIfGameActive.Decide(this) && (currentState != inactiveState && currentState != gameStartState && currentState != defeatedState))
         {
             TransitionToState(inactiveState);
         }

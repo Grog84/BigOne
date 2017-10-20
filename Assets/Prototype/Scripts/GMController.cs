@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class GMController : MonoBehaviour {
 
-    public Animator FadeAnim;
     public Transform playerTransform;
 
     [HideInInspector] public static GMController instance = null;
@@ -14,10 +15,13 @@ public class GMController : MonoBehaviour {
     [HideInInspector] public Transform[] allEnemiesTransform;
     [HideInInspector] public int suspiciousGuards = 0, alarmedGuards = 0;
 
-    public bool isGameActive = false;
+    [HideInInspector] public bool isGameActive = false;
     [HideInInspector] public CheckPointManager m_CheckpointManager;
 
     [HideInInspector] public _CharacterController charController;
+    [HideInInspector] public CharacterStateController charStateController;
+
+    private Image fadeEffect;
 
     static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
 
@@ -40,7 +44,10 @@ public class GMController : MonoBehaviour {
             Destroy(gameObject);
 
         m_CheckpointManager = GetComponent<CheckPointManager>();
-        charController = GameObject.FindGameObjectWithTag("Player").GetComponent<_CharacterController>();
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        charController = player.GetComponent<_CharacterController>();
+        charStateController = player.GetComponent<CharacterStateController>();
 
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         allEnemiesTransform = new Transform[allEnemies.Length];
@@ -48,6 +55,8 @@ public class GMController : MonoBehaviour {
         {
             allEnemiesTransform[i] = allEnemies[i].transform;
         }
+
+        fadeEffect = GameObject.Find("FadeEffect").GetComponent<Image>();
 
     }
 
@@ -83,7 +92,7 @@ public class GMController : MonoBehaviour {
 
     public void FadeIn()
     {
-        FadeAnim.SetBool("Fade", false);
+        fadeEffect.DOFade(0, fadeInTime);
         StartCoroutine(WaitAndActivate());
         isFadeScreenVisible = false;
 
@@ -98,7 +107,7 @@ public class GMController : MonoBehaviour {
 
     public void FadeOut()
     {
-        FadeAnim.SetBool("Fade", true);
+        fadeEffect.DOFade(1, fadeInTime);
         StartCoroutine(WaitAndDeactivate());
         isFadeScreenVisible = true;
 
@@ -118,9 +127,9 @@ public class GMController : MonoBehaviour {
 
     public void LoadCheckpoint()
     {
-        FadeOut();
+        //FadeOut();
         m_CheckpointManager.LoadAllObj();
-        FadeIn();
+        //FadeIn();
     }
 
     public void DefeatPlayer()
@@ -132,6 +141,8 @@ public class GMController : MonoBehaviour {
     public void RevivePlayer()
     {
         charController.isDefeated = false;
+        charController.m_Animator.SetFloat("Forward", 0f);
+        charStateController.TransitionToState(charStateController.gameStartState);
     }
 
     private IEnumerator WaitAndRestart()

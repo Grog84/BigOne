@@ -372,6 +372,7 @@ public class _CharacterController : MonoBehaviour {
             yield return null;
         }
     }
+
     void Update ()
     {
         if (startClimbAnimationEnd)

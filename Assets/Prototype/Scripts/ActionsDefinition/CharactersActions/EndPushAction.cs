@@ -15,8 +15,8 @@ public class EndPushAction : _Action
 
     private void EndPush(CharacterStateController controller)
     {
-        controller.m_CharacterController.isExitPush = true;  
-       
+        controller.m_CharacterController.isExitPush = true;
+        controller.m_CharacterController.isPushLimit = false;
     }
 }
 

@@ -185,7 +185,7 @@ public class _CharacterController : MonoBehaviour {
             climbingTop = true;
             ActivateClimbingChoice();
         }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Pushable"))
+        if (other.tag == "PushTrigger")
         {
             ActivatePushingChoice();
         }
@@ -212,7 +212,7 @@ public class _CharacterController : MonoBehaviour {
             climbingTop = true;
             Debug.Log("entro");
         }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Pushable"))
+        if (other.tag == "PushTrigger")
         {
             pushCollider = other.gameObject;
             isInPushArea = true;

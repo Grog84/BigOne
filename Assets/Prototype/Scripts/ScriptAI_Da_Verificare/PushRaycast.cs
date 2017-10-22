@@ -15,9 +15,9 @@ public class PushRaycast : MonoBehaviour {
     {
         objectRaycastsX = new Vector3[9];
 
-        quarterHight = transform.parent.GetComponent<Collider>().bounds.size.y / 4;
-        quarterWidth = transform.parent.GetComponent<Collider>().bounds.size.x / 4;
-        quarterDepth = transform.parent.GetComponent<Collider>().bounds.size.z / 4;
+        quarterHight = transform.GetComponent<Collider>().bounds.size.y / 4;
+        quarterWidth = transform.GetComponent<Collider>().bounds.size.x / 4;
+        quarterDepth = transform.GetComponent<Collider>().bounds.size.z / 4;
 
         objectRaycastsX[0] = new Vector3(-quarterWidth*2, -quarterHight  , 0);
         objectRaycastsX[1] = new Vector3(0              , -quarterHight  , 0);

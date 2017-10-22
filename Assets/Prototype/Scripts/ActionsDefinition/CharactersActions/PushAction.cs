@@ -24,11 +24,11 @@ public class PushAction : _Action
         if (Vector3.Angle(controller.m_CharacterController.pushObject.transform.forward.normalized, controller.m_CharacterController.CharacterTansform.forward.normalized) <= 45 || 
             Vector3.Angle(controller.m_CharacterController.pushObject.transform.forward.normalized, -controller.m_CharacterController.CharacterTansform.forward.normalized) <= 45)
         {
-            RaycastPoints = controller.m_CharacterController.pushCollider.GetComponent<PushRaycast>().objectRaycastsX;
+            RaycastPoints = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().objectRaycastsX;
         }
         else
         {
-            RaycastPoints = controller.m_CharacterController.pushCollider.GetComponent<PushRaycast>().objectRaycastsZ;
+            RaycastPoints = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().objectRaycastsZ;
         }
 
         for (int i = 0; i < RaycastPoints.Length; i++)

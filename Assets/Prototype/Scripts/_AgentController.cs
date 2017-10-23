@@ -6,7 +6,8 @@ using UnityEngine.AI;
 public class _AgentController : MonoBehaviour {
 
     public List<NavPoint> wayPointList;
-    public Transform eyes;
+
+    [HideInInspector] public Transform eyes;
 
     [HideInInspector] public Transform[] lookAtPositions;
     [HideInInspector] public Transform lookAtPositionCentral;
@@ -61,6 +62,7 @@ public class _AgentController : MonoBehaviour {
 
         m_SaveComponent = gameObject.GetComponent<GuardSaveComponent>();
         m_Animator = GetComponent<Animator>();
+        eyes = transform.Find("eyes");
     }
 
     public void LoadNavmeshStats()

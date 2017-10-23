@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class SaveObjComponent : MonoBehaviour {
 
-    public string saveObjName;
-    [Space]
+    [HideInInspector] public string saveObjName;
 
     [Header("Position parameters", order = 1)]
     [Tooltip("Save the object position")]
     public bool savePosition = true;
     [Tooltip("Save the object rotation")]
-    public bool saveRotation = false;//Necessita prova tecnica HardCoded
+    public bool saveRotation = false;
     [Space]
     
     [Header("Saving settings")]
@@ -33,14 +32,11 @@ public class SaveObjComponent : MonoBehaviour {
     }
     ObjectPosition ObjPos;
 
-    private void OnEnable()
-    {
-        saveObjName = gameObject.name;
-    }
 
     private void Awake()
     {
-        
+        saveObjName = gameObject.name + transform.position.x.ToString() + transform.position.y.ToString() + transform.position.z.ToString();
+
         if (setOnAwake)
         {
             LoadData();
@@ -66,7 +62,7 @@ public class SaveObjComponent : MonoBehaviour {
         {
             if (PlayerPrefs.HasKey(saveObjName + "PositionX") && PlayerPrefs.HasKey(saveObjName + "PositionY") && PlayerPrefs.HasKey(saveObjName + "PositionZ"))
             {
-                Debug.Log("Caricate Coordinate di: " + saveObjName + " x=" + ObjPos.x + " y=" + ObjPos.y + " z=" + ObjPos.z);
+                //Debug.Log("Caricate Coordinate di: " + saveObjName + " x=" + ObjPos.x + " y=" + ObjPos.y + " z=" + ObjPos.z);
                 transform.position = new Vector3(PlayerPrefs.GetFloat(gameObject.name + "PositionX"),
                     PlayerPrefs.GetFloat(saveObjName + "PositionY"), PlayerPrefs.GetFloat(saveObjName + "PositionZ"));
             }
@@ -76,7 +72,7 @@ public class SaveObjComponent : MonoBehaviour {
         {
             if (PlayerPrefs.HasKey(saveObjName + "RotationX") && PlayerPrefs.HasKey(saveObjName + "RotationY") && PlayerPrefs.HasKey(saveObjName + "RotationZ"))
             {
-               Debug.Log("Caricata Rotazione di: " + saveObjName + " x=" + ObjPos.xRotation + " y=" + ObjPos.yRotation + " z=" + ObjPos.zRotation);
+               //Debug.Log("Caricata Rotazione di: " + saveObjName + " x=" + ObjPos.xRotation + " y=" + ObjPos.yRotation + " z=" + ObjPos.zRotation);
                 transform.eulerAngles = new Vector3(PlayerPrefs.GetFloat(saveObjName + "RotationX"),
                     PlayerPrefs.GetFloat(saveObjName + "RotationY"), PlayerPrefs.GetFloat(saveObjName + "RotationZ"));
             }
@@ -95,7 +91,7 @@ public class SaveObjComponent : MonoBehaviour {
             PlayerPrefs.SetFloat(saveObjName + "PositionX", ObjPos.x);
             PlayerPrefs.SetFloat(saveObjName + "PositionY", ObjPos.y);
             PlayerPrefs.SetFloat(saveObjName + "PositionZ", ObjPos.z);
-            Debug.Log("Salvate Coordinate di: " + saveObjName + " x=" + ObjPos.x + " y=" + ObjPos.y + " z=" + ObjPos.z);
+            //Debug.Log("Salvate Coordinate di: " + saveObjName + " x=" + ObjPos.x + " y=" + ObjPos.y + " z=" + ObjPos.z);
         }
         if (saveRotation)
         {
@@ -105,7 +101,7 @@ public class SaveObjComponent : MonoBehaviour {
             PlayerPrefs.SetFloat(saveObjName + "RotationX", ObjPos.xRotation);
             PlayerPrefs.SetFloat(saveObjName + "RotationY", ObjPos.yRotation);
             PlayerPrefs.SetFloat(saveObjName + "RotationZ", ObjPos.zRotation);
-            Debug.Log("Salvata Rotazione di: " + saveObjName + " x=" + ObjPos.xRotation + " y=" + ObjPos.yRotation + " z=" + ObjPos.zRotation);
+            //Debug.Log("Salvata Rotazione di: " + saveObjName + " x=" + ObjPos.xRotation + " y=" + ObjPos.yRotation + " z=" + ObjPos.zRotation);
 
         }
     }

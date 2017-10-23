@@ -71,8 +71,6 @@ namespace Character
         private bool oneStepCoroutineController = true;                 // used to make sure only one step coroutine is runnin at a given time
 
 
-        private StateController controller;
-
         private void Awake()
         {
             CharacterTansform = GetComponent<Transform>();          // A reference to the character assigned to the state controller transform
@@ -85,7 +83,6 @@ namespace Character
         // Use this for initialization
         void Start()
         {
-            controller = GetComponent<StateController>();
             isInClimbArea = false;
             isInPushArea = false;
             ray_length = m_CharController.bounds.size.y / 2.0f + 0.1f;

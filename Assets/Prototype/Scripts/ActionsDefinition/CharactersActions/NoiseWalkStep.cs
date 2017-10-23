@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using StateMachine;
+using AI;
 
 namespace Character.Actions
 {

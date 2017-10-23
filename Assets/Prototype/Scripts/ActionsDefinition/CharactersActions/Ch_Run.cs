@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Run")]
-public class Ch_Run : _Action
+namespace Character.Actions
 {
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Run")]
+    public class Ch_Run : _Action
     {
-        Run(controller);
-    }
+        public override void Execute(CharacterStateController controller)
+        {
+            Run(controller);
+        }
 
-    public void Run(CharacterStateController controller)
-    {
-        controller.characterStats.m_MovementSpeed = controller.characterStats.m_RunSpeed;
-    }
+        public void Run(CharacterStateController controller)
+        {
+            controller.characterStats.m_MovementSpeed = controller.characterStats.m_RunSpeed;
+        }
 
+    }
 }

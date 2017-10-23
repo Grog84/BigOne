@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Crouching")]
-public class Ch_Crouching : _Action
+namespace Character.Actions
 {
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Crouching")]
+    public class Ch_Crouching : _Action
     {
-        Crouching(controller);
-    }
+        public override void Execute(CharacterStateController controller)
+        {
+            Crouching(controller);
+        }
 
-    public void Crouching (CharacterStateController controller)
-    {
-        controller.characterStats.m_MovementSpeed = controller.characterStats.m_CrouchSpeed;
+        public void Crouching (CharacterStateController controller)
+        {
+            controller.characterStats.m_MovementSpeed = controller.characterStats.m_CrouchSpeed;
+        }
     }
 }

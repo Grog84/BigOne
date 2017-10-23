@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SetCrouchSpeed : _Action
+namespace Character.Actions
 {
-
-    public override void Execute(CharacterStateController controller)
+    public class SetCrouchSpeed : _Action
     {
-        SetSpeed(controller);
-    }
 
-    private void SetSpeed(CharacterStateController controller)
-    {
-        controller.m_CharacterController.m_MoveSpeedMultiplier = controller.characterStats.m_CrouchSpeedMultiplier;
+        public override void Execute(CharacterStateController controller)
+        {
+            SetSpeed(controller);
+        }
+
+        private void SetSpeed(CharacterStateController controller)
+        {
+            controller.m_CharacterController.m_MoveSpeedMultiplier = controller.characterStats.m_CrouchSpeedMultiplier;
+        }
     }
 }

@@ -2,20 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/AIActions/IncreaseSuspiciousCount")]
-public class IncreaseSuspiciousCount : _Action {
-
-    public override void Execute(EnemiesAIStateController controller)
+namespace AI.Actions
+{
+    [CreateAssetMenu(menuName = "Prototype/AIActions/IncreaseSuspiciousCount")]
+    public class IncreaseSuspiciousCount : _Action
     {
-        IncreaseCount(controller);
-    }
 
-    private void IncreaseCount(EnemiesAIStateController controller)
-    {
-        if (!controller.m_AgentController.isSuspicious && !controller.m_AgentController.isAlarmed)
+        public override void Execute(EnemiesAIStateController controller)
         {
-            controller.m_AgentController.isSuspicious = true;
-            GMController.instance.suspiciousGuards += 1;
+            IncreaseCount(controller);
+        }
+
+        private void IncreaseCount(EnemiesAIStateController controller)
+        {
+            if (!controller.m_AgentController.isSuspicious && !controller.m_AgentController.isAlarmed)
+            {
+                controller.m_AgentController.isSuspicious = true;
+                GMController.instance.suspiciousGuards += 1;
+            }
         }
     }
 }

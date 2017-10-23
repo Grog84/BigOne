@@ -4,18 +4,20 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using DG.Tweening;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/ItemCollectAction")]
-public class ItemCollectAction : _Action
+namespace Character.Actions
 {
-
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/ItemCollectAction")]
+    public class ItemCollectAction : _Action
     {
-        Interact(controller);
-    }
 
-    private void Interact(CharacterStateController controller)
-    {
-      
+        public override void Execute(CharacterStateController controller)
+        {
+            Interact(controller);
+        }
+
+        private void Interact(CharacterStateController controller)
+        {
+
             // Pick up Keys
             if (controller.m_CharacterController.isInKeyArea)
             {
@@ -24,6 +26,7 @@ public class ItemCollectAction : _Action
                 controller.m_CharacterController.isInKeyArea = false;
             }
 
-     
+
+        }
     }
 }

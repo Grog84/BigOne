@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/StartPush")]
-public class StartPushAction : _Action
+namespace Character.Actions
 {
-    
-
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/StartPush")]
+    public class StartPushAction : _Action
     {
-        StartPush(controller);
-    }
 
-    private void StartPush(CharacterStateController controller)
-    {
-        controller.m_CharacterController.pushObject = controller.m_CharacterController.pushCollider.transform.parent.gameObject;
-        controller.m_CharacterController.isPushing = true;
-     
+
+        public override void Execute(CharacterStateController controller)
+        {
+            StartPush(controller);
+        }
+
+        private void StartPush(CharacterStateController controller)
+        {
+            controller.m_CharacterController.pushObject = controller.m_CharacterController.pushCollider.transform.parent.gameObject;
+            controller.m_CharacterController.isPushing = true;
+
+        }
     }
 }
-

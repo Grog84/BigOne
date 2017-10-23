@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivatePush")]
-public class AnimSetPushBoolFalse : _Action
+namespace Character.Actions
 {
-
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivatePush")]
+    public class AnimSetPushBoolFalse : _Action
     {
-        UpdateAnimatorForPush(controller);
-    }
 
-    private void UpdateAnimatorForPush(CharacterStateController controller)
-    {
-        controller.m_CharacterController.m_Animator.SetBool("isPushing", false);
-        Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isPushing"));
+        public override void Execute(CharacterStateController controller)
+        {
+            UpdateAnimatorForPush(controller);
+        }
+
+        private void UpdateAnimatorForPush(CharacterStateController controller)
+        {
+            controller.m_CharacterController.m_Animator.SetBool("isPushing", false);
+            Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isPushing"));
+        }
     }
 }

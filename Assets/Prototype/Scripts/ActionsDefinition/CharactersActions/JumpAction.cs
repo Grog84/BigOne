@@ -3,24 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Jump")]
-public class JumpAction : _Action
+namespace Character.Actions
 {
-    Vector3 m_Velocity;
-
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Jump")]
+    public class JumpAction : _Action
     {
-        Jump(controller);
-    }
+        Vector3 m_Velocity;
 
-    private void Jump(CharacterStateController controller)
-    {
-        bool m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
-
-        if (m_Jump)
+        public override void Execute(CharacterStateController controller)
         {
-            m_Velocity = controller.m_CharacterController.m_CharController.velocity;
-            m_Velocity.y += Mathf.Sqrt(controller.characterStats.m_JumpHeight * -2f * controller.characterStats.m_Gravity);
+            Jump(controller);
+        }
+
+        private void Jump(CharacterStateController controller)
+        {
+            bool m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+
+            if (m_Jump)
+            {
+                m_Velocity = controller.m_CharacterController.m_CharController.velocity;
+                m_Velocity.y += Mathf.Sqrt(controller.characterStats.m_JumpHeight * -2f * controller.characterStats.m_Gravity);
+            }
         }
     }
 }

@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/AIActions/Animator/DeactivatePursuit")]
-public class AnimSetPursuitBoolFalse : _Action
+namespace AI.Actions
 {
-
-    public override void Execute(EnemiesAIStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/AIActions/Animator/DeactivatePursuit")]
+    public class AnimSetPursuitBoolFalse : _Action
     {
-        UpdateAnimatorForStartPursuit(controller);
-    }
 
-    private void UpdateAnimatorForStartPursuit(EnemiesAIStateController controller)
-    {
-        controller.m_AgentController.m_Animator.SetBool("isChasing", false);
+        public override void Execute(EnemiesAIStateController controller)
+        {
+            UpdateAnimatorForStartPursuit(controller);
+        }
 
+        private void UpdateAnimatorForStartPursuit(EnemiesAIStateController controller)
+        {
+            controller.m_AgentController.m_Animator.SetBool("isChasing", false);
+
+        }
     }
 }

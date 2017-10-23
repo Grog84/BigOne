@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/AIActions/Animator/DeactivatePatrol")]
-public class AnimSetPatrolBoolFalse : _Action
+namespace AI.Actions
 {
-
-    public override void Execute(EnemiesAIStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/AIActions/Animator/DeactivatePatrol")]
+    public class AnimSetPatrolBoolFalse : _Action
     {
-        UpdateAnimatorForStartPatrol(controller);
-    }
 
-    private void UpdateAnimatorForStartPatrol(EnemiesAIStateController controller)
-    {
-        controller.m_AgentController.m_Animator.SetBool("isPatrolling", false);
+        public override void Execute(EnemiesAIStateController controller)
+        {
+            UpdateAnimatorForStartPatrol(controller);
+        }
 
+        private void UpdateAnimatorForStartPatrol(EnemiesAIStateController controller)
+        {
+            controller.m_AgentController.m_Animator.SetBool("isPatrolling", false);
+
+        }
     }
 }

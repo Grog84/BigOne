@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/AIActions/DecreaseSuspiciousCount")]
-public class DecreaseSuspiciousCount : _Action {
-
-    public override void Execute(EnemiesAIStateController controller)
+namespace AI.Actions
+{
+    [CreateAssetMenu(menuName = "Prototype/AIActions/DecreaseSuspiciousCount")]
+    public class DecreaseSuspiciousCount : _Action
     {
-        DecreaseCount(controller);
-    }
 
-    private void DecreaseCount(EnemiesAIStateController controller)
-    {
-        controller.m_AgentController.isSuspicious = false;
-        GMController.instance.suspiciousGuards -= 1;
+        public override void Execute(EnemiesAIStateController controller)
+        {
+            DecreaseCount(controller);
+        }
+
+        private void DecreaseCount(EnemiesAIStateController controller)
+        {
+            controller.m_AgentController.isSuspicious = false;
+            GMController.instance.suspiciousGuards -= 1;
+        }
     }
 }

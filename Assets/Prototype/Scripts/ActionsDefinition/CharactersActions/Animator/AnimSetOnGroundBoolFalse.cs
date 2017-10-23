@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateNormal")]
-public class AnimSetOnGroundBoolFalse: _Action
+namespace Character.Actions
 {
-
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateNormal")]
+    public class AnimSetOnGroundBoolFalse : _Action
     {
-        UpdateAnimatorForGround(controller);
-    }
 
-    private void UpdateAnimatorForGround(CharacterStateController controller)
-    {
-        controller.m_CharacterController.m_Animator.SetBool("OnGround", false);
+        public override void Execute(CharacterStateController controller)
+        {
+            UpdateAnimatorForGround(controller);
+        }
+
+        private void UpdateAnimatorForGround(CharacterStateController controller)
+        {
+            controller.m_CharacterController.m_Animator.SetBool("OnGround", false);
+        }
     }
 }

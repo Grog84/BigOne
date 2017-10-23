@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/ActivateDefeat")]
-public class AnimSetDefeatTrue : _Action
+namespace Character.Actions
 {
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/ActivateDefeat")]
+    public class AnimSetDefeatTrue : _Action
     {
-        UpdateAnimatorForDefeat(controller);
-    }
+        public override void Execute(CharacterStateController controller)
+        {
+            UpdateAnimatorForDefeat(controller);
+        }
 
-    private void UpdateAnimatorForDefeat(CharacterStateController controller)
-    {
-        controller.m_CharacterController.m_Animator.SetBool("isDead", true);
-        Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isDead"));
-    }
+        private void UpdateAnimatorForDefeat(CharacterStateController controller)
+        {
+            controller.m_CharacterController.m_Animator.SetBool("isDead", true);
+            Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isDead"));
+        }
 
+    }
 }

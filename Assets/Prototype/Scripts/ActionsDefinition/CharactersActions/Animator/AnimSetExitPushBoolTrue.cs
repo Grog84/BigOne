@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/ActivateExitPush")]
-public class AnimSetExitPushBoolTrue : _Action
+namespace Character.Actions
 {
-
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/ActivateExitPush")]
+    public class AnimSetExitPushBoolTrue : _Action
     {
-        UpdateAnimatorForStartPush(controller);
-    }
 
-    private void UpdateAnimatorForStartPush(CharacterStateController controller)
-    {
-        controller.m_CharacterController.m_Animator.SetBool("isStartingPush", false);
-        Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isStartingPush"));
+        public override void Execute(CharacterStateController controller)
+        {
+            UpdateAnimatorForStartPush(controller);
+        }
+
+        private void UpdateAnimatorForStartPush(CharacterStateController controller)
+        {
+            controller.m_CharacterController.m_Animator.SetBool("isStartingPush", false);
+            Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isStartingPush"));
+        }
     }
 }

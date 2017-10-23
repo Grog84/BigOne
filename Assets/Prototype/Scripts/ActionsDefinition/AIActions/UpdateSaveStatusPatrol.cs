@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/AIActions/UpdateSaveStatus")]
-public class UpdateSaveStatusPatrol : _Action
+namespace AI.Actions
 {
-
-    public override void Execute(EnemiesAIStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/AIActions/UpdateSaveStatus")]
+    public class UpdateSaveStatusPatrol : _Action
     {
-        UpdateState(controller);
-    }
 
-    private void UpdateState(EnemiesAIStateController controller)
-    {
-        controller.m_AgentController.m_SaveComponent.activeState = GuardSaveComponent.GuardStates.Patrol;
+        public override void Execute(EnemiesAIStateController controller)
+        {
+            UpdateState(controller);
+        }
 
+        private void UpdateState(EnemiesAIStateController controller)
+        {
+            controller.m_AgentController.m_SaveComponent.activeState = GuardSaveComponent.GuardStates.Patrol;
+
+        }
     }
 }

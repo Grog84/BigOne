@@ -2,16 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/AIActions/ResetLastSeenPosition")]
-public class ResetLastSeenPosition : _Action
+namespace AI.Actions
 {
-    public override void Execute(EnemiesAIStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/AIActions/ResetLastSeenPosition")]
+    public class ResetLastSeenPosition : _Action
     {
-        ResetPos(controller);
-    }
+        public override void Execute(EnemiesAIStateController controller)
+        {
+            ResetPos(controller);
+        }
 
-    private void ResetPos(EnemiesAIStateController controller)
-    {
-        GMController.instance.ResetPlayerLastSeenPosition();
+        private void ResetPos(EnemiesAIStateController controller)
+        {
+            GMController.instance.ResetPlayerLastSeenPosition();
+        }
     }
 }

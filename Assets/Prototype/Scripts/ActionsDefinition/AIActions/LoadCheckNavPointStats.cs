@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/AIActions/LoadCheckNavPointStats")]
-public class LoadCheckNavPointStats : _Action
+namespace AI.Actions
 {
-
-    public override void Execute(EnemiesAIStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/AIActions/LoadCheckNavPointStats")]
+    public class LoadCheckNavPointStats : _Action
     {
-        LoadCheckNavPoint(controller);
-    }
 
-    private void LoadCheckNavPoint(EnemiesAIStateController controller)
-    {
-        controller.m_AgentController.UpdateStats("checkNavPoint");
+        public override void Execute(EnemiesAIStateController controller)
+        {
+            LoadCheckNavPoint(controller);
+        }
+
+        private void LoadCheckNavPoint(EnemiesAIStateController controller)
+        {
+            controller.m_AgentController.UpdateStats("checkNavPoint");
+        }
     }
 }

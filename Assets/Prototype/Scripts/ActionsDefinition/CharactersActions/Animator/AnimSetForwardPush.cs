@@ -2,26 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/SetForwardPush")]
-public class AnimSetForwardPush: _Action
+namespace Character.Actions
 {
-
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/SetForwardPush")]
+    public class AnimSetForwardPush : _Action
     {
-        SetForwardAmount(controller);
-    }
 
-    private void SetForwardAmount(CharacterStateController controller)
-    {
-        if (controller.m_CharacterController.isPushLimit)
+        public override void Execute(CharacterStateController controller)
         {
-            controller.m_CharacterController.m_Animator.SetFloat("Forward", Mathf.Clamp(controller.m_CharacterController.m_ForwardAmount, -1f, 0f), 0.1f, Time.deltaTime);
-        }
-        else if (!controller.m_CharacterController.isPushLimit)
-        {
-            controller.m_CharacterController.m_Animator.SetFloat("Forward", controller.m_CharacterController.m_ForwardAmount, 0.1f, Time.deltaTime);
+            SetForwardAmount(controller);
         }
 
-       // Debug.Log(controller.m_CharacterController.m_Animator.GetFloat("Forward"));
+        private void SetForwardAmount(CharacterStateController controller)
+        {
+            if (controller.m_CharacterController.isPushLimit)
+            {
+                controller.m_CharacterController.m_Animator.SetFloat("Forward", Mathf.Clamp(controller.m_CharacterController.m_ForwardAmount, -1f, 0f), 0.1f, Time.deltaTime);
+            }
+            else if (!controller.m_CharacterController.isPushLimit)
+            {
+                controller.m_CharacterController.m_Animator.SetFloat("Forward", controller.m_CharacterController.m_ForwardAmount, 0.1f, Time.deltaTime);
+            }
+
+            // Debug.Log(controller.m_CharacterController.m_Animator.GetFloat("Forward"));
+        }
     }
 }

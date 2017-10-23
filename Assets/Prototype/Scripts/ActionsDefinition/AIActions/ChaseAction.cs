@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/AIActions/Chase")]
-public class ChaseAction : _Action
+namespace AI.Actions
 {
-    public override void Execute(EnemiesAIStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/AIActions/Chase")]
+    public class ChaseAction : _Action
     {
-        Chase(controller);
-    }
+        public override void Execute(EnemiesAIStateController controller)
+        {
+            Chase(controller);
+        }
 
-    private void Chase(EnemiesAIStateController controller)
-    {
-        controller.m_AgentController.m_NavMeshAgent.destination = controller.m_AgentController.chaseTarget.position;
-        controller.m_AgentController.m_NavMeshAgent.isStopped = false;
+        private void Chase(EnemiesAIStateController controller)
+        {
+            controller.m_AgentController.m_NavMeshAgent.destination = controller.m_AgentController.chaseTarget.position;
+            controller.m_AgentController.m_NavMeshAgent.isStopped = false;
+        }
     }
 }

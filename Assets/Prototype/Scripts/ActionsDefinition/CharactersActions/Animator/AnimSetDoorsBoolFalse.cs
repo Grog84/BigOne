@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateDoors")]
-public class AnimSetDoorsBoolFalse : _Action
+namespace Character.Actions
 {
-
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateDoors")]
+    public class AnimSetDoorsBoolFalse : _Action
     {
-        UpdateAnimatorForDoors(controller);
-    }
 
-    private void UpdateAnimatorForDoors(CharacterStateController controller)
-    {
-        controller.m_CharacterController.m_Animator.SetBool("isOpening", false);
+        public override void Execute(CharacterStateController controller)
+        {
+            UpdateAnimatorForDoors(controller);
+        }
+
+        private void UpdateAnimatorForDoors(CharacterStateController controller)
+        {
+            controller.m_CharacterController.m_Animator.SetBool("isOpening", false);
+        }
     }
 }

@@ -12,8 +12,8 @@ public class _CharacterController : MonoBehaviour {
 
     [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
     [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
-    [HideInInspector] public bool climbingBottom;
-    [HideInInspector] public bool climbingTop;
+    [HideInInspector] public bool climbingBottom;                  // The player is in the Bottom Trigger
+    [HideInInspector] public bool climbingTop;                     // The player is in the Top Trigger
     [HideInInspector] public bool startClimbAnimationTop;          // Starts the descend from top
     [HideInInspector] public bool startClimbAnimationBottom;       // Starts the climb from bottom
     [HideInInspector] public bool startClimbAnimationEnd;          // Starts the end climb courutine
@@ -28,6 +28,8 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public bool isInDoorArea;                    // Detect if the player is in the Door trigger area
     [HideInInspector] public bool isDoorDirectionRight;            // Detect if the player is looking toward the door
     [HideInInspector] public bool isInKeyArea;                     // Detect if the player is in the key object interactable area
+    [HideInInspector] public bool startDoorAnimation;              // Starts the door interaction courutine
+    [HideInInspector] public bool startItemAnimation;              // Starts the item collection courutine
 
     [HideInInspector] public bool canStep = true;
     [HideInInspector] public float m_WalkSoundrange_sq;   // squared value
@@ -50,6 +52,7 @@ public class _CharacterController : MonoBehaviour {
     [HideInInspector] public Transform  climbAnchorBottom;
     [HideInInspector] public Transform  endClimbAnchor;
 
+    [HideInInspector] public GameObject doorObject;
     [HideInInspector] public GameObject doorCollider;
     [HideInInspector] public GameObject KeyCollider;
 
@@ -86,16 +89,17 @@ public class _CharacterController : MonoBehaviour {
         UpdateSoundRange();
 
     }
+#region Raycast Check
 
     void ActivateDoors()
     {
         RaycastHit hit;
+        Debug.DrawRay(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, Color.red);
 
         if (isInDoorArea)
         {
             if (Physics.Raycast(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, out hit, m_CharStats.m_DistanceFromDoor))
             {
-                Debug.DrawRay(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, Color.red);
                 Debug.Log("vedo");
 
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors"))
@@ -106,6 +110,10 @@ public class _CharacterController : MonoBehaviour {
                 {
                     isDoorDirectionRight = false;
                 }
+            }
+            else
+            {
+                isDoorDirectionRight = false;
             }
         }
     }
@@ -161,6 +169,10 @@ public class _CharacterController : MonoBehaviour {
         }
     }
 
+#endregion
+
+#region Triggers
+
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Ladder_Bottom")
@@ -173,7 +185,7 @@ public class _CharacterController : MonoBehaviour {
             climbingTop = true;
             ActivateClimbingChoice();
         }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Pushable"))
+        if (other.tag == "PushTrigger")
         {
             ActivatePushingChoice();
         }
@@ -200,7 +212,7 @@ public class _CharacterController : MonoBehaviour {
             climbingTop = true;
             Debug.Log("entro");
         }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Pushable"))
+        if (other.tag == "PushTrigger")
         {
             pushCollider = other.gameObject;
             isInPushArea = true;
@@ -239,7 +251,7 @@ public class _CharacterController : MonoBehaviour {
             isClimbDirectionRight = false;
            // Debug.Log("esco");
         }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Pushable"))
+        if (other.tag == "PushTrigger")
         {
             pushCollider = null;
             isInPushArea = false;
@@ -262,12 +274,16 @@ public class _CharacterController : MonoBehaviour {
 
     }
 
+#endregion
+
     private void UpdateSoundRange()
     {
         m_WalkSoundrange_sq = m_CharStats.m_WalkSoundrange * m_CharStats.m_WalkSoundrange;
         m_CrouchSoundrange_sq = m_CharStats.m_CrouchSoundrange * m_CharStats.m_CrouchSoundrange;
         m_RunSoundrange_sq = m_CharStats.m_RunSoundrange * m_CharStats.m_RunSoundrange;
     }
+
+#region Climb Coroutine
 
     private IEnumerator ReachPointEnd()
     {
@@ -320,6 +336,7 @@ public class _CharacterController : MonoBehaviour {
         m_CharController.enabled = true;
         yield return null;
     }
+#endregion
 
     public IEnumerator MakeStep()
     {
@@ -329,6 +346,7 @@ public class _CharacterController : MonoBehaviour {
         oneStepCoroutineController = true;
     }
 
+#region Pushable Coroutine
 
     public IEnumerator GrabPushable()
     {
@@ -361,6 +379,50 @@ public class _CharacterController : MonoBehaviour {
         yield return null;
     }
 
+#endregion
+
+#region Door Coroutine
+
+    private IEnumerator DoorInteraction()
+    {
+        float InteractTime = 1f;
+
+        Vector3 dir = doorObject.transform.position - doorCollider.transform.position;
+        dir.y = 0;
+        dir = dir.normalized;
+
+        yield return StartCoroutine(RotateToward(dir));
+
+        m_CharController.enabled = false;
+        CharacterTansform.DOMove(doorCollider.transform.GetChild(0).position, InteractTime);
+
+        yield return new WaitForSeconds(InteractTime);
+        startDoorAnimation = false;
+        m_CharController.enabled = true;
+        yield return null;
+    }
+
+#endregion
+
+#region Item Collection Coroutine
+
+    private IEnumerator ItemCollection()
+    {
+        float collectTime = 2f;
+
+
+        m_CharController.enabled = false;
+
+        yield return new WaitForSeconds(collectTime);
+        startItemAnimation = false;
+        m_CharController.enabled = true;
+        yield return null;
+    }
+
+    #endregion
+
+#region Rotate Toward Target Coroutine
+
     IEnumerator RotateToward(Vector3 finalDirection)
     {
         float rotatingSpeed = 10f;
@@ -372,6 +434,9 @@ public class _CharacterController : MonoBehaviour {
             yield return null;
         }
     }
+
+#endregion
+
     void Update ()
     {
         if (startClimbAnimationEnd)
@@ -404,6 +469,15 @@ public class _CharacterController : MonoBehaviour {
             StartCoroutine(DetachFromPushable());
         }
 
+        if (startDoorAnimation)
+        {
+            StartCoroutine(DoorInteraction());
+        }
+
+        if (startItemAnimation)
+        {
+            StartCoroutine(ItemCollection());
+        }
     }
 
 }

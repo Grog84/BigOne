@@ -19,13 +19,15 @@ public class CameraScriptShiny : MonoBehaviour
 	private Camera cam;
     private float camDistance = 0.0f;
     //camera variables for the position 
-	public float height = 0.0f;
+	private float nearClipPlaneDistance = 0.1f;
     public float distance = 2.5f;
     // position of the camera assigned in the camera movement
     private float currentX = 0.0f;
 	private float currentY = 0.0f;
     Vector3 dir = new Vector3();
     Quaternion rotation = new Quaternion();
+    //Variable for the offset of the raycast that check the collisions of the camera
+    public float collisionOffeset = 4.004f;
 	//array of the actual position of the clip points
 	[HideInInspector]
 	public Vector3[] clipPointPositionArray;
@@ -39,6 +41,7 @@ public class CameraScriptShiny : MonoBehaviour
 		camTransform = transform;
 		cam = Camera.main;
         Cursor.lockState = CursorLockMode.Locked;
+        cam.nearClipPlane = nearClipPlaneDistance;
     }
 
 	private void Update ()
@@ -99,7 +102,7 @@ public class CameraScriptShiny : MonoBehaviour
 		clipArray = new Vector3[5];
 
 		float z = cam.nearClipPlane;
-		float x = Mathf.Tan (cam.fieldOfView / 4.004f) * z;
+		float x = Mathf.Tan (cam.fieldOfView / collisionOffeset) * z;
 		float y = x / cam.aspect;
 
 		

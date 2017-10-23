@@ -13,4 +13,8 @@ public class MenuManager : MonoBehaviour {
     {
         Application.Quit();
     }
+    public void LoadGame()
+    {
+        SceneManager.LoadScene("LG_LoadGame_test");
+    }
 }

@@ -89,6 +89,7 @@ public class _CharacterController : MonoBehaviour {
         UpdateSoundRange();
 
     }
+#region Raycast Check
 
     void ActivateDoors()
     {
@@ -168,6 +169,10 @@ public class _CharacterController : MonoBehaviour {
         }
     }
 
+#endregion
+
+#region Triggers
+
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "Ladder_Bottom")
@@ -180,7 +185,7 @@ public class _CharacterController : MonoBehaviour {
             climbingTop = true;
             ActivateClimbingChoice();
         }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Pushable"))
+        if (other.tag == "PushTrigger")
         {
             ActivatePushingChoice();
         }
@@ -207,7 +212,7 @@ public class _CharacterController : MonoBehaviour {
             climbingTop = true;
             Debug.Log("entro");
         }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Pushable"))
+        if (other.tag == "PushTrigger")
         {
             pushCollider = other.gameObject;
             isInPushArea = true;
@@ -269,12 +274,16 @@ public class _CharacterController : MonoBehaviour {
 
     }
 
+#endregion
+
     private void UpdateSoundRange()
     {
         m_WalkSoundrange_sq = m_CharStats.m_WalkSoundrange * m_CharStats.m_WalkSoundrange;
         m_CrouchSoundrange_sq = m_CharStats.m_CrouchSoundrange * m_CharStats.m_CrouchSoundrange;
         m_RunSoundrange_sq = m_CharStats.m_RunSoundrange * m_CharStats.m_RunSoundrange;
     }
+
+#region Climb Coroutine
 
     private IEnumerator ReachPointEnd()
     {
@@ -327,6 +336,7 @@ public class _CharacterController : MonoBehaviour {
         m_CharController.enabled = true;
         yield return null;
     }
+#endregion
 
     public IEnumerator MakeStep()
     {
@@ -336,6 +346,7 @@ public class _CharacterController : MonoBehaviour {
         oneStepCoroutineController = true;
     }
 
+#region Pushable Coroutine
 
     public IEnumerator GrabPushable()
     {
@@ -368,6 +379,10 @@ public class _CharacterController : MonoBehaviour {
         yield return null;
     }
 
+#endregion
+
+#region Door Coroutine
+
     private IEnumerator DoorInteraction()
     {
         float InteractTime = 1f;
@@ -387,9 +402,13 @@ public class _CharacterController : MonoBehaviour {
         yield return null;
     }
 
+#endregion
+
+#region Item Collection Coroutine
+
     private IEnumerator ItemCollection()
     {
-        float collectTime = 1f;
+        float collectTime = 2f;
 
 
         m_CharController.enabled = false;
@@ -399,6 +418,10 @@ public class _CharacterController : MonoBehaviour {
         m_CharController.enabled = true;
         yield return null;
     }
+
+    #endregion
+
+#region Rotate Toward Target Coroutine
 
     IEnumerator RotateToward(Vector3 finalDirection)
     {
@@ -411,6 +434,8 @@ public class _CharacterController : MonoBehaviour {
             yield return null;
         }
     }
+
+#endregion
 
     void Update ()
     {

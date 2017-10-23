@@ -14,6 +14,6 @@ public class AnimSetForwardRun : _Action
     private void SetForwardAmount(CharacterStateController controller)
     {
         controller.m_CharacterController.m_Animator.SetFloat("Forward", controller.m_CharacterController.m_ForwardAmount, 0.1f, Time.deltaTime);
-        Debug.Log(controller.m_CharacterController.m_ForwardAmount);
+        //Debug.Log(controller.m_CharacterController.m_ForwardAmount);
     }
 }

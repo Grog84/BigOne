@@ -14,6 +14,6 @@ public class AnimSetStartPushBoolFalse : _Action
     private void UpdateAnimatorForStartPush(CharacterStateController controller)
     {
         controller.m_CharacterController.m_Animator.SetBool("isStartingPush", false);
-        Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isStartingPush"));
+       // Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isStartingPush"));
     }
 }

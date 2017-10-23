@@ -251,7 +251,7 @@ public class _CharacterController : MonoBehaviour {
             isClimbDirectionRight = false;
            // Debug.Log("esco");
         }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Pushable"))
+        if (other.tag == "PushTrigger")
         {
             pushCollider = null;
             isInPushArea = false;

@@ -1,13 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/AI/IsCheckingNavPoint")]
-public class IsCheckingNavPoint : Decision {
-
-    public override bool Decide(EnemiesAIStateController controller)
+namespace AI.Decisions
+{
+    [CreateAssetMenu(menuName = "Prototype/Decisions/AI/IsCheckingNavPoint")]
+    public class IsCheckingNavPoint : Decision
     {
-        return controller.m_AgentController.isCheckingNavPoint;
-    }
 
+        public override bool Decide(EnemiesAIStateController controller)
+        {
+            return controller.m_AgentController.isCheckingNavPoint;
+        }
+
+    }
 }

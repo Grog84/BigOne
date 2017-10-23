@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/OverWritableGravity")]
-public class OverWritableGravity : _Action
+namespace Character.Actions
 {
-
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/OverWritableGravity")]
+    public class OverWritableGravity : _Action
     {
-        OverWriteGravity(controller);
-    }
 
-    public void OverWriteGravity(CharacterStateController controller)
-    {
-        controller.characterStats.m_Gravity = controller.characterStats.m_DefaultGravity;
+        public override void Execute(CharacterStateController controller)
+        {
+            OverWriteGravity(controller);
+        }
+
+        public void OverWriteGravity(CharacterStateController controller)
+        {
+            controller.characterStats.m_Gravity = controller.characterStats.m_DefaultGravity;
+        }
     }
 }

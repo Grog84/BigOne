@@ -1,26 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/Characters/Crouch")]
-public class CrouchDecision : Decision
+namespace Character.Decisions
 {
-    bool Crouch = false;
-
-    public override bool Decide(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/Crouch")]
+    public class CrouchDecision : Decision
     {
+        bool Crouch = false;
 
-        if(Input.GetButtonDown("Crouch") && Crouch == false)
+        public override bool Decide(CharacterStateController controller)
         {
-            Crouch = true;
-        }
-        else if (Input.GetButtonDown("Crouch") && Crouch == true)
-        {
-            Crouch = false;
-        }
 
-        return Crouch;
+            if (Input.GetButtonDown("Crouch") && Crouch == false)
+            {
+                Crouch = true;
+            }
+            else if (Input.GetButtonDown("Crouch") && Crouch == true)
+            {
+                Crouch = false;
+            }
+
+            return Crouch;
+
+        }
 
     }
-
 }

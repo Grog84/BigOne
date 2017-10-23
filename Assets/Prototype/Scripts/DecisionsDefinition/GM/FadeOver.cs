@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/GM/FadeOver")]
-public class FadeOver : Decision {
-
-    public override bool Decide(GMStateController controller)
+namespace GM.Decisions
+{
+    [CreateAssetMenu(menuName = "Prototype/Decisions/GM/FadeOver")]
+    public class FadeOver : Decision
     {
-        return controller.m_GM.isFadeScreenVisible;
+
+        public override bool Decide(GMStateController controller)
+        {
+            return controller.m_GM.isFadeScreenVisible;
+        }
     }
 }

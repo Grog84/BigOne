@@ -1,33 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/Characters/EndItemCollectDecision")]
-public class EndItemCollectDecision : Decision
+namespace Character.Decisions
 {
-    public override bool Decide(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/EndItemCollectDecision")]
+    public class EndItemCollectDecision : Decision
     {
-        bool isInteracting = CheckIfEndDoorInteraction(controller);
-        return isInteracting;
-    }
+        public override bool Decide(CharacterStateController controller)
+        {
+            bool isInteracting = CheckIfEndDoorInteraction(controller);
+            return isInteracting;
+        }
 
-    private bool CheckIfEndDoorInteraction(CharacterStateController controller)
-    {
-
-        if (!controller.m_CharacterController.startItemAnimation)
+        private bool CheckIfEndDoorInteraction(CharacterStateController controller)
         {
 
-            return true;
+            if (!controller.m_CharacterController.startItemAnimation)
+            {
+
+                return true;
+
+
+            }
+            else
+            {
+                return false;
+            }
 
 
         }
-        else
-        {
-            return false;
-        }
 
 
     }
-
-
 }

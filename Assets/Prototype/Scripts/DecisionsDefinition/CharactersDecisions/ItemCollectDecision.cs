@@ -1,29 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/Characters/ItemCollectDecision")]
-public class ItemCollectDecision : Decision
+namespace Character.Decisions
 {
-    public override bool Decide(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/ItemCollectDecision")]
+    public class ItemCollectDecision : Decision
     {
-        bool isInteracting = CheckIfItemCollect(controller);
-        return isInteracting;
-    }
-
-    private bool CheckIfItemCollect(CharacterStateController controller)
-    {
-        if (controller.m_CharacterController.isInKeyArea && Input.GetKeyDown(KeyCode.E))
+        public override bool Decide(CharacterStateController controller)
         {
-            
-            return true;
+            bool isInteracting = CheckIfItemCollect(controller);
+            return isInteracting;
         }
-        else
+
+        private bool CheckIfItemCollect(CharacterStateController controller)
         {
-            return false;
+            if (controller.m_CharacterController.isInKeyArea && Input.GetKeyDown(KeyCode.E))
+            {
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
-       
+
+
     }
-
-
 }

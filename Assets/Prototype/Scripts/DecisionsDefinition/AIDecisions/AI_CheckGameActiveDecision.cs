@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/AI/CheckForGameActive")]
-public class AI_CheckGameActiveDecision : Decision
+namespace AI.Decisions
 {
-    public override bool Decide(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/Decisions/AI/CheckForGameActive")]
+    public class AI_CheckGameActiveDecision : Decision
     {
-        return GMController.instance.GetGameStatus();
+        public override bool Decide(CharacterStateController controller)
+        {
+            return GMController.instance.GetGameStatus();
+        }
     }
 }

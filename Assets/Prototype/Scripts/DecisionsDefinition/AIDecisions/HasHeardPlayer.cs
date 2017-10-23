@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/AI/Hear")]
-public class HasHeardPlayer : Decision {
-
-    public override bool Decide(EnemiesAIStateController controller)
+namespace AI.Decisions
+{
+    [CreateAssetMenu(menuName = "Prototype/Decisions/AI/Hear")]
+    public class HasHeardPlayer : Decision
     {
-        return controller.m_AgentController.hasHeardPlayer;
+
+        public override bool Decide(EnemiesAIStateController controller)
+        {
+            return controller.m_AgentController.hasHeardPlayer;
+        }
     }
 }

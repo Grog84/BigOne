@@ -1,30 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/Characters/ClimbDownDecision")]
-public class ClimbDownDecision : Decision
+namespace Character.Decisions
 {
-    public override bool Decide(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/ClimbDownDecision")]
+    public class ClimbDownDecision : Decision
     {
-        bool isClimbing = CheckIfClimbingDown(controller);
-        return isClimbing;
-    }
-
-    private bool CheckIfClimbingDown(CharacterStateController controller)
-    {
-       // Debug.Log(controller.m_CharacterController.isInClimbArea + " " + controller.m_CharacterController.climbingTop + " " + Input.GetKeyDown(KeyCode.E));
-        if (controller.m_CharacterController.isInClimbArea && controller.m_CharacterController.climbingTop && Input.GetKeyDown(KeyCode.E))
+        public override bool Decide(CharacterStateController controller)
         {
-            
-            return true;
+            bool isClimbing = CheckIfClimbingDown(controller);
+            return isClimbing;
         }
-        else
+
+        private bool CheckIfClimbingDown(CharacterStateController controller)
         {
-            return false;
+            // Debug.Log(controller.m_CharacterController.isInClimbArea + " " + controller.m_CharacterController.climbingTop + " " + Input.GetKeyDown(KeyCode.E));
+            if (controller.m_CharacterController.isInClimbArea && controller.m_CharacterController.climbingTop && Input.GetKeyDown(KeyCode.E))
+            {
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
-       
+
+
     }
-
-
 }

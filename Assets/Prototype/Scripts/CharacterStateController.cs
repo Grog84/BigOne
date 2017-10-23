@@ -2,60 +2,65 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Character;
 
-public class CharacterStateController : StateController {
-
-    public CharacterStats characterStats;
-
-    [HideInInspector] public State gameStartState;
-    [HideInInspector] public State defeatedState;
-    [HideInInspector] public _CharacterController m_CharacterController;
-    [HideInInspector] public NavMeshAgent navMeshAgent;
-
-    // Use this for initialization
-    protected override void Awake ()
+namespace StateMachine
+{
+    public class CharacterStateController : StateController
     {
-        base.Awake();
-        navMeshAgent = GetComponent<NavMeshAgent>();
 
-        lastActiveState = currentState;
+        public CharacterStats characterStats;
 
-        m_CharacterController = GetComponent<_CharacterController>();
+        [HideInInspector] public State gameStartState;
+        [HideInInspector] public State defeatedState;
+        [HideInInspector] public _CharacterController m_CharacterController;
+        [HideInInspector] public NavMeshAgent navMeshAgent;
 
-        gameStartState = (State)Resources.Load("GameStart");
-        defeatedState = (State)Resources.Load("Defeated");
-
-    }
-
-    public override void TransitionToState(State nextState)
-    {
-        if (nextState != remainState)
+        // Use this for initialization
+        protected override void Awake()
         {
-            if (nextState == null)
-                Debug.Log("ecco");
-            currentState.OnExitState(this);
-            currentState = nextState;
-            currentState.OnEnterState(this);
+            base.Awake();
+            navMeshAgent = GetComponent<NavMeshAgent>();
+
             lastActiveState = currentState;
-            OnExitState();
+
+            m_CharacterController = GetComponent<_CharacterController>();
+
+            gameStartState = (State)Resources.Load("GameStart");
+            defeatedState = (State)Resources.Load("Defeated");
+
         }
-    }
 
-    public override void Update()
-    {
-        base.Update();
-
-        if (!checkIfGameActive.Decide(this) && (currentState != inactiveState && currentState != gameStartState && currentState != defeatedState))
+        public override void TransitionToState(State nextState)
         {
-            TransitionToState(inactiveState);
-        }
-        else if (checkIfGameActive.Decide(this) && currentState == inactiveState)
-        {
-            TransitionToState(lastActiveState);
+            if (nextState != remainState)
+            {
+                if (nextState == null)
+                    Debug.Log("ecco");
+                currentState.OnExitState(this);
+                currentState = nextState;
+                currentState.OnEnterState(this);
+                lastActiveState = currentState;
+                OnExitState();
+            }
         }
 
-        currentState.UpdateState(this);
+        public override void Update()
+        {
+            base.Update();
+
+            if (!checkIfGameActive.Decide(this) && (currentState != inactiveState && currentState != gameStartState && currentState != defeatedState))
+            {
+                TransitionToState(inactiveState);
+            }
+            else if (checkIfGameActive.Decide(this) && currentState == inactiveState)
+            {
+                TransitionToState(lastActiveState);
+            }
+
+            currentState.UpdateState(this);
+
+        }
 
     }
-
 }

@@ -1,31 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/Characters/ClimbFromTopDecision")]
-public class ClimbFromTopDecision : Decision
+namespace Character.Decisions
 {
-    public override bool Decide(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/ClimbFromTopDecision")]
+    public class ClimbFromTopDecision : Decision
     {
-        bool isClimbing = CheckIfClimbingFromTopDecision(controller);
-        return isClimbing;
-    }
-
-    private bool CheckIfClimbingFromTopDecision(CharacterStateController controller)
-    {
-        if (controller.m_CharacterController.isInClimbArea && controller.m_CharacterController.climbingTop && Input.GetKeyDown(KeyCode.E))
+        public override bool Decide(CharacterStateController controller)
         {
+            bool isClimbing = CheckIfClimbingFromTopDecision(controller);
+            return isClimbing;
+        }
 
-            return true;
+        private bool CheckIfClimbingFromTopDecision(CharacterStateController controller)
+        {
+            if (controller.m_CharacterController.isInClimbArea && controller.m_CharacterController.climbingTop && Input.GetKeyDown(KeyCode.E))
+            {
 
+                return true;
+
+
+            }
+            else
+            {
+                return false;
+            }
 
         }
-        else
-        {
-            return false;
-        }
-       
+
+
     }
-
-
 }

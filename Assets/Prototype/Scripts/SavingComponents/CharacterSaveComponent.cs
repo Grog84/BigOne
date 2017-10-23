@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterSaveComponent : SaveObjComponent
+namespace SaveGame
 {
-
-    public override void LoadData()
+    public class CharacterSaveComponent : SaveObjComponent
     {
-        base.LoadData();
 
-    }
+        public override void LoadData()
+        {
+            base.LoadData();
 
-    public override void SaveData()
-    {
-        base.SaveData();
+        }
+
+        public override void SaveData()
+        {
+            base.SaveData();
+        }
     }
 }

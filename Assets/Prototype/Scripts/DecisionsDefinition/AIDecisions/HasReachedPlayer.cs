@@ -1,31 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/AI/HasReachedPlayer")]
-public class HasReachedPlayer : Decision
+namespace AI.Decisions
 {
-
-    public override bool Decide(EnemiesAIStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/Decisions/AI/HasReachedPlayer")]
+    public class HasReachedPlayer : Decision
     {
-        bool hasReachedPlay = HasReachedPlayPos(controller);
-        return hasReachedPlay;
-    }
 
-    private bool HasReachedPlayPos(EnemiesAIStateController controller)
-    {
-        bool hasReached = false;
-
-        // Check if we've reached the destination
-        if (!controller.m_AgentController.m_NavMeshAgent.pathPending)
+        public override bool Decide(EnemiesAIStateController controller)
         {
-            if (controller.m_AgentController.m_NavMeshAgent.remainingDistance <= controller.m_AgentController.m_NavMeshAgent.stoppingDistance)
-            {                
-                    hasReached = true;
-            }
+            bool hasReachedPlay = HasReachedPlayPos(controller);
+            return hasReachedPlay;
         }
 
-        return hasReached;
-    }
+        private bool HasReachedPlayPos(EnemiesAIStateController controller)
+        {
+            bool hasReached = false;
 
+            // Check if we've reached the destination
+            if (!controller.m_AgentController.m_NavMeshAgent.pathPending)
+            {
+                if (controller.m_AgentController.m_NavMeshAgent.remainingDistance <= controller.m_AgentController.m_NavMeshAgent.stoppingDistance)
+                {
+                    hasReached = true;
+                }
+            }
+
+            return hasReached;
+        }
+
+    }
 }

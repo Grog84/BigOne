@@ -11,7 +11,7 @@ public class StateController : MonoBehaviour {
 
     [HideInInspector] public State inactiveState;  
     [HideInInspector] public State remainState;
-
+    [HideInInspector] public State defeatedState;
     [HideInInspector] public float stateTimeElapsed;
     [HideInInspector] public State lastActiveState;
 
@@ -21,6 +21,7 @@ public class StateController : MonoBehaviour {
     {
         inactiveState = (State)Resources.Load("Inactive"); 
         remainState = (State)Resources.Load("RemainInState");
+        defeatedState = (State)Resources.Load("Defeated");
     }
 
     // Update is called once per frame

@@ -8,6 +8,7 @@ namespace Character.Actions
     public class AnimSetForwardRun : _Action
     {
 
+<<<<<<< HEAD
         public override void Execute(CharacterStateController controller)
         {
             SetForwardAmount(controller);
@@ -18,5 +19,11 @@ namespace Character.Actions
             controller.m_CharacterController.m_Animator.SetFloat("Forward", controller.m_CharacterController.m_ForwardAmount, 0.1f, Time.deltaTime);
             //Debug.Log(controller.m_CharacterController.m_ForwardAmount);
         }
+=======
+    private void SetForwardAmount(CharacterStateController controller)
+    {
+        controller.m_CharacterController.m_Animator.SetFloat("Forward", controller.m_CharacterController.m_ForwardAmount, 0.1f, Time.deltaTime);
+        Debug.Log(controller.m_CharacterController.m_ForwardAmount);
+>>>>>>> f33a8f5
     }
 }

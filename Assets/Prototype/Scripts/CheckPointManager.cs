@@ -9,7 +9,7 @@ public class CheckPointManager : MonoBehaviour {
     private SaveObjComponent[] saveObjects;
 
     // Use this for initialization
-    void Awake()
+    void Start()
     {
         saveObjects = FindObjectsOfType<SaveObjComponent>();   
     }

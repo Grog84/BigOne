@@ -4,14 +4,24 @@ using UnityEngine;
 
 namespace Character.Actions
 {
+<<<<<<< HEAD
     [CreateAssetMenu(menuName = "Prototype/CharactersActions/Push")]
     public class PushAction : _Action
+=======
+    //Vector3 m_Move;
+    float forward;
+    float backward;
+    float movement;
+
+    public override void Execute(CharacterStateController controller)
+>>>>>>> f33a8f5
     {
         Vector3[] RaycastPoints;
         float forward;
         float backward;
         float movement;
 
+<<<<<<< HEAD
 
         public override void Execute(CharacterStateController controller)
         {
@@ -53,8 +63,39 @@ namespace Character.Actions
 
                 }
 
+=======
+    private void Push(CharacterStateController controller)
+    {
+        Debug.DrawRay(controller.m_CharacterController.pushObject.transform.position + new Vector3(0,controller.characterStats.m_PushableObjectRaycastOffset,0), controller.m_CharacterController.CharacterTansform.forward, Color.red);
+        RaycastHit hit;
+
+        if (Physics.Raycast(controller.m_CharacterController.pushObject.transform.position +
+            new Vector3(0, controller.characterStats.m_PushableObjectRaycastOffset, 0), controller.m_CharacterController.CharacterTansform.forward, 
+            out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromPushableObstacle))
+        {
+            
+
+            if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Default") || hit.transform.gameObject.layer == LayerMask.NameToLayer("Climbable") ||
+                      hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors"))
+            {
+                Debug.Log("vedo ostacolo");
+                controller.m_CharacterController.isPushLimit = true;
+                Debug.Log(controller.m_CharacterController.isPushLimit);
+            }
+            else
+            {
+                controller.m_CharacterController.isPushLimit = false;
+                Debug.Log(controller.m_CharacterController.isPushLimit);
+>>>>>>> f33a8f5
             }
 
+        }
+        else
+        {
+            controller.m_CharacterController.isPushLimit = false;
+        }
+       
+        
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
             {
                 movement = Input.GetAxis("Vertical");
@@ -76,7 +117,6 @@ namespace Character.Actions
             if (Input.GetKey(KeyCode.S))
             {
                 backward = Input.GetAxis("Vertical");
-                controller.m_CharacterController.isPushLimit = false;
             }
             else
             {

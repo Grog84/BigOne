@@ -54,10 +54,7 @@ public class AT_ProvaSalvataggio : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F6))
         {
             SaveData();
-            ScreenCapture.CaptureScreenshot("Assets/Prototype/Images/ScreenInput.png");
-            
-           Debug.Log(Application.persistentDataPath);
-
+          
         }
         if (Input.GetKeyDown(KeyCode.F7))
         {

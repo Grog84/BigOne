@@ -8,6 +8,7 @@ namespace Character.Actions
     public class EndPushAction : _Action
     {
 
+<<<<<<< HEAD
 
         public override void Execute(CharacterStateController controller)
         {
@@ -19,6 +20,12 @@ namespace Character.Actions
             controller.m_CharacterController.isExitPush = true;
             controller.m_CharacterController.isPushLimit = false;
         }
+=======
+    private void EndPush(CharacterStateController controller)
+    {
+        controller.m_CharacterController.isExitPush = true;  
+       
+>>>>>>> f33a8f5
     }
 }
 

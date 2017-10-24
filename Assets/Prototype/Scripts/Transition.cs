@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using StateMachine;
 
-[System.Serializable]
-public class Transition
+namespace StateMachine
 {
-    public Decision decision;
-    public State trueState;
-    public State falseState;
+    [System.Serializable]
+    public class Transition
+    {
+        public Decision decision;
+        public State trueState;
+        public State falseState;
+    }
+
 }

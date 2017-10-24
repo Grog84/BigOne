@@ -9,27 +9,38 @@ public class LightTestScript : MonoBehaviour {
     public Transform player;
 
     public Light worldLight;
-    public Transform worldLightTransform;    
+    public Transform worldLightTransform;
+
+    public float Distance;
+    private bool onAnFaretto;
+
+    [Range(0.0f, 10.0f)]
+    public float range;
     // Update is called once per frame
     private void Start()
     {
         thisLight = this.GetComponent<Light>();
         thisTransform = this.GetComponent<Transform>();
+        Debug.Log(this.gameObject.name + "Ha coordinate: x" + thisTransform.position.x + "y: " + thisTransform.position.y + "z: " + thisTransform.position.z);
     }
 
     void Update()
     {
-       if (Vector3.Distance(player.position, thisTransform.transform.position) <= 10f)
+        Distance = Vector3.Distance(player.position, thisTransform.transform.position);
+        if (Distance <= range)
         {
-        worldLight.type=thisLight.type;
-        worldLightTransform.transform.position=thisTransform.transform.position;
+            worldLight.type = thisLight.type;
+            worldLightTransform.transform.position = thisTransform.transform.position;
             worldLightTransform.position += Vector3.up;
+            onAnFaretto = true;
         }
-        else
+        else if (onAnFaretto == false)
         {
             worldLight.type = LightType.Directional;
+            worldLightTransform.position = new Vector3(0.12f, 20.77f, 3.49f);
         }
     }
+}
  #region LightFollowPalyer
       /* public Light test;
     public Transform playerTransform;
@@ -64,4 +75,4 @@ public class LightTestScript : MonoBehaviour {
 
     }*/
     #endregion
-}
+

@@ -34,7 +34,10 @@ public class LightTestScript : MonoBehaviour {
             worldLightTransform.position += Vector3.up;
             onAnFaretto = true;
         }
-        else if (onAnFaretto == false)
+        else if (Distance > range)
+            onAnFaretto = false;
+
+            if (onAnFaretto == false)
         {
             worldLight.type = LightType.Directional;
             worldLightTransform.position = new Vector3(0.12f, 20.77f, 3.49f);

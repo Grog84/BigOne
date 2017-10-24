@@ -5,11 +5,13 @@ using UnityEngine;
 public class PushRaycast : MonoBehaviour {
 
     [HideInInspector] public Vector3[] objectRaycastsX;
-    [HideInInspector] public Vector3[] objectRaycastsZ
-        ;
+    [HideInInspector] public Vector3[] objectRaycastsZ;
+
     private float quarterHight;
     private float quarterWidth;
     private float quarterDepth;
+    [Range(-1f, 1f)]
+    public float offset;
 
     private void Awake()
     {
@@ -19,9 +21,11 @@ public class PushRaycast : MonoBehaviour {
         quarterWidth = transform.GetComponent<Collider>().bounds.size.x / 4;
         quarterDepth = transform.GetComponent<Collider>().bounds.size.z / 4;
 
-        objectRaycastsX[0] = new Vector3(-quarterWidth*2, -quarterHight  , 0);
-        objectRaycastsX[1] = new Vector3(0              , -quarterHight  , 0);
-        objectRaycastsX[2] = new Vector3(+quarterWidth*2, -quarterHight  , 0);
+        offset = -quarterHight;
+
+        objectRaycastsX[0] = new Vector3(-quarterWidth*2,        offset  , 0);
+        objectRaycastsX[1] = new Vector3(0              ,        offset  , 0);
+        objectRaycastsX[2] = new Vector3(+quarterWidth*2,        offset  , 0);
 
         objectRaycastsX[3] = new Vector3(-quarterWidth*2, 0              , 0);
         objectRaycastsX[4] = new Vector3(0              , 0              , 0);
@@ -46,4 +50,10 @@ public class PushRaycast : MonoBehaviour {
         objectRaycastsZ[8] = new Vector3(0, +quarterHight * 2, +quarterDepth * 2);
     }
 
+    private void Update()
+    {
+        objectRaycastsX[0] = new Vector3(-quarterWidth * 2, offset, 0);
+        objectRaycastsX[1] = new Vector3(0, offset, 0);
+        objectRaycastsX[2] = new Vector3(+quarterWidth * 2, offset, 0);
+    }
 }

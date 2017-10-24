@@ -4,12 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-enum CharacterActive { Boy, Mother}
-
 public class GMController : MonoBehaviour {
 
     // Transform of the active player
-    public Transform playerTransform;
+    public CharacterActive activePlayerAtStart;
+    public Transform[] playerTransform;
 
     // Needed for Singleton pattern 
     [HideInInspector] public static GMController instance = null;
@@ -27,6 +26,7 @@ public class GMController : MonoBehaviour {
 
     // Variables used in order to trigger transitions when the game is not active
     [HideInInspector] public bool isGameActive = false;
+    [HideInInspector] public CharacterActive isCharacterPlaying;
     [HideInInspector] public bool isFadeScreenVisible = true;
     private Image fadeEffect;
     
@@ -41,7 +41,7 @@ public class GMController : MonoBehaviour {
     [HideInInspector] public CheckPointManager m_CheckpointManager;
 
     // Character interface used to acces those methods requiring both Character controller and character stte machine controller
-    [HideInInspector] public CharacterInt m_CharacterInterface;
+    [HideInInspector] public CharacterInt[] m_CharacterInterfaces;
 
     void Awake() 
     {
@@ -57,12 +57,18 @@ public class GMController : MonoBehaviour {
         m_CheckpointManager = GetComponent<CheckPointManager>();
         fadeEffect = GameObject.Find("FadeEffect").GetComponent<Image>();
 
+        isCharacterPlaying = activePlayerAtStart;
     }
 
     private void Start()
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        m_CharacterInterface = player.GetComponent<CharacterInt>();
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        m_CharacterInterfaces = new CharacterInt[players.Length];
+        for (int i = 0; i < players.Length; i++)
+        {
+            m_CharacterInterfaces[i] = players[i].GetComponent<CharacterInt>();
+
+        }
 
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         allEnemiesTransform = new Transform[allEnemies.Length];
@@ -104,7 +110,6 @@ public class GMController : MonoBehaviour {
         fadeEffect.DOFade(0, fadeInTime);
         StartCoroutine(WaitAndActivate());
         isFadeScreenVisible = false;
-
     }
 
     private IEnumerator WaitAndActivate()
@@ -139,12 +144,6 @@ public class GMController : MonoBehaviour {
         m_CheckpointManager.LoadAllObj();
     }
 
-    //public void DefeatPlayer()
-    //{
-    //    //m_CharacterInterface.m_CharacterController.isDefeated = true;
-    //    StartCoroutine(WaitAndRestart());
-    //}
-
     public IEnumerator WaitDeathAnimation()
     {
         yield return new WaitForSeconds(deathAnimationTime);
@@ -160,7 +159,7 @@ public class GMController : MonoBehaviour {
         yield return StartCoroutine(WaitDeathAnimation());
         FadeOut();
         yield return StartCoroutine(WaitFadeOut());
-        m_CharacterInterface.RevivePlayer();
+        m_CharacterInterfaces[(int)isCharacterPlaying].RevivePlayer();
         LoadCheckpoint();
         FadeIn();
 

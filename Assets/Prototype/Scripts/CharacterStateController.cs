@@ -10,6 +10,7 @@ namespace StateMachine
     {
 
         public CharacterStats characterStats;
+        public CharacterActive thisCharacter;
 
         [HideInInspector] public State gameStartState;
         [HideInInspector] public State defeatedState;
@@ -26,7 +27,10 @@ namespace StateMachine
 
             m_CharacterController = GetComponent<_CharacterController>();
 
-            gameStartState = (State)Resources.Load("GameStart");
+            if (thisCharacter == CharacterActive.Boy)
+                gameStartState = (State)Resources.Load("GameStart_Boy");
+            else
+                gameStartState = (State)Resources.Load("GameStart_Mother");
             defeatedState = (State)Resources.Load("Defeated");
 
         }

@@ -16,7 +16,7 @@ namespace AI.Actions
 
         private void DefeatPlayr(EnemiesAIStateController controller)
         {
-            controller.characterInterface.DefeatPlayer();
+            controller.characterInterfaces[(int)GMController.instance.isCharacterPlaying].DefeatPlayer();
         }
     }
 }

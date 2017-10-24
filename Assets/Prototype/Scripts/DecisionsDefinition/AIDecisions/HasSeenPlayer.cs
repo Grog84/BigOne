@@ -13,7 +13,7 @@ namespace AI.Decisions
         {
             if (controller.m_AgentController.sightPercentage >= 100f)
             {
-                controller.m_AgentController.chaseTarget = GMController.instance.playerTransform;
+                controller.m_AgentController.chaseTarget = GMController.instance.playerTransform[(int)GMController.instance.isCharacterPlaying];
                 return true;
             }
             else

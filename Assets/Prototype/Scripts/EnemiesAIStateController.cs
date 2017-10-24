@@ -11,7 +11,7 @@ namespace StateMachine
 
         [HideInInspector] public _AgentController m_AgentController;
         [HideInInspector] public float stateTimer = 0f;
-        [HideInInspector] public CharacterInt characterInterface;
+        [HideInInspector] public CharacterInt[] characterInterfaces;
 
         [Space(5)]
         [Header("States For Saving")]
@@ -27,7 +27,7 @@ namespace StateMachine
 
         private void Start()
         {
-            characterInterface = GMController.instance.m_CharacterInterface;
+            characterInterfaces = GMController.instance.m_CharacterInterfaces;
         }
 
         public override void TransitionToState(State nextState)

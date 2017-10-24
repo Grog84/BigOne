@@ -11,6 +11,7 @@ namespace StateMachine
 
         [HideInInspector] public _AgentController m_AgentController;
         [HideInInspector] public float stateTimer = 0f;
+        [HideInInspector] public CharacterInt characterInterface;
 
         [Space(5)]
         [Header("States For Saving")]
@@ -22,6 +23,11 @@ namespace StateMachine
             base.Awake();
             lastActiveState = currentState;
             m_AgentController = GetComponent<_AgentController>();
+        }
+
+        private void Start()
+        {
+            characterInterface = GMController.instance.m_CharacterInterface;
         }
 
         public override void TransitionToState(State nextState)

@@ -1,24 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/InAir")]
-public class InAirAction : _Action
+namespace Character.Actions
 {
-
-    Vector3 m_Velocity;
-
-    public override void Execute(CharacterStateController controller)
-    {
-        AirbornMovement(controller);
-    }
-
-    private void AirbornMovement(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/InAir")]
+    public class InAirAction : _Action
     {
 
-        m_Velocity = controller.m_CharacterController.m_CharController.velocity;
-        m_Velocity.y -= controller.characterStats.m_Gravity * Time.deltaTime;
-        controller.m_CharacterController.m_CharController.Move(m_Velocity * Time.deltaTime);
-        controller.m_CharacterController.m_ForwardAmount = 0;
+        Vector3 m_Velocity;
+
+        public override void Execute(CharacterStateController controller)
+        {
+            AirbornMovement(controller);
+        }
+
+        private void AirbornMovement(CharacterStateController controller)
+        {
+
+            m_Velocity = controller.m_CharacterController.m_CharController.velocity;
+            m_Velocity.y -= controller.characterStats.m_Gravity * Time.deltaTime;
+            controller.m_CharacterController.m_CharController.Move(m_Velocity * Time.deltaTime);
+            controller.m_CharacterController.m_ForwardAmount = 0;
+        }
     }
 }

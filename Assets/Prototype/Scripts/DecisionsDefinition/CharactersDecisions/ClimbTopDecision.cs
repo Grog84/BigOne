@@ -1,30 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/Characters/ClimbTopDecision")]
-public class ClimbTopDecision : Decision
+namespace Character.Decisions
 {
-    public override bool Decide(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/ClimbTopDecision")]
+    public class ClimbTopDecision : Decision
     {
-        bool isClimbing = CheckIfClimbingTop(controller);
-        return isClimbing;
-    }
-
-    private bool CheckIfClimbingTop(CharacterStateController controller)
-    {
-        // Debug.Log(controller.m_CharacterController.isInClimbArea + " " + controller.m_CharacterController.isClimbDirectionRight + " " + Input.GetKeyDown(KeyCode.E));
-        if (controller.m_CharacterController.isInClimbArea && controller.m_CharacterController.isClimbDirectionRight && Input.GetKeyDown(KeyCode.E))
+        public override bool Decide(CharacterStateController controller)
         {
-            
-            return true;
+            bool isClimbing = CheckIfClimbingTop(controller);
+            return isClimbing;
         }
-        else
+
+        private bool CheckIfClimbingTop(CharacterStateController controller)
         {
-            return false;
+            // Debug.Log(controller.m_CharacterController.isInClimbArea + " " + controller.m_CharacterController.isClimbDirectionRight + " " + Input.GetKeyDown(KeyCode.E));
+            if (controller.m_CharacterController.isInClimbArea && controller.m_CharacterController.isClimbDirectionRight && Input.GetKeyDown(KeyCode.E))
+            {
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
-       
+
+
     }
-
-
 }

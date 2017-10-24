@@ -2,46 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cone : MonoBehaviour {
-
-    public ConeStats coneStats;
-    public bool isDebug;
-
-    private _AgentController m_AgentController;
-
-    private void Awake()
+namespace AI
+{
+    public class Cone : MonoBehaviour
     {
-        m_AgentController = GetComponentInParent<_AgentController>();
-    }
 
-    void Start() {
+        public ConeStats coneStats;
+        public bool isDebug;
 
-        transform.localScale.Set(coneStats.scaleX, coneStats.scaleY, coneStats.scaleZ);
-    }
+        private _AgentController m_AgentController;
 
-    private void Update()
-    {
-        if (isDebug)
+        private void Awake()
         {
+            m_AgentController = GetComponentInParent<_AgentController>();
+        }
+
+        void Start()
+        {
+
             transform.localScale.Set(coneStats.scaleX, coneStats.scaleY, coneStats.scaleZ);
         }
 
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
+        private void Update()
         {
-            m_AgentController.isPlayerInSight = true;
-        }
-    }
+            if (isDebug)
+            {
+                transform.localScale.Set(coneStats.scaleX, coneStats.scaleY, coneStats.scaleZ);
+            }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
+        }
+
+        private void OnTriggerEnter(Collider other)
         {
-            m_AgentController.isPlayerInSight = false;
+            if (other.tag == "Player")
+            {
+                m_AgentController.isPlayerInSight = true;
+            }
         }
-    }
 
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.tag == "Player")
+            {
+                m_AgentController.isPlayerInSight = false;
+            }
+        }
+
+    }
 }

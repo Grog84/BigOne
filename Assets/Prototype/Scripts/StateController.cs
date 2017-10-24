@@ -3,38 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-public class StateController : MonoBehaviour {
-
-    public State currentState;
-    public Decision checkIfGameActive;
-
-    [HideInInspector] public State inactiveState;  
-    [HideInInspector] public State remainState;
-
-    [HideInInspector] public float stateTimeElapsed;
-    [HideInInspector] public State lastActiveState;
-
-    protected bool isActive = true;
-
-    protected virtual void Awake()
+namespace StateMachine
+{
+    public class StateController : MonoBehaviour
     {
-        inactiveState = (State)Resources.Load("Inactive"); 
-        remainState = (State)Resources.Load("RemainInState");
-    }
 
-    // Update is called once per frame
-    public virtual void Update()
-    {
-    }
+        public State currentState;
+        public Decision checkIfGameActive;
 
-    public virtual void TransitionToState(State nextState)
-    {
-    }
+        [HideInInspector] public State inactiveState;  
+        [HideInInspector] public State remainState;
 
-    protected void OnExitState()
-    {
-        stateTimeElapsed = 0;
-    }
+        [HideInInspector] public float stateTimeElapsed;
+        [HideInInspector] public State lastActiveState;
 
+        protected bool isActive = true;
+
+        protected virtual void Awake()
+        {
+            inactiveState = (State)Resources.Load("Inactive"); 
+            remainState = (State)Resources.Load("RemainInState");
+        }
+
+        // Update is called once per frame
+        public virtual void Update()
+        {
+        }
+
+        public virtual void TransitionToState(State nextState)
+        {
+        }
+
+        protected void OnExitState()
+        {
+            stateTimeElapsed = 0;
+        }
+
+    }
 }

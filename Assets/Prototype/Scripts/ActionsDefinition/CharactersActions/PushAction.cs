@@ -1,58 +1,60 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Push")]
-public class PushAction : _Action
+namespace Character.Actions
 {
-    Vector3[] RaycastPoints;
-    float forward;
-    float backward;
-    float movement;
-
-
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Push")]
+    public class PushAction : _Action
     {
-        Push(controller);
-    }
+        Vector3[] RaycastPoints;
+        float forward;
+        float backward;
+        float movement;
 
-    private void Push(CharacterStateController controller)
-    {
-        
 
-        if (Vector3.Angle(controller.m_CharacterController.pushObject.transform.forward.normalized, controller.m_CharacterController.CharacterTansform.forward.normalized) <= 45 || 
-            Vector3.Angle(controller.m_CharacterController.pushObject.transform.forward.normalized, -controller.m_CharacterController.CharacterTansform.forward.normalized) <= 45)
+        public override void Execute(CharacterStateController controller)
         {
-            RaycastPoints = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().objectRaycastsX;
-        }
-        else
-        {
-            RaycastPoints = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().objectRaycastsZ;
+            Push(controller);
         }
 
-        for (int i = 0; i < RaycastPoints.Length; i++)
+        private void Push(CharacterStateController controller)
         {
-            Debug.DrawRay(controller.m_CharacterController.pushObject.transform.position + RaycastPoints[i], controller.m_CharacterController.CharacterTansform.forward, Color.red);
-            RaycastHit hit;
 
-            if (Physics.Raycast(controller.m_CharacterController.pushObject.transform.position +
-                RaycastPoints[i], controller.m_CharacterController.CharacterTansform.forward,
-                out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromPushableObstacle))
+
+            if (Vector3.Angle(controller.m_CharacterController.pushObject.transform.forward.normalized, controller.m_CharacterController.CharacterTansform.forward.normalized) <= 45 ||
+                Vector3.Angle(controller.m_CharacterController.pushObject.transform.forward.normalized, -controller.m_CharacterController.CharacterTansform.forward.normalized) <= 45)
             {
+                RaycastPoints = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().objectRaycastsX;
+            }
+            else
+            {
+                RaycastPoints = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().objectRaycastsZ;
+            }
 
+            for (int i = 0; i < RaycastPoints.Length; i++)
+            {
+                Debug.DrawRay(controller.m_CharacterController.pushObject.transform.position + RaycastPoints[i], controller.m_CharacterController.CharacterTansform.forward, Color.red);
+                RaycastHit hit;
 
-                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Default") || hit.transform.gameObject.layer == LayerMask.NameToLayer("Climbable") ||
-                          hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors"))
+                if (Physics.Raycast(controller.m_CharacterController.pushObject.transform.position +
+                    RaycastPoints[i], controller.m_CharacterController.CharacterTansform.forward,
+                    out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromPushableObstacle))
                 {
-                    Debug.Log("vedo ostacolo");
-                    controller.m_CharacterController.isPushLimit = true;
-                    Debug.Log(controller.m_CharacterController.isPushLimit);
-                }        
+
+
+                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Default") || hit.transform.gameObject.layer == LayerMask.NameToLayer("Climbable") ||
+                              hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors"))
+                    {
+                        Debug.Log("vedo ostacolo");
+                        controller.m_CharacterController.isPushLimit = true;
+                        Debug.Log(controller.m_CharacterController.isPushLimit);
+                    }
+
+                }
 
             }
-          
-        }
 
             if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
             {
@@ -93,7 +95,7 @@ public class PushAction : _Action
             }
 
             controller.m_CharacterController.m_ForwardAmount = movement;
-        
+
+        }
     }
 }
-

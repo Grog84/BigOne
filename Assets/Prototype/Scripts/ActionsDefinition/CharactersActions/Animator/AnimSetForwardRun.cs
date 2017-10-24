@@ -1,19 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/SetForwardRun")]
-public class AnimSetForwardRun : _Action
+namespace Character.Actions
 {
-
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/SetForwardRun")]
+    public class AnimSetForwardRun : _Action
     {
-        SetForwardAmount(controller);
-    }
 
-    private void SetForwardAmount(CharacterStateController controller)
-    {
-        controller.m_CharacterController.m_Animator.SetFloat("Forward", controller.m_CharacterController.m_ForwardAmount, 0.1f, Time.deltaTime);
-        //Debug.Log(controller.m_CharacterController.m_ForwardAmount);
+        public override void Execute(CharacterStateController controller)
+        {
+            SetForwardAmount(controller);
+        }
+
+        private void SetForwardAmount(CharacterStateController controller)
+        {
+            controller.m_CharacterController.m_Animator.SetFloat("Forward", controller.m_CharacterController.m_ForwardAmount, 0.1f, Time.deltaTime);
+            //Debug.Log(controller.m_CharacterController.m_ForwardAmount);
+        }
     }
 }

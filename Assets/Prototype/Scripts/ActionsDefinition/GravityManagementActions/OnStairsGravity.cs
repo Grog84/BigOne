@@ -1,17 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/OnStairsGravity")]
-public class OnStairsGravity : _Action
+namespace Character.Actions
 {
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/OnStairsGravity")]
+    public class OnStairsGravity : _Action
     {
-        onStairsGravity(controller);
-    }
+        public override void Execute(CharacterStateController controller)
+        {
+            onStairsGravity(controller);
+        }
 
-    public void onStairsGravity(CharacterStateController controller)
-    {
-        controller.characterStats.m_Gravity = controller.characterStats.m_StairsGravity;
+        public void onStairsGravity(CharacterStateController controller)
+        {
+            controller.characterStats.m_Gravity = controller.characterStats.m_StairsGravity;
+        }
     }
-}	
+}

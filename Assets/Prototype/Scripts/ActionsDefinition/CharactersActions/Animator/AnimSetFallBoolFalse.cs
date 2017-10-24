@@ -1,22 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateFall")]
-public class AnimSetFallBoolFalse : _Action
+namespace Character.Actions
 {
-
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateFall")]
+    public class AnimSetFallBoolFalse : _Action
     {
-        UpdateAnimatorForFall(controller);
-    }
 
-    private void UpdateAnimatorForFall(CharacterStateController controller)
-    {
-        
+        public override void Execute(CharacterStateController controller)
+        {
+            UpdateAnimatorForFall(controller);
+        }
+
+        private void UpdateAnimatorForFall(CharacterStateController controller)
+        {
+
             controller.m_CharacterController.m_Animator.SetBool("isFalling", false);
 
 
 
+        }
     }
 }

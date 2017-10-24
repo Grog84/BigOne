@@ -1,22 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/EndPush")]
-public class EndPushAction : _Action
+namespace Character.Actions
 {
-   
-
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/EndPush")]
+    public class EndPushAction : _Action
     {
-        EndPush(controller);
-    }
 
-    private void EndPush(CharacterStateController controller)
-    {
-        controller.m_CharacterController.isExitPush = true;
-        controller.m_CharacterController.isPushLimit = false;
+
+        public override void Execute(CharacterStateController controller)
+        {
+            EndPush(controller);
+        }
+
+        private void EndPush(CharacterStateController controller)
+        {
+            controller.m_CharacterController.isExitPush = true;
+            controller.m_CharacterController.isPushLimit = false;
+        }
     }
 }
 

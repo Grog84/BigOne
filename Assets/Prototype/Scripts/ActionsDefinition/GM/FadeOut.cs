@@ -1,19 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/GMActions/FadeOut")]
-public class FadeOut : _Action
+namespace GM.Actions
 {
-
-    public override void Execute(GMStateController controller)
-    {
-        StartFadeOut(controller);
-    }
-
-    private void StartFadeOut(GMStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/GMActions/FadeOut")]
+    public class FadeOut : _Action
     {
 
-        controller.m_GM.FadeOut();
+        public override void Execute(GMStateController controller)
+        {
+            StartFadeOut(controller);
+        }
+
+        private void StartFadeOut(GMStateController controller)
+        {
+
+            controller.m_GM.FadeOut();
+        }
     }
 }

@@ -1,33 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-
-[CreateAssetMenu(menuName = "Prototype/Decisions/Characters/EndClimbFallDecision")]
-public class EndClimbFallDecision : Decision
+namespace Character.Decisions
 {
-    public override bool Decide(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/EndClimbFallDecision")]
+    public class EndClimbFallDecision : Decision
     {
-        bool isClimbing = CheckIfClimbingFall(controller);
-        return isClimbing;
-    }
-
-    private bool CheckIfClimbingFall(CharacterStateController controller)
-    {
-        if (!controller.m_CharacterController.climbingTop && Input.GetKeyDown(KeyCode.E))
+        public override bool Decide(CharacterStateController controller)
         {
-
-
-            return true;
-
-
-        }
-        else
-        {
-            return false;
+            bool isClimbing = CheckIfClimbingFall(controller);
+            return isClimbing;
         }
 
+        private bool CheckIfClimbingFall(CharacterStateController controller)
+        {
+            if (!controller.m_CharacterController.climbingTop && Input.GetKeyDown(KeyCode.E))
+            {
+
+
+                return true;
+
+
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+
     }
-
-
 }

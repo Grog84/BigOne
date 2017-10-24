@@ -1,17 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/AIActions/LoadCheckPositionStats")]
-public class LoadCheckLastHeardStats : _Action {
-
-    public override void Execute(EnemiesAIStateController controller)
+namespace AI.Actions
+{
+    [CreateAssetMenu(menuName = "Prototype/AIActions/LoadCheckPositionStats")]
+    public class LoadCheckLastHeardStats : _Action
     {
-        LoadCheckPositionParams(controller);
-    }
 
-    private void LoadCheckPositionParams(EnemiesAIStateController controller)
-    {
-        controller.m_AgentController.UpdateStats("checkForNoise");
+        public override void Execute(EnemiesAIStateController controller)
+        {
+            LoadCheckPositionParams(controller);
+        }
+
+        private void LoadCheckPositionParams(EnemiesAIStateController controller)
+        {
+            controller.m_AgentController.UpdateStats("checkForNoise");
+        }
     }
 }

@@ -1,28 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/Characters/EndPushDecision")]
-public class EndPushDecision : Decision
+namespace Character.Decisions
 {
-    public override bool Decide(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/EndPushDecision")]
+    public class EndPushDecision : Decision
     {
-        bool isPushing = CheckIfEndPushing(controller);
-        return isPushing;
+        public override bool Decide(CharacterStateController controller)
+        {
+            bool isPushing = CheckIfEndPushing(controller);
+            return isPushing;
+        }
+
+        private bool CheckIfEndPushing(CharacterStateController controller)
+        {
+
+            if (controller.m_CharacterController.isInPushArea && controller.m_CharacterController.isPushDirectionRight && Input.GetKeyDown(KeyCode.E))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
     }
-
-    private bool CheckIfEndPushing(CharacterStateController controller)
-    {
-
-         if (controller.m_CharacterController.isInPushArea && controller.m_CharacterController.isPushDirectionRight && Input.GetKeyDown(KeyCode.E))
-         {
-            return true;
-         }
-         else
-         {
-            return false;
-         }
-
-    }
-        
 }

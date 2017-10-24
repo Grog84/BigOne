@@ -1,19 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Walk")]
-public class WalkAction : _Action
+namespace Character.Actions
 {
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Walk")]
+    public class WalkAction : _Action
     {
-        Walk(controller);
-    }
+        public override void Execute(CharacterStateController controller)
+        {
+            Walk(controller);
+        }
 
-    public void Walk (CharacterStateController controller)
-    {
-        controller.characterStats.m_MovementSpeed = controller.characterStats.m_WalkSpeed;
-    }
+        public void Walk(CharacterStateController controller)
+        {
+            controller.characterStats.m_MovementSpeed = controller.characterStats.m_WalkSpeed;
+        }
 
+    }
 }

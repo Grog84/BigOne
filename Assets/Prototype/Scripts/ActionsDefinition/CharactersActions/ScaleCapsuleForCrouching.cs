@@ -1,22 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/StateEnter/ScaleCapsuleForCrouching")]
-public class ScaleCapsuleForCrouching : _Action
+namespace Character.Actions
 {
-
-    public override void Execute(CharacterStateController controller)
-    {
-        ScaleCapsule(controller);
-    }
-
-
-    void ScaleCapsule(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/StateEnter/ScaleCapsuleForCrouching")]
+    public class ScaleCapsuleForCrouching : _Action
     {
 
-        controller.m_CharacterController.m_Capsule.height = controller.m_CharacterController.m_Capsule.height / 2f;
-        controller.m_CharacterController.m_Capsule.center = controller.m_CharacterController.m_Capsule.center / 2f;
-        
+        public override void Execute(CharacterStateController controller)
+        {
+            ScaleCapsule(controller);
+        }
+
+
+        void ScaleCapsule(CharacterStateController controller)
+        {
+
+            controller.m_CharacterController.m_Capsule.height = controller.m_CharacterController.m_Capsule.height / 2f;
+            controller.m_CharacterController.m_Capsule.center = controller.m_CharacterController.m_Capsule.center / 2f;
+
+        }
     }
 }

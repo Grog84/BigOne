@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/ActivateCrouch")]
-public class AnimSetCrouchBoolTrue : _Action
+namespace Character.Actions
 {
-
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/ActivateCrouch")]
+    public class AnimSetCrouchBoolTrue : _Action
     {
-        UpdateAnimatorForCrouch(controller);
-    }
 
-    private void UpdateAnimatorForCrouch(CharacterStateController controller)
-    {
-        controller.m_CharacterController.m_Animator.SetBool("Crouch", true);
+        public override void Execute(CharacterStateController controller)
+        {
+            UpdateAnimatorForCrouch(controller);
+        }
+
+        private void UpdateAnimatorForCrouch(CharacterStateController controller)
+        {
+            controller.m_CharacterController.m_Animator.SetBool("Crouch", true);
+        }
     }
 }

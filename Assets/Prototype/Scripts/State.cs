@@ -2,161 +2,165 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu (menuName = "Prototype/State")]
-public class State : ScriptableObject {
-
-    public _Action[] actions;
-    public _Action[] enterActions;
-    public _Action[] exitActions;
-    public Transition[] transitions;
-    public Color sceneGizmosColor = Color.gray;
-
-    // Every time we are calling this function we are evaluating all the actions and decisions connected to the state
-    public void UpdateState(CharacterStateController controller)
+namespace StateMachine
+{
+    [CreateAssetMenu(menuName = "Prototype/State")]
+    public class State : ScriptableObject
     {
-        DoActions(controller);
-        CheckTransitions(controller);
-    }
 
-    public void UpdateState(EnemiesAIStateController controller)
-    {
-        DoActions(controller);
-        CheckTransitions(controller);
-    }
+        public _Action[] actions;
+        public _Action[] enterActions;
+        public _Action[] exitActions;
+        public Transition[] transitions;
+        public Color sceneGizmosColor = Color.gray;
 
-    public void UpdateState(GMStateController controller)
-    {
-        DoActions(controller);
-        CheckTransitions(controller);
-    }
-
-    protected virtual void DoActions(CharacterStateController controller)
-    {
-        for (int i = 0; i < actions.Length; i++)
+        // Every time we are calling this function we are evaluating all the actions and decisions connected to the state
+        public void UpdateState(CharacterStateController controller)
         {
-            actions[i].Execute(controller);
+            DoActions(controller);
+            CheckTransitions(controller);
         }
-    }
 
-    protected virtual void DoActions(EnemiesAIStateController controller)
-    {
-        for (int i = 0; i < actions.Length; i++)
+        public void UpdateState(EnemiesAIStateController controller)
         {
-            actions[i].Execute(controller);
+            DoActions(controller);
+            CheckTransitions(controller);
         }
-    }
 
-    protected virtual void DoActions(GMStateController controller)
-    {
-        for (int i = 0; i < actions.Length; i++)
+        public void UpdateState(GMStateController controller)
         {
-            actions[i].Execute(controller);
+            DoActions(controller);
+            CheckTransitions(controller);
         }
-    }
 
-    private void CheckTransitions(CharacterStateController controller)
-    {
-        for (int i = 0; i < transitions.Length; i++)
+        protected virtual void DoActions(CharacterStateController controller)
         {
-            bool decisionSucceeded = transitions[i].decision.Decide(controller);
-
-            if (decisionSucceeded)
+            for (int i = 0; i < actions.Length; i++)
             {
-                if (transitions[i].trueState == null)
+                actions[i].Execute(controller);
+            }
+        }
+
+        protected virtual void DoActions(EnemiesAIStateController controller)
+        {
+            for (int i = 0; i < actions.Length; i++)
+            {
+                actions[i].Execute(controller);
+            }
+        }
+
+        protected virtual void DoActions(GMStateController controller)
+        {
+            for (int i = 0; i < actions.Length; i++)
+            {
+                actions[i].Execute(controller);
+            }
+        }
+
+        private void CheckTransitions(CharacterStateController controller)
+        {
+            for (int i = 0; i < transitions.Length; i++)
+            {
+                bool decisionSucceeded = transitions[i].decision.Decide(controller);
+
+                if (decisionSucceeded)
                 {
-                    Debug.Log("ecco");
-                    Debug.Log(this);
+                    if (transitions[i].trueState == null)
+                    {
+                        Debug.Log("ecco");
+                        Debug.Log(this);
+                    }
+                    controller.TransitionToState(transitions[i].trueState);
                 }
-                controller.TransitionToState(transitions[i].trueState);
+                else
+                {
+                    if (transitions[i].falseState == null)
+                        Debug.Log("ecco");
+                    controller.TransitionToState(transitions[i].falseState);
+                }
             }
-            else
+        }
+
+        private void CheckTransitions(EnemiesAIStateController controller)
+        {
+            for (int i = 0; i < transitions.Length; i++)
             {
-                if (transitions[i].falseState == null)
-                    Debug.Log("ecco");
-                controller.TransitionToState(transitions[i].falseState);
+                bool decisionSucceeded = transitions[i].decision.Decide(controller);
+
+                if (decisionSucceeded)
+                {
+                    controller.TransitionToState(transitions[i].trueState);
+                }
+                else
+                {
+                    controller.TransitionToState(transitions[i].falseState);
+                }
             }
         }
-    }
 
-    private void CheckTransitions(EnemiesAIStateController controller)
-    {
-        for (int i = 0; i < transitions.Length; i++)
+        private void CheckTransitions(GMStateController controller)
         {
-            bool decisionSucceeded = transitions[i].decision.Decide(controller);
-
-            if (decisionSucceeded)
+            for (int i = 0; i < transitions.Length; i++)
             {
-                controller.TransitionToState(transitions[i].trueState);
+                bool decisionSucceeded = transitions[i].decision.Decide(controller);
+
+                if (decisionSucceeded)
+                {
+                    controller.TransitionToState(transitions[i].trueState);
+                }
+                else
+                {
+                    controller.TransitionToState(transitions[i].falseState);
+                }
             }
-            else
+        }
+
+        public void OnExitState(CharacterStateController controller)
+        {
+            for (int i = 0; i < exitActions.Length; i++)
             {
-                controller.TransitionToState(transitions[i].falseState);
+                exitActions[i].Execute(controller);
             }
         }
-    }
 
-    private void CheckTransitions(GMStateController controller)
-    {
-        for (int i = 0; i < transitions.Length; i++)
+        public void OnExitState(EnemiesAIStateController controller)
         {
-            bool decisionSucceeded = transitions[i].decision.Decide(controller);
-
-            if (decisionSucceeded)
+            for (int i = 0; i < exitActions.Length; i++)
             {
-                controller.TransitionToState(transitions[i].trueState);
+                exitActions[i].Execute(controller);
             }
-            else
+        }
+
+        public void OnExitState(GMStateController controller)
+        {
+            for (int i = 0; i < exitActions.Length; i++)
             {
-                controller.TransitionToState(transitions[i].falseState);
+                exitActions[i].Execute(controller);
             }
         }
-    }
 
-    public void OnExitState(CharacterStateController controller)
-    {
-        for (int i = 0; i < exitActions.Length; i++)
+        public void OnEnterState(CharacterStateController controller)
         {
-            exitActions[i].Execute(controller);
+            for (int i = 0; i < enterActions.Length; i++)
+            {
+                enterActions[i].Execute(controller);
+            }
         }
-    }
 
-    public void OnExitState(EnemiesAIStateController controller)
-    {
-        for (int i = 0; i < exitActions.Length; i++)
+        public void OnEnterState(EnemiesAIStateController controller)
         {
-            exitActions[i].Execute(controller);
+            for (int i = 0; i < enterActions.Length; i++)
+            {
+                enterActions[i].Execute(controller);
+            }
         }
-    }
 
-    public void OnExitState(GMStateController controller)
-    {
-        for (int i = 0; i < exitActions.Length; i++)
+        public void OnEnterState(GMStateController controller)
         {
-            exitActions[i].Execute(controller);
-        }
-    }
-
-    public void OnEnterState(CharacterStateController controller)
-    {
-        for (int i = 0; i < enterActions.Length; i++)
-        {
-            enterActions[i].Execute(controller);
-        }
-    }
-
-    public void OnEnterState(EnemiesAIStateController controller)
-    {
-        for (int i = 0; i < enterActions.Length; i++)
-        {
-            enterActions[i].Execute(controller);
-        }
-    }
-
-    public void OnEnterState(GMStateController controller)
-    {
-        for (int i = 0; i < enterActions.Length; i++)
-        {
-            enterActions[i].Execute(controller);
+            for (int i = 0; i < enterActions.Length; i++)
+            {
+                enterActions[i].Execute(controller);
+            }
         }
     }
 }

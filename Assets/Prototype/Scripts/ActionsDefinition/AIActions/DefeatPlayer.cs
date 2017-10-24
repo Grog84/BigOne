@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/AIActions/DefeatPlayer")]
-public class DefeatPlayer : _Action
+namespace AI.Actions
 {
-
-    public override void Execute(EnemiesAIStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/AIActions/DefeatPlayer")]
+    public class DefeatPlayer : _Action
     {
-        DefeatPlayr(controller);
-    }
 
-    private void DefeatPlayr(EnemiesAIStateController controller)
-    {
-        GMController.instance.DefeatPlayer();
+        public override void Execute(EnemiesAIStateController controller)
+        {
+            DefeatPlayr(controller);
+        }
+
+        private void DefeatPlayr(EnemiesAIStateController controller)
+        {
+            GMController.instance.DefeatPlayer();
+        }
     }
 }

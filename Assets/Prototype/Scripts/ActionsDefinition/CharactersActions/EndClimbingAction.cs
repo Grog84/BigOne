@@ -2,23 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/EndClimbAction")]
-public class EndClimbingAction : _Action
+namespace Character.Actions
 {
-
-
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/EndClimbAction")]
+    public class EndClimbingAction : _Action
     {
-        EndClimb(controller);
-    }
 
-    private void EndClimb(CharacterStateController controller)
-    {
-        if (controller.m_CharacterController.climbingTop)
-        { 
-            controller.m_CharacterController.endClimbAnchor = controller.m_CharacterController.climbCollider.transform.parent.transform.GetChild(4);
-            controller.m_CharacterController.startClimbAnimationEnd = true;
+
+        public override void Execute(CharacterStateController controller)
+        {
+            EndClimb(controller);
+        }
+
+        private void EndClimb(CharacterStateController controller)
+        {
+            if (controller.m_CharacterController.climbingTop)
+            {
+                controller.m_CharacterController.endClimbAnchor = controller.m_CharacterController.climbCollider.transform.parent.transform.GetChild(4);
+                controller.m_CharacterController.startClimbAnimationEnd = true;
+            }
         }
     }
 }

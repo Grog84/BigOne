@@ -1,19 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateStartPush")]
-public class AnimSetStartPushBoolFalse : _Action
+namespace Character.Actions
 {
-
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateStartPush")]
+    public class AnimSetStartPushBoolFalse : _Action
     {
-        UpdateAnimatorForStartPush(controller);
-    }
 
-    private void UpdateAnimatorForStartPush(CharacterStateController controller)
-    {
-        controller.m_CharacterController.m_Animator.SetBool("isStartingPush", false);
-       // Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isStartingPush"));
+        public override void Execute(CharacterStateController controller)
+        {
+            UpdateAnimatorForStartPush(controller);
+        }
+
+        private void UpdateAnimatorForStartPush(CharacterStateController controller)
+        {
+            controller.m_CharacterController.m_Animator.SetBool("isStartingPush", false);
+            // Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isStartingPush"));
+        }
     }
 }

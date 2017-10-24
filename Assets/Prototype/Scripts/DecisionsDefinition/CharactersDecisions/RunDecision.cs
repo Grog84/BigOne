@@ -1,13 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/Characters/Run")]
-public class RunDecision : Decision {
-
-    public override bool Decide(CharacterStateController controller)
+namespace Character.Decisions
+{
+    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/Run")]
+    public class RunDecision : Decision
     {
-         return Input.GetButton("Run");
-    }
 
+        public override bool Decide(CharacterStateController controller)
+        {
+            return Input.GetButton("Run");
+        }
+
+    }
 }

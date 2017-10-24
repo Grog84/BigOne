@@ -2,25 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Jump")]
-public class JumpAction_old : _Action
+namespace Character.Actions
 {
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Jump")]
+    public class JumpAction_old : _Action
     {
-        Jump(controller);
-    }
-
-    private void Jump(CharacterStateController controller)
-    {
-        bool m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
-
-        if (m_Jump)
+        public override void Execute(CharacterStateController controller)
         {
-            // jump!
-            controller.m_CharacterController.m_Rigidbody.velocity = new Vector3(controller.m_CharacterController.m_Rigidbody.velocity.x,
-                controller.characterStats.m_JumpPower, controller.m_CharacterController.m_Rigidbody.velocity.z);
-            controller.characterStats.m_GroundCheckDistance = 0.1f;
+            Jump(controller);
+        }
+
+        private void Jump(CharacterStateController controller)
+        {
+            bool m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
+
+            if (m_Jump)
+            {
+                // jump!
+                controller.m_CharacterController.m_Rigidbody.velocity = new Vector3(controller.m_CharacterController.m_Rigidbody.velocity.x,
+                    controller.characterStats.m_JumpPower, controller.m_CharacterController.m_Rigidbody.velocity.z);
+                controller.characterStats.m_GroundCheckDistance = 0.1f;
+            }
         }
     }
 }

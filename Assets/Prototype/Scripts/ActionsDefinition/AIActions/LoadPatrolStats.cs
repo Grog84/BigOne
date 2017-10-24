@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/AIActions/LoadPatrolStats")]
-public class LoadPatrolStats : _Action
+namespace AI.Actions
 {
-
-    public override void Execute(EnemiesAIStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/AIActions/LoadPatrolStats")]
+    public class LoadPatrolStats : _Action
     {
-        LoadPatrolParams(controller);
-    }
 
-    private void LoadPatrolParams(EnemiesAIStateController controller)
-    {
-        controller.m_AgentController.UpdateStats("patrol");
+        public override void Execute(EnemiesAIStateController controller)
+        {
+            LoadPatrolParams(controller);
+        }
+
+        private void LoadPatrolParams(EnemiesAIStateController controller)
+        {
+            controller.m_AgentController.UpdateStats("patrol");
+        }
     }
 }

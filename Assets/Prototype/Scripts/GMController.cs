@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+
 public class GMController : MonoBehaviour {
 
     public Transform playerTransform;
@@ -18,8 +19,8 @@ public class GMController : MonoBehaviour {
     [HideInInspector] public bool isGameActive = false;
     [HideInInspector] public CheckPointManager m_CheckpointManager;
 
-    [HideInInspector] public _CharacterController charController;
-    [HideInInspector] public CharacterStateController charStateController;
+    [HideInInspector] public CharacterInt m_CharacterInterface;
+    //[HideInInspector] public CharacterStateController charStateController;
 
     private Image fadeEffect;
 
@@ -46,8 +47,8 @@ public class GMController : MonoBehaviour {
         m_CheckpointManager = GetComponent<CheckPointManager>();
 
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        charController = player.GetComponent<_CharacterController>();
-        charStateController = player.GetComponent<CharacterStateController>();
+        //m_CharacterInterface = player.GetComponent<CharacterInterface>();
+        //charStateController = player.GetComponent<CharacterStateController>();
 
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         allEnemiesTransform = new Transform[allEnemies.Length];
@@ -127,32 +128,35 @@ public class GMController : MonoBehaviour {
 
     public void LoadCheckpoint()
     {
-        //FadeOut();
         m_CheckpointManager.LoadAllObj();
-        //FadeIn();
     }
 
     public void DefeatPlayer()
     {
-        charController.isDefeated = true;
+        //m_CharacterInterface.m_CharacterController.isDefeated = true;
         StartCoroutine(WaitAndRestart());
     }
 
-    public void RevivePlayer()
-    {
-        charController.isDefeated = false;
-        charController.m_Animator.SetFloat("Forward", 0f);
-        charStateController.TransitionToState(charStateController.gameStartState);
-    }
-
-    private IEnumerator WaitAndRestart()
+    public IEnumerator WaitDeathAnimation()
     {
         yield return new WaitForSeconds(deathAnimationTime);
-        FadeOut();
+    }
+
+    public IEnumerator WaitFadeOut()
+    {
         yield return new WaitForSeconds(fadeOutTime);
-        RevivePlayer();
+    }
+
+    public IEnumerator WaitAndRestart()
+    {
+        yield return StartCoroutine(WaitDeathAnimation());
+        FadeOut();
+        yield return StartCoroutine(WaitFadeOut());
+        m_CharacterInterface.RevivePlayer();
         LoadCheckpoint();
         FadeIn();
 
     }
 }
+
+

@@ -1,18 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/ActivateStartClimb")]
-public class AnimSetStartClimbBoolTrue : _Action
+namespace Character.Actions
 {
-
-    public override void Execute(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/ActivateStartClimb")]
+    public class AnimSetStartClimbBoolTrue : _Action
     {
-        UpdateAnimatorForClimb(controller);
-    }
 
-    private void UpdateAnimatorForClimb(CharacterStateController controller)
-    {
-        controller.m_CharacterController.m_Animator.SetBool("isStartClimb", true);
+        public override void Execute(CharacterStateController controller)
+        {
+            UpdateAnimatorForClimb(controller);
+        }
+
+        private void UpdateAnimatorForClimb(CharacterStateController controller)
+        {
+            controller.m_CharacterController.m_Animator.SetBool("isStartClimb", true);
+        }
     }
 }

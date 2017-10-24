@@ -1,33 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/Characters/EndExitPushDecision")]
-public class EndExitPushDecision : Decision
+namespace Character.Decisions
 {
-    public override bool Decide(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/EndExitPushDecision")]
+    public class EndExitPushDecision : Decision
     {
-        bool isPushing = CheckIfEndPushing(controller);
-        return isPushing;
-    }
+        public override bool Decide(CharacterStateController controller)
+        {
+            bool isPushing = CheckIfEndPushing(controller);
+            return isPushing;
+        }
 
-    private bool CheckIfEndPushing(CharacterStateController controller)
-    {
-
-        if (!controller.m_CharacterController.isExitPush)
+        private bool CheckIfEndPushing(CharacterStateController controller)
         {
 
-            return true;
+            if (!controller.m_CharacterController.isExitPush)
+            {
+
+                return true;
+
+
+            }
+            else
+            {
+                return false;
+            }
 
 
         }
-        else
-        {
-            return false;
-        }
 
 
     }
-
-
 }

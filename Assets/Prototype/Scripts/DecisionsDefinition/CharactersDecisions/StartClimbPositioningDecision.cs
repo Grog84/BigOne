@@ -1,33 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
-[CreateAssetMenu(menuName = "Prototype/Decisions/Characters/StartClimbPositioningDecision")]
-public class StartClimbPositioningDecision : Decision
+namespace Character.Decisions
 {
-    public override bool Decide(CharacterStateController controller)
+    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/StartClimbPositioningDecision")]
+    public class StartClimbPositioningDecision : Decision
     {
-        bool isPushing = CheckIfEndPushing(controller);
-        return isPushing;
-    }
+        public override bool Decide(CharacterStateController controller)
+        {
+            bool isPushing = CheckIfEndPushing(controller);
+            return isPushing;
+        }
 
-    private bool CheckIfEndPushing(CharacterStateController controller)
-    {
-       
-         if (!controller.m_CharacterController.startClimbAnimationBottom && !controller.m_CharacterController.startClimbAnimationTop)
-         {
+        private bool CheckIfEndPushing(CharacterStateController controller)
+        {
+
+            if (!controller.m_CharacterController.startClimbAnimationBottom && !controller.m_CharacterController.startClimbAnimationTop)
+            {
 
                 return true;
 
 
-         }
-         else
-         {
+            }
+            else
+            {
                 return false;
-         }
-        
-        
+            }
+
+
+        }
+
+
     }
-
-
 }

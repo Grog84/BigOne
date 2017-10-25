@@ -5,8 +5,8 @@ using StateMachine;
 
 namespace GM.Decisions
 {
-    [CreateAssetMenu(menuName = "Prototype/Decisions/GM/FadeOver")]
-    public class FadeOver : Decision
+    [CreateAssetMenu(menuName = "Prototype/Decisions/GM/FadeTransparent")]
+    public class FadeScreenTransparent : Decision
     {
 
         public override bool Decide(GMStateController controller)

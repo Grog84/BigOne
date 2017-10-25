@@ -35,10 +35,9 @@ public class CameraScript : MonoBehaviour
 
 
 
-       private void Start()
+    private void Start()
 	{
-        lookAt.GetComponentsInParent<Animation>();
-		clipPointPositionArray = new Vector3[5];
+ 		clipPointPositionArray = new Vector3[5];
 		camTransform = transform;
 		cam = Camera.main;
         Cursor.lockState = CursorLockMode.Locked;

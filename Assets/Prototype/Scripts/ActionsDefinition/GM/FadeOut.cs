@@ -17,7 +17,8 @@ namespace GM.Actions
 
         private void StartFadeOut(GMStateController controller)
         {
-            controller.m_GM.fadeEffect.DOFade(1, controller.m_GM.fadeInTime);
+            Debug.Log("Started Fading Out");
+            controller.m_GM.fadeEffect.DOFade(1, controller.m_GM.fadeOutTime);
         }
     }
 }

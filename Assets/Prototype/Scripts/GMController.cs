@@ -8,7 +8,6 @@ public class GMController : MonoBehaviour {
 
     // Transform of the active player
     public CharacterActive activePlayerAtStart;
-    public Transform[] playerTransform;
 
     // Needed for Singleton pattern 
     [HideInInspector] public static GMController instance = null;
@@ -26,7 +25,7 @@ public class GMController : MonoBehaviour {
 
     // Variables used in order to trigger transitions when the game is not active
     public bool isGameActive = false;
-    [HideInInspector] public CharacterActive isCharacterPlaying;
+    public CharacterActive isCharacterPlaying;
     //[HideInInspector] public bool isFadeScreenVisible = true;
     [HideInInspector] public Image fadeEffect;
     
@@ -42,6 +41,7 @@ public class GMController : MonoBehaviour {
 
     // Character interface used to acces those methods requiring both Character controller and character stte machine controller
     [HideInInspector] public CharacterInt[] m_CharacterInterfaces;
+    [HideInInspector] public Transform[] playerTransform;
 
     // Main Camera
     [HideInInspector] public CameraScript m_MainCamera;
@@ -67,12 +67,20 @@ public class GMController : MonoBehaviour {
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         m_CharacterInterfaces = new CharacterInt[players.Length];
+        playerTransform = new Transform[players.Length];
+
         for (int i = 0; i < players.Length; i++)
         {
-            if(players[i].name == "Boy")
+            if (players[i].name == "Boy")
+            {
                 m_CharacterInterfaces[(int)CharacterActive.Boy] = players[i].GetComponent<CharacterInt>();
-            else if(players[i].name == "Mother")
+                playerTransform[(int)CharacterActive.Boy] = players[i].transform;
+            }
+            else if (players[i].name == "Mother")
+            {
                 m_CharacterInterfaces[(int)CharacterActive.Mother] = players[i].GetComponent<CharacterInt>();
+                playerTransform[(int)CharacterActive.Mother] = players[i].transform;
+            }
         }
 
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -167,6 +175,11 @@ public class GMController : MonoBehaviour {
     //    LoadCheckpoint();
     //    FadeIn();
 
+    //}
+
+    //private void Update()
+    //{
+    //    Debug.Log(fadeEffect.color.a);
     //}
 }
 

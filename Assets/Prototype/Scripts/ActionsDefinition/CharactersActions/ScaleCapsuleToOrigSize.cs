@@ -18,8 +18,8 @@ namespace Character.Actions
         void ScaleCapsule(CharacterStateController controller)
         {
 
-            controller.m_CharacterController.m_Capsule.height = controller.m_CharacterController.m_Capsule.height * 2f;
-            controller.m_CharacterController.m_Capsule.center = controller.m_CharacterController.m_Capsule.center * 2f;
+            controller.m_CharacterController.m_CharController.height = controller.characterStats.standingColliderHeightDimension;
+            controller.m_CharacterController.m_CharController.center = new Vector3(0, controller.characterStats.standingColliderYOffset, 0);
 
         }
     }

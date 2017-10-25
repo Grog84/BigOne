@@ -25,6 +25,7 @@ namespace StateMachine
             }
             else
             {
+                //Debug.Log("asdjpaojss");
                 isOnTheGround = false;
             }
 
@@ -49,11 +50,12 @@ namespace StateMachine
             // Debug.Log(Physics.Raycast(controller.m_CharacterController.CharacterTansform.position + Vector3.up * offset, Vector3.down, out hitInfo, 0.15f));
             if (Physics.Raycast(controller.m_CharacterController.CharacterTansform.position + Vector3.up * verticalMainOffset, Vector3.down, out hitInfo, controller.characterStats.m_GroundCheckDistance))
             {
-                hits[0] = true;
+                //hits[0] = true;
 
             }
             else
             {
+                //Debug.Log("1");
                 hits[0] = false;
             }
 
@@ -63,6 +65,7 @@ namespace StateMachine
             }
             else
             {
+                //Debug.Log("2");
                 hits[1] = false;
             }
 
@@ -72,6 +75,7 @@ namespace StateMachine
             }
             else
             {
+                //Debug.Log("3");
                 hits[2] = false;
             }
 
@@ -81,6 +85,7 @@ namespace StateMachine
             }
             else
             {
+               // Debug.Log("4");
                 hits[3] = false;
             }
 
@@ -90,6 +95,7 @@ namespace StateMachine
             }
             else
             {
+               // Debug.Log("5");
                 hits[4] = false;
             }
 

@@ -47,8 +47,7 @@ namespace Character
         [HideInInspector] public Transform m_Camera;                   // A reference to the main camera in the scenes transform
         [HideInInspector] public Transform CharacterTansform;          // A reference to the character assigned to the state controller transform
         [HideInInspector] public Rigidbody m_Rigidbody;                // A reference to the rigidbody
-        [HideInInspector] public CapsuleCollider m_Capsule;            // A reference to the capsule collider
-        [HideInInspector] public CharacterController m_CharController;
+        [HideInInspector] public CharacterController m_CharController; // A reference to the Character controller component
 
         [HideInInspector] public GameObject climbCollider;
         [HideInInspector] public Transform climbAnchorTop;

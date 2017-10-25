@@ -16,7 +16,6 @@ namespace GM.Actions
 
         private void Revive(GMStateController controller)
         {
-
             controller.m_GM.m_CharacterInterfaces[(int)controller.m_GM.isCharacterPlaying].RevivePlayer(); ;
         }
     }

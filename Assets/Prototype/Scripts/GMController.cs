@@ -66,8 +66,10 @@ public class GMController : MonoBehaviour {
         m_CharacterInterfaces = new CharacterInt[players.Length];
         for (int i = 0; i < players.Length; i++)
         {
-            m_CharacterInterfaces[i] = players[i].GetComponent<CharacterInt>();
-
+            if(players[i].name == "Boy")
+                m_CharacterInterfaces[(int)CharacterActive.Boy] = players[i].GetComponent<CharacterInt>();
+            else if(players[i].name == "Mother")
+                m_CharacterInterfaces[(int)CharacterActive.Mother] = players[i].GetComponent<CharacterInt>();
         }
 
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");

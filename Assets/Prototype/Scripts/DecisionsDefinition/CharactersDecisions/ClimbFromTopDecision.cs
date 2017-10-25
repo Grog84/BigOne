@@ -16,7 +16,7 @@ namespace Character.Decisions
 
         private bool CheckIfClimbingFromTopDecision(CharacterStateController controller)
         {
-            if (controller.m_CharacterController.isInClimbArea && controller.m_CharacterController.climbingTop && Input.GetKeyDown(KeyCode.E))
+            if (controller.m_CharacterController.isInClimbArea && controller.m_CharacterController.climbingTop && Input.GetButtonDown("Interact"))
             {
 
                 return true;

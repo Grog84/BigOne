@@ -37,6 +37,7 @@ public class CameraScript : MonoBehaviour
 
     private void Start()
 	{
+        SwitchLookAt();
  		clipPointPositionArray = new Vector3[5];
 		camTransform = transform;
 		cam = Camera.main;

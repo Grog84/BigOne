@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using StateMachine;
+using DG.Tweening;
 
 namespace GM.Actions
 {
@@ -16,8 +17,7 @@ namespace GM.Actions
 
         private void StartFadeOut(GMStateController controller)
         {
-
-            controller.m_GM.FadeOut();
+            controller.m_GM.fadeEffect.DOFade(1, controller.m_GM.fadeInTime);
         }
     }
 }

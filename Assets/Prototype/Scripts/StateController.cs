@@ -11,7 +11,7 @@ namespace StateMachine
         public State currentState;
         public Decision checkIfGameActive;
 
-        [HideInInspector] public State inactiveState;  
+        [HideInInspector] public State inactiveState; 
         [HideInInspector] public State remainState;
 
         [HideInInspector] public float stateTimeElapsed;

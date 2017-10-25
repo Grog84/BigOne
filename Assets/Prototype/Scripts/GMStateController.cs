@@ -11,6 +11,7 @@ namespace StateMachine
 
         protected override void Awake()
         {
+            base.Awake();
             m_GM = GetComponent<GMController>();
         }
 

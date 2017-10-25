@@ -5,19 +5,17 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    public class WalkOnStairs : MonoBehaviour
+    [CreateAssetMenu(menuName = "Prototype/CharactersActions/WalkOnStairs")]
+    public class WalkOnStairs : _Action
     {
-
-        // Use this for initialization
-        void Start()
+        public override void Execute(CharacterStateController controller)
         {
-
+            WalkOnStairsSpeed(controller);
         }
 
-        // Update is called once per frame
-        void Update()
+        public void WalkOnStairsSpeed(CharacterStateController controller)
         {
-
+            controller.characterStats.m_MovementSpeed = controller.characterStats.m_WalkOnStairsSpeed;
         }
     }
 }

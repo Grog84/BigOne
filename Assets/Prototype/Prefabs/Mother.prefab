@@ -36,6 +36,7 @@ GameObject:
   - component: {fileID: 4793200518670394}
   - component: {fileID: 95803349612443494}
   - component: {fileID: 143334455943176234}
+  - component: {fileID: 114632749769169098}
   - component: {fileID: 114101064156900452}
   - component: {fileID: 114347872472351318}
   - component: {fileID: 114207358478277556}
@@ -1932,7 +1933,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1039286497789842}
   m_LocalRotation: {x: 0, y: 0.91354537, z: -0, w: -0.40673694}
-  m_LocalPosition: {x: -2.0152519, y: -0.62, z: -25.480875}
+  m_LocalPosition: {x: -2.6990452, y: -0.6, z: -21.697395}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4329025743024176}
@@ -2800,13 +2801,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: {fileID: 11400000, guid: 1e556dbe00d57724da73f57d7158196e, type: 2}
-  checkIfGameActive: {fileID: 11400000, guid: bf3a05a8f8153d648af2b0cbbb1a72c7, type: 2}
+  checkIfGameActive: {fileID: 11400000, guid: 28eb9a2bd27c75b4eaac1c35d0d28f2f, type: 2}
   inactiveState: {fileID: 0}
   remainState: {fileID: 0}
   stateTimeElapsed: 0
   lastActiveState: {fileID: 0}
   characterStats: {fileID: 11400000, guid: 6548a679fde78b44d9641d8ff222c908, type: 2}
+<<<<<<< HEAD
   thisCharacter: 0
+=======
+  thisCharacter: 1
+>>>>>>> origin/master
   gameStartState: {fileID: 0}
   defeatedState: {fileID: 0}
   m_CharacterController: {fileID: 0}
@@ -2824,11 +2829,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CharController: {fileID: 0}
   m_CharStateController: {fileID: 0}
+<<<<<<< HEAD
 --- !u!114 &114642765387904924
+=======
+--- !u!114 &114632749769169098
+>>>>>>> origin/master
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
+<<<<<<< HEAD
   m_GameObject: {fileID: 1621253975633662}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -2840,6 +2850,19 @@ MonoBehaviour:
   targets: []
   maxHeadWeight: 0.7
   headClamp: 0
+=======
+  m_GameObject: {fileID: 1039286497789842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf2c17d2f148db4087b972d78f03cda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveObjName: 
+  savePosition: 1
+  saveRotation: 0
+  setOnAwake: 0
+  memorizeOnClose: 1
+>>>>>>> origin/master
 --- !u!137 &137886494971596152
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

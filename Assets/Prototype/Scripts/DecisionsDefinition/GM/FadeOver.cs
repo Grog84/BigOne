@@ -11,7 +11,7 @@ namespace GM.Decisions
 
         public override bool Decide(GMStateController controller)
         {
-            return controller.m_GM.isFadeScreenVisible;
+            return controller.m_GM.fadeEffect.color.a == 0;
         }
     }
 }

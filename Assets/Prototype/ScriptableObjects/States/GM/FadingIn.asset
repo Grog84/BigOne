@@ -9,14 +9,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75ffedece9bcbbd4baec2ae9d1095f4c, type: 3}
-  m_Name: SceneStart
+  m_Name: FadingIn
   m_EditorClassIdentifier: 
-  actions:
-  - {fileID: 11400000, guid: 10c296a41e1209541a4295b646b6e7ed, type: 2}
+  actions: []
   enterActions: []
-  exitActions: []
+  exitActions:
+  - {fileID: 11400000, guid: 8eb2fd8cf126e264f987236b77659161, type: 2}
   transitions:
-  - decision: {fileID: 11400000, guid: 32dfffa2d0868134997237385ad476ec, type: 2}
-    trueState: {fileID: 11400000, guid: a09be78e920c3e54dabead7a04ee2b91, type: 2}
-    falseState: {fileID: 0}
+  - decision: {fileID: 11400000, guid: d4be56cbad1a3a84686df9d1cebd8008, type: 2}
+    trueState: {fileID: 11400000, guid: c0c590ee287cfa747afa366e3fa58c0b, type: 2}
+    falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
   sceneGizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

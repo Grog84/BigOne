@@ -27,8 +27,8 @@ public class GMController : MonoBehaviour {
     // Variables used in order to trigger transitions when the game is not active
     [HideInInspector] public bool isGameActive = false;
     [HideInInspector] public CharacterActive isCharacterPlaying;
-    [HideInInspector] public bool isFadeScreenVisible = true;
-    private Image fadeEffect;
+    //[HideInInspector] public bool isFadeScreenVisible = true;
+    [HideInInspector] public Image fadeEffect;
     
     [Range(0.5f, 5f)]
     public float fadeInTime = 1f;
@@ -90,14 +90,9 @@ public class GMController : MonoBehaviour {
         lastHeardPlayerPosition = resetPlayerPosition;
     }
 
-    public void ActivateGame()
+    public void SetActive(bool state)
     {
-        isGameActive = true;
-    }
-
-    public void DeactivateGame()
-    {
-        isGameActive = false;
+        isGameActive = state;
     }
 
     public bool GetGameStatus()
@@ -109,28 +104,28 @@ public class GMController : MonoBehaviour {
     {
         fadeEffect.DOFade(0, fadeInTime);
         StartCoroutine(WaitAndActivate());
-        isFadeScreenVisible = false;
+        //isFadeScreenVisible = false;
     }
 
     private IEnumerator WaitAndActivate()
     {
         // Wait and Activate
         yield return new WaitForSeconds(fadeInTime);
-        ActivateGame();
+        SetActive(true);
     }
 
     public void FadeOut()
     {
         fadeEffect.DOFade(1, fadeInTime);
         StartCoroutine(WaitAndDeactivate());
-        isFadeScreenVisible = true;
+        //isFadeScreenVisible = true;
 
     }
 
     private IEnumerator WaitAndDeactivate()
     {
         // Deactivate and wait
-        DeactivateGame();
+        SetActive(false);
         yield return new WaitForSeconds(fadeOutTime);
     }
 

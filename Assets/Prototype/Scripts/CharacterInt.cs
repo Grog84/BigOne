@@ -23,7 +23,8 @@ public class CharacterInt : MonoBehaviour {
     private IEnumerator PlayerDefeatSequence()
     {
         m_CharController.isDefeated = false;
-        yield return StartCoroutine(GMController.instance.WaitAndRestart());
+        yield return null;
+        //yield return StartCoroutine(GMController.instance.WaitAndRestart());
     }
 
     private void Awake()

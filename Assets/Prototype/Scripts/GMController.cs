@@ -25,7 +25,7 @@ public class GMController : MonoBehaviour {
     [HideInInspector] public Transform[] allEnemiesTransform;
 
     // Variables used in order to trigger transitions when the game is not active
-    [HideInInspector] public bool isGameActive = false;
+    public bool isGameActive = false;
     [HideInInspector] public CharacterActive isCharacterPlaying;
     //[HideInInspector] public bool isFadeScreenVisible = true;
     [HideInInspector] public Image fadeEffect;
@@ -102,6 +102,7 @@ public class GMController : MonoBehaviour {
         return isGameActive;
     }
 
+    /*
     public void FadeIn()
     {
         fadeEffect.DOFade(0, fadeInTime);
@@ -129,7 +130,7 @@ public class GMController : MonoBehaviour {
         // Deactivate and wait
         SetActive(false);
         yield return new WaitForSeconds(fadeOutTime);
-    }
+    }*/
 
     public void SaveCheckpoint()
     {
@@ -151,16 +152,16 @@ public class GMController : MonoBehaviour {
         yield return new WaitForSeconds(fadeOutTime);
     }
 
-    public IEnumerator WaitAndRestart()
-    {
-        yield return StartCoroutine(WaitDeathAnimation());
-        FadeOut();
-        yield return StartCoroutine(WaitFadeOut());
-        m_CharacterInterfaces[(int)isCharacterPlaying].RevivePlayer();
-        LoadCheckpoint();
-        FadeIn();
+    //public IEnumerator WaitAndRestart()
+    //{
+    //    yield return StartCoroutine(WaitDeathAnimation());
+    //    FadeOut();
+    //    yield return StartCoroutine(WaitFadeOut());
+    //    m_CharacterInterfaces[(int)isCharacterPlaying].RevivePlayer();
+    //    LoadCheckpoint();
+    //    FadeIn();
 
-    }
+    //}
 }
 
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraScriptShiny : MonoBehaviour
+public class CameraScript : MonoBehaviour
 {
     public LayerMask layerIgnored = ~(1 << 8);
 
@@ -14,7 +14,7 @@ public class CameraScriptShiny : MonoBehaviour
 
     public Transform motherLookAt;
     public Transform boyLookAt;
-    public Transform lookAt;                    // object that the camera is looking at
+    private Transform lookAt;                    // object that the camera is looking at
 	private Transform camTransform;
     
 	private Camera cam;

@@ -4,34 +4,44 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-
 public class GMController : MonoBehaviour {
 
-    public Transform playerTransform;
+    // Transform of the active player
+    public CharacterActive activePlayerAtStart;
+    public Transform[] playerTransform;
 
+    // Needed for Singleton pattern 
     [HideInInspector] public static GMController instance = null;
+
+    // Guards perception system variables
     [HideInInspector] public Vector3 lastSeenPlayerPosition = new Vector3(1000f, 1000f, 1000f);
     [HideInInspector] public Vector3 lastHeardPlayerPosition = new Vector3(1000f, 1000f, 1000f);
-    [HideInInspector] public bool isFadeScreenVisible = true;
-    [HideInInspector] public Transform[] allEnemiesTransform;
-    [HideInInspector] public int suspiciousGuards = 0, alarmedGuards = 0;
-
-    [HideInInspector] public bool isGameActive = false;
-    [HideInInspector] public CheckPointManager m_CheckpointManager;
-
-    [HideInInspector] public CharacterInt m_CharacterInterface;
-    //[HideInInspector] public CharacterStateController charStateController;
-
-    private Image fadeEffect;
-
     static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
 
+    // Counter of alarmed guards
+    [HideInInspector] public int suspiciousGuards = 0, alarmedGuards = 0;
+
+    // Transform of all the agents who could hear or see the player
+    [HideInInspector] public Transform[] allEnemiesTransform;
+
+    // Variables used in order to trigger transitions when the game is not active
+    [HideInInspector] public bool isGameActive = false;
+    [HideInInspector] public CharacterActive isCharacterPlaying;
+    //[HideInInspector] public bool isFadeScreenVisible = true;
+    [HideInInspector] public Image fadeEffect;
+    
     [Range(0.5f, 5f)]
     public float fadeInTime = 1f;
     [Range(0.5f, 5f)]
     public float fadeOutTime = 1f;
     [Range(0.5f, 5f)]
     public float deathAnimationTime = 1f;
+
+    // Save game references and variables
+    [HideInInspector] public CheckPointManager m_CheckpointManager;
+
+    // Character interface used to acces those methods requiring both Character controller and character stte machine controller
+    [HideInInspector] public CharacterInt[] m_CharacterInterfaces;
 
     void Awake() 
     {
@@ -45,10 +55,20 @@ public class GMController : MonoBehaviour {
             Destroy(gameObject);
 
         m_CheckpointManager = GetComponent<CheckPointManager>();
+        fadeEffect = GameObject.Find("FadeEffect").GetComponent<Image>();
 
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        //m_CharacterInterface = player.GetComponent<CharacterInterface>();
-        //charStateController = player.GetComponent<CharacterStateController>();
+        isCharacterPlaying = activePlayerAtStart;
+    }
+
+    private void Start()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        m_CharacterInterfaces = new CharacterInt[players.Length];
+        for (int i = 0; i < players.Length; i++)
+        {
+            m_CharacterInterfaces[i] = players[i].GetComponent<CharacterInt>();
+
+        }
 
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         allEnemiesTransform = new Transform[allEnemies.Length];
@@ -57,12 +77,6 @@ public class GMController : MonoBehaviour {
             allEnemiesTransform[i] = allEnemies[i].transform;
         }
 
-        fadeEffect = GameObject.Find("FadeEffect").GetComponent<Image>();
-
-    }
-
-    private void Start()
-    {
         SaveCheckpoint();
     }
 
@@ -76,14 +90,9 @@ public class GMController : MonoBehaviour {
         lastHeardPlayerPosition = resetPlayerPosition;
     }
 
-    public void ActivateGame()
+    public void SetActive(bool state)
     {
-        isGameActive = true;
-    }
-
-    public void DeactivateGame()
-    {
-        isGameActive = false;
+        isGameActive = state;
     }
 
     public bool GetGameStatus()
@@ -95,29 +104,28 @@ public class GMController : MonoBehaviour {
     {
         fadeEffect.DOFade(0, fadeInTime);
         StartCoroutine(WaitAndActivate());
-        isFadeScreenVisible = false;
-
+        //isFadeScreenVisible = false;
     }
 
     private IEnumerator WaitAndActivate()
     {
         // Wait and Activate
         yield return new WaitForSeconds(fadeInTime);
-        ActivateGame();
+        SetActive(true);
     }
 
     public void FadeOut()
     {
         fadeEffect.DOFade(1, fadeInTime);
         StartCoroutine(WaitAndDeactivate());
-        isFadeScreenVisible = true;
+        //isFadeScreenVisible = true;
 
     }
 
     private IEnumerator WaitAndDeactivate()
     {
         // Deactivate and wait
-        DeactivateGame();
+        SetActive(false);
         yield return new WaitForSeconds(fadeOutTime);
     }
 
@@ -129,12 +137,6 @@ public class GMController : MonoBehaviour {
     public void LoadCheckpoint()
     {
         m_CheckpointManager.LoadAllObj();
-    }
-
-    public void DefeatPlayer()
-    {
-        //m_CharacterInterface.m_CharacterController.isDefeated = true;
-        StartCoroutine(WaitAndRestart());
     }
 
     public IEnumerator WaitDeathAnimation()
@@ -152,7 +154,7 @@ public class GMController : MonoBehaviour {
         yield return StartCoroutine(WaitDeathAnimation());
         FadeOut();
         yield return StartCoroutine(WaitFadeOut());
-        m_CharacterInterface.RevivePlayer();
+        m_CharacterInterfaces[(int)isCharacterPlaying].RevivePlayer();
         LoadCheckpoint();
         FadeIn();
 

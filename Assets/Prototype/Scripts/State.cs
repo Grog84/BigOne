@@ -61,7 +61,12 @@ namespace StateMachine
         {
             for (int i = 0; i < transitions.Length; i++)
             {
-                bool decisionSucceeded = transitions[i].decision.Decide(controller);
+                bool decisionSucceeded = true;
+                for (int j = 0; j < transitions[i].decision.Length; j++)
+                {
+                    decisionSucceeded = decisionSucceeded && transitions[i].decision[j].Decide(controller);
+                }
+                    
 
                 if (decisionSucceeded)
                 {
@@ -85,7 +90,11 @@ namespace StateMachine
         {
             for (int i = 0; i < transitions.Length; i++)
             {
-                bool decisionSucceeded = transitions[i].decision.Decide(controller);
+                bool decisionSucceeded = true;
+                for (int j = 0; j < transitions[i].decision.Length; j++)
+                {
+                    decisionSucceeded = decisionSucceeded && transitions[i].decision[j].Decide(controller);
+                }
 
                 if (decisionSucceeded)
                 {
@@ -102,7 +111,11 @@ namespace StateMachine
         {
             for (int i = 0; i < transitions.Length; i++)
             {
-                bool decisionSucceeded = transitions[i].decision.Decide(controller);
+                bool decisionSucceeded = true;
+                for (int j = 0; j < transitions[i].decision.Length; j++)
+                {
+                    decisionSucceeded = decisionSucceeded && transitions[i].decision[j].Decide(controller);
+                }
 
                 if (decisionSucceeded)
                 {

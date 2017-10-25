@@ -1,81 +1,203 @@
-﻿using System.Collections;
+﻿using RootMotion;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightTestScript : MonoBehaviour {
-    private Light thisLight;
-    private Transform thisTransform;
-
-    public Transform player;
-
-    public Light worldLight;
-    public Transform worldLightTransform;
-
-    public float Distance;
-    private bool onAnFaretto;
-
-    [Range(0.0f, 10.0f)]
-    public float range;
-    // Update is called once per frame
+public class LightTestScript : MonoBehaviour
+{
+    [SerializeField] private GameObject Player;
+    Vector3 Origin = new Vector3(-0.12f, 20.77f, 3.49f);
+    private List<Light> LightList = new List<Light>();
+    public static List<Light> LightTriggerList = new List<Light>();
     private void Start()
     {
-        thisLight = this.GetComponent<Light>();
-        thisTransform = this.GetComponent<Transform>();
-        Debug.Log(this.gameObject.name + "Ha coordinate: x" + thisTransform.position.x + "y: " + thisTransform.position.y + "z: " + thisTransform.position.z);
-    }
+        //Trovo Tutte le luci
+        Light[] _LightList;
+        _LightList = FindObjectsOfType<Light>();
+        foreach (Light item in _LightList)
+        {
+            // e seleziono solo i tipi Point (I nostri Faretti)
+            if (item.type == LightType.Point)
+            {
+                LightList.Add(item);
+            }
+        }
 
-    void Update()
+    }
+  
+    private void Update()
     {
-        Distance = Vector3.Distance(player.position, thisTransform.transform.position);
-        if (Distance <= range)
+        Debug.Log(LightTriggerList.Count);
+        if (LightTriggerList.Count == 0)
         {
-            worldLight.type = thisLight.type;
-            worldLightTransform.transform.position = thisTransform.transform.position;
-            worldLightTransform.position += Vector3.up;
-            onAnFaretto = true;
+            //Luce Fuori
+            this.gameObject.transform.position = Origin;
+            this.GetComponent<Light>().type = LightType.Directional;
         }
-        else if (Distance > range)
-            onAnFaretto = false;
-
-            if (onAnFaretto == false)
+       else if (LightTriggerList.Count ==1)
         {
-            worldLight.type = LightType.Directional;
-            worldLightTransform.position = new Vector3(0.12f, 20.77f, 3.49f);
+            this.gameObject.transform.position = LightTriggerList[0].gameObject.transform.position+Vector3.up;
+            this.GetComponent<Light>().type = LightType.Point;
+            //Butta La luce alla prima luce
+        }
+       else if (LightTriggerList.Count >= 2)
+        {
+            foreach (Light item in LightTriggerList)
+            {
+                Debug.DrawLine(
+                    Player.transform.position, 
+                    item.gameObject.transform.position);
+            }
+            this.gameObject.transform.position = AT_NearestSpotlight.NearestSpotlight(LightTriggerList);
         }
     }
+
+    public static void TriggerLightEnter(GameObject _light)
+    {
+        LightTriggerList.Add((Light)_light.GetComponent<Light>());
+    }
+    public static void TriggerLightExit(GameObject _light)
+    {
+        LightTriggerList.Remove((Light)_light.GetComponent<Light>());
+    }
+
 }
- #region LightFollowPalyer
-      /* public Light test;
-    public Transform playerTransform;
-	// Use this for initialization
-	void Start () {
-        test = GetComponent<Light>();
-	}
-
-        //values that will be set in the Inspector
-    public Transform Target;
-    public float RotationSpeed;
 
 
 
 
-    //values for internal use
-    private Quaternion _lookRotation;
-    private Vector3 _direction;
- void roba()
-    {
+#region Script da Non buttare
+//Vector3 Origin = new Vector3(-0.12f, 20.77f, 3.49f);
 
-       
-    GetComponent<Light>().intensity = 1;
-            //find the vector pointing from our position to the target
-            _direction = (Target.position - transform.position).normalized;
+/* public bool onAnFaretto;
 
-            //create the rotation we need to be in to look at the target
-            _lookRotation = Quaternion.LookRotation(_direction);
+   [Range(0.0f, 10.0f)]
+   public float range;*/
+//public Transform player;
+//public Light worldLight;
+//    public Transform worldLightTransform;
+//  private void Update()
+//    {
+//        Debug.DrawLine(player.position, this.gameObject.transform.position, Color.yellow);
+//}
+// worldLight.type = LightType.Point;
+// worldLight.range = 5.15f;
+//  worldLightTransform.position = this.gameObject.transform.position + Vector3.up;
+//   worldLight.type = LightType.Directional;
+//   worldLightTransform.position = Origin;
+#endregion
+#region Old Script Faretti
 
-            //rotate us over time according to speed until we are in the required rotation
-            transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * RotationSpeed);
+// private Light thisLight;
+// private Transform thisTransform;
 
-    }*/
-    #endregion
+
+
+// 
+///*
+//         if (Vector3.Distance(player.position, item.GetComponent<Transform>().position) <= range)
+//         {
+//             this.gameObject.transform.position = item.GetComponent<Transform>().position;
+//             this.gameObject.transform.position += Vector3.up;
+//             this.gameObject.GetComponent<Light>().type = item.type;
+
+//             //   onAnFaretto = true;
+//         }
+//         else //if(Vector3.Distance(player.position, item.GetComponent<Transform>().position) > range && this.gameObject.transform.position!=Origin)
+//         {
+//         this.gameObject.GetComponent<Light>().type = LightType.Directional;
+//             this.gameObject.transform.position = Origin;
+
+//         }
+//      }*/
+
+// // Update is called once per frame
+//
+
+// void Update()
+// {
+//     thisLight = this.GetComponent<Light>();
+//     thisTransform = this.GetComponent<Transform>();
+//     foreach (Light item in LightList)
+//     {
+//         Distance = Vector3.Distance(player.position, item.GetComponent<Transform>().position);
+//         if (Distance <= range)
+//         {
+//             onAnFaretto = true;
+//             AccendiFaretto(onAnFaretto);
+//         }
+//         if (!onAnFaretto)
+//         {
+//             SpegniFaretto();
+//         }
+
+//     }
+
+//     
+//     /*
+//     else
+//     {
+//         onAnFaretto = false;
+//         SpegniFaretto();
+//     }*/
+
+//     /* if (Distance > range)
+//         onAnFaretto = false;*/
+//     if (!onAnFaretto)
+//     {
+
+//     }
+// }
+
+// void AccendiFaretto(bool trigger)
+// {
+//     if (trigger)
+//     {
+//         worldLight.type = thisLight.type;
+//         worldLightTransform.transform.position = thisTransform.transform.position;
+//         worldLightTransform.position += Vector3.up;
+
+//     }
+//}
+
+// void SpegniFaretto()
+// {
+//     worldLight.type = LightType.Directional;
+//     worldLightTransform.position = new Vector3(0.12f, 20.77f, 3.49f);
+// }
+#endregion
+#region LightFollowPalyer
+/* public Light test;
+public Transform playerTransform;
+// Use this for initialization
+void Start () {
+  test = GetComponent<Light>();
+}
+
+  //values that will be set in the Inspector
+public Transform Target;
+public float RotationSpeed;
+
+
+
+
+//values for internal use
+private Quaternion _lookRotation;
+private Vector3 _direction;
+void roba()
+{
+
+
+GetComponent<Light>().intensity = 1;
+      //find the vector pointing from our position to the target
+      _direction = (Target.position - transform.position).normalized;
+
+      //create the rotation we need to be in to look at the target
+      _lookRotation = Quaternion.LookRotation(_direction);
+
+      //rotate us over time according to speed until we are in the required rotation
+      transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * RotationSpeed);
+
+}*/
+#endregion
 

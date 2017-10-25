@@ -4389,7 +4389,7 @@ Prefab:
         type: 2}
       propertyPath: boyLookAt
       value: 
-      objectReference: {fileID: 964324793}
+      objectReference: {fileID: 1749256465}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 346ae395e2a32cb438d3e80fd1ac485d, type: 2}
   m_IsPrefabParent: 0
@@ -5419,14 +5419,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114835592958906586, guid: 9e35acd077483864a8d28830a6f17470,
-        type: 2}
-      propertyPath: solver.target
-      value: 
-      objectReference: {fileID: 72885806}
     - target: {fileID: 114223224527689550, guid: 9e35acd077483864a8d28830a6f17470,
         type: 2}
       propertyPath: cameraObject
+      value: 
+      objectReference: {fileID: 72885806}
+    - target: {fileID: 114835592958906586, guid: 9e35acd077483864a8d28830a6f17470,
+        type: 2}
+      propertyPath: solver.target
       value: 
       objectReference: {fileID: 72885806}
     m_RemovedComponents: []
@@ -6265,6 +6265,7 @@ MonoBehaviour:
   deathAnimationTime: 1
   m_CheckpointManager: {fileID: 0}
   m_CharacterInterfaces: []
+  m_MainCamera: {fileID: 0}
 --- !u!4 &964324793 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4974805155084396, guid: 9e35acd077483864a8d28830a6f17470,
@@ -8125,7 +8126,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh18828
+  m_Name: pb_Mesh18644
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -12091,6 +12092,11 @@ Transform:
   m_Father: {fileID: 2114065647}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1749256465 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4273567003512648, guid: ac2752dd92e2046499789efc8d2e61b2,
+    type: 2}
+  m_PrefabInternal: {fileID: 2050547844}
 --- !u!4 &1809229854 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4972563938538442, guid: 7e707504ef8904876a7379137c2d5f0f,
@@ -13985,25 +13991,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 114951182589854320, guid: ac2752dd92e2046499789efc8d2e61b2,
-        type: 2}
-      propertyPath: solver.target
-      value: 
-      objectReference: {fileID: 72885806}
     - target: {fileID: 114234166378658538, guid: ac2752dd92e2046499789efc8d2e61b2,
         type: 2}
       propertyPath: cameraObject
       value: 
       objectReference: {fileID: 72885806}
-    - target: {fileID: 1236579459611486, guid: ac2752dd92e2046499789efc8d2e61b2, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114099655126269870, guid: ac2752dd92e2046499789efc8d2e61b2,
+    - target: {fileID: 114951182589854320, guid: ac2752dd92e2046499789efc8d2e61b2,
         type: 2}
-      propertyPath: thisCharacter
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: solver.target
+      value: 
+      objectReference: {fileID: 72885806}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac2752dd92e2046499789efc8d2e61b2, type: 2}
   m_IsPrefabParent: 0

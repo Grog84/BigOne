@@ -43,6 +43,9 @@ public class GMController : MonoBehaviour {
     // Character interface used to acces those methods requiring both Character controller and character stte machine controller
     [HideInInspector] public CharacterInt[] m_CharacterInterfaces;
 
+    // Main Camera
+    [HideInInspector] public CameraScript m_MainCamera;
+
     void Awake() 
     {
         //Singleton
@@ -78,6 +81,9 @@ public class GMController : MonoBehaviour {
         {
             allEnemiesTransform[i] = allEnemies[i].transform;
         }
+
+        m_MainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>();
+        m_MainCamera.SwitchLookAt();
 
         SaveCheckpoint();
     }

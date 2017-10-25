@@ -5,8 +5,8 @@ using StateMachine;
 
 namespace GM.Decisions
 {
-    [CreateAssetMenu(menuName = "Prototype/Decisions/GM/SwitchCharacterMother")]
-    public class CharacterSwitchDecision_Mother : Decision
+    [CreateAssetMenu(menuName = "Prototype/Decisions/GM/IsBoyPlaying")]
+    public class IsBoyPlaying : Decision
     {
         public override bool Decide(GMStateController controller)
         {

@@ -1,3 +1,3 @@
-﻿public enum CharacterActive { Boy, Mother}
+﻿public enum CharacterActive { Boy, Mother, None}
 
 

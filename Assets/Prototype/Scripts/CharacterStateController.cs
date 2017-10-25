@@ -29,7 +29,7 @@ namespace StateMachine
 
             if (thisCharacter == CharacterActive.Boy)
                 gameStartState = (State)Resources.Load("GameStart_Boy");
-            else
+            else if (thisCharacter == CharacterActive.Mother)
                 gameStartState = (State)Resources.Load("GameStart_Mother");
             defeatedState = (State)Resources.Load("Defeated");
 

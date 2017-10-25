@@ -17,9 +17,9 @@ public class PushRaycast : MonoBehaviour {
     {
         objectRaycastsX = new Vector3[9];
 
-        quarterHight = transform.GetComponent<Collider>().bounds.size.y / 4;
-        quarterWidth = transform.GetComponent<Collider>().bounds.size.x / 4;
-        quarterDepth = transform.GetComponent<Collider>().bounds.size.z / 4;
+        quarterHight = transform.GetComponent<MeshCollider>().bounds.size.y / 4;
+        quarterWidth = transform.GetComponent<MeshCollider>().bounds.size.x / 4;
+        quarterDepth = transform.GetComponent<MeshCollider>().bounds.size.z / 4;
 
         offset = -quarterHight;
 
@@ -37,9 +37,9 @@ public class PushRaycast : MonoBehaviour {
 
         objectRaycastsZ = new Vector3[9];
 
-        objectRaycastsZ[0] = new Vector3(0, -quarterHight    , -quarterDepth * 2);
-        objectRaycastsZ[1] = new Vector3(0, -quarterHight    ,                 0);
-        objectRaycastsZ[2] = new Vector3(0, -quarterHight    , +quarterDepth * 2);
+        objectRaycastsZ[0] = new Vector3(0, offset           , -quarterDepth * 2);
+        objectRaycastsZ[1] = new Vector3(0, offset           ,                 0);
+        objectRaycastsZ[2] = new Vector3(0, offset           , +quarterDepth * 2);
 
         objectRaycastsZ[3] = new Vector3(0, 0                , -quarterDepth * 2);
         objectRaycastsZ[4] = new Vector3(0, 0                ,                 0);
@@ -52,8 +52,13 @@ public class PushRaycast : MonoBehaviour {
 
     private void Update()
     {
-        objectRaycastsX[0] = new Vector3(-quarterWidth * 2, offset, 0);
-        objectRaycastsX[1] = new Vector3(0, offset, 0);
-        objectRaycastsX[2] = new Vector3(+quarterWidth * 2, offset, 0);
+        objectRaycastsX[0] = new Vector3(-quarterWidth * 2, offset ,                 0);
+        objectRaycastsX[1] = new Vector3(0                , offset ,                 0);
+        objectRaycastsX[2] = new Vector3(+quarterWidth * 2, offset ,                 0);
+
+        objectRaycastsZ[0] = new Vector3(0                , offset , -quarterDepth * 2);
+        objectRaycastsZ[1] = new Vector3(0                , offset ,                 0);
+        objectRaycastsZ[2] = new Vector3(0                , offset , +quarterDepth * 2);
+
     }
 }

@@ -9,23 +9,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75ffedece9bcbbd4baec2ae9d1095f4c, type: 3}
-  m_Name: Run
+  m_Name: WalkOnStairs_Boy
   m_EditorClassIdentifier: 
   actions:
   - {fileID: 11400000, guid: 0a39d3bdc3f871542820292ebcdaa873, type: 2}
-  - {fileID: 11400000, guid: 986257171053801488891c35abc734c5, type: 2}
+  - {fileID: 11400000, guid: 9bca15a300c21dd4caae041cec13be6c, type: 2}
   enterActions:
-  - {fileID: 11400000, guid: a49479dc70f2cbf47ab9b524d0de043e, type: 2}
-  exitActions: []
+  - {fileID: 11400000, guid: 5d8b4c4da72517245811b588530e7386, type: 2}
+  - {fileID: 11400000, guid: f59e7a4d1f112b143be95b90066c8d42, type: 2}
+  exitActions:
+  - {fileID: 11400000, guid: 7e4f3b76dc3f1b145bab14044c05a4c3, type: 2}
   transitions:
-  - decision: {fileID: 11400000, guid: e3f1e894390157a45a922a97639d09f9, type: 2}
+  - decision: {fileID: 11400000, guid: a6b9b769a5ba50447890e39c7b7456cb, type: 2}
     trueState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
     falseState: {fileID: 11400000, guid: 8dda0072a2675e24a9f06d4214821f6b, type: 2}
-  - decision: {fileID: 11400000, guid: fa058eae859c7c449ad5686d575a292f, type: 2}
-    trueState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
-    falseState: {fileID: 11400000, guid: 7421e84aa60d8814c9e680d0cc5ecd90, type: 2}
-  - decision: {fileID: 11400000, guid: a6b9b769a5ba50447890e39c7b7456cb, type: 2}
+  - decision: {fileID: 11400000, guid: e3f1e894390157a45a922a97639d09f9, type: 2}
     trueState: {fileID: 11400000, guid: f284a25cfd1e5014492e853378b45b1c, type: 2}
+    falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+  - decision: {fileID: 11400000, guid: 4a3842460d54aa24e8db6c0ab6a99057, type: 2}
+    trueState: {fileID: 11400000, guid: fb75e0f125ccc7d4cb02121c110726c5, type: 2}
     falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
   - decision: {fileID: 11400000, guid: 67e864e4d01fcb540ad4143c9cdbbf9e, type: 2}
     trueState: {fileID: 11400000, guid: 536d2a2fc2ef7e14f8c4e2e2798a7e64, type: 2}

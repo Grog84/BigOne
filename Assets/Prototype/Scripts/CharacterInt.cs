@@ -6,8 +6,8 @@ using StateMachine;
 
 public class CharacterInt : MonoBehaviour {
 
-    public _CharacterController m_CharController;
-    public CharacterStateController m_CharStateController;
+    [HideInInspector] public _CharacterController m_CharController;
+    [HideInInspector] public CharacterStateController m_CharStateController;
 
     public void DefeatPlayer()
     {
@@ -24,6 +24,12 @@ public class CharacterInt : MonoBehaviour {
     {
         m_CharController.isDefeated = false;
         yield return StartCoroutine(GMController.instance.WaitAndRestart());
+    }
+
+    private void Awake()
+    {
+        m_CharController = GetComponent<_CharacterController>();
+        m_CharStateController = GetComponent<CharacterStateController>();
     }
 
     private void Update()

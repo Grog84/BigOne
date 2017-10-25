@@ -12,7 +12,7 @@ namespace StateMachine
         public float verticalMainOffset = 0.1f;
         public float horizontalOffset = 0.5f;
         public int raycastCollided;
-        bool isOnTheGround;
+        public bool isOnTheGround;
         public bool[] hits = new bool[5];
         float secondaryRaycastDistance;
 

@@ -18,18 +18,7 @@ namespace Character.Actions
 
         private void Interact(CharacterStateController controller)
         {
-            // if (Input.GetKeyDown(KeyCode.E))
-            //{
-            // Pick up Keys
-            /* if (controller.m_CharacterController.isInKeyArea)
-             {
-                 controller.m_CharacterController.Keychain.Add(controller.m_CharacterController.KeyCollider.gameObject);
-                 controller.m_CharacterController.KeyCollider.gameObject.SetActive(false);
-                 controller.m_CharacterController.isInKeyArea = false;
-             }*/
-
-            // if (controller.m_CharacterController.isDoorDirectionRight)
-            // {
+            
             RaycastHit hit;
             Debug.DrawRay(controller.m_CharacterController.CharacterTansform.position + Vector3.up * controller.m_CharacterController.m_CharController.bounds.size.y / 2.0f, controller.m_CharacterController.CharacterTansform.forward, Color.red);
 

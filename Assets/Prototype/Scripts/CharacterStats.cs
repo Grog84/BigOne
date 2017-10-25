@@ -8,8 +8,11 @@ public class CharacterStats : ScriptableObject { // nope...here stats only shoul
    
     [Header("Character Movement Parameters")]
     public float m_WalkSpeed = 3.0f;
+    public float m_WalkOnStairsSpeed = 3.0f;
     public float m_CrouchSpeed = 3.0f;
+    public float m_CrouchOnStarisSpeed = 3.0f;
     public float m_RunSpeed = 3.0f;
+    public float m_RunOnStarisSpeed = 3.0f;
     public float m_RotateSpeed = 3.0f;
     public float m_MovementSpeed = 3.0f;
     [Space(10)]

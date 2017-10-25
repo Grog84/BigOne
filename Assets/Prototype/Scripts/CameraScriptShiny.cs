@@ -5,7 +5,6 @@ using UnityEngine;
 public class CameraScriptShiny : MonoBehaviour
 {
     public LayerMask layerIgnored = ~(1 << 8);
-    
 
 
     // max and min angles of the camera movement
@@ -13,6 +12,8 @@ public class CameraScriptShiny : MonoBehaviour
 	private const float Y_ANGLE_MAX = 70.0F;
 
 
+    public Transform motherLookAt;
+    public Transform boyLookAt;
     public Transform lookAt;                    // object that the camera is looking at
 	private Transform camTransform;
     
@@ -118,6 +119,19 @@ public class CameraScriptShiny : MonoBehaviour
         clipArray[4] = cameraPosition - cam.transform.forward;
 
 	}
+
+    public void SwitchLookAt()
+    {
+        if((int)GMController.instance.isCharacterPlaying == 0)
+        {
+            lookAt = boyLookAt;
+        }
+        else if((int)GMController.instance.isCharacterPlaying == 1)
+        {
+            lookAt = motherLookAt;
+        }
+    }
+
 }
 
 

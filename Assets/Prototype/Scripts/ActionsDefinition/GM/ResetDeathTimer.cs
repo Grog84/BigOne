@@ -16,7 +16,7 @@ namespace GM.Actions
 
         private void ResetTimer(GMStateController controller)
         {
-            GMController.instance.deathTimer = 0f;
+            controller.m_GM.deathTimer = 0f;
         }
     }
 }

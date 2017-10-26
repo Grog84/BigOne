@@ -24,8 +24,8 @@ public class GMController : MonoBehaviour {
     [HideInInspector] public Transform[] allEnemiesTransform;
 
     // Variables used in order to trigger transitions when the game is not active
-    [HideInInspector] public bool isGameActive = false;
-    [HideInInspector] public CharacterActive isCharacterPlaying;
+     public bool isGameActive = false;
+     public CharacterActive isCharacterPlaying;
     [HideInInspector] public Image fadeEffect;
     
     [Range(0.5f, 5f)]
@@ -35,7 +35,7 @@ public class GMController : MonoBehaviour {
     [Range(0.5f, 5f)]
     public float deathAnimationTime = 1f;
 
-    [HideInInspector] public float deathTimer = 0f;
+    public float deathTimer = 0f;
 
     // Save game references and variables
     [HideInInspector] public CheckPointManager m_CheckpointManager;

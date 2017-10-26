@@ -17,7 +17,7 @@ namespace SaveGame
 
         public override void LoadData()
         {
-            CharacterActive activeCharacter = (CharacterActive)PlayerPrefs.GetInt(saveObjName + "characterPlaying");
+            m_Controller.isCharacterPlaying = (CharacterActive)PlayerPrefs.GetInt(saveObjName + "characterPlaying");        
         }
 
         public override void SaveData()

@@ -26,7 +26,6 @@ public class GMController : MonoBehaviour {
     // Variables used in order to trigger transitions when the game is not active
     [HideInInspector] public bool isGameActive = false;
     [HideInInspector] public CharacterActive isCharacterPlaying;
-    //[HideInInspector] public bool isFadeScreenVisible = true;
     [HideInInspector] public Image fadeEffect;
     
     [Range(0.5f, 5f)]
@@ -36,11 +35,13 @@ public class GMController : MonoBehaviour {
     [Range(0.5f, 5f)]
     public float deathAnimationTime = 1f;
 
+    [HideInInspector] public float deathTimer = 0f;
+
     // Save game references and variables
     [HideInInspector] public CheckPointManager m_CheckpointManager;
 
     // Character interface used to acces those methods requiring both Character controller and character stte machine controller
-    [HideInInspector] public CharacterInt[] m_CharacterInterfaces;
+    [HideInInspector] public CharacterInterface[] m_CharacterInterfaces;
     [HideInInspector] public Transform[] playerTransform;
 
     // Main Camera
@@ -66,19 +67,19 @@ public class GMController : MonoBehaviour {
     private void Start()
     {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        m_CharacterInterfaces = new CharacterInt[players.Length];
+        m_CharacterInterfaces = new CharacterInterface[players.Length];
         playerTransform = new Transform[players.Length];
 
         for (int i = 0; i < players.Length; i++)
         {
             if (players[i].name == "Boy")
             {
-                m_CharacterInterfaces[(int)CharacterActive.Boy] = players[i].GetComponent<CharacterInt>();
+                m_CharacterInterfaces[(int)CharacterActive.Boy] = players[i].GetComponent<CharacterInterface>();
                 playerTransform[(int)CharacterActive.Boy] = players[i].transform;
             }
             else if (players[i].name == "Mother")
             {
-                m_CharacterInterfaces[(int)CharacterActive.Mother] = players[i].GetComponent<CharacterInt>();
+                m_CharacterInterfaces[(int)CharacterActive.Mother] = players[i].GetComponent<CharacterInterface>();
                 playerTransform[(int)CharacterActive.Mother] = players[i].transform;
             }
         }

@@ -1,6 +1,7 @@
 ﻿using RootMotion;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class LightTestScript : MonoBehaviour
@@ -32,12 +33,13 @@ public class LightTestScript : MonoBehaviour
         {
             //Luce Fuori
             this.gameObject.transform.position = Origin;
-            this.GetComponent<Light>().type = LightType.Directional;
+          //  this.GetComponent<Light>().type = LightType.Directional;
         }
        else if (LightTriggerList.Count ==1)
         {
             this.gameObject.transform.position = LightTriggerList[0].gameObject.transform.position+Vector3.up;
-            this.GetComponent<Light>().type = LightType.Point;
+            this.GetComponent<Light>().color = Color.white;
+     //    this.GetComponent<Light>().type = LightType.Point;
             //Butta La luce alla prima luce
         }
        else if (LightTriggerList.Count >= 2)
@@ -48,7 +50,7 @@ public class LightTestScript : MonoBehaviour
                     Player.transform.position, 
                     item.gameObject.transform.position);
             }
-            this.gameObject.transform.position = AT_NearestSpotlight.NearestSpotlight(LightTriggerList);
+            this.gameObject.transform.position = NearestSpotlight(LightTriggerList);
         }
     }
 
@@ -60,7 +62,31 @@ public class LightTestScript : MonoBehaviour
     {
         LightTriggerList.Remove((Light)_light.GetComponent<Light>());
     }
+    public  Vector3 NearestSpotlight(List<Light> LightConflict)
+    {
 
+        float[] Distance = new float[LightConflict.Count];
+        int index = -1;
+        float min = 10000000000000;
+        for (int i = 0; i < Distance.Length; i++)
+        {
+            Distance[i] = Vector3.Distance(Player.transform.position, LightConflict[i].gameObject.transform.position);
+
+        }
+        for (int i = 0; i < Distance.Length; i++)
+        {
+            if (Distance.Min() == Distance[i])
+            {
+                Debug.Log(Distance.Min());
+                index = i;
+
+            }
+
+        }
+
+
+        return LightConflict[index].transform.position;
+    }
 }
 
 

@@ -16,7 +16,7 @@ namespace Character.Decisions
 
         private bool CheckIfDoorsInteract(CharacterStateController controller)
         {
-            if (controller.m_CharacterController.isInDoorArea && controller.m_CharacterController.isDoorDirectionRight && Input.GetKeyDown(KeyCode.E))
+            if (controller.m_CharacterController.isInDoorArea && controller.m_CharacterController.isDoorDirectionRight && Input.GetButtonDown("Interact"))
             {
 
                 return true;

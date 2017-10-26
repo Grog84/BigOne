@@ -16,7 +16,7 @@ namespace Character.Decisions
 
         private bool CheckIfPushing(CharacterStateController controller)
         {
-            if (controller.m_CharacterController.isInPushArea && controller.m_CharacterController.isPushDirectionRight && Input.GetKeyDown(KeyCode.E))
+            if (controller.m_CharacterController.isInPushArea && controller.m_CharacterController.isPushDirectionRight && Input.GetButtonDown("Interact"))
             {
 
                 return true;

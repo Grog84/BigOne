@@ -16,7 +16,7 @@ namespace Character.Decisions
 
         private bool CheckIfItemCollect(CharacterStateController controller)
         {
-            if (controller.m_CharacterController.isInKeyArea && Input.GetKeyDown(KeyCode.E))
+            if (controller.m_CharacterController.isInKeyArea && Input.GetButtonDown("Interact"))
             {
 
                 return true;

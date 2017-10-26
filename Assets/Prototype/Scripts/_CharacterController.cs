@@ -384,7 +384,7 @@ namespace Character
 
         private IEnumerator DoorInteraction()
         {
-            float InteractTime = 2f;
+            float InteractTime = 1f;
 
             Vector3 dir = doorObject.transform.position - doorCollider.transform.position;
             dir.y = 0;

@@ -811,6 +811,11 @@ Transform:
   m_Father: {fileID: 1691328922}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &75310637 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4672722663747394, guid: 9e35acd077483864a8d28830a6f17470,
+    type: 2}
+  m_PrefabInternal: {fileID: 849272089}
 --- !u!43 &80863650
 Mesh:
   m_ObjectHideFlags: 0
@@ -971,8 +976,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ae9f179708940428f48967ce60c1bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coneStats: {fileID: 11400000, guid: 421b0b50551b7bc48ac3e5d4b26cb332, type: 2}
-  isDebug: 0
 --- !u!64 &82425667
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3421,7 +3424,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.11
+      value: 0.987
       objectReference: {fileID: 0}
     - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
       propertyPath: m_LocalPosition.z
@@ -5335,6 +5338,16 @@ Prefab:
       propertyPath: solver.target
       value: 
       objectReference: {fileID: 72885806}
+    - target: {fileID: 114223224527689550, guid: 9e35acd077483864a8d28830a6f17470,
+        type: 2}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 904587077}
+    - target: {fileID: 114223224527689550, guid: 9e35acd077483864a8d28830a6f17470,
+        type: 2}
+      propertyPath: head
+      value: 
+      objectReference: {fileID: 75310637}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9e35acd077483864a8d28830a6f17470, type: 2}
   m_IsPrefabParent: 0
@@ -5838,6 +5851,11 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
+--- !u!95 &904587077 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 95788484390038242, guid: 9e35acd077483864a8d28830a6f17470,
+    type: 2}
+  m_PrefabInternal: {fileID: 849272089}
 --- !u!4 &908955599 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4951419105055242, guid: 77701d11bda0b9b4985d48ef40481d50,
@@ -7228,7 +7246,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1200
+  m_Name: pb_Mesh-2480
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -13061,12 +13079,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 33996018742626638, guid: 4cda579b828497e47ac37475c8924192,
+    - target: {fileID: 64438699364457636, guid: 4cda579b828497e47ac37475c8924192,
         type: 2}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 2097096076}
-    - target: {fileID: 64438699364457636, guid: 4cda579b828497e47ac37475c8924192,
+    - target: {fileID: 33996018742626638, guid: 4cda579b828497e47ac37475c8924192,
         type: 2}
       propertyPath: m_Mesh
       value: 
@@ -14371,7 +14389,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2222
+  m_Name: pb_Mesh-3500
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2

@@ -116,36 +116,6 @@ public class GMController : MonoBehaviour {
         return isGameActive;
     }
 
-    /*
-    public void FadeIn()
-    {
-        fadeEffect.DOFade(0, fadeInTime);
-        StartCoroutine(WaitAndActivate());
-        //isFadeScreenVisible = false;
-    }
-
-    private IEnumerator WaitAndActivate()
-    {
-        // Wait and Activate
-        yield return new WaitForSeconds(fadeInTime);
-        SetActive(true);
-    }
-
-    public void FadeOut()
-    {
-        fadeEffect.DOFade(1, fadeInTime);
-        StartCoroutine(WaitAndDeactivate());
-        //isFadeScreenVisible = true;
-
-    }
-
-    private IEnumerator WaitAndDeactivate()
-    {
-        // Deactivate and wait
-        SetActive(false);
-        yield return new WaitForSeconds(fadeOutTime);
-    }*/
-
     public void SaveCheckpoint()
     {
         m_CheckpointManager.SaveAllObj();
@@ -166,21 +136,6 @@ public class GMController : MonoBehaviour {
         yield return new WaitForSeconds(fadeOutTime);
     }
 
-    //public IEnumerator WaitAndRestart()
-    //{
-    //    yield return StartCoroutine(WaitDeathAnimation());
-    //    FadeOut();
-    //    yield return StartCoroutine(WaitFadeOut());
-    //    m_CharacterInterfaces[(int)isCharacterPlaying].RevivePlayer();
-    //    LoadCheckpoint();
-    //    FadeIn();
-
-    //}
-
-    //private void Update()
-    //{
-    //    Debug.Log(fadeEffect.color.a);
-    //}
 }
 
 

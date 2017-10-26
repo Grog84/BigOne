@@ -37,7 +37,8 @@ namespace StateMachine
                 currentState.OnExitState(this);
                 currentState = nextState;
                 currentState.OnEnterState(this);
-                lastActiveState = currentState;
+                if (currentState != inactiveState)
+                    lastActiveState = currentState;
                 OnExitState();
             }
         }

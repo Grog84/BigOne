@@ -371,7 +371,7 @@ namespace Character
         {
             pushObject.transform.parent = null;                       // Detach the pushable object from the Player
             pushObject.GetComponent<Rigidbody>().isKinematic = true;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
             isExitPush = false;
             //pushObject = null;
             //pushCollider = null;
@@ -384,7 +384,7 @@ namespace Character
 
         private IEnumerator DoorInteraction()
         {
-            float InteractTime = 1f;
+            float InteractTime = 2f;
 
             Vector3 dir = doorObject.transform.position - doorCollider.transform.position;
             dir.y = 0;

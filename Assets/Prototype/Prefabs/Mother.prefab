@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 114835592958906586}
   - component: {fileID: 114159225348741878}
   - component: {fileID: 114457326688147732}
+  - component: {fileID: 114724338851888376}
   m_Layer: 8
   m_Name: Mother
   m_TagString: Player
@@ -2863,7 +2864,6 @@ MonoBehaviour:
   gazeAt: {fileID: 114835592958906586}
   cameraObject: {fileID: 0}
   targets: []
-  maxHeadWeight: 0.7
   headClamp: 0
 --- !u!114 &114457326688147732
 MonoBehaviour:
@@ -2960,6 +2960,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   Keychain: []
+--- !u!114 &114724338851888376
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1046753759377328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf2c17d2f148db4087b972d78f03cda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveObjName: 
+  savePosition: 1
+  saveRotation: 1
+  setOnAwake: 0
+  memorizeOnClose: 1
 --- !u!114 &114835592958906586
 MonoBehaviour:
   m_ObjectHideFlags: 1

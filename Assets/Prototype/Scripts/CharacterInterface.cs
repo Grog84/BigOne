@@ -4,7 +4,7 @@ using UnityEngine;
 using Character;
 using StateMachine;
 
-public class CharacterInt : MonoBehaviour {
+public class CharacterInterface : MonoBehaviour {
 
     [HideInInspector] public _CharacterController m_CharController;
     [HideInInspector] public CharacterStateController m_CharStateController;
@@ -23,7 +23,14 @@ public class CharacterInt : MonoBehaviour {
     private IEnumerator PlayerDefeatSequence()
     {
         m_CharController.isDefeated = false;
-        yield return null;
+        GMController.instance.isCharacterPlaying = CharacterActive.None;
+
+        while (GMController.instance.deathTimer <= GMController.instance.deathAnimationTime)
+        {
+            GMController.instance.deathTimer += Time.deltaTime;
+            yield return null;
+        }
+
         //yield return StartCoroutine(GMController.instance.WaitAndRestart());
     }
 

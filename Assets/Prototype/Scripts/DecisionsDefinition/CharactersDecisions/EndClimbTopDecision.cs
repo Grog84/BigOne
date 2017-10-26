@@ -19,7 +19,7 @@ namespace Character.Decisions
             if (controller.m_CharacterController.climbingTop && Input.GetKeyDown(KeyCode.E))
             {
 
-
+                Debug.Log("pereppe");
                 return true;
 
 

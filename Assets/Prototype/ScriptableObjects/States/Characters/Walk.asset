@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ffedece9bcbbd4baec2ae9d1095f4c, type: 3}
+  m_Name: Walk
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: 0a39d3bdc3f871542820292ebcdaa873, type: 2}
+  - {fileID: 11400000, guid: 9bca15a300c21dd4caae041cec13be6c, type: 2}
+  - {fileID: 11400000, guid: 7ff50e2711e40c94cac27f16dfa12cf6, type: 2}
+  enterActions:
+  - {fileID: 11400000, guid: 5d8b4c4da72517245811b588530e7386, type: 2}
+  exitActions: []
+  transitions:
+  - decision:
+    - {fileID: 11400000, guid: e3f1e894390157a45a922a97639d09f9, type: 2}
+    trueState: {fileID: 11400000, guid: 00d32e59c1d260b449e7bd884a0e24f7, type: 2}
+    falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+  - decision:
+    - {fileID: 11400000, guid: 4a3842460d54aa24e8db6c0ab6a99057, type: 2}
+    trueState: {fileID: 11400000, guid: 8a4c1a0ea32c4df48aab79dfd1290b66, type: 2}
+    falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+  - decision:
+    - {fileID: 11400000, guid: 4cf811e1c76bf6e44a5ce409972fb257, type: 2}
+    trueState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+    falseState: {fileID: 11400000, guid: 9b8d90e47751184408263070e0adcc41, type: 2}
+  - decision:
+    - {fileID: 11400000, guid: c898dff84cb93254a87ef9c616f9bd61, type: 2}
+    - {fileID: 11400000, guid: 339b51605ab61684681d006dba0c0cb7, type: 2}
+    trueState: {fileID: 11400000, guid: 098c213ea8ff3a14cb76339ea3eecbd0, type: 2}
+    falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+  - decision:
+    - {fileID: 11400000, guid: d5ef72fbe97b7444687fed1dc921d55b, type: 2}
+    - {fileID: 11400000, guid: 339b51605ab61684681d006dba0c0cb7, type: 2}
+    trueState: {fileID: 11400000, guid: 098c213ea8ff3a14cb76339ea3eecbd0, type: 2}
+    falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+  - decision:
+    - {fileID: 11400000, guid: a6b9b769a5ba50447890e39c7b7456cb, type: 2}
+    trueState: {fileID: 11400000, guid: 78dc744c6ac190d448a1e085717cacdf, type: 2}
+    falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+  - decision:
+    - {fileID: 11400000, guid: 67e864e4d01fcb540ad4143c9cdbbf9e, type: 2}
+    trueState: {fileID: 11400000, guid: 536d2a2fc2ef7e14f8c4e2e2798a7e64, type: 2}
+    falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+  - decision:
+    - {fileID: 11400000, guid: 4a6de53d988c00e4e8ed55758decd0c5, type: 2}
+    trueState: {fileID: 11400000, guid: 07e5a50d2bc384649958c32c71d84e8e, type: 2}
+    falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+  - decision:
+    - {fileID: 11400000, guid: dbdb561e1f23fe942961c2446a363c34, type: 2}
+    trueState: {fileID: 11400000, guid: 457030a786473da49b58d4909f965840, type: 2}
+    falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+  - decision:
+    - {fileID: 11400000, guid: cc9be72141b16b7478d3f873ec857aba, type: 2}
+    - {fileID: 11400000, guid: 686d2350df88dd14890d43abeac7feb0, type: 2}
+    trueState: {fileID: 11400000, guid: f081d5df94d3cb043b529eaf7672fd5d, type: 2}
+    falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+  sceneGizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

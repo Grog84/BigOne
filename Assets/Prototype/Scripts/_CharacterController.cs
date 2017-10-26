@@ -152,13 +152,12 @@ namespace Character
                 if (Physics.Raycast(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, out hit, m_CharStats.m_DistanceFromPushableObject))
                 {
                     // Debug.DrawRay(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, Color.red);
-                    // Debug.Log("vedo");
+                     //Debug.Log(hit.transform == pushCollider.transform.parent);
 
 
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Pushable"))
+                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Pushable") && hit.transform == pushCollider.transform.parent)
                     {
                         isPushDirectionRight = true;
-
                     }
                     else
                     {
@@ -184,8 +183,11 @@ namespace Character
                 climbingTop = true;
                 ActivateClimbingChoice();
             }
-            if (other.tag == "PushTrigger")
+            if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTansform.forward, other.transform.forward) < 45)
             {
+                //Debug.Log(Vector3.Angle(CharacterTansform.forward, other.transform.forward));
+                pushCollider = other.gameObject;
+                isInPushArea = true;
                 ActivatePushingChoice();
             }
             if (other.tag == "UnlockedDoor" || other.tag == "LockedDoor")
@@ -196,13 +198,12 @@ namespace Character
 
         private void OnTriggerEnter(Collider other)
         {
+
             if (other.tag == "Ladder_Bottom")
             {
                 climbCollider = other.gameObject;
                 isInClimbArea = true;
                 climbingBottom = true;
-                ActivateClimbingChoice();
-                // Debug.Log("entro");
             }
             else if (other.tag == "Ladder_Top")
             {
@@ -211,12 +212,10 @@ namespace Character
                 climbingTop = true;
                 Debug.Log("entro");
             }
-            if (other.tag == "PushTrigger")
+            if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTansform.forward, other.transform.forward) < 45)
             {
                 pushCollider = other.gameObject;
                 isInPushArea = true;
-                ActivatePushingChoice();
-                Debug.Log("spingo");
             }
             if (other.tag == "UnlockedDoor" || other.tag == "LockedDoor")
             {
@@ -240,7 +239,6 @@ namespace Character
                 isInClimbArea = false;
                 climbingBottom = false;
                 isClimbDirectionRight = false;
-                // Debug.Log("esco");
             }
             if (other.tag == "Ladder_Top")
             {
@@ -248,9 +246,8 @@ namespace Character
                 isInClimbArea = false;
                 climbingTop = false;
                 isClimbDirectionRight = false;
-                // Debug.Log("esco");
             }
-            if (other.tag == "PushTrigger")
+            if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTansform.forward, other.transform.forward) > 45)
             {
                 pushCollider = null;
                 isInPushArea = false;
@@ -371,7 +368,7 @@ namespace Character
         {
             pushObject.transform.parent = null;                       // Detach the pushable object from the Player
             pushObject.GetComponent<Rigidbody>().isKinematic = true;
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(1f);
             isExitPush = false;
             //pushObject = null;
             //pushCollider = null;

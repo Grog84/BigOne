@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ffedece9bcbbd4baec2ae9d1095f4c, type: 3}
+  m_Name: LoadCheckPoint
+  m_EditorClassIdentifier: 
+  actions: []
+  enterActions:
+  - {fileID: 11400000, guid: 9d35bb5b14456fa45930dc4b88ae96de, type: 2}
+  exitActions: []
+  transitions:
+  - decision:
+    - {fileID: 11400000, guid: 32dfffa2d0868134997237385ad476ec, type: 2}
+    trueState: {fileID: 11400000, guid: a09be78e920c3e54dabead7a04ee2b91, type: 2}
+    falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+  sceneGizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

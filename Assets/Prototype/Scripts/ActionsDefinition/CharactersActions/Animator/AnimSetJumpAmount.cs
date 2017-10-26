@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/SetJumpAmount")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Animator/SetJumpAmount")]
     public class AnimSetJumpAmount : _Action
     {
 

@@ -6,7 +6,7 @@ using DG.Tweening;
 
 namespace GM.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/GMActions/FadeOut")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/GM/FadeOut")]
     public class FadeOut : _Action
     {
 
@@ -17,7 +17,7 @@ namespace GM.Actions
 
         private void StartFadeOut(GMStateController controller)
         {
-            controller.m_GM.fadeEffect.DOFade(1, controller.m_GM.fadeInTime);
+            controller.m_GM.fadeEffect.DOFade(1, controller.m_GM.fadeOutTime);
         }
     }
 }

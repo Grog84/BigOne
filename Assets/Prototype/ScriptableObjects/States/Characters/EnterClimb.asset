@@ -9,20 +9,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75ffedece9bcbbd4baec2ae9d1095f4c, type: 3}
-  m_Name: Pushing
+  m_Name: EnterClimb
   m_EditorClassIdentifier: 
-  actions:
-  - {fileID: 11400000, guid: c7459f7a0f0be494699a3bc6e320c5bf, type: 2}
-  - {fileID: 11400000, guid: 986257171053801488891c35abc734c5, type: 2}
+  actions: []
   enterActions:
-  - {fileID: 11400000, guid: 05c58b665928b27479a174d23b853b75, type: 2}
-  exitActions:
-  - {fileID: 11400000, guid: dea70afe657238f4382f506522ac33b8, type: 2}
+  - {fileID: 11400000, guid: b686d701a4551b2469155db038727cd6, type: 2}
+  - {fileID: 11400000, guid: 8a170368cc1901b41b69fb1d69ada0f2, type: 2}
+  exitActions: []
   transitions:
-  - decision: {fileID: 11400000, guid: 19b1c2a8cada2744d8a638f4c9b81d47, type: 2}
-    trueState: {fileID: 11400000, guid: b525b8aa9faaa7b42b83f61250eb1cf1, type: 2}
+  - decision:
+    - {fileID: 11400000, guid: 457d391b7b8c40047b5afcfeb6940cc5, type: 2}
+    trueState: {fileID: 11400000, guid: 3ae6872b7e9d72d4ea6436ccc344f046, type: 2}
     falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
-  - decision: {fileID: 11400000, guid: 67e864e4d01fcb540ad4143c9cdbbf9e, type: 2}
+  - decision:
+    - {fileID: 11400000, guid: 67e864e4d01fcb540ad4143c9cdbbf9e, type: 2}
     trueState: {fileID: 11400000, guid: 536d2a2fc2ef7e14f8c4e2e2798a7e64, type: 2}
     falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
   sceneGizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

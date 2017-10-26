@@ -9,8 +9,11 @@ public class CheckPoint : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        GMController.instance.SaveCheckpoint();
-        if (isDestroyable)
-            Destroy(gameObject);
+        if (other.tag == "Player")
+        {
+            GMController.instance.SaveCheckpoint();
+            if (isDestroyable)
+                Destroy(gameObject);
+        }
     }
 }

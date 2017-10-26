@@ -11,12 +11,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75ffedece9bcbbd4baec2ae9d1095f4c, type: 3}
   m_Name: GameActive_Mother
   m_EditorClassIdentifier: 
-  actions: []
+  actions:
+  - {fileID: 11400000, guid: 12d7b4a92a28a4343b5a8162a7bb1cef, type: 2}
   enterActions: []
   exitActions: []
   transitions:
   - decision:
     - {fileID: 11400000, guid: 7fbf09ac8f5c32b4382859e479eccfde, type: 2}
     trueState: {fileID: 11400000, guid: 6df83fee53eedea43b3f6a1084ad55f8, type: 2}
+    falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+  - decision:
+    - {fileID: 11400000, guid: 1ecd8a1781ce76d4abcf4131e6d21b6c, type: 2}
+    trueState: {fileID: 11400000, guid: 418d2d0aef287b24184004373d608024, type: 2}
     falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
   sceneGizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

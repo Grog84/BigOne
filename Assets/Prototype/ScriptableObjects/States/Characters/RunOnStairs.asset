@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ffedece9bcbbd4baec2ae9d1095f4c, type: 3}
+  m_Name: RunOnStairs
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: 0a39d3bdc3f871542820292ebcdaa873, type: 2}
+  - {fileID: 11400000, guid: 986257171053801488891c35abc734c5, type: 2}
+  enterActions:
+  - {fileID: 11400000, guid: c5e24f9c374f3b54cbe4d7f708544e9b, type: 2}
+  - {fileID: 11400000, guid: f59e7a4d1f112b143be95b90066c8d42, type: 2}
+  exitActions:
+  - {fileID: 11400000, guid: 7e4f3b76dc3f1b145bab14044c05a4c3, type: 2}
+  transitions:
+  - decision:
+    - {fileID: 11400000, guid: a6b9b769a5ba50447890e39c7b7456cb, type: 2}
+    trueState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+    falseState: {fileID: 11400000, guid: 00d32e59c1d260b449e7bd884a0e24f7, type: 2}
+  - decision:
+    - {fileID: 11400000, guid: e3f1e894390157a45a922a97639d09f9, type: 2}
+    trueState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+    falseState: {fileID: 11400000, guid: 78dc744c6ac190d448a1e085717cacdf, type: 2}
+  - decision:
+    - {fileID: 11400000, guid: 67e864e4d01fcb540ad4143c9cdbbf9e, type: 2}
+    trueState: {fileID: 11400000, guid: 536d2a2fc2ef7e14f8c4e2e2798a7e64, type: 2}
+    falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+  sceneGizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

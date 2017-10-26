@@ -39,12 +39,11 @@ namespace StateMachine
         {
             if (nextState != remainState)
             {
-                if (nextState == null)
-                    Debug.Log("ecco");
                 currentState.OnExitState(this);
                 currentState = nextState;
                 currentState.OnEnterState(this);
-                lastActiveState = currentState;
+                if (currentState != inactiveState)
+                    lastActiveState = currentState;
                 OnExitState();
             }
         }

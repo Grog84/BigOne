@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Name: PausedBetweenFade
   m_EditorClassIdentifier: 
   actions: []
-  enterActions: []
+  enterActions:
+  - {fileID: 11400000, guid: 476fde93b9f394349afddd48b263b33b, type: 2}
   exitActions: []
   transitions:
-  - decision: {fileID: 11400000, guid: 32dfffa2d0868134997237385ad476ec, type: 2}
-    trueState: {fileID: 11400000, guid: a09be78e920c3e54dabead7a04ee2b91, type: 2}
-    falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+  - decision:
+    - {fileID: 11400000, guid: 1ecd8a1781ce76d4abcf4131e6d21b6c, type: 2}
+    trueState: {fileID: 11400000, guid: 1f08e627f2a5ad54db225594ed04d0c4, type: 2}
+    falseState: {fileID: 11400000, guid: a09be78e920c3e54dabead7a04ee2b91, type: 2}
   sceneGizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

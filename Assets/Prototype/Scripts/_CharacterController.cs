@@ -15,8 +15,8 @@ namespace Character
 
         [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
         [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
-         public bool climbingBottom;                  // The player is in the Bottom Trigger
-         public bool climbingTop;                     // The player is in the Top Trigger
+        [HideInInspector] public bool climbingBottom;                  // The player is in the Bottom Trigger
+        [HideInInspector] public bool climbingTop;                     // The player is in the Top Trigger
         [HideInInspector] public bool startClimbAnimationTop;          // Starts the descend from top
         [HideInInspector] public bool startClimbAnimationBottom;       // Starts the climb from bottom
         [HideInInspector] public bool startClimbAnimationEnd;          // Starts the end climb courutine
@@ -158,7 +158,6 @@ namespace Character
                     if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Pushable"))
                     {
                         isPushDirectionRight = true;
-
                     }
                     else
                     {
@@ -196,13 +195,12 @@ namespace Character
 
         private void OnTriggerEnter(Collider other)
         {
+
             if (other.tag == "Ladder_Bottom")
             {
                 climbCollider = other.gameObject;
                 isInClimbArea = true;
                 climbingBottom = true;
-                ActivateClimbingChoice();
-                // Debug.Log("entro");
             }
             else if (other.tag == "Ladder_Top")
             {
@@ -215,8 +213,6 @@ namespace Character
             {
                 pushCollider = other.gameObject;
                 isInPushArea = true;
-                ActivatePushingChoice();
-                Debug.Log("spingo");
             }
             if (other.tag == "UnlockedDoor" || other.tag == "LockedDoor")
             {
@@ -240,7 +236,6 @@ namespace Character
                 isInClimbArea = false;
                 climbingBottom = false;
                 isClimbDirectionRight = false;
-                // Debug.Log("esco");
             }
             if (other.tag == "Ladder_Top")
             {
@@ -248,7 +243,6 @@ namespace Character
                 isInClimbArea = false;
                 climbingTop = false;
                 isClimbDirectionRight = false;
-                // Debug.Log("esco");
             }
             if (other.tag == "PushTrigger")
             {

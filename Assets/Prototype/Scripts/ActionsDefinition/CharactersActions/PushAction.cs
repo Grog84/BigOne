@@ -21,7 +21,7 @@ namespace Character.Actions
 
         private void Push(CharacterStateController controller)
         {
-
+            #region Reycasts
             // Check the direction for the Raycast
             if (Vector3.Angle(controller.m_CharacterController.pushObject.transform.forward.normalized, controller.m_CharacterController.CharacterTansform.forward.normalized) <= 45 ||
                 Vector3.Angle(controller.m_CharacterController.pushObject.transform.forward.normalized, -controller.m_CharacterController.CharacterTansform.forward.normalized) <= 45)
@@ -43,9 +43,9 @@ namespace Character.Actions
                     out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromPushableObstacle))
                 {
 
-
+                    // Layers of Obastacles
                     if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Default") || hit.transform.gameObject.layer == LayerMask.NameToLayer("Climbable") ||
-                              hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors"))
+                              hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors")|| hit.transform.gameObject.layer == LayerMask.NameToLayer("Pushable"))
                     {
                         Debug.Log("vedo ostacolo");
                         controller.m_CharacterController.isPushLimit = true;
@@ -55,8 +55,10 @@ namespace Character.Actions
                 }
 
             }
-            // For Animator
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+#endregion
+
+            #region Animator
+            if (Input.GetAxis("Vertical")!= 0 || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
             {
                 movement = Input.GetAxis("Vertical");
             }
@@ -68,9 +70,11 @@ namespace Character.Actions
             {
                 movement = 0;
             }
+            #endregion
 
-            // For actual Movements
-            if (Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
+            #region Movements
+    
+            if (Input.GetAxis("Vertical") > 0 || Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
             {
                 forward = Input.GetAxis("Vertical");
             }
@@ -79,7 +83,7 @@ namespace Character.Actions
                 forward = 0;
             }
 
-            if (Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
+            if (Input.GetAxis("Vertical") < 0 || Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
             {
                 backward = Input.GetAxis("Vertical");
                 controller.m_CharacterController.isPushLimit = false;
@@ -99,6 +103,7 @@ namespace Character.Actions
                 controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.pushCollider.transform.forward * forward * controller.characterStats.m_PushSpeed * Time.deltaTime);//0.0.1
                 controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.pushCollider.transform.forward * backward * controller.characterStats.m_PushSpeed * Time.deltaTime);//0.0.1
             }
+#endregion
             // For Animator
             controller.m_CharacterController.m_ForwardAmount = movement;
 

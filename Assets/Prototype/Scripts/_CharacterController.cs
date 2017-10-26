@@ -152,10 +152,10 @@ namespace Character
                 if (Physics.Raycast(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, out hit, m_CharStats.m_DistanceFromPushableObject))
                 {
                     // Debug.DrawRay(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, Color.red);
-                    // Debug.Log("vedo");
+                     //Debug.Log(hit.transform == pushCollider.transform.parent);
 
 
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Pushable"))
+                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Pushable") && hit.transform == pushCollider.transform.parent)
                     {
                         isPushDirectionRight = true;
                     }
@@ -183,8 +183,11 @@ namespace Character
                 climbingTop = true;
                 ActivateClimbingChoice();
             }
-            if (other.tag == "PushTrigger")
+            if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTansform.forward, other.transform.forward) < 45)
             {
+                //Debug.Log(Vector3.Angle(CharacterTansform.forward, other.transform.forward));
+                pushCollider = other.gameObject;
+                isInPushArea = true;
                 ActivatePushingChoice();
             }
             if (other.tag == "UnlockedDoor" || other.tag == "LockedDoor")
@@ -209,7 +212,7 @@ namespace Character
                 climbingTop = true;
                 Debug.Log("entro");
             }
-            if (other.tag == "PushTrigger")
+            if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTansform.forward, other.transform.forward) < 45)
             {
                 pushCollider = other.gameObject;
                 isInPushArea = true;
@@ -244,7 +247,7 @@ namespace Character
                 climbingTop = false;
                 isClimbDirectionRight = false;
             }
-            if (other.tag == "PushTrigger")
+            if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTansform.forward, other.transform.forward) > 45)
             {
                 pushCollider = null;
                 isInPushArea = false;

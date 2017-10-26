@@ -6,13 +6,11 @@ using DG.Tweening;
 
 public class LookAtItems : MonoBehaviour {
 
-    public LookAtIK gazeAt;
-    public Transform cameraObject;
-
+    public LookAtIK gazeAt;                       // Take the LookAtIk component we want to move
+    public Transform cameraObject;                // Reference to the Camera LookAt object
     public List<Transform> targets;
-    public float maxHeadWeight;
-    public float headClamp;
 
+    [HideInInspector] public float headClamp;    // Reference to the maximum weight according to inspector values
 
 	void Start ()
     {

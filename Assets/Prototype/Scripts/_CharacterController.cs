@@ -15,8 +15,8 @@ namespace Character
 
         [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
         [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
-        [HideInInspector] public bool climbingBottom;                  // The player is in the Bottom Trigger
-        [HideInInspector] public bool climbingTop;                     // The player is in the Top Trigger
+         public bool climbingBottom;                  // The player is in the Bottom Trigger
+         public bool climbingTop;                     // The player is in the Top Trigger
         [HideInInspector] public bool startClimbAnimationTop;          // Starts the descend from top
         [HideInInspector] public bool startClimbAnimationBottom;       // Starts the climb from bottom
         [HideInInspector] public bool startClimbAnimationEnd;          // Starts the end climb courutine

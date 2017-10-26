@@ -7,29 +7,11 @@ namespace AI
     public class Cone : MonoBehaviour
     {
 
-        public ConeStats coneStats;
-        public bool isDebug;
-
         private _AgentController m_AgentController;
 
         private void Awake()
         {
             m_AgentController = GetComponentInParent<_AgentController>();
-        }
-
-        void Start()
-        {
-
-            transform.localScale.Set(coneStats.scaleX, coneStats.scaleY, coneStats.scaleZ);
-        }
-
-        private void Update()
-        {
-            if (isDebug)
-            {
-                transform.localScale.Set(coneStats.scaleX, coneStats.scaleY, coneStats.scaleZ);
-            }
-
         }
 
         private void OnTriggerEnter(Collider other)

@@ -49,6 +49,7 @@ namespace AI
         private void Awake()
         {
             m_NavMeshAgent = GetComponent<NavMeshAgent>();
+
             GameObject[] lookAtPositionsObj = GameObject.FindGameObjectsWithTag("LookAtPosition");
             lookAtPositions = new Transform[lookAtPositionsObj.Length];
             for (int i = 0; i < lookAtPositionsObj.Length; i++)
@@ -56,6 +57,7 @@ namespace AI
                 lookAtPositions[i] = lookAtPositionsObj[i].transform;
             }
             lookAtPositionCentral = GameObject.FindGameObjectsWithTag("LookAtPositionCentral")[0].transform;
+
             UpdateStats(patrolStats);
             perceptionBar = GetComponentInChildren<PerceptionBar>();
             wayPointListTransform = new Transform[wayPointList.Count];
@@ -66,7 +68,7 @@ namespace AI
 
             m_SaveComponent = gameObject.GetComponent<GuardSaveComponent>();
             m_Animator = GetComponent<Animator>();
-            eyes = transform.Find("eyes");
+            eyes = TransformDeepChildExtension.FindDeepChild(transform,"eyes");
         }
 
         public void LoadNavmeshStats()

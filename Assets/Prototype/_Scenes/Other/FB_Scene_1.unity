@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028346, g: 0.22571373, b: 0.30692244, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2621,9 +2621,27 @@ Prefab:
       propertyPath: boyLookAt
       value: 
       objectReference: {fileID: 1608906908}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 81452027933559748, guid: 346ae395e2a32cb438d3e80fd1ac485d, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 346ae395e2a32cb438d3e80fd1ac485d, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &630851365 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1245696758782788, guid: 346ae395e2a32cb438d3e80fd1ac485d,
+    type: 2}
+  m_PrefabInternal: {fileID: 630851364}
+--- !u!114 &630851366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 630851365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListenerNumber: 0
 --- !u!114 &667061714 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114982575321856154, guid: 77701d11bda0b9b4985d48ef40481d50,
@@ -2825,6 +2843,33 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8e2af980bfbe67542a70c190d0256c02, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &723565015 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1013249801369906, guid: 8e2af980bfbe67542a70c190d0256c02,
+    type: 2}
+  m_PrefabInternal: {fileID: 723565014}
+--- !u!114 &723565016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 723565015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: event:/SFX/Steps/Steps_Walks
+  PlayEvent: 11
+  StopEvent: 12
+  CollisionTag: 
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!114 &733670127 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114982575321856154, guid: 77701d11bda0b9b4985d48ef40481d50,

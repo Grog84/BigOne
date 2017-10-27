@@ -24,8 +24,8 @@ public class GMController : MonoBehaviour {
     [HideInInspector] public Transform[] allEnemiesTransform;
 
     // Variables used in order to trigger transitions when the game is not active
-     public bool isGameActive = false;
-     public CharacterActive isCharacterPlaying;
+    [HideInInspector] public bool isGameActive = false;
+    [HideInInspector] public CharacterActive isCharacterPlaying;
     [HideInInspector] public Image fadeEffect;
     
     [Range(0.5f, 5f)]
@@ -47,6 +47,8 @@ public class GMController : MonoBehaviour {
     // Main Camera
     [HideInInspector] public CameraScript m_MainCamera;
 
+    private GameObject[] players;
+
     void Awake() 
     {
         //Singleton
@@ -62,12 +64,13 @@ public class GMController : MonoBehaviour {
         fadeEffect = GameObject.Find("FadeEffect").GetComponent<Image>();
 
         isCharacterPlaying = activePlayerAtStart;
+        players = GameObject.FindGameObjectsWithTag("Player");
+        m_CharacterInterfaces = new CharacterInterface[players.Length];
     }
 
     private void Start()
     {
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        m_CharacterInterfaces = new CharacterInterface[players.Length];
+        
         playerTransform = new Transform[players.Length];
 
         for (int i = 0; i < players.Length; i++)

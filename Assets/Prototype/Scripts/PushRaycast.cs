@@ -27,10 +27,6 @@ public class PushRaycast : MonoBehaviour {
         quarterWidth = transform.GetComponent<MeshCollider>().bounds.size.x / 4;
         quarterDepth = transform.GetComponent<MeshCollider>().bounds.size.z / 4;
 
-        topLineOffset    = +quarterHight;
-        bottomLineOffset = -quarterHight;
-        verticalColumnOffsetX = +quarterWidth;
-        verticalColumnOffsetZ = +quarterDepth;
 
         // X
         objectRaycastsX = new Vector3[9];

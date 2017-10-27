@@ -56,6 +56,7 @@ public class FootstepsEmitter : MonoBehaviour
             SetParameter(e, "ReverbDiffusion", m_footstepsParameters.ReverbDiffusion);
             SetParameter(e, "ReverbTime", m_footstepsParameters.ReverbTime);
 
+            //Debug.Log("SoundStart");
             e.start();
             e.release();//Release each event instance immediately, there are fire and forget, one-shot instances. 
         }
@@ -90,6 +91,7 @@ public class FootstepsEmitter : MonoBehaviour
 
     public void MakeStep()
     {
+        //Debug.Log("Made step");
         playStep = true;
     }
 }

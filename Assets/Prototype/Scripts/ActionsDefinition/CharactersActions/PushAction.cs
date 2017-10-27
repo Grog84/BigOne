@@ -45,7 +45,8 @@ namespace Character.Actions
 
                     // Layers of Obastacles
                     if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Default") || hit.transform.gameObject.layer == LayerMask.NameToLayer("Climbable") ||
-                              hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors")|| hit.transform.gameObject.layer == LayerMask.NameToLayer("Pushable"))
+                              hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors")|| hit.transform.gameObject.layer == LayerMask.NameToLayer("Pushable") ||
+                              hit.transform.gameObject.layer == LayerMask.NameToLayer("Stairs"))
                     {
                         Debug.Log("vedo ostacolo");
                         controller.m_CharacterController.isPushLimit = true;

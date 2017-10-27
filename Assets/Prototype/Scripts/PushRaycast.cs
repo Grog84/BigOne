@@ -27,42 +27,62 @@ public class PushRaycast : MonoBehaviour {
         quarterWidth = transform.GetComponent<MeshCollider>().bounds.size.x / 4;
         quarterDepth = transform.GetComponent<MeshCollider>().bounds.size.z / 4;
 
-
+       
         // X
         objectRaycastsX = new Vector3[9];
        
-        objectRaycastsX[0] = new Vector3(-verticalColumnOffsetX * 2,        bottomLineOffset  , 0);
-        objectRaycastsX[1] = new Vector3(0                         ,        bottomLineOffset  , 0);
-        objectRaycastsX[2] = new Vector3(+verticalColumnOffsetX * 2,        bottomLineOffset  , 0);
-
-        objectRaycastsX[3] = new Vector3(-verticalColumnOffsetX * 2, 0                        , 0);
-        objectRaycastsX[4] = new Vector3(0                         , 0                        , 0);
-        objectRaycastsX[5] = new Vector3(+verticalColumnOffsetX * 2, 0                        , 0);
-
-        objectRaycastsX[6] = new Vector3(-verticalColumnOffsetX * 2, topLineOffset * 2, 0);
-        objectRaycastsX[7] = new Vector3(0                         , topLineOffset * 2, 0);
-        objectRaycastsX[8] = new Vector3(+verticalColumnOffsetX * 2, topLineOffset * 2, 0);
-
+        
         // Z
         objectRaycastsZ = new Vector3[9];
      
-        objectRaycastsZ[0] = new Vector3(0                         , bottomLineOffset , -verticalColumnOffsetZ * 2);
-        objectRaycastsZ[1] = new Vector3(0                         , bottomLineOffset ,                          0);
-        objectRaycastsZ[2] = new Vector3(0                         , bottomLineOffset , +verticalColumnOffsetZ * 2);
-
-        objectRaycastsZ[3] = new Vector3(0                         , 0                , -verticalColumnOffsetZ * 2);
-        objectRaycastsZ[4] = new Vector3(0                         , 0                ,                          0);
-        objectRaycastsZ[5] = new Vector3(0                         , 0                , +verticalColumnOffsetZ * 2);
-
-        objectRaycastsZ[6] = new Vector3(0                         , topLineOffset * 2, -verticalColumnOffsetZ * 2);
-        objectRaycastsZ[7] = new Vector3(0                         , topLineOffset * 2,                 0);
-        objectRaycastsZ[8] = new Vector3(0                         , topLineOffset * 2, +verticalColumnOffsetZ * 2);
     }
 
    
 
     private void Update()
     {
+        //Clamp Raycast to be inside the Object
+        if(bottomLineOffset < -quarterHight * 2)
+        {
+            bottomLineOffset = -quarterHight * 2;
+        }
+        else if(bottomLineOffset > 0)
+        {
+            bottomLineOffset = 0;
+        }
+
+
+        if (verticalColumnOffsetX < 0)
+        {
+            verticalColumnOffsetX = 0;
+        }
+        else if (verticalColumnOffsetX > +quarterWidth)
+        {
+            verticalColumnOffsetX = +quarterWidth;
+        }
+
+
+
+        if (verticalColumnOffsetZ < 0)
+        {
+            verticalColumnOffsetZ = 0;
+        }
+        else if (verticalColumnOffsetZ > +quarterDepth )
+        {
+            verticalColumnOffsetZ = +quarterDepth ;
+        }
+
+
+        if (topLineOffset < 0)
+        {
+            topLineOffset = 0;
+        }
+        else if (topLineOffset > +quarterHight)
+        {
+            topLineOffset = +quarterHight;
+        }
+
+
         // X
         objectRaycastsX[0] = new Vector3(-verticalColumnOffsetX * 2, bottomLineOffset ,                 0);
         objectRaycastsX[1] = new Vector3(0                         , bottomLineOffset ,                 0);

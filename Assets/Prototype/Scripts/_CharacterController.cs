@@ -433,6 +433,7 @@ namespace Character
 
         #endregion
 
+
         void Update()
         {
             if (startClimbAnimationEnd)
@@ -474,6 +475,7 @@ namespace Character
             {
                 StartCoroutine(ItemCollection());
             }
+
         }
 
     }

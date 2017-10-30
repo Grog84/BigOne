@@ -17,7 +17,7 @@ namespace AI.Actions
 
         private void UpdateState(EnemiesAIStateController controller)
         {
-            controller.m_AgentController.m_SaveComponent.activeState = GuardSaveComponent.GuardStates.Patrol;
+            controller.m_AgentController.m_SaveComponent.activeState = GuardStates.Patrol;
 
         }
     }

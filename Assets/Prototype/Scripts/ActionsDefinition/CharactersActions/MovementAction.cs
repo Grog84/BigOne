@@ -46,7 +46,7 @@ namespace Character.Actions
 
             //make the model face the camera direction
             if (m_Move != Vector3.zero)
-                controller.m_CharacterController.CharacterTansform.forward = m_Move;
+                controller.m_CharacterController.CharacterTransform.forward = m_Move;
 
             //apply gravity if needed when walking
             m_Move.y -= controller.characterStats.m_Gravity;

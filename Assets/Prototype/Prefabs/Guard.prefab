@@ -20,14 +20,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4611598647768748}
   - component: {fileID: 95041946631777876}
-  - component: {fileID: 54129281017105708}
   - component: {fileID: 136390266449606854}
   - component: {fileID: 195158568718383348}
   - component: {fileID: 114360159246085624}
   - component: {fileID: 114031046007957198}
+  - component: {fileID: 114388542434630502}
   - component: {fileID: 114301279847743488}
-  - component: {fileID: 114657527568981958}
-  - component: {fileID: 114921892275113748}
+  - component: {fileID: 114972735813137712}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Enemy
@@ -1749,7 +1748,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1013249801369906}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.14, y: 3.72, z: -4.77}
+  m_LocalPosition: {x: -5.5156717, y: 0.058647394, z: -19.636005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4744573828020444}
@@ -2222,21 +2221,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1675850199048792}
   m_Mesh: {fileID: 4300000, guid: b0b1d6cda2b909f428f8ba4232c363c1, type: 2}
---- !u!54 &54129281017105708
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1013249801369906}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!64 &64960428162646976
 MeshCollider:
   m_ObjectHideFlags: 1
@@ -2280,7 +2264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: {fileID: 11400000, guid: 56a194c2119de0148934f6b01b647ccb, type: 2}
-  checkIfGameActive: {fileID: 11400000, guid: 6eff275557f5157489b49810230a8532, type: 2}
+  checkIfGameActive: {fileID: 11400000, guid: bf3a05a8f8153d648af2b0cbbb1a72c7, type: 2}
   inactiveState: {fileID: 0}
   remainState: {fileID: 0}
   stateTimeElapsed: 0
@@ -2288,6 +2272,7 @@ MonoBehaviour:
   m_AgentController: {fileID: 0}
   stateTimer: 0
   characterInterfaces: []
+  saveState: 0
   patrolState: {fileID: 11400000, guid: 96b9c524bfb65d14b8a1b64165429806, type: 2}
   checkNavPoint: {fileID: 11400000, guid: 7cde0775bba627c45a06b82bf240ddd2, type: 2}
 --- !u!114 &114073364908913434
@@ -2360,9 +2345,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d03df075d7c1c245b28de4986d70077, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveObjName: 
+  saveObjName: Guard
   savePosition: 1
-  saveRotation: 0
+  saveRotation: 1
   setOnAwake: 0
   memorizeOnClose: 1
   activeState: 0
@@ -2383,7 +2368,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  eyes: {fileID: 0}
+  eyes: {fileID: 4531830543544974}
   lookAtPositions: []
   lookAtPositionCentral: {fileID: 0}
   wayPointListTransform: []
@@ -2408,7 +2393,7 @@ MonoBehaviour:
     type: 2}
   checkNavPointStats: {fileID: 11400000, guid: 5dd4ba0fc84cf324388ec028ae328bee, type: 2}
   chaseStats: {fileID: 11400000, guid: 32065dc82a4086b44b8649c5de072382, type: 2}
---- !u!114 &114657527568981958
+--- !u!114 &114388542434630502
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2434,7 +2419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81ae9f179708940428f48967ce60c1bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114921892275113748
+--- !u!114 &114972735813137712
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

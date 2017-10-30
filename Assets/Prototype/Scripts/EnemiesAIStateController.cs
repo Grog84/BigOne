@@ -12,6 +12,7 @@ namespace StateMachine
         [HideInInspector] public _AgentController m_AgentController;
         [HideInInspector] public float stateTimer = 0f;
         [HideInInspector] public CharacterInterface[] characterInterfaces;
+        [HideInInspector] public GuardStates saveState;
 
         [Space(5)]
         [Header("States For Saving")]

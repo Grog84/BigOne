@@ -23,8 +23,8 @@ namespace Character.Actions
         {
             #region Reycasts
             // Check the direction for the Raycast
-            if (Vector3.Angle(controller.m_CharacterController.pushObject.transform.forward.normalized, controller.m_CharacterController.CharacterTansform.forward.normalized) <= 45 ||
-                Vector3.Angle(controller.m_CharacterController.pushObject.transform.forward.normalized, -controller.m_CharacterController.CharacterTansform.forward.normalized) <= 45)
+            if (Vector3.Angle(controller.m_CharacterController.pushObject.transform.forward.normalized, controller.m_CharacterController.CharacterTransform.forward.normalized) <= 45 ||
+                Vector3.Angle(controller.m_CharacterController.pushObject.transform.forward.normalized, -controller.m_CharacterController.CharacterTransform.forward.normalized) <= 45)
             {
                 RaycastPoints = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().objectRaycastsX;
             }

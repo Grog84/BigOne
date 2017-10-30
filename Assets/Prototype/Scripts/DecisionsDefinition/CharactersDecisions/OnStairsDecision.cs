@@ -21,7 +21,7 @@ namespace Character.Decisions
         private bool CheckIsOnStairs(CharacterStateController controller)
         {
             RaycastHit hitInfo;
-            Ray ray = new Ray(controller.m_CharacterController.CharacterTansform.position, Vector3.down);
+            Ray ray = new Ray(controller.m_CharacterController.CharacterTransform.position, Vector3.down);
             Physics.Raycast(ray, out hitInfo, 0.5f, Stairs);
 
             if (Physics.Raycast(ray, out hitInfo, 0.5f, Stairs))

@@ -53,6 +53,7 @@ public class LightTestScript : MonoBehaviour
             this.gameObject.transform.position = NearestSpotlight(LightTriggerList);
         }
 
+        DayNight isDayOrNight = GMController.instance.isDayOrNight;
         //Get Level Info from GM
         //se è notte, accendi tutte le luci
         //se è giorno, spegni tutte le luci

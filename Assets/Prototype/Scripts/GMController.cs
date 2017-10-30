@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
+public enum DayNight { Day, Night}
 public class GMController : MonoBehaviour {
 
     // Transform of the active player
     public CharacterActive activePlayerAtStart;
+    public DayNight isDayOrNight;
+
 
     // Needed for Singleton pattern 
     [HideInInspector] public static GMController instance = null;

@@ -91,7 +91,6 @@ namespace Character
             UpdateSoundRange();
 
         }
-
         #region Raycast Check
 
         void ActivateDoors()

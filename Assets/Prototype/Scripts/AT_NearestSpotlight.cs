@@ -10,7 +10,7 @@ public class AT_NearestSpotlight : MonoBehaviour {
 
         float[] Distance = new float[LightConflict.Count];
         int index = -1;
-        float min = 10000000000000;
+
         for (int i = 0; i < Distance.Length; i++)
         {
             Distance[i] = Vector3.Distance(Player.transform.position, LightConflict[i].gameObject.transform.position);
@@ -26,8 +26,6 @@ public class AT_NearestSpotlight : MonoBehaviour {
             }
 
         }
-
-
         return LightConflict[index].transform.position;
     }
 

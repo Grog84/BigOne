@@ -27,15 +27,15 @@ public class AT_PlayerOnlySaveManager : AT_ProvaSalvataggio
       
     }
 
-
-    private void LoadData()
+    /*
+    private LoadData()
     {
        
         FadeFromBlack();
 
 
     }
-
+    */
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Checkpoint")

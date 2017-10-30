@@ -85,7 +85,7 @@ public class FootstepsEmitter : MonoBehaviour
         parameter.setValue(value);
     }
 
-    public virtual void MakeStep()
+    public void MakeStep()
     {
         //Debug.Log("Made step");
         playStep = true;

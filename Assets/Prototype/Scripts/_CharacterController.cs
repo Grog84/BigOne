@@ -63,6 +63,8 @@ namespace Character
 
         [HideInInspector] public bool isDefeated = false;
 
+        [HideInInspector] public FootstepsEmitter footStepsEmitter;
+
         public CharacterStats m_CharStats;
         public LayerMask m_WalkNoiseLayerMask;
         public List<GameObject> Keychain;                               // List of all the keys collected by the player
@@ -77,6 +79,7 @@ namespace Character
             m_CharController = GetComponent<CharacterController>();
             GameObject m_CameraObj = GameObject.FindGameObjectsWithTag("MainCamera")[0];
             m_Camera = m_CameraObj.transform;
+            footStepsEmitter = GetComponent<FootstepsEmitter>();
         }
 
         // Use this for initialization

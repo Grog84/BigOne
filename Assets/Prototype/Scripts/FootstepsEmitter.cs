@@ -19,11 +19,7 @@ public class FootstepsEmitter : MonoBehaviour
 
     string lastFloorName = "None";
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
+    
 
     // Update is called once per frame
     void Update()
@@ -93,5 +89,29 @@ public class FootstepsEmitter : MonoBehaviour
     {
         //Debug.Log("Made step");
         playStep = true;
+    }
+
+    public void SetState(string state)
+    {
+        switch (state)
+        {
+            case "Walk":
+                audioWalk = 1f;
+                audioRun = 0f;
+                audioCrouch = 0f;
+                break;
+            case "Run":
+                audioWalk = 0f;
+                audioRun = 1f;
+                audioCrouch = 0f;
+                break;
+            case "Crouch":
+                audioWalk = 0f;
+                audioRun = 0f;
+                audioCrouch = 1f;
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -10,18 +10,24 @@ namespace SaveGame
 
         private EnemiesAIStateController m_Controller;
 
-        public enum GuardStates { Patrol, CheckPosition, Inactive }
-
         [HideInInspector] public GuardStates activeState;
 
-        private void Awake()
+        public override void Awake()
         {
+            base.Awake();
             m_Controller = GetComponent<EnemiesAIStateController>();
+
         }
 
         public override void LoadData()
         {
             base.LoadData();
+
+            m_Controller.m_AgentController.hasHeardPlayer = false;
+            m_Controller.m_AgentController.hasSeenPlayer = false;
+
+            m_Controller.m_AgentController.m_Animator.SetFloat("Forward", 0f);
+
             activeState = (GuardStates)PlayerPrefs.GetInt(saveObjName + "status");
             switch (activeState)
             {
@@ -47,6 +53,8 @@ namespace SaveGame
         public override void SaveData()
         {
             base.SaveData();
+
+            activeState = m_Controller.saveState;
             PlayerPrefs.SetInt(saveObjName + "status", (int)activeState);
 
             switch (activeState)

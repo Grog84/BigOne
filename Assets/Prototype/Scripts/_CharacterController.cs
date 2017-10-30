@@ -45,7 +45,7 @@ namespace Character
 
         [HideInInspector] public Animator m_Animator;
         [HideInInspector] public Transform m_Camera;                   // A reference to the main camera in the scenes transform
-        [HideInInspector] public Transform CharacterTansform;          // A reference to the character assigned to the state controller transform
+        [HideInInspector] public Transform CharacterTransform;          // A reference to the character assigned to the state controller transform
         [HideInInspector] public Rigidbody m_Rigidbody;                // A reference to the rigidbody
         [HideInInspector] public CharacterController m_CharController; // A reference to the Character controller component
 
@@ -74,7 +74,7 @@ namespace Character
 
         private void Awake()
         {
-            CharacterTansform = GetComponent<Transform>();          // A reference to the character assigned to the state controller transform
+            CharacterTransform = GetComponent<Transform>();          // A reference to the character assigned to the state controller transform
             m_Animator = GetComponent<Animator>();
             m_CharController = GetComponent<CharacterController>();
             GameObject m_CameraObj = GameObject.FindGameObjectsWithTag("MainCamera")[0];
@@ -97,11 +97,11 @@ namespace Character
         void ActivateDoors()
         {
             RaycastHit hit;
-            Debug.DrawRay(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, Color.red);
+            Debug.DrawRay(CharacterTransform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTransform.forward, Color.red);
 
             if (isInDoorArea)
             {
-                if (Physics.Raycast(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, out hit, m_CharStats.m_DistanceFromDoor))
+                if (Physics.Raycast(CharacterTransform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTransform.forward, out hit, m_CharStats.m_DistanceFromDoor))
                 {
                     Debug.Log("vedo");
 
@@ -127,9 +127,9 @@ namespace Character
             {
                 RaycastHit hit;
 
-                if (Physics.Raycast(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, out hit, m_CharStats.m_DistanceFromWallClimbing))
+                if (Physics.Raycast(CharacterTransform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTransform.forward, out hit, m_CharStats.m_DistanceFromWallClimbing))
                 {
-                    Debug.DrawRay(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, Color.red);
+                    Debug.DrawRay(CharacterTransform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTransform.forward, Color.red);
 
 
 
@@ -153,7 +153,7 @@ namespace Character
             {
                 RaycastHit hit;
 
-                if (Physics.Raycast(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, out hit, m_CharStats.m_DistanceFromPushableObject))
+                if (Physics.Raycast(CharacterTransform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTransform.forward, out hit, m_CharStats.m_DistanceFromPushableObject))
                 {
                     // Debug.DrawRay(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, Color.red);
                      //Debug.Log(hit.transform == pushCollider.transform.parent);
@@ -187,7 +187,7 @@ namespace Character
                 climbingTop = true;
                 ActivateClimbingChoice();
             }
-            if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTansform.forward, other.transform.forward) < 45)
+            if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTransform.forward, other.transform.forward) < 45)
             {
                 //Debug.Log(Vector3.Angle(CharacterTansform.forward, other.transform.forward));
                 pushCollider = other.gameObject;
@@ -216,7 +216,7 @@ namespace Character
                 climbingTop = true;
                 Debug.Log("entro");
             }
-            if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTansform.forward, other.transform.forward) < 45)
+            if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTransform.forward, other.transform.forward) < 45)
             {
                 pushCollider = other.gameObject;
                 isInPushArea = true;
@@ -251,7 +251,7 @@ namespace Character
                 climbingTop = false;
                 isClimbDirectionRight = false;
             }
-            if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTansform.forward, other.transform.forward) > 45)
+            if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTransform.forward, other.transform.forward) > 45)
             {
                 pushCollider = null;
                 isInPushArea = false;
@@ -291,7 +291,7 @@ namespace Character
 
 
             m_CharController.enabled = false;
-            CharacterTansform.DOMove(endClimbAnchor.position, climbTime);
+            CharacterTransform.DOMove(endClimbAnchor.position, climbTime);
 
             yield return new WaitForSeconds(climbTime);
             startClimbAnimationEnd = false;
@@ -309,7 +309,7 @@ namespace Character
             yield return StartCoroutine(RotateToward(top));
 
             m_CharController.enabled = false;
-            CharacterTansform.DOMove(climbAnchorTop.position, climbTime);
+            CharacterTransform.DOMove(climbAnchorTop.position, climbTime);
             yield return new WaitForSeconds(climbTime);
             climbingTop = false;
             startClimbAnimationTop = false;
@@ -329,7 +329,7 @@ namespace Character
 
             m_CharController.enabled = false;
 
-            CharacterTansform.DOMove(climbAnchorBottom.position, climbTime);
+            CharacterTransform.DOMove(climbAnchorBottom.position, climbTime);
             yield return new WaitForSeconds(climbTime);
             climbingBottom = false;
             startClimbAnimationBottom = false;
@@ -338,13 +338,6 @@ namespace Character
         }
         #endregion
 
-        public IEnumerator MakeStep()
-        {
-            oneStepCoroutineController = false;
-            yield return new WaitForSeconds(1f);
-            canStep = true;
-            oneStepCoroutineController = true;
-        }
 
         #region Pushable Coroutine
 
@@ -360,9 +353,9 @@ namespace Character
 
 
 
-            CharacterTansform.DOMove(pushCollider.transform.GetChild(0).position, positionTime);
+            CharacterTransform.DOMove(pushCollider.transform.GetChild(0).position, positionTime);
             yield return new WaitForSeconds(1f);
-            pushObject.transform.SetParent(CharacterTansform);  // Set the pushable object as Child
+            pushObject.transform.SetParent(CharacterTransform);  // Set the pushable object as Child
             pushObject.GetComponent<Rigidbody>().isKinematic = false;
             isPushing = false;
             yield return null;
@@ -394,7 +387,7 @@ namespace Character
             yield return StartCoroutine(RotateToward(dir));
 
             m_CharController.enabled = false;
-            CharacterTansform.DOMove(doorCollider.transform.GetChild(0).position, InteractTime);
+            CharacterTransform.DOMove(doorCollider.transform.GetChild(0).position, InteractTime);
 
             yield return new WaitForSeconds(InteractTime);
             startDoorAnimation = false;
@@ -426,11 +419,11 @@ namespace Character
         IEnumerator RotateToward(Vector3 finalDirection)
         {
             float rotatingSpeed = 10f;
-            while ((CharacterTansform.forward - finalDirection).sqrMagnitude > 0.01f)
+            while ((CharacterTransform.forward - finalDirection).sqrMagnitude > 0.01f)
             {
                 float step = rotatingSpeed * Time.deltaTime;
-                Vector3 newDir = Vector3.RotateTowards(CharacterTansform.forward, finalDirection, step, 0.0f);
-                CharacterTansform.rotation = Quaternion.LookRotation(newDir);
+                Vector3 newDir = Vector3.RotateTowards(CharacterTransform.forward, finalDirection, step, 0.0f);
+                CharacterTransform.rotation = Quaternion.LookRotation(newDir);
                 yield return null;
             }
         }
@@ -453,11 +446,6 @@ namespace Character
             if (startClimbAnimationBottom)
             {
                 StartCoroutine(ReachPointBottom());
-            }
-
-            if (!canStep && oneStepCoroutineController)
-            {
-                StartCoroutine(MakeStep());
             }
 
             if (isPushing)

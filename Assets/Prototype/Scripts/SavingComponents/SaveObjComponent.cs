@@ -36,7 +36,7 @@ namespace SaveGame
         ObjectPosition ObjPos;
 
 
-        private void Awake()
+        public virtual void Awake()
         {
             saveObjName = gameObject.name + transform.position.x.ToString() + transform.position.y.ToString() + transform.position.z.ToString();
 
@@ -66,7 +66,7 @@ namespace SaveGame
                 if (PlayerPrefs.HasKey(saveObjName + "PositionX") && PlayerPrefs.HasKey(saveObjName + "PositionY") && PlayerPrefs.HasKey(saveObjName + "PositionZ"))
                 {
                     //Debug.Log("Caricate Coordinate di: " + saveObjName + " x=" + ObjPos.x + " y=" + ObjPos.y + " z=" + ObjPos.z);
-                    transform.position = new Vector3(PlayerPrefs.GetFloat(gameObject.name + "PositionX"),
+                    transform.position = new Vector3(PlayerPrefs.GetFloat(saveObjName + "PositionX"),
                         PlayerPrefs.GetFloat(saveObjName + "PositionY"), PlayerPrefs.GetFloat(saveObjName + "PositionZ"));
                 }
 

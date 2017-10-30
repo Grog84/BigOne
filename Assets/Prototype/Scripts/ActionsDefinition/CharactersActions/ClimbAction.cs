@@ -52,12 +52,12 @@ namespace Character.Actions
 
             if (!controller.m_CharacterController.climbingTop)
             {
-                controller.m_CharacterController.CharacterTansform.Translate(Vector3.up * up * controller.characterStats.m_ClimbSpeed * Time.deltaTime);//0.0.1
+                controller.m_CharacterController.CharacterTransform.Translate(Vector3.up * up * controller.characterStats.m_ClimbSpeed * Time.deltaTime);//0.0.1
 
             }
             if (!controller.m_CharacterController.climbingBottom)
             {
-                controller.m_CharacterController.CharacterTansform.Translate(Vector3.up * down * controller.characterStats.m_ClimbSpeed * Time.deltaTime);//0.0.1
+                controller.m_CharacterController.CharacterTransform.Translate(Vector3.up * down * controller.characterStats.m_ClimbSpeed * Time.deltaTime);//0.0.1
 
             }
             // Animator

@@ -20,10 +20,10 @@ namespace Character.Actions
         {
             
             RaycastHit hit;
-            Debug.DrawRay(controller.m_CharacterController.CharacterTansform.position + Vector3.up * controller.m_CharacterController.m_CharController.bounds.size.y / 2.0f, controller.m_CharacterController.CharacterTansform.forward, Color.red);
+            Debug.DrawRay(controller.m_CharacterController.CharacterTransform.position + Vector3.up * controller.m_CharacterController.m_CharController.bounds.size.y / 2.0f, controller.m_CharacterController.CharacterTransform.forward, Color.red);
 
-            if (Physics.Raycast(controller.m_CharacterController.CharacterTansform.position + Vector3.up * controller.m_CharacterController.m_CharController.bounds.size.y / 2.0f,
-                controller.m_CharacterController.CharacterTansform.forward, out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromWallClimbing))
+            if (Physics.Raycast(controller.m_CharacterController.CharacterTransform.position + Vector3.up * controller.m_CharacterController.m_CharController.bounds.size.y / 2.0f,
+                controller.m_CharacterController.CharacterTransform.forward, out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromWallClimbing))
             {
                 Debug.Log("vedo");
 

@@ -15,7 +15,7 @@ namespace Character.Actions
 
         public void AudioWalk(CharacterStateController controller)
         {
-            controller.footStepsEmitter.SetState("Walk");
+            controller.m_CharacterController.footStepsEmitter.SetState("Walk");
         }
 
     }

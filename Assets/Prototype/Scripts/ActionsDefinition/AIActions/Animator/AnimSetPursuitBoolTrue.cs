@@ -6,7 +6,7 @@ using StateMachine;
 namespace AI.Actions
 {
     [CreateAssetMenu(menuName = "Prototype/AIActions/Animator/ActivatePursuit")]
-    public class AnimSetpursuitBoolTrue : _Action
+    public class AnimSetPursuitBoolTrue : _Action
     {
 
         public override void Execute(EnemiesAIStateController controller)

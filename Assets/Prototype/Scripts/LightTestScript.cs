@@ -25,7 +25,7 @@ public class LightTestScript : MonoBehaviour
         }
 
     }
-  
+
     private void Update()
     {
         Debug.Log(LightTriggerList.Count);
@@ -33,27 +33,32 @@ public class LightTestScript : MonoBehaviour
         {
             //Luce Fuori
             this.gameObject.transform.position = Origin;
-          //  this.GetComponent<Light>().type = LightType.Directional;
+            //  this.GetComponent<Light>().type = LightType.Directional;
         }
-       else if (LightTriggerList.Count ==1)
+        else if (LightTriggerList.Count == 1)
         {
-            this.gameObject.transform.position = LightTriggerList[0].gameObject.transform.position+Vector3.up;
+            this.gameObject.transform.position = LightTriggerList[0].gameObject.transform.position + Vector3.up;
             this.GetComponent<Light>().color = Color.white;
-     //    this.GetComponent<Light>().type = LightType.Point;
+            //    this.GetComponent<Light>().type = LightType.Point;
             //Butta La luce alla prima luce
         }
-       else if (LightTriggerList.Count >= 2)
+        else if (LightTriggerList.Count >= 2)
         {
             foreach (Light item in LightTriggerList)
             {
                 Debug.DrawLine(
-                    Player.transform.position, 
+                    Player.transform.position,
                     item.gameObject.transform.position);
             }
             this.gameObject.transform.position = NearestSpotlight(LightTriggerList);
         }
-    }
 
+        //Get Level Info from GM
+        //se è notte, accendi tutte le luci
+        //se è giorno, spegni tutte le luci
+
+
+    }
     public static void TriggerLightEnter(GameObject _light)
     {
         LightTriggerList.Add((Light)_light.GetComponent<Light>());

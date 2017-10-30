@@ -76,7 +76,7 @@ public class AT_ProvaSalvataggio : MonoBehaviour
         }
     }
     //Caricamento dati (Se presenti)
-    public void LoadData()
+    public  void LoadData()
     {
         if (savePosition)
         {

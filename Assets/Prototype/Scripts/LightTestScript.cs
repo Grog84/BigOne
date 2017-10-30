@@ -10,6 +10,7 @@ public class LightTestScript : MonoBehaviour
     Vector3 Origin = new Vector3(-0.12f, 20.77f, 3.49f);
     private List<Light> LightList = new List<Light>();
     public static List<Light> LightTriggerList = new List<Light>();
+
     private void Start()
     {
         //Trovo Tutte le luci

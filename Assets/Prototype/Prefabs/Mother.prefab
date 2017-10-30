@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 114159225348741878}
   - component: {fileID: 114457326688147732}
   - component: {fileID: 114724338851888376}
+  - component: {fileID: 114358415208295798}
   m_Layer: 8
   m_Name: Mother
   m_TagString: Player
@@ -2865,6 +2866,23 @@ MonoBehaviour:
   cameraObject: {fileID: 0}
   targets: []
   headClamp: 0
+--- !u!114 &114358415208295798
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1046753759377328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1606c19e96abc3544a2a5d507c75d688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventPath: event:/SFX/Steps
+  playStep: 0
+  origin:
+  - {fileID: 4409180782181108}
+  - {fileID: 4998304293270240}
+  - {fileID: 4159851523659872}
 --- !u!114 &114457326688147732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2942,7 +2960,7 @@ MonoBehaviour:
   charSize: 0
   m_Animator: {fileID: 0}
   m_Camera: {fileID: 0}
-  CharacterTansform: {fileID: 0}
+  CharacterTransform: {fileID: 0}
   m_Rigidbody: {fileID: 0}
   m_CharController: {fileID: 0}
   climbCollider: {fileID: 0}
@@ -2955,6 +2973,7 @@ MonoBehaviour:
   pushObject: {fileID: 0}
   pushCollider: {fileID: 0}
   isDefeated: 0
+  footStepsEmitter: {fileID: 0}
   m_CharStats: {fileID: 11400000, guid: a2dd8df195e7e384aa94a2d0d17f47b3, type: 2}
   m_WalkNoiseLayerMask:
     serializedVersion: 2

@@ -299,6 +299,7 @@ GameObject:
   - component: {fileID: 114553567268930278}
   - component: {fileID: 114319331313540930}
   - component: {fileID: 114951182589854320}
+  - component: {fileID: 114707480430341444}
   m_Layer: 8
   m_Name: Boy
   m_TagString: Player
@@ -2346,7 +2347,7 @@ MonoBehaviour:
   remainState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
   stateTimeElapsed: 0
   lastActiveState: {fileID: 11400000, guid: 0671d112d18c20d43959d00b038f5c4a, type: 2}
-  characterStats: {fileID: 11400000, guid: 6548a679fde78b44d9641d8ff222c908, type: 2}
+  characterStats: {fileID: 11400000, guid: a2dd8df195e7e384aa94a2d0d17f47b3, type: 2}
   thisCharacter: 0
   gameStartState: {fileID: 11400000, guid: 94f03c507bbcfec4ba82d6ec06fb81c3, type: 2}
   defeatedState: {fileID: 11400000, guid: 536d2a2fc2ef7e14f8c4e2e2798a7e64, type: 2}
@@ -2872,7 +2873,7 @@ MonoBehaviour:
   charSize: 0
   m_Animator: {fileID: 95539346152527064}
   m_Camera: {fileID: 0}
-  CharacterTansform: {fileID: 4213731339692590}
+  CharacterTransform: {fileID: 0}
   m_Rigidbody: {fileID: 0}
   m_CharController: {fileID: 143626487709842166}
   climbCollider: {fileID: 0}
@@ -2885,7 +2886,8 @@ MonoBehaviour:
   pushObject: {fileID: 0}
   pushCollider: {fileID: 0}
   isDefeated: 0
-  m_CharStats: {fileID: 11400000, guid: 6548a679fde78b44d9641d8ff222c908, type: 2}
+  footStepsEmitter: {fileID: 0}
+  m_CharStats: {fileID: 11400000, guid: a2dd8df195e7e384aa94a2d0d17f47b3, type: 2}
   m_WalkNoiseLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -2959,6 +2961,23 @@ MonoBehaviour:
   saveRotation: 1
   setOnAwake: 0
   memorizeOnClose: 1
+--- !u!114 &114707480430341444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236579459611486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1606c19e96abc3544a2a5d507c75d688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventPath: event:/SFX/Steps
+  playStep: 0
+  origin:
+  - {fileID: 4042092016516534}
+  - {fileID: 4620284774424666}
+  - {fileID: 4511355375746734}
 --- !u!114 &114888755817776138
 MonoBehaviour:
   m_ObjectHideFlags: 1

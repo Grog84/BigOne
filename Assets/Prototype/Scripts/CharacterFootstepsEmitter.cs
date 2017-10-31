@@ -64,6 +64,7 @@ public class CharacterFootstepsEmitter : FootstepsEmitter
 
     private void OnDrawGizmos()
     {
+        if (!Application.isPlaying) return;
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, Mathf.Sqrt(controller.m_WalkSoundrange_sq));
     }

@@ -36,8 +36,6 @@ namespace Character
 
         [HideInInspector] public bool canStep = true;
         [HideInInspector] public float m_WalkSoundrange_sq;   // squared value
-        [HideInInspector] public float m_CrouchSoundrange_sq; // squared value
-        [HideInInspector] public float m_RunSoundrange_sq;    // squared value
         [HideInInspector] public float floorNoiseMultiplier;
 
         [HideInInspector] public float charDepth;
@@ -64,6 +62,7 @@ namespace Character
         [HideInInspector] public bool isDefeated = false;
 
         [HideInInspector] public FootstepsEmitter footStepsEmitter;
+        [HideInInspector] public float walkStatusRange = 1f;
 
         public CharacterStats m_CharStats;
         public LayerMask m_WalkNoiseLayerMask;
@@ -88,7 +87,7 @@ namespace Character
             isInClimbArea = false;
             isInPushArea = false;
             ray_length = m_CharController.bounds.size.y / 2.0f + 0.1f;
-            UpdateSoundRange();
+            
 
         }
         #region Raycast Check
@@ -275,11 +274,9 @@ namespace Character
 
         #endregion
 
-        private void UpdateSoundRange()
+        private void UpdateSoundRange()  // This could be improved by updating only the data necessary
         {
-            m_WalkSoundrange_sq = m_CharStats.m_WalkSoundrange * m_CharStats.m_WalkSoundrange;
-            m_CrouchSoundrange_sq = m_CharStats.m_CrouchSoundrange * m_CharStats.m_CrouchSoundrange;
-            m_RunSoundrange_sq = m_CharStats.m_RunSoundrange * m_CharStats.m_RunSoundrange;
+            m_WalkSoundrange_sq = walkStatusRange * walkStatusRange * m_ForwardAmount;
         }
 
         #region Climb Coroutine
@@ -432,6 +429,8 @@ namespace Character
 
         void Update()
         {
+            UpdateSoundRange();
+
             if (startClimbAnimationEnd)
             {
                 StartCoroutine(ReachPointEnd());

@@ -350,7 +350,7 @@ namespace Character
 
 
             CharacterTransform.DOMove(pushCollider.transform.GetChild(0).position, positionTime);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(positionTime);
             pushObject.transform.SetParent(CharacterTransform);  // Set the pushable object as Child
             pushObject.GetComponent<Rigidbody>().isKinematic = false;
             isPushing = false;

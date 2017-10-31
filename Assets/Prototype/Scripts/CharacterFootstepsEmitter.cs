@@ -62,10 +62,10 @@ public class CharacterFootstepsEmitter : FootstepsEmitter
 
     }
 
-    private void OnDrawGizmos()
+    /*private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, controller.m_WalkSoundrange_sq);
-    }
+    }*/
 
 }

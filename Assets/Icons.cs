@@ -17,44 +17,78 @@ public class Icons : MonoBehaviour
 
 	void Update ()
     {
-        // Climb Icon
-		if(controllerBoy.thisCharacter == CharacterActive.Boy && controllerBoy.m_CharacterController.isClimbDirectionRight)
+        // If Boy Is Active
+        if (GMController.instance.isCharacterPlaying == controllerBoy.thisCharacter)
         {
-            gameObject.transform.Find("Climb").gameObject.SetActive(true);
-        }
-        else
-        {
-            gameObject.transform.Find("Climb").gameObject.SetActive(false);
-        }
-
-        // Push Icon
-        if (controllerMother.thisCharacter == CharacterActive.Mother && controllerMother.m_CharacterController.isPushDirectionRight)
-        {
-            gameObject.transform.Find("Push").gameObject.SetActive(true);
-        }
-        else
-        {
+            // Set Push Icon False
             gameObject.transform.Find("Push").gameObject.SetActive(false);
-        }
+            
+            // Climb Icon
+            if (controllerBoy.thisCharacter == CharacterActive.Boy && controllerBoy.m_CharacterController.isClimbDirectionRight)
+            {
+                gameObject.transform.Find("Climb").gameObject.SetActive(true);
+            }
+            else
+            {
+                gameObject.transform.Find("Climb").gameObject.SetActive(false);
+            }
 
-        // Door Icon
-        if ( controllerMother.m_CharacterController.isDoorDirectionRight || controllerBoy.m_CharacterController.isDoorDirectionRight)
-        {
-            gameObject.transform.Find("Door").gameObject.SetActive(true);
+            // Door Icon 
+            if (controllerBoy.m_CharacterController.isDoorDirectionRight && !controllerBoy.m_CharacterController.isClimbDirectionRight)
+            {
+                gameObject.transform.Find("Door").gameObject.SetActive(true);
+            }
+            else
+            {
+                gameObject.transform.Find("Door").gameObject.SetActive(false);
+            }
+            // Collect Icon
+            if (controllerBoy.m_CharacterController.isInKeyArea && !controllerBoy.m_CharacterController.isClimbDirectionRight)
+            {
+                gameObject.transform.Find("Key").gameObject.SetActive(true);
+            }
+            else
+            {
+                gameObject.transform.Find("Key").gameObject.SetActive(false);
+            }
         }
-        else
+        // If Mother Is Active
+        else if (GMController.instance.isCharacterPlaying == controllerMother.thisCharacter)
         {
-            gameObject.transform.Find("Door").gameObject.SetActive(false);
+            // Set Climb Icon False
+            gameObject.transform.Find("Climb").gameObject.SetActive(false);
+
+            // Push Icon
+            if (controllerMother.thisCharacter == CharacterActive.Mother && controllerMother.m_CharacterController.isPushDirectionRight)
+            {
+                gameObject.transform.Find("Push").gameObject.SetActive(true);
+            }
+            else
+            {
+                gameObject.transform.Find("Push").gameObject.SetActive(false);
+            }
+            
+            // Door Icon
+            if ( controllerMother.m_CharacterController.isDoorDirectionRight && !controllerMother.m_CharacterController.isPushDirectionRight)
+            {
+                gameObject.transform.Find("Door").gameObject.SetActive(true);
+            }
+            else
+            {
+                gameObject.transform.Find("Door").gameObject.SetActive(false);
+            }
+           
+            // Collect Icon
+            if (controllerMother.m_CharacterController.isInKeyArea && !controllerMother.m_CharacterController.isPushDirectionRight)
+            {
+                gameObject.transform.Find("Key").gameObject.SetActive(true);
+            }
+            else
+            {
+                gameObject.transform.Find("Key").gameObject.SetActive(false);
+            }
         }
-        // Collect Icon
-        if (controllerMother.m_CharacterController.isInKeyArea || controllerBoy.m_CharacterController.isInKeyArea)
-        {
-            gameObject.transform.Find("Key").gameObject.SetActive(true);
-        }
-        else
-        {
-            gameObject.transform.Find("Key").gameObject.SetActive(false);
-        }
+        
 
     }
 }

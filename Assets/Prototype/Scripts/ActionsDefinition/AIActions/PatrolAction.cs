@@ -27,7 +27,18 @@ namespace AI.Actions
                     controller.m_AgentController.checkingWayPoint = controller.m_AgentController.nextWayPoint;
                 }
 
-                controller.m_AgentController.nextWayPoint = (controller.m_AgentController.nextWayPoint + 1) % controller.m_AgentController.wayPointList.Count;
+                if (controller.m_AgentController.randomPick)
+                {
+                    int nextPoint = controller.m_AgentController.nextWayPoint;
+                    while (nextPoint == controller.m_AgentController.nextWayPoint)
+                    {
+                        nextPoint = Random.Range(0, controller.m_AgentController.wayPointList.Count);
+                    }
+                    controller.m_AgentController.nextWayPoint = nextPoint;
+
+                }
+                else
+                    controller.m_AgentController.nextWayPoint = (controller.m_AgentController.nextWayPoint + 1) % controller.m_AgentController.wayPointList.Count;
             }
 
         }

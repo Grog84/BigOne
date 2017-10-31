@@ -8,7 +8,8 @@ namespace AI
 {
     public class _AgentController : MonoBehaviour
     {
-
+        [Header("Agent Navigation")]
+        public bool randomPick;
         public List<NavPoint> wayPointList;
 
         [HideInInspector] public Transform eyes;

@@ -17,7 +17,7 @@ public class CharacterFootstepsEmitter : FootstepsEmitter
     public override void MakeStep()
     {
         base.MakeStep();
-        Debug.Log(controller.m_WalkSoundrange_sq);
+        //Debug.Log(controller.m_WalkSoundrange_sq);
 
         // Controllo nemici a tiro d'orecchio
 
@@ -28,7 +28,7 @@ public class CharacterFootstepsEmitter : FootstepsEmitter
             //if (distance < controller.m_CharacterController.m_WalkSoundrange_sq * Mathf.Pow(controller.m_CharacterController.floorNoiseMultiplier, 2.0f))
             if (distance < controller.m_WalkSoundrange_sq)
             {
-                Debug.Log(" Guard in Range ");
+                //Debug.Log(" Guard in Range ");
                 EmitSound(enemyPosition);
             }
         }
@@ -62,10 +62,10 @@ public class CharacterFootstepsEmitter : FootstepsEmitter
 
     }
 
-    /*private void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, controller.m_WalkSoundrange_sq);
-    }*/
+        Gizmos.DrawWireSphere(transform.position, Mathf.Sqrt(controller.m_WalkSoundrange_sq));
+    }
 
 }

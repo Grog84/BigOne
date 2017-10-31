@@ -16,7 +16,9 @@ namespace AI.Actions
 
         private void UpdateAnimatorForStartPursuit(EnemiesAIStateController controller)
         {
-            controller.m_AgentController.m_Animator.SetBool("isChasing", true);
+            //controller.m_AgentController.m_Animator.SetBool("isChasing", true);
+            controller.m_AgentController.m_Animator.SetFloat("Forward", controller.m_AgentController.m_ForwardAmount, 0.1f, Time.deltaTime);
+            controller.m_AgentController.m_Animator.SetFloat("Turn", controller.m_AgentController.m_TurnAmount, 0.1f, Time.deltaTime);
 
         }
     }

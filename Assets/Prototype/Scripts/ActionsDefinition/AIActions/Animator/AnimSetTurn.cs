@@ -5,8 +5,8 @@ using StateMachine;
 
 namespace AI.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/AIActions/Animator/ActivatePatrol")]
-    public class AnimSetPatrolBoolTrue : _Action
+    [CreateAssetMenu(menuName = "Prototype/AIActions/Animator/ResetTurn")]
+    public class AnimSetTurn : _Action
     {
 
         public override void Execute(EnemiesAIStateController controller)
@@ -17,8 +17,7 @@ namespace AI.Actions
         private void UpdateAnimatorForStartPatrol(EnemiesAIStateController controller)
         {
             //controller.m_AgentController.m_Animator.SetBool("isPatrolling", true);
-            controller.m_AgentController.m_Animator.SetFloat("Forward", Mathf.Clamp(controller.m_AgentController.m_ForwardAmount, 0f, 0.5f), 0.1f, Time.deltaTime);
-            controller.m_AgentController.m_Animator.SetFloat("Turn", Mathf.Clamp(controller.m_AgentController.m_TurnAmount, -0.5f, 0.5f), 0.1f, Time.deltaTime);
+            controller.m_AgentController.m_Animator.SetFloat("Turn", 0, 0.1f, Time.deltaTime);
         }
     }
 }

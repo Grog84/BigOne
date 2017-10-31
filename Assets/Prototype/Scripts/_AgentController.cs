@@ -33,6 +33,10 @@ namespace AI
         [HideInInspector] public MyAgentStats agentStats;
         [HideInInspector] public float sightPercentage = 0f;
 
+        [HideInInspector] public Vector3 move;
+        [HideInInspector] public float m_TurnAmount;
+        [HideInInspector] public float m_ForwardAmount;
+
         [HideInInspector] public Animator m_Animator;
 
         [HideInInspector] public GuardSaveComponent m_SaveComponent;
@@ -144,12 +148,13 @@ namespace AI
             sightPercentage = Mathf.Clamp(sightPercentage, 0f, 100f);
             perceptionBar.SetFillingPerc(sightPercentage);
 
-            //move = m_NavMeshAgent.desiredVelocity;
-            //if (move.magnitude > 1f) move.Normalize();
-            //move = transform.InverseTransformDirection(move);
-            //move = Vector3.ProjectOnPlane(move, m_GroundNormal);
-            //m_TurnAmount = Mathf.Atan2(move.x, move.z);
-            //m_ForwardAmount = move.z;
+            // Turn and Forward Implementation
+            move = m_NavMeshAgent.desiredVelocity;
+            if (move.magnitude > 1f) move.Normalize();
+            move = transform.InverseTransformDirection(move);
+            move = Vector3.ProjectOnPlane(move, Vector3.down);
+            m_TurnAmount = Mathf.Atan2(move.x, move.z);
+            m_ForwardAmount = move.z;
 
 
 

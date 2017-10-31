@@ -5,8 +5,8 @@ using StateMachine;
 
 namespace AI.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/AIActions/Animator/DeactivatePatrol")]
-    public class AnimSetPatrolBoolFalse : _Action
+    [CreateAssetMenu(menuName = "Prototype/AIActions/Animator/ResetForward")]
+    public class AnimSetForward : _Action
     {
 
         public override void Execute(EnemiesAIStateController controller)
@@ -16,8 +16,8 @@ namespace AI.Actions
 
         private void UpdateAnimatorForStartPatrol(EnemiesAIStateController controller)
         {
-            controller.m_AgentController.m_Animator.SetBool("isPatrolling", false);
-
+            //controller.m_AgentController.m_Animator.SetBool("isPatrolling", true);
+            controller.m_AgentController.m_Animator.SetFloat("Forward", 0, 0.1f, Time.deltaTime);
         }
     }
 }

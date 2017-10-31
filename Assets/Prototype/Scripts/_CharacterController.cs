@@ -468,5 +468,10 @@ namespace Character
 
         }
 
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawWireSphere(transform.position, walkStatusRange);
+        }
+
     }
 }

@@ -27,6 +27,7 @@ namespace AI
         [HideInInspector] public int checkingWayPoint = 0;
         [HideInInspector] public bool isCheckingNavPoint = false;
         [HideInInspector] public float checkNavPointTime = 0f, navPointTimer = 0f;
+        [HideInInspector] public Vector3 randomDestination = Vector3.zero;
 
         [HideInInspector] public Transform chaseTarget;
         [HideInInspector] public NavMeshAgent m_NavMeshAgent;

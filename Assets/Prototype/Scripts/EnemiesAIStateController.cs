@@ -47,6 +47,7 @@ namespace StateMachine
         public override void Update()
         {
             base.Update();
+            stateTimeElapsed += Time.deltaTime;
 
             if (!checkIfGameActive.Decide(this) && currentState != inactiveState)
             {

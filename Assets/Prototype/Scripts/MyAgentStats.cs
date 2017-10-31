@@ -17,8 +17,7 @@ public class MyAgentStats : ScriptableObject {
     public float torsoMultiplier = 10.0f;
     public float noSeeMultiplier = 0.3f;
     [Space(10)]
-    public float localSearchRange = 20f;
-    public float lookRange = 8f;
-    public float lookSphereCastRadius = 0.5f;
+    public float localSearchRange = 10f;
+    public float localSearchTime = 10f;
 
 }

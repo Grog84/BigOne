@@ -17,21 +17,23 @@ namespace AI.Decisions
 
         private bool Look(EnemiesAIStateController controller)
         {
-            RaycastHit hit;
+            //RaycastHit hit;
 
-            Debug.DrawRay(controller.m_AgentController.eyes.position, controller.m_AgentController.eyes.forward.normalized * controller.m_AgentController.agentStats.lookRange, Color.green);
+            //Debug.DrawRay(controller.m_AgentController.eyes.position, controller.m_AgentController.eyes.forward.normalized * controller.m_AgentController.agentStats.lookRange, Color.green);
 
-            //condizoine per il fov
-            if (Physics.SphereCast(controller.m_AgentController.eyes.position, controller.m_AgentController.agentStats.lookSphereCastRadius, controller.m_AgentController.eyes.forward, out hit, controller.m_AgentController.agentStats.lookRange)
-                && hit.collider.CompareTag("Player"))
-            {
-                controller.m_AgentController.chaseTarget = hit.transform;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            ////condizoine per il fov
+            //if (Physics.SphereCast(controller.m_AgentController.eyes.position, controller.m_AgentController.agentStats.lookSphereCastRadius, controller.m_AgentController.eyes.forward, out hit, controller.m_AgentController.agentStats.lookRange)
+            //    && hit.collider.CompareTag("Player"))
+            //{
+            //    controller.m_AgentController.chaseTarget = hit.transform;
+            //    return true;
+            //}
+            //else
+            //{
+            //    return false;
+            //}
+
+            return true;
         }
     }
 }

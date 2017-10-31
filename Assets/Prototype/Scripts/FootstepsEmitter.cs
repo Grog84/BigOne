@@ -64,10 +64,13 @@ public class FootstepsEmitter : MonoBehaviour
         if (Physics.Raycast(transform.position, Vector3.down, out hit, 1000.0f))
         {
             Floor thisFloor = hit.transform.GetComponent<Floor>();
-            string thisFloorName = thisFloor.GetFloorName();
-            if (lastFloorName != thisFloorName)
+            if (thisFloor != null)
             {
-                m_footstepsParameters = thisFloor.GetFloorParameters();
+                string thisFloorName = thisFloor.GetFloorName();
+                if (lastFloorName != thisFloorName)
+                {
+                    m_footstepsParameters = thisFloor.GetFloorParameters();
+                }
             }
         }
 

@@ -9,6 +9,7 @@ public class LookAtItems : MonoBehaviour {
     public LookAtIK gazeAt;                       // Take the LookAtIk component we want to move
     public Transform cameraObject;                // Reference to the Camera LookAt object
     public List<Transform> targets;
+    public GameObject currentItem;
 
     [HideInInspector] public float headClamp;    // Reference to the maximum weight according to inspector values
 
@@ -34,12 +35,14 @@ public class LookAtItems : MonoBehaviour {
             if(i == 0)
             {
                 gazeAt.solver.target = targets[i];
+                currentItem = targets[i].gameObject;
             }
-            
+            // Look the closest item
             else if ((Vector3.Distance(gameObject.transform.parent.position, targets[i].position)) < 
                    (Vector3.Distance(gameObject.transform.parent.position, targets[i-1].position)))
                  {
                      gazeAt.solver.target = targets[i];
+                     currentItem = targets[i].gameObject;
                  }
         }
     }
@@ -48,7 +51,7 @@ public class LookAtItems : MonoBehaviour {
     {
         targets.Remove(other.transform);
         gazeAt.solver.headWeight = 0;
-
+        currentItem = null;
         if (targets.Count == 0)
         {
             gazeAt.solver.target = cameraObject;
@@ -58,10 +61,22 @@ public class LookAtItems : MonoBehaviour {
 
     void LateUpdate ()
     {
+        // Turn head speed
         if (gazeAt.solver.headWeight < headClamp)
         {
             gazeAt.solver.headWeight += Time.deltaTime;
         }
 
+        // Check if currentItem has been picked up
+        if (currentItem != null && currentItem.activeSelf == false)
+        {   
+            targets.Remove(currentItem.transform);
+            if (targets.Count == 0)
+            {
+                gazeAt.solver.target = cameraObject;
+                gazeAt.solver.headWeight = 0;
+                currentItem = null;
+            }
+        }
     }
 }

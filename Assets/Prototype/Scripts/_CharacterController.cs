@@ -101,7 +101,6 @@ namespace Character
             {
                 if (Physics.Raycast(CharacterTransform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTransform.forward, out hit, m_CharStats.m_DistanceFromDoor))
                 {
-                    Debug.Log("vedo");
 
                     if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors"))
                     {
@@ -134,7 +133,6 @@ namespace Character
                     if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Climbable"))
                     {
                         isClimbDirectionRight = true;
-                        Debug.Log("vedo");
 
                     }
                     else
@@ -177,7 +175,6 @@ namespace Character
         {
             if (other.tag == "Ladder_Bottom")
             {
-                //climbingBottom = true;
                 ActivateClimbingChoice();
             }
             if (other.tag == "Ladder_Top")
@@ -212,7 +209,6 @@ namespace Character
                 climbCollider = other.gameObject;
                 isInClimbArea = true;
                 climbingTop = true;
-                Debug.Log("entro");
             }
             if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTransform.forward, other.transform.forward) < 45)
             {
@@ -223,13 +219,11 @@ namespace Character
             {
                 doorCollider = other.gameObject;
                 isInDoorArea = true;
-                Debug.Log("apro");
             }
             if (other.tag == "Key")
             {
                 KeyCollider = other.gameObject;
                 isInKeyArea = true;
-                Debug.Log("prendo");
             }
         }
 
@@ -254,20 +248,17 @@ namespace Character
                 pushCollider = null;
                 isInPushArea = false;
                 isPushDirectionRight = false;
-                Debug.Log("spingo");
             }
             if (other.tag == "UnlockedDoor" || other.tag == "LockedDoor")
             {
                 doorCollider = null;
                 isInDoorArea = false;
                 isDoorDirectionRight = false;
-                Debug.Log("chiudo");
             }
             if (other.tag == "Key")
             {
                 KeyCollider = null;
                 isInKeyArea = false;
-                Debug.Log("lascio");
             }
 
         }

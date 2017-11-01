@@ -5,8 +5,8 @@ using StateMachine;
 
 namespace Character.Decisions
 {
-    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/ItemCollectDecision")]
-    public class ItemCollectDecision : Decision
+    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/ItemCollectDecisionBoy")]
+    public class ItemCollectDecisionBoy : Decision
     {
         public override bool Decide(CharacterStateController controller)
         {
@@ -16,7 +16,7 @@ namespace Character.Decisions
 
         private bool CheckIfItemCollect(CharacterStateController controller)
         {
-            if (controller.m_CharacterController.isInKeyArea && !controller.m_CharacterController.isPushDirectionRight && 
+            if (controller.m_CharacterController.isInKeyArea && !controller.m_CharacterController.isClimbDirectionRight && 
                 !controller.m_CharacterController.isDoorDirectionRight && Input.GetButtonDown("Interact"))
             {
 

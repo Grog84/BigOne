@@ -112,6 +112,8 @@ public class LightTestScript : MonoBehaviour
     {
         LightTriggerList.Remove((Light)_light.GetComponent<Light>());
     }
+
+
     public  Vector3 NearestSpotlight(List<Light> LightConflict)
     {
 
@@ -133,7 +135,7 @@ public class LightTestScript : MonoBehaviour
             }
 
         }
-
+        LightConflict[index].GetComponent<Light>().shadows = LightShadows.Soft;
 
         return LightConflict[index].transform.position;
     }

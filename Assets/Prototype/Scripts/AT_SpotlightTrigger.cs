@@ -48,7 +48,7 @@ public class AT_SpotlightTrigger : MonoBehaviour
         if (other.tag == "Player")
         {
             LightTestScript.TriggerLightEnter(this.gameObject);
- 
+          //  this.GetComponent<Light>().shadows = LightShadows.Soft;
         }
 
     }
@@ -57,6 +57,7 @@ public class AT_SpotlightTrigger : MonoBehaviour
         if (other.tag == "Player")
         {
             LightTestScript.TriggerLightExit(this.gameObject);
+            //this.GetComponent<Light>().shadows = LightShadows.Soft;
         }
     }
 }

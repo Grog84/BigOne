@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SaveGame
 {
@@ -22,6 +23,8 @@ namespace SaveGame
         [Tooltip("Save the object when the applicatio is closed")]
         public bool memorizeOnClose = true;
 
+        private string LastScene;
+        private int SceneIndex;
 
         struct ObjectPosition
         {
@@ -48,14 +51,20 @@ namespace SaveGame
 
         private void OnApplicationQuit()
         {
+            LastScene = SceneManager.GetActiveScene().name;
+            SceneIndex = SceneManager.GetActiveScene().buildIndex;
+            PlayerPrefs.SetString("LastScene", LastScene);
+            PlayerPrefs.SetFloat("LastSceneIndex", SceneIndex);
+              if (GMController.instance.m_CheckpointManager.SaveOnClose)
+            {
+                SaveData();
+            }
             if (memorizeOnClose)
             {
                 PlayerPrefs.Save();
             }
-            if (GMController.instance.m_CheckpointManager.SaveOnClose)
-            {
-                SaveData();
-            }
+          
+
         }
 
         //Caricamento dati (Se presenti)
@@ -107,6 +116,21 @@ namespace SaveGame
                 //Debug.Log("Salvata Rotazione di: " + saveObjName + " x=" + ObjPos.xRotation + " y=" + ObjPos.yRotation + " z=" + ObjPos.zRotation);
 
             }
+          
+        }
+
+        public static string GetLastScene(/*out int index*/)
+        {
+            string result = "";
+            float indexNumber=0f;
+           if(PlayerPrefs.HasKey("LastScene")&&PlayerPrefs.HasKey("LastSceneIndex"))
+            {
+                result = PlayerPrefs.GetString("LastScene");
+                indexNumber = PlayerPrefs.GetFloat("LastSceneIndex");
+            }
+            result = result + " " + indexNumber.ToString();
+           // index = (int)indexNumber;
+            return result;
         }
     }
 }

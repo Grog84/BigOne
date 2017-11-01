@@ -6,13 +6,30 @@ using UnityEngine;
 
 public class LightTestScript : MonoBehaviour
 {
-    [SerializeField] private GameObject Player;
-    Vector3 Origin = new Vector3(-0.12f, 20.77f, 3.49f);
+   
+     private GameObject Boy;
+     private GameObject Mother;
+    private Vector3 Origin = new Vector3(-0.12f, 20.77f, 3.49f);
+
+    private Light dayLight;
+    private Light nightLight;
     private List<Light> LightList = new List<Light>();
     public static List<Light> LightTriggerList = new List<Light>();
 
     private void Start()
     {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject item in players)
+        {
+            if(item.name=="Boy")
+            {
+                Boy = item;
+            }
+            if(item.name== "Mother")
+            {
+                Mother = item;
+            }
+        }
         //Trovo Tutte le luci
         Light[] _LightList;
         _LightList = FindObjectsOfType<Light>();
@@ -23,6 +40,30 @@ public class LightTestScript : MonoBehaviour
             {
                 LightList.Add(item);
             }
+            if (item.type == LightType.Directional)
+            {
+                if (item.gameObject.name == "Day Light")
+                {
+                    dayLight = item;
+                }
+                else if (item.gameObject.name == "Night Light")
+                {
+                    nightLight = item;
+                }
+
+            }
+        }
+        DayNight isDayOrNight = GMController.instance.isDayOrNight;
+        if (isDayOrNight == DayNight.Day)
+        {
+            nightLight.intensity = 0;
+            dayLight.intensity = 1;
+
+        }
+        else if (isDayOrNight == DayNight.Night)
+        {
+            nightLight.intensity = 1;
+            dayLight.intensity = 0;
         }
 
     }
@@ -39,7 +80,7 @@ public class LightTestScript : MonoBehaviour
         else if (LightTriggerList.Count == 1)
         {
             this.gameObject.transform.position = LightTriggerList[0].gameObject.transform.position + Vector3.up;
-            this.GetComponent<Light>().color = Color.white;
+        
             //    this.GetComponent<Light>().type = LightType.Point;
             //Butta La luce alla prima luce
         }
@@ -48,13 +89,15 @@ public class LightTestScript : MonoBehaviour
             foreach (Light item in LightTriggerList)
             {
                 Debug.DrawLine(
-                    Player.transform.position,
+                    Boy.transform.position,
                     item.gameObject.transform.position);
             }
-            this.gameObject.transform.position = NearestSpotlight(LightTriggerList);
+            this.gameObject.transform.position = NearestSpotlight(LightTriggerList) + Vector3.up;
         }
 
-        DayNight isDayOrNight = GMController.instance.isDayOrNight;
+      
+       
+     
         //Get Level Info from GM
         //se è notte, accendi tutte le luci
         //se è giorno, spegni tutte le luci
@@ -74,10 +117,10 @@ public class LightTestScript : MonoBehaviour
 
         float[] Distance = new float[LightConflict.Count];
         int index = -1;
-        float min = 10000000000000;
+  
         for (int i = 0; i < Distance.Length; i++)
         {
-            Distance[i] = Vector3.Distance(Player.transform.position, LightConflict[i].gameObject.transform.position);
+            Distance[i] = Vector3.Distance(Boy.transform.position, LightConflict[i].gameObject.transform.position);
 
         }
         for (int i = 0; i < Distance.Length; i++)

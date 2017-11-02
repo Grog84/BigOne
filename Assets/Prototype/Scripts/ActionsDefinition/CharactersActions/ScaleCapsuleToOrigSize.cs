@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/StateExit/ScaleCapsuleFromCrouching")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/StateExit/ScaleCapsuleFromCrouching")]
     public class ScaleCapsuleToOrigSize : _Action
     {
 

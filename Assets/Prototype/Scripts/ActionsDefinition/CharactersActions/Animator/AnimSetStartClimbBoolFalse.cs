@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateStartClimb")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Animator/DeactivateStartClimb")]
     public class AnimSetStartClimbBoolFalse : _Action
     {
 

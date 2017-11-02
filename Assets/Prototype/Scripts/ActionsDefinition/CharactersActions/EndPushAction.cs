@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/EndPush")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/EndPush")]
     public class EndPushAction : _Action
     {
 

@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateCrouch")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Animator/DeactivateCrouch")]
     public class AnimSetCrouchBoolFalse : _Action
     {
 

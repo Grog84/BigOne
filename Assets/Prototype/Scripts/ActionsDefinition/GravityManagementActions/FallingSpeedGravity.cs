@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/FallingSpeedGravity")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/FallingSpeedGravity")]
     public class FallingSpeedGravity : _Action
     {
 

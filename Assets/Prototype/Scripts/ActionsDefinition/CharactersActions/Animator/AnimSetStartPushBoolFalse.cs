@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateStartPush")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Animator/DeactivateStartPush")]
     public class AnimSetStartPushBoolFalse : _Action
     {
 

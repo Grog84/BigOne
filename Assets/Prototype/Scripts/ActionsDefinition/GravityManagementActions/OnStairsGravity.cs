@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/OnStairsGravity")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/OnStairsGravity")]
     public class OnStairsGravity : _Action
     {
         public override void Execute(CharacterStateController controller)

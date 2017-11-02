@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/SetForwardMovement")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Animator/SetForwardMovement")]
     public class AnimSetForwardMovement : _Action
     {
 

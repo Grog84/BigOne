@@ -6,7 +6,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Jump")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Jump")]
     public class JumpAction : _Action
     {
         Vector3 m_Velocity;

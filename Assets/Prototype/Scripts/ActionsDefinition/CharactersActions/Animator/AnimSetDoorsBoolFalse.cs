@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateDoors")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Animator/DeactivateDoors")]
     public class AnimSetDoorsBoolFalse : _Action
     {
 

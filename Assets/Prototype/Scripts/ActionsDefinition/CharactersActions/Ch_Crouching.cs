@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Crouching")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Crouching")]
     public class Ch_Crouching : _Action
     {
         public override void Execute(CharacterStateController controller)

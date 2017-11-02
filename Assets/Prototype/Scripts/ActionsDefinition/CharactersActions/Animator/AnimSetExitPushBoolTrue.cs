@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/ActivateExitPush")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Animator/ActivateExitPush")]
     public class AnimSetExitPushBoolTrue : _Action
     {
 

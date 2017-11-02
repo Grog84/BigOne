@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/SetTurnAmount")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Animator/SetTurnAmount")]
     public class AnimSetTurnAmount : _Action
     {
 

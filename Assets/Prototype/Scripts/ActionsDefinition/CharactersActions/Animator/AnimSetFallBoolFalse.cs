@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateFall")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Animator/DeactivateFall")]
     public class AnimSetFallBoolFalse : _Action
     {
 

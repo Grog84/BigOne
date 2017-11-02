@@ -6,7 +6,7 @@ using AI;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/SetCrouchStepPercetionRange")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/SetCrouchStepPercetionRange")]
     public class SetCrouchStepPercetionRange : _Action
     {
 

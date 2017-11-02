@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateStartItemCollect")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Animator/DeactivateStartItemCollect")]
     public class AnimSetStartItemCollectBoolFalse : _Action
     {
 

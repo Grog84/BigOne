@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/ActivateDefeat")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Animator/ActivateDefeat")]
     public class AnimSetDefeatTrue : _Action
     {
         public override void Execute(CharacterStateController controller)

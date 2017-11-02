@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/OverWritableGravity")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/OverWritableGravity")]
     public class OverWritableGravity : _Action
     {
 

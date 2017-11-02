@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Push")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Push")]
     public class PushAction : _Action
     {
         Vector3[] RaycastPoints;

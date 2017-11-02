@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Animator/DeactivateNormal")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Animator/DeactivateNormal")]
     public class AnimSetOnGroundBoolFalse : _Action
     {
 

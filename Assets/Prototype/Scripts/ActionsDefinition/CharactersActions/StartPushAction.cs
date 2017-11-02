@@ -6,7 +6,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/StartPush")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/StartPush")]
     public class StartPushAction : _Action
     {
 

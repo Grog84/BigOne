@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/InAirForwardReset")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/InAirForwardReset")]
     public class InAirForwardReset : _Action
     {
 

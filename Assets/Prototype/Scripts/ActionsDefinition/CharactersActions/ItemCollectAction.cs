@@ -7,7 +7,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/ItemCollectAction")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/ItemCollectAction")]
     public class ItemCollectAction : _Action
     {
 

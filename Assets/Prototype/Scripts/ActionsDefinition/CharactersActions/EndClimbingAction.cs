@@ -6,7 +6,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/EndClimbAction")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/EndClimbAction")]
     public class EndClimbingAction : _Action
     {
 

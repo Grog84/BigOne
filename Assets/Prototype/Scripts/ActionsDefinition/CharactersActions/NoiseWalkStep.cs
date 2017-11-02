@@ -6,7 +6,7 @@ using AI;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/NoiseWalkSteps")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/NoiseWalkSteps")]
     public class NoiseWalkStep : _Action
     {
 

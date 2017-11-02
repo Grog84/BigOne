@@ -6,7 +6,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/StartDoorInteraction")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/StartDoorInteraction")]
     public class StartDoorInteractionAction : _Action
     {
 

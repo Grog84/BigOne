@@ -6,7 +6,7 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/CharactersActions/Climb")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Climb")]
     public class ClimbAction : _Action
     {
         Vector3 m_Move;

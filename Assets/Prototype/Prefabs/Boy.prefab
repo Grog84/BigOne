@@ -1299,7 +1299,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1236579459611486}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: -22.29}
+  m_LocalPosition: {x: -15.89, y: -0.6, z: -21.297798}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 4404718081447118}
@@ -2347,7 +2347,7 @@ MonoBehaviour:
   remainState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
   stateTimeElapsed: 0
   lastActiveState: {fileID: 11400000, guid: 0671d112d18c20d43959d00b038f5c4a, type: 2}
-  characterStats: {fileID: 11400000, guid: a2dd8df195e7e384aa94a2d0d17f47b3, type: 2}
+  characterStats: {fileID: 11400000, guid: 080da5c3b4c909145b5cc9c307920c50, type: 2}
   thisCharacter: 0
   gameStartState: {fileID: 11400000, guid: 94f03c507bbcfec4ba82d6ec06fb81c3, type: 2}
   defeatedState: {fileID: 11400000, guid: 536d2a2fc2ef7e14f8c4e2e2798a7e64, type: 2}
@@ -2367,6 +2367,7 @@ MonoBehaviour:
   gazeAt: {fileID: 114951182589854320}
   cameraObject: {fileID: 0}
   targets: []
+  currentItem: {fileID: 0}
   headClamp: 0.5
 --- !u!114 &114319331313540930
 MonoBehaviour:
@@ -2866,8 +2867,6 @@ MonoBehaviour:
   startItemAnimation: 0
   canStep: 1
   m_WalkSoundrange_sq: 9
-  m_CrouchSoundrange_sq: 1
-  m_RunSoundrange_sq: 25
   floorNoiseMultiplier: 0
   charDepth: 0
   charSize: 0
@@ -2887,7 +2886,8 @@ MonoBehaviour:
   pushCollider: {fileID: 0}
   isDefeated: 0
   footStepsEmitter: {fileID: 0}
-  m_CharStats: {fileID: 11400000, guid: a2dd8df195e7e384aa94a2d0d17f47b3, type: 2}
+  walkStatusRange: 1
+  m_CharStats: {fileID: 11400000, guid: 080da5c3b4c909145b5cc9c307920c50, type: 2}
   m_WalkNoiseLayerMask:
     serializedVersion: 2
     m_Bits: 1

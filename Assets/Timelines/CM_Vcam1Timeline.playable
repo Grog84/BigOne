@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Name: CM_Vcam1Timeline
   m_EditorClassIdentifier: 
   m_Id: 0
-  m_NextId: 3
+  m_NextId: 6
   m_Tracks:
   - {fileID: 114147246088712064}
   - {fileID: 114502612361184916}
   - {fileID: 114593695600930024}
   - {fileID: 114117747332025008}
   - {fileID: 114622280817638702}
-  - {fileID: 114512447206041430}
+  - {fileID: 114415700199106496}
   m_FixedDuration: 0
   m_EditorSettings:
     fps: 60
@@ -633,13 +633,13 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 0
+        value: 2.9774437
         inSlope: 0
         outSlope: 0.6
         tangentMode: 69
       - serializedVersion: 2
         time: 15
-        value: 9
+        value: 11.977444
         inSlope: 0.6
         outSlope: 0
         tangentMode: 69
@@ -721,13 +721,13 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 2
         time: 0
-        value: 0
+        value: 2.9774437
         inSlope: 0
         outSlope: 0.6
         tangentMode: 69
       - serializedVersion: 2
         time: 15
-        value: 9
+        value: 11.977444
         inSlope: 0.6
         outSlope: 0
         tangentMode: 69
@@ -923,19 +923,6 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 1
   m_Events: []
---- !u!114 &114091491503105926
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0445258a5c40b364ab21547784905327, type: 3}
-  m_Name: ScreenFaderClip
-  m_EditorClassIdentifier: 
-  template:
-    color: {r: 0, g: 0, b: 0, a: 1}
 --- !u!114 &114117747332025008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1042,37 +1029,7 @@ MonoBehaviour:
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_UseTrackMatchFields: 0
   m_MatchTargetFields: 63
---- !u!114 &114502612361184916
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1467732076, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
-  m_Name: Animation Track1
-  m_EditorClassIdentifier: 
-  m_Locked: 0
-  m_Muted: 0
-  m_Soloed: 0
-  m_Height: 0
-  m_InlineAnimationCurveHeight: 177
-  m_CustomPlayableFullTypename: 
-  m_AnimClip: {fileID: 74857734416821436}
-  m_Parent: {fileID: 11400000}
-  m_Children: []
-  m_Clips: []
-  m_OpenClipPreExtrapolation: 1
-  m_OpenClipPostExtrapolation: 1
-  m_OpenClipOffsetPosition: {x: 0, y: 0, z: 0}
-  m_OpenClipOffsetRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_OpenClipTimeOffset: 0
-  m_MatchTargetFields: 63
-  m_Position: {x: 0, y: 0, z: 0}
-  m_Rotation: {x: 0, y: 0, z: 0, w: 1}
-  m_ApplyOffsets: 0
---- !u!114 &114512447206041430
+--- !u!114 &114415700199106496
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1093,11 +1050,11 @@ MonoBehaviour:
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
-  - m_Start: 0.016666666666666666
+  - m_Start: 0
     m_ClipIn: 0
-    m_Asset: {fileID: 114091491503105926}
-    m_UnderlyingAsset: {fileID: 114091491503105926}
-    m_Duration: 3.0166666666666666
+    m_Asset: {fileID: 114922432467424032}
+    m_UnderlyingAsset: {fileID: 114922432467424032}
+    m_Duration: 1.6833333333333333
     m_ParentID: 0
     m_TimeScale: 1
     m_BlendCurve:
@@ -1106,9 +1063,9 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ParentTrack: {fileID: 114512447206041430}
-    m_EaseInDuration: 1
-    m_EaseOutDuration: 1
+    m_ParentTrack: {fileID: 114415700199106496}
+    m_EaseInDuration: 0.5
+    m_EaseOutDuration: 0
     m_BlendInDuration: -1
     m_BlendOutDuration: -1
     m_MixInCurve:
@@ -1151,13 +1108,43 @@ MonoBehaviour:
     m_BlendOutCurveMode: 0
     m_ExposedParameterNames: []
     m_AnimationCurves: {fileID: 0}
-    m_ID: -1639367280
+    m_ID: -1639336195
     m_Recordable: 0
     m_PostExtrapolationMode: 0
     m_PreExtrapolationMode: 0
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: ScreenFaderClip
+--- !u!114 &114502612361184916
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1467732076, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Name: Animation Track1
+  m_EditorClassIdentifier: 
+  m_Locked: 0
+  m_Muted: 0
+  m_Soloed: 0
+  m_Height: 0
+  m_InlineAnimationCurveHeight: 177
+  m_CustomPlayableFullTypename: 
+  m_AnimClip: {fileID: 74857734416821436}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips: []
+  m_OpenClipPreExtrapolation: 1
+  m_OpenClipPostExtrapolation: 1
+  m_OpenClipOffsetPosition: {x: 0, y: 0, z: 0}
+  m_OpenClipOffsetRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_OpenClipTimeOffset: 0
+  m_MatchTargetFields: 63
+  m_Position: {x: 0, y: 0, z: 0}
+  m_Rotation: {x: 0, y: 0, z: 0, w: 1}
+  m_ApplyOffsets: 0
 --- !u!114 &114593695600930024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1218,3 +1205,16 @@ MonoBehaviour:
   m_Position: {x: 0, y: 0, z: 0}
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_ApplyOffsets: 0
+--- !u!114 &114922432467424032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0445258a5c40b364ab21547784905327, type: 3}
+  m_Name: ScreenFaderClip
+  m_EditorClassIdentifier: 
+  template:
+    color: {r: 0, g: 0, b: 0, a: 1}

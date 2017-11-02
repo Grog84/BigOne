@@ -162,5 +162,13 @@ namespace AI
 
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                sightPercentage = 100f;
+            }
+        }
+
     }
 }

@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using AI;
 
 public class AgentAvoidance : MonoBehaviour {
 
     [HideInInspector] public float myOrder = 0f;
 
+    [HideInInspector] public _AgentController m_AgentController;
     [HideInInspector] public NavMeshAgent m_NavmeshAgent;
     [HideInInspector] public NavMeshObstacle m_NavmeshObstacle;
 
     private void Awake()
     {
-        m_NavmeshAgent = GetComponent<NavMeshAgent>();
-        m_NavmeshObstacle = GetComponent<NavMeshObstacle>();
+        m_NavmeshAgent = GetComponentInParent<NavMeshAgent>();
+        m_NavmeshObstacle = GetComponentInParent<NavMeshObstacle>();
+        m_AgentController = GetComponentInParent<_AgentController>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,6 +33,11 @@ public class AgentAvoidance : MonoBehaviour {
                 otherAgentAvoidance.m_NavmeshObstacle.enabled = false;
                 otherAgentAvoidance.m_NavmeshAgent.enabled = true;
             }
+        }
+
+        else if (other.tag == "Player")
+        {
+            m_AgentController.sightPercentage = 110f;
         }
     }
 

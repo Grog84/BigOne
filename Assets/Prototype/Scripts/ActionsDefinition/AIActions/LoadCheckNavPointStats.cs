@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace AI.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/AIActions/LoadCheckNavPointStats")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/AI/Guard/LoadCheckNavPointStats")]
     public class LoadCheckNavPointStats : _Action
     {
 

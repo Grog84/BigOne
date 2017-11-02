@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 namespace AI.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/AIActions/RandomAreaSearch")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/AI/Guard/RandomAreaSearch")]
     public class RandomAreaSearch : _Action
     {
         public override void Execute(EnemiesAIStateController controller)

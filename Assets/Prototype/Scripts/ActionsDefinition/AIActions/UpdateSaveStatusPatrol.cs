@@ -6,7 +6,7 @@ using SaveGame;
 
 namespace AI.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/AIActions/UpdateSaveStatus")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/AI/Guard/UpdateSaveStatus")]
     public class UpdateSaveStatusPatrol : _Action
     {
 

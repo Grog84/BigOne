@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace AI.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/AIActions/ResetLastHeardPosition")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/AI/Guard/ResetLastHeardPosition")]
     public class ResetLastHeardPosition : _Action
     {
         public override void Execute(EnemiesAIStateController controller)

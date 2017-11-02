@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace AI.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/AIActions/ResetTurn")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/AI/Guard/ResetTurn")]
     public class ResetTurn : _Action
     {
 

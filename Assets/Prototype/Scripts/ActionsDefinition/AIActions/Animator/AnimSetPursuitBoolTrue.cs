@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace AI.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/AIActions/Animator/ActivatePursuit")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/AI/Guard/Animator/ActivatePursuit")]
     public class AnimSetPursuitBoolTrue : _Action
     {
 

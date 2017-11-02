@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace AI.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/AIActions/DefeatPlayer")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/AI/Guard/DefeatPlayer")]
     public class DefeatPlayer : _Action
     {
 

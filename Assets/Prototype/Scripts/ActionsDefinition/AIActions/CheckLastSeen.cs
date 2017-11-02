@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace AI.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/AIActions/CheckLastSeen")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/AI/Guard/CheckLastSeen")]
     public class CheckLastSeen : _Action
     {
 

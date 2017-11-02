@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace AI.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/AIActions/Patrol")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/AI/Guard/Patrol")]
     public class PatrolAction : _Action
     {
         public override void Execute(EnemiesAIStateController controller)

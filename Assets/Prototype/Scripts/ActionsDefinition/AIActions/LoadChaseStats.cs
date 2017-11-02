@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace AI.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/AIActions/LoadChaseStats")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/AI/Guard/LoadChaseStats")]
     public class LoadChaseStats : _Action
     {
 

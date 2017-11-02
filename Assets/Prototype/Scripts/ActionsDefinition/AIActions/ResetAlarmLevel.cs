@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace AI.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/AIActions/ResetAlarmLevel")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/AI/Guard/ResetAlarmLevel")]
     public class ResetAlarmLevel : _Action
     {
         public override void Execute(EnemiesAIStateController controller)

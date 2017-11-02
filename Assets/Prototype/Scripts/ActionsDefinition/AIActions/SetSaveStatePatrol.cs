@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace AI.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/AIActions/SetSaveStatePatrol")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/AI/Guard/SetSaveStatePatrol")]
     public class SetSaveStatePatrol : _Action
     {
 

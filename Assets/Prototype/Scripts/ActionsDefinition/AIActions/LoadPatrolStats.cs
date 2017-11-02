@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace AI.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/AIActions/LoadPatrolStats")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/AI/Guard/LoadPatrolStats")]
     public class LoadPatrolStats : _Action
     {
 

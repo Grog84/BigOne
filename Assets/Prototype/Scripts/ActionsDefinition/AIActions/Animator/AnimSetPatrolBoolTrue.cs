@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace AI.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/AIActions/Animator/ActivatePatrol")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/AI/Guard/Animator/ActivatePatrol")]
     public class AnimSetPatrolBoolTrue : _Action
     {
 

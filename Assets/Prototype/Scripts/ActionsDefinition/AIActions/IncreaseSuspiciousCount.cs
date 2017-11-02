@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace AI.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/AIActions/IncreaseSuspiciousCount")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/AI/Guard/IncreaseSuspiciousCount")]
     public class IncreaseSuspiciousCount : _Action
     {
 

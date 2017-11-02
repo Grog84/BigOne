@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public enum DayNight { Day, Night}
 public class GMController : MonoBehaviour {
@@ -141,6 +142,15 @@ public class GMController : MonoBehaviour {
     public IEnumerator WaitFadeOut()
     {
         yield return new WaitForSeconds(fadeOutTime);
+    }
+
+    public void MoveToNextScene()
+    {
+        int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        if (SceneManager.sceneCount > nextSceneIndex)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
     }
 
 }

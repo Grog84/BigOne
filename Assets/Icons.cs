@@ -5,8 +5,8 @@ using StateMachine;
 
 public class Icons : MonoBehaviour
 {
-    public CharacterStateController controllerMother;
-    public CharacterStateController controllerBoy;
+    [HideInInspector] public CharacterStateController controllerMother;
+    [HideInInspector] public CharacterStateController controllerBoy;
 
     void Awake ()
     {

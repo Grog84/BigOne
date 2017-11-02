@@ -146,8 +146,8 @@ namespace AI
                 sightPercentage -= agentStats.fillingSpeed * agentStats.noSeeMultiplier * Time.deltaTime;
             }
 
-            sightPercentage = Mathf.Clamp(sightPercentage, 0f, 100f);
-            perceptionBar.SetFillingPerc(sightPercentage);
+            sightPercentage = Mathf.Clamp(sightPercentage, 0f, 120f);
+            perceptionBar.SetFillingPerc(Mathf.Clamp(sightPercentage, 0f, 100f));
 
             // Turn and Forward Implementation
             move = m_NavMeshAgent.desiredVelocity;

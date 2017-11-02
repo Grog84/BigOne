@@ -33,13 +33,13 @@ namespace Character.Actions
                     {
                         Debug.Log("APRI LA PORTA");
                         hit.transform.gameObject.GetComponent<Doors>().isDoorOpen = true;
-                        controller.m_CharacterController.doorCollider.transform.parent.transform.Find("Hinge").DORotate(new Vector3(0, -90, 0), 2f);
+                        controller.m_CharacterController.doorCollider.transform.parent.transform.Find("Hinge").DOLocalRotate(new Vector3(0, -90, 0), 2f);
                     }
                     else if (hit.transform.gameObject.GetComponent<Doors>().isDoorOpen)
                     {
                         Debug.Log("CHIUDI LA PORTA");
                         hit.transform.gameObject.GetComponent<Doors>().isDoorOpen = false;
-                        controller.m_CharacterController.doorCollider.transform.parent.transform.Find("Hinge").DORotate(new Vector3(0, 0, 0), 2f);
+                        controller.m_CharacterController.doorCollider.transform.parent.transform.Find("Hinge").DOLocalRotate(new Vector3(0, 0, 0), 2f);
                     }
                 }
                 else
@@ -52,13 +52,13 @@ namespace Character.Actions
                             {
                                 Debug.Log("APRI LA PORTA");
                                 hit.transform.gameObject.GetComponent<Doors>().isDoorOpen = true;
-                                controller.m_CharacterController.doorCollider.transform.parent.transform.Find("Hinge").DORotate(new Vector3(0, -90, 0), 2f);
+                                controller.m_CharacterController.doorCollider.transform.parent.transform.Find("Hinge").DOLocalRotate(new Vector3(0, -90, 0), 2f);
                             }
                             else if (hit.transform.gameObject.GetComponent<Doors>().isDoorOpen)
                             {
                                 Debug.Log("CHIUDI LA PORTA");
                                 hit.transform.gameObject.GetComponent<Doors>().isDoorOpen = false;
-                                controller.m_CharacterController.doorCollider.transform.parent.transform.Find("Hinge").DORotate(new Vector3(0, 0, 0), 2f);
+                                controller.m_CharacterController.doorCollider.transform.parent.transform.Find("Hinge").DOLocalRotate(new Vector3(0, 0, 0), 2f);
                             }
                         }
                     }

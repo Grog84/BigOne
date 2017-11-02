@@ -23,6 +23,7 @@ namespace AI.Actions
                 float step = controller.m_AgentController.agentStats.angularSpeed * Time.deltaTime;
                 Vector3 newDir = Vector3.RotateTowards(controller.m_AgentController.transform.forward, controller.m_AgentController.wayPointList[controller.m_AgentController.checkingWayPoint].facingDirection, step, 0.0f);
                 controller.m_AgentController.transform.rotation = Quaternion.LookRotation(newDir);
+                controller.m_AgentController.m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
             }
             else if (controller.m_AgentController.navPointTimer >= controller.m_AgentController.checkNavPointTime - 2f)
             {
@@ -31,7 +32,7 @@ namespace AI.Actions
                 Vector3 targetDir = controller.m_AgentController.wayPointListTransform[controller.m_AgentController.nextWayPoint].position - controller.m_AgentController.transform.position;
                 Vector3 newDir = Vector3.RotateTowards(controller.m_AgentController.transform.forward, targetDir, step, 0.0F);
                 controller.m_AgentController.transform.rotation = Quaternion.LookRotation(newDir);
-
+                controller.m_AgentController.m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
             }
 
             if (controller.m_AgentController.navPointTimer >= controller.m_AgentController.checkNavPointTime)

@@ -16,7 +16,6 @@ namespace AI.Actions
         private void SetHeardFalse(EnemiesAIStateController controller)
         {
             controller.m_AgentController.hasHeardPlayer = false;
-
         }
     }
     

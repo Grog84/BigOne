@@ -118,7 +118,7 @@ namespace AI
         void Update()
         {
             bool noRaycastHitting = true;
-            if (isPlayerInSight && sightPercentage < 100f)
+            if (isPlayerInSight && sightPercentage < 100f && GMController.instance.GetGameStatus())
             {
                 Vector3 direction;
 

@@ -16,6 +16,8 @@ namespace Character.Actions
 
         private void UpdateAnimatorForStartPush(CharacterStateController controller)
         {
+            controller.m_CharacterController.m_ForwardAmount = 0;
+            controller.m_CharacterController.m_Animator.SetFloat("Forward", 0f);
             controller.m_CharacterController.m_Animator.SetBool("isStartingPush", false);
             // Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isStartingPush"));
         }

@@ -18,6 +18,8 @@ namespace Character.Actions
         {
             // if (controller.m_CharacterController.climbingTop)
             // {
+            controller.m_CharacterController.m_ForwardAmount = 0;
+            controller.m_CharacterController.m_Animator.SetFloat("Forward", 0f);
             controller.m_CharacterController.m_Animator.SetBool("isStartClimb", false);
             // }
 

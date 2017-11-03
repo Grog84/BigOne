@@ -14,22 +14,22 @@ namespace Character
         [HideInInspector] public float ray_length;
 
         [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
-        [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
+         public bool isClimbDirectionRight;           // The player is facing the climbable object
         [HideInInspector] public bool climbingBottom;                  // The player is in the Bottom Trigger
         [HideInInspector] public bool climbingTop;                     // The player is in the Top Trigger
         [HideInInspector] public bool startClimbAnimationTop;          // Starts the descend from top
         [HideInInspector] public bool startClimbAnimationBottom;       // Starts the climb from bottom
         [HideInInspector] public bool startClimbAnimationEnd;          // Starts the end climb courutine
 
-        [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing
-        [HideInInspector] public bool isPushDirectionRight;            // The player is facing the pushable object
+         public bool isInPushArea;                    // The player is in the trigger area for Pushing
+         public bool isPushDirectionRight;            // The player is facing the pushable object
         [HideInInspector] public bool isPushLimit;                     // Detect push limits like obstacles
 
         [HideInInspector] public bool isPushing;                       // Define the start push actions
         [HideInInspector] public bool isExitPush;
 
         [HideInInspector] public bool isInDoorArea;                    // Detect if the player is in the Door trigger area
-        [HideInInspector] public bool isDoorDirectionRight;            // Detect if the player is looking toward the door
+         public bool isDoorDirectionRight;            // Detect if the player is looking toward the door
         [HideInInspector] public bool isInKeyArea;                     // Detect if the player is in the key object interactable area
         [HideInInspector] public bool startDoorAnimation;              // Starts the door interaction courutine
         [HideInInspector] public bool startItemAnimation;              // Starts the item collection courutine
@@ -140,6 +140,10 @@ namespace Character
                         isClimbDirectionRight = false;
                     }
                 }
+                else
+                {
+                    isClimbDirectionRight = false;
+                }
             }
         }
 
@@ -149,9 +153,9 @@ namespace Character
             {
                 RaycastHit hit;
 
+                    // Debug.DrawRay(CharacterTransform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTransform.forward, Color.red);
                 if (Physics.Raycast(CharacterTransform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTransform.forward, out hit, m_CharStats.m_DistanceFromPushableObject))
                 {
-                    // Debug.DrawRay(CharacterTansform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTansform.forward, Color.red);
                      //Debug.Log(hit.transform == pushCollider.transform.parent);
 
 
@@ -164,6 +168,11 @@ namespace Character
                         isPushDirectionRight = false;
                     }
                 }
+                else
+                {
+                    isPushDirectionRight = false;
+                }
+
             }
         }
 
@@ -184,9 +193,13 @@ namespace Character
             }
             if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTransform.forward, other.transform.forward) < 45)
             {
-                //Debug.Log(Vector3.Angle(CharacterTansform.forward, other.transform.forward));
+               // Debug.Log(Vector3.Angle(CharacterTransform.forward, other.transform.forward));
                 pushCollider = other.gameObject;
                 isInPushArea = true;
+                ActivatePushingChoice();
+            }
+            else if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTransform.forward, other.transform.forward) > 45)
+            {
                 ActivatePushingChoice();
             }
             if (other.tag == "UnlockedDoor" || other.tag == "LockedDoor")

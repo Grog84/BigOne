@@ -17,7 +17,7 @@ namespace Character.Actions
         private void UpdateAnimatorForStartPush(CharacterStateController controller)
         {
             controller.m_CharacterController.m_Animator.SetBool("isStartingPush", true);
-            Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isStartingPush"));
+            //Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isStartingPush"));
         }
     }
 }

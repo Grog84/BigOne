@@ -75,7 +75,7 @@ namespace Character.Actions
 
             #region Movements
     
-            if (Input.GetAxis("Vertical") > 0 || Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
+            if (Input.GetAxis("Vertical") > 0)
             {
                 forward = Input.GetAxis("Vertical");
             }
@@ -84,7 +84,7 @@ namespace Character.Actions
                 forward = 0;
             }
 
-            if (Input.GetAxis("Vertical") < 0 || Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))
+            if (Input.GetAxis("Vertical") < 0)
             {
                 backward = Input.GetAxis("Vertical");
                 controller.m_CharacterController.isPushLimit = false;
@@ -92,6 +92,12 @@ namespace Character.Actions
             else 
             {
                 backward = 0;
+            }
+
+            if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.W))
+            {
+                backward = 0;
+                forward = 0;
             }
 
 

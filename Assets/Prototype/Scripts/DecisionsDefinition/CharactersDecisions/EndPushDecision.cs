@@ -17,7 +17,7 @@ namespace Character.Decisions
         private bool CheckIfEndPushing(CharacterStateController controller)
         {
 
-            if (controller.m_CharacterController.isInPushArea && controller.m_CharacterController.isPushDirectionRight && Input.GetButtonDown("Interact"))
+            if (controller.m_CharacterController.isInPushArea && controller.m_CharacterController.isPushDirectionRight && Input.GetButtonDown("Cancel"))
             {
                 return true;
             }

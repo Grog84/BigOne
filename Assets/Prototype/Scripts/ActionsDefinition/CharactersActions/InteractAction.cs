@@ -25,19 +25,19 @@ namespace Character.Actions
             if (Physics.Raycast(controller.m_CharacterController.CharacterTransform.position + Vector3.up * controller.m_CharacterController.m_CharController.bounds.size.y / 2.0f,
                 controller.m_CharacterController.CharacterTransform.forward, out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromWallClimbing))
             {
-                Debug.Log("vedo");
+                //Debug.Log("vedo");
 
                 if (hit.transform.gameObject.tag == "UnlockedDoor")
                 {
                     if (!hit.transform.gameObject.GetComponent<Doors>().isDoorOpen)
                     {
-                        Debug.Log("APRI LA PORTA");
+                       // Debug.Log("APRI LA PORTA");
                         hit.transform.gameObject.GetComponent<Doors>().isDoorOpen = true;
                         controller.m_CharacterController.doorCollider.transform.parent.transform.Find("Hinge").DOLocalRotate(new Vector3(0, -90, 0), 2f);
                     }
                     else if (hit.transform.gameObject.GetComponent<Doors>().isDoorOpen)
                     {
-                        Debug.Log("CHIUDI LA PORTA");
+                       // Debug.Log("CHIUDI LA PORTA");
                         hit.transform.gameObject.GetComponent<Doors>().isDoorOpen = false;
                         controller.m_CharacterController.doorCollider.transform.parent.transform.Find("Hinge").DOLocalRotate(new Vector3(0, 0, 0), 2f);
                     }
@@ -50,13 +50,13 @@ namespace Character.Actions
                         {
                             if (!hit.transform.gameObject.GetComponent<Doors>().isDoorOpen)
                             {
-                                Debug.Log("APRI LA PORTA");
+                                //Debug.Log("APRI LA PORTA");
                                 hit.transform.gameObject.GetComponent<Doors>().isDoorOpen = true;
                                 controller.m_CharacterController.doorCollider.transform.parent.transform.Find("Hinge").DOLocalRotate(new Vector3(0, -90, 0), 2f);
                             }
                             else if (hit.transform.gameObject.GetComponent<Doors>().isDoorOpen)
                             {
-                                Debug.Log("CHIUDI LA PORTA");
+                                //Debug.Log("CHIUDI LA PORTA");
                                 hit.transform.gameObject.GetComponent<Doors>().isDoorOpen = false;
                                 controller.m_CharacterController.doorCollider.transform.parent.transform.Find("Hinge").DOLocalRotate(new Vector3(0, 0, 0), 2f);
                             }

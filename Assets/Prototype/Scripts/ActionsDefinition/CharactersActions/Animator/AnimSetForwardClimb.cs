@@ -28,7 +28,7 @@ namespace Character.Actions
             {
                 controller.m_CharacterController.m_Animator.SetFloat("Forward", controller.m_CharacterController.m_ForwardAmount, 0.1f, Time.deltaTime);
             }
-            Debug.Log("Animator" + controller.m_CharacterController.m_Animator.GetFloat("Forward"));
+           // Debug.Log("Animator" + controller.m_CharacterController.m_Animator.GetFloat("Forward"));
         }
     }
 }

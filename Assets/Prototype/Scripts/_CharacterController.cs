@@ -13,23 +13,23 @@ namespace Character
         [HideInInspector] public float m_ForwardAmount;
         [HideInInspector] public float ray_length;
 
-        [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
+         public bool isInClimbArea;                   // The player is in the trigger area for Climbing
          public bool isClimbDirectionRight;           // The player is facing the climbable object
-        [HideInInspector] public bool climbingBottom;                  // The player is in the Bottom Trigger
-        [HideInInspector] public bool climbingTop;                     // The player is in the Top Trigger
+         public bool climbingBottom;                  // The player is in the Bottom Trigger
+         public bool climbingTop;                     // The player is in the Top Trigger
         [HideInInspector] public bool startClimbAnimationTop;          // Starts the descend from top
         [HideInInspector] public bool startClimbAnimationBottom;       // Starts the climb from bottom
         [HideInInspector] public bool startClimbAnimationEnd;          // Starts the end climb courutine
 
-         public bool isInPushArea;                    // The player is in the trigger area for Pushing
-         public bool isPushDirectionRight;            // The player is facing the pushable object
+        [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing
+        [HideInInspector] public bool isPushDirectionRight;            // The player is facing the pushable object
         [HideInInspector] public bool isPushLimit;                     // Detect push limits like obstacles
 
         [HideInInspector] public bool isPushing;                       // Define the start push actions
         [HideInInspector] public bool isExitPush;
 
         [HideInInspector] public bool isInDoorArea;                    // Detect if the player is in the Door trigger area
-         public bool isDoorDirectionRight;            // Detect if the player is looking toward the door
+        [HideInInspector] public bool isDoorDirectionRight;            // Detect if the player is looking toward the door
         [HideInInspector] public bool isInKeyArea;                     // Detect if the player is in the key object interactable area
         [HideInInspector] public bool startDoorAnimation;              // Starts the door interaction courutine
         [HideInInspector] public bool startItemAnimation;              // Starts the item collection courutine
@@ -184,6 +184,7 @@ namespace Character
         {
             if (other.tag == "Ladder_Bottom")
             {
+                climbingBottom = true;
                 ActivateClimbingChoice();
             }
             if (other.tag == "Ladder_Top")

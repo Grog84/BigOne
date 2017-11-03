@@ -53,14 +53,39 @@ namespace Character.Actions
             controller.m_CharacterController.m_CharController.Move(m_Move * Time.deltaTime);
 
             // For Animator
-            if (Input.GetAxis("Vertical") != 0)
+            if (Input.GetAxis("Vertical") > 0 || Input.GetAxis("Horizontal") > 0)
             {
-                controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(v);
+
+                if(v>h)
+                {
+                    controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(v);
+                    return;
+                }
+                else if(h>v)
+                {
+                    controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(h);
+                    return;
+                }
+                
             }
-            if (Input.GetAxis("Horizontal") != 0)
+            else if(Input.GetAxis("Vertical") < 0 || Input.GetAxis("Horizontal") < 0)
+            {
+                if(v<h)
+                {
+                    controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(v);
+                    return;
+                }
+                else if (h<v)
+                {
+                    controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(h);
+                    return;
+                }
+            }
+            /*if (Input.GetAxis("Horizontal") != 0)
             {
                 controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(h);
-            }
+                return;
+            }*/
         }
     }
 }

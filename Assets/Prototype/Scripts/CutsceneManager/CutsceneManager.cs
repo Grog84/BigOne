@@ -8,9 +8,9 @@ using UnityEngine.Playables;
 public class CutsceneManager : MonoBehaviour
 {
    
-    public TimelineClip m_Timeline;
+    
     public PlayableDirector m_PlayableDirector;
-    public bool trigger = false;
+    protected bool trigger = false;
     public bool characterControlEnabled = false;
 
 
@@ -29,7 +29,7 @@ public class CutsceneManager : MonoBehaviour
         {
             if(playableDirector.playableGraph.IsPlaying())
             {
-                Debug.Log("INIZIATO");
+                //Debug.Log("INIZIATO");
                 GMController.instance.SetActive(false);
             }
 

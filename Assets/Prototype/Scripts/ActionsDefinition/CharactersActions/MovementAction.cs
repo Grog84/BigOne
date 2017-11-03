@@ -25,6 +25,7 @@ namespace Character.Actions
             float h = Input.GetAxis("Horizontal");
             float v = Input.GetAxis("Vertical");
 
+           
             //calculate move direction to pass to character
             if (controller.m_CharacterController.m_Camera != null)
             {
@@ -52,40 +53,68 @@ namespace Character.Actions
             m_Move.y -= controller.characterStats.m_Gravity;
             controller.m_CharacterController.m_CharController.Move(m_Move * Time.deltaTime);
 
-            // For Animator
-            if (Input.GetAxis("Vertical") > 0 || Input.GetAxis("Horizontal") > 0)
+            #region For Animator
+
+
+
+            if (v > 0 || h > 0)
             {
 
-                if(v>h)
+                if (Mathf.Abs(v) > Mathf.Abs(h))
                 {
                     controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(v);
-                    return;
                 }
-                else if(h>v)
+                else if (Mathf.Abs(h) > Mathf.Abs(v))
                 {
                     controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(h);
-                    return;
                 }
-                
+
             }
-            else if(Input.GetAxis("Vertical") < 0 || Input.GetAxis("Horizontal") < 0)
+            else if (v < 0 || h < 0)
             {
-                if(v<h)
+                if (Mathf.Abs(v) > Mathf.Abs(h))
                 {
                     controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(v);
-                    return;
+                   
                 }
-                else if (h<v)
+                else if (Mathf.Abs(h) > Mathf.Abs(v))
                 {
                     controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(h);
-                    return;
+                   
                 }
             }
-            /*if (Input.GetAxis("Horizontal") != 0)
+            else if (v > 0 || h < 0)
             {
-                controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(h);
-                return;
-            }*/
+                if (Mathf.Abs(v) > Mathf.Abs(h))
+                {
+                    controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(v);
+                   
+                }
+                else if (Mathf.Abs(h) > Mathf.Abs(v))
+                {
+                    controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(h);
+                   
+                }
+            }
+            else if (v < 0 || h > 0)
+            {
+                if (Mathf.Abs(v) > Mathf.Abs(h))
+                {
+                    controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(v);
+                    
+                }
+                else if (Mathf.Abs(h) > Mathf.Abs(v))
+                {
+                    controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(h);
+                    
+                }
+            }
+            else if (v == 0 && h==0)
+            {
+                controller.m_CharacterController.m_ForwardAmount = 0;
+            }
+#endregion
+
         }
     }
 }

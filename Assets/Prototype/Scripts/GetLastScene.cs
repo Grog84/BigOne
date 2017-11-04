@@ -7,10 +7,6 @@ public class GetLastScene : MonoBehaviour {
     private Text LastScene;
 
     public void Start()
-    {
-        LastScene = this.gameObject.GetComponent<Text>();
-   
-        string lastScene= SaveGame.SaveObjComponent.GetLastScene();
-        LastScene.text = lastScene;
+    {;
     }
 }

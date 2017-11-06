@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using UnityEngine.SceneManagement;
 
 namespace SaveGame
@@ -53,9 +54,11 @@ namespace SaveGame
         {
             LastScene = SceneManager.GetActiveScene().name;
             SceneIndex = SceneManager.GetActiveScene().buildIndex;
-            PlayerPrefs.SetString("LastScene", LastScene);
+            //PlayerPrefs.SetString("LastScene", LastScene);
             PlayerPrefs.SetFloat("LastSceneIndex", SceneIndex);
-              if (GMController.instance.m_CheckpointManager.SaveOnClose)
+            //ScreenCapture.CaptureScreenshot("Assets/Prototype/Images/ScreenInput.png");
+
+            if (GMController.instance.m_CheckpointManager.SaveOnClose)
             {
                 SaveData();
             }
@@ -63,7 +66,7 @@ namespace SaveGame
             {
                 PlayerPrefs.Save();
             }
-          
+
 
         }
 
@@ -116,20 +119,20 @@ namespace SaveGame
                 //Debug.Log("Salvata Rotazione di: " + saveObjName + " x=" + ObjPos.xRotation + " y=" + ObjPos.yRotation + " z=" + ObjPos.zRotation);
 
             }
-          
+
         }
 
-        public static string GetLastScene(/*out int index*/)
+        public static int GetLastScene(/*out int index*/)
         {
-            string result = "";
-            float indexNumber=0f;
-           if(PlayerPrefs.HasKey("LastScene")&&PlayerPrefs.HasKey("LastSceneIndex"))
+            int result;
+            float indexNumber = 0f;
+            if (PlayerPrefs.HasKey("LastSceneIndex"))
             {
-                result = PlayerPrefs.GetString("LastScene");
+                //result = PlayerPrefs.GetString("LastScene");
                 indexNumber = PlayerPrefs.GetFloat("LastSceneIndex");
             }
-            result = result + " " + indexNumber.ToString();
-           // index = (int)indexNumber;
+            result = (int)indexNumber;
+            // index = (int)indexNumber;
             return result;
         }
     }

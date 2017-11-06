@@ -25,5 +25,9 @@ namespace SaveGame
             CharacterActive activeCharacter = m_Controller.isCharacterPlaying;
             PlayerPrefs.SetInt(saveObjName + "characterPlaying", (int)activeCharacter);
         }
+        public void OnApplicationQuit()
+        {
+            ScreenCapture.CaptureScreenshot("Assets/Prototype/Images/ScreenInput.png");
+        }
     }
 }

@@ -16,10 +16,10 @@ namespace Character.Decisions
 
         private bool CheckIfClimbingTop(CharacterStateController controller)
         {
-            if (controller.m_CharacterController.climbingTop && Input.GetKeyDown(KeyCode.E))
+            if (controller.m_CharacterController.climbingTop && Input.GetButtonDown("Interact"))
             {
 
-                Debug.Log("pereppe");
+                //Debug.Log("pereppe");
                 return true;
 
 

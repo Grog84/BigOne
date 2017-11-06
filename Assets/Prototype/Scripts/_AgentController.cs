@@ -117,7 +117,7 @@ namespace AI
 
         void Update()
         {
-            Debug.Log(m_NavMeshAgent.destination);
+            //Debug.Log(m_NavMeshAgent.destination);
             bool noRaycastHitting = true;
             if (isPlayerInSight && sightPercentage < 100f && GMController.instance.GetGameStatus())
             {

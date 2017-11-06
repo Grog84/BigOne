@@ -147,7 +147,7 @@ public class GMController : MonoBehaviour {
     public void MoveToNextScene()
     {
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-        if (SceneManager.sceneCount > nextSceneIndex)
+        if (SceneManager.sceneCountInBuildSettings > nextSceneIndex)
         {
             SceneManager.LoadScene(nextSceneIndex);
         }
@@ -155,7 +155,7 @@ public class GMController : MonoBehaviour {
 
     public void MoveToScene(int nextSceneIndex)
     {
-        if (SceneManager.sceneCount > nextSceneIndex)
+        if (SceneManager.sceneCountInBuildSettings > nextSceneIndex)
         {
             SceneManager.LoadScene(nextSceneIndex);
         }

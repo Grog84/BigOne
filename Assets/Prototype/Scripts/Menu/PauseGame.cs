@@ -38,7 +38,6 @@ public class PauseGame : MonoBehaviour
     }
     public void ResumeGame()
     {
-
         canvasTrigger = !canvasTrigger;
         Pause();
     }

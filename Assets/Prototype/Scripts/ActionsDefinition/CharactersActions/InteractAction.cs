@@ -32,13 +32,13 @@ namespace Character.Actions
                     if (!hit.transform.gameObject.GetComponent<Doors>().isDoorOpen)
                     {
                        // Debug.Log("APRI LA PORTA");
-                        hit.transform.gameObject.GetComponent<Doors>().isDoorOpen = true;
+                        hit.transform.gameObject.GetComponent<Doors>().OpenDoor();
                         controller.m_CharacterController.doorCollider.transform.parent.transform.Find("Hinge").DOLocalRotate(new Vector3(0, -90, 0), 2f);
                     }
                     else if (hit.transform.gameObject.GetComponent<Doors>().isDoorOpen)
                     {
                        // Debug.Log("CHIUDI LA PORTA");
-                        hit.transform.gameObject.GetComponent<Doors>().isDoorOpen = false;
+                        hit.transform.gameObject.GetComponent<Doors>().CloseDoor();
                         controller.m_CharacterController.doorCollider.transform.parent.transform.Find("Hinge").DOLocalRotate(new Vector3(0, 0, 0), 2f);
                     }
                 }
@@ -51,13 +51,13 @@ namespace Character.Actions
                             if (!hit.transform.gameObject.GetComponent<Doors>().isDoorOpen)
                             {
                                 //Debug.Log("APRI LA PORTA");
-                                hit.transform.gameObject.GetComponent<Doors>().isDoorOpen = true;
+                                hit.transform.gameObject.GetComponent<Doors>().OpenDoor();
                                 controller.m_CharacterController.doorCollider.transform.parent.transform.Find("Hinge").DOLocalRotate(new Vector3(0, -90, 0), 2f);
                             }
                             else if (hit.transform.gameObject.GetComponent<Doors>().isDoorOpen)
                             {
                                 //Debug.Log("CHIUDI LA PORTA");
-                                hit.transform.gameObject.GetComponent<Doors>().isDoorOpen = false;
+                                hit.transform.gameObject.GetComponent<Doors>().CloseDoor();
                                 controller.m_CharacterController.doorCollider.transform.parent.transform.Find("Hinge").DOLocalRotate(new Vector3(0, 0, 0), 2f);
                             }
                         }

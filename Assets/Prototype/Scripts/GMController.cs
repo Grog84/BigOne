@@ -153,6 +153,14 @@ public class GMController : MonoBehaviour {
         }
     }
 
+    public void MoveToScene(int nextSceneIndex)
+    {
+        if (SceneManager.sceneCount > nextSceneIndex)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+    }
+
 }
 
 

@@ -1,26 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class NextSceneTrigger : MonoBehaviour {
 
     public bool withInteraction = false;
+    public bool goToNextScene = true;
+    public int sceneIndex = 0;
 
     private bool canChangeScene = false;
     private Icons canvasIcon;
+
 
     private void Awake()
     {
         canvasIcon = GameObject.FindObjectOfType<Icons>();
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            if (!withInteraction)
+            if (!withInteraction && goToNextScene)
                 GMController.instance.MoveToNextScene();
+            else if (!withInteraction && !goToNextScene)
+            {
+                GMController.instance.MoveToScene(sceneIndex);
+            }
             else
             {
                 canChangeScene = true;
@@ -43,7 +51,10 @@ public class NextSceneTrigger : MonoBehaviour {
     {
         if (canChangeScene && Input.GetButtonDown("Interact"))
         {
-            GMController.instance.MoveToNextScene();
+            if (goToNextScene)
+                GMController.instance.MoveToNextScene();
+            else
+                GMController.instance.MoveToScene(sceneIndex);
         }
     }
 }

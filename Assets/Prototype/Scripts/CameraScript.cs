@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
-    public Canvas pauseCanvas;
+   
     public LayerMask layerIgnored = ~(1 << 8);
 
 
@@ -53,20 +53,16 @@ public class CameraScript : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;                     //Riabilita il cursore del mouse premendo ESC
          
         }
-        if (Input.GetButtonDown("Pause"))
+        if (Input.GetMouseButtonDown(0))
         {
             Cursor.lockState = CursorLockMode.Locked;
         
         }
 
-        if (!pauseCanvas.isActiveAndEnabled)
-        {
-            // camera movement and limit of movement
-            currentX += Input.GetAxis ("Mouse X");
-		    currentY -= Input.GetAxis ("Mouse Y");
-		    currentY = Mathf.Clamp (currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
-
-        }
+        // camera movement and limit of movement
+        currentX += Input.GetAxis ("Mouse X");
+		currentY -= Input.GetAxis ("Mouse Y");
+		currentY = Mathf.Clamp (currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
 
 		//camera management of the bound to the player, movement, rotation and look direction
 		dir.Set (0, 0, -distance);

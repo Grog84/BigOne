@@ -24,13 +24,14 @@ public class PauseGame : MonoBehaviour
     public void Pause()
     {
         if (canvasTrigger)
-        { Time.timeScale = 0;
+        {
             canvas.gameObject.SetActive(true);
+            Time.timeScale = 0;
         }
         else
         {
-            Time.timeScale = 1;
             canvas.gameObject.SetActive(false);
+            Time.timeScale = 1;
         }
 
 

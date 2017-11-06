@@ -17,7 +17,7 @@ public class CutsceneManager : MonoBehaviour
    
 
 
-    public IEnumerator PlayTimeline(PlayableDirector playableDirector, bool triggered ,bool characterControllable)
+    public IEnumerator PlayTimeline(PlayableDirector playableDirector, bool triggered)
     {
         if (triggered == false)
         {
@@ -25,7 +25,7 @@ public class CutsceneManager : MonoBehaviour
         }
         trigger = true;
 
-        if(characterControllable == false)
+        if(characterControlEnabled == false)
         {
             if(playableDirector.playableGraph.IsPlaying())
             {

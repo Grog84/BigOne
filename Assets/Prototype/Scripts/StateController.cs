@@ -20,8 +20,7 @@ namespace StateMachine
         protected bool isActive = true;
 
         protected virtual void Awake()
-        {
-            inactiveState = (State)Resources.Load("Inactive"); 
+        { 
             remainState = (State)Resources.Load("RemainInState");
         }
 

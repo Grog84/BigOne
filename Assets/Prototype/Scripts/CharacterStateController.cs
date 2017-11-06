@@ -21,6 +21,7 @@ namespace StateMachine
         protected override void Awake()
         {
             base.Awake();
+            inactiveState = (State)Resources.Load("Inactive");
             navMeshAgent = GetComponent<NavMeshAgent>();
 
             lastActiveState = currentState;

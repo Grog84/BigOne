@@ -24,6 +24,7 @@ namespace StateMachine
             base.Awake();
             lastActiveState = currentState;
             m_AgentController = GetComponent<_AgentController>();
+            inactiveState = (State)Resources.Load("InactiveAI");
         }
 
         private void Start()

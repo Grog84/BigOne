@@ -70,7 +70,7 @@ public class LightTestScript : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(LightTriggerList.Count);
+        //Debug.Log(LightTriggerList.Count);
         if (LightTriggerList.Count == 0)
         {
             //Luce Fuori

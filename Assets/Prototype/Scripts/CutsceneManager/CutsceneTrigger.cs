@@ -10,7 +10,7 @@ public class CutsceneTrigger : CutsceneManager
     {
         if (other.gameObject.tag == "Player")
         {
-            StartCoroutine(PlayTimeline(m_PlayableDirector,trigger,characterControlEnabled));
+            StartCoroutine(PlayTimeline(m_PlayableDirector,trigger));
         }
     }
 

@@ -13,7 +13,7 @@ public class CutsceneOnAwake : CutsceneManager
     {
         m_PlayableDirector = this.GetComponent<PlayableDirector>();
 
-        StartCoroutine(PlayTimeline(m_PlayableDirector, trigger, characterControlEnabled));
+        StartCoroutine(PlayTimeline(m_PlayableDirector, trigger));
     }
 
 }

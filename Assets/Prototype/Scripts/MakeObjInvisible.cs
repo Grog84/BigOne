@@ -4,10 +4,24 @@ using UnityEngine;
 
 public class MakeObjInvisible : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    private List<MeshRenderer> meshRenderers;
 
-        GetComponent<MeshRenderer>().enabled = false;
+    // Use this for initialization
+    void Start () {
+
+        meshRenderers = new List<MeshRenderer>();
+        if(GetComponent<MeshRenderer>())
+            GetComponent<MeshRenderer>().enabled = false;
+
+
+        if (gameObject.GetComponentsInChildren<MeshRenderer>().Length != 0)
+        {
+            foreach (var meshRend in GetComponentsInChildren<MeshRenderer>())
+            {
+                meshRend.enabled = false;
+            }
+            
+        }
 
 	}
 	

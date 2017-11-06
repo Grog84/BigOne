@@ -161,6 +161,14 @@ public class GMController : MonoBehaviour {
         }
     }
 
+    void OnDisable()
+    {
+        #if !UNITY_EDITOR
+                CancelInvoke();
+                StopAllCoroutines();
+        #endif
+    }
+
 }
 
 

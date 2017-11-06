@@ -32,7 +32,7 @@ public class CutsceneInteractable : CutsceneManager
     {
         if (other.gameObject.tag == "Player" && Input.GetButtonDown("Interact") && !trigger)
         {
-            StartCoroutine(PlayTimeline(m_PlayableDirector, trigger));
+            StartCoroutine(PlayTimeline(m_PlayableDirector));
         }
     }
 

@@ -7,7 +7,7 @@ public class CheckPointManager : MonoBehaviour {
 
     [HideInInspector] public bool SaveOnClose = true;
 
-    private static SaveObjComponent[] saveObjects;
+    private SaveObjComponent[] saveObjects;
 
     // Use this for initialization
     void Awake()

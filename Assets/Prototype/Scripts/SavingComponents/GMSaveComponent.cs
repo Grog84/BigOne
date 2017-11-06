@@ -10,7 +10,7 @@ namespace SaveGame
 
         private GMController m_Controller;
 
-        private void Awake()
+        public override void Awake()
         {
             m_Controller = GetComponent<GMController>();
         }
@@ -27,7 +27,7 @@ namespace SaveGame
         }
         public void OnApplicationQuit()
         {
-            ScreenCapture.CaptureScreenshot("Assets/Prototype/Images/ScreenInput.png");
+            //ScreenCapture.CaptureScreenshot("Assets/Prototype/Images/ScreenInput.png");
         }
     }
 }

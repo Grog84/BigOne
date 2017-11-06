@@ -798,6 +798,7 @@ GameObject:
   - component: {fileID: 23749959247208126}
   - component: {fileID: 64960428162646976}
   - component: {fileID: 114719919862951872}
+  - component: {fileID: 114097041064369286}
   m_Layer: 0
   m_Name: Cone
   m_TagString: Untagged
@@ -862,6 +863,7 @@ GameObject:
   - component: {fileID: 136365586091180548}
   - component: {fileID: 23869048058992134}
   - component: {fileID: 114765155193208524}
+  - component: {fileID: 114289879685906290}
   m_Layer: 0
   m_Name: AgentAvoidance
   m_TagString: Untagged
@@ -1780,8 +1782,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1013249801369906}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.14, y: 3.72, z: -4.77}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4744573828020444}
@@ -1791,7 +1793,7 @@ Transform:
   - {fileID: 4192945220411342}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -160.3, z: 0}
 --- !u!4 &4624055599457456
 Transform:
   m_ObjectHideFlags: 1
@@ -2375,6 +2377,17 @@ MonoBehaviour:
   m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114097041064369286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1675850199048792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4edc80d8cebbea3489edd0890735112d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114122895203698508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2407,6 +2420,17 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114289879685906290
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1782435451722994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4edc80d8cebbea3489edd0890735112d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114301279847743488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2435,7 +2459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f97efe3389134cc40afc8ce130338a47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  randomPick: 0
+  randomPick: 1
   wayPointList:
   - {fileID: 0}
   - {fileID: 0}

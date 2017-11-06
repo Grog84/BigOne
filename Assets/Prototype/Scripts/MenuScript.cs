@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MenuScript : MonoBehaviour {
 
-	public void LoadLastMission()
+    public void LoadLastMission()
     {
-     
         SceneManager.LoadScene(SaveGame.SaveObjComponent.GetLastScene());
-
     }
     public void ReturnHomePage()
     {
@@ -17,6 +17,7 @@ public class MenuScript : MonoBehaviour {
     }
     public void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             ReturnHomePage();

@@ -22,7 +22,8 @@ public class CameraScript : MonoBehaviour
     private float camDistance = 0.0f;
     //camera variables for the position 
 	private float nearClipPlaneDistance = 0.1f;
-    public float distance = 2.5f;
+    private float distance = 2.5f;
+    public float maxDistance = 2.5f;
     // position of the camera assigned in the camera movement
     private float currentX = 0.0f;
 	private float currentY = 0.0f;
@@ -85,7 +86,7 @@ public class CameraScript : MonoBehaviour
 			
 			Ray ray = new Ray (lookAt.position, clipPointPositionArray [i] - lookAt.position);
 			RaycastHit hit;
-			if (Physics.Raycast (ray, out hit, 2.5f, layerIgnored))
+			if (Physics.Raycast (ray, out hit, maxDistance, layerIgnored))
             {
 				finalDist = Mathf.Min(hit.distance, finalDist);
 				distance = finalDist;
@@ -93,7 +94,7 @@ public class CameraScript : MonoBehaviour
 			}
             else 
 			{
-				finalDist = Mathf.Min(2.5f, finalDist);
+				finalDist = Mathf.Min(maxDistance, finalDist);
 				distance = finalDist;
 			}
 

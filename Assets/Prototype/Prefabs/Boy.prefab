@@ -294,11 +294,11 @@ GameObject:
   - component: {fileID: 114099655126269870}
   - component: {fileID: 114342614479072684}
   - component: {fileID: 114699801486323228}
+  - component: {fileID: 114873372109710600}
   - component: {fileID: 114888755817776138}
   - component: {fileID: 114553567268930278}
   - component: {fileID: 114319331313540930}
   - component: {fileID: 114951182589854320}
-  - component: {fileID: 114707480430341444}
   m_Layer: 8
   m_Name: Boy
   m_TagString: Player
@@ -756,7 +756,7 @@ GameObject:
   - component: {fileID: 4273567003512648}
   m_Layer: 8
   m_Name: mixamorig:Neck
-  m_TagString: Untagged
+  m_TagString: LookAt
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1298,8 +1298,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1236579459611486}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0624201, y: 3.3106668, z: -0.84312105}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalPosition: {x: -207.5, y: 0, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 4404718081447118}
   - {fileID: 4886003829020566}
@@ -1345,13 +1345,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1626955007279924}
-  m_LocalRotation: {x: 0.04592706, y: -0.0003351867, z: -0.004002347, w: 0.9989367}
-  m_LocalPosition: {x: -0.0000002520208, y: 0.15032494, z: 0.007929049}
+  m_LocalRotation: {x: 0.04592707, y: -0.0003351865, z: -0.0040023513, w: 0.9989368}
+  m_LocalPosition: {x: -0, y: 0.15032467, z: 0.007928631}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4620284774424666}
   m_Father: {fileID: 4812920408024088}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4277154966395148
 Transform:
@@ -2050,8 +2050,8 @@ Transform:
   m_LocalPosition: {x: -0.00000091440717, y: 0.13360202, z: -0.016264595}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4833316060219292}
   - {fileID: 4273567003512648}
+  - {fileID: 4833316060219292}
   - {fileID: 4677583313549822}
   m_Father: {fileID: 4876141501369842}
   m_RootOrder: 0
@@ -2094,7 +2094,7 @@ Transform:
   m_Children:
   - {fileID: 4581100213717532}
   m_Father: {fileID: 4812920408024088}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4858775029576168
 Transform:
@@ -2340,13 +2340,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75ec9bf1ccffab5468cbce2d3fc986ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: {fileID: 11400000, guid: 0671d112d18c20d43959d00b038f5c4a, type: 2}
+  currentState: {fileID: 11400000, guid: 94f03c507bbcfec4ba82d6ec06fb81c3, type: 2}
   checkIfGameActive: {fileID: 11400000, guid: bf3a05a8f8153d648af2b0cbbb1a72c7, type: 2}
   inactiveState: {fileID: 11400000, guid: 1fb2ce50376699e41aaee9389d83bfd4, type: 2}
   remainState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
   stateTimeElapsed: 0
   lastActiveState: {fileID: 11400000, guid: 0671d112d18c20d43959d00b038f5c4a, type: 2}
-  characterStats: {fileID: 11400000, guid: 080da5c3b4c909145b5cc9c307920c50, type: 2}
+  characterStats: {fileID: 11400000, guid: 6548a679fde78b44d9641d8ff222c908, type: 2}
   thisCharacter: 0
   gameStartState: {fileID: 11400000, guid: 94f03c507bbcfec4ba82d6ec06fb81c3, type: 2}
   defeatedState: {fileID: 11400000, guid: 536d2a2fc2ef7e14f8c4e2e2798a7e64, type: 2}
@@ -2886,7 +2886,7 @@ MonoBehaviour:
   isDefeated: 0
   footStepsEmitter: {fileID: 0}
   walkStatusRange: 1
-  m_CharStats: {fileID: 11400000, guid: 080da5c3b4c909145b5cc9c307920c50, type: 2}
+  m_CharStats: {fileID: 11400000, guid: 6548a679fde78b44d9641d8ff222c908, type: 2}
   m_WalkNoiseLayerMask:
     serializedVersion: 2
     m_Bits: 1
@@ -2943,7 +2943,7 @@ MonoBehaviour:
   saveRotation: 1
   setOnAwake: 0
   memorizeOnClose: 1
---- !u!114 &114707480430341444
+--- !u!114 &114873372109710600
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2951,15 +2951,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1236579459611486}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1606c19e96abc3544a2a5d507c75d688, type: 3}
+  m_Script: {fileID: 11500000, guid: 7aaa5fd6a924cc04e87943bed001a778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EventPath: event:/SFX/Steps
-  playStep: 0
-  origin:
-  - {fileID: 4042092016516534}
-  - {fileID: 4620284774424666}
-  - {fileID: 4511355375746734}
+  savePosition: 1
+  saveRotation: 1
+  isOnCover: 0
+  setOnAwake: 0
+  memorizeOnClose: 1
+  saveOnClose: 0
 --- !u!114 &114888755817776138
 MonoBehaviour:
   m_ObjectHideFlags: 1

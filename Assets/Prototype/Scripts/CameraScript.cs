@@ -15,6 +15,9 @@ public class CameraScript : MonoBehaviour
 
     public Transform motherLookAt;
     public Transform boyLookAt;
+    //variables initialized at start 
+    private Transform motherLookAtByTag;
+    private Transform boyLookAtByTag;
     private Transform lookAt;                    // object that the camera is looking at
 	private Transform camTransform;
     
@@ -36,11 +39,18 @@ public class CameraScript : MonoBehaviour
 	public Vector3[] clipPointPositionArray;
 
 
+    private void Awake()
+    {
+        motherLookAtByTag = motherLookAt.FindDeepChildByTag("LookAtCamera");
+        boyLookAtByTag = boyLookAt.FindDeepChildByTag("LookAtCamera");
+    }
 
     private void Start()
 	{
+
         SwitchLookAt();
- 		clipPointPositionArray = new Vector3[5];
+        
+    	clipPointPositionArray = new Vector3[5];
 		camTransform = transform;
 		cam = Camera.main;
         Cursor.lockState = CursorLockMode.Locked;
@@ -49,6 +59,7 @@ public class CameraScript : MonoBehaviour
 
 	private void Update ()
 	{
+
         if (Input.GetButtonDown("Pause"))
         {
             Cursor.lockState = CursorLockMode.None;                     //Riabilita il cursore del mouse premendo ESC
@@ -127,14 +138,14 @@ public class CameraScript : MonoBehaviour
     {
         if((int)GMController.instance.isCharacterPlaying == 0)
         {
-            lookAt = boyLookAt;
+            lookAt = boyLookAtByTag;
         }
         else if((int)GMController.instance.isCharacterPlaying == 1)
         {
-            lookAt = motherLookAt;
+            lookAt = motherLookAtByTag;
         }
     }
-
+    
 }
 
 

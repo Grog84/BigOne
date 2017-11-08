@@ -33,7 +33,9 @@ namespace Character.Actions
                     {
                        // Debug.Log("APRI LA PORTA");
                         hit.transform.gameObject.GetComponent<Doors>().OpenDoor();
+                       // Quaternion doorRotation = Quaternion.Euler(controller.m_CharacterController.doorCollider.transform.parent.Find("Hinge").rotation.eulerAngles + new Vector3(0, 90, 0));
                         controller.m_CharacterController.doorCollider.transform.parent.transform.Find("Hinge").DOLocalRotate(new Vector3(0, -90, 0), 2f);
+                        //Quaternion.Lerp(controller.m_CharacterController.doorCollider.transform.rotation, doorRotation, 1f);
                     }
                     else if (hit.transform.gameObject.GetComponent<Doors>().isDoorOpen)
                     {

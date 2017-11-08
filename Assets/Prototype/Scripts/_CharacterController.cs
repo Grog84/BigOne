@@ -20,6 +20,8 @@ namespace Character
         [HideInInspector] public bool startClimbAnimationTop;          // Starts the descend from top
         [HideInInspector] public bool startClimbAnimationBottom;       // Starts the climb from bottom
         [HideInInspector] public bool startClimbAnimationEnd;          // Starts the end climb courutine
+         public bool useIk;
+
 
         [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing
         [HideInInspector] public bool isPushDirectionRight;            // The player is facing the pushable object
@@ -87,7 +89,6 @@ namespace Character
             isInClimbArea = false;
             isInPushArea = false;
             ray_length = m_CharController.bounds.size.y / 2.0f + 0.1f;
-            
 
         }
         #region Raycast Check
@@ -286,34 +287,49 @@ namespace Character
 
         #region Climb Coroutine
 
+        public void EndClimbing()
+        {
+            //StartCoroutine(ReachPointEnd());
+            useIk = false;
+        }
+
         private IEnumerator ReachPointEnd()
         {
+            useIk = true;
+            startClimbAnimationEnd = false;
             float climbTime = 1f;
-
+            Vector3 difPos = endClimbAnchor.position - transform.position;
+            //Debug.Log(difPos);
 
             m_CharController.enabled = false;
-            CharacterTransform.DOMove(endClimbAnchor.position, climbTime);
+            // CharacterTransform.DOMove(endClimbAnchor.position, climbTime);
+            CharacterTransform.DOBlendableMoveBy(new Vector3(0,difPos.y,0), climbTime);
+            CharacterTransform.DOBlendableMoveBy(new Vector3(difPos.x, 0, difPos.z), 2f);
 
+          
             yield return new WaitForSeconds(climbTime);
-            startClimbAnimationEnd = false;
             m_CharController.enabled = true;
+       
             yield return null;
         }
 
         private IEnumerator ReachPointTop()
         {
-            float climbTime = 1f;
+            startClimbAnimationTop = false;
+            Vector3 difPos = climbAnchorTop.position - transform.position;
+            float climbTime = 0.5f;
             Vector3 top = climbAnchorTop.parent.position - climbAnchorTop.position;
             top.y = 0;
             top = top.normalized;
 
-            yield return StartCoroutine(RotateToward(top));
+            StartCoroutine(RotateToward(top));
 
             m_CharController.enabled = false;
-            CharacterTransform.DOMove(climbAnchorTop.position, climbTime);
+            //CharacterTransform.DOMove(climbAnchorTop.position, climbTime);
+            CharacterTransform.DOBlendableMoveBy(new Vector3(0, difPos.y, 0), 1f);
+            CharacterTransform.DOBlendableMoveBy(new Vector3(difPos.x, 0, difPos.z), climbTime);
             yield return new WaitForSeconds(climbTime);
             climbingTop = false;
-            startClimbAnimationTop = false;
             m_CharController.enabled = true;
             yield return null;
         }
@@ -321,7 +337,7 @@ namespace Character
 
         private IEnumerator ReachPointBottom()
         {
-            float climbTime = 1f;
+            float climbTime = 0.5f;
             Vector3 bot = climbAnchorBottom.parent.position - climbAnchorBottom.position;
             bot.y = 0;
             bot = bot.normalized;
@@ -344,7 +360,7 @@ namespace Character
 
         public IEnumerator GrabPushable()
         {
-            float positionTime = 1f;
+            float positionTime = 0.5f;
 
             Vector3 dir = pushObject.transform.position - pushCollider.transform.position;
             dir.y = 0;
@@ -366,7 +382,7 @@ namespace Character
         {
             pushObject.transform.parent = null;                       // Detach the pushable object from the Player
             pushObject.GetComponent<Rigidbody>().isKinematic = true;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             isExitPush = false;
             //pushObject = null;
             //pushCollider = null;
@@ -389,6 +405,7 @@ namespace Character
 
             m_CharController.enabled = false;
             CharacterTransform.DOMove(doorCollider.transform.GetChild(0).position, InteractTime);
+
 
             yield return new WaitForSeconds(InteractTime);
             startDoorAnimation = false;
@@ -431,6 +448,16 @@ namespace Character
 
         #endregion
 
+        private void OnAnimatorIK(int layerIndex)
+        {
+            if (useIk)
+            {
+                m_Animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
+                m_Animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
+                m_Animator.SetIKPosition(AvatarIKGoal.RightHand, climbCollider.transform.parent.GetChild(5).position);
+                m_Animator.SetIKPosition(AvatarIKGoal.LeftHand, climbCollider.transform.parent.GetChild(6).position);
+            }
+        }
 
         void Update()
         {

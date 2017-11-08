@@ -20,13 +20,13 @@ namespace Character.Actions
             if (controller.m_CharacterController.climbingTop)
             {
                 controller.m_CharacterController.climbAnchorTop = controller.m_CharacterController.climbCollider.transform.parent.transform.GetChild(2);
-                Debug.Log("Scendo");
+                //Debug.Log("Scendo");
                 controller.m_CharacterController.startClimbAnimationTop = true;
             }
             else if (controller.m_CharacterController.climbingBottom)
             {
                 controller.m_CharacterController.climbAnchorBottom = controller.m_CharacterController.climbCollider.transform.parent.transform.GetChild(3);
-                Debug.Log("Salgo");
+                //Debug.Log("Salgo");
                 controller.m_CharacterController.startClimbAnimationBottom = true;
             }
         }

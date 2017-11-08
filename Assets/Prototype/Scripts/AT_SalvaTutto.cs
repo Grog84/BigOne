@@ -19,23 +19,12 @@ public class AT_SalvaTutto : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.F5))
         {
             SaveAllObj();
-        //LoadAllObj();
-            /*
-           
-
-            foreach (AT_ProvaSalvataggio c in Prova)
-            {
-                c.SaveData();
-
-            }
-            */
+      
         }
     }
     void SaveAllObj()
     {
-        
-          //
-       
+
         foreach (AT_ProvaSalvataggio c in objWithSaveScript)
         {
             c.SaveData();

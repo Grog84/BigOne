@@ -17,7 +17,7 @@ namespace Character.Actions
         private void UpdateAnimatorForPush(CharacterStateController controller)
         {
             controller.m_CharacterController.m_Animator.SetBool("isPushing", false);
-            Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isPushing"));
+         
         }
     }
 }

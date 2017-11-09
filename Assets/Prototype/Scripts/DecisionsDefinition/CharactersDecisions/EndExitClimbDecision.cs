@@ -10,14 +10,15 @@ namespace Character.Decisions
     {
         public override bool Decide(CharacterStateController controller)
         {
-            bool isPushing = CheckIfEndPushing(controller);
-            return isPushing;
+            bool isClimbing = CheckIfEndClimbing(controller);
+            return isClimbing;
         }
 
-        private bool CheckIfEndPushing(CharacterStateController controller)
+        private bool CheckIfEndClimbing(CharacterStateController controller)
         {
 
-            if (!controller.m_CharacterController.startClimbAnimationEnd)
+            if (!controller.m_CharacterController.startClimbAnimationEnd 
+                && !controller.m_CharacterController.startClimbEnd)
             {
 
                 return true;

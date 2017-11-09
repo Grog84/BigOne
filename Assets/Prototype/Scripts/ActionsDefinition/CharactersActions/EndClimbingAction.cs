@@ -22,6 +22,7 @@ namespace Character.Actions
             {
                 controller.m_CharacterController.endClimbAnchor = controller.m_CharacterController.climbCollider.transform.parent.transform.GetChild(4);
                 controller.m_CharacterController.startClimbAnimationEnd = true;
+                controller.m_CharacterController.startClimbEnd = true;
             }
         }
     }

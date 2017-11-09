@@ -16,6 +16,7 @@ namespace Character.Actions
         public void Walk(CharacterStateController controller)
         {
             controller.characterStats.m_MovementSpeed = controller.characterStats.m_WalkSpeed;
+
         }
 
     }

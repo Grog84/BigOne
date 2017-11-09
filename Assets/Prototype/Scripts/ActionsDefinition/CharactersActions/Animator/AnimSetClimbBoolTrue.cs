@@ -17,7 +17,7 @@ namespace Character.Actions
         private void UpdateAnimatorForClimb(CharacterStateController controller)
         {
             controller.m_CharacterController.m_Animator.SetBool("isClimbing", true);
-            // Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isClimbing"));
+            controller.m_CharacterController.m_Animator.SetBool("isStartClimb", false);
         }
     }
 }

@@ -5,8 +5,8 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Animator/DeactivateStartClimb")]
-    public class AnimSetStartClimbBoolFalse : _Action
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Animator/DeactivateEndClimb")]
+    public class AnimSetEndClimbBoolFalse : _Action
     {
 
         public override void Execute(CharacterStateController controller)
@@ -20,9 +20,11 @@ namespace Character.Actions
             controller.m_CharacterController.m_ForwardAmount = 0;
             controller.m_CharacterController.m_Animator.SetFloat("Forward", 0f);
 
-            
-                controller.m_CharacterController.m_Animator.SetBool("isEndClimb", true);
-            
+
+            if (!controller.m_CharacterController.startClimbAnimationEnd)
+            {
+                controller.m_CharacterController.m_Animator.SetBool("isEndClimb", false);
+            }
          
          
         }

@@ -19,8 +19,10 @@ namespace Character
         [HideInInspector] public bool climbingTop;                     // The player is in the Top Trigger
         [HideInInspector] public bool startClimbAnimationTop;          // Starts the descend from top
         [HideInInspector] public bool startClimbAnimationBottom;       // Starts the climb from bottom
-        [HideInInspector] public bool startClimbAnimationEnd;          // Starts the end climb courutine
-         public bool useIk;
+         public bool startClimbAnimationEnd;          // Starts the end climb courutine
+         public bool startClimbEnd;
+        [HideInInspector] public bool useEndClimbIk;
+        [HideInInspector] public float ikWeight = 1;
 
 
         [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing
@@ -290,26 +292,26 @@ namespace Character
         public void EndClimbing()
         {
             //StartCoroutine(ReachPointEnd());
-            useIk = false;
+            useEndClimbIk = false;
+            ikWeight = 1;
         }
 
         private IEnumerator ReachPointEnd()
         {
-            useIk = true;
+            useEndClimbIk = true;
             startClimbAnimationEnd = false;
-            float climbTime = 1f;
+            float climbTime = 2f;
             Vector3 difPos = endClimbAnchor.position - transform.position;
-            //Debug.Log(difPos);
+
 
             m_CharController.enabled = false;
-            // CharacterTransform.DOMove(endClimbAnchor.position, climbTime);
-            CharacterTransform.DOBlendableMoveBy(new Vector3(0,difPos.y,0), climbTime);
-            CharacterTransform.DOBlendableMoveBy(new Vector3(difPos.x, 0, difPos.z), 2f);
+            CharacterTransform.DOBlendableMoveBy(new Vector3(0,difPos.y,0), 1f);
+            CharacterTransform.DOBlendableMoveBy(new Vector3(difPos.x, 0, difPos.z), climbTime);
 
           
             yield return new WaitForSeconds(climbTime);
             m_CharController.enabled = true;
-       
+            startClimbEnd = false;
             yield return null;
         }
 
@@ -325,7 +327,6 @@ namespace Character
             StartCoroutine(RotateToward(top));
 
             m_CharController.enabled = false;
-            //CharacterTransform.DOMove(climbAnchorTop.position, climbTime);
             CharacterTransform.DOBlendableMoveBy(new Vector3(0, difPos.y, 0), 1f);
             CharacterTransform.DOBlendableMoveBy(new Vector3(difPos.x, 0, difPos.z), climbTime);
             yield return new WaitForSeconds(climbTime);
@@ -450,10 +451,14 @@ namespace Character
 
         private void OnAnimatorIK(int layerIndex)
         {
-            if (useIk)
+            
+            if (useEndClimbIk)
             {
-                m_Animator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
-                m_Animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
+                ikWeight -= Time.deltaTime;
+                //Debug.Log(ikWeight);
+                m_Animator.SetIKPositionWeight(AvatarIKGoal.RightHand, ikWeight);
+                m_Animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, ikWeight);
+
                 m_Animator.SetIKPosition(AvatarIKGoal.RightHand, climbCollider.transform.parent.GetChild(5).position);
                 m_Animator.SetIKPosition(AvatarIKGoal.LeftHand, climbCollider.transform.parent.GetChild(6).position);
             }

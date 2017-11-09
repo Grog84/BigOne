@@ -19,7 +19,7 @@ namespace Character.Decisions
             if (controller.m_CharacterController.climbingTop && Input.GetButtonDown("Interact"))
             {
 
-                //Debug.Log("pereppe");
+           
                 return true;
 
 

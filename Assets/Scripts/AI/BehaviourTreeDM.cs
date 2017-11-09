@@ -16,7 +16,7 @@ namespace AI.BT
         {
             // Build the tree from game objects
 
-            rootTask = GetComponentInChildren<Task>();
+            rootTask = GetComponent<Task>();
             BuildTree(rootTask);
         }
 

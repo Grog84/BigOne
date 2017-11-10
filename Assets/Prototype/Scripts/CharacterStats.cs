@@ -17,7 +17,8 @@ public class CharacterStats : ScriptableObject { // nope...here stats only shoul
     public float m_MovementSpeed = 3.0f;
     [Space(10)]
     public float m_ClimbSpeed = 3.0f;
-    public float m_DistanceFromWallClimbing = 4f; 
+    public float m_DistanceFromWallClimbing = 4f;
+    public float m_ClimbFallHeight = 1f;
     [Space(10)]
     public float m_PushSpeed = 3.0f;
     public float m_DistanceFromPushableObject = 4f;

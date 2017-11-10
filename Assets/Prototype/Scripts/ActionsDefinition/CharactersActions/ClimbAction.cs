@@ -62,7 +62,23 @@ namespace Character.Actions
             }
             // Animator
             controller.m_CharacterController.m_ForwardAmount = movement;
-            //Debug.Log(controller.m_CharacterController.m_ForwardAmount);
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(controller.m_CharacterController.CharacterTransform.position, Vector3.down, out hit, controller.m_CharacterController.m_CharStats.m_ClimbFallHeight))
+            {
+                Debug.DrawRay(controller.m_CharacterController.CharacterTransform.position, Vector3.down, Color.red);
+
+                if (!(hit.transform.gameObject.layer == LayerMask.NameToLayer("Player")))
+
+                    controller.m_CharacterController.secureFall = true;
+               
+            }
+            else
+            {
+                controller.m_CharacterController.secureFall = false;
+            }
+
         }
     }
 }

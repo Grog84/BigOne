@@ -24,6 +24,7 @@ namespace Character
         [HideInInspector] public bool startClimbEnd;                   // Indicates if the EndClimb coroutine is finished
         [HideInInspector] public bool useEndClimbIk;
         [HideInInspector] public float ikWeight = 1;
+         public bool secureFall;
         //
         // PUSH VARIABLES
         [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing

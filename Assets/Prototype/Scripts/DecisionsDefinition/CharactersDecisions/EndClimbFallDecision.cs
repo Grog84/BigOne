@@ -16,7 +16,7 @@ namespace Character.Decisions
 
         private bool CheckIfClimbingFall(CharacterStateController controller)
         {
-            if (/*!controller.m_CharacterController.climbingTop && */Input.GetButtonDown("Cancel"))
+            if (Input.GetButtonDown("Cancel") && controller.m_CharacterController.secureFall)
             {
 
 

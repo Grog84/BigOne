@@ -42,4 +42,9 @@ public class FDMenuUIManager : MonoBehaviour
 		
 	}
 
+    public void Exit()
+    {
+        Application.Quit();
+    }
+
 }

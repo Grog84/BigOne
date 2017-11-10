@@ -12,45 +12,48 @@ namespace Character
         [HideInInspector] public float m_TurnAmount;                   // Unutilized for the moment
         [HideInInspector] public float m_ForwardAmount;
         [HideInInspector] public float ray_length;
-
+        //
+        // CLIMB VARIABLES
         [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
         [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
         [HideInInspector] public bool climbingBottom;                  // The player is in the Bottom Trigger
         [HideInInspector] public bool climbingTop;                     // The player is in the Top Trigger
         [HideInInspector] public bool startClimbAnimationTop;          // Starts the descend from top
         [HideInInspector] public bool startClimbAnimationBottom;       // Starts the climb from bottom
-         public bool startClimbAnimationEnd;          // Starts the end climb courutine
-         public bool startClimbEnd;
+        [HideInInspector] public bool startClimbAnimationEnd;          // Starts the EndClimb courutine
+        [HideInInspector] public bool startClimbEnd;                   // Indicates if the EndClimb coroutine is finished
         [HideInInspector] public bool useEndClimbIk;
         [HideInInspector] public float ikWeight = 1;
-
-
+        //
+        // PUSH VARIABLES
         [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing
         [HideInInspector] public bool isPushDirectionRight;            // The player is facing the pushable object
         [HideInInspector] public bool isPushLimit;                     // Detect push limits like obstacles
-
         [HideInInspector] public bool isPushing;                       // Define the start push actions
-        [HideInInspector] public bool isExitPush;
-
+        [HideInInspector] public bool isExitPush;                      // Indicates if the DetachFormPushable coroutine is finished
+        //
+        // DOORS & ITEMS VARIABLES
         [HideInInspector] public bool isInDoorArea;                    // Detect if the player is in the Door trigger area
         [HideInInspector] public bool isDoorDirectionRight;            // Detect if the player is looking toward the door
         [HideInInspector] public bool isInKeyArea;                     // Detect if the player is in the key object interactable area
-        [HideInInspector] public bool startDoorAnimation;              // Starts the door interaction courutine
+        [HideInInspector] public bool startDoorAnimation;              // Starts the DoorInteraction courutine
         [HideInInspector] public bool startItemAnimation;              // Starts the item collection courutine
-
+        [HideInInspector] public bool isEndDoorAction;                 // Indicates if the DoorInteraction coroutine is finished
+        //
         [HideInInspector] public bool canStep = true;
-        [HideInInspector] public float m_WalkSoundrange_sq;   // squared value
+        [HideInInspector] public float m_WalkSoundrange_sq;            // squared value
         [HideInInspector] public float floorNoiseMultiplier;
 
         [HideInInspector] public float charDepth;
         [HideInInspector] public float charSize;
-
+        // COMPONENTS REFERENCES
         [HideInInspector] public Animator m_Animator;
         [HideInInspector] public Transform m_Camera;                   // A reference to the main camera in the scenes transform
-        [HideInInspector] public Transform CharacterTransform;          // A reference to the character assigned to the state controller transform
+        [HideInInspector] public Transform CharacterTransform;         // A reference to the character assigned to the state controller transform
         [HideInInspector] public Rigidbody m_Rigidbody;                // A reference to the rigidbody
         [HideInInspector] public CharacterController m_CharController; // A reference to the Character controller component
 
+        // COLIDERS REFERENCES
         [HideInInspector] public GameObject climbCollider;
         [HideInInspector] public Transform climbAnchorTop;
         [HideInInspector] public Transform climbAnchorBottom;
@@ -62,7 +65,7 @@ namespace Character
 
         [HideInInspector] public GameObject pushObject;
         [HideInInspector] public GameObject pushCollider;
-
+        //
         [HideInInspector] public bool isDefeated = false;
 
         [HideInInspector] public FootstepsEmitter footStepsEmitter;
@@ -396,7 +399,8 @@ namespace Character
 
         private IEnumerator DoorInteraction()
         {
-            float InteractTime = 1f;
+            startDoorAnimation = false;
+            float InteractTime = 1.5f;
 
             Vector3 dir = doorObject.transform.position - doorCollider.transform.position;
             dir.y = 0;
@@ -409,8 +413,8 @@ namespace Character
 
 
             yield return new WaitForSeconds(InteractTime);
-            startDoorAnimation = false;
             m_CharController.enabled = true;
+            isEndDoorAction = false;
             yield return null;
         }
 

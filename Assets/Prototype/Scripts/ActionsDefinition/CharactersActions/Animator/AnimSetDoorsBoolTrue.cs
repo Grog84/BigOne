@@ -16,7 +16,14 @@ namespace Character.Actions
 
         private void UpdateAnimatorForDoors(CharacterStateController controller)
         {
-            controller.m_CharacterController.m_Animator.SetBool("isOpening", true);
+            if (!controller.m_CharacterController.doorObject.transform.GetComponentInChildren<Doors>().hasKey)
+            {
+                controller.m_CharacterController.m_Animator.SetBool("isLocked", true);
+            }
+            else
+            {
+                controller.m_CharacterController.m_Animator.SetBool("isOpening", true);
+            }
         }
     }
 }

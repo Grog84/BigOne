@@ -5,8 +5,8 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Animator/DeactivateDoors")]
-    public class AnimSetDoorsBoolFalse : _Action
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Animator/DeactivateLockedDoors")]
+    public class AnimSetDoorsLockedBoolFalse : _Action
     {
 
         public override void Execute(CharacterStateController controller)
@@ -19,10 +19,8 @@ namespace Character.Actions
             controller.m_CharacterController.m_ForwardAmount = 0;
             controller.m_CharacterController.m_Animator.SetFloat("Forward", 0f);
 
-            if (!controller.m_CharacterController.startDoorAnimation)
-            {
-                controller.m_CharacterController.m_Animator.SetBool("isOpening", false);
-            }
+            controller.m_CharacterController.m_Animator.SetBool("isLocked", false);
+            
 
         }
     }

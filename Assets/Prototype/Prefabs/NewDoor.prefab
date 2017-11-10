@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 114860049488070432}
   - component: {fileID: 64905100658800414}
   m_Layer: 11
-  m_Name: LockedDoor
+  m_Name: DoorBody
   m_TagString: LockedDoor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
@@ -78,7 +78,7 @@ GameObject:
   m_Layer: 2
   m_Name: Point
   m_TagString: Untagged
-  m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -156,7 +156,7 @@ GameObject:
   m_Layer: 2
   m_Name: Point
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -167,7 +167,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1471658473345598}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.281319, y: 1.0000001, z: -16.530075}
+  m_LocalPosition: {x: -10.382, y: 0.987, z: -21.635}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4125519760261186}
@@ -224,7 +224,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1949420013083112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.196, y: -0.3, z: -0.098}
+  m_LocalPosition: {x: 0.322, y: -0.3, z: -0.098}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4590293619956960}
@@ -738,9 +738,17 @@ MonoBehaviour:
     areaError: 15
   asset_guid: 
   dontDestroyMeshOnDelete: 0
-  m_selectedFaces: 
-  m_SelectedEdges: []
-  m_selectedTriangles: 
+  m_selectedFaces: 00000000
+  m_SelectedEdges:
+  - x: 0
+    y: 1
+  - x: 2
+    y: 0
+  - x: 1
+    y: 3
+  - x: 3
+    y: 2
+  m_selectedTriangles: 000000000100000002000000010000000300000002000000
 --- !u!114 &114860049488070432
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -755,6 +763,7 @@ MonoBehaviour:
   rightKey: {fileID: 0}
   doorID: 
   isDoorOpen: 0
+  hasKey: 0
 --- !u!114 &114969717661996624
 MonoBehaviour:
   m_ObjectHideFlags: 1

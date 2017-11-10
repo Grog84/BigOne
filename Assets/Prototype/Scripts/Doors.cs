@@ -8,19 +8,24 @@ public class Doors : MonoBehaviour
     public GameObject rightKey;
     public string doorID;
     public bool isDoorOpen;
+    public bool hasKey;
 
     private OffMeshLink m_offLink;
 
     void Start()
     {
         m_offLink = GetComponentInChildren<OffMeshLink>();
+        isDoorOpen = false;
 
         if (gameObject.tag == "LockedDoor")
         {
             doorID = rightKey.GetComponent<Keys>().keyID;
+            hasKey = false;
         }
-
-        isDoorOpen = false;
+        else
+        {
+            hasKey = true;
+        }
     }
 
     public void OpenDoor()

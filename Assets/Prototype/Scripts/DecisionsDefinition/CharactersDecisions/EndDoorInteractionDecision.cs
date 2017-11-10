@@ -17,7 +17,7 @@ namespace Character.Decisions
         private bool CheckIfEndDoorInteraction(CharacterStateController controller)
         {
 
-            if (!controller.m_CharacterController.startDoorAnimation)
+            if (!controller.m_CharacterController.startDoorAnimation && !controller.m_CharacterController.isEndDoorAction)
             {
 
                 return true;

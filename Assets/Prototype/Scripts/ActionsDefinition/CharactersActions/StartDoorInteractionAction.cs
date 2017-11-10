@@ -20,6 +20,7 @@ namespace Character.Actions
         {
             controller.m_CharacterController.doorObject = controller.m_CharacterController.doorCollider.transform.parent.gameObject;
             controller.m_CharacterController.startDoorAnimation = true;
+            controller.m_CharacterController.isEndDoorAction = true;
 
         }
     }

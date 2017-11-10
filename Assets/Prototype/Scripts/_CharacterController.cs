@@ -36,9 +36,12 @@ namespace Character
         [HideInInspector] public bool isInDoorArea;                    // Detect if the player is in the Door trigger area
         [HideInInspector] public bool isDoorDirectionRight;            // Detect if the player is looking toward the door
         [HideInInspector] public bool isInKeyArea;                     // Detect if the player is in the key object interactable area
-        [HideInInspector] public bool startDoorAnimation;              // Starts the DoorInteraction courutine
+        [HideInInspector] public bool startDoorAction;                 // Starts the DoorInteraction courutine
         [HideInInspector] public bool startItemAnimation;              // Starts the item collection courutine
         [HideInInspector] public bool isEndDoorAction;                 // Indicates if the DoorInteraction coroutine is finished
+        [HideInInspector] public bool isDoorOpen;                      // Indicates if the door has to be opended or closed in the RotateDoor coroutine
+        [HideInInspector] public bool isDoorRotate;                    // Indicates if the RotateDoor coroutine is finished
+        [HideInInspector] public bool isEndAnim = false;               // Indicates if the player playing the door animation
         //
         [HideInInspector] public bool canStep = true;
         [HideInInspector] public float m_WalkSoundrange_sq;            // squared value
@@ -397,10 +400,15 @@ namespace Character
 
         #region Door Coroutine
 
+        public void EndDoorInteraction()
+        {
+            isEndAnim = true;   
+        }
+
         private IEnumerator DoorInteraction()
         {
-            startDoorAnimation = false;
-            float InteractTime = 1.5f;
+            startDoorAction = false;
+            float InteractTime = 0.5f;
 
             Vector3 dir = doorObject.transform.position - doorCollider.transform.position;
             dir.y = 0;
@@ -411,10 +419,34 @@ namespace Character
             m_CharController.enabled = false;
             CharacterTransform.DOMove(doorCollider.transform.GetChild(0).position, InteractTime);
 
-
             yield return new WaitForSeconds(InteractTime);
+            if (doorObject.transform.GetComponentInChildren<Doors>().hasKey)
+            {
+                StartCoroutine(RotateDoor(isDoorOpen, doorObject));
+            }
+            else
+            {
+                m_CharController.enabled = true;
+                isDoorRotate = true;
+            }
+            yield return null;
+        }
+
+        IEnumerator RotateDoor(bool isDoorOpen, GameObject doorObject)
+        {
+            float openDoorTime = 1f;
+
+            if (!isDoorOpen)
+            {
+               doorObject.transform.Find("Hinge").DOLocalRotate(new Vector3(0, -90, 0), openDoorTime);
+            }
+            else
+            {
+                doorObject.transform.Find("Hinge").DOLocalRotate(new Vector3(0, 0, 0), openDoorTime);
+            }
+            yield return new WaitForSeconds(openDoorTime);
             m_CharController.enabled = true;
-            isEndDoorAction = false;
+            isDoorRotate = true;
             yield return null;
         }
 
@@ -459,7 +491,7 @@ namespace Character
             if (useEndClimbIk)
             {
                 ikWeight -= Time.deltaTime;
-                //Debug.Log(ikWeight);
+             
                 m_Animator.SetIKPositionWeight(AvatarIKGoal.RightHand, ikWeight);
                 m_Animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, ikWeight);
 
@@ -497,7 +529,7 @@ namespace Character
                 StartCoroutine(DetachFromPushable());
             }
 
-            if (startDoorAnimation)
+            if (startDoorAction)
             {
                 StartCoroutine(DoorInteraction());
             }

@@ -19,11 +19,15 @@ namespace Character.Actions
             controller.m_CharacterController.m_ForwardAmount = 0;
             controller.m_CharacterController.m_Animator.SetFloat("Forward", 0f);
 
-            if (!controller.m_CharacterController.startDoorAnimation)
+            if (!controller.m_CharacterController.startDoorAction)
             {
                 controller.m_CharacterController.m_Animator.SetBool("isOpening", false);
             }
 
+            if (controller.m_CharacterController.isDoorRotate && controller.m_CharacterController.isEndAnim)
+            {
+                controller.m_CharacterController.isEndDoorAction = false;
+            }
         }
     }
 }

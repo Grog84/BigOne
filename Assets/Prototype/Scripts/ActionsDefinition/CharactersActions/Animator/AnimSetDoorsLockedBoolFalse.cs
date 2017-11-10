@@ -20,7 +20,9 @@ namespace Character.Actions
             controller.m_CharacterController.m_Animator.SetFloat("Forward", 0f);
 
             controller.m_CharacterController.m_Animator.SetBool("isLocked", false);
-            
+            controller.m_CharacterController.isEndAnim = false;
+
+
 
         }
     }

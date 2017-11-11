@@ -24,7 +24,7 @@ namespace Character
         [HideInInspector] public bool startClimbEnd;                   // Indicates if the EndClimb coroutine is finished
         [HideInInspector] public bool useEndClimbIk;
         [HideInInspector] public float ikWeight = 1;
-         public bool secureFall;
+        [HideInInspector] public bool secureFall;
         //
         // PUSH VARIABLES
         [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing
@@ -112,7 +112,7 @@ namespace Character
                 if (Physics.Raycast(CharacterTransform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTransform.forward, out hit, m_CharStats.m_DistanceFromDoor))
                 {
 
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors"))
+                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors") && hit.transform == doorCollider.transform.parent.FindDeepChild("DoorBody"))
                     {
                         isDoorDirectionRight = true;
                     }

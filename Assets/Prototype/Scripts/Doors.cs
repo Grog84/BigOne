@@ -19,7 +19,8 @@ public class Doors : MonoBehaviour
 
         if (gameObject.tag == "LockedDoor")
         {
-            doorID = rightKey.GetComponent<Keys>().keyID;
+            Debug.Log(rightKey.GetComponent<Keys>().ItemID);
+            doorID = rightKey.GetComponent<Keys>().ItemID;
             hasKey = false;
         }
         else

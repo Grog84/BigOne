@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Keys : Collectables
+public abstract class Collectables : MonoBehaviour
 {
+    public string ItemID;
     
-
 
 }

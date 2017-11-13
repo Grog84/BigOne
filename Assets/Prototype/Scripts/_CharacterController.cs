@@ -77,7 +77,7 @@ namespace Character
 
         public CharacterStats m_CharStats;
         public LayerMask m_WalkNoiseLayerMask;
-        public List<GameObject> Keychain;                               // List of all the keys collected by the player
+        public List<GameObject> Keychain;                               // List of all the key items collected by the player
 
         private bool oneStepCoroutineController = true;                 // used to make sure only one step coroutine is runnin at a given time
 
@@ -204,7 +204,6 @@ namespace Character
             }
             if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTransform.forward, other.transform.forward) < 45)
             {
-               // Debug.Log(Vector3.Angle(CharacterTransform.forward, other.transform.forward));
                 pushCollider = other.gameObject;
                 isInPushArea = true;
                 ActivatePushingChoice();

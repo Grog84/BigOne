@@ -56,7 +56,7 @@ namespace Character.Actions
 
                     for (int i = 0; i < controller.m_CharacterController.Keychain.Count; i++)
                     {
-                        if (hit.transform.gameObject.GetComponent<Doors>().doorID == controller.m_CharacterController.Keychain[i].gameObject.GetComponent<Keys>().keyID)
+                        if (hit.transform.gameObject.GetComponent<Doors>().doorID == controller.m_CharacterController.Keychain[i].gameObject.GetComponent<Keys>().ItemID)
                         {
                             hit.transform.gameObject.GetComponent<Doors>().hasKey = true;
                             // OPEN THE DOOR

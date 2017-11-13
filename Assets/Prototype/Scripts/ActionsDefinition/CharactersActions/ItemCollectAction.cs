@@ -20,13 +20,20 @@ namespace Character.Actions
         {
 
             // Pick up Keys
-            if (controller.m_CharacterController.isInKeyArea)
+            if (GMController.instance.isCharacterPlaying == CharacterActive.Mother && controller.m_CharacterController.KeyCollider.tag == "Key")
             {
+                controller.m_CharacterController.startItemAnimation = true;
                 controller.m_CharacterController.Keychain.Add(controller.m_CharacterController.KeyCollider.gameObject);
                 controller.m_CharacterController.KeyCollider.gameObject.SetActive(false);
                 controller.m_CharacterController.isInKeyArea = false;
             }
-
+            else if (controller.m_CharacterController.KeyCollider.tag != "Key")
+            {
+                controller.m_CharacterController.startItemAnimation = true;
+                controller.m_CharacterController.Keychain.Add(controller.m_CharacterController.KeyCollider.gameObject);
+                controller.m_CharacterController.KeyCollider.gameObject.SetActive(false);
+                controller.m_CharacterController.isInKeyArea = false;
+            }
 
         }
     }

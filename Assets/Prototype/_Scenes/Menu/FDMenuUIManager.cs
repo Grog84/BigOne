@@ -7,13 +7,13 @@ using UnityEngine.UI;
 public class FDMenuUIManager : MonoBehaviour 
 {
 	public Animator startButtonAnim;
-	public Animator settingsButtonAnim;
+	public Animator optionButtonAnim;
 	public Animator continueAnim;
 	public Animator exitGameAnim;
 	public Animator audioGameAnim;
 	public Animator videoGameAnim;
 	public Animator commandsGameAnim;
-	public Animator backGameAnim;
+	public Animator backMenuAnim;
 
 	public void StartGame () 
 	{
@@ -23,18 +23,31 @@ public class FDMenuUIManager : MonoBehaviour
 
 	public void OpenSettings()
 	{
-		settingsButtonAnim.SetBool ("IsHidden", true);
+		startButtonAnim.SetBool ("IsHidden", true);
+		optionButtonAnim.SetBool ("IsHidden", true);
+		continueAnim.SetBool ("IsHidden", true);
+		exitGameAnim.SetBool ("IsHidden", true);
+		audioGameAnim.SetBool ("IsHidden", false);
+		videoGameAnim.SetBool ("IsHidden", false);
+		commandsGameAnim.SetBool ("IsHidden", false);
+		backMenuAnim.SetBool ("IsHidden", false);
 	}
 
 	public void CloseSettings()
 	{
-		settingsButtonAnim.SetBool ("IsHidden", false);
+		startButtonAnim.SetBool ("IsHidden", false);
+		optionButtonAnim.SetBool ("IsHidden", false);
+		continueAnim.SetBool ("IsHidden", false);
+		exitGameAnim.SetBool ("IsHidden", false);
+		audioGameAnim.SetBool ("IsHidden", true);
+		videoGameAnim.SetBool ("IsHidden", true);
+		commandsGameAnim.SetBool ("IsHidden", true);
+		backMenuAnim.SetBool ("IsHidden", true);
 	}
 
 	public void slideMenu()
 	{
-		bool isHidden = exitGameAnim.GetBool ("IsHidden");
-		exitGameAnim.SetBool ("isHidden", !isHidden);
+		
 	}
 
 	public void Continue()

@@ -17,8 +17,8 @@ public class FDMenuUIManager : MonoBehaviour
 
 	public void StartGame () 
 	{
-		SceneManager.LoadScene ("FG_MappaP_01");
 		Debug.Log ("CHIAMO SCENA DI FACUNDO");
+		SceneManager.LoadScene ("FG_MappaP_01");
 	}
 
 	public void OpenSettings()

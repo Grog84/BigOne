@@ -46,9 +46,10 @@ public class FDMenuUIManager : MonoBehaviour
 		backMenuAnim.SetBool ("IsHidden", true);
 	}
 
-	public void AudioMenu()
+	public void AudioMenuEnter()
 	{
-		audioMenu.SetBool ("AudioMenu", true);
+		Debug.Log ("CHIAMO SCENA DI FACUNDO");
+		audioMenu.SetBool ("Audio", true);
 	}
 
 	public void Continue()

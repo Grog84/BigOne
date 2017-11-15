@@ -14,6 +14,7 @@ public class FDMenuUIManager : MonoBehaviour
 	public Animator videoGameAnim;
 	public Animator commandsGameAnim;
 	public Animator backMenuAnim;
+	public Animator audioMenu;
 
 	public void StartGame () 
 	{
@@ -45,9 +46,9 @@ public class FDMenuUIManager : MonoBehaviour
 		backMenuAnim.SetBool ("IsHidden", true);
 	}
 
-	public void slideMenu()
+	public void AudioMenu()
 	{
-		
+		audioMenu.SetBool ("AudioMenu", true);
 	}
 
 	public void Continue()

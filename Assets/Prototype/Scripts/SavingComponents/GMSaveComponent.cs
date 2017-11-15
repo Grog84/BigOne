@@ -27,7 +27,7 @@ namespace SaveGame
         }
         public void OnApplicationQuit()
         {
-            ScreenCapture.CaptureScreenshot("ScreenInput.png");
+            //ScreenCapture.CaptureScreenshot("ScreenInput.png");
 #if !UNITY_EDITOR
             ScreenCapture.CaptureScreenshot("Assets/Prototype/Images/ScreenInput.png");
 #endif

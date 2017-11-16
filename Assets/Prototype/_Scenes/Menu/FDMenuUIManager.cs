@@ -34,7 +34,7 @@ public class FDMenuUIManager : MonoBehaviour
         videoGameAnim.SetBool("IsHidden", false);
         commandsGameAnim.SetBool("IsHidden", false);
         backMenuAnim.SetBool("IsHidden", false);
-    }
+	}
 
     public void CloseSettings()
     {

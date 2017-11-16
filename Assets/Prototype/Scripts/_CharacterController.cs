@@ -111,8 +111,9 @@ namespace Character
             {
                 if (Physics.Raycast(CharacterTransform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTransform.forward, out hit, m_CharStats.m_DistanceFromDoor))
                 {
-
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors") && hit.transform == doorCollider.transform.parent.FindDeepChild("DoorBody"))
+                    
+                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors") &&
+                        hit.transform == doorCollider.transform.parent.FindDeepChild("DoorBody"))
                     {
                         isDoorDirectionRight = true;
                     }
@@ -163,13 +164,14 @@ namespace Character
             {
                 RaycastHit hit;
 
-                    // Debug.DrawRay(CharacterTransform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTransform.forward, Color.red);
+                    
                 if (Physics.Raycast(CharacterTransform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTransform.forward, out hit, m_CharStats.m_DistanceFromPushableObject))
                 {
-                     //Debug.Log(hit.transform == pushCollider.transform.parent);
+            
 
 
-                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Pushable") && hit.transform == pushCollider.transform.parent)
+                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Pushable") &&
+                        hit.transform == pushCollider.transform.parent)
                     {
                         isPushDirectionRight = true;
                     }
@@ -214,6 +216,7 @@ namespace Character
             }
             if (other.tag == "UnlockedDoor" || other.tag == "LockedDoor")
             {
+                doorCollider = other.gameObject;
                 ActivateDoors();
             }
         }

@@ -23,7 +23,6 @@ public class ThirdPersonCameraScript : CameraScript {
     {
 
         SwitchLookAt();
-        
 
         clipPointPositionArray = new Vector3[5];
         camTransform = transform;

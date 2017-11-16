@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class DecisionMaker : MonoBehaviour
+public abstract class DecisionMaker : ScriptableObject
 {
     public abstract void MakeDecision();
 }

@@ -19,6 +19,7 @@ public class GMController : MonoBehaviour {
     // Guards perception system variables
     [HideInInspector] public Vector3 lastSeenPlayerPosition = new Vector3(1000f, 1000f, 1000f);
     [HideInInspector] public Vector3 lastHeardPlayerPosition = new Vector3(1000f, 1000f, 1000f);
+    [HideInInspector] public Vector3 lastPercievedPlayerPosition = new Vector3(1000f, 1000f, 1000f);
     static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
 
     // Counter of alarmed guards
@@ -102,6 +103,11 @@ public class GMController : MonoBehaviour {
         m_MainCamera.SwitchLookAt();
 
         SaveCheckpoint();
+    }
+
+    public void UpdatePlayerPosition()
+    {
+        lastPercievedPlayerPosition = players[(int)isCharacterPlaying].transform.position;
     }
 
     public void ResetPlayerLastSeenPosition()

@@ -31,7 +31,7 @@ namespace AI
 
         [HideInInspector] public Transform chaseTarget;
         [HideInInspector] public NavMeshAgent m_NavMeshAgent;
-        [HideInInspector] public MyAgentStats agentStats;
+        [HideInInspector] public GuardStats agentStats;
         [HideInInspector] public float sightPercentage = 0f;
 
         [HideInInspector] public Vector3 move;
@@ -44,12 +44,12 @@ namespace AI
 
         [Space(10)]
         [Header("Agent States Parameters")]
-        public MyAgentStats patrolStats;
-        public MyAgentStats checkForPositionStats;
-        public MyAgentStats checkNavPointStats;
-        public MyAgentStats chaseStats;
+        public GuardStats patrolStats;
+        public GuardStats checkForPositionStats;
+        public GuardStats checkNavPointStats;
+        public GuardStats chaseStats;
 
-        private MyAgentStats loadingStats;
+        private GuardStats loadingStats;
         private PerceptionBar perceptionBar;
 
         private void Awake()
@@ -85,7 +85,7 @@ namespace AI
             m_NavMeshAgent.stoppingDistance = agentStats.stoppingDistance;
         }
 
-        public void UpdateStats(MyAgentStats stats)
+        public void UpdateStats(GuardStats stats)
         {
             agentStats = stats;
             LoadNavmeshStats();

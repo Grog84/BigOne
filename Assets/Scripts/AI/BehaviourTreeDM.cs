@@ -16,8 +16,13 @@ namespace AI.BT
         {
             // Build the tree from game objects
 
-            rootTask = GetComponent<Task>();
+            //rootTask = GetComponent<Task>();
             BuildTree(rootTask);
+        }
+
+        public void AssignRootTask(Task rTask)
+        {
+            this.rootTask = rTask;
         }
 
         public void BuildTree(Task parentTask)
@@ -25,19 +30,19 @@ namespace AI.BT
             //parentTask.m_Agent = GetComponent<Agent>();
             //parentTask.btdm = this;
 
-            if (parentTask.transform.childCount > 0)
-            {
-                // This is a composite task
-                Composite composite = parentTask as Composite;
-                composite.children = new List<Task>();
+            //if (parentTask.transform.childCount > 0)
+            //{
+            //    // This is a composite task
+            //    Composite composite = parentTask as Composite;
+            //    composite.children = new List<Task>();
 
-                foreach (Transform child in composite.transform)
-                {
-                    Task childTask = child.GetComponent<Task>();
-                    composite.children.Add(childTask);
-                    BuildTree(childTask);
-                }
-            }
+            //    foreach (Transform child in composite.transform)
+            //    {
+            //        Task childTask = child.GetComponent<Task>();
+            //        composite.children.Add(childTask);
+            //        BuildTree(childTask);
+            //    }
+            //}
         }
 
         public override void MakeDecision()

@@ -16,6 +16,7 @@ namespace Character.Actions
 
         private void UpdateAnimatorForDoors(CharacterStateController controller)
         {
+            // Check if player has the key
             if (!controller.m_CharacterController.doorObject.transform.GetComponentInChildren<Doors>().hasKey)
             {
                 controller.m_CharacterController.m_Animator.SetBool("isLocked", true);

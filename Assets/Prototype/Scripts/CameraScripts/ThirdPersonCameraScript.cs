@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class ThirdPersonCameraScript : CameraScript {
 
+        
 
     // max and min angles of the camera movement
     protected float yAngleMin = -40.0F;
     protected float yAngelMax = 70.0F;
+
+
 
     //Variable for the offset of the raycast that check the collisions of the camera
     private float collisionOffeset = 4.004f;
@@ -30,6 +33,10 @@ public class ThirdPersonCameraScript : CameraScript {
 
     private void Update()
     {
+        if (Input.GetButton("Submit"))
+        {
+            SwitchLookAt();
+        }
 
         if (Input.GetButtonDown("Pause"))
         {

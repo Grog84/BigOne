@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
-
-    public LayerMask layerIgnored = ~(1 << 8);
+    [SerializeField]
+    protected LayerMask layerIgnored = ~(1 << 8);
 
     //variables initialized at start 
     protected Transform motherLookAt;
@@ -38,6 +38,8 @@ public class CameraScript : MonoBehaviour
         motherLookAtByTag = motherLookAt.FindDeepChildByTag("LookAtCamera");
         boyLookAtByTag = boyLookAt.FindDeepChildByTag("LookAtCamera");
     }
+
+
 }
     
 

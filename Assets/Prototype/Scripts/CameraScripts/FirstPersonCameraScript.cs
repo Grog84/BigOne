@@ -8,16 +8,20 @@ public class FirstPersonCameraScript : CameraScript {
     CinemachineVirtualCamera myCamera;
     public float yAngleMin = -40.0F;
     public float yAngleMax = 70.0F;
-
+   
     private void Start()
     {
         myCamera = GetComponent<CinemachineVirtualCamera>();
+        SwitchLookAt();
     }
 
     private void Update()
-    {     
+    {  
 
-        SwitchLookAt();
+        if(Input.GetButton("Submit"))
+        {
+            SwitchLookAt();
+        }
 
         // camera movement and limit of movement
         currentX += Input.GetAxis("Mouse X");

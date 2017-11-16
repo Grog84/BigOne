@@ -15,7 +15,7 @@ namespace AI.Actions
 
         private void ResetPos(EnemiesAIStateController controller)
         {
-            if (GMController.instance.alarmedGuards == 0 && GMController.instance.suspiciousGuards == 0)
+            if (GMController.instance.alarmedGuards == 0 && GMController.instance.curiousGuards == 0)
                 GMController.instance.ResetPlayerLastHeardPosition();
         }
     }

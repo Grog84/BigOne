@@ -17,7 +17,7 @@ namespace AI.Actions
         private void DecreaseCount(EnemiesAIStateController controller)
         {
             controller.m_AgentController.isSuspicious = false;
-            GMController.instance.suspiciousGuards -= 1;
+            GMController.instance.curiousGuards -= 1;
         }
     }
 }

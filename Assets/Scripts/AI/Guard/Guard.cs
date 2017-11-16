@@ -51,18 +51,27 @@ namespace AI
 
         public void GetNormal()
         {
+            if (m_State == GuardState.ALARMED)
+                GMController.instance.alarmedGuards--;
+            else if (m_State == GuardState.CURIOUS)
+                GMController.instance.curiousGuards--;
             m_State = GuardState.NORMAL;
             LoadStats(normalStats);
         }
 
         public void GetCurious()
         {
+            GMController.instance.curiousGuards++;
             m_State = GuardState.CURIOUS;
             LoadStats(curiousStats);
         }
 
         public void GetAlarmed()
         {
+            if (m_State == GuardState.CURIOUS)
+                GMController.instance.curiousGuards--;
+
+            GMController.instance.alarmedGuards++;
             m_State = GuardState.ALARMED;
             LoadStats(alarmedStats);
         }
@@ -96,22 +105,24 @@ namespace AI
 
                     if (Physics.Raycast(eyes.position, direction))
                     {
-                        perceptionPercentage += stats.fillingSpeed * Time.deltaTime;
                         noRaycastHitting = false;
                         GMController.instance.UpdatePlayerPosition();
+                        if (!isPerceptionBlocked)
+                            perceptionPercentage += stats.fillingSpeed * Time.deltaTime;
                     }
                 }
 
                 direction = (lookAtPositionCentral.position - transform.position).normalized;
                 if (Physics.Raycast(eyes.position, direction))
                 {
-                    perceptionPercentage += stats.fillingSpeed * stats.torsoMultiplier * Time.deltaTime;
                     noRaycastHitting = false;
                     GMController.instance.UpdatePlayerPosition();
+                    if (!isPerceptionBlocked)
+                        perceptionPercentage += stats.fillingSpeed * stats.torsoMultiplier * Time.deltaTime;
                 }
             }
 
-            if (noRaycastHitting && perceptionPercentage > 0f)
+            if (!isPerceptionBlocked && noRaycastHitting && perceptionPercentage > 0f)
             {
                 perceptionPercentage -= stats.fillingSpeed * stats.noSeeMultiplier * Time.deltaTime;
             }

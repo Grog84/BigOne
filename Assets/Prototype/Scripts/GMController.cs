@@ -23,7 +23,7 @@ public class GMController : MonoBehaviour {
     static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
 
     // Counter of alarmed guards
-    [HideInInspector] public int suspiciousGuards = 0, alarmedGuards = 0;
+    [HideInInspector] public int curiousGuards = 0, alarmedGuards = 0;
 
     // Transform of all the agents who could hear or see the player
     [HideInInspector] public Transform[] allEnemiesTransform;

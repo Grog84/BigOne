@@ -3,50 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class FirstPersonCameraScript : MonoBehaviour {
-
-    // max and min angles of the camera movement
-    private const float Y_ANGLE_MIN = -40.0F;
-    private const float Y_ANGLE_MAX = 70.0F;
+public class FirstPersonCameraScript : CameraScript {
 
     CinemachineVirtualCamera myCamera;
-    private Transform motherLookAtByTag;
-    private Transform boyLookAtByTag;
-    public Transform motherLookAt;
-    public Transform boyLookAt;
-
-    // position of the camera assigned in the camera movement
-    private float currentX = 0.0f;
-    private float currentY = 0.0f;
-    Quaternion rotation = new Quaternion();
-
-    private void Awake()
-    {
-        motherLookAtByTag = motherLookAt.FindDeepChildByTag("LookAtCamera");
-        boyLookAtByTag = boyLookAt.FindDeepChildByTag("LookAtCamera");
-    }
+    public float yAngleMin = -40.0F;
+    public float yAngleMax = 70.0F;
 
     private void Start()
     {
         myCamera = GetComponent<CinemachineVirtualCamera>();
-        
     }
 
     private void Update()
-    {
-        SwitchLookAt();
+    {     
 
+        SwitchLookAt();
 
         // camera movement and limit of movement
         currentX += Input.GetAxis("Mouse X");
         currentY -= Input.GetAxis("Mouse Y");
-        currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
+        currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
         rotation = Quaternion.Euler (currentY, currentX, 0);
         transform.rotation = rotation;
 
     }
 
-    public void SwitchLookAt()
+    public override void SwitchLookAt()
     {
         if ((int)GMController.instance.isCharacterPlaying == 0)
         {

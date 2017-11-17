@@ -62,7 +62,7 @@ public class CameraScript : MonoBehaviour
     {
         if (firstPersonCameraScript.FPSbyTrigger == false && thirdPersonCameraScript.distance < minCamDistance) 
         {
-            Debug.Log("triggered");
+            //Debug.Log("triggered");
             firstPersonVirtualCamera.m_Priority = 100;
         }
         else if (firstPersonCameraScript.FPSbyTrigger == false && thirdPersonCameraScript.distance > minCamDistance)

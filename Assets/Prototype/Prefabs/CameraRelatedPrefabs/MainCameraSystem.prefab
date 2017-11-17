@@ -474,13 +474,14 @@ MonoBehaviour:
   layerIgnored:
     serializedVersion: 2
     m_Bits: 4294958843
+  minCamDistance: 1
   maxDistance: 2.5
   clipPointPositionArray:
-  - {x: -1.184735, y: -0.7042539, z: -15.32932}
-  - {x: -1.361175, y: -0.7042539, z: -15.33194}
-  - {x: -1.184264, y: -0.6102073, z: -15.36106}
-  - {x: -1.360704, y: -0.6102073, z: -15.36368}
-  - {x: -1.257258, y: -1.008995, z: -16.38862}
+  - {x: -1.785634, y: -0.10259, z: -31.32229}
+  - {x: -1.962061, y: -0.10259, z: -31.32567}
+  - {x: -1.785504, y: -0.00356112, z: -31.32904}
+  - {x: -1.961932, y: -0.00356112, z: -31.33242}
+  - {x: -1.852715, y: -0.1278923, z: -32.42461}
 --- !u!114 &114488478674170926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -495,6 +496,7 @@ MonoBehaviour:
   layerIgnored:
     serializedVersion: 2
     m_Bits: 4294958843
+  minCamDistance: 0.3
   maxDistance: 2.5
 --- !u!114 &114524706211795172
 MonoBehaviour:
@@ -514,7 +516,7 @@ MonoBehaviour:
   m_DefaultBlend:
     m_Style: 1
     m_Time: 2
-  m_CustomBlends: {fileID: 0}
+  m_CustomBlends: {fileID: 11400000, guid: 088b5b0879491d2468ed5eca11507132, type: 2}
   m_CameraCutEvent:
     m_PersistentCalls:
       m_Calls:
@@ -561,7 +563,9 @@ MonoBehaviour:
   layerIgnored:
     serializedVersion: 2
     m_Bits: 4294958843
+  minCamDistance: 1
   maxDistance: 2.5
+  FPSbyTrigger: 0
   yAngleMin: -75
   yAngleMax: 40
 --- !u!114 &114805826676908730

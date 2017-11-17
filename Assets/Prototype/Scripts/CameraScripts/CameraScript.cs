@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using DG.Tweening;
+
 
 public class CameraScript : MonoBehaviour
 {
@@ -11,6 +13,9 @@ public class CameraScript : MonoBehaviour
     private CinemachineVirtualCamera thirdPersonVirtualCamera;
     private FirstPersonCameraScript firstPersonCameraScript;
     private ThirdPersonCameraScript thirdPersonCameraScript;
+
+    public Renderer boyJoints;
+    public Renderer boySkin;
 
     [SerializeField]
     protected LayerMask layerIgnored = ~(1 << 8);
@@ -56,13 +61,15 @@ public class CameraScript : MonoBehaviour
         thirdPersonVirtualCamera = thirdPersonCamera.GetComponent<CinemachineVirtualCamera>();
         thirdPersonCameraScript = thirdPersonCamera.GetComponent<ThirdPersonCameraScript>();
 
+        
+
+
     }
 
     private void Update()
     {
         if (firstPersonCameraScript.FPSbyTrigger == false && thirdPersonCameraScript.distance < minCamDistance) 
         {
-            //Debug.Log("triggered");
             firstPersonVirtualCamera.m_Priority = 100;
         }
         else if (firstPersonCameraScript.FPSbyTrigger == false && thirdPersonCameraScript.distance > minCamDistance)
@@ -70,9 +77,49 @@ public class CameraScript : MonoBehaviour
             firstPersonVirtualCamera.m_Priority = 0;
         }
 
+        if (firstPersonVirtualCamera.m_Priority == 100)
+        {
+            SetMaterialTrasparent(boyJoints);
+            SetMaterialTrasparent(boySkin);
+
+        }
+        else if (firstPersonVirtualCamera.m_Priority != 100)
+        {
+            SetMaterialOpaque(boyJoints);
+            SetMaterialOpaque(boySkin);
+        }
 
     }
 
+    void SetMaterialTrasparent(Renderer mat)
+    {
+        mat.material.DOFade(0, 0.5f);
+
+        mat.material.SetFloat("_Mode", 2);
+        mat.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
+        mat.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
+        mat.material.SetInt("_ZWrite", 0);
+        mat.material.DisableKeyword("_ALPHATEST_ON");
+        mat.material.EnableKeyword("_ALPHABLEND_ON");
+        mat.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mat.material.renderQueue = 3000;
+
+
+    }
+
+    void SetMaterialOpaque(Renderer mat)
+    {
+        mat.material.DOFade(255, 0.5f);
+
+        mat.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
+        mat.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
+        mat.material.SetInt("_ZWrite", 1);
+        mat.material.DisableKeyword("_ALPHATEST_ON");
+        mat.material.DisableKeyword("_ALPHABLEND_ON");
+        mat.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
+        mat.material.renderQueue = -1;
+
+    }
 
 }
     

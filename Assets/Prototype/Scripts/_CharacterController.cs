@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 namespace Character
 {
@@ -58,6 +59,7 @@ namespace Character
         [HideInInspector] public CharacterController m_CharController; // A reference to the Character controller component
 
         // COLIDERS REFERENCES
+        [HideInInspector] public GameObject lastTopCollider;           // reference to the last top climb trigger, used for Icons
         [HideInInspector] public GameObject climbCollider;
         [HideInInspector] public Transform climbAnchorTop;
         [HideInInspector] public Transform climbAnchorBottom;
@@ -67,14 +69,21 @@ namespace Character
         [HideInInspector] public GameObject doorCollider;
         [HideInInspector] public GameObject KeyCollider;
 
+        [HideInInspector] public GameObject pushHit = null;            // Used for icons 
         [HideInInspector] public GameObject pushObject;
-        [HideInInspector] public GameObject pushCollider;
+        [HideInInspector] public GameObject pushCollider = null;
         //
         [HideInInspector] public bool isDefeated = false;
 
         [HideInInspector] public FootstepsEmitter footStepsEmitter;
         [HideInInspector] public float walkStatusRange = 1f;
-
+        // Alpha management for Icons
+        [HideInInspector] public Color alphaZero;
+        [HideInInspector] public Color alphaMax;
+        //
+        public Transform playerCanvas;
+        public Sprite cancelIcon;
+        public Sprite cantCancelIcon;
         public CharacterStats m_CharStats;
         public LayerMask m_WalkNoiseLayerMask;
         public List<GameObject> Keychain;                               // List of all the key items collected by the player
@@ -90,6 +99,8 @@ namespace Character
             GameObject m_CameraObj = GameObject.FindGameObjectsWithTag("MainCamera")[0];
             m_Camera = m_CameraObj.transform;
             footStepsEmitter = GetComponent<FootstepsEmitter>();
+            alphaMax = new Color(100, 100, 100, 255);
+            alphaZero = new Color(0, 0, 0, 0);
         }
 
         // Use this for initialization
@@ -100,6 +111,7 @@ namespace Character
             ray_length = m_CharController.bounds.size.y / 2.0f + 0.1f;
 
         }
+
         #region Raycast Check
 
         void ActivateDoors()
@@ -174,15 +186,18 @@ namespace Character
                         hit.transform == pushCollider.transform.parent)
                     {
                         isPushDirectionRight = true;
+                        pushHit = hit.transform.gameObject;
                     }
                     else
                     {
                         isPushDirectionRight = false;
+                        pushHit = null;
                     }
                 }
                 else
                 {
                     isPushDirectionRight = false;
+                    pushHit = null;
                 }
 
             }
@@ -198,17 +213,20 @@ namespace Character
             {
                 climbingBottom = true;
                 ActivateClimbingChoice();
+                climbCollider.transform.parent.GetComponent<ClimbableIconsActivation>().ShowIcon();
             }
             if (other.tag == "Ladder_Top")
-            {
+            {           
                 climbingTop = true;
                 ActivateClimbingChoice();
+                climbCollider.transform.parent.GetComponent<ClimbableIconsActivation>().ShowIcon();
             }
             if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTransform.forward, other.transform.forward) < 45)
             {
                 pushCollider = other.gameObject;
                 isInPushArea = true;
                 ActivatePushingChoice();
+                pushCollider.transform.parent.GetComponent<PushableIconsActivation>().ShowIcon();
             }
             else if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTransform.forward, other.transform.forward) > 45)
             {
@@ -218,6 +236,7 @@ namespace Character
             {
                 doorCollider = other.gameObject;
                 ActivateDoors();
+                doorCollider.transform.parent.GetComponent<DoorIconsActivation>().ShowIcon();
             }
         }
 
@@ -232,6 +251,7 @@ namespace Character
             }
             else if (other.tag == "Ladder_Top")
             {
+                lastTopCollider = other.gameObject;
                 climbCollider = other.gameObject;
                 isInClimbArea = true;
                 climbingTop = true;
@@ -264,6 +284,7 @@ namespace Character
             }
             if (other.tag == "Ladder_Top")
             {
+                lastTopCollider.transform.parent.GetComponent<ClimbableIconsActivation>().HideIcons();
                 climbCollider = null;
                 isInClimbArea = false;
                 climbingTop = false;
@@ -503,8 +524,42 @@ namespace Character
             }
         }
 
+        #region Icons
+
+        public void ShowCancelIcon()
+        {
+            playerCanvas.GetChild(0).GetComponent<Image>().sprite = cancelIcon;
+            playerCanvas.GetChild(0).GetComponent<Image>().color = alphaMax;
+        }
+
+        public void HideCancelIcon()
+        {
+            playerCanvas.GetChild(0).GetComponent<Image>().color = alphaZero;
+            playerCanvas.GetChild(0).GetComponent<Image>().sprite = null;
+        }
+    
+        public void ShowDisabledCancelIcon()
+        {
+            playerCanvas.GetChild(1).GetComponent<Image>().sprite = cantCancelIcon;
+            playerCanvas.GetChild(1).GetComponent<Image>().color = alphaMax;
+        }
+
+        public void HideDisabledCancelIcon()
+        {
+            playerCanvas.GetChild(1).GetComponent<Image>().color = alphaZero;
+            playerCanvas.GetChild(1).GetComponent<Image>().sprite = null;
+        }
+
+        public void RotateCanvas()
+        {
+            playerCanvas.DOLookAt(m_Camera.transform.position, 0.1f);
+        }
+
+        #endregion
+
         void Update()
         {
+            
             UpdateSoundRange();
 
             if (startClimbAnimationEnd)

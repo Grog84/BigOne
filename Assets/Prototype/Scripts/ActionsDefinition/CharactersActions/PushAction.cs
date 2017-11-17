@@ -113,7 +113,9 @@ namespace Character.Actions
 #endregion
             // For Animator
             controller.m_CharacterController.m_ForwardAmount = movement;
+            //
 
+            controller.m_CharacterController.RotateCanvas();
         }
     }
 }

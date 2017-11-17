@@ -12,7 +12,7 @@ public class Doors : MonoBehaviour
 
     private OffMeshLink m_offLink;
 
-    void Start()
+    void Awake()
     {
         m_offLink = GetComponentInChildren<OffMeshLink>();
         isDoorOpen = false;

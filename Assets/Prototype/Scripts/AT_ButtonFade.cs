@@ -10,6 +10,7 @@ public class AT_ButtonFade:MonoBehaviour
     private Image[] ImageStatus;
     private void Start()
     {
+        ImageStatus = new Image[SceneStatus.Length];
         for (int i = 0; i < SceneStatus.Length; i++)
         {
             ImageStatus[i] = SceneStatus[i].gameObject.GetComponent<Image>();

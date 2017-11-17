@@ -5,19 +5,25 @@ using Cinemachine;
 
 public class FirstPersonCameraScript : CameraScript {
 
+
+ 
+    public bool FPSbyTrigger = false;
     CinemachineVirtualCamera myCamera;
     public float yAngleMin = -40.0F;
     public float yAngleMax = 70.0F;
+    private Transform myTransform;
+    private Transform myFollow;
    
     private void Start()
     {
+        myTransform = GetComponent<Transform>();
         myCamera = GetComponent<CinemachineVirtualCamera>();
         SwitchLookAt();
     }
 
     private void Update()
-    {  
-
+    {
+        myTransform.position = myFollow.position;
         if(Input.GetButton("Submit"))
         {
             SwitchLookAt();
@@ -36,11 +42,11 @@ public class FirstPersonCameraScript : CameraScript {
     {
         if ((int)GMController.instance.isCharacterPlaying == 0)
         {
-            myCamera.m_Follow = boyLookAtByTag;
+            myFollow = boyLookAtByTag;
         }
         else if ((int)GMController.instance.isCharacterPlaying == 1)
         {
-            myCamera.m_Follow = motherLookAtByTag;
+            myFollow = motherLookAtByTag;
         }
     }
 

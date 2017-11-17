@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class ThirdPersonCameraScript : CameraScript {
 
@@ -9,7 +10,7 @@ public class ThirdPersonCameraScript : CameraScript {
     // max and min angles of the camera movement
     protected float yAngleMin = -40.0F;
     protected float yAngelMax = 70.0F;
-
+    protected CinemachineVirtualCamera cam;
 
 
     //Variable for the offset of the raycast that check the collisions of the camera
@@ -26,9 +27,9 @@ public class ThirdPersonCameraScript : CameraScript {
 
         clipPointPositionArray = new Vector3[5];
         camTransform = transform;
-        cam = Camera.main;
+        cam = this.GetComponent<CinemachineVirtualCamera>();
         Cursor.lockState = CursorLockMode.Locked;
-        cam.nearClipPlane = nearClipPlaneDistance;
+        cam.m_Lens.NearClipPlane = nearClipPlaneDistance;
     }
 
     private void Update()
@@ -94,9 +95,9 @@ public class ThirdPersonCameraScript : CameraScript {
     {
         clipArray = new Vector3[5];
 
-        float z = cam.nearClipPlane;
-        float x = Mathf.Tan(cam.fieldOfView / collisionOffeset) * z;
-        float y = x / cam.aspect;
+        float z = cam.m_Lens.NearClipPlane;
+        float x = Mathf.Tan(cam.m_Lens.FieldOfView/ collisionOffeset) * z;
+        float y = x / cam.m_Lens.Aspect;
 
 
         //top left

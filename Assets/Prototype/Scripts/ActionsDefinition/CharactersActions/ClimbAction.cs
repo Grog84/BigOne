@@ -72,8 +72,7 @@ namespace Character.Actions
                 if (!(hit.transform.gameObject.layer == LayerMask.NameToLayer("Player")))
                 {
                     controller.m_CharacterController.secureFall = true;
-                    controller.m_CharacterController.ShowCancelIcon();
-                    controller.m_CharacterController.HideDisabledCancelIcon();
+                    controller.m_CharacterController.ShowCancelIcon();                   
                     controller.m_CharacterController.RotateCanvas();
                 }
             }
@@ -81,7 +80,6 @@ namespace Character.Actions
             {
                 controller.m_CharacterController.secureFall = false;
                 controller.m_CharacterController.ShowDisabledCancelIcon();
-                controller.m_CharacterController.HideCancelIcon();
                 controller.m_CharacterController.RotateCanvas();
             }
 

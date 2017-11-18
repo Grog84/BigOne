@@ -18,7 +18,7 @@ namespace Character.Actions
 
         private void ActivateIcon(CharacterStateController controller)
         {
-            controller.m_CharacterController.HideCancelIcon();
+            controller.m_CharacterController.HideIcon();
         }
     }
 }

@@ -16,6 +16,8 @@ public class ClimbableIconsActivation : MonoBehaviour
     [HideInInspector] public CharacterStateController controllerBoy;
     [HideInInspector] public Color alphaZero;
     [HideInInspector] public Color alphaMax;
+    [HideInInspector] public Transform bottomIcons;
+    [HideInInspector] public Transform topIcons;
 
 
     void Awake()
@@ -23,24 +25,30 @@ public class ClimbableIconsActivation : MonoBehaviour
         controllerBoy = GameObject.Find("Boy").GetComponent<CharacterStateController>();
         alphaZero = new Color(0, 0, 0, 0);
         alphaMax = new Color(100, 100, 100, 255); ;
+
+        bottomIcons = ClimbableCanvas.GetChild(0);
+        topIcons = ClimbableCanvas.GetChild(1);
     }
 	
-    public void HideIcons()
+    public void HideIcons(Transform position)
     {
-         // Reset Icons
          
-        ClimbableCanvas.GetChild(0).GetComponent<Image>().color = alphaZero;
-        ClimbableCanvas.GetChild(0).GetComponent<Image>().sprite = null;
+        position.GetChild(0).GetComponent<Image>().color = alphaZero;
+        position.GetChild(0).GetComponent<Image>().sprite = null;
     
-        ClimbableCanvas.GetChild(1).GetComponent<Image>().color = alphaZero;
-        ClimbableCanvas.GetChild(1).GetComponent<Image>().sprite = null;
+        position.GetChild(1).GetComponent<Image>().color = alphaZero;
+        position.GetChild(1).GetComponent<Image>().sprite = null;
 
-        ClimbableCanvas.GetChild(2).GetComponent<Image>().color = alphaZero;
-        ClimbableCanvas.GetChild(2).GetComponent<Image>().sprite = null;
+       
+    }
 
-        ClimbableCanvas.GetChild(3).GetComponent<Image>().color = alphaZero;
-        ClimbableCanvas.GetChild(3).GetComponent<Image>().sprite = null;
+    public void SwapIcons(Transform position)
+    {
+        position.GetChild(0).GetComponent<Image>().sprite = startClimbIcon;
+        position.GetChild(0).GetComponent<Image>().color = alphaMax;
 
+        position.GetChild(1).GetComponent<Image>().sprite = interact;
+        position.GetChild(1).GetComponent<Image>().color = alphaMax;
     }
 
     public void ShowIcon()
@@ -56,55 +64,31 @@ public class ClimbableIconsActivation : MonoBehaviour
                 {
                     if (controllerBoy.m_CharacterController.isClimbDirectionRight)
                     {
-                        ClimbableCanvas.GetChild(0).GetComponent<Image>().color = alphaMax;
-                        ClimbableCanvas.GetChild(0).GetComponent<Image>().sprite = startClimbIcon;
-
-                        ClimbableCanvas.GetChild(2).GetComponent<Image>().color = alphaMax;
-                        ClimbableCanvas.GetChild(2).GetComponent<Image>().sprite = interact;
+                        SwapIcons(bottomIcons);
                     }
                    else 
                    {
-                        ClimbableCanvas.GetChild(0).GetComponent<Image>().color = alphaZero;
-                        ClimbableCanvas.GetChild(0).GetComponent<Image>().sprite = null;
-
-                        ClimbableCanvas.GetChild(2).GetComponent<Image>().color = alphaZero;
-                        ClimbableCanvas.GetChild(2).GetComponent<Image>().sprite = null;
-                    }
+                        HideIcons(bottomIcons);
+                   }
                 }
                 // Start climb from top Icon
                 else if (controllerBoy.m_CharacterController.climbCollider.transform == Top.transform)
                 {
-                    ClimbableCanvas.GetChild(1).GetComponent<Image>().color = alphaMax;
-                    ClimbableCanvas.GetChild(1).GetComponent<Image>().sprite = startClimbIcon;
-
-                    ClimbableCanvas.GetChild(3).GetComponent<Image>().color = alphaMax ;
-                    ClimbableCanvas.GetChild(3).GetComponent<Image>().sprite = interact;
+                    SwapIcons(topIcons);
                 }
             }
             // End Climb Icon
             else if (controllerBoy.currentState.name == "Climbing" )
             {
-                ClimbableCanvas.GetChild(0).GetComponent<Image>().color = alphaZero;
-                ClimbableCanvas.GetChild(0).GetComponent<Image>().sprite = null;
-
-                ClimbableCanvas.GetChild(2).GetComponent<Image>().color = alphaZero;
-                ClimbableCanvas.GetChild(2).GetComponent<Image>().sprite = null;
+                HideIcons(bottomIcons);
 
                 if (controllerBoy.m_CharacterController.climbCollider.transform == Top.transform)
                 {
-                    ClimbableCanvas.GetChild(1).GetComponent<Image>().color = alphaMax;
-                    ClimbableCanvas.GetChild(1).GetComponent<Image>().sprite = endClimbIcon;
-
-                    ClimbableCanvas.GetChild(3).GetComponent<Image>().color = alphaMax;
-                    ClimbableCanvas.GetChild(3).GetComponent<Image>().sprite = interact;
+                    SwapIcons(topIcons);
                 }
                 else
                 {
-                    ClimbableCanvas.GetChild(1).GetComponent<Image>().color = alphaZero;
-                    ClimbableCanvas.GetChild(1).GetComponent<Image>().sprite = null;
-
-                    ClimbableCanvas.GetChild(3).GetComponent<Image>().color = alphaZero;
-                    ClimbableCanvas.GetChild(3).GetComponent<Image>().sprite = null;
+                    HideIcons(topIcons);
                 }
             }
            

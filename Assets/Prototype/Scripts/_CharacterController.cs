@@ -80,7 +80,9 @@ namespace Character
         // Alpha management for Icons
         [HideInInspector] public Color alphaZero;
         [HideInInspector] public Color alphaMax;
+        [HideInInspector] public Transform playerIcon;
         //
+
         public Transform playerCanvas;
         public Sprite cancelIcon;
         public Sprite cantCancelIcon;
@@ -101,6 +103,7 @@ namespace Character
             footStepsEmitter = GetComponent<FootstepsEmitter>();
             alphaMax = new Color(100, 100, 100, 255);
             alphaZero = new Color(0, 0, 0, 0);
+            playerIcon = playerCanvas.GetChild(0);
         }
 
         // Use this for initialization
@@ -284,7 +287,7 @@ namespace Character
             }
             if (other.tag == "Ladder_Top")
             {
-                lastTopCollider.transform.parent.GetComponent<ClimbableIconsActivation>().HideIcons();
+                lastTopCollider.transform.parent.GetComponent<ClimbableIconsActivation>().HideIcons(lastTopCollider.transform.parent.GetComponent<ClimbableIconsActivation>().topIcons);
                 climbCollider = null;
                 isInClimbArea = false;
                 climbingTop = false;
@@ -528,31 +531,25 @@ namespace Character
 
         public void ShowCancelIcon()
         {
-            playerCanvas.GetChild(0).GetComponent<Image>().sprite = cancelIcon;
-            playerCanvas.GetChild(0).GetComponent<Image>().color = alphaMax;
+            playerIcon.GetChild(0).GetComponent<Image>().sprite = cancelIcon;
+            playerIcon.GetChild(0).GetComponent<Image>().color = alphaMax;
         }
 
-        public void HideCancelIcon()
-        {
-            playerCanvas.GetChild(0).GetComponent<Image>().color = alphaZero;
-            playerCanvas.GetChild(0).GetComponent<Image>().sprite = null;
-        }
-    
         public void ShowDisabledCancelIcon()
         {
-            playerCanvas.GetChild(1).GetComponent<Image>().sprite = cantCancelIcon;
-            playerCanvas.GetChild(1).GetComponent<Image>().color = alphaMax;
+            playerIcon.GetChild(0).GetComponent<Image>().sprite = cantCancelIcon;
+            playerIcon.GetChild(0).GetComponent<Image>().color = alphaMax;
         }
 
-        public void HideDisabledCancelIcon()
+        public void HideIcon()
         {
-            playerCanvas.GetChild(1).GetComponent<Image>().color = alphaZero;
-            playerCanvas.GetChild(1).GetComponent<Image>().sprite = null;
+            playerIcon.GetChild(0).GetComponent<Image>().color = alphaZero;
+            playerIcon.GetChild(0).GetComponent<Image>().sprite = null;
         }
 
         public void RotateCanvas()
         {
-            playerCanvas.DOLookAt(m_Camera.transform.position, 0.1f);
+            playerIcon.DOLookAt(m_Camera.transform.position, 0.1f);
         }
 
         #endregion

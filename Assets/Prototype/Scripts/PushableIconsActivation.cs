@@ -8,6 +8,7 @@ public class PushableIconsActivation : MonoBehaviour
 {
     public Transform PushableCanvas;
     public Sprite startPush;
+    public Sprite pushButton;
     public Collider trigger1;
     public Collider trigger2;
     public Collider trigger3;
@@ -16,6 +17,10 @@ public class PushableIconsActivation : MonoBehaviour
     [HideInInspector] public CharacterStateController controllerMother;
     [HideInInspector] public Color alphaZero;
     [HideInInspector] public Color alphaMax;
+    [HideInInspector] public Transform trig1;
+    [HideInInspector] public Transform trig2;
+    [HideInInspector] public Transform trig3;
+    [HideInInspector] public Transform trig4;
 
     [HideInInspector] public bool stopUpdate = true;
 
@@ -24,8 +29,30 @@ public class PushableIconsActivation : MonoBehaviour
         controllerMother = GameObject.Find("Mother").GetComponent<CharacterStateController>();
         alphaZero = new Color(0, 0, 0, 0);
         alphaMax = new Color(100, 100, 100, 255);
+
+        trig1 = PushableCanvas.GetChild(0);
+        trig2 = PushableCanvas.GetChild(1);
+        trig3 = PushableCanvas.GetChild(2);
+        trig4 = PushableCanvas.GetChild(3);
+    }
+
+    public void HideIcons(Transform trigger)
+    {
+        trigger.GetChild(0).GetComponent<Image>().color = alphaZero;
+        trigger.GetChild(0).GetComponent<Image>().sprite = null;
+        trigger.GetChild(1).GetComponent<Image>().color = alphaZero;
+        trigger.GetChild(1).GetComponent<Image>().sprite = null;    
     }
 	
+    public void SwapIcons(Transform trigger)
+    {
+        trigger.GetChild(0).GetComponent<Image>().sprite = startPush;
+        trigger.GetChild(0).GetComponent<Image>().color = alphaMax;
+
+        trigger.GetChild(1).GetComponent<Image>().sprite = pushButton;
+        trigger.GetChild(1).GetComponent<Image>().color = alphaMax;
+    }
+
     public void ShowIcon()
     {
         //Mother
@@ -37,26 +64,26 @@ public class PushableIconsActivation : MonoBehaviour
             {
                 if (controllerMother.m_CharacterController.pushCollider.transform == trigger1.transform)
                 {
-                    PushableCanvas.GetChild(0).GetComponent<Image>().color = alphaMax;
-                    PushableCanvas.GetChild(0).GetComponent<Image>().sprite = startPush;
+                    SwapIcons(trig1);
+
                     stopUpdate = false;
                 }
                 else if (controllerMother.m_CharacterController.pushCollider.transform == trigger2.transform)
                 {
-                    PushableCanvas.GetChild(1).GetComponent<Image>().color = alphaMax;
-                    PushableCanvas.GetChild(1).GetComponent<Image>().sprite = startPush;
+                    SwapIcons(trig2);
+
                     stopUpdate = false;
                 }
                 else if (controllerMother.m_CharacterController.pushCollider.transform == trigger3.transform)
                 {
-                    PushableCanvas.GetChild(2).GetComponent<Image>().color = alphaMax;
-                    PushableCanvas.GetChild(2).GetComponent<Image>().sprite = startPush;
+                    SwapIcons(trig3);
+
                     stopUpdate = false;
                 }
                 else if (controllerMother.m_CharacterController.pushCollider.transform == trigger4.transform)
                 {
-                    PushableCanvas.GetChild(3).GetComponent<Image>().color = alphaMax;
-                    PushableCanvas.GetChild(3).GetComponent<Image>().sprite = startPush;
+                    SwapIcons(trig4);
+
                     stopUpdate = false;
                 }
             }          
@@ -64,25 +91,15 @@ public class PushableIconsActivation : MonoBehaviour
         }
     }
 
+
     private void Update()
     {
         if (controllerMother.m_CharacterController.pushHit != gameObject && !stopUpdate || controllerMother.currentState.name == "Pushing")
         {
-            PushableCanvas.GetChild(0).GetComponent<Image>().color = alphaZero;
-            PushableCanvas.GetChild(0).GetComponent<Image>().sprite = null;
-
-
-            PushableCanvas.GetChild(1).GetComponent<Image>().color = alphaZero;
-            PushableCanvas.GetChild(1).GetComponent<Image>().sprite = null;
-
-
-            PushableCanvas.GetChild(2).GetComponent<Image>().color = alphaZero;
-            PushableCanvas.GetChild(2).GetComponent<Image>().sprite = null;
-
-
-
-            PushableCanvas.GetChild(3).GetComponent<Image>().color = alphaZero;
-            PushableCanvas.GetChild(3).GetComponent<Image>().sprite = null;
+            HideIcons(trig1);
+            HideIcons(trig2);
+            HideIcons(trig3);
+            HideIcons(trig4);
 
             stopUpdate = true;
         }

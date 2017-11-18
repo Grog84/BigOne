@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using StateMachine;
 using DG.Tweening;
 
-public class DoorIconsActivation : MonoBehaviour {
+public class DoorIconsActivation : MonoBehaviour
+{
 
     public GameObject camera;
     public Transform DoorCanvas;
@@ -20,7 +21,10 @@ public class DoorIconsActivation : MonoBehaviour {
     [HideInInspector] public CharacterStateController controllerBoy;
     [HideInInspector] public Color alphaZero;
     [HideInInspector] public Color alphaMax;
-    public Transform hasKey;
+    [HideInInspector] public Transform hasKey;
+    [HideInInspector] public Transform frontIcons;
+    [HideInInspector] public Transform backIcons;
+
     void Awake()
     {
         controllerMother = GameObject.Find("Mother").GetComponent<CharacterStateController>();
@@ -28,8 +32,24 @@ public class DoorIconsActivation : MonoBehaviour {
         alphaZero = new Color(0, 0, 0, 0);
         alphaMax = new Color(100,100,100,255);
         hasKey = transform.FindDeepChild("DoorBody");
+
+        frontIcons = DoorCanvas.transform.GetChild(0);
+        backIcons = DoorCanvas.transform.GetChild(1);
     }
 	
+    public void HideIcon()
+    {
+        frontIcons.GetChild(0).GetComponent<Image>().color = alphaZero;
+        frontIcons.GetChild(0).GetComponent<Image>().sprite = null;
+        frontIcons.GetChild(1).GetComponent<Image>().color = alphaZero;
+        frontIcons.GetChild(1).GetComponent<Image>().sprite = null;
+
+        backIcons.GetChild(0).GetComponent<Image>().color = alphaZero;
+        backIcons.GetChild(0).GetComponent<Image>().sprite = null;
+        backIcons.GetChild(1).GetComponent<Image>().color = alphaZero;
+        backIcons.GetChild(1).GetComponent<Image>().sprite = null;
+    }
+
     public void ShowIcon()
     {
         //Mother
@@ -42,59 +62,52 @@ public class DoorIconsActivation : MonoBehaviour {
                 {
                     if (controllerMother.m_CharacterController.doorCollider.transform == outside.transform)
                     {
-                        DoorCanvas.GetChild(0).GetComponent<Image>().sprite = openDoor;
-                        DoorCanvas.GetChild(0).GetComponent<Image>().color = alphaMax;
+                        frontIcons.GetChild(0).GetComponent<Image>().sprite = openDoor;
+                        frontIcons.GetChild(0).GetComponent<Image>().color = alphaMax;
 
-                        DoorCanvas.GetChild(2).GetComponent<Image>().color = alphaMax;
-                        DoorCanvas.GetChild(2).GetComponent<Image>().sprite = interact;
+                        frontIcons.GetChild(1).GetComponent<Image>().sprite = interact;
+                        frontIcons.GetChild(1).GetComponent<Image>().color = alphaMax;
                     
-                        DoorCanvas.DOLookAt(camera.transform.position, 0.1f);
+                        frontIcons.DOLookAt(camera.transform.position, 0.1f);
                     }
                     else if (controllerMother.m_CharacterController.doorCollider.transform == inside.transform)
                     {
-                        DoorCanvas.GetChild(1).GetComponent<Image>().sprite = openDoor;
-                        DoorCanvas.GetChild(1).GetComponent<Image>().color = alphaMax;
+                        backIcons.GetChild(0).GetComponent<Image>().sprite = openDoor;
+                        backIcons.GetChild(0).GetComponent<Image>().color = alphaMax;
 
-                        DoorCanvas.GetChild(3).GetComponent<Image>().color = alphaMax;
-                        DoorCanvas.GetChild(3).GetComponent<Image>().sprite = interact;
+                        backIcons.GetChild(1).GetComponent<Image>().sprite = interact;
+                        backIcons.GetChild(1).GetComponent<Image>().color = alphaMax;
 
-                        DoorCanvas.DOLookAt(camera.transform.position, 0.1f);
+                        backIcons.DOLookAt(camera.transform.position, 0.1f);
                     }
                 }
                 else
                 {
                     if (controllerMother.m_CharacterController.doorCollider.transform == outside.transform)
                     {
-                        DoorCanvas.GetChild(0).GetComponent<Image>().sprite = cantOpenDoor;
-                        DoorCanvas.GetChild(0).GetComponent<Image>().color = alphaMax;
+                        frontIcons.GetChild(0).GetComponent<Image>().sprite = cantOpenDoor;
+                        frontIcons.GetChild(0).GetComponent<Image>().color = alphaMax;
 
-                        DoorCanvas.GetChild(2).GetComponent<Image>().color = alphaMax;
-                        DoorCanvas.GetChild(2).GetComponent<Image>().sprite = cantInteract;
+                        frontIcons.GetChild(1).GetComponent<Image>().sprite = cantInteract;
+                        frontIcons.GetChild(1).GetComponent<Image>().color = alphaMax;
 
-                        DoorCanvas.DOLookAt(camera.transform.position, 0.1f);
+                        frontIcons.DOLookAt(camera.transform.position, 0.1f);
                     }
                     else if (controllerMother.m_CharacterController.doorCollider.transform == inside.transform)
                     {
-                        DoorCanvas.GetChild(1).GetComponent<Image>().sprite = cantOpenDoor;
-                        DoorCanvas.GetChild(1).GetComponent<Image>().color = alphaMax;
+                        backIcons.GetChild(0).GetComponent<Image>().sprite = cantOpenDoor;
+                        backIcons.GetChild(0).GetComponent<Image>().color = alphaMax;
 
-                        DoorCanvas.GetChild(3).GetComponent<Image>().color = alphaMax;
-                        DoorCanvas.GetChild(3).GetComponent<Image>().sprite = cantInteract;
+                        backIcons.GetChild(1).GetComponent<Image>().sprite = cantInteract;
+                        backIcons.GetChild(1).GetComponent<Image>().color = alphaMax;
 
-                        DoorCanvas.DOLookAt(camera.transform.position, 0.1f);
+                        backIcons.DOLookAt(camera.transform.position, 0.1f);
                     }
                 }
             }
             else
             {
-                DoorCanvas.GetChild(0).GetComponent<Image>().color = alphaZero;
-                DoorCanvas.GetChild(0).GetComponent<Image>().sprite = null;
-                DoorCanvas.GetChild(1).GetComponent<Image>().color = alphaZero;
-                DoorCanvas.GetChild(1).GetComponent<Image>().sprite = null;
-                DoorCanvas.GetChild(2).GetComponent<Image>().color = alphaZero;
-                DoorCanvas.GetChild(2).GetComponent<Image>().sprite = null;
-                DoorCanvas.GetChild(3).GetComponent<Image>().color = alphaZero;
-                DoorCanvas.GetChild(3).GetComponent<Image>().sprite = null;
+                HideIcon();
             }
 
            
@@ -107,35 +120,28 @@ public class DoorIconsActivation : MonoBehaviour {
             {
                 if (controllerBoy.m_CharacterController.doorCollider.transform == outside.transform)
                 {
-                    DoorCanvas.GetChild(0).GetComponent<Image>().sprite = cantOpenDoor;
-                    DoorCanvas.GetChild(0).GetComponent<Image>().color = alphaMax;
+                    frontIcons.GetChild(0).GetComponent<Image>().sprite = cantOpenDoor;
+                    frontIcons.GetChild(0).GetComponent<Image>().color = alphaMax;
 
-                    DoorCanvas.GetChild(2).GetComponent<Image>().sprite = cantInteract;
-                    DoorCanvas.GetChild(2).GetComponent<Image>().color = alphaMax;
+                    frontIcons.GetChild(1).GetComponent<Image>().sprite = cantInteract;
+                    frontIcons.GetChild(1).GetComponent<Image>().color = alphaMax;
 
-                    DoorCanvas.DOLookAt(camera.transform.position, 0.1f);
+                    frontIcons.DOLookAt(camera.transform.position, 0.1f);
                 }
                 else if (controllerBoy.m_CharacterController.doorCollider.transform == inside.transform) 
                 {
-                    DoorCanvas.GetChild(1).GetComponent<Image>().sprite = cantOpenDoor;
-                    DoorCanvas.GetChild(1).GetComponent<Image>().color = alphaMax;
+                    backIcons.GetChild(0).GetComponent<Image>().sprite = cantOpenDoor;
+                    backIcons.GetChild(0).GetComponent<Image>().color = alphaMax;
 
-                    DoorCanvas.GetChild(3).GetComponent<Image>().sprite = cantInteract;
-                    DoorCanvas.GetChild(3).GetComponent<Image>().color = alphaMax;
+                    backIcons.GetChild(1).GetComponent<Image>().sprite = cantInteract;
+                    backIcons.GetChild(1).GetComponent<Image>().color = alphaMax;
 
-                    DoorCanvas.DOLookAt(camera.transform.position, 0.1f);
+                    backIcons.DOLookAt(camera.transform.position, 0.1f);
                 }
             }
             else
             {
-                DoorCanvas.GetChild(0).GetComponent<Image>().color = alphaZero;
-                DoorCanvas.GetChild(0).GetComponent<Image>().sprite = null;
-                DoorCanvas.GetChild(1).GetComponent<Image>().color = alphaZero;
-                DoorCanvas.GetChild(1).GetComponent<Image>().sprite = null;
-                DoorCanvas.GetChild(2).GetComponent<Image>().color = alphaZero;
-                DoorCanvas.GetChild(2).GetComponent<Image>().sprite = null;
-                DoorCanvas.GetChild(3).GetComponent<Image>().color = alphaZero;
-                DoorCanvas.GetChild(3).GetComponent<Image>().sprite = null;
+                HideIcon();
             }
         }
        

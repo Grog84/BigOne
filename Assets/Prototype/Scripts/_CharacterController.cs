@@ -239,7 +239,7 @@ namespace Character
             {
                 doorCollider = other.gameObject;
                 ActivateDoors();
-                doorCollider.transform.parent.GetComponent<DoorIconsActivation>().ShowIcon();
+                doorCollider.transform.parent.GetComponent<DoorIconsActivation>().ShowIcon(this.gameObject);
             }
         }
 

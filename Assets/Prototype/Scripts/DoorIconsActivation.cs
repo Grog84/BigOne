@@ -16,8 +16,6 @@ public class DoorIconsActivation : MonoBehaviour
     public Collider outside;
     public Collider inside;
 
-    [HideInInspector] public CharacterStateController controllerMother;
-    [HideInInspector] public CharacterStateController controllerBoy;
     [HideInInspector] public Color alphaZero;
     [HideInInspector] public Color alphaMax;
     [HideInInspector] public Transform hasKey;
@@ -25,9 +23,7 @@ public class DoorIconsActivation : MonoBehaviour
     [HideInInspector] public Transform backIcons;
 
     void Awake()
-    {
-        controllerMother = GameObject.Find("Mother").GetComponent<CharacterStateController>();
-        controllerBoy = GameObject.Find("Boy").GetComponent<CharacterStateController>();
+    {     
         alphaZero = new Color(0, 0, 0, 0);
         alphaMax = new Color(100,100,100,255);
         hasKey = transform.FindDeepChild("DoorBody");
@@ -44,9 +40,9 @@ public class DoorIconsActivation : MonoBehaviour
         orientation.GetChild(1).GetComponent<Image>().sprite = null;
     }
 
-    public void SwapIcons(Transform hasKey, Transform orientation)
+    public void SwapIcons(Transform hasKey, Transform orientation, CharacterStateController playerState)
     {
-        if (hasKey.GetComponent<Doors>().hasKey)
+        if (hasKey.GetComponent<Doors>().hasKey && playerState. thisCharacter == CharacterActive.Mother)
         {
             orientation.GetChild(0).GetComponent<Image>().sprite = openDoor;
             orientation.GetChild(0).GetComponent<Image>().color = alphaMax;
@@ -64,23 +60,24 @@ public class DoorIconsActivation : MonoBehaviour
         }
     }
 
-    public void ShowIcon()
+    public void ShowIcon(GameObject player)
     {
-        //Mother
-        if (GMController.instance.isCharacterPlaying == controllerMother.thisCharacter)
+       CharacterStateController playerState = player.GetComponent<CharacterStateController>();
+
+        if (GMController.instance.isCharacterPlaying == playerState.thisCharacter)
         {
             // Door icons 
-            if (controllerMother.m_CharacterController.isDoorDirectionRight && !controllerMother.m_CharacterController.isPushDirectionRight)
+            if (playerState.m_CharacterController.isDoorDirectionRight)
             {
       
-                    if (controllerMother.m_CharacterController.doorCollider.transform == outside.transform)
+                    if (playerState.m_CharacterController.doorCollider.transform == outside.transform)
                     {
-                        SwapIcons(hasKey,frontIcons);
+                        SwapIcons(hasKey,frontIcons,playerState);
                     
                     }
-                    else if (controllerMother.m_CharacterController.doorCollider.transform == inside.transform)
+                    else if (playerState.m_CharacterController.doorCollider.transform == inside.transform)
                     {
-                        SwapIcons(hasKey,backIcons);
+                        SwapIcons(hasKey,backIcons,playerState);
 
                     }
    
@@ -92,38 +89,7 @@ public class DoorIconsActivation : MonoBehaviour
             }
 
            
-        }
-        // Boy
-        else if (GMController.instance.isCharacterPlaying == controllerBoy.thisCharacter)
-        {
-            // Door icons 
-            if (controllerBoy.m_CharacterController.isDoorDirectionRight && !controllerBoy.m_CharacterController.isClimbDirectionRight)
-            {
-                if (controllerBoy.m_CharacterController.doorCollider.transform == outside.transform)
-                {
-                    frontIcons.GetChild(0).GetComponent<Image>().sprite = cantOpenDoor;
-                    frontIcons.GetChild(0).GetComponent<Image>().color = alphaMax;
-
-                    frontIcons.GetChild(1).GetComponent<Image>().sprite = cantInteract;
-                    frontIcons.GetChild(1).GetComponent<Image>().color = alphaMax;
-
-                }
-                else if (controllerBoy.m_CharacterController.doorCollider.transform == inside.transform) 
-                {
-                    backIcons.GetChild(0).GetComponent<Image>().sprite = cantOpenDoor;
-                    backIcons.GetChild(0).GetComponent<Image>().color = alphaMax;
-
-                    backIcons.GetChild(1).GetComponent<Image>().sprite = cantInteract;
-                    backIcons.GetChild(1).GetComponent<Image>().color = alphaMax;
-
-                }
-            }
-            else
-            {
-                HideIcons(frontIcons);
-                HideIcons(backIcons);
-            }
-        }
+        }     
        
     }
 	

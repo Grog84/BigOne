@@ -34,10 +34,8 @@ public class ThirdPersonCameraScript : CameraScript {
 
     private void Update()
     {
-        if (Input.GetButton("Submit"))
-        {
-            SwitchLookAt();
-        }
+       
+        //Debug.Log(lookAt.gameObject.name);
 
         if (Input.GetButtonDown("Pause"))
         {

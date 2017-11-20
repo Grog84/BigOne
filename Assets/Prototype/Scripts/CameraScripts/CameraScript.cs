@@ -81,6 +81,15 @@ public class CameraScript : MonoBehaviour
 
     private void Update()
     {
+        if(thirdPersonVirtualCamera.m_Priority > firstPersonVirtualCamera.m_Priority)
+        {
+            GMController.instance.activeCamera = (CameraActive)0;
+        }
+        else if( firstPersonVirtualCamera.m_Priority > thirdPersonVirtualCamera.m_Priority)
+        {
+            GMController.instance.activeCamera = (CameraActive)1;
+        }
+
         if (firstPersonCameraScript.FPSbyTrigger == false && thirdPersonCameraScript.distance < minCamDistance) 
         {
             firstPersonVirtualCamera.m_Priority = 100;
@@ -147,8 +156,3 @@ public class CameraScript : MonoBehaviour
     }
 
 }
-    
-
-
-
-

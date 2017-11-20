@@ -8,14 +8,23 @@ namespace GM.Actions
     [CreateAssetMenu(menuName = "Prototype/Actions/GM/SwitchCamera")]
     public class SwitchCamera : _Action {
 
+       
+
         public override void Execute(GMStateController controller)
         {
+            
             Switch(controller);
         }
 
         private void Switch(GMStateController controller)
         {
-            controller.m_GM.m_MainCamera.SwitchLookAt();
+
+            for (int i = 0; i < GMController.instance.m_MainCamera.Length; i++)
+            {
+                controller.m_GM.m_MainCamera[i].SwitchLookAt();
+
+            }
+
         }
     }
 }

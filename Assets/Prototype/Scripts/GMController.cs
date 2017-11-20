@@ -5,13 +5,15 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
+
+public enum CameraActive {ThirdPersonCameraScript, FirstPersonCameraScript}
 public enum DayNight { Day, Night}
 public class GMController : MonoBehaviour {
 
     // Transform of the active player
     public CharacterActive activePlayerAtStart;
     public DayNight isDayOrNight;
-
+    public CameraActive activeCamera;
 
     // Needed for Singleton pattern 
     [HideInInspector] public static GMController instance = null;
@@ -49,7 +51,7 @@ public class GMController : MonoBehaviour {
     [HideInInspector] public Transform[] playerTransform;
 
     // Main Camera
-    [HideInInspector] public CameraScript m_MainCamera;
+    [HideInInspector] public CameraScript[] m_MainCamera;
 
     private GameObject[] players;
 
@@ -98,9 +100,10 @@ public class GMController : MonoBehaviour {
             allEnemiesTransform[i] = allEnemies[i].transform;
         }
 
-        m_MainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraScript>();
-        m_MainCamera.SwitchLookAt();
-
+        m_MainCamera = new CameraScript[2];
+        m_MainCamera[0] = GameObject.Find("ThirdPersonCamera").GetComponent<ThirdPersonCameraScript>();
+        m_MainCamera[1] = GameObject.Find("FirstPersonCamera").GetComponent<FirstPersonCameraScript>();
+        
         SaveCheckpoint();
     }
 

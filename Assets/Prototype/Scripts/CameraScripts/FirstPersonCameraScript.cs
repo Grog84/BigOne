@@ -24,10 +24,7 @@ public class FirstPersonCameraScript : CameraScript {
     private void Update()
     {
         myTransform.position = myFollow.position;
-        if(Input.GetButton("Submit"))
-        {
-            SwitchLookAt();
-        }
+      
 
         // camera movement and limit of movement
         currentX += Input.GetAxis("Mouse X");

@@ -49,7 +49,7 @@ public class DoorIconsActivation : MonoBehaviour
 
     public void SwapIcons(Transform hasKey, Transform orientation, CharacterStateController playerState)
     {
-        if (hasKey.GetComponent<Doors>().hasKey && playerState. thisCharacter == CharacterActive.Mother)
+        if (hasKey.GetComponent<Doors>().hasKey && playerState.thisCharacter == CharacterActive.Mother)
         {
             orientation.GetChild(0).GetComponent<Image>().sprite = openDoor;
             orientation.GetChild(0).GetComponent<Image>().color = alphaMax;
@@ -74,19 +74,23 @@ public class DoorIconsActivation : MonoBehaviour
         if (GMController.instance.isCharacterPlaying == playerState.thisCharacter)
         {
             // Door icons 
-            if (playerState.m_CharacterController.isDoorDirectionRight)
-            {                
+            if (playerState.m_CharacterController.isDoorDirectionRight )
+            {
+                if (playerState.thisCharacter == CharacterActive.Mother && !playerState.m_CharacterController.isPushDirectionRight || 
+                    playerState.thisCharacter == CharacterActive.Boy && !playerState.m_CharacterController.isClimbDirectionRight)
+                {
                     if (playerState.m_CharacterController.doorCollider.transform == outside.transform)
                     {
-                        SwapIcons(hasKey,frontIcons,playerState);
+                        SwapIcons(hasKey, frontIcons, playerState);
                         player.GetComponent<_CharacterController>().IconPriority(frontIcons, degrees);
-                    
+
                     }
                     else if (playerState.m_CharacterController.doorCollider.transform == inside.transform)
                     {
-                        SwapIcons(hasKey,backIcons,playerState);
+                        SwapIcons(hasKey, backIcons, playerState);
                         player.GetComponent<_CharacterController>().IconPriority(backIcons, degrees);
                     }
+                }
    
             }
             else

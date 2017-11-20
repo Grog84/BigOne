@@ -20,10 +20,9 @@ namespace Character.Actions
         {
             controller.m_CharacterController.doorObject = controller.m_CharacterController.doorCollider.transform.parent.gameObject;
             RaycastHit hit;
-            Debug.DrawRay(controller.m_CharacterController.CharacterTransform.position + Vector3.up * controller.m_CharacterController.m_CharController.bounds.size.y / 2.0f, controller.m_CharacterController.CharacterTransform.forward, Color.red);
 
-            if (Physics.Raycast(controller.m_CharacterController.CharacterTransform.position + Vector3.up * controller.m_CharacterController.m_CharController.bounds.size.y / 2.0f,
-                controller.m_CharacterController.CharacterTransform.forward, out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromDoor))
+            if (Physics.Raycast(controller.m_CharacterController.playerHead.position,
+                controller.m_CharacterController.playerHead.forward, out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromDoor))
             {
                 
                 // UNLOCKED DOOR

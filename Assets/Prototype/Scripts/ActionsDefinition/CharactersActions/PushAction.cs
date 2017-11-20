@@ -48,9 +48,7 @@ namespace Character.Actions
                               hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors")|| hit.transform.gameObject.layer == LayerMask.NameToLayer("Pushable") ||
                               hit.transform.gameObject.layer == LayerMask.NameToLayer("Stairs"))
                     {
-                        Debug.Log("vedo ostacolo");
                         controller.m_CharacterController.isPushLimit = true;
-                        Debug.Log(controller.m_CharacterController.isPushLimit);
                     }
 
                 }

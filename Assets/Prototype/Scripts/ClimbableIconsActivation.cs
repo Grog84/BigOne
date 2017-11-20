@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using StateMachine;
 using Character;
+using DG.Tweening;
 
 public class ClimbableIconsActivation : MonoBehaviour
 {
@@ -77,6 +78,7 @@ public class ClimbableIconsActivation : MonoBehaviour
                 else if (controllerBoy.m_CharacterController.climbCollider.transform == Top.transform)
                 {
                     SwapIcons(topIcons);
+                    topIcons.DOLocalRotate(new Vector3(0, 0, 0), 0.1f);
                     player.GetComponent<_CharacterController>().IconPriority(topIcons, degrees);
                 }
             }
@@ -88,6 +90,7 @@ public class ClimbableIconsActivation : MonoBehaviour
                 if (controllerBoy.m_CharacterController.climbCollider.transform == Top.transform)
                 {
                     SwapIcons(topIcons);
+                    topIcons.DOLocalRotate(new Vector3(0, 180, 0), 0.1f);
                     player.GetComponent<_CharacterController>().IconPriority(topIcons, degrees);
                 }
                 else

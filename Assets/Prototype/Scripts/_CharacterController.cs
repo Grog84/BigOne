@@ -66,6 +66,8 @@ namespace Character
 
         [HideInInspector] public GameObject doorObject;
         [HideInInspector] public GameObject doorCollider;
+        [HideInInspector] public GameObject doorBody;
+
         [HideInInspector] public GameObject KeyCollider;
 
         [HideInInspector] public GameObject pushHit = null;            // Used for icons 
@@ -82,6 +84,7 @@ namespace Character
         [HideInInspector] public Transform playerIcon;
         //
 
+        public Transform playerHead;
         public Transform playerCanvas;
         public Sprite cancelIcon;
         public Sprite cantCancelIcon;
@@ -119,26 +122,28 @@ namespace Character
         void ActivateDoors()
         {
             RaycastHit hit;
-            Debug.DrawRay(CharacterTransform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTransform.forward, Color.red);
-
+            Debug.DrawRay(playerHead.position, playerHead.forward);
             if (isInDoorArea)
             {
-                if (Physics.Raycast(CharacterTransform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTransform.forward, out hit, m_CharStats.m_DistanceFromDoor))
+                if (Physics.Raycast(playerHead.position, playerHead.forward, out hit, m_CharStats.m_DistanceFromDoor))//(CharacterTransform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTransform.forward, out hit, m_CharStats.m_DistanceFromDoor))
                 {
                     
                     if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors") &&
                         hit.transform == doorCollider.transform.parent.FindDeepChild("DoorBody"))
                     {
                         isDoorDirectionRight = true;
+                        doorBody = hit.transform.gameObject;
                     }
                     else
                     {
                         isDoorDirectionRight = false;
+                        doorBody = null;
                     }
                 }
                 else
                 {
                     isDoorDirectionRight = false;
+                    doorBody = null;
                 }
             }
         }
@@ -239,6 +244,7 @@ namespace Character
                 doorCollider = other.gameObject;
                 ActivateDoors();
                 doorCollider.transform.parent.GetComponent<DoorIconsActivation>().ShowIcon(this.gameObject);
+                
             }
         }
 
@@ -435,7 +441,7 @@ namespace Character
             startDoorAction = false;
             float InteractTime = 0.5f;
 
-            Vector3 dir = doorObject.transform.position - doorCollider.transform.position;
+            Vector3 dir = doorBody.transform.position - doorCollider.transform.position;
             dir.y = 0;
             dir = dir.normalized;
 
@@ -510,18 +516,6 @@ namespace Character
 
         #endregion
 
-        public void IconPriority(Transform icons, int degrees)
-        {
-            if (Vector3.Angle(m_Camera.forward, icons.forward) > degrees )
-            {
-                m_Camera.GetChild(0).gameObject.SetActive(false);
-
-            }
-            else
-            {
-                m_Camera.GetChild(0).gameObject.SetActive(true);
-            }
-        }
 
         private void OnAnimatorIK(int layerIndex)
         {
@@ -539,6 +533,19 @@ namespace Character
         }
 
         #region Icons
+
+        public void IconPriority(Transform icons, int degrees)
+        {
+            if (Vector3.Angle(m_Camera.forward, icons.forward) > degrees )
+            {
+                m_Camera.GetChild(0).gameObject.SetActive(false);
+
+            }
+            else
+            {
+                m_Camera.GetChild(0).gameObject.SetActive(true);
+            }
+        }
 
         public void ShowCancelIcon()
         {
@@ -567,7 +574,7 @@ namespace Character
 
         void Update()
         {
-            Debug.DrawRay(m_Camera.GetChild(0).position, m_Camera.GetChild(0).forward, Color.red);
+           
             UpdateSoundRange();
 
             if (startClimbAnimationEnd)

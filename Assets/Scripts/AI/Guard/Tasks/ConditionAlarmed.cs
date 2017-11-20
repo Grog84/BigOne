@@ -6,12 +6,12 @@ namespace AI.BT
 {
     public class ConditionAlarmed : Task
     {
-        
-
         public override TaskState Run()
         {
-
-            return TaskState.SUCCESS;
+            if (m_BehaviourTree.m_Blackboard.GetIntValue("GuardState") == (int)GuardState.ALARMED)
+                return TaskState.SUCCESS;
+            else
+                return TaskState.FAILURE;
         }
     }
 }

@@ -26,7 +26,7 @@ namespace AI
         GuardState m_State = GuardState.NORMAL;
         GuardStats stats;
 
-        //Navigation
+        ////Navigation
         NavMeshAgent m_NavMeshAgent;
 
         [HideInInspector] public Transform[] wayPointListTransform;
@@ -48,6 +48,10 @@ namespace AI
         // Animation
         Animator m_Animator;
 
+        // AI
+        Brain m_Brain;
+        Blackboard m_Blackboard;
+
 
         public void GetNormal()
         {
@@ -55,7 +59,9 @@ namespace AI
                 GMController.instance.alarmedGuards--;
             else if (m_State == GuardState.CURIOUS)
                 GMController.instance.curiousGuards--;
+
             m_State = GuardState.NORMAL;
+            m_Blackboard.SetIntValue("GuardState", (int)GuardState.NORMAL);
             LoadStats(normalStats);
         }
 
@@ -63,6 +69,7 @@ namespace AI
         {
             GMController.instance.curiousGuards++;
             m_State = GuardState.CURIOUS;
+            m_Blackboard.SetIntValue("GuardState", (int)GuardState.CURIOUS);
             LoadStats(curiousStats);
         }
 
@@ -73,12 +80,14 @@ namespace AI
 
             GMController.instance.alarmedGuards++;
             m_State = GuardState.ALARMED;
+            m_Blackboard.SetIntValue("GuardState", (int)GuardState.ALARMED);
             LoadStats(alarmedStats);
         }
 
         public void GetDistracted()
         {
             m_State = GuardState.DISTRACTED;
+            m_Blackboard.SetIntValue("GuardState", (int)GuardState.DISTRACTED);
             LoadStats(distractedStats);
         }
 
@@ -143,6 +152,8 @@ namespace AI
             perceptionBar = GetComponentInChildren<PerceptionBar>();
             eyes = TransformDeepChildExtension.FindDeepChild(transform, "eyes");
             m_Animator = GetComponent<Animator>();
+            m_Brain = GetComponent<Brain>();
+            m_Blackboard = m_Brain.decisionMaker.m_Blackboard;
 
             // Get the transform of the patrol nav points
             wayPointListTransform = new Transform[wayPointList.Count];

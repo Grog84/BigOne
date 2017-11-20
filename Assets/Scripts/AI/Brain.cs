@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Brain : MonoBehaviour
+namespace AI
 {
-    public float tickDelay = 1;
-    public DecisionMaker decisionMaker;
-
-    void Start()
+    public class Brain : MonoBehaviour
     {
-        InvokeRepeating("TickBrain", tickDelay, tickDelay);
-    }
+        public float tickDelay = 1;
+        public DecisionMaker decisionMaker;
 
-    void TickBrain()
-    {
-        decisionMaker.MakeDecision();
+        void Start()
+        {
+            InvokeRepeating("TickBrain", tickDelay, tickDelay);
+        }
+
+        void TickBrain()
+        {
+            decisionMaker.MakeDecision();
+        }
     }
 }

@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using AI.BT;
+using AI;
 using System.Linq;
 
 public class BTDMMaker : MonoBehaviour {
 
     public BehaviourTreeDM behaviourTree;
     public GameObject rootTask;
+
+    public enum AgentType { GUARD }
+    public AgentType thisAgentType = AgentType.GUARD;
 
     private void BuildTree(GameObject thisToolTask, Task thisTask)
     {
@@ -66,6 +70,18 @@ public class BTDMMaker : MonoBehaviour {
         }
     }
 
+    private void AssignBlackboard()
+    {
+        switch (thisAgentType)
+        {
+            case AgentType.GUARD:
+                behaviourTree.m_Blackboard = new GuardBlackboard();
+                break;
+            default:
+                break;
+        }
+    }
+
     public void PrintTree()
     {
         behaviourTree.PrintTree(0, behaviourTree.rootTask);
@@ -87,6 +103,7 @@ public class BTDMMaker : MonoBehaviour {
     void Start () {
 
         AssignRoot();
+        AssignBlackboard();
         BuildTree(rootTask, behaviourTree.rootTask);
         Debug.Log("Done Talking");
     }

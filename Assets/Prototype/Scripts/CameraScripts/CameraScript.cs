@@ -77,24 +77,22 @@ public class CameraScript : MonoBehaviour
             firstPersonVirtualCamera.m_Priority = 0;
         }
 
-        if (firstPersonVirtualCamera.m_Priority == 100)
+        if (firstPersonVirtualCamera.m_Priority == 100 )
         {
-            SetMaterialTrasparent(boyJoints);
-            SetMaterialTrasparent(boySkin);
+            StartCoroutine(SetMaterialTrasparent(boyJoints));
+            StartCoroutine(SetMaterialTrasparent(boySkin));
 
         }
-        else if (firstPersonVirtualCamera.m_Priority != 100)
+        else if (firstPersonVirtualCamera.m_Priority != 100 )
         {
-            SetMaterialOpaque(boyJoints);
-            SetMaterialOpaque(boySkin);
+            StartCoroutine(SetMaterialOpaque(boyJoints));
+            StartCoroutine(SetMaterialOpaque(boySkin));
         }
 
     }
 
-    void SetMaterialTrasparent(Renderer mat)
+    IEnumerator SetMaterialTrasparent(Renderer mat)
     {
-        mat.material.DOFade(0, 0.5f);
-
         mat.material.SetFloat("_Mode", 2);
         mat.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
         mat.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
@@ -103,13 +101,14 @@ public class CameraScript : MonoBehaviour
         mat.material.EnableKeyword("_ALPHABLEND_ON");
         mat.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
         mat.material.renderQueue = 3000;
-
-
+        mat.material.DOFade(0, 0.5f);
+        yield return null;
     }
 
-    void SetMaterialOpaque(Renderer mat)
+    IEnumerator SetMaterialOpaque(Renderer mat)
     {
-        mat.material.DOFade(255, 0.5f);
+        mat.material.DOFade(1, 0.5f);
+        yield return new WaitForSeconds(0.1f);
 
         mat.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
         mat.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
@@ -118,7 +117,7 @@ public class CameraScript : MonoBehaviour
         mat.material.DisableKeyword("_ALPHABLEND_ON");
         mat.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
         mat.material.renderQueue = -1;
-
+        yield return null;
     }
 
 }

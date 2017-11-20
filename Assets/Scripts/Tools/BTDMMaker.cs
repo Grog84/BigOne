@@ -2,18 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using AI.BT;
+using System.Linq;
 
     public class BTDMMaker : MonoBehaviour {
 
-    BehaviourTreeDM behaviourTree;
-    List<GameObject> levels;
-    List<GameObject> connections;
+    public BehaviourTreeDM behaviourTree;
+
+
+    private void ShowConnections()
+    {
+
+    }
 
     void Start () {
 
-        behaviourTree.AssignRootTask(levels[0].GetComponent<Task>());
-
+        
 
     }
+
+
 
 }

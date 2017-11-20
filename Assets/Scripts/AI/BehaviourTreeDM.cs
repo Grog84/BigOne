@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace AI.BT
 {
+
     public class BehaviourTreeDM : DecisionMaker
     {
         // Blackboard Area
@@ -11,7 +12,6 @@ namespace AI.BT
 
         Task rootTask;
 
-        // Use this for initialization
         void Start()
         {
             // Build the tree from game objects
@@ -22,7 +22,7 @@ namespace AI.BT
 
         public void AssignRootTask(Task rTask)
         {
-            this.rootTask = rTask;
+            rootTask = rTask;
         }
 
         public void BuildTree(Task parentTask)

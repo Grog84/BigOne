@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using StateMachine;
+using Character;
 
 public class PushableIconsActivation : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PushableIconsActivation : MonoBehaviour
     public Collider trigger2;
     public Collider trigger3;
     public Collider trigger4;
+    public int degrees;
 
     [HideInInspector] public CharacterStateController controllerMother;
     [HideInInspector] public Color alphaZero;
@@ -53,37 +55,36 @@ public class PushableIconsActivation : MonoBehaviour
         trigger.GetChild(1).GetComponent<Image>().color = alphaMax;
     }
 
-    public void ShowIcon()
+    public void ShowIcon(GameObject player)
     {
         //Mother
         if (GMController.instance.isCharacterPlaying == controllerMother.thisCharacter)
         {
-
             // Pushable Icons
             if (controllerMother.m_CharacterController.isPushDirectionRight && controllerMother.currentState.name != "Pushing")
             {
                 if (controllerMother.m_CharacterController.pushCollider.transform == trigger1.transform)
                 {
                     SwapIcons(trig1);
-
+                    player.GetComponent<_CharacterController>().IconPriority(trig1, degrees);
                     stopUpdate = false;
                 }
                 else if (controllerMother.m_CharacterController.pushCollider.transform == trigger2.transform)
                 {
                     SwapIcons(trig2);
-
+                    player.GetComponent<_CharacterController>().IconPriority(trig2, degrees);
                     stopUpdate = false;
                 }
                 else if (controllerMother.m_CharacterController.pushCollider.transform == trigger3.transform)
                 {
                     SwapIcons(trig3);
-
+                    player.GetComponent<_CharacterController>().IconPriority(trig3, degrees);
                     stopUpdate = false;
                 }
                 else if (controllerMother.m_CharacterController.pushCollider.transform == trigger4.transform)
                 {
                     SwapIcons(trig4);
-
+                    player.GetComponent<_CharacterController>().IconPriority(trig4, degrees);
                     stopUpdate = false;
                 }
             }          

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using StateMachine;
+using Character;
 
 public class ClimbableIconsActivation : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class ClimbableIconsActivation : MonoBehaviour
     public Sprite endClimbIcon;
     public Collider Top;
     public Collider Bottom;
+    public int degrees;
 
     [HideInInspector] public CharacterStateController controllerBoy;
     [HideInInspector] public Color alphaZero;
@@ -51,12 +53,11 @@ public class ClimbableIconsActivation : MonoBehaviour
         position.GetChild(1).GetComponent<Image>().color = alphaMax;
     }
 
-    public void ShowIcon()
+    public void ShowIcon(GameObject player)
     {
         //Boy
         if (GMController.instance.isCharacterPlaying == controllerBoy.thisCharacter)
-        {
-
+        {            
             if (controllerBoy.currentState.name != "Climbing")
             {
                 // Start climb from Bottom
@@ -65,6 +66,7 @@ public class ClimbableIconsActivation : MonoBehaviour
                     if (controllerBoy.m_CharacterController.isClimbDirectionRight)
                     {
                         SwapIcons(bottomIcons);
+                        player.GetComponent<_CharacterController>().IconPriority(bottomIcons, degrees);
                     }
                    else 
                    {
@@ -75,6 +77,7 @@ public class ClimbableIconsActivation : MonoBehaviour
                 else if (controllerBoy.m_CharacterController.climbCollider.transform == Top.transform)
                 {
                     SwapIcons(topIcons);
+                    player.GetComponent<_CharacterController>().IconPriority(topIcons, degrees);
                 }
             }
             // End Climb Icon
@@ -85,6 +88,7 @@ public class ClimbableIconsActivation : MonoBehaviour
                 if (controllerBoy.m_CharacterController.climbCollider.transform == Top.transform)
                 {
                     SwapIcons(topIcons);
+                    player.GetComponent<_CharacterController>().IconPriority(topIcons, degrees);
                 }
                 else
                 {

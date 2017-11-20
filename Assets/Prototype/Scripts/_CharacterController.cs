@@ -58,8 +58,7 @@ namespace Character
         [HideInInspector] public Rigidbody m_Rigidbody;                // A reference to the rigidbody
         [HideInInspector] public CharacterController m_CharController; // A reference to the Character controller component
 
-        // COLIDERS REFERENCES
-        [HideInInspector] public GameObject lastTopCollider;           // reference to the last top climb trigger, used for Icons
+        // COLIDERS REFERENCES      
         [HideInInspector] public GameObject climbCollider;
         [HideInInspector] public Transform climbAnchorTop;
         [HideInInspector] public Transform climbAnchorBottom;
@@ -216,20 +215,20 @@ namespace Character
             {
                 climbingBottom = true;
                 ActivateClimbingChoice();
-                climbCollider.transform.parent.GetComponent<ClimbableIconsActivation>().ShowIcon();
+                climbCollider.transform.parent.GetComponent<ClimbableIconsActivation>().ShowIcon(this.gameObject);
             }
             if (other.tag == "Ladder_Top")
             {           
                 climbingTop = true;
                 ActivateClimbingChoice();
-                climbCollider.transform.parent.GetComponent<ClimbableIconsActivation>().ShowIcon();
+                climbCollider.transform.parent.GetComponent<ClimbableIconsActivation>().ShowIcon(this.gameObject);
             }
             if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTransform.forward, other.transform.forward) < 45)
             {
                 pushCollider = other.gameObject;
                 isInPushArea = true;
                 ActivatePushingChoice();
-                pushCollider.transform.parent.GetComponent<PushableIconsActivation>().ShowIcon();
+                pushCollider.transform.parent.GetComponent<PushableIconsActivation>().ShowIcon(this.gameObject);
             }
             else if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTransform.forward, other.transform.forward) > 45)
             {
@@ -253,8 +252,7 @@ namespace Character
                 climbingBottom = true;
             }
             else if (other.tag == "Ladder_Top")
-            {
-                lastTopCollider = other.gameObject;
+            {              
                 climbCollider = other.gameObject;
                 isInClimbArea = true;
                 climbingTop = true;
@@ -286,8 +284,8 @@ namespace Character
                 isClimbDirectionRight = false;
             }
             if (other.tag == "Ladder_Top")
-            {
-                lastTopCollider.transform.parent.GetComponent<ClimbableIconsActivation>().HideIcons(lastTopCollider.transform.parent.GetComponent<ClimbableIconsActivation>().topIcons);
+            {             
+                climbCollider.transform.parent.GetComponent<ClimbableIconsActivation>().HideIcons(climbCollider.transform.parent.GetComponent<ClimbableIconsActivation>().topIcons);
                 climbCollider = null;
                 isInClimbArea = false;
                 climbingTop = false;
@@ -301,6 +299,7 @@ namespace Character
             }
             if (other.tag == "UnlockedDoor" || other.tag == "LockedDoor")
             {
+                doorCollider.transform.parent.GetComponent<DoorIconsActivation>().HideIcons();
                 doorCollider = null;
                 isInDoorArea = false;
                 isDoorDirectionRight = false;
@@ -388,7 +387,6 @@ namespace Character
             yield return null;
         }
         #endregion
-
 
         #region Pushable Coroutine
 
@@ -512,6 +510,19 @@ namespace Character
 
         #endregion
 
+        public void IconPriority(Transform icons, int degrees)
+        {
+            if (Vector3.Angle(m_Camera.forward, icons.forward) > degrees )
+            {
+                m_Camera.GetChild(0).gameObject.SetActive(false);
+
+            }
+            else
+            {
+                m_Camera.GetChild(0).gameObject.SetActive(true);
+            }
+        }
+
         private void OnAnimatorIK(int layerIndex)
         {
             
@@ -556,7 +567,7 @@ namespace Character
 
         void Update()
         {
-            
+            Debug.DrawRay(m_Camera.GetChild(0).position, m_Camera.GetChild(0).forward, Color.red);
             UpdateSoundRange();
 
             if (startClimbAnimationEnd)

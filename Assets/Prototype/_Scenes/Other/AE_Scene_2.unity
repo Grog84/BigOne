@@ -877,7 +877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22b984eca39029d4fa4e7a8426d7bfc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floorDescription: {fileID: 11400000, guid: 0dcc0cae387f70446a81a1d4fe8dd750, type: 2}
+  floorDescription: {fileID: 0}
 --- !u!43 &53954247
 Mesh:
   m_ObjectHideFlags: 0
@@ -1011,7 +1011,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1646
+  m_Name: pb_Mesh-1644
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -3300,9 +3300,18 @@ Prefab:
       propertyPath: m_Name
       value: Door (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1124687347930342, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
+      propertyPath: m_TagString
+      value: LockedDoor
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
   m_IsPrefabParent: 0
+--- !u!137 &495756572 stripped
+SkinnedMeshRenderer:
+  m_PrefabParentObject: {fileID: 137911985727873108, guid: ac2752dd92e2046499789efc8d2e61b2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1067367740}
 --- !u!43 &510813698
 Mesh:
   m_ObjectHideFlags: 0
@@ -3431,73 +3440,12 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
---- !u!1001 &523085367
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -10.382
-      objectReference: {fileID: 0}
-    - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.987
-      objectReference: {fileID: 0}
-    - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -21.635
-      objectReference: {fileID: 0}
-    - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 33329656885011894, guid: e142f5358a2d517409c5388d235a1bf9,
-        type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 2127551205}
-    - target: {fileID: 64905100658800414, guid: e142f5358a2d517409c5388d235a1bf9,
-        type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 2127551205}
-    - target: {fileID: 114860049488070432, guid: e142f5358a2d517409c5388d235a1bf9,
-        type: 2}
-      propertyPath: rightKey
-      value: 
-      objectReference: {fileID: 1434830731}
-    - target: {fileID: 1471658473345598, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
-      propertyPath: m_Name
-      value: Door
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
-  m_IsPrefabParent: 0
 --- !u!43 &532663240
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1414
+  m_Name: pb_Mesh-1412
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -4034,6 +3982,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &595905462
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -10.382
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.987
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -21.635
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4061612236470314, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 33329656885011894, guid: e142f5358a2d517409c5388d235a1bf9,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 2127551205}
+    - target: {fileID: 64905100658800414, guid: e142f5358a2d517409c5388d235a1bf9,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 2127551205}
+    - target: {fileID: 114860049488070432, guid: e142f5358a2d517409c5388d235a1bf9,
+        type: 2}
+      propertyPath: rightKey
+      value: 
+      objectReference: {fileID: 1434830731}
+    - target: {fileID: 1471658473345598, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
+      propertyPath: m_Name
+      value: Door
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e142f5358a2d517409c5388d235a1bf9, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &611202671
 GameObject:
   m_ObjectHideFlags: 3
@@ -4086,10 +4095,10 @@ MonoBehaviour:
   m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
   m_HorizontalDamping: 0.5
   m_VerticalDamping: 0.5
-  m_ScreenX: 0.4965764
-  m_ScreenY: 0.5446573
-  m_DeadZoneWidth: 0.05342466
-  m_DeadZoneHeight: 0
+  m_ScreenX: 0.5
+  m_ScreenY: 0.5
+  m_DeadZoneWidth: 0.1
+  m_DeadZoneHeight: 0.1
   m_SoftZoneWidth: 0.8
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
@@ -4253,7 +4262,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-2790
+  m_Name: pb_Mesh-2784
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -5255,10 +5264,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FollowOffset: {x: 0, y: 0, z: 0}
-  m_XDamping: 0
-  m_YDamping: 13
-  m_ZDamping: 0
+  m_FollowOffset: {x: 0, y: 0, z: -10}
+  m_XDamping: 1
+  m_YDamping: 1
+  m_ZDamping: 1
   m_BindingMode: 1
 --- !u!114 &918347375
 MonoBehaviour:
@@ -5371,6 +5380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   activePlayerAtStart: 0
   isDayOrNight: 0
+  activeCamera: 0
   lastSeenPlayerPosition: {x: 1000, y: 1000, z: 1000}
   lastHeardPlayerPosition: {x: 1000, y: 1000, z: 1000}
   suspiciousGuards: 0
@@ -5385,9 +5395,8 @@ MonoBehaviour:
   deathTimer: 0
   m_CheckpointManager: {fileID: 0}
   m_CharacterInterfaces: []
-  playerTransform:
-  - {fileID: 0}
-  m_MainCamera: {fileID: 0}
+  playerTransform: []
+  m_MainCamera: []
 --- !u!1 &963955477
 GameObject:
   m_ObjectHideFlags: 3
@@ -5483,10 +5492,10 @@ MonoBehaviour:
   m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
   m_HorizontalDamping: 0.5
   m_VerticalDamping: 0.5
-  m_ScreenX: 0.4965764
-  m_ScreenY: 0.5446573
-  m_DeadZoneWidth: 0.05342466
-  m_DeadZoneHeight: 0
+  m_ScreenX: 0.5
+  m_ScreenY: 0.5
+  m_DeadZoneWidth: 0.1
+  m_DeadZoneHeight: 0.1
   m_SoftZoneWidth: 0.8
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
@@ -7098,6 +7107,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 77701d11bda0b9b4985d48ef40481d50, type: 2}
   m_IsPrefabParent: 0
+--- !u!137 &1259794115 stripped
+SkinnedMeshRenderer:
+  m_PrefabParentObject: {fileID: 137593445220522594, guid: ac2752dd92e2046499789efc8d2e61b2,
+    type: 2}
+  m_PrefabInternal: {fileID: 1067367740}
 --- !u!43 &1288211537
 Mesh:
   m_ObjectHideFlags: 0
@@ -9646,7 +9660,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-3346
+  m_Name: pb_Mesh-3340
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -11834,12 +11848,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 33686419882505966, guid: 659d2375587bf2045858b4faa16cbeb0,
+    - target: {fileID: 64105729796383064, guid: 659d2375587bf2045858b4faa16cbeb0,
         type: 2}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1591467000}
-    - target: {fileID: 64105729796383064, guid: 659d2375587bf2045858b4faa16cbeb0,
+    - target: {fileID: 33686419882505966, guid: 659d2375587bf2045858b4faa16cbeb0,
         type: 2}
       propertyPath: m_Mesh
       value: 
@@ -12038,7 +12052,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1687221926335328, guid: 7dfd14c26069e0a4c96af8f35e8b38c3, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 20689405304300226, guid: 7dfd14c26069e0a4c96af8f35e8b38c3,
         type: 2}
@@ -12072,6 +12086,16 @@ Prefab:
       propertyPath: field of view
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 114488478674170926, guid: 7dfd14c26069e0a4c96af8f35e8b38c3,
+        type: 2}
+      propertyPath: boyJoints
+      value: 
+      objectReference: {fileID: 1259794115}
+    - target: {fileID: 114488478674170926, guid: 7dfd14c26069e0a4c96af8f35e8b38c3,
+        type: 2}
+      propertyPath: boySkin
+      value: 
+      objectReference: {fileID: 495756572}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7dfd14c26069e0a4c96af8f35e8b38c3, type: 2}
   m_IsPrefabParent: 0
@@ -12080,7 +12104,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-3522
+  m_Name: pb_Mesh-3516
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -12255,10 +12279,10 @@ MonoBehaviour:
   m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
   m_HorizontalDamping: 0.5
   m_VerticalDamping: 0.5
-  m_ScreenX: 0.4965764
-  m_ScreenY: 0.5446573
-  m_DeadZoneWidth: 0.05342466
-  m_DeadZoneHeight: 0
+  m_ScreenX: 0.5
+  m_ScreenY: 0.5
+  m_DeadZoneWidth: 0.1
+  m_DeadZoneHeight: 0.1
   m_SoftZoneWidth: 0.8
   m_SoftZoneHeight: 0.8
   m_BiasX: 0
@@ -12998,7 +13022,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1530
+  m_Name: pb_Mesh-1528
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2

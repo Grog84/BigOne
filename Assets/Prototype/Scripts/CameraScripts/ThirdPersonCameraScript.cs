@@ -28,7 +28,7 @@ public class ThirdPersonCameraScript : CameraScript {
         clipPointPositionArray = new Vector3[5];
         camTransform = transform;
         cam = this.GetComponent<CinemachineVirtualCamera>();
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         cam.m_Lens.NearClipPlane = nearClipPlaneDistance;
     }
 
@@ -37,20 +37,21 @@ public class ThirdPersonCameraScript : CameraScript {
        
         //Debug.Log(lookAt.gameObject.name);
 
-        if (Input.GetButtonDown("Pause"))
-        {
-            Cursor.lockState = CursorLockMode.None;                     //Riabilita il cursore del mouse premendo ESC
+        //if (Input.GetButtonDown("Pause"))
+        //{
+        //    Cursor.lockState = CursorLockMode.None;                     //Reabilitate the mouse cursor pressing ESC
 
-        }
-        if (Input.GetMouseButtonDown(0))
-        {
-            Cursor.lockState = CursorLockMode.Locked;
+        //}
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Cursor.lockState = CursorLockMode.Locked;
 
-        }
+        //}
 
-        // camera movement and limit of movement
+        // camera movement by axis
         currentX += Input.GetAxis("Mouse X");
         currentY -= Input.GetAxis("Mouse Y");
+        //baunderies of the camera movement
         currentY = Mathf.Clamp(currentY, yAngleMin, yAngelMax);
 
         //camera management of the bound to the player, movement, rotation and look direction
@@ -62,30 +63,31 @@ public class ThirdPersonCameraScript : CameraScript {
         //collision check controll 
         clipPointsPosition(cam.transform.position, cam.transform.rotation, ref clipPointPositionArray);
 
+
+        //Series of Debug controlls 
         //Debug.DrawRay (lookAt.position, clipPointPositionArray [0] - lookAt.position, Color.red);
         //Debug.DrawRay (lookAt.position, clipPointPositionArray [1] - lookAt.position, Color.green);
         //Debug.DrawRay (lookAt.position, clipPointPositionArray [2] - lookAt.position, Color.blue);
         //Debug.DrawRay (lookAt.position, clipPointPositionArray [3] - lookAt.position);
         Debug.DrawRay(lookAt.position, clipPointPositionArray[4] - lookAt.position);
 
+
+        // Camera repositioning on collision
         float finalDist = 100f;
         for (int i = 0; i < clipPointPositionArray.Length; i++)
         {
-
             Ray ray = new Ray(lookAt.position, clipPointPositionArray[i] - lookAt.position);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, maxDistance, layerIgnored))
             {
                 finalDist = Mathf.Min(hit.distance, finalDist);
                 distance = finalDist;
-
             }
             else
             {
                 finalDist = Mathf.Min(maxDistance, finalDist);
                 distance = finalDist;
             }
-
         }
     }
     //method used to populate and update the array containing the coordinates of the clipPonts

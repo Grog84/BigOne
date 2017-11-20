@@ -7,7 +7,6 @@ public class FirstPersonCameraScript : CameraScript {
 
 
  
-    public bool FPSbyTrigger = false;
     CinemachineVirtualCamera myCamera;
     public float yAngleMin = -40.0F;
     public float yAngleMax = 70.0F;
@@ -39,10 +38,12 @@ public class FirstPersonCameraScript : CameraScript {
     {
         if ((int)GMController.instance.isCharacterPlaying == 0)
         {
+            myCamera.m_Priority = 0;
             myFollow = boyLookAtByTag;
         }
         else if ((int)GMController.instance.isCharacterPlaying == 1)
         {
+            myCamera.m_Priority = 0;
             myFollow = motherLookAtByTag;
         }
     }

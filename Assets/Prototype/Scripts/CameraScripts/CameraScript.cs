@@ -7,6 +7,7 @@ using DG.Tweening;
 
 public class CameraScript : MonoBehaviour
 {
+    //references to other virtual cameras
     private GameObject firstPersonCamera;
     private GameObject thirdPersonCamera;
     private CinemachineVirtualCamera firstPersonVirtualCamera;
@@ -14,6 +15,8 @@ public class CameraScript : MonoBehaviour
     private FirstPersonCameraScript firstPersonCameraScript;
     private ThirdPersonCameraScript thirdPersonCameraScript;
 
+
+    // objects of the characters that the camera fades when too close to them
     private Renderer boyJoints;
     private Renderer boySkin;
     private GameObject BJoints;
@@ -28,6 +31,8 @@ public class CameraScript : MonoBehaviour
     [SerializeField]
     protected LayerMask layerIgnored = ~(1 << 8);
 
+    //check if the camera is in a different state from the normal gameplay Camera
+    public bool activatedByTrigger = false;
     //variables initialized at start 
     protected Transform motherLookAt;
     protected Transform boyLookAt;
@@ -36,11 +41,13 @@ public class CameraScript : MonoBehaviour
     protected Transform lookAt;                    // object that the camera is looking at
     protected Transform camTransform;
 
+    //minimum distance of the camera to the character before switching to fps
     public float minCamDistance = 1f;
-    
+
     //camera variables for the position 
     protected float nearClipPlaneDistance = 0.1f;
     protected float distance = 2.5f;
+    //maximum distance from the character
     public float maxDistance = 2.5f;
     // position of the camera assigned in the camera movement
     protected float currentX = 0.0f;
@@ -48,14 +55,15 @@ public class CameraScript : MonoBehaviour
     protected Vector3 dir = new Vector3();
     protected Quaternion rotation = new Quaternion();
 
-
-    public virtual void SwitchLookAt(){}
+    //method used for switching character
+    public virtual void SwitchLookAt() { }
 
     protected void Awake()
     {
-        motherLookAt = GameObject.Find("Mother").GetComponent<Transform>();       
+
+        motherLookAt = GameObject.Find("Mother").GetComponent<Transform>();
         boyLookAt = GameObject.Find("Boy").GetComponent<Transform>();
-        
+
         motherLookAtByTag = motherLookAt.FindDeepChildByTag("LookAtCamera");
         boyLookAtByTag = boyLookAt.FindDeepChildByTag("LookAtCamera");
     }
@@ -81,43 +89,48 @@ public class CameraScript : MonoBehaviour
 
     private void Update()
     {
-        if(thirdPersonVirtualCamera.m_Priority > firstPersonVirtualCamera.m_Priority)
+        //check which camera is active
+        if (thirdPersonVirtualCamera.m_Priority > firstPersonVirtualCamera.m_Priority)
         {
             GMController.instance.activeCamera = (CameraActive)0;
         }
-        else if( firstPersonVirtualCamera.m_Priority > thirdPersonVirtualCamera.m_Priority)
+        else if (firstPersonVirtualCamera.m_Priority > thirdPersonVirtualCamera.m_Priority)
         {
             GMController.instance.activeCamera = (CameraActive)1;
         }
 
-        if (firstPersonCameraScript.FPSbyTrigger == false && thirdPersonCameraScript.distance < minCamDistance) 
+
+        //trigger the switch to fps or tps using the distance of the camera from the player
+        if (activatedByTrigger == false && thirdPersonCameraScript.distance < minCamDistance)
         {
             firstPersonVirtualCamera.m_Priority = 100;
         }
-        else if (firstPersonCameraScript.FPSbyTrigger == false && thirdPersonCameraScript.distance > minCamDistance)
+        else if (activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance)
         {
             firstPersonVirtualCamera.m_Priority = 0;
         }
 
+        // fade of the boy when camera too close
         if (firstPersonVirtualCamera.m_Priority == 100 && (int)GMController.instance.isCharacterPlaying == 0)
         {
             StartCoroutine(SetMaterialTrasparent(boyJoints));
             StartCoroutine(SetMaterialTrasparent(boySkin));
 
         }
-        else if (firstPersonVirtualCamera.m_Priority != 100 && (int)GMController.instance.isCharacterPlaying == 0)
+        else if (firstPersonVirtualCamera.m_Priority != 100 || (int)GMController.instance.isCharacterPlaying != 0)
         {
             StartCoroutine(SetMaterialOpaque(boyJoints));
             StartCoroutine(SetMaterialOpaque(boySkin));
         }
 
+        //fade of the mother if camera too close
         if (firstPersonVirtualCamera.m_Priority == 100 && (int)GMController.instance.isCharacterPlaying == 1)
         {
             StartCoroutine(SetMaterialTrasparent(MotherJoints));
             StartCoroutine(SetMaterialTrasparent(MotherSkin));
 
         }
-        else if (firstPersonVirtualCamera.m_Priority != 100 && (int)GMController.instance.isCharacterPlaying == 1)
+        else if (firstPersonVirtualCamera.m_Priority != 100 || (int)GMController.instance.isCharacterPlaying != 1)
         {
             StartCoroutine(SetMaterialOpaque(MotherJoints));
             StartCoroutine(SetMaterialOpaque(MotherSkin));
@@ -126,6 +139,8 @@ public class CameraScript : MonoBehaviour
 
     }
 
+
+    //method used to start the fade of the material setting it to transparent and manipulating the alpha
     IEnumerator SetMaterialTrasparent(Renderer mat)
     {
         mat.material.SetFloat("_Mode", 2);
@@ -140,6 +155,7 @@ public class CameraScript : MonoBehaviour
         yield return null;
     }
 
+    //method used to revert the fade of the material setting it to opaque and manipulating the alpha
     IEnumerator SetMaterialOpaque(Renderer mat)
     {
         mat.material.DOFade(1, 0.5f);

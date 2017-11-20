@@ -5,12 +5,12 @@ using Cinemachine;
 
 public class FirstPersonCameraTrigger : MonoBehaviour {
 
-    private FirstPersonCameraScript firstPersonCameraScript;
+    private CameraScript mainCamera;
     public CinemachineVirtualCamera firstPersonCamera;
 
     private void Awake()
     {
-        firstPersonCameraScript = firstPersonCamera.GetComponent<FirstPersonCameraScript>();
+        mainCamera = Camera.main.GetComponent<CameraScript>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -18,7 +18,7 @@ public class FirstPersonCameraTrigger : MonoBehaviour {
         if(other.tag == "Player")
         {
             firstPersonCamera.m_Priority = 100;
-            firstPersonCameraScript.FPSbyTrigger = true;
+            mainCamera.activatedByTrigger = true;
         }
     }
 
@@ -27,8 +27,7 @@ public class FirstPersonCameraTrigger : MonoBehaviour {
         if (other.tag == "Player")
         {
             firstPersonCamera.m_Priority = -10;
-            firstPersonCameraScript.FPSbyTrigger = false;
-
+            mainCamera.activatedByTrigger = false;
         }
     }
 }

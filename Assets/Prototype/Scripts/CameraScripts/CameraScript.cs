@@ -14,8 +14,16 @@ public class CameraScript : MonoBehaviour
     private FirstPersonCameraScript firstPersonCameraScript;
     private ThirdPersonCameraScript thirdPersonCameraScript;
 
-    public Renderer boyJoints;
-    public Renderer boySkin;
+    private Renderer boyJoints;
+    private Renderer boySkin;
+    private GameObject BJoints;
+    private GameObject BSkin;
+
+    private Renderer MotherJoints;
+    private Renderer MotherSkin;
+    private GameObject MJoints;
+    private GameObject MSkin;
+
 
     [SerializeField]
     protected LayerMask layerIgnored = ~(1 << 8);
@@ -47,7 +55,7 @@ public class CameraScript : MonoBehaviour
     {
         motherLookAt = GameObject.Find("Mother").GetComponent<Transform>();       
         boyLookAt = GameObject.Find("Boy").GetComponent<Transform>();
-
+        
         motherLookAtByTag = motherLookAt.FindDeepChildByTag("LookAtCamera");
         boyLookAtByTag = boyLookAt.FindDeepChildByTag("LookAtCamera");
     }
@@ -60,9 +68,14 @@ public class CameraScript : MonoBehaviour
         thirdPersonCamera = GameObject.Find("ThirdPersonCamera");
         thirdPersonVirtualCamera = thirdPersonCamera.GetComponent<CinemachineVirtualCamera>();
         thirdPersonCameraScript = thirdPersonCamera.GetComponent<ThirdPersonCameraScript>();
-
-        
-
+        BJoints = GameObject.Find("Alpha_Joints");
+        boyJoints = BJoints.GetComponent<Renderer>();
+        BSkin = GameObject.Find("Alpha_Surface");
+        boySkin = BSkin.GetComponent<Renderer>();
+        MJoints = GameObject.Find("Beta_Joints");
+        MotherJoints = MJoints.GetComponent<Renderer>();
+        MSkin = GameObject.Find("Beta_Surface");
+        MotherSkin = MSkin.GetComponent<Renderer>();
 
     }
 
@@ -77,17 +90,30 @@ public class CameraScript : MonoBehaviour
             firstPersonVirtualCamera.m_Priority = 0;
         }
 
-        if (firstPersonVirtualCamera.m_Priority == 100 )
+        if (firstPersonVirtualCamera.m_Priority == 100 && (int)GMController.instance.isCharacterPlaying == 0)
         {
             StartCoroutine(SetMaterialTrasparent(boyJoints));
             StartCoroutine(SetMaterialTrasparent(boySkin));
 
         }
-        else if (firstPersonVirtualCamera.m_Priority != 100 )
+        else if (firstPersonVirtualCamera.m_Priority != 100 && (int)GMController.instance.isCharacterPlaying == 0)
         {
             StartCoroutine(SetMaterialOpaque(boyJoints));
             StartCoroutine(SetMaterialOpaque(boySkin));
         }
+
+        if (firstPersonVirtualCamera.m_Priority == 100 && (int)GMController.instance.isCharacterPlaying == 1)
+        {
+            StartCoroutine(SetMaterialTrasparent(MotherJoints));
+            StartCoroutine(SetMaterialTrasparent(MotherSkin));
+
+        }
+        else if (firstPersonVirtualCamera.m_Priority != 100 && (int)GMController.instance.isCharacterPlaying == 1)
+        {
+            StartCoroutine(SetMaterialOpaque(MotherJoints));
+            StartCoroutine(SetMaterialOpaque(MotherSkin));
+        }
+
 
     }
 

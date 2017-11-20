@@ -9,7 +9,6 @@ public class BTDMMaker : MonoBehaviour {
     public BehaviourTreeDM behaviourTree;
     public GameObject rootTask;
 
-
     private void BuildTree(GameObject thisToolTask, Task thisTask)
     {
 
@@ -24,11 +23,12 @@ public class BTDMMaker : MonoBehaviour {
                 if (tr.gameObject.tag == "ToolSequence")
                 {
                     task = new Sequence();
-
+                    task.m_BehaviourTree = behaviourTree;
                 }
                 else if (tr.gameObject.tag == "ToolSelector")
                 {
                     task = new Selector();
+                    task.m_BehaviourTree = behaviourTree;
                 }
                 else
                 {
@@ -45,18 +45,19 @@ public class BTDMMaker : MonoBehaviour {
 
     }
 
-
     private void AssignRoot()
     {
         if (rootTask.tag == "ToolSequence")
         {
             Sequence sequenceTask = new Sequence();
+            sequenceTask.m_BehaviourTree = behaviourTree;
             behaviourTree.AssignRootTask(sequenceTask);
 
         }
         else if (rootTask.tag == "ToolSelector")
         {
             Selector selectorTask = new Selector();
+            selectorTask.m_BehaviourTree = behaviourTree;
             behaviourTree.AssignRootTask(selectorTask);
         }
         else

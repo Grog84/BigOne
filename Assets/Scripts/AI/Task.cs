@@ -8,8 +8,7 @@ namespace AI.BT
 
     public abstract class Task
     {
-        //public Agent m_Agent;
-        //public BTDM btdm; // for blackboard access
+        public BehaviourTreeDM m_BehaviourTree;
 
         public abstract TaskState Run();
     }

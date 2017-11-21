@@ -290,6 +290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   behaviourTree: {fileID: 11400000, guid: 4ebf4f8ac1f5e464483463cf809c39d4, type: 2}
   rootTask: {fileID: 1555054742}
+  thisAgentType: 0
 --- !u!1 &445158801
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,6 +563,11 @@ Prefab:
     - target: {fileID: 4156248832233846, guid: 13408856a0ca72d4ab7f58ac9c394a83, type: 2}
       propertyPath: m_LocalScale.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114699345688293464, guid: 13408856a0ca72d4ab7f58ac9c394a83,
+        type: 2}
+      propertyPath: taskType
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 13408856a0ca72d4ab7f58ac9c394a83, type: 2}

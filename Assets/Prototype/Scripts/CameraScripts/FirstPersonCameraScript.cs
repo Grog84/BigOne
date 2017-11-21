@@ -37,12 +37,12 @@ public class FirstPersonCameraScript : CameraScript {
     {
         if ((int)GMController.instance.isCharacterPlaying == 0)
         {
-            myCamera.m_Priority = 0;
+            StartCoroutine(ResetCameraPriority());
             myFollow = boyLookAtByTag;
         }
         else if ((int)GMController.instance.isCharacterPlaying == 1)
         {
-            myCamera.m_Priority = 0;
+            StartCoroutine(ResetCameraPriority());
             myFollow = motherLookAtByTag;
         }
     }

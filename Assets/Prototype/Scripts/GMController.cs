@@ -21,10 +21,11 @@ public class GMController : MonoBehaviour {
     // Guards perception system variables
     [HideInInspector] public Vector3 lastSeenPlayerPosition = new Vector3(1000f, 1000f, 1000f);
     [HideInInspector] public Vector3 lastHeardPlayerPosition = new Vector3(1000f, 1000f, 1000f);
+    [HideInInspector] public Vector3 lastPercievedPlayerPosition = new Vector3(1000f, 1000f, 1000f);
     static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
 
     // Counter of alarmed guards
-    [HideInInspector] public int suspiciousGuards = 0, alarmedGuards = 0;
+    [HideInInspector] public int curiousGuards = 0, alarmedGuards = 0;
 
     // Transform of all the agents who could hear or see the player
     [HideInInspector] public Transform[] allEnemiesTransform;
@@ -105,6 +106,11 @@ public class GMController : MonoBehaviour {
         m_MainCamera[1] = GameObject.Find("FirstPersonCamera").GetComponent<FirstPersonCameraScript>();
         
         SaveCheckpoint();
+    }
+
+    public void UpdatePlayerPosition()
+    {
+        lastPercievedPlayerPosition = players[(int)isCharacterPlaying].transform.position;
     }
 
     public void ResetPlayerLastSeenPosition()

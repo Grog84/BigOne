@@ -19,7 +19,7 @@ namespace AI.Actions
             if (!controller.m_AgentController.isSuspicious && !controller.m_AgentController.isAlarmed)
             {
                 controller.m_AgentController.isSuspicious = true;
-                GMController.instance.suspiciousGuards += 1;
+                GMController.instance.curiousGuards += 1;
             }
         }
     }

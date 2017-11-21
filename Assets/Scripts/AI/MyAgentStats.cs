@@ -11,13 +11,4 @@ public class MyAgentStats : ScriptableObject {
     public float acceleration = 10f;
     public float stoppingDistance = 2f;
 
-    [Space(10)]
-    [Header("Perception Parameters")]
-    public float fillingSpeed = 100.0f;
-    public float torsoMultiplier = 10.0f;
-    public float noSeeMultiplier = 0.3f;
-    [Space(10)]
-    public float localSearchRange = 10f;
-    public float localSearchTime = 10f;
-
 }

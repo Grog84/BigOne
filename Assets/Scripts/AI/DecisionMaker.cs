@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class DecisionMaker : MonoBehaviour
+namespace AI
 {
-    public abstract void MakeDecision();
+    public abstract class DecisionMaker : ScriptableObject
+    {
+        public Blackboard m_Blackboard;
+
+        public abstract void MakeDecision();
+    }
 }

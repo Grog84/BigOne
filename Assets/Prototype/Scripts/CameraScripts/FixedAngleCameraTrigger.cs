@@ -20,24 +20,69 @@ public class FixedAngleCameraTrigger : MonoBehaviour {
         fixedAngleCamera = GetComponentInChildren<CinemachineVirtualCamera>();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Player")
-        {
-            fixedAngleCamera.m_Priority = priorityAmmount;
-            fixedAngleCamera.m_LookAt = other.transform;
-            mainCamera.activatedByTrigger = true;
-        }
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if(other.tag == "Player")
+    //    {
+    //        fixedAngleCamera.m_Priority = priorityAmmount;
+    //        fixedAngleCamera.m_LookAt = other.transform;
+    //        mainCamera.activatedByTrigger = true;
+    //    }
 
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.tag == "Player")
+    //    {
+    //        fixedAngleCamera.m_Priority = -10;
+    //        mainCamera.activatedByTrigger = false;
+    //        fixedAngleCamera.m_LookAt = null;
+    //    }
+    //}
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            if (other.name == "Boy" && (int)GMController.instance.isCharacterPlaying == 0)
+            {
+                fixedAngleCamera.m_Priority = priorityAmmount;
+                mainCamera.activatedByTrigger = true;
+                fixedAngleCamera.m_LookAt = other.transform;
+                //mainCamera.boyInTrigger = true;
+            }
+            else if (other.name == "Mother" && (int)GMController.instance.isCharacterPlaying == 1)
+            {
+                fixedAngleCamera.m_Priority = priorityAmmount;
+                mainCamera.activatedByTrigger = true;
+                fixedAngleCamera.m_LookAt = other.transform;
+                //mainCamera.motherInTrigger = true;
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Player")
         {
-            fixedAngleCamera.m_Priority = -10;
-            mainCamera.activatedByTrigger = false;
-            fixedAngleCamera.m_LookAt = null;
+            if (other.name == "Boy" && (int)GMController.instance.isCharacterPlaying == 0)
+            {
+                fixedAngleCamera.m_Priority = 0;
+                mainCamera.activatedByTrigger = false;
+                mainCamera.boyInTrigger = false;
+                fixedAngleCamera.m_LookAt = null;
+            }
+            else if (other.name == "Mother" && (int)GMController.instance.isCharacterPlaying == 1)
+            {
+                fixedAngleCamera.m_Priority = 0;
+                mainCamera.activatedByTrigger = false;
+                mainCamera.motherInTrigger = false;
+                fixedAngleCamera.m_LookAt = null;
+            }
         }
     }
+
+
+
 }

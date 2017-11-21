@@ -34,7 +34,7 @@ public class ThirdPersonCameraScript : CameraScript {
 
     private void Update()
     {
-       
+        //cam.m_Priority = 15;
         //Debug.Log(lookAt.gameObject.name);
 
         //if (Input.GetButtonDown("Pause"))
@@ -117,10 +117,12 @@ public class ThirdPersonCameraScript : CameraScript {
     {
         if ((int)GMController.instance.isCharacterPlaying == 0)
         {
+            StartCoroutine(ResetCameraPriority());
             lookAt = boyLookAtByTag;
         }
         else if ((int)GMController.instance.isCharacterPlaying == 1)
         {
+            StartCoroutine(ResetCameraPriority());
             lookAt = motherLookAtByTag;
         }
     }

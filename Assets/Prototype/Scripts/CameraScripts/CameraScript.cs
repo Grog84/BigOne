@@ -30,7 +30,8 @@ public class CameraScript : MonoBehaviour
     private GameObject MJoints;
     private GameObject MSkin;
 
-
+    //Array of cameras used to reset the priority to default on swtich
+    protected CinemachineVirtualCamera[] camerasInScene;
     [SerializeField]
     protected LayerMask layerIgnored = ~(1 << 8);
 
@@ -63,7 +64,7 @@ public class CameraScript : MonoBehaviour
 
     protected void Awake()
     {
-
+        camerasInScene = FindObjectsOfType<CinemachineVirtualCamera>();
         motherLookAt = GameObject.Find("Mother").GetComponent<Transform>();
         boyLookAt = GameObject.Find("Boy").GetComponent<Transform>();
 
@@ -102,7 +103,7 @@ public class CameraScript : MonoBehaviour
             GMController.instance.activeCamera = (CameraActive)1;
         }
 
-
+        #region Fade
         //trigger the switch to fps or tps using the distance of the camera from the player
         if (activatedByTrigger == false && thirdPersonCameraScript.distance < minCamDistance)
         {
@@ -114,30 +115,38 @@ public class CameraScript : MonoBehaviour
         }
 
         // fade of the boy when camera too close
-        if (firstPersonVirtualCamera.m_Priority == 100 && ((int)GMController.instance.isCharacterPlaying == 0 && boyInTrigger == true))
+        if (firstPersonVirtualCamera.m_Priority == 100 && ((int)GMController.instance.isCharacterPlaying == 0 && boyInTrigger == true) 
+            || firstPersonVirtualCamera.m_Priority == 100 && activatedByTrigger == false && thirdPersonCameraScript.distance < minCamDistance)
         {
             StartCoroutine(SetMaterialTrasparent(boyJoints));
             StartCoroutine(SetMaterialTrasparent(boySkin));
 
         }
-        else if (firstPersonVirtualCamera.m_Priority != 100 || (int)GMController.instance.isCharacterPlaying != 0)
+        else if (firstPersonVirtualCamera.m_Priority != 100 || (int)GMController.instance.isCharacterPlaying != 0
+            || firstPersonVirtualCamera.m_Priority != 100 && activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance)
         {
             StartCoroutine(SetMaterialOpaque(boyJoints));
             StartCoroutine(SetMaterialOpaque(boySkin));
         }
 
         //fade of the mother if camera too close
-        if (firstPersonVirtualCamera.m_Priority == 100 && ((int)GMController.instance.isCharacterPlaying == 1 && motherInTrigger == true))
+        if (firstPersonVirtualCamera.m_Priority == 100 && ((int)GMController.instance.isCharacterPlaying == 1 && motherInTrigger == true)
+            || firstPersonVirtualCamera.m_Priority == 100 && activatedByTrigger == false && thirdPersonCameraScript.distance < minCamDistance)
         {
             StartCoroutine(SetMaterialTrasparent(MotherJoints));
             StartCoroutine(SetMaterialTrasparent(MotherSkin));
 
         }
-        else if (firstPersonVirtualCamera.m_Priority != 100 || (int)GMController.instance.isCharacterPlaying != 1)
+        else if (firstPersonVirtualCamera.m_Priority != 100 || (int)GMController.instance.isCharacterPlaying != 1
+             || firstPersonVirtualCamera.m_Priority != 100 && activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance)
         {
             StartCoroutine(SetMaterialOpaque(MotherJoints));
             StartCoroutine(SetMaterialOpaque(MotherSkin));
         }
+#endregion
+
+
+
 
 
     }
@@ -154,7 +163,7 @@ public class CameraScript : MonoBehaviour
         mat.material.EnableKeyword("_ALPHABLEND_ON");
         mat.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
         mat.material.renderQueue = 3000;
-        mat.material.DOFade(0, 0.5f);
+        mat.material.DOFade(0, 0.3f);
         yield return null;
     }
 
@@ -162,7 +171,7 @@ public class CameraScript : MonoBehaviour
     IEnumerator SetMaterialOpaque(Renderer mat)
     {
         mat.material.DOFade(1, 0.5f);
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSecondsRealtime(0.1f);
 
         mat.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
         mat.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
@@ -171,6 +180,19 @@ public class CameraScript : MonoBehaviour
         mat.material.DisableKeyword("_ALPHABLEND_ON");
         mat.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
         mat.material.renderQueue = -1;
+        yield return null;
+    }
+
+
+    protected IEnumerator ResetCameraPriority()
+    {
+        for (int c = 0; c < camerasInScene.Length; c++)
+        {
+            if(camerasInScene[c].gameObject.name != "ThirdPersonCamera")
+            {
+                camerasInScene[c].m_Priority = 0;
+            }
+        }
         yield return null;
     }
 

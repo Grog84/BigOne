@@ -27,19 +27,17 @@ public class BTDMMaker : MonoBehaviour {
                 if (tr.gameObject.tag == "ToolSequence")
                 {
                     task = new Sequence();
-                    task.m_BehaviourTree = behaviourTree;
                 }
                 else if (tr.gameObject.tag == "ToolSelector")
                 {
                     task = new Selector();
-                    task.m_BehaviourTree = behaviourTree;
                 }
                 else
                 {
-                    Debug.Log("There's gonna be a real task");
+                    task = tr.GetComponent<TaskTool>().GetTask();
                 }
 
-
+                task.m_BehaviourTree = behaviourTree;
                 parentTask.children.Add(task);
                 BuildTree(tr.gameObject, task);
 

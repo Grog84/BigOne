@@ -7,6 +7,7 @@ namespace AI
     public class GuardBlackboard : Blackboard
     {
         GuardState guardState = GuardState.NORMAL;
+        bool isPlayerInSight = false;
 
         public override int GetIntValue(string valueName)
         {
@@ -23,6 +24,25 @@ namespace AI
             if (valueName == "GuardState")
             {
                 guardState = (GuardState)value;
+            }
+
+        }
+
+        public override bool GetBoolValue(string valueName)
+        {
+            if (valueName == "PlayerInSight")
+            {
+                return isPlayerInSight;
+            }
+
+            return false;
+        }
+
+        public override void SetBoolValue(string valueName, bool value)
+        {
+            if (valueName == "PlayerInSight")
+            {
+                isPlayerInSight = value;
             }
 
         }

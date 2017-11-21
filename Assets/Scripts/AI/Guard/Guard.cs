@@ -91,6 +91,32 @@ namespace AI
             LoadStats(distractedStats);
         }
 
+        public void SetPlayerInSight()
+        {
+            isPlayerInSight = true;
+            m_Blackboard.SetBoolValue("PlayerInSight", true);
+        }
+
+        public void SetPlayerOutOfSight()
+        {
+            isPlayerInSight = false;
+            StartCoroutine(OutOfSightHysteresis());
+        }
+
+        IEnumerator OutOfSightHysteresis()
+        {
+            float timer = 0f;
+            while (timer < stats.outOfSightHysteresis)
+            {
+                timer += Time.deltaTime;
+                yield return null;
+                if (isPlayerInSight)
+                    yield break;
+            }
+
+            m_Blackboard.SetBoolValue("PlayerInSight", false);
+        }
+
         private void LoadStats(GuardStats thisStats)
         {
             stats = thisStats;

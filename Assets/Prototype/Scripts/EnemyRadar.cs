@@ -40,9 +40,9 @@ public class EnemyRadar : MonoBehaviour
 
     private void Update()
     {
-
+        Debug.Log((oldDir - dir).sqrMagnitude);
          UpdateDir();
-        if ((oldDir - dir).sqrMagnitude > 0.2f)
+        if ((oldDir - dir).sqrMagnitude > 0.005f)
         {
             oldDir = dir;
 

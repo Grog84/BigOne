@@ -14,6 +14,7 @@ public class EnemyClose : MonoBehaviour
             pos -= 0.2f;
             var thisPointer = Instantiate(enemyPointer, transform.parent);
             thisPointer.GetComponent<EnemyRadar>().target = other.gameObject;
+            thisPointer.GetComponent<EnemyRadar>().pos = pos;
         }
     }
 

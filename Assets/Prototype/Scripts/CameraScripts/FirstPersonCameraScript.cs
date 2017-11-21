@@ -6,7 +6,6 @@ using Cinemachine;
 public class FirstPersonCameraScript : CameraScript {
 
 
- 
     CinemachineVirtualCamera myCamera;
     public float yAngleMin = -40.0F;
     public float yAngleMax = 70.0F;

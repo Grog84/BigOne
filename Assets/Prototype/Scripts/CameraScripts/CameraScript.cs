@@ -15,6 +15,9 @@ public class CameraScript : MonoBehaviour
     private FirstPersonCameraScript firstPersonCameraScript;
     private ThirdPersonCameraScript thirdPersonCameraScript;
 
+    //check wich character is in trigger
+    public bool motherInTrigger = false;
+    public bool boyInTrigger = false;
 
     // objects of the characters that the camera fades when too close to them
     private Renderer boyJoints;
@@ -111,7 +114,7 @@ public class CameraScript : MonoBehaviour
         }
 
         // fade of the boy when camera too close
-        if (firstPersonVirtualCamera.m_Priority == 100 && (int)GMController.instance.isCharacterPlaying == 0)
+        if (firstPersonVirtualCamera.m_Priority == 100 && ((int)GMController.instance.isCharacterPlaying == 0 && boyInTrigger == true))
         {
             StartCoroutine(SetMaterialTrasparent(boyJoints));
             StartCoroutine(SetMaterialTrasparent(boySkin));
@@ -124,7 +127,7 @@ public class CameraScript : MonoBehaviour
         }
 
         //fade of the mother if camera too close
-        if (firstPersonVirtualCamera.m_Priority == 100 && (int)GMController.instance.isCharacterPlaying == 1)
+        if (firstPersonVirtualCamera.m_Priority == 100 && ((int)GMController.instance.isCharacterPlaying == 1 && motherInTrigger == true))
         {
             StartCoroutine(SetMaterialTrasparent(MotherJoints));
             StartCoroutine(SetMaterialTrasparent(MotherSkin));

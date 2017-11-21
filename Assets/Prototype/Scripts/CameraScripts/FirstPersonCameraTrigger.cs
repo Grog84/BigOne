@@ -13,12 +13,22 @@ public class FirstPersonCameraTrigger : MonoBehaviour {
         mainCamera = Camera.main.GetComponent<CameraScript>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if(other.tag == "Player")
         {
-            firstPersonCamera.m_Priority = 100;
-            mainCamera.activatedByTrigger = true;
+            if(other.name == "Boy" && (int)GMController.instance.isCharacterPlaying == 0)
+            {
+                firstPersonCamera.m_Priority = 100;
+                mainCamera.activatedByTrigger = true;
+                mainCamera.boyInTrigger = true;
+            }
+            else if (other.name == "Mother" && (int)GMController.instance.isCharacterPlaying == 1)
+            {
+                firstPersonCamera.m_Priority = 100;
+                mainCamera.activatedByTrigger = true;
+                mainCamera.motherInTrigger = true;
+            }
         }
     }
 
@@ -26,8 +36,18 @@ public class FirstPersonCameraTrigger : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            firstPersonCamera.m_Priority = -10;
-            mainCamera.activatedByTrigger = false;
+            if (other.name == "Boy" && (int)GMController.instance.isCharacterPlaying == 0)
+            {
+                firstPersonCamera.m_Priority = 0;
+                mainCamera.activatedByTrigger = false;
+                mainCamera.boyInTrigger = false;
+            }
+            else if (other.name == "Mother" && (int)GMController.instance.isCharacterPlaying == 1)
+            {
+                firstPersonCamera.m_Priority = 0;
+                mainCamera.activatedByTrigger = false;
+                mainCamera.motherInTrigger = false;
+            }
         }
     }
 }

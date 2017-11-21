@@ -7,7 +7,6 @@ public class AT_SalvaTutto : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
       
-      //  Debug.Log("Found " + Prova.Length + " element");
 	}
     private void Awake()
     {

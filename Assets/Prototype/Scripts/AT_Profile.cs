@@ -1,17 +1,13 @@
-﻿using System.Collections;
+﻿using UnityEngine.SceneManagement;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-public class AT_Profile 
+[CreateAssetMenu(menuName = "Prototype/ProfileStats")]
+public class AT_Profile : ScriptableObject
 {
     public string idProfile;
-    public bool[] completedLevel;
+    [SerializeField] public bool[] completedLevel;
     public int currentLevelIndex;
-
-    public AT_Profile(string _idProfile)
-    {
-        idProfile = _idProfile;
-
-    }
+ 
 }

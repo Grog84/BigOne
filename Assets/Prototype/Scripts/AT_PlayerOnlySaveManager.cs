@@ -40,7 +40,7 @@ public class AT_PlayerOnlySaveManager : AT_ProvaSalvataggio
     {
         if (collision.gameObject.tag == "Checkpoint")
         {
-            ScreenCapture.CaptureScreenshot("Assets/Prototype/Images/ScreenCheckPoint.png");
+         //   ScreenCapture.CaptureScreenshot("Assets/Prototype/Images/ScreenCheckPoint.png");
             Debug.Log("Saved checkpoint at x: " + collision.transform.position.x + " y: " + collision.transform.position.y + " z: " + collision.transform.position.z);
             SaveData();
         }

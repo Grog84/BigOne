@@ -6,110 +6,94 @@ using UnityEngine.UI;
 
 
 
-public class AT_LoadSceneASync : MonoBehaviour {
-   
+public class AT_LoadSceneASync : MonoBehaviour
+{
+
+    public AT_Profile Profiler;
+
     AsyncOperation ao;
 
     public int _index;
-
     public Text TextBox;
 
     public RectTransform me;
+    public Button LastSceneButton;
+    [SerializeField] public Button[] ButtonStatus;
 
-    [SerializeField] public Button[] SceneStatus;
-  
+    private void Awake()
+    {
+        if (Profiler != null)
+        {
+            Profiler.completedLevel = new bool[SceneManager.sceneCountInBuildSettings-1];
+            for (int i = 0; i < Profiler.completedLevel.Length; i++)
+            {
+                if (i < Profiler.currentLevelIndex)
+                {
+                    Profiler.completedLevel[i] = true;
+                }
+                else
+                {
+                    Profiler.completedLevel[i] = false;
+                }
+            }
+          
+            for (int i = 0; i < Profiler.completedLevel.Length; i++)
+            {
+                if(Profiler.completedLevel[i]==true)
+                {
+                    ButtonStatus[i].interactable = true;
+                }
+                else
+                {
+                    ButtonStatus[i].interactable = false;
+                }
+            }
+        }
+    }
     private void Start()
     {
-        InizializeLevelButton();
-     
+        LastSceneButton.transform.GetChild(0).GetComponent<Text>().text = "Load last Scene Saved : " + Profiler.currentLevelIndex;
     }
     //   public Image yourNameHere;
     public void StartLoad(int index)
     {
+
+        for (int i = 0; i < ButtonStatus.Length; i++)
+        {
+            ButtonStatus[i].interactable = false;
+        }
         _index = index;
-        StartCoroutine(AsynchronousLoad(index));
+        StartCoroutine(AsynchronousLoad(_index));
         TextBox.text = "Caricamento in corso";
         StartCoroutine(LoadingText());
     }
-     
+
+    public void LoadLastScene()
+    {
+        StartCoroutine(AsynchronousLoad(Profiler.currentLevelIndex));
+        TextBox.text = "Caricamento in corso";
+        StartCoroutine(LoadingText());
+
+    }
     public void PressMe()
     {
-   
+
         me.position = new Vector3(Random.Range(0f, 410.0f), Random.Range(0f, 150.0f));
 
     }
 
     public void OnApplicationQuit()
     {
-       // SceneManager.UnloadSceneAsync(_index);
-    }
-     
-    public void InizializeLevelButton()
-    {   Dropdown ProfileDropDown = GameObject.FindObjectOfType<Dropdown>();
-        bool[] temp;
-        //Check the Dropdown current Profile Loaded
-        temp=SetCondition(ProfileDropDown.value);
-        //on every Profile there are several check on current / completed Levels
-        for (int i = 0; i < temp.Length; i++)
-        {
-           if(temp[i])
+        if (ao != null)
+            if (!ao.isDone)
             {
-                SceneStatus[i].gameObject.SetActive(true);
+                SceneManager.UnloadSceneAsync(_index);
             }
-           else
-            {
-                SceneStatus[i].gameObject.SetActive(false);
-            }
-        }
-
-        //And inizialize all button based on those info;
-
-    }
-   
-    private bool[] SetCondition(int value)
-    {//Don't care about this...
-          
-        switch (value)
-        {
-            case 0:
-                return new bool[] { true, true, false, false };
-               
-            case 1:
-                return  new bool[] { true, false, false, false };
-           
-            case 2:
-                return  new bool[] { true, true, true, true };
-            default:
-                return new bool[] { false, false, false, false };
-               
-
-        }
-  
-    }
-
-   IEnumerator AsynchronousLoad(string scene)
-    {
-     //   yield return null;
-
-      ao= SceneManager.LoadSceneAsync(scene,LoadSceneMode.Single);
-        ao.allowSceneActivation = false;
-        ao.allowSceneActivation = false;
-        while (!ao.isDone)
-        {
-            Debug.Log("State: " + ao.isDone + " Allowed: " + ao.allowSceneActivation);
-            // Loading completed
-            if (ao.progress == 0.9f)
-            {            
-                    ao.allowSceneActivation = true;
-            }
-
-            yield return null;
-        }
     }
 
     IEnumerator AsynchronousLoad(int index)
     {
-        //   yield return null;
+        yield return null;
 
         ao = SceneManager.LoadSceneAsync(index, LoadSceneMode.Single);
         ao.allowSceneActivation = false;
@@ -136,7 +120,7 @@ public class AT_LoadSceneASync : MonoBehaviour {
             {
                 case "Caricamento in corso":
                     TextBox.text = "Caricamento in corso.";
-                    yield return new WaitForSecondsRealtime(00.5f) ;
+                    yield return new WaitForSecondsRealtime(00.5f);
                     break;
                 case "Caricamento in corso.":
                     TextBox.text = "Caricamento in corso..";
@@ -144,10 +128,10 @@ public class AT_LoadSceneASync : MonoBehaviour {
                     break;
                 case "Caricamento in corso..":
                     TextBox.text = "Caricamento in corso...";
-                    yield return new WaitForSecondsRealtime(00.5f) ;
+                    yield return new WaitForSecondsRealtime(00.5f);
                     break;
                 case "Caricamento in corso...":
-                    TextBox.text = "Caricamento in corso";
+                    TextBox.text = "Caricamento in corso \n Non chiudere il gioco";
                     yield return new WaitForSecondsRealtime(00.5f);
                     break;
 
@@ -156,6 +140,34 @@ public class AT_LoadSceneASync : MonoBehaviour {
         yield return null;
 
     }
+
+    #region Codice Da Trasferire
+
+    //public static void SetLastScene(out int index, out string sceneName)
+    //{
+    //    List<string> ignoreSceneName = new List<string> { "LG_MenuStart", "LG_Pause_Canvas" };
+    //    bool checkIfNotMenuScene = true;
+    //    for (int i = 0; i < ignoreSceneName.Count; i++)
+    //    {
+    //        if (SceneManager.GetActiveScene().name == ignoreSceneName[i])
+    //        {
+    //            checkIfNotMenuScene = false;
+    //        }
+    //    }    
+    //    if (checkIfNotMenuScene)
+    //    {
+    //        index = SceneManager.GetActiveScene().buildIndex;
+    //        sceneName = SceneManager.GetActiveScene().name;
+    //    }
+    //    else
+    //    {
+    //        index = 0;
+    //        sceneName = "";
+    //    }
+    //}
+
+    #endregion
+
 
     #region FadeButton
     //public void FadeOut()
@@ -206,5 +218,5 @@ public class AT_LoadSceneASync : MonoBehaviour {
     //    }
     //    }
     //}
-#endregion
+    #endregion
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor.SceneManagement;
 
 [CreateAssetMenu(menuName = "Tools/MapToolConfig")]
+[System.Serializable]
 public class MapToolConfig : ScriptableObject
 {
     [SerializeField]

@@ -18,4 +18,8 @@ public class MapTool : MonoBehaviour
         EditorSceneManager.RestoreSceneManagerSetup(myConfigFile.sceneSetup);
     }
 
+    void OnApplicationQuit()
+    {
+        myConfigFile = null;
+    }
 }

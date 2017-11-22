@@ -5,10 +5,10 @@ using UnityEngine;
 namespace AI.BT
 {
     [CreateAssetMenu(menuName = "AI/BTDM")]
-
+    [System.Serializable]
     public class BehaviourTreeDM : DecisionMaker
     {
-
+        [SerializeField]
         public Task rootTask;
 
         public void AssignRootTask(Task rTask)

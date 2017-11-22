@@ -102,12 +102,11 @@ public class BTDMMaker : MonoBehaviour {
         }
     }
 
-    void Start () {
-
+    public void SaveTree()
+    {
         AssignRoot();
         AssignBlackboard();
         BuildTree(rootTask, behaviourTree.rootTask);
-        Debug.Log("Done Talking");
     }
 
     private void Update()

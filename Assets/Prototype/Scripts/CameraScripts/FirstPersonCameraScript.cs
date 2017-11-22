@@ -11,9 +11,14 @@ public class FirstPersonCameraScript : CameraScript {
     public float yAngleMax = 70.0F;
     private Transform myTransform;
     private Transform myFollow;
+    private CameraScript mainCam;
    
     private void Start()
     {
+        mainCam = Camera.main.GetComponent<CameraScript>();
+        this.minCamDistance = mainCam.minCamDistance;
+        this.maxDistance = mainCam.maxDistance;
+      
         myTransform = GetComponent<Transform>();
         myCamera = GetComponent<CinemachineVirtualCamera>();
         SwitchLookAt();
@@ -22,7 +27,6 @@ public class FirstPersonCameraScript : CameraScript {
     private void Update()
     {
         myTransform.position = myFollow.position;
-      
 
         // camera movement and limit of movement
         currentX += Input.GetAxis("Mouse X");

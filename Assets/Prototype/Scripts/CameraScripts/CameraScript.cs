@@ -16,8 +16,8 @@ public class CameraScript : MonoBehaviour
     private ThirdPersonCameraScript thirdPersonCameraScript;
 
     //check wich character is in trigger
-    public bool motherInTrigger = false;
-    public bool boyInTrigger = false;
+    [HideInInspector]public bool motherInTrigger = false;
+    [HideInInspector]public bool boyInTrigger = false;
 
     // objects of the characters that the camera fades when too close to them
     private Renderer boyJoints;
@@ -36,7 +36,7 @@ public class CameraScript : MonoBehaviour
     protected LayerMask layerIgnored = ~(1 << 8);
 
     //check if the camera is in a different state from the normal gameplay Camera
-    public bool activatedByTrigger = false;
+    [HideInInspector]public bool activatedByTrigger = false;
     //variables initialized at start 
     protected Transform motherLookAt;
     protected Transform boyLookAt;
@@ -46,6 +46,7 @@ public class CameraScript : MonoBehaviour
     protected Transform camTransform;
 
     //minimum distance of the camera to the character before switching to fps
+    [Tooltip("distanza alla quale la telecamera passa in prima persona")]
     public float minCamDistance = 1f;
 
     //camera variables for the position 

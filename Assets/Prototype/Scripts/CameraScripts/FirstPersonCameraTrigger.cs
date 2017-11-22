@@ -6,11 +6,12 @@ using Cinemachine;
 public class FirstPersonCameraTrigger : MonoBehaviour {
 
     private CameraScript mainCamera;
-    public CinemachineVirtualCamera firstPersonCamera;
+    private CinemachineVirtualCamera firstPersonCamera;
 
     private void Awake()
     {
         mainCamera = Camera.main.GetComponent<CameraScript>();
+        firstPersonCamera = GameObject.Find("FirstPersonCamera").GetComponent<CinemachineVirtualCamera>();
     }
 
     private void OnTriggerStay(Collider other)

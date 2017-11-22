@@ -11,6 +11,7 @@ public class ThirdPersonCameraScript : CameraScript {
     protected float yAngleMin = -40.0F;
     protected float yAngelMax = 70.0F;
     protected CinemachineVirtualCamera cam;
+    private CameraScript mainCam;
 
 
     //Variable for the offset of the raycast that check the collisions of the camera
@@ -22,7 +23,11 @@ public class ThirdPersonCameraScript : CameraScript {
   
     private void Start()
     {
+        mainCam = Camera.main.GetComponent<CameraScript>();
+        this.minCamDistance = mainCam.minCamDistance;
+        this.maxDistance = mainCam.maxDistance;
 
+       
         SwitchLookAt();
 
         clipPointPositionArray = new Vector3[5];

@@ -116,14 +116,15 @@ public class CameraScript : MonoBehaviour
 
         // fade of the boy when camera too close
         if (firstPersonVirtualCamera.m_Priority == 100 && ((int)GMController.instance.isCharacterPlaying == 0 && boyInTrigger == true) 
-            || firstPersonVirtualCamera.m_Priority == 100 && activatedByTrigger == false && thirdPersonCameraScript.distance < minCamDistance)
+            || firstPersonVirtualCamera.m_Priority == 100 && activatedByTrigger == false && thirdPersonCameraScript.distance < minCamDistance && (int)GMController.instance.isCharacterPlaying == 0)
+
         {
             StartCoroutine(SetMaterialTrasparent(boyJoints));
             StartCoroutine(SetMaterialTrasparent(boySkin));
 
         }
         else if (firstPersonVirtualCamera.m_Priority != 100 || (int)GMController.instance.isCharacterPlaying != 0
-            || firstPersonVirtualCamera.m_Priority != 100 && activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance)
+            || firstPersonVirtualCamera.m_Priority != 100 && activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance )
         {
             StartCoroutine(SetMaterialOpaque(boyJoints));
             StartCoroutine(SetMaterialOpaque(boySkin));
@@ -131,14 +132,14 @@ public class CameraScript : MonoBehaviour
 
         //fade of the mother if camera too close
         if (firstPersonVirtualCamera.m_Priority == 100 && ((int)GMController.instance.isCharacterPlaying == 1 && motherInTrigger == true)
-            || firstPersonVirtualCamera.m_Priority == 100 && activatedByTrigger == false && thirdPersonCameraScript.distance < minCamDistance)
+            || firstPersonVirtualCamera.m_Priority == 100 && activatedByTrigger == false && thirdPersonCameraScript.distance < minCamDistance && (int)GMController.instance.isCharacterPlaying == 1)
         {
             StartCoroutine(SetMaterialTrasparent(MotherJoints));
             StartCoroutine(SetMaterialTrasparent(MotherSkin));
 
         }
         else if (firstPersonVirtualCamera.m_Priority != 100 || (int)GMController.instance.isCharacterPlaying != 1
-             || firstPersonVirtualCamera.m_Priority != 100 && activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance)
+             || firstPersonVirtualCamera.m_Priority != 100 && activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance )
         {
             StartCoroutine(SetMaterialOpaque(MotherJoints));
             StartCoroutine(SetMaterialOpaque(MotherSkin));

@@ -13,6 +13,10 @@ public class BTDMMaker : MonoBehaviour {
     public enum AgentType { GUARD }
     public AgentType thisAgentType = AgentType.GUARD;
 
+    public GameObject selector;
+    public GameObject sequencer;
+    public GameObject task;
+
     private void BuildTree(GameObject thisToolTask, Task thisTask)
     {
 

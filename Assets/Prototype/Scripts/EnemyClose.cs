@@ -4,17 +4,27 @@ using UnityEngine;
 
 public class EnemyClose : MonoBehaviour
 {
-    public GameObject enemyPointer;
-    public float pos;
+    [HideInInspector] public GameObject enemyPointer;
+    [HideInInspector] public float pos;
+
+    public List<GameObject> pointers;
+    public float arrowDistance;
+
+    private void Awake()
+    {
+        pointers = new List<GameObject>();
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Enemy")
         {
-            pos -= 0.2f;
+            pos -= arrowDistance;
             var thisPointer = Instantiate(enemyPointer, transform.parent);
+            pointers.Add(thisPointer);
             thisPointer.GetComponent<EnemyRadar>().target = other.gameObject;
             thisPointer.GetComponent<EnemyRadar>().pos = pos;
+            thisPointer.GetComponent<EnemyRadar>().enemyClose = this.transform;
         }
     }
 
@@ -22,7 +32,7 @@ public class EnemyClose : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            pos += 0.2f;
+            pos += arrowDistance;
         }
     }
 }

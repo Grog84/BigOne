@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 64191486362886636}
   - component: {fileID: 54182888537261834}
   - component: {fileID: 114248999214539586}
-  m_Layer: 2
+  m_Layer: 18
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4743017775625184}
   - component: {fileID: 114459912945315544}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: EnemyRadar
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -56,7 +56,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4212316269728816}
   - component: {fileID: 212178512586907984}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: Pointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -196,8 +196,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pos: 0
   target: {fileID: 0}
-  dir: {x: 0, y: 0, z: 0}
-  oldDir: {x: 0, y: 0, z: 0}
+  colorTime: 5
+  newTarget: {x: 0, y: 0, z: 0}
 --- !u!212 &212178512586907984
 SpriteRenderer:
   m_ObjectHideFlags: 1

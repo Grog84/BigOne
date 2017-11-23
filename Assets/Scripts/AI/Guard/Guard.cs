@@ -8,7 +8,7 @@ namespace AI
 {
     enum GuardState { NORMAL, CURIOUS, ALARMED, DISTRACTED};
 
-    public class Guard : MonoBehaviour
+    public class Guard : AIAgent
     {
 
         [Header("Agent Navigation")]
@@ -26,8 +26,8 @@ namespace AI
         GuardState m_State = GuardState.NORMAL;
         GuardStats stats;
 
-        ////Navigation
-        NavMeshAgent m_NavMeshAgent;
+        //Navigation
+        //NavMeshAgent m_NavMeshAgent;
 
         [HideInInspector] public Transform[] wayPointListTransform;
 
@@ -46,11 +46,11 @@ namespace AI
         [HideInInspector] public GuardSaveComponent m_SaveComponent;
 
         // Animation
-        Animator m_Animator;
+        //Animator m_Animator;
 
-        // AI
-        Brain m_Brain;
-        Blackboard m_Blackboard;
+        //// AI
+        //Brain m_Brain;
+        //Blackboard m_Blackboard;
 
 
         public void GetNormal()

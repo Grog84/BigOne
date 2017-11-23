@@ -21,11 +21,19 @@ public class BDTMMakerEditor : Editor
         if (GUILayout.Button("Save Behaviour Tree"))
         {
             EditorApplication.Beep();
-            if (EditorUtility.DisplayDialog("Save Behaviour Tree", "Are you sure you really want to save the current Behaviour tree?", "Yes", "No"))
+            if (EditorUtility.DisplayDialog("Save Behaviour Tree", "Are you sure you really want to save the current Behaviour tree?" +
+                "\n NOTE: PLAY MODE MUST BE ACTIVE", "Yes", "No"))
             {
                 m_Target.SaveTree();
                 EditorUtility.SetDirty(m_Target.behaviourTree);
             }
+        }
+
+        if (GUILayout.Button("Print Tree"))
+        {
+
+            m_Target.PrintTree();
+           
         }
     }
 

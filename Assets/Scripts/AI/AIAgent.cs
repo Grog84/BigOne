@@ -9,10 +9,14 @@ namespace AI
     public abstract class AIAgent : MonoBehaviour
     {
         //Navigation
-        NavMeshAgent m_NavMeshAgent;
+        public NavMeshAgent m_NavMeshAgent;
 
         // Animation
-        Animator m_Animator;
+        public Animator m_Animator;
+
+        // AI
+        public Brain m_Brain;
+        public Blackboard m_Blackboard;
 
     }
 }

@@ -6,6 +6,7 @@ namespace AI
 {
     public abstract class Blackboard
     {
+        public AIAgent m_Agent;
 
         public abstract int GetIntValue(string valueName);
 

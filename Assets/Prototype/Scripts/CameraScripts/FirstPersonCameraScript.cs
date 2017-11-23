@@ -29,11 +29,14 @@ public class FirstPersonCameraScript : CameraScript {
         myTransform.position = myFollow.position;
 
         // camera movement and limit of movement
+        currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
+
         currentX += Input.GetAxis("Mouse X");
         currentY -= Input.GetAxis("Mouse Y");
-        currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
         rotation = Quaternion.Euler (currentY, currentX, 0);
         transform.rotation = rotation;
+        
+        
 
     }
 

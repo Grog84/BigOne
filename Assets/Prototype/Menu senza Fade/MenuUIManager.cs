@@ -13,8 +13,10 @@ public class MenuUIManager : MonoBehaviour
 	public GameObject controllerMenu;
 	public GameObject selectLevelMenu;
 	public GameObject exitMenu;
+	public GameObject areYouSure;
+	public Button continueButton;
 
-	void Start() //Set on false all the object that has not to be on the main menu
+	void Start() //Disable all the GameObject-Menu that has not to be on the screen
 	{
 		mainMenu.gameObject.SetActive (true);
 		settingsMenu.gameObject.SetActive (false);
@@ -23,6 +25,7 @@ public class MenuUIManager : MonoBehaviour
 		controllerMenu.gameObject.SetActive (false);
 		selectLevelMenu.gameObject.SetActive (false);
 		exitMenu.gameObject.SetActive (false);
+		areYouSure.gameObject.SetActive (false);
 	}	
 
 	public void StartGame() //Start game function
@@ -30,12 +33,12 @@ public class MenuUIManager : MonoBehaviour
 		SceneManager.LoadScene("FG_MappaP_01");
 	}
 
-	public void FadesMenu(string menuType)
+	public void FadesMenu(string menuType) //Set the time to wait until the fade animation is finished
 	{
-		Invoke (menuType, 1);
+		Invoke (menuType, 0.2f);
 	}
 
-	public void SettingsMenu()//Put the settings option in the menu screen and and set on "False" all the other button and image
+	public void SettingsMenu()//Enabled the Settings Menu and disable all the others
 	{
 		mainMenu.gameObject.SetActive (false);
 		settingsMenu.gameObject.SetActive (true);
@@ -46,7 +49,7 @@ public class MenuUIManager : MonoBehaviour
 		exitMenu.gameObject.SetActive (false);
 	}
 
-	public void MainMenu() //Put the main menu in the menu screen and set on "False" all the other button and image
+	public void MainMenu() //Enabled the Main Menu and disable all the others
 	{
 		mainMenu.gameObject.SetActive (true);
 		settingsMenu.gameObject.SetActive (false);
@@ -57,7 +60,7 @@ public class MenuUIManager : MonoBehaviour
 		exitMenu.gameObject.SetActive (false);
 	}
 
-	public void AudioMenu() //Put in the screen the audio options and set on "False" all the other button and image
+	public void AudioMenu() //Enabled the Audio Menu and disable all the others
 	{
 		mainMenu.gameObject.SetActive (false);
 		settingsMenu.gameObject.SetActive (false);
@@ -68,7 +71,7 @@ public class MenuUIManager : MonoBehaviour
 		exitMenu.gameObject.SetActive (false);
 	}
 
-	public void VideoMenu() //Put in the screen the video options and set on "False" all the other button and image
+	public void VideoMenu() //Enabled the Video Menu and disable all the others
 	{
 		mainMenu.gameObject.SetActive (false);
 		settingsMenu.gameObject.SetActive (false);
@@ -79,7 +82,7 @@ public class MenuUIManager : MonoBehaviour
 		exitMenu.gameObject.SetActive (false);
 	}
 
-	public void ControllerMenu() //Put in the screen the input layout and set on "False" all the other button and image
+	public void ControllerMenu() //Enabled the Controller Menu and disable all the others
 	{
 		mainMenu.gameObject.SetActive (false);
 		settingsMenu.gameObject.SetActive (false);
@@ -95,7 +98,7 @@ public class MenuUIManager : MonoBehaviour
 
 	}
 
-	public void SelectLevelMenu()
+	public void SelectLevelMenu() //Enabled the Select Level Menu and disable all the others
 	{
 		mainMenu.gameObject.SetActive (false);
 		settingsMenu.gameObject.SetActive (false);
@@ -106,7 +109,7 @@ public class MenuUIManager : MonoBehaviour
 		exitMenu.gameObject.SetActive (false);
 	}
 
-	public void ExitGameMenu() //Exit game function
+	public void ExitGameMenu() //Enabled the Exit Game Menu and disable all the others
 	{
 		mainMenu.gameObject.SetActive (false);
 		settingsMenu.gameObject.SetActive (false);
@@ -117,7 +120,7 @@ public class MenuUIManager : MonoBehaviour
 		exitMenu.gameObject.SetActive (true);
 	}
 
-	public void ExitGameYes()
+	public void ExitGameYes() //Exit game
 	{
 		Application.Quit();
 	}

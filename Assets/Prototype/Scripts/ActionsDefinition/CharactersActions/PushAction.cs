@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using StateMachine;
+using DG.Tweening;
 
 namespace Character.Actions
 {

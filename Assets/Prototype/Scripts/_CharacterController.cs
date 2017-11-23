@@ -125,7 +125,7 @@ namespace Character
             Debug.DrawRay(playerHead.position, playerHead.forward);
             if (isInDoorArea)
             {
-                if (Physics.Raycast(playerHead.position, playerHead.forward, out hit, m_CharStats.m_DistanceFromDoor))//(CharacterTransform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTransform.forward, out hit, m_CharStats.m_DistanceFromDoor))
+                if (Physics.Raycast(playerHead.position, playerHead.forward, out hit, m_CharStats.m_DistanceFromDoor))
                 {
                     
                     if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors") &&
@@ -345,7 +345,6 @@ namespace Character
             m_CharController.enabled = false;
             CharacterTransform.DOBlendableMoveBy(new Vector3(0,difPos.y,0), 1f);
             CharacterTransform.DOBlendableMoveBy(new Vector3(difPos.x, 0, difPos.z), climbTime);
-
           
             yield return new WaitForSeconds(climbTime);
             m_CharController.enabled = true;
@@ -516,22 +515,6 @@ namespace Character
 
         #endregion
 
-
-        private void OnAnimatorIK(int layerIndex)
-        {
-            
-            if (useEndClimbIk)
-            {
-                ikWeight -= Time.deltaTime;
-             
-                m_Animator.SetIKPositionWeight(AvatarIKGoal.RightHand, ikWeight);
-                m_Animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, ikWeight);
-
-                m_Animator.SetIKPosition(AvatarIKGoal.RightHand, climbCollider.transform.parent.GetChild(5).position);
-                m_Animator.SetIKPosition(AvatarIKGoal.LeftHand, climbCollider.transform.parent.GetChild(6).position);
-            }
-        }
-
         #region Icons
 
         public void IconPriority(Transform icons, int degrees)
@@ -571,6 +554,22 @@ namespace Character
         }
 
         #endregion
+
+        private void OnAnimatorIK(int layerIndex)
+        {
+            
+            if (useEndClimbIk)
+            {
+                ikWeight -= Time.deltaTime;
+             
+                m_Animator.SetIKPositionWeight(AvatarIKGoal.RightHand, ikWeight);
+                m_Animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, ikWeight);
+
+                m_Animator.SetIKPosition(AvatarIKGoal.RightHand, climbCollider.transform.parent.GetChild(5).position);
+                m_Animator.SetIKPosition(AvatarIKGoal.LeftHand, climbCollider.transform.parent.GetChild(6).position);
+            }
+        }
+
 
         void Update()
         {

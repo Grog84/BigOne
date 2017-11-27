@@ -26,7 +26,7 @@ public class MapToolProtoEditor : Editor
                 if (EditorUtility.DisplayDialog("Save Configuration", "Are you sure you really want to save the current configuration?", "Yes", "No"))
                 {
                     m_Target.SaveConfig();
-                    EditorUtility.SetDirty(m_Target.myConfigFile);
+                    //EditorUtility.SetDirty(m_Target.myConfigFile);
                 }
 
             }

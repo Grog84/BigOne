@@ -248,6 +248,12 @@ namespace Character
                 doorCollider.transform.parent.GetComponent<DoorIconsActivation>().ShowIcon(this.gameObject);
                 
             }
+            if (other.tag == "Key")
+            {
+                KeyCollider = other.gameObject;
+                isInKeyArea = true;
+                KeyCollider.GetComponent<CollectablesIconsActivation>().ShowIcon(this.gameObject);
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -314,6 +320,7 @@ namespace Character
             }
             if (other.tag == "Key")
             {
+                KeyCollider.GetComponent<CollectablesIconsActivation>().HideIcons();
                 KeyCollider = null;
                 isInKeyArea = false;
             }

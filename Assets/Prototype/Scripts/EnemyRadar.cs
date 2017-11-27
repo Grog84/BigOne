@@ -4,6 +4,7 @@ using UnityEngine;
 using Character;
 using DG.Tweening;
 using StateMachine;
+using AI;
 
 public class EnemyRadar : MonoBehaviour
 {
@@ -28,11 +29,22 @@ public class EnemyRadar : MonoBehaviour
         
         transform.DOLookAt(newTarget, 0.1f);
 
-        //if(target.GetComponent<EnemiesAIStateController>().currentState == "PatrolState")
-        //{
-            transform.GetChild(0).GetComponent<SpriteRenderer>().DOColor (Color.yellow, colorTime);
-       // }
-
+        if(target.GetComponent<Guard>().GetState == GuardState.NORMAL)
+        {
+            transform.GetChild(0).GetComponent<SpriteRenderer>().DOColor (Color.red, colorTime);
+        }
+        else if(target.GetComponent<Guard>().GetState == GuardState.CURIOUS)
+        {
+            transform.GetChild(0).GetComponent<SpriteRenderer>().DOColor(Color.yellow, colorTime);
+        }
+        else if (target.GetComponent<Guard>().GetState == GuardState.ALARMED)
+        {
+            transform.GetChild(0).GetComponent<SpriteRenderer>().DOColor(Color.red, colorTime);
+        }
+        else if (target.GetComponent<Guard>().GetState == GuardState.DISTRACTED)
+        {
+            transform.GetChild(0).GetComponent<SpriteRenderer>().DOColor(Color.blue, colorTime);
+        }
     } 
 
 }

@@ -88,6 +88,8 @@ namespace Character
         public Transform playerCanvas;
         public Sprite cancelIcon;
         public Sprite cantCancelIcon;
+        public Sprite stopPush;
+        public Sprite stopClimb;
         public CharacterStats m_CharStats;
         public LayerMask m_WalkNoiseLayerMask;
         public List<GameObject> Keychain;                               // List of all the key items collected by the player
@@ -356,7 +358,7 @@ namespace Character
         {
             startClimbAnimationTop = false;
             Vector3 difPos = climbAnchorTop.position - transform.position;
-            float climbTime = 0.5f;
+            float climbTime = 0.2f;
             Vector3 top = climbAnchorTop.parent.position - climbAnchorTop.position;
             top.y = 0;
             top = top.normalized;
@@ -364,7 +366,7 @@ namespace Character
             StartCoroutine(RotateToward(top));
 
             m_CharController.enabled = false;
-            CharacterTransform.DOBlendableMoveBy(new Vector3(0, difPos.y, 0), 1f);
+            CharacterTransform.DOBlendableMoveBy(new Vector3(0, difPos.y, 0), 0.5f);
             CharacterTransform.DOBlendableMoveBy(new Vector3(difPos.x, 0, difPos.z), climbTime);
             yield return new WaitForSeconds(climbTime);
             climbingTop = false;
@@ -530,6 +532,18 @@ namespace Character
             }
         }
 
+        public void ShowStopPushIcon()
+        {
+            playerIcon.GetChild(1).GetComponent<Image>().sprite = stopPush;
+            playerIcon.GetChild(1).GetComponent<Image>().color = alphaMax;
+        }
+
+        public void ShowStopClimbIcon()
+        {
+            playerIcon.GetChild(1).GetComponent<Image>().sprite = stopClimb;
+            playerIcon.GetChild(1).GetComponent<Image>().color = alphaMax;
+        }
+
         public void ShowCancelIcon()
         {
             playerIcon.GetChild(0).GetComponent<Image>().sprite = cancelIcon;
@@ -546,6 +560,8 @@ namespace Character
         {
             playerIcon.GetChild(0).GetComponent<Image>().color = alphaZero;
             playerIcon.GetChild(0).GetComponent<Image>().sprite = null;
+            playerIcon.GetChild(1).GetComponent<Image>().color = alphaZero;
+            playerIcon.GetChild(1).GetComponent<Image>().sprite = null;
         }
 
         public void RotateCanvas()

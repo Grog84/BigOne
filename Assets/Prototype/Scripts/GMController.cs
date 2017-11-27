@@ -110,6 +110,7 @@ public class GMController : MonoBehaviour {
 
     public void UpdatePlayerPosition()
     {
+        
         lastPercievedPlayerPosition = players[(int)isCharacterPlaying].transform.position;
     }
 

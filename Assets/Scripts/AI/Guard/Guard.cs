@@ -166,6 +166,24 @@ namespace AI
             
         }
 
+        private void ChangeStateFromGauge()
+        {
+            if(perceptionPercentage >=0 && perceptionPercentage< 25)
+            {
+                GetNormal();
+            }
+            else if(perceptionPercentage >= 25 && perceptionPercentage < 75)
+            {
+                GetCurious();
+            }
+            else if(perceptionPercentage >= 75 && perceptionPercentage <= 100)
+            {
+                GetAlarmed();
+            }
+        }
+
+
+
         private void UpdatePerceptionUI()
         {
             perceptionBar.SetFillingPerc(Mathf.Clamp(perceptionPercentage, 0f, 100f));
@@ -208,6 +226,7 @@ namespace AI
         {
             LookAround();
             UpdatePerceptionUI();
+            ChangeStateFromGauge();
         }
     }
 

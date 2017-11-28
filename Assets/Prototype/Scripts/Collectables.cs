@@ -6,5 +6,8 @@ public abstract class Collectables : MonoBehaviour
 {
     public string ItemID;
     
+    public virtual void PickUp()
+    {
 
+    }
 }

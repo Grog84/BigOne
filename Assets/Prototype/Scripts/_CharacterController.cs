@@ -37,7 +37,7 @@ namespace Character
         // DOORS & ITEMS VARIABLES
         [HideInInspector] public bool isInDoorArea;                    // Detect if the player is in the Door trigger area
         [HideInInspector] public bool isDoorDirectionRight;            // Detect if the player is looking toward the door
-        [HideInInspector] public bool isInKeyArea;                     // Detect if the player is in the key object interactable area
+        [HideInInspector] public bool isInItemArea;                     // Detect if the player is in the key object interactable area
         [HideInInspector] public bool startDoorAction;                 // Starts the DoorInteraction courutine
         [HideInInspector] public bool startItemAnimation;              // Starts the item collection courutine
         [HideInInspector] public bool isEndDoorAction;                 // Indicates if the DoorInteraction coroutine is finished
@@ -68,7 +68,7 @@ namespace Character
         [HideInInspector] public GameObject doorCollider;
         [HideInInspector] public GameObject doorBody;
 
-        [HideInInspector] public GameObject KeyCollider;
+        [HideInInspector] public GameObject ItemCollider;
 
         [HideInInspector] public GameObject pushHit = null;            // Used for icons 
         [HideInInspector] public GameObject pushObject;
@@ -248,11 +248,11 @@ namespace Character
                 doorCollider.transform.parent.GetComponent<DoorIconsActivation>().ShowIcon(this.gameObject);
                 
             }
-            if (other.tag == "Key")
+            if (other.gameObject.layer == LayerMask.NameToLayer("Interactable"))
             {
-                KeyCollider = other.gameObject;
-                isInKeyArea = true;
-                KeyCollider.GetComponent<CollectablesIconsActivation>().ShowIcon(this.gameObject);
+                  ItemCollider = other.gameObject;
+                  isInItemArea = true;
+                  ItemCollider.GetComponent<CollectablesIconsActivation>().ShowIcon(this.gameObject);
             }
         }
 
@@ -281,10 +281,10 @@ namespace Character
                 doorCollider = other.gameObject;
                 isInDoorArea = true;
             }
-            if (other.tag == "Key")
+            if (other.gameObject.layer == LayerMask.NameToLayer("Interactable"))
             {
-                KeyCollider = other.gameObject;
-                isInKeyArea = true;
+                ItemCollider = other.gameObject;
+                isInItemArea = true;
             }
         }
 
@@ -318,11 +318,11 @@ namespace Character
                 isInDoorArea = false;
                 isDoorDirectionRight = false;
             }
-            if (other.tag == "Key")
+            if (other.gameObject.layer == LayerMask.NameToLayer("Interactable"))
             {
-                KeyCollider.GetComponent<CollectablesIconsActivation>().HideIcons();
-                KeyCollider = null;
-                isInKeyArea = false;
+                ItemCollider.GetComponent<CollectablesIconsActivation>().HideIcons();
+                ItemCollider = null;
+                isInItemArea = false;
             }
 
         }
@@ -574,6 +574,12 @@ namespace Character
         public void RotateCanvas()
         {
             playerIcon.DOLookAt(m_Camera.transform.position, 0.1f);
+        }
+
+        public void HideHUDIcons(Transform icon)
+        {
+            icon.GetComponent<Image>().color = alphaZero;
+            icon.GetComponent<Image>().sprite = null;
         }
 
         #endregion

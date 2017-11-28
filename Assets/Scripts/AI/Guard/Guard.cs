@@ -108,6 +108,7 @@ namespace AI
             StartCoroutine(OutOfSightHysteresis());
         }
  
+        // method used to trigger the random pick of the points by action
         public void GetRandomPickStatus()
         {
             randomPick = m_Blackboard.GetBoolValue("RandomPick");
@@ -183,7 +184,8 @@ namespace AI
                     if (hasRadio)
                     {
                         GMController.instance.UpdatePlayerPosition();
-
+                        playerLastPercieved = GMController.instance.lastPercievedPlayerPosition;
+                        UpdateLastPercievedDestination();
                     }
                     else
                     {
@@ -204,6 +206,7 @@ namespace AI
             
         }
 
+        // method used to manage the state of the guard from the gauge of perception
         private void ChangeStateFromGauge()
         {
             if(perceptionPercentage >=0 && perceptionPercentage< 25)
@@ -220,33 +223,31 @@ namespace AI
             }
         }
 
+        // update the personal known positoin of the player
         public void UpdateMyPlayerPosition()
         {
             playerLastPercieved = GMController.instance.players[(int)GMController.instance.isCharacterPlaying].transform.position;
             UpdateLastPercievedDestination();
         }
 
+        // update the personal known position of the player on the blackboard
         public void UpdateLastPercievedDestination()
         {
             m_Blackboard.SetVector3Value("LastPercievedPosition", playerLastPercieved);
-
         }
 
+        // reset the personal known positoin of the player
         public void ResetMyPlayerPosition()
         {
             playerLastPercieved = resetPlayerPosition;
-            ResetLastPercievedPosition()
+            ResetLastPercievedPosition();
         }
 
+        // reset the personal known position of the player on the blackboard
         public void ResetLastPercievedPosition()
         {
             m_Blackboard.SetVector3Value("LastPercievedPosition", playerLastPercieved);
         }
-
-        //public void UpdateMyPlayerHeardPos()
-        //{
-        //    playerLastHeard = 
-        //}
 
         private void UpdatePerceptionUI()
         {

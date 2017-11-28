@@ -43,7 +43,7 @@ public class Icons : MonoBehaviour
                 gameObject.transform.Find("Door").gameObject.SetActive(false);
             }
             // Collect Icon
-            if (controllerBoy.m_CharacterController.isInKeyArea && !controllerBoy.m_CharacterController.isClimbDirectionRight && !controllerBoy.m_CharacterController.isDoorDirectionRight)
+            if (controllerBoy.m_CharacterController.isInItemArea && !controllerBoy.m_CharacterController.isClimbDirectionRight && !controllerBoy.m_CharacterController.isDoorDirectionRight)
             {
                 gameObject.transform.Find("Key").gameObject.SetActive(true);
             }
@@ -79,7 +79,7 @@ public class Icons : MonoBehaviour
             }
            
             // Collect Icon
-            if (controllerMother.m_CharacterController.isInKeyArea && !controllerMother.m_CharacterController.isPushDirectionRight && !controllerMother.m_CharacterController.isDoorDirectionRight)
+            if (controllerMother.m_CharacterController.isInItemArea && !controllerMother.m_CharacterController.isPushDirectionRight && !controllerMother.m_CharacterController.isDoorDirectionRight)
             {
                 gameObject.transform.Find("Key").gameObject.SetActive(true);
             }

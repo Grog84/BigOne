@@ -31,7 +31,7 @@ public class EnemyRadar : MonoBehaviour
 
         if(target.GetComponent<Guard>().GetState == GuardState.NORMAL)
         {
-            transform.GetChild(0).GetComponent<SpriteRenderer>().DOColor (Color.red, colorTime);
+            transform.GetChild(0).GetComponent<SpriteRenderer>().DOColor (Color.white, colorTime);
         }
         else if(target.GetComponent<Guard>().GetState == GuardState.CURIOUS)
         {

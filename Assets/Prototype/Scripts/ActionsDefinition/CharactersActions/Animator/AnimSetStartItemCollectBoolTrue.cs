@@ -16,11 +16,11 @@ namespace Character.Actions
 
         private void UpdateAnimatorForStartItemCollect(CharacterStateController controller)
         {
-            if (GMController.instance.isCharacterPlaying == CharacterActive.Mother && controller.m_CharacterController.KeyCollider.tag == "Key")
+            if (GMController.instance.isCharacterPlaying == CharacterActive.Mother && controller.m_CharacterController.ItemCollider.tag == "Key")
             {
                 controller.m_CharacterController.m_Animator.SetBool("isCollecting", true);
             }
-            else if (controller.m_CharacterController.KeyCollider.tag != "Key")
+            else if (controller.m_CharacterController.ItemCollider.tag != "Key")
             {
                 controller.m_CharacterController.m_Animator.SetBool("isCollecting", true);
             }

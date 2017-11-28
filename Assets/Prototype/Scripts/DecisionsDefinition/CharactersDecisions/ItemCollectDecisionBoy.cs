@@ -16,7 +16,7 @@ namespace Character.Decisions
 
         private bool CheckIfItemCollect(CharacterStateController controller)
         {
-            if (controller.m_CharacterController.isInKeyArea && !controller.m_CharacterController.isClimbDirectionRight && 
+            if (controller.m_CharacterController.isInItemArea && !controller.m_CharacterController.isClimbDirectionRight && 
                 !controller.m_CharacterController.isDoorDirectionRight && Input.GetButtonDown("Interact"))
             {
 

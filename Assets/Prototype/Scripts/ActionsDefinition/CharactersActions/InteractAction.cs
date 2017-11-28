@@ -57,6 +57,8 @@ namespace Character.Actions
                     {
                         if (hit.transform.gameObject.GetComponent<Doors>().doorID == controller.m_CharacterController.Keychain[i].gameObject.GetComponent<Keys>().ItemID)
                         {
+                            controller.m_CharacterController.HideHUDIcons(controller.m_CharacterController.Keychain[i].gameObject.GetComponent<Keys>().icon);
+
                             hit.transform.gameObject.GetComponent<Doors>().hasKey = true;
                             // OPEN THE DOOR
                             if (!hit.transform.gameObject.GetComponent<Doors>().isDoorOpen)

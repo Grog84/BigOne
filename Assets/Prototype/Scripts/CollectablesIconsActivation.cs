@@ -13,6 +13,7 @@ public class CollectablesIconsActivation : MonoBehaviour
     public Sprite collectable;
     public Sprite interact;
     public int degrees;
+    
 
     [HideInInspector] public Color alphaZero;
     [HideInInspector] public Color alphaMax;
@@ -47,12 +48,12 @@ public class CollectablesIconsActivation : MonoBehaviour
             icons.GetChild(1).GetComponent<Image>().sprite = interact;
             icons.GetChild(1).GetComponent<Image>().color = alphaMax;
         }
-        else if (gameObject.tag != "Key" && playerState.thisCharacter == CharacterActive.Boy)
+        else if (gameObject.tag != "Key")
         {
             icons.GetChild(0).GetComponent<Image>().sprite = collectable;
             icons.GetChild(0).GetComponent<Image>().color = alphaMax;
 
-            icons.GetChild(1).GetComponent<Image>().sprite = collectable;
+            icons.GetChild(1).GetComponent<Image>().sprite = interact;
             icons.GetChild(1).GetComponent<Image>().color = alphaMax;
         }
     }
@@ -64,12 +65,12 @@ public class CollectablesIconsActivation : MonoBehaviour
         if (GMController.instance.isCharacterPlaying == playerState.thisCharacter)
         {
             // Collectable icons 
-            if (playerState.m_CharacterController.isInKeyArea)
+            if (playerState.m_CharacterController.isInItemArea)
             {
                 if (playerState.thisCharacter == CharacterActive.Mother && !playerState.m_CharacterController.isPushDirectionRight || 
                     playerState.thisCharacter == CharacterActive.Boy && !playerState.m_CharacterController.isClimbDirectionRight)
                 {
-                    if (playerState.m_CharacterController.KeyCollider.transform == trigger.transform)
+                    if (playerState.m_CharacterController.ItemCollider.transform == trigger.transform)
                     {
                         SwapIcons(playerState);
                         player.GetComponent<_CharacterController>().IconPriority(icons, degrees);

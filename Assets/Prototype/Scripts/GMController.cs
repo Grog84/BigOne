@@ -54,7 +54,7 @@ public class GMController : MonoBehaviour {
     // Main Camera
     [HideInInspector] public CameraScript[] m_MainCamera;
 
-    private GameObject[] players;
+    [HideInInspector] public GameObject[] players;
 
     void Awake() 
     {

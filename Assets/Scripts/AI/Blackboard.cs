@@ -16,5 +16,9 @@ namespace AI
 
         public abstract void SetBoolValue(string valueName, bool value);
 
+        public abstract Vector3 GetVector3Value(string valueName);
+
+        public abstract void SetVector3Value(string valueName, Vector3 value);
+
     }
 }

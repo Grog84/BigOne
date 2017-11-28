@@ -8,6 +8,9 @@ namespace AI
     {
         GuardState guardState = GuardState.NORMAL;
         bool isPlayerInSight = false;
+        bool randomPick = false;
+        Vector3 lastPercievedPosition;
+        Vector3 resetPlayerPosition = new Vector3(1000, 1000, 1000);
 
         public override int GetIntValue(string valueName)
         {
@@ -35,6 +38,11 @@ namespace AI
                 return isPlayerInSight;
             }
 
+            if(valueName == "RandomValue")
+            {
+                return randomPick;
+            }
+
             return false;
         }
 
@@ -45,7 +53,28 @@ namespace AI
                 isPlayerInSight = value;
             }
 
+            if (valueName == "RandomValue")
+            {
+                 randomPick = value;
+            }
         }
 
+        public override Vector3 GetVector3Value(string valueName)
+        {
+            if(valueName == "LastPercievedPosition")
+            {
+                return lastPercievedPosition;
+            }
+
+            return resetPlayerPosition;
+        }
+
+        public override void SetVector3Value(string valueName, Vector3 value)
+        {
+            if(valueName == "LastPercievedPosition")
+            {
+                lastPercievedPosition = value;
+            }
+        }
     }
 }

@@ -107,6 +107,11 @@ namespace AI
             isPlayerInSight = false;
             StartCoroutine(OutOfSightHysteresis());
         }
+ 
+        public void GetRandomPickStatus()
+        {
+            randomPick = m_Blackboard.GetBoolValue("RandomPick");
+        }
 
         internal GuardState GetState
         {
@@ -155,7 +160,17 @@ namespace AI
                     if (Physics.Raycast(eyes.position, direction))
                     {
                         noRaycastHitting = false;
-                        GMController.instance.UpdatePlayerPosition();
+                        if (hasRadio)
+                        {
+                            GMController.instance.UpdatePlayerPosition();
+                            playerLastPercieved = GMController.instance.lastPercievedPlayerPosition;
+                            UpdateLastPercievedDestination();
+                        }
+                        else
+                        {
+                            UpdateMyPlayerPosition();
+                        }
+
                         if (!isPerceptionBlocked)
                             perceptionPercentage += stats.fillingSpeed * Time.deltaTime;
                     }
@@ -165,7 +180,16 @@ namespace AI
                 if (Physics.Raycast(eyes.position, direction))
                 {
                     noRaycastHitting = false;
-                    GMController.instance.UpdatePlayerPosition();
+                    if (hasRadio)
+                    {
+                        GMController.instance.UpdatePlayerPosition();
+
+                    }
+                    else
+                    {
+                        UpdateMyPlayerPosition();
+                    }
+
                     if (!isPerceptionBlocked)
                         perceptionPercentage += stats.fillingSpeed * stats.torsoMultiplier * Time.deltaTime;
                 }
@@ -196,7 +220,33 @@ namespace AI
             }
         }
 
+        public void UpdateMyPlayerPosition()
+        {
+            playerLastPercieved = GMController.instance.players[(int)GMController.instance.isCharacterPlaying].transform.position;
+            UpdateLastPercievedDestination();
+        }
 
+        public void UpdateLastPercievedDestination()
+        {
+            m_Blackboard.SetVector3Value("LastPercievedPosition", playerLastPercieved);
+
+        }
+
+        public void ResetMyPlayerPosition()
+        {
+            playerLastPercieved = resetPlayerPosition;
+            ResetLastPercievedPosition()
+        }
+
+        public void ResetLastPercievedPosition()
+        {
+            m_Blackboard.SetVector3Value("LastPercievedPosition", playerLastPercieved);
+        }
+
+        //public void UpdateMyPlayerHeardPos()
+        //{
+        //    playerLastHeard = 
+        //}
 
         private void UpdatePerceptionUI()
         {
@@ -238,6 +288,7 @@ namespace AI
 
         private void Update()
         {
+            GetRandomPickStatus();
             LookAround();
             UpdatePerceptionUI();
             ChangeStateFromGauge();

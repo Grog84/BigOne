@@ -33,7 +33,7 @@ public class ToolMenuEditor : Editor
                     break;
                 default:
                     EditorPrefs.SetBool("IsLevelEditorEnabled", true);
-                    EditorPrefs.SetBool("SelectBlockNextToMousePosition", true);
+                    //EditorPrefs.SetBool("SelectBlockNextToMousePosition", true);
                     EditorPrefs.SetFloat("CubeHandleColorR", Color.yellow.r);
                     EditorPrefs.SetFloat("CubeHandleColorG", Color.yellow.g);
                     EditorPrefs.SetFloat("CubeHandleColorB", Color.yellow.b);
@@ -78,10 +78,10 @@ public class ToolMenuEditor : Editor
 
     static void OnSceneGUI(SceneView sceneView)
     {
-        if (IsInCorrectLevel() == false)
-        {
-            return;
-        }
+        //if (IsInCorrectLevel() == false)
+        //{
+        //    return;
+        //}
 
         DrawToolsMenu(sceneView.position);
     }

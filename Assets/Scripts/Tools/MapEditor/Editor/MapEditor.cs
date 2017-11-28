@@ -9,6 +9,7 @@ public class MapEditor : Editor
     static MapEditorDatabase m_Database;
 
     static GUIStyle style = new GUIStyle();
+    static Vector2 scrollPosition = Vector2.zero;
 
     //static Transform m_LevelParent;
     //static Transform LevelParent
@@ -127,10 +128,14 @@ public class MapEditor : Editor
 
         GUI.Box(new Rect(0, 0, 110, sceneView.position.height - 35), GUIContent.none, EditorStyles.textArea);
 
+        scrollPosition = GUI.BeginScrollView(new Rect(0, 0, 125, sceneView.position.height - 35), scrollPosition, new Rect(0, 0, 110, m_Database.prefabsList.Count * 128 + 25));
+
         for (int i = 0; i < m_Database.prefabsList.Count; ++i)
         {
             DrawCustomButton(i, sceneView.position);
         }
+
+        GUI.EndScrollView();
 
         Handles.EndGUI();
     }

@@ -6,6 +6,8 @@ using UnityEditor;
 //[InitializeOnLoad]
 public class MapEditor : Editor
 {
+    static MapEditorDatabase m_Database;
+
 
     //Get or Set which Prefab is selected in our custom menu
     public static int SelectedPrefab
@@ -25,9 +27,7 @@ public class MapEditor : Editor
         SceneView.onSceneGUIDelegate -= OnSceneGUI;
         SceneView.onSceneGUIDelegate += OnSceneGUI;
 
-        //Make sure we load our block database. Notice the path here, which means the block database has to be in this specific location so we can find it
-        //LoadAssetAtPath is a great way to load an asset from the project
-        //m_LevelBlocks = AssetDatabase.LoadAssetAtPath<LevelBlocks>("Assets/E09 - Scriptable Object/LevelBlocks.asset");
+        m_Database = AssetDatabase.LoadAssetAtPath<MapEditorDatabase>("Assets/Scripts/Tools/MapEditor/MapEditorDatabase.asset");
     }
 
     void OnDestroy()
@@ -37,56 +37,51 @@ public class MapEditor : Editor
 
     static void OnSceneGUI(SceneView sceneView)
     {
-        //if (IsInCorrectLevel() == false)
-        //{
-        //    return;
-        //}
+        if (IsInCorrectLevel() == false)
+        {
+            return;
+        }
 
-        //if (m_LevelBlocks == null)
-        //{
-        //    return;
-        //}
+        if (m_Database == null)
+        {
+            return;
+        }
 
-        //DrawCustomBlockButtons(sceneView);
-        //HandleLevelEditorPlacement();
+        DrawCustomButtons(sceneView);
+        HandleLevelEditorPlacement();
     }
 
     static void HandleLevelEditorPlacement()
     {
-        //if (LevelEditorE07ToolsMenu.SelectedTool == 0)
-        //{
-        //    return;
-        //}
+        if (ToolMenuEditor.SelectedTool == 0)
+        {
+            return;
+        }
 
         ////This method is very similar to the one in E08. Only the AddBlock function is different
 
         ////By creating a new ControlID here we can grab the mouse input to the SceneView and prevent Unitys default mouse handling from happening
         ////FocusType.Passive means this control cannot receive keyboard input since we are only interested in mouse input
-        //int controlId = GUIUtility.GetControlID(FocusType.Passive);
+        int controlId = GUIUtility.GetControlID(FocusType.Passive);
 
         ////If the left mouse is being clicked and no modifier buttons are being held
-        //if (Event.current.type == EventType.mouseDown &&
-        //    Event.current.button == 0 &&
-        //    Event.current.alt == false &&
-        //    Event.current.shift == false &&
-        //    Event.current.control == false)
-        //{
-        //    if (LevelEditorE06CubeHandle.IsMouseInValidArea == true)
-        //    {
-        //        if (LevelEditorE07ToolsMenu.SelectedTool == 1)
-        //        {
-        //            LevelEditorE08AddAndRemoveObjects.RemoveBlock(LevelEditorE06CubeHandle.CurrentHandlePosition);
-        //        }
-
-        //        if (LevelEditorE07ToolsMenu.SelectedTool == 2)
-        //        {
-        //            if (SelectedBlock < m_LevelBlocks.Blocks.Count)
-        //            {
-        //                AddBlock(LevelEditorE06CubeHandle.CurrentHandlePosition, m_LevelBlocks.Blocks[SelectedBlock].Prefab);
-        //            }
-        //        }
-        //    }
-        //}
+        if (Event.current.type == EventType.mouseDown &&
+            Event.current.button == 0 &&
+            Event.current.alt == false &&
+            Event.current.shift == false &&
+            Event.current.control == false)
+        {
+            //if (LevelEditorE06CubeHandle.IsMouseInValidArea == true)
+            //{
+            //    if (ToolMenuEditor.SelectedTool == 1)
+            //    {
+            //        if (SelectedPrefab < m_Database.prefabsList.Count)
+            //        {
+            //            AddBlock(LevelEditorE06CubeHandle.CurrentHandlePosition, m_Database.prefabsList[SelectedPrefab].Prefab);
+            //        }
+            //    }
+            //}
+        }
 
         ////If we press escape we want to automatically deselect our own painting or erasing tools
         //if (Event.current.type == EventType.keyDown &&
@@ -99,7 +94,7 @@ public class MapEditor : Editor
     }
 
     //Draw a list of our custom blocks on the left side of the SceneView
-    static void DrawCustomBlockButtons(SceneView sceneView)
+    static void DrawCustomButtons(SceneView sceneView)
     {
         //Handles.BeginGUI();
 
@@ -113,7 +108,7 @@ public class MapEditor : Editor
         //Handles.EndGUI();
     }
 
-    static void DrawCustomBlockButton(int index, Rect sceneViewRect)
+    static void DrawCustomButtons(int index, Rect sceneViewRect)
     {
         //bool isActive = false;
 

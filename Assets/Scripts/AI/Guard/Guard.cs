@@ -36,8 +36,8 @@ namespace AI
         Transform lookAtPositionCentral;
         PerceptionBar perceptionBar;
         Transform eyes;
-        Vector3 playerLastSeen = new Vector3(1000f, 1000f, 1000f);
-        Vector3 playerLastHeard = new Vector3(1000f, 1000f, 1000f);
+        //Vector3 playerLastSeen = new Vector3(1000f, 1000f, 1000f);
+        //Vector3 playerLastHeard = new Vector3(1000f, 1000f, 1000f);
         Vector3 playerLastPercieved = new Vector3(1000f, 1000f, 1000f);
         static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
 

@@ -5,18 +5,21 @@ using UnityEngine;
 
 public class Actor : SerializedMonoBehaviour
 {
+   [HideInEditorMode][HideInPlayMode]
+   [ReadOnly]
+    public ActorData data;
 
-    public ActorData data;// = new ActorData();
 
-    public string objName;
+    [ReadOnly]
+    public string thisObjectName;
 
     public virtual void Awake()
     {
-        objName = this.gameObject.name;
+        thisObjectName = this.gameObject.name;
     }
     public virtual void StoreData()
     {
-        data.name = objName;
+        data.name = thisObjectName;
         data.pos = this.gameObject.transform.position;
 
     }
@@ -25,7 +28,7 @@ public class Actor : SerializedMonoBehaviour
     public virtual void LoadData()
     {
 
-        objName = data.name;
+        thisObjectName = data.name;
         this.gameObject.transform.position= data.pos;
        
 

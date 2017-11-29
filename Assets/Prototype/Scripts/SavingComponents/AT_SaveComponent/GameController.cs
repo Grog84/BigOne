@@ -4,15 +4,30 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
-public class GameController : SerializedMonoBehaviour {
+public class GameController :MonoBehaviour {
 
+    
+    [BoxGroup("Out Application Propreties",true,true)]
+    public bool SaveOnClose = false;
+    [BoxGroup("Out Application Propreties", true, true)]
+    public bool LoadOnOpen = false;
 
-    [ReadOnly]
+    [HideInEditorMode]    [ReadOnly] 
     public Actor[] allActor;
 
-    [ListDrawerSettings]
-    public List<ActorData> allActorData;
+    [HideInEditorMode]    [ReadOnly]    [BoxGroup("Build & Index Stuff (Hidden in Editor Mode)", true, true)]
+    public int currentLoadedScene;
+    [HideInEditorMode]    [ReadOnly]    [BoxGroup("Build & Index Stuff (Hidden in Editor Mode)", true, true)]    
+    public int currentSceneInBuild;
+    [HideInEditorMode]    [ReadOnly]    [BoxGroup("Build & Index Stuff (Hidden in Editor Mode)", true, true)]
+    public int currentScene;
+    [HideInEditorMode]    [ReadOnly]    [BoxGroup("Build & Index Stuff (Hidden in Editor Mode)", true, true)]
+    public string currentSceneName;
+   
+
+    private List<ActorData> allActorData;
 
 
     private GameObject objPrefab;
@@ -24,28 +39,35 @@ public class GameController : SerializedMonoBehaviour {
     private void Awake()
     {
         allActorData = SaveData.actorContainer.actors;
-
         dataPath = System.IO.Path.Combine(Application.persistentDataPath, "actors.json");
         objPrefab = this.gameObject;
-
-        
+      
         oPrefab = objPrefab;
-    }
 
+        #region Build&Index Stuff's Code
+        currentLoadedScene = SceneManager.sceneCount;
+        currentSceneInBuild = SceneManager.sceneCountInBuildSettings;
+        currentScene = SceneManager.GetActiveScene().buildIndex;
+        currentSceneName = SceneManager.GetActiveScene().name;
+        
+        #endregion
+    }
     private void Start()
     {
         allActor = FindObjectsOfType<Actor>();
 
+        if(LoadOnOpen)
+        {
+            Load();
+        }
     }
-
     public static Actor createActor(string path, Vector3 position, Quaternion rotation)
     {
       
         Actor actor = oPrefab.GetComponent<Actor>();
 
         return actor;
-    }
-   
+    }  
 
     public static Actor createActor(ActorData data, string path, Vector3 position, Quaternion rotation)
     {
@@ -55,29 +77,26 @@ public class GameController : SerializedMonoBehaviour {
         return actor;
 
     }
-    public void Update()
-    {
-       
-
-    }
-
+    
     [HideInEditorMode]
     [Button("Save Check point", ButtonSizes.Medium)]
-    public void Save()
+    public  void Save()
     {
-
         SaveData.Save(dataPath, SaveData.actorContainer);
     }
     [HideInEditorMode]
     [Button("Load Check point", ButtonSizes.Medium)]
-    public void Load()
+    public  void Load()
     {
 
         SaveData.Load(dataPath,allActor);
     }
     private void OnApplicationQuit()
     {
-        //Save();
+        if(SaveOnClose)
+        {
+            Save();
+        }
     }
 
 }

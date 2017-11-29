@@ -13,23 +13,19 @@ public class SaveData  {
 
     public static void Load(string path,Actor[] actors)
     {
-
         actorContainer = LoadActors(path);
 
         foreach (Actor a in actors)
         {
             for (int i = 0; i < actorContainer.actors.Count; i++)
             {
-                if(actorContainer.actors[i].name==a.gameObject.name)
+                if (actorContainer.actors[i].name == a.gameObject.name)
                 {
                     a.data.name = a.gameObject.name;
                     a.data.pos = actorContainer.actors[i].pos;
                     a.gameObject.transform.position = a.data.pos;
                 }
             }
-
-      
-
         }
         OnLoaded();
 
@@ -39,21 +35,9 @@ public class SaveData  {
 
     public static void Save(string path, ActorContainer actors)
     {
-        try
-        {
-
             OnBeforeSave();
             SaveActors(path, actors);
-
-        ClearActorList(); 
-        }
-        catch (System.Exception ex)
-        {
-            Debug.Log(ex.Message);
-        }
-
-       
-
+            ClearActorList();
     }
 
     public static void addActorData(ActorData data)

@@ -29,7 +29,7 @@ namespace SaveGame
         public AT_Profile Profile;
         public void OnApplicationQuit()
         {
-            Profile.currentLevelIndex = SetLastScene();
+            //Profile.currentLevelIndex = SetLastScene();
             //ScreenCapture.CaptureScreenshot("ScreenInput.png");
 #if !UNITY_EDITOR
           //  ScreenCapture.CaptureScreenshot("Assets/Prototype/Images/ScreenInput.png");

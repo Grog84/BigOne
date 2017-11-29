@@ -13,6 +13,11 @@ public class MapEditor : Editor
     static int itemCount;
     static bool[] blocksStatus;
     static int offset;
+    static bool isStart = true;
+
+    static int blockTagSpacing = 15;
+    static int buttonSize = 128;
+    static int buttonSpacing = 35;
 
     //static Transform m_LevelParent;
     //static Transform LevelParent
@@ -75,17 +80,21 @@ public class MapEditor : Editor
 
     static void OnSceneGUI(SceneView sceneView)
     {
-        itemCount = 0;
-        foreach (var block in m_Database.blocksList)
-        {
-            itemCount += block.prefabsList.Count;
-        }
 
-
-        blocksStatus = new bool[m_Database.blocksList.Count];
-        for (int i = 0; i < blocksStatus.Length; i++)
+        if (isStart)
         {
-            blocksStatus[i] = true;
+            isStart = false;
+            itemCount = 0;
+            foreach (var block in m_Database.blocksList)
+            {
+                itemCount += block.prefabsList.Count;
+            }
+
+            blocksStatus = new bool[m_Database.blocksList.Count];
+            for (int i = 0; i < blocksStatus.Length; i++)
+            {
+                blocksStatus[i] = true;
+            }
         }
 
         if (IsInCorrectLevel() == false)
@@ -158,15 +167,16 @@ public class MapEditor : Editor
 
         offset = 0;
 
-        scrollPosition = GUI.BeginScrollView(new Rect(0, 0, 125, sceneView.position.height - 35), scrollPosition, new Rect(0, 0, 110, itemCount * 128 + 25));
+
+        scrollPosition = GUI.BeginScrollView(new Rect(0, 0, 125, sceneView.position.height - 35), scrollPosition, new Rect(0, 0, 110, itemCount * buttonSize + 25));
 
         for (int i = 0; i < m_Database.blocksList.Count; ++i)
         {
             DrawCustomBlock(i, sceneView.position, offset);
             if (blocksStatus[i])
-                offset += m_Database.blocksList[i].prefabsList.Count * 128 + 15;
+                offset += m_Database.blocksList[i].prefabsList.Count * buttonSize + blockTagSpacing;
             else
-                offset += 15;
+                offset += blockTagSpacing;
         }
 
         GUI.EndScrollView();
@@ -176,7 +186,8 @@ public class MapEditor : Editor
 
     static void DrawCustomBlock(int index, Rect sceneView, int offset)
     {
-        blocksStatus[index] = EditorGUI.Foldout(new Rect(0, offset, 125, offset + m_Database.blocksList[index].prefabsList.Count * 128 + 25), blocksStatus[index], m_Database.blocksList[index].Name);
+        blocksStatus[index] = EditorGUI.Foldout(new Rect(0, offset, 125, blockTagSpacing), blocksStatus[index], m_Database.blocksList[index].Name);
+
         if (blocksStatus[index])
         {
             for (int i = 0; i < m_Database.blocksList[index].prefabsList.Count; i++)
@@ -184,13 +195,14 @@ public class MapEditor : Editor
                 DrawCustomButton(index, i, sceneView, offset);
             }
         }
+
     }
 
     static void DrawCustomButton(int blockIndex, int index, Rect sceneViewRect, int offset)
     {
         bool isActive = false;
 
-        if (ToolMenuEditor.SelectedTool == 1 && index == SelectedPrefab)
+        if (ToolMenuEditor.SelectedTool == 1 && index == SelectedPrefab && blockIndex == SelectedBlock)
         {
             isActive = true;
         }
@@ -200,13 +212,12 @@ public class MapEditor : Editor
         GUIContent buttonContent = new GUIContent(previewImage);
 
 
-        GUI.Label(new Rect(5, offset + index * 128 + 15, 100, 20), m_Database.blocksList[blockIndex].prefabsList[index].Name, style);
-        bool isToggleDown = GUI.Toggle(new Rect(5, offset + index * 128 + 35, 100, 100), isActive, buttonContent, GUI.skin.button);
+        GUI.Label(new Rect(5, offset + index * buttonSize + 15, 100, 20), m_Database.blocksList[blockIndex].prefabsList[index].Name, style);
+        bool isToggleDown = GUI.Toggle(new Rect(5, offset + index * buttonSize + 35, 100, 100), isActive, buttonContent, GUI.skin.button);
 
         //If this button is clicked but it wasn't clicked before (ie. if the user has just pressed the button)
         if (isToggleDown == true && isActive == false)
         {
-            Debug.Log("Assign");
             SelectedBlock = blockIndex;
             SelectedPrefab = index;
             ToolMenuEditor.SelectedTool = 1;

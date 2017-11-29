@@ -9,6 +9,7 @@ namespace AI
         GuardState guardState = GuardState.NORMAL;
         bool isPlayerInSight = false;
         bool randomPick = false;
+        bool otherAlarmed = false;
         Vector3 lastPercievedPosition;
         Vector3 resetPlayerPosition = new Vector3(1000, 1000, 1000);
 
@@ -43,6 +44,10 @@ namespace AI
                 return randomPick;
             }
 
+            if(valueName == "OtherAllarmed")
+            {
+                return otherAlarmed;
+            }
             return false;
         }
 
@@ -56,6 +61,11 @@ namespace AI
             if (valueName == "RandomValue")
             {
                  randomPick = value;
+            }
+
+            if(valueName == "OtherAllarmed")
+            {
+                otherAlarmed = value;
             }
         }
 

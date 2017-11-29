@@ -22,6 +22,10 @@ namespace AI
         public GuardStats alarmedStats;
         public GuardStats distractedStats;
 
+        [Space(10)]
+        [Header("Agent Perception Component")]
+        public GameObject guardAllert;
+
         // State
         GuardState m_State = GuardState.NORMAL;
         GuardStats stats;
@@ -38,7 +42,7 @@ namespace AI
         Transform eyes;
         //Vector3 playerLastSeen = new Vector3(1000f, 1000f, 1000f);
         //Vector3 playerLastHeard = new Vector3(1000f, 1000f, 1000f);
-        Vector3 playerLastPercieved = new Vector3(1000f, 1000f, 1000f);
+        [HideInInspector]public Vector3 playerLastPercieved = new Vector3(1000f, 1000f, 1000f);
         static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
 
         public bool hasRadio = false;
@@ -46,7 +50,7 @@ namespace AI
 
         float perceptionPercentage = 0f;
         [HideInInspector] public bool isPlayerInSight = false;
-
+        [HideInInspector] public bool isOtherAlarmed = false;
         // Saving Game
         [HideInInspector] public GuardSaveComponent m_SaveComponent;
 
@@ -68,6 +72,7 @@ namespace AI
             m_State = GuardState.NORMAL;
             m_Blackboard.SetIntValue("GuardState", (int)GuardState.NORMAL);
             LoadStats(normalStats);
+            guardAllert.SetActive(true);
         }
 
         public void GetCurious()
@@ -80,6 +85,7 @@ namespace AI
 
         public void GetAlarmed()
         {
+            perceptionPercentage = 100;
             if (m_State == GuardState.CURIOUS)
                 GMController.instance.curiousGuards--;
 
@@ -87,6 +93,8 @@ namespace AI
             m_State = GuardState.ALARMED;
             m_Blackboard.SetIntValue("GuardState", (int)GuardState.ALARMED);
             LoadStats(alarmedStats);
+            guardAllert.SetActive(false);
+            isOtherAllarmed = false;
         }
 
         public void GetDistracted()
@@ -107,11 +115,16 @@ namespace AI
             isPlayerInSight = false;
             StartCoroutine(OutOfSightHysteresis());
         }
- 
-        // method used to trigger the random pick of the points by action
-        public void GetRandomPickStatus()
+
+        public void SetOtherAlarmed()
         {
-            randomPick = m_Blackboard.GetBoolValue("RandomPick");
+            isOtherAlarmed = true;
+            m_Blackboard.SetBoolValue("OtherAlarmed", true);
+        }
+        
+        public void GetOtherAlarmed()
+        {
+            isOtherAlarmed = m_Blackboard.GetBoolValue("OtherAlarmed");
         }
 
         internal GuardState GetState
@@ -213,11 +226,11 @@ namespace AI
             {
                 GetNormal();
             }
-            else if(perceptionPercentage >= 25 && perceptionPercentage < 75)
+            else if((perceptionPercentage >= 25 && perceptionPercentage < 75) && GetState != GuardState.ALARMED && GetState != GuardState.CURIOUS)
             {
                 GetCurious();
             }
-            else if(perceptionPercentage >= 75 && perceptionPercentage <= 100)
+            else if((perceptionPercentage >= 75 && perceptionPercentage < 100) && GetState != GuardState.ALARMED)
             {
                 GetAlarmed();
             }
@@ -289,10 +302,10 @@ namespace AI
 
         private void Update()
         {
-            GetRandomPickStatus();
             LookAround();
             UpdatePerceptionUI();
             ChangeStateFromGauge();
+            GetOtherAlarmed();
         }
     }
 

@@ -6,7 +6,7 @@ using UnityEditor;
 [InitializeOnLoad]
 public class MapEditor : Editor
 {
-    static MapEditorDatabase m_Database;
+    public static MapEditorDatabase m_Database;
 
     static GUIStyle style = new GUIStyle();
     static Vector2 scrollPosition = Vector2.zero;
@@ -223,7 +223,6 @@ public class MapEditor : Editor
             ToolMenuEditor.SelectedTool = 1;
         }
     }
-
 
     public static void AddGameObject(Vector3 position, GameObject prefab)
     {

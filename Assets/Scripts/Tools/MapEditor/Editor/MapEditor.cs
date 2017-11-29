@@ -206,6 +206,7 @@ public class MapEditor : Editor
         //If this button is clicked but it wasn't clicked before (ie. if the user has just pressed the button)
         if (isToggleDown == true && isActive == false)
         {
+            Debug.Log("Assign");
             SelectedBlock = blockIndex;
             SelectedPrefab = index;
             ToolMenuEditor.SelectedTool = 1;

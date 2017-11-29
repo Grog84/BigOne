@@ -10,6 +10,9 @@ public class MapEditor : Editor
 
     static GUIStyle style = new GUIStyle();
     static Vector2 scrollPosition = Vector2.zero;
+    static int itemCount;
+    static bool[] blocksStatus;
+    static int offset;
 
     //static Transform m_LevelParent;
     //static Transform LevelParent
@@ -29,6 +32,18 @@ public class MapEditor : Editor
     //        return m_LevelParent;
     //    }
     //}
+
+    public static int SelectedBlock
+    {
+        get
+        {
+            return EditorPrefs.GetInt("SelectedBlock", 0);
+        }
+        set
+        {
+            EditorPrefs.SetInt("SelectedBlock", value);
+        }
+    }
 
     //Get or Set which Prefab is selected in our custom menu
     public static int SelectedPrefab
@@ -60,6 +75,19 @@ public class MapEditor : Editor
 
     static void OnSceneGUI(SceneView sceneView)
     {
+        itemCount = 0;
+        foreach (var block in m_Database.blocksList)
+        {
+            itemCount += block.prefabsList.Count;
+        }
+
+
+        blocksStatus = new bool[m_Database.blocksList.Count];
+        for (int i = 0; i < blocksStatus.Length; i++)
+        {
+            blocksStatus[i] = true;
+        }
+
         if (IsInCorrectLevel() == false)
         {
             return;
@@ -102,9 +130,9 @@ public class MapEditor : Editor
 
                 if (ToolMenuEditor.SelectedTool == 1)
                 {
-                    if (SelectedPrefab < m_Database.prefabsList.Count)
+                    if (SelectedPrefab < m_Database.blocksList.Count)
                     {
-                        AddBlock(MapEditorHandle.CurrentHandlePosition, m_Database.prefabsList[SelectedPrefab].Prefab);
+                        AddGameObject(MapEditorHandle.CurrentHandlePosition, m_Database.blocksList[SelectedBlock].prefabsList[SelectedPrefab].Prefab);
                     }
                 }
 
@@ -128,11 +156,17 @@ public class MapEditor : Editor
 
         GUI.Box(new Rect(0, 0, 110, sceneView.position.height - 35), GUIContent.none, EditorStyles.textArea);
 
-        scrollPosition = GUI.BeginScrollView(new Rect(0, 0, 125, sceneView.position.height - 35), scrollPosition, new Rect(0, 0, 110, m_Database.prefabsList.Count * 128 + 25));
+        offset = 0;
 
-        for (int i = 0; i < m_Database.prefabsList.Count; ++i)
+        scrollPosition = GUI.BeginScrollView(new Rect(0, 0, 125, sceneView.position.height - 35), scrollPosition, new Rect(0, 0, 110, itemCount * 128 + 25));
+
+        for (int i = 0; i < m_Database.blocksList.Count; ++i)
         {
-            DrawCustomButton(i, sceneView.position);
+            DrawCustomBlock(i, sceneView.position, offset);
+            if (blocksStatus[i])
+                offset += m_Database.blocksList[i].prefabsList.Count * 128 + 15;
+            else
+                offset += 15;
         }
 
         GUI.EndScrollView();
@@ -140,7 +174,19 @@ public class MapEditor : Editor
         Handles.EndGUI();
     }
 
-    static void DrawCustomButton(int index, Rect sceneViewRect)
+    static void DrawCustomBlock(int index, Rect sceneView, int offset)
+    {
+        blocksStatus[index] = EditorGUI.Foldout(new Rect(0, offset, 125, offset + m_Database.blocksList[index].prefabsList.Count * 128 + 25), blocksStatus[index], m_Database.blocksList[index].Name);
+        if (blocksStatus[index])
+        {
+            for (int i = 0; i < m_Database.blocksList[index].prefabsList.Count; i++)
+            {
+                DrawCustomButton(index, i, sceneView, offset);
+            }
+        }
+    }
+
+    static void DrawCustomButton(int blockIndex, int index, Rect sceneViewRect, int offset)
     {
         bool isActive = false;
 
@@ -150,22 +196,24 @@ public class MapEditor : Editor
         }
 
         //By passing a Prefab or GameObject into AssetPreview.GetAssetPreview you get a texture that shows this object
-        Texture2D previewImage = AssetPreview.GetAssetPreview(m_Database.prefabsList[index].Prefab);
+        Texture2D previewImage = AssetPreview.GetAssetPreview(m_Database.blocksList[blockIndex].prefabsList[index].Prefab);
         GUIContent buttonContent = new GUIContent(previewImage);
 
-        
-        GUI.Label(new Rect(5, index * 128 + 5, 100, 20), m_Database.prefabsList[index].Name, style);
-        bool isToggleDown = GUI.Toggle(new Rect(5, index * 128 + 25, 100, 100), isActive, buttonContent, GUI.skin.button);
+
+        GUI.Label(new Rect(5, offset + index * 128 + 15, 100, 20), m_Database.blocksList[blockIndex].prefabsList[index].Name, style);
+        bool isToggleDown = GUI.Toggle(new Rect(5, offset + index * 128 + 35, 100, 100), isActive, buttonContent, GUI.skin.button);
 
         //If this button is clicked but it wasn't clicked before (ie. if the user has just pressed the button)
         if (isToggleDown == true && isActive == false)
         {
+            SelectedBlock = blockIndex;
             SelectedPrefab = index;
             ToolMenuEditor.SelectedTool = 1;
         }
     }
 
-    public static void AddBlock(Vector3 position, GameObject prefab)
+
+    public static void AddGameObject(Vector3 position, GameObject prefab)
     {
         if (prefab == null)
         {

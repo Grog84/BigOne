@@ -40,7 +40,7 @@ public class MapEditorHandle : Editor
             return;
         }
 
-        UpdateHandlePosition();
+        UpdateHandlePosition(sceneView);
         //UpdateIsMouseInValidArea(sceneView.position);
         UpdateRepaint();
 
@@ -66,7 +66,7 @@ public class MapEditorHandle : Editor
     //    }
     //}
 
-    static void UpdateHandlePosition()
+    static void UpdateHandlePosition(SceneView sceneView)
     {
         if (Event.current == null)
         {
@@ -78,7 +78,10 @@ public class MapEditorHandle : Editor
         Ray ray = HandleUtility.GUIPointToWorldRay(mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        // 0, 0, 110, sceneView.position.height - 35
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity) &&
+            Event.current.mousePosition.x > 110)
         {
             IsMouseInValidArea = true;
             CurrentHandlePosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);

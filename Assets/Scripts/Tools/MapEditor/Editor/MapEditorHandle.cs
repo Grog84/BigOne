@@ -81,7 +81,8 @@ public class MapEditorHandle : Editor
         // 0, 0, 110, sceneView.position.height - 35
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity) &&
-            Event.current.mousePosition.x > 110)
+            Event.current.mousePosition.x > 110 &&
+            Event.current.mousePosition.y < sceneView.position.height - 35)
         {
             IsMouseInValidArea = true;
             CurrentHandlePosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
@@ -109,7 +110,9 @@ public class MapEditorHandle : Editor
         //    return;
         //}
 
-        Handles.color = new Color(EditorPrefs.GetFloat("CubeHandleColorR", 1f), EditorPrefs.GetFloat("CubeHandleColorG", 1f), EditorPrefs.GetFloat("CubeHandleColorB", 0f));
+        Handles.color = new Color(EditorPrefs.GetFloat("CubeHandleColorR", 1f),
+            EditorPrefs.GetFloat("CubeHandleColorG", 1f),
+            EditorPrefs.GetFloat("CubeHandleColorB", 0f));
         
         DrawHandlesCube(CurrentHandlePosition);
     }

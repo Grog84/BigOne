@@ -165,6 +165,8 @@ public class MapEditor : Editor
 
         GUI.Box(new Rect(0, 0, 110, sceneView.position.height - 35), GUIContent.none, EditorStyles.textArea);
 
+        GUI.Box(new Rect(sceneView.position.width - 110 , 0, sceneView.position.width, sceneView.position.height - 35), GUIContent.none, EditorStyles.textArea);
+
         offset = 0;
 
 

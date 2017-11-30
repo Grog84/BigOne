@@ -116,15 +116,39 @@ public class MapEditorHandle : Editor
 
     static void DrawHandlesCube(Vector3 center)
     {
-        Vector3 p1 = center + Vector3.up * 0.5f + Vector3.right * 0.5f + Vector3.forward * 0.5f;
-        Vector3 p2 = center + Vector3.up * 0.5f + Vector3.right * 0.5f - Vector3.forward * 0.5f;
-        Vector3 p3 = center + Vector3.up * 0.5f - Vector3.right * 0.5f - Vector3.forward * 0.5f;
-        Vector3 p4 = center + Vector3.up * 0.5f - Vector3.right * 0.5f + Vector3.forward * 0.5f;
+        GameObject selectedPrefab = MapEditor.m_Database.blocksList[MapEditor.SelectedBlock].prefabsList[MapEditor.SelectedPrefab].Prefab;
+        Vector3 bounds = Vector3.zero;
 
-        Vector3 p5 = center - Vector3.up * 0.5f + Vector3.right * 0.5f + Vector3.forward * 0.5f;
-        Vector3 p6 = center - Vector3.up * 0.5f + Vector3.right * 0.5f - Vector3.forward * 0.5f;
-        Vector3 p7 = center - Vector3.up * 0.5f - Vector3.right * 0.5f - Vector3.forward * 0.5f;
-        Vector3 p8 = center - Vector3.up * 0.5f - Vector3.right * 0.5f + Vector3.forward * 0.5f;
+        if(selectedPrefab)
+        {
+            if (selectedPrefab.GetComponent<MeshFilter>())
+                bounds = selectedPrefab.GetComponent<MeshFilter>().sharedMesh.bounds.extents;
+            else
+            {
+                Bounds combinedBounds = new Bounds();
+                pb_Object[] pbObjs = selectedPrefab.GetComponentsInChildren<pb_Object>();
+
+                foreach (var pbObj in pbObjs)
+                {
+                    pbObj.GetComponent<pb_Object>().Verify();
+                    combinedBounds.Encapsulate(pbObj.msh.bounds);
+                    //Debug.Log(pbObj.msh.bounds.extents);
+                }
+
+                bounds = combinedBounds.extents;
+                //Debug.Log(bounds);
+            }
+        }
+
+        Vector3 p1 = center + Vector3.right * bounds.x + Vector3.forward * bounds.z;
+        Vector3 p2 = center + Vector3.right * bounds.x - Vector3.forward * bounds.z;
+        Vector3 p3 = center - Vector3.right * bounds.x - Vector3.forward * bounds.z;
+        Vector3 p4 = center - Vector3.right * bounds.x + Vector3.forward * bounds.z;
+
+        Vector3 p5 = center + Vector3.up * bounds.y * 2f + Vector3.right * bounds.x + Vector3.forward * bounds.z;
+        Vector3 p6 = center + Vector3.up * bounds.y * 2f + Vector3.right * bounds.x - Vector3.forward * bounds.z;
+        Vector3 p7 = center + Vector3.up * bounds.y * 2f - Vector3.right * bounds.x - Vector3.forward * bounds.z;
+        Vector3 p8 = center + Vector3.up * bounds.y * 2f - Vector3.right * bounds.x + Vector3.forward * bounds.z;
 
         //You can use Handles to draw 3d objects into the SceneView. If defined properly the
         //user can even interact with the handles. For example Unitys move tool is implemented using Handles

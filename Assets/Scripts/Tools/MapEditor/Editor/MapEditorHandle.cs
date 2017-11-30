@@ -126,15 +126,17 @@ public class MapEditorHandle : Editor
             else
             {
                 Bounds combinedBounds = new Bounds();
-                MeshRenderer[] renderers = selectedPrefab.GetComponentsInChildren<MeshRenderer>();
-                //Debug.Log(renderers.Length);
-                foreach (var render in renderers)
+                pb_Object[] pbObjs = selectedPrefab.GetComponentsInChildren<pb_Object>();
+
+                foreach (var pbObj in pbObjs)
                 {
-                    combinedBounds.Encapsulate(render.bounds);
+                    pbObj.GetComponent<pb_Object>().Verify();
+                    combinedBounds.Encapsulate(pbObj.msh.bounds);
+                    //Debug.Log(pbObj.msh.bounds.extents);
                 }
-                
+
                 bounds = combinedBounds.extents;
-                Debug.Log(bounds);
+                //Debug.Log(bounds);
             }
         }
 

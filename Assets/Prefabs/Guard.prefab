@@ -451,6 +451,7 @@ GameObject:
   - component: {fileID: 195911928445851840}
   - component: {fileID: 114820765553436026}
   - component: {fileID: 114983923712983390}
+  - component: {fileID: 114876821729729712}
   - component: {fileID: 114875479976392488}
   - component: {fileID: 114528073490817216}
   m_Layer: 17
@@ -2489,6 +2490,18 @@ MonoBehaviour:
   xScale: 4
   yScale: 4
   zScale: 4
+--- !u!114 &114876821729729712
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1328685680502708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa5ae2cbafe13584d94a425a61a7d5d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Guard: {fileID: 114983923712983390}
 --- !u!114 &114983923712983390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2509,9 +2522,12 @@ MonoBehaviour:
   curiousStats: {fileID: 0}
   alarmedStats: {fileID: 0}
   distractedStats: {fileID: 0}
+  guardAllert: {fileID: 0}
   wayPointListTransform: []
+  playerLastPercieved: {x: 1000, y: 1000, z: 1000}
   hasRadio: 0
   isPlayerInSight: 0
+  isOtherAlarmed: 0
   m_SaveComponent: {fileID: 0}
 --- !u!136 &136112457474815546
 CapsuleCollider:

@@ -30,9 +30,11 @@ namespace AI
         GuardState m_State = GuardState.NORMAL;
         GuardStats stats;
 
-        //Navigation
-        //NavMeshAgent m_NavMeshAgent;
-
+        //Patrols
+        [HideInInspector] public int nextWayPoint = 0;
+        [HideInInspector] public int checkingWayPoint = 0;
+        [HideInInspector] public float checkNavPointTime = 0f, navPointTimer = 0f;
+        [HideInInspector] public float m_TurnAmount;
         [HideInInspector] public Transform[] wayPointListTransform;
 
         // Perception
@@ -40,8 +42,7 @@ namespace AI
         Transform lookAtPositionCentral;
         PerceptionBar perceptionBar;
         Transform eyes;
-        //Vector3 playerLastSeen = new Vector3(1000f, 1000f, 1000f);
-        //Vector3 playerLastHeard = new Vector3(1000f, 1000f, 1000f);
+       
         [HideInInspector]public Vector3 playerLastPercieved = new Vector3(1000f, 1000f, 1000f);
         static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
 
@@ -217,6 +218,34 @@ namespace AI
 
             perceptionPercentage = Mathf.Clamp(perceptionPercentage, 0f, 100f);
             
+        }
+
+        public void CheckNextPoint()
+        {
+            navPointTimer += Time.deltaTime;
+
+            if (navPointTimer <= 2f)
+            {
+                float step = normalStats.angularSpeed * Time.deltaTime;
+                Vector3 newDir = Vector3.RotateTowards(transform.forward, wayPointList[checkingWayPoint].facingDirection, step, 0.0f);
+                transform.rotation = Quaternion.LookRotation(newDir);
+                m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
+            }
+            else if (navPointTimer >= checkNavPointTime - 2f)
+            {
+                // start facing the next point of the navigation
+                float step = normalStats.angularSpeed * Time.deltaTime;
+                Vector3 targetDir = wayPointListTransform[nextWayPoint].position - transform.position;
+                Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+                transform.rotation = Quaternion.LookRotation(newDir);
+                m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
+            }
+
+            if (navPointTimer >= checkNavPointTime)
+            {
+                navPointTimer = 0;
+                m_Blackboard.SetBoolValue("CheckingNavPoint", false);
+            }
         }
 
         // method used to manage the state of the guard from the gauge of perception

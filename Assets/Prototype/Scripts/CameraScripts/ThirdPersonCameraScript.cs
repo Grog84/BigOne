@@ -26,7 +26,7 @@ public class ThirdPersonCameraScript : CameraScript {
         mainCam = Camera.main.GetComponent<CameraScript>();
         this.minCamDistance = mainCam.minCamDistance;
         this.maxDistance = mainCam.maxDistance;
-
+        //cam.m_Lens.FieldOfView = mainCam.Fov;
        
         SwitchLookAt();
 
@@ -39,8 +39,7 @@ public class ThirdPersonCameraScript : CameraScript {
 
     private void Update()
     {
-        //cam.m_Priority = 15;
-        //Debug.Log(lookAt.gameObject.name);
+        //cam.m_Lens.FieldOfView = Fov;
 
         //if (Input.GetButtonDown("Pause"))
         //{

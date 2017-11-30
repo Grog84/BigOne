@@ -40,7 +40,6 @@ namespace AI.Actions
                 else
                     controller.m_AgentController.nextWayPoint = (controller.m_AgentController.nextWayPoint + 1) % controller.m_AgentController.wayPointList.Count;
             }
-
         }
     }
 }

@@ -48,7 +48,7 @@ public class CameraScript : MonoBehaviour
     //minimum distance of the camera to the character before switching to fps
     [Tooltip("distanza alla quale la telecamera passa in prima persona")]
     public float minCamDistance = 1f;
-
+    //public int Fov = 60;
     //camera variables for the position 
     protected float nearClipPlaneDistance = 0.1f;
     protected float distance = 2.5f;
@@ -146,10 +146,6 @@ public class CameraScript : MonoBehaviour
             StartCoroutine(SetMaterialOpaque(MotherSkin));
         }
 #endregion
-
-
-
-
 
     }
 

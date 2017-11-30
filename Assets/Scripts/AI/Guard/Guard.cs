@@ -262,6 +262,21 @@ namespace AI
             m_Blackboard.SetVector3Value("LastPercievedPosition", playerLastPercieved);
         }
 
+        // get a random point to check when reached the last precieved position
+        public void GetRandomPoint(out Vector3 result)
+        {
+            for (int i = 0; i < 30; i++)
+            {
+                Vector3 randomPoint = transform.position + Random.insideUnitSphere * alarmedStats.localSearchRange;
+                NavMeshHit hit;
+                if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+                {
+                    result = hit.position;
+                }
+            }
+            result = transform.position;
+        }
+
         private void UpdatePerceptionUI()
         {
             perceptionBar.SetFillingPerc(Mathf.Clamp(perceptionPercentage, 0f, 100f));

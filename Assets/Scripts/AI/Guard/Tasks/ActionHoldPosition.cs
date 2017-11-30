@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace AI.BT
 {
-    public class ActionAlarmed : Task
+    public class ActionHoldPosition : Task
     {
         public override TaskState Run()
         {
-            m_BehaviourTree.m_Blackboard.m_Agent.GetComponent<Guard>().GetAlarmed();
+            m_BehaviourTree.m_Blackboard.m_Agent.m_NavMeshAgent.isStopped = true;
             return TaskState.SUCCESS;
         }
     }

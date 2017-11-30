@@ -6,11 +6,15 @@ namespace AI.BT
 {
     public class ActionRandomPatrol : Task
     {
+        private Vector3 randomDestination;
+
         public override TaskState Run()
         {
-            m_BehaviourTree.m_Blackboard.SetBoolValue("RandomPick", true); 
+            
+            m_BehaviourTree.m_Blackboard.m_Agent.GetComponent<Guard>().GetRandomPoint(out randomDestination);
+            m_BehaviourTree.m_Blackboard.m_Agent.m_NavMeshAgent.destination = randomDestination;
 
-            return TaskState.SUCCESS;;
+           return TaskState.SUCCESS;
         }
     }
 }

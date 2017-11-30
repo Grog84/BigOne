@@ -31,7 +31,7 @@ public class Actor : SerializedMonoBehaviour
         thisObjectName = data.name;
         this.gameObject.transform.position= data.pos;
        
-
+     
     }
     public virtual void ApplyData()
     {

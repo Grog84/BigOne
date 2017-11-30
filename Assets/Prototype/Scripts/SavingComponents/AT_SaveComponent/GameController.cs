@@ -5,9 +5,13 @@ using Sirenix.OdinInspector;
 using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
+using System.IO;
 
 public class GameController :MonoBehaviour {
 
+
+    [BoxGroup("Profile Settings")]
+    public AT_Profile Profile;
     
     [BoxGroup("Out Application Propreties",true,true)]
     public bool SaveOnClose = false;
@@ -35,11 +39,13 @@ public class GameController :MonoBehaviour {
     public const string playerPath = "/Prototype/Prefabs/";
 
     private static string dataPath = string.Empty;
+    private static string profilePath = string.Empty;
 
     private void Awake()
     {
         allActorData = SaveData.actorContainer.actors;
         dataPath = System.IO.Path.Combine(Application.persistentDataPath, "actors.json");
+        profilePath = System.IO.Path.Combine(Application.persistentDataPath, "Profile.json");
         objPrefab = this.gameObject;
       
         oPrefab = objPrefab;
@@ -54,6 +60,7 @@ public class GameController :MonoBehaviour {
     }
     private void Start()
     {
+       Profile.AC = SaveData.actorContainer;
         allActor = FindObjectsOfType<Actor>();
 
         if(LoadOnOpen)
@@ -83,20 +90,59 @@ public class GameController :MonoBehaviour {
     public  void Save()
     {
         SaveData.Save(dataPath, SaveData.actorContainer);
+
+        Profile.AC = SaveData.actorContainer;
+        Profile.dateTime = DateTime.Now;
+        SaveProfile(profilePath, Profile);
+        Debug.Log("Salvato");
     }
     [HideInEditorMode]
     [Button("Load Check point", ButtonSizes.Medium)]
     public  void Load()
     {
-
+        Profile = LoadProfile(profilePath);
         SaveData.Load(dataPath,allActor);
     }
     private void OnApplicationQuit()
     {
+
+       
+        SaveProfile(profilePath, Profile);
         if(SaveOnClose)
         {
             Save();
         }
+    }
+
+    public void LoadLastScene()
+    {
+       Profile= LoadProfile(profilePath);
+        SceneManager.LoadSceneAsync(Profile.LastScene);
+    }
+
+    
+
+    private static void SaveProfile(string path, AT_Profile profile)
+    {
+
+        profile.dateTime = DateTime.Now;
+        profile.LastScene = SceneManager.GetActiveScene().buildIndex;
+
+        string json = JsonUtility.ToJson(profile);
+
+        StreamWriter sw = File.CreateText(path);
+        sw.Close();
+
+        File.WriteAllText(path, json);
+
+    }
+    private static AT_Profile LoadProfile(string path)
+    {
+        string json = File.ReadAllText(path);
+
+        return JsonUtility.FromJson<AT_Profile>(json);
+
+
     }
 
 }

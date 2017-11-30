@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class AT_NearestSpotlight : MonoBehaviour {
- static GameObject Player = GameObject.FindGameObjectWithTag("Player");
+public class AT_NearestSpotlight : MonoBehaviour
+{
+    static GameObject Player = GameObject.FindGameObjectWithTag("Player");
     public static Vector3 NearestSpotlight(List<Light> LightConflict)
     {
 
@@ -20,7 +21,7 @@ public class AT_NearestSpotlight : MonoBehaviour {
         {
             if (Distance.Min() == Distance[i])
             {
-                Debug.Log(Distance.Min());
+                //Debug.Log(Distance.Min());
                 index = i;
 
             }
@@ -29,5 +30,5 @@ public class AT_NearestSpotlight : MonoBehaviour {
         return LightConflict[index].transform.position;
     }
 
-    
+
 }

@@ -6,9 +6,7 @@ using UnityEngine;
 [Serializable]
 public class ActorData
 {
-    //public int indexSave;
-
-    //public DateTime dateTime;
+    
 
     public string name;
 

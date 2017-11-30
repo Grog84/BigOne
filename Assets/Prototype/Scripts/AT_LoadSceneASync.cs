@@ -21,7 +21,7 @@ public class AT_LoadSceneASync : MonoBehaviour
     [SerializeField] public Button[] ButtonStatus;
 
     private void Awake()
-    {
+    {/*
         if (Profiler != null)
         {
             Profiler.completedLevel = new bool[SceneManager.sceneCountInBuildSettings-1];
@@ -48,11 +48,11 @@ public class AT_LoadSceneASync : MonoBehaviour
                     ButtonStatus[i].interactable = false;
                 }
             }
-        }
+        }*/
     }
     private void Start()
     {
-        LastSceneButton.transform.GetChild(0).GetComponent<Text>().text = "Load last Scene Saved : " + Profiler.currentLevelIndex;
+        //LastSceneButton.transform.GetChild(0).GetComponent<Text>().text = "Load last Scene Saved : " + Profiler.currentLevelIndex;
     }
     //   public Image yourNameHere;
     public void StartLoad(int index)
@@ -70,7 +70,7 @@ public class AT_LoadSceneASync : MonoBehaviour
 
     public void LoadLastScene()
     {
-        StartCoroutine(AsynchronousLoad(Profiler.currentLevelIndex));
+      //  StartCoroutine(AsynchronousLoad(Profiler.currentLevelIndex));
         TextBox.text = "Caricamento in corso";
         StartCoroutine(LoadingText());
 

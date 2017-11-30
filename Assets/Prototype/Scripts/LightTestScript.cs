@@ -129,7 +129,7 @@ public class LightTestScript : MonoBehaviour
         {
             if (Distance.Min() == Distance[i])
             {
-                Debug.Log(Distance.Min());
+               // Debug.Log(Distance.Min());
                 index = i;
 
             }

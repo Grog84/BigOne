@@ -94,7 +94,7 @@ namespace AI
             m_Blackboard.SetIntValue("GuardState", (int)GuardState.ALARMED);
             LoadStats(alarmedStats);
             guardAllert.SetActive(false);
-            isOtherAllarmed = false;
+            isOtherAlarmed = false;
         }
 
         public void GetDistracted()

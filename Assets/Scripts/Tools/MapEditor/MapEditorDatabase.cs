@@ -7,6 +7,7 @@ public class ItemData
 {
     public string Name;
     public GameObject Prefab;
+    public List<Material> materialList = new List<Material>() { };
 }
 
 [System.Serializable]

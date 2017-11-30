@@ -12,6 +12,10 @@ public class GameController :MonoBehaviour {
 
     [BoxGroup("Profile Settings")]
     public AT_Profile Profile;
+
+
+
+	public static int lastscene;
     
     [BoxGroup("Out Application Propreties",true,true)]
     public bool SaveOnClose = false;
@@ -43,6 +47,7 @@ public class GameController :MonoBehaviour {
 
     private void Awake()
     {
+		lastscene = Profile.LastScene;
         allActorData = SaveData.actorContainer.actors;
         dataPath = System.IO.Path.Combine(Application.persistentDataPath, "actors.json");
         profilePath = System.IO.Path.Combine(Application.persistentDataPath, "Profile.json");
@@ -116,11 +121,21 @@ public class GameController :MonoBehaviour {
 
     public void LoadLastScene()
     {
-       Profile= LoadProfile(profilePath);
-        SceneManager.LoadSceneAsync(Profile.LastScene);
+		StartCoroutine (AsycLoad()); 
     }
 
-    
+	IEnumerator AsycLoad()
+	{
+		Profile= LoadProfile(profilePath);
+		SceneManager.LoadSceneAsync(Profile.LastScene);
+		yield return null;
+	}
+
+	public  static int getlastScene()
+	{
+
+		return lastscene;
+	}
 
     private static void SaveProfile(string path, AT_Profile profile)
     {

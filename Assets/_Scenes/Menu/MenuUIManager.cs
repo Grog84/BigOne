@@ -15,7 +15,7 @@ public class MenuUIManager : MonoBehaviour
 	public GameObject selectLevelMenu;
 	public GameObject exitMenu;
 	public GameObject areYouSure;
-	public Button continueButton;
+	public GameObject continueButton;
 	public EventSystem eventSystem;
 	public GameObject firstSelectedMainMenuButton;
 	public GameObject firstSelectedSettingsMenuButton;
@@ -25,9 +25,14 @@ public class MenuUIManager : MonoBehaviour
 	public GameObject firstSelectedSelectLevelMenuButton;
 	public GameObject firstSelectedExitMenuButton;
 	public GameObject firstSelectedAreYouSureButton;
+	public int variabileCheckMenu;
+	public Button areYouSureYesButton;
+	public Button areYouSureNoButton;
+	private GameController GC;
 
 	void Start() //Disable all the GameObject-Menu that has not to be on the screen
 	{
+		GC = FindObjectOfType<GameController> ().GetComponents<GameController> ();
 		mainMenu.gameObject.SetActive (true);
 		settingsMenu.gameObject.SetActive (false);
 		audioMenu.gameObject.SetActive (false);
@@ -36,12 +41,18 @@ public class MenuUIManager : MonoBehaviour
 		selectLevelMenu.gameObject.SetActive (false);
 		exitMenu.gameObject.SetActive (false);
 		areYouSure.gameObject.SetActive (false);
+		areYouSure.gameObject.SetActive (false);
 		eventSystem.SetSelectedGameObject(firstSelectedMainMenuButton);
+		variabileCheckMenu = 0;
+		if (GameController.getlastScene() > 1) 
+			continueButton.SetActive (true);
+		else 
+			continueButton.SetActive (false);
 	}	
 
-	public void StartGame() //Start game function
+	public void StartNewGame() //Start game function
 	{
-		SceneManager.LoadScene("FG_MappaP_01");
+		SceneManager.LoadSceneAsync (2);
 	}
 
 	public void FadesMenu(string menuType) //Set the time to wait until the fade animation is finished
@@ -58,6 +69,7 @@ public class MenuUIManager : MonoBehaviour
 		controllerMenu.gameObject.SetActive (false);
 		selectLevelMenu.gameObject.SetActive (false);
 		exitMenu.gameObject.SetActive (false);
+		areYouSure.gameObject.SetActive (false);
 		eventSystem.SetSelectedGameObject(firstSelectedSettingsMenuButton);
 	}
 
@@ -70,7 +82,9 @@ public class MenuUIManager : MonoBehaviour
 		controllerMenu.gameObject.SetActive (false);
 		selectLevelMenu.gameObject.SetActive (false);
 		exitMenu.gameObject.SetActive (false);
+		areYouSure.gameObject.SetActive (false);
 		eventSystem.SetSelectedGameObject(firstSelectedMainMenuButton);
+		variabileCheckMenu = 0;
 	}
 
 	public void AudioMenu() //Enabled the Audio Menu and disable all the others
@@ -82,6 +96,7 @@ public class MenuUIManager : MonoBehaviour
 		controllerMenu.gameObject.SetActive (false);
 		selectLevelMenu.gameObject.SetActive (false);
 		exitMenu.gameObject.SetActive (false);
+		areYouSure.gameObject.SetActive (false);
 		eventSystem.SetSelectedGameObject(firstSelectedAudioMenuButton);
 	}
 
@@ -94,6 +109,7 @@ public class MenuUIManager : MonoBehaviour
 		controllerMenu.gameObject.SetActive (false);
 		selectLevelMenu.gameObject.SetActive (false);
 		exitMenu.gameObject.SetActive (false);
+		areYouSure.gameObject.SetActive (false);
 		eventSystem.SetSelectedGameObject(firstSelectedVideoMenuButton);
 	}
 
@@ -106,12 +122,13 @@ public class MenuUIManager : MonoBehaviour
 		controllerMenu.gameObject.SetActive (true);
 		selectLevelMenu.gameObject.SetActive (false);
 		exitMenu.gameObject.SetActive (false);
+		areYouSure.gameObject.SetActive (false);
 		eventSystem.SetSelectedGameObject(firstSelectedControllerMenuButton);
 	}
 
 	public void Continue() //Load the previous game
 	{
-
+		GC.LoadLastScene ();
 	}
 
 	public void SelectLevelMenu() //Enabled the Select Level Menu and disable all the others
@@ -123,6 +140,7 @@ public class MenuUIManager : MonoBehaviour
 		controllerMenu.gameObject.SetActive (false);
 		selectLevelMenu.gameObject.SetActive (true);
 		exitMenu.gameObject.SetActive (false);
+		areYouSure.gameObject.SetActive (false);
 		eventSystem.SetSelectedGameObject(firstSelectedSelectLevelMenuButton);
 	}
 
@@ -135,12 +153,42 @@ public class MenuUIManager : MonoBehaviour
 		controllerMenu.gameObject.SetActive (false);
 		selectLevelMenu.gameObject.SetActive (false);
 		exitMenu.gameObject.SetActive (true);
+		areYouSure.gameObject.SetActive (false);
 		eventSystem.SetSelectedGameObject(firstSelectedExitMenuButton);
 	}
 
 	public void ExitGameYes() //Exit game
 	{
 		Application.Quit();
+	}
+
+	public void NewGameButtonVariabileCheckMenu ()
+	{
+		variabileCheckMenu = 1;
+	}
+
+	public void SelectLevelMenuVariabileCheckMenu ()
+	{
+		variabileCheckMenu = 2;
+	}
+
+	public void AreYouSure()
+	{
+		areYouSure.gameObject.SetActive (true);
+		eventSystem.SetSelectedGameObject(firstSelectedAreYouSureButton);
+		if (variabileCheckMenu == 1) 
+		{
+			areYouSureYesButton.onClick.AddListener(StartNewGame);
+			areYouSureNoButton.onClick.AddListener(MainMenu);
+		}
+		if (variabileCheckMenu == 2) 
+		{
+			//areYouSureYesButton.onClick.AddListener(SelectLevelMenu);
+			//areYouSureNoButton.onClick.AddListener(SelectLevelMenu);
+
+			areYouSureNoButton.onClick.AddListener(SelectLevelMenu);
+		}
+			
 	}
 		
 }

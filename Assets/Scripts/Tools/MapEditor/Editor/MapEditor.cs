@@ -140,9 +140,12 @@ public class MapEditor : Editor
 
                 if (ToolMenuEditor.SelectedTool == 1)
                 {
-                    if (SelectedPrefab < m_Database.blocksList.Count)
+                    if (SelectedBlock < m_Database.blocksList.Count)
                     {
-                        AddGameObject(MapEditorHandle.CurrentHandlePosition, m_Database.blocksList[SelectedBlock].prefabsList[SelectedPrefab].Prefab);
+                        if (SelectedPrefab < m_Database.blocksList[SelectedBlock].prefabsList.Count)
+                        {
+                            AddGameObject(MapEditorHandle.CurrentHandlePosition, m_Database.blocksList[SelectedBlock].prefabsList[SelectedPrefab].Prefab);
+                        }
                     }
                 }
 

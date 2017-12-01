@@ -29,6 +29,7 @@ public class BDTMMakerEditor : Editor
                 AssetDatabase.Refresh();
                 EditorUtility.SetDirty(m_Target);
                 EditorUtility.SetDirty(m_Target.behaviourTree);
+                EditorUtility.SetDirty(m_Target.rootTask);
                 AssetDatabase.SaveAssets();
 
                 //EditorUtility.SetDirty(m_Target.behaviourTree);

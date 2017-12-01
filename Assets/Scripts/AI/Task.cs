@@ -10,6 +10,7 @@ namespace AI.BT
     public abstract class Task : ScriptableObject
     {
         public BehaviourTreeDM m_BehaviourTree;
+        public TaskType m_Type;
 
         public abstract TaskState Run();
 

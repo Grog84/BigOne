@@ -6,45 +6,62 @@ namespace AI.BT
 {
     public class TaskTool : MonoBehaviour
     {
-        public enum TaskType { GUARD_IS_ALARMED, GUARD_IS_CHAR_VISIBLE, GUARD_IS_CURIOUS, GUARD_IS_LAST_PERCIEVED_POSITION_REACHED, GUARD_IS_LAST_NODE_REACHED, GUARD_IS_WAITING,
-                                GUARD_CHAR_CHASE, GUARD_ALARMED, GUARD_RANDOM_PATROL, GUARD_REACH_LAST_PERCIEVED_POSITION, GUARD_STOP, GUARD_CHECK_NAVPOINT, GUARD_WAIT_NAVPOINT, GUARD_PATROL}
         public TaskType taskType;
 
         public Task GetTask()
         {
+            Task thisTask;
             switch (taskType)
             {
                 case TaskType.GUARD_ALARMED:
-                    return new ActionAlarmed();
+                    thisTask = new ActionAlarmed();
+                    break;
                 case TaskType.GUARD_CHAR_CHASE:
-                    return new ActionChase();
+                    thisTask = new ActionChase();
+                    break;
                 case TaskType.GUARD_CHECK_NAVPOINT:
-                    return new ActionCheckNavPoint();
+                    thisTask = new ActionCheckNavPoint();
+                    break;
                 case TaskType.GUARD_STOP:
-                    return new ActionHoldPosition();
+                    thisTask = new ActionHoldPosition();
+                    break;
                 case TaskType.GUARD_PATROL:
-                    return new ActionPatrol();
+                    thisTask = new ActionPatrol();
+                    break;
                 case TaskType.GUARD_RANDOM_PATROL:
-                    return new ActionRandomPatrol();
+                    thisTask = new ActionRandomPatrol();
+                    break;
                 case TaskType.GUARD_REACH_LAST_PERCIEVED_POSITION:
-                    return new ActionReachLastPosition();
+                    thisTask = new ActionReachLastPosition();
+                    break;
                 case TaskType.GUARD_WAIT_NAVPOINT:
-                    return new ActionWaitNavPoint();
+                    thisTask = new ActionWaitNavPoint();
+                    break;
                 case TaskType.GUARD_IS_ALARMED:
-                    return new ConditionAlarmed();
+                    thisTask = new ConditionAlarmed();
+                    break;
                 case TaskType.GUARD_IS_CURIOUS:
-                    return new ConditionCurious();
+                    thisTask = new ConditionCurious();
+                    break;
                 case TaskType.GUARD_IS_WAITING:
-                    return new ConditionIsWaiting();
+                    thisTask = new ConditionIsWaiting();
+                    break;
                 case TaskType.GUARD_IS_LAST_PERCIEVED_POSITION_REACHED:
-                    return new ConditionLastHeardSeenPosition();
+                    thisTask = new ConditionLastHeardSeenPosition();
+                    break;
                 case TaskType.GUARD_IS_LAST_NODE_REACHED:
-                    return new ConditionLastNodeReached();
+                    thisTask = new ConditionLastNodeReached();
+                    break;
                 case TaskType.GUARD_IS_CHAR_VISIBLE:
-                    return new ConditionPlayerVisible();
+                    thisTask = new ConditionPlayerVisible();
+                    break;
                 default:
-                    return null;
+                    thisTask = null;
+                    break;
             }
+            thisTask.m_Type = taskType;
+            return thisTask;
+            
         }
 	
     }

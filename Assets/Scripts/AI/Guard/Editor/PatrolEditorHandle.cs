@@ -34,6 +34,7 @@ public class PatrolEditorHandle : Editor
     {
         if (isActive)
         {
+            Tools.hidden = true;
             bool isLevelEditorEnabled = EditorPrefs.GetBool("IsLevelEditorEnabled", true);
             if (isLevelEditorEnabled)
             {
@@ -44,6 +45,7 @@ public class PatrolEditorHandle : Editor
 
             DrawCubeDrawPreview();
         }
+        else { Tools.hidden = false; }
     }
 
     static void UpdateHandlePosition(SceneView sceneView)

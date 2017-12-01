@@ -60,6 +60,7 @@ public class NavPointCreatorEditor : Editor
         {
             if (PatrolEditorHandle.IsMouseInValidArea == true)
             {
+                Debug.Log("Click");
                 PatrolEditorHandle.isActive = false;
             }
         }

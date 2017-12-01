@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace AI
 {
+    [CreateAssetMenu(menuName = "AI/GuardBlackboard")]
+    [System.Serializable]
     public class GuardBlackboard : Blackboard
     {
         GuardState guardState = GuardState.NORMAL;

@@ -10,6 +10,9 @@ public class BTDMMaker : MonoBehaviour {
     public BehaviourTreeDM behaviourTree;
     public GameObject rootTask;
 
+    [SerializeField]
+    public Blackboard thisBlackboard;
+
     public enum AgentType { GUARD }
     public AgentType thisAgentType = AgentType.GUARD;
 
@@ -77,7 +80,12 @@ public class BTDMMaker : MonoBehaviour {
         switch (thisAgentType)
         {
             case AgentType.GUARD:
+                
+                var bl = new GuardBlackboard();
+                Debug.Log(bl.ToString());
+
                 behaviourTree.m_Blackboard = new GuardBlackboard();
+                thisBlackboard = behaviourTree.m_Blackboard;
                 break;
             default:
                 break;
@@ -86,7 +94,9 @@ public class BTDMMaker : MonoBehaviour {
 
     public void PrintTree()
     {
-        behaviourTree.PrintTree(0, behaviourTree.rootTask);
+        Debug.Log(rootTask.ToString());
+        Debug.Log(behaviourTree.m_Blackboard.ToString());
+        //behaviourTree.PrintTree(0, behaviourTree.rootTask);
     }
 
     private void ShowConnections(GameObject thisTask)

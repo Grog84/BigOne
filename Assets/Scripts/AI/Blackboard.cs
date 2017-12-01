@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace AI
 {
-    public abstract class Blackboard
+    [System.Serializable]
+    public abstract class Blackboard : ScriptableObject
     {
         public AIAgent m_Agent;
 
@@ -19,6 +20,16 @@ namespace AI
         public abstract Vector3 GetVector3Value(string valueName);
 
         public abstract void SetVector3Value(string valueName, Vector3 value);
+
+        public override string ToString()
+        {
+            string printOut;
+            if (m_Agent != null)
+                printOut = m_Agent.ToString() + " Blackboard";
+            else
+                printOut = base.ToString();
+            return printOut;
+        }
 
     }
 }

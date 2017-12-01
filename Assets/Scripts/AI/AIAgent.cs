@@ -6,17 +6,23 @@ using SaveGame;
 
 namespace AI
 {
+    [System.Serializable]
     public abstract class AIAgent : MonoBehaviour
     {
         //Navigation
-        public NavMeshAgent m_NavMeshAgent;
+        [HideInInspector] public NavMeshAgent m_NavMeshAgent;
 
         // Animation
-        public Animator m_Animator;
+        [HideInInspector] public Animator m_Animator;
 
         // AI
-        public Brain m_Brain;
-        public Blackboard m_Blackboard;
+        [HideInInspector] public Brain m_Brain;
+        [HideInInspector] public Blackboard m_Blackboard;
+
+        public override string ToString()
+        {
+            return gameObject.name;
+        }
 
     }
 }

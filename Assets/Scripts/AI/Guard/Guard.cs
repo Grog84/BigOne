@@ -24,7 +24,7 @@ namespace AI
 
         [Space(10)]
         [Header("Agent Perception Component")]
-        public GameObject guardAllert;
+        [HideInInspector]public GameObject guardAllert;
 
         // State
         GuardState m_State = GuardState.NORMAL;
@@ -320,6 +320,8 @@ namespace AI
             m_Animator = GetComponent<Animator>();
             m_Brain = GetComponent<Brain>();
             m_Blackboard = m_Brain.decisionMaker.m_Blackboard;
+            m_Blackboard.m_Agent = this;
+            guardAllert = transform.Find("AllertRange").gameObject;
 
             // Get the transform of the patrol nav points
             wayPointListTransform = new Transform[wayPointList.Count];

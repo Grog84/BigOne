@@ -25,7 +25,13 @@ public class BDTMMakerEditor : Editor
                 "\n NOTE: PLAY MODE MUST BE ACTIVE", "Yes", "No"))
             {
                 m_Target.SaveTree();
+
+                AssetDatabase.Refresh();
+                EditorUtility.SetDirty(m_Target);
                 EditorUtility.SetDirty(m_Target.behaviourTree);
+                AssetDatabase.SaveAssets();
+
+                //EditorUtility.SetDirty(m_Target.behaviourTree);
             }
         }
 

@@ -74,19 +74,16 @@ public class MenuUIManager : MonoBehaviour
 
     public void FadesMenu(string menuType) // Set the time to wait until the fade animation is finished
     {
-        Invoke(menuType, 0.2f);
-
 		switch (variabileCheckAreYouSure) 
 		{
-		case 1:
+		case 1: // Enable the Fade when the user press the "No Button" in the "AreYouSureMenu" and let him go back to the "Main Menu"
 			Invoke("MainMenu", 0.2f);
-
 			break;
 		case 2:
-			Invoke("SelectLevelMenu", 0.2f);
+			Invoke("SelectLevelMenu", 0.2f); // Enable the Fade when the user press the "No Button" in the "AreYouSureMenu" and let him go back to the "Select Level Menu"
 			break;
 		case 0:
-			Invoke (menuType, 0.2f);
+			Invoke (menuType, 0.2f); // Enable the Fade 
 			break;
 		default:
 			break;
@@ -216,19 +213,12 @@ public class MenuUIManager : MonoBehaviour
 		//selectLevelMenu.gameObject.SetActive(false);
 		exitMenu.gameObject.SetActive(false);
 		areYouSure.gameObject.SetActive(true);
-		eventSystem.SetSelectedGameObject(firstSelectedExitMenuButton); // Set the first selected button in the menu
+		eventSystem.SetSelectedGameObject(firstSelectedAreYouSureButton); // Set the first selected button in the menu
 		switch (variabileCheckAreYouSure) 
 		{
 		case 1:
 			mainMenu.gameObject.SetActive (true);
 			areYouSureYesButton.onClick.AddListener (StartNewGame);
-			//areYouSureNoButton.onClick.AddListener (MainMenu);
-			//areYouSureNoButton.onClick.GetPersistentTarget(Pippo);
-
-
-
-			//AddListener (MenuUIManager.FadesMenu("MainMenu"));
-
 			break;
 		case 2:
 			selectLevelMenu.gameObject.SetActive(true);

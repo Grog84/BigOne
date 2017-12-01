@@ -6,9 +6,12 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
 using System.IO;
+using UnityEditor;
 
+
+  [HideMonoScript]
 public class GameController :MonoBehaviour {
-
+  
 
     [BoxGroup("Profile Settings")]
     public AT_Profile Profile;
@@ -52,7 +55,7 @@ public class GameController :MonoBehaviour {
         dataPath = System.IO.Path.Combine(Application.persistentDataPath, "actors.json");
         profilePath = System.IO.Path.Combine(Application.persistentDataPath, "Profile.json");
         objPrefab = this.gameObject;
-      
+     
         oPrefab = objPrefab;
 
         #region Build&Index Stuff's Code
@@ -65,10 +68,19 @@ public class GameController :MonoBehaviour {
     }
     private void Start()
     {
-       Profile.AC = SaveData.actorContainer;
+       //Caricamento attori (Dati salvati sul disco)
+      
         allActor = FindObjectsOfType<Actor>();
 
-        if(LoadOnOpen)
+        //Inizializzazione livelli nuovi
+        Profile.completedLevel = new bool[UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings];
+        for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings; i++)
+        {
+            Profile.completedLevel[i] = false;
+        }
+
+        //Caricamento on Open [continue]
+        if (LoadOnOpen)
         {
             Load();
         }
@@ -94,11 +106,11 @@ public class GameController :MonoBehaviour {
     [Button("Save Check point", ButtonSizes.Medium)]
     public  void Save()
     {
-        SaveData.Save(dataPath, SaveData.actorContainer);
-
-        Profile.AC = SaveData.actorContainer;
-        Profile.dateTime = DateTime.Now;
+        Profile.Save();
+        SaveTime(DateTime.Now);
         SaveProfile(profilePath, Profile);
+        SaveData.Save(dataPath, SaveData.actorContainer);
+        
         Debug.Log("Salvato");
     }
     [HideInEditorMode]
@@ -106,12 +118,11 @@ public class GameController :MonoBehaviour {
     public  void Load()
     {
         Profile = LoadProfile(profilePath);
+        if(allActor.Length!=0)
         SaveData.Load(dataPath,allActor);
     }
     private void OnApplicationQuit()
     {
-
-       
         SaveProfile(profilePath, Profile);
         if(SaveOnClose)
         {
@@ -140,8 +151,12 @@ public class GameController :MonoBehaviour {
     private static void SaveProfile(string path, AT_Profile profile)
     {
 
-        profile.dateTime = DateTime.Now;
+
         profile.LastScene = SceneManager.GetActiveScene().buildIndex;
+        for (int i = 0; i <= profile.LastScene; i++)
+        {
+            profile.completedLevel[i] = true;
+        }
 
         string json = JsonUtility.ToJson(profile);
 
@@ -149,13 +164,24 @@ public class GameController :MonoBehaviour {
         sw.Close();
 
         File.WriteAllText(path, json);
-
-    }
+            }
     private static AT_Profile LoadProfile(string path)
     {
         string json = File.ReadAllText(path);
 
         return JsonUtility.FromJson<AT_Profile>(json);
+
+
+    }
+
+    public  void SaveTime(DateTime dateTimeNow)
+    {
+        Profile.dateTime.day = dateTimeNow.Day;
+        Profile.dateTime.minute = dateTimeNow.Minute;
+        Profile.dateTime.second = dateTimeNow.Second;
+        Profile.dateTime.hour = dateTimeNow.Hour;
+        Profile.dateTime.month = dateTimeNow.Month;
+        Profile.dateTime.year = dateTimeNow.Year;
 
 
     }

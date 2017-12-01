@@ -26,7 +26,7 @@ namespace SaveGame
             CharacterActive activeCharacter = m_Controller.isCharacterPlaying;
             PlayerPrefs.SetInt(saveObjName + "characterPlaying", (int)activeCharacter);
         }
-        public AT_Profile Profile;
+      
         public void OnApplicationQuit()
         {
             //Profile.currentLevelIndex = SetLastScene();

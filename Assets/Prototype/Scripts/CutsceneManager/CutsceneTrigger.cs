@@ -13,5 +13,4 @@ public class CutsceneTrigger : CutsceneManager
             StartCoroutine(PlayTimeline(m_PlayableDirector));
         }
     }
-
 }

@@ -12,10 +12,7 @@ public class CutsceneManager : MonoBehaviour
     public PlayableDirector m_PlayableDirector;
     protected bool trigger = false;
     public bool characterControlEnabled = false;
-
-
-   
-
+    public bool repeatable = false;
 
     public IEnumerator PlayTimeline(PlayableDirector playableDirector)
     {
@@ -23,8 +20,12 @@ public class CutsceneManager : MonoBehaviour
         {
             playableDirector.Play();
         }
-        trigger = true;
 
+        if (!repeatable)
+        {
+            trigger = true;
+        }
+        
         if(characterControlEnabled == false)
         {
             if(playableDirector.playableGraph.IsPlaying())

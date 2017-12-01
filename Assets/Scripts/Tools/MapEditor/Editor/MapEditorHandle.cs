@@ -124,24 +124,28 @@ public class MapEditorHandle : Editor
 
         if(selectedPrefab)
         {
-            if (selectedPrefab.GetComponent<MeshFilter>())
-                bounds = selectedPrefab.GetComponent<MeshFilter>().sharedMesh.bounds.extents;
-            else
-            {
-                Bounds combinedBounds = new Bounds();
-                pb_Object[] pbObjs = selectedPrefab.GetComponentsInChildren<pb_Object>();
+            // Resize Handle - commented in order to solve a blocking bug
+            //if (selectedPrefab.GetComponent<MeshFilter>())
+            //    bounds = selectedPrefab.GetComponent<MeshFilter>().sharedMesh.bounds.extents;
+            //else
+            //{
+            //    Bounds combinedBounds = new Bounds();
+            //    pb_Object[] pbObjs = selectedPrefab.GetComponentsInChildren<pb_Object>();
 
-                foreach (var pbObj in pbObjs)
-                {
-                    pbObj.GetComponent<pb_Object>().Verify();
-                    combinedBounds.Encapsulate(pbObj.msh.bounds);
-                    //Debug.Log(pbObj.msh.bounds.extents);
-                }
+            //    foreach (var pbObj in pbObjs)
+            //    {
+            //        pbObj.GetComponent<pb_Object>().Verify();
+            //        combinedBounds.Encapsulate(pbObj.msh.bounds);
+            //        //Debug.Log(pbObj.msh.bounds.extents);
+            //    }
 
-                bounds = combinedBounds.extents;
-                //Debug.Log(bounds);
-            }
+            //    bounds = combinedBounds.extents;
+            //    //Debug.Log(bounds);
+            //}
+
+            bounds = new Vector3(0.5f, 0.5f, 0.5f);
         }
+
 
         Vector3 p1 = center + Vector3.right * bounds.x + Vector3.forward * bounds.z;
         Vector3 p2 = center + Vector3.right * bounds.x - Vector3.forward * bounds.z;

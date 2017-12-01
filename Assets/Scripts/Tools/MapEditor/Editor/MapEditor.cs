@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
 
 [InitializeOnLoad]
 public class MapEditor : Editor
@@ -240,7 +241,8 @@ public class MapEditor : Editor
         //Make sure a proper Undo/Redo step is created. This is a special type for newly created objects
         Undo.RegisterCreatedObjectUndo(newObj, "Add " + prefab.name);
 
-        UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
+        //UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
+        UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
     }
 
     //I will use this type of function in many different classes. Basically this is useful to 

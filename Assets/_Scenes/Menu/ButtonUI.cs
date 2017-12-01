@@ -5,6 +5,10 @@ using UnityEngine;
 public class ButtonUI : MonoBehaviour {
 
     public MenuUIManager m_Manager;
+	// BOOL ISACTIVE
+
+	// ACTIVATE
+	// DEACTIVATE
 
     public void SelectButton()
     {

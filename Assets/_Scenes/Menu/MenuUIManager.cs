@@ -51,11 +51,12 @@ public class MenuUIManager : MonoBehaviour
         else // If there is not a save file, the "Continue Button" will not appear in the Main Menu
             continueButton.SetActive(false);
 
-		// CONTROLLO SUYI BOTTONI DA ATTIVARE
-		// FOR (BOTTONI)
-		//     DEACTIVATE BOTTONI NON BUONI
+        inizialize();
+        // CONTROLLO SUYI BOTTONI DA ATTIVARE
+        // FOR (BOTTONI)
+        //     DEACTIVATE BOTTONI NON BUONI
 
-		Button btn = areYouSureNoButton.GetComponent<Button>();
+        Button btn = areYouSureNoButton.GetComponent<Button>();
     }
 
 	public void StartNewGame() // Start new game function
@@ -174,6 +175,7 @@ public class MenuUIManager : MonoBehaviour
         exitMenu.gameObject.SetActive(false);
         areYouSure.gameObject.SetActive(false);
         eventSystem.SetSelectedGameObject(firstSelectedSelectLevelMenuButton); // Set the first selected button in the menu
+   
     }
 
     public void ExitGameMenu() // Enabled the Exit Game Menu and disable all the others
@@ -228,4 +230,48 @@ public class MenuUIManager : MonoBehaviour
 			break;
 		}
 	}
+    public Button[] LevelSelect;
+
+    public void inizialize()
+    {
+        LevelSelect = new Button[9];
+
+        #region findChildStuff
+        LevelSelect[0] = selectLevelMenu.transform.Find("SelectLevel1Button").GetComponent<Button>();
+        LevelSelect[1] = selectLevelMenu.transform.Find("SelectLevel2Button").GetComponent<Button>();
+        LevelSelect[2] = selectLevelMenu.transform.Find("SelectLevel3Button").GetComponent<Button>();
+        LevelSelect[3] = selectLevelMenu.transform.Find("SelectLevel4Button").GetComponent<Button>();
+        LevelSelect[4] = selectLevelMenu.transform.Find("SelectLevel5Button").GetComponent<Button>();
+        LevelSelect[5] = selectLevelMenu.transform.Find("SelectLevel6Button").GetComponent<Button>();
+        LevelSelect[6] = selectLevelMenu.transform.Find("SelectLevel7Button").GetComponent<Button>();
+        LevelSelect[7] = selectLevelMenu.transform.Find("SelectLevel8Button").GetComponent<Button>();
+        LevelSelect[8] = selectLevelMenu.transform.Find("SelectLevel9Button").GetComponent<Button>();
+        #endregion
+
+
+        for (int i = 0; i < 9; i++)
+        {
+            if(GC.Profile.completedLevel[i])
+            {
+                LevelSelect[i].enabled = true;
+
+            }
+            else
+            {
+                LevelSelect[i].enabled = false;
+            }
+        }
+        
+        Debug.Log(LevelSelect.Length + "," + this.selectLevelMenu.transform.childCount);
+    }
+
+
+
+
+
+
+
+
+
+
 }

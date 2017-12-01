@@ -24,6 +24,8 @@ public class CharacterStats : ScriptableObject { // nope...here stats only shoul
     public float m_DistanceFromPushableObject = 4f;
     public float m_DistanceFromPushableObstacle = 5f;
     [Space(10)]
+    public float m_BalanceMovementSpeed = 0.5f;
+    [Space(10)]
     public float m_DistanceFromDoor = 4f;
     [Space(10)]
     [Header("Character Gravity Parameters")]

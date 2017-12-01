@@ -8,12 +8,14 @@ namespace Character
 {
     public class _CharacterController : MonoBehaviour
     {
-
+        public bool isInDanger = false;
         [HideInInspector] public float m_MoveSpeedMultiplier;
         [HideInInspector] public float m_TurnAmount;                   // Unutilized for the moment
         [HideInInspector] public float m_ForwardAmount;
         [HideInInspector] public float ray_length;
         //
+        // BALANCE VARIABLES
+         public bool isInBalanceArea;
         // CLIMB VARIABLES
         [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
         [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
@@ -58,7 +60,7 @@ namespace Character
         [HideInInspector] public Rigidbody m_Rigidbody;                // A reference to the rigidbody
         [HideInInspector] public CharacterController m_CharController; // A reference to the Character controller component
 
-        // COLIDERS REFERENCES      
+        // COLLIDERS REFERENCES      
         [HideInInspector] public GameObject climbCollider;
         [HideInInspector] public Transform climbAnchorTop;
         [HideInInspector] public Transform climbAnchorBottom;
@@ -73,6 +75,9 @@ namespace Character
         [HideInInspector] public GameObject pushHit = null;            // Used for icons 
         [HideInInspector] public GameObject pushObject;
         [HideInInspector] public GameObject pushCollider = null;
+
+         public GameObject balanceCollider;
+         public GameObject forwardBalance;
         //
         [HideInInspector] public bool isDefeated = false;
 
@@ -286,6 +291,11 @@ namespace Character
                 ItemCollider = other.gameObject;
                 isInItemArea = true;
             }
+            if (other.gameObject.layer == LayerMask.NameToLayer("Balance"))
+            {
+                balanceCollider = other.gameObject;
+                isInBalanceArea = true;
+            }
         }
 
         private void OnTriggerExit(Collider other)
@@ -323,6 +333,17 @@ namespace Character
                 ItemCollider.GetComponent<CollectablesIconsActivation>().HideIcons();
                 ItemCollider = null;
                 isInItemArea = false;
+            }
+            if (other.gameObject.layer == LayerMask.NameToLayer("Balance"))
+            {
+                if(other.tag == "Board")
+                {
+                    //if(forwardCollider != other.gameObject)
+                   // {
+                        balanceCollider = null;
+                        isInBalanceArea = false;
+                    //}
+                }
             }
 
         }

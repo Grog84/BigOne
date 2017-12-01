@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 using AI.BT;
 public class BTDMStringConverter
 {
@@ -75,24 +76,57 @@ public class BTDMStringConverter
         {
             char[] delimiterChars = { 'T' };
             string[] codeSplit = code.Split(delimiterChars);
-            string taskType = codeSplit[codeSplit.Length];
-            tTool.GetTask();
+            int taskType;
+            System.Int32.TryParse(codeSplit[codeSplit.Length], out taskType);
+            Task task = tTool.GetTask((TaskType)taskType);
+            task.m_BehaviourTree = m_Tree;
+            return task;
         }
-        return null;
     }
 
     public void BuildTreeFromCode()
     {
         char[] delimiterChars = { '\n' };
         string[] codes = m_Code.Split(delimiterChars);
+        List<string> codesList = new List<string>(codes);
 
-        Task rootTask;
+        Task rootTask = CodeToTask(codes[0]);
+        m_Tree.rootTask = rootTask;
+        codesList.Remove(codes[0]);
+        BuildTreeFromCode(m_Tree.rootTask, codes[0], codesList);
 
+    }
 
-        foreach (var code in codes)
+    public void BuildTreeFromCode(Task task, string code, List<string> remainingCodes)
+    {
+        if (task.m_Type == TaskType.SELECTOR || task.m_Type == TaskType.SEQUENCER)
         {
+            var cmpTask = (Composite)task;
+            cmpTask.children = new List<Task>();
+
+            char[] delimiterChars = { 'S', 'Q' };
+            string parentPrefix = code.Split(delimiterChars)[0];
+            int parentNestedLevel = parentPrefix.Length;
+
+            foreach (var cd in remainingCodes)
+            {
+                string prefix = cd.Split(delimiterChars)[0];
+                int nestedLevel = prefix.Length;
+                if (nestedLevel - parentNestedLevel == 1)
+                {
+                    if (parentPrefix == prefix.Substring(0, prefix.Length-2))
+                    {
+                        Task thisTask = CodeToTask(cd);
+                        cmpTask.children.Add(thisTask);
+                        remainingCodes.Remove(cd);
+                        BuildTreeFromCode(thisTask, cd, remainingCodes);
+                    }
+                }
+            }
 
         }
+        else { }
     }
-    
+
+
 }

@@ -18,7 +18,7 @@ public class BDTMMakerEditor : Editor
 
     public void DrawCreateTaskButtons()
     {
-        if (GUILayout.Button("Save Behaviour Tree"))
+        if (GUILayout.Button("Create Behaviour Tree"))
         {
             EditorApplication.Beep();
             if (EditorUtility.DisplayDialog("Save Behaviour Tree", "Are you sure you really want to save the current Behaviour tree?" +
@@ -28,8 +28,8 @@ public class BDTMMakerEditor : Editor
 
                 AssetDatabase.Refresh();
                 EditorUtility.SetDirty(m_Target);
-                EditorUtility.SetDirty(m_Target.behaviourTree);
-                EditorUtility.SetDirty(m_Target.rootTask);
+                //EditorUtility.SetDirty(m_Target.behaviourTree);
+                //EditorUtility.SetDirty(m_Target.rootTask);
                 AssetDatabase.SaveAssets();
 
                 //EditorUtility.SetDirty(m_Target.behaviourTree);

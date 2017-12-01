@@ -1,69 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using AI.BT;
 using AI;
 using System.Linq;
-
-public class BDTMJsonConverter
-{
-    public BehaviourTreeDM m_Tree;
-    public string m_Code;
-
-    public string TaskToCode(Task task, string prefixCode)
-    {
-        string taskCode = "";
-        if (task.m_Type == TaskType.SELECTOR)
-        {
-            taskCode = "S";
-        }
-        else if (task.m_Type == TaskType.SEQUENCER)
-        {
-            taskCode = "Q";
-        }
-        else
-        {
-            taskCode = "T";
-            taskCode += task.m_Type;
-        }
-
-        string code = prefixCode + taskCode + ";\n";
-        return code;
-    }
-
-    public void ConvertToCode(Task task, string prefixCode)
-    {
-        string taskToCode = TaskToCode(task, prefixCode);
-
-        m_Code = m_Code + taskToCode;
-        if (task.m_Type == TaskType.SELECTOR || task.m_Type == TaskType.SEQUENCER)
-        {
-            var cmptask = (Composite)task;
-            int i = 0;
-            foreach (var tsk in cmptask.children)
-            {
-                string childPrefix = taskToCode.Substring(0, taskToCode.Length - 3) + i.ToString();
-                ConvertToCode(tsk, childPrefix);
-                i++;
-            }
-        }
-    }
-
-    public void WriteTree()
-    {
-        m_Code = "";
-        ConvertToCode(m_Tree.rootTask, "0");
-        Debug.Log(m_Code);
-    }
-    
-}
 
 public class BTDMMaker : MonoBehaviour {
 
     public BehaviourTreeDM behaviourTree;
     public GameObject rootTask;
-
-    [SerializeField]
     public Blackboard thisBlackboard;
 
     public enum AgentType { GUARD }
@@ -75,7 +21,6 @@ public class BTDMMaker : MonoBehaviour {
 
     private void BuildTree(GameObject thisToolTask, Task thisTask)
     {
-
         if (thisToolTask.transform.childCount > 0)
         {
             var parentTask = thisTask as Composite;
@@ -137,10 +82,6 @@ public class BTDMMaker : MonoBehaviour {
         switch (thisAgentType)
         {
             case AgentType.GUARD:
-                
-                var bl = new GuardBlackboard();
-                Debug.Log(bl.ToString());
-
                 behaviourTree.m_Blackboard = new GuardBlackboard();
                 thisBlackboard = behaviourTree.m_Blackboard;
                 break;
@@ -151,8 +92,7 @@ public class BTDMMaker : MonoBehaviour {
 
     public void PrintTree()
     {
-
-        var converter = new BDTMJsonConverter();
+        var converter = new BTDMStringConverter();
         converter.m_Tree = behaviourTree;
         converter.WriteTree();
 
@@ -176,9 +116,18 @@ public class BTDMMaker : MonoBehaviour {
 
     public void SaveTree()
     {
+        behaviourTree = ScriptableObject.CreateInstance<BehaviourTreeDM>();
+        AssetDatabase.CreateAsset(behaviourTree, "Assets/ScriptableObjects/AI/NewBDTM.asset");
+        AssetDatabase.SaveAssets();
         AssignRoot();
         AssignBlackboard();
         BuildTree(rootTask, behaviourTree.rootTask);
+
+        var converter = new BTDMStringConverter();
+        converter.m_Tree = behaviourTree;
+        behaviourTree.codeStructure = converter.WriteTree();
+
+        EditorUtility.SetDirty(behaviourTree);
     }
 
     private void Update()

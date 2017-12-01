@@ -10,6 +10,7 @@ namespace AI.BT
     {
         [SerializeField]
         public Task rootTask;
+        public string codeStructure;
 
         public void AssignRootTask(Task rTask)
         {

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace AI
 {
     [System.Serializable]
-    public abstract class Blackboard : ScriptableObject
+    public abstract class Blackboard: System.Object
     {
         public AIAgent m_Agent;
 

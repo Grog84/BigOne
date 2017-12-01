@@ -5,7 +5,7 @@ using UnityEngine;
 namespace AI
 {
     [System.Serializable]
-    public abstract class DecisionMaker : ScriptableObject
+    public abstract class DecisionMaker: ScriptableObject
     {
         [SerializeField]
         public Blackboard m_Blackboard;

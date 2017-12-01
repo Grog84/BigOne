@@ -7,7 +7,7 @@ namespace AI.BT
     public enum TaskState { FAILURE, SUCCESS, WAIT }
 
     [System.Serializable]
-    public abstract class Task : ScriptableObject
+    public abstract class Task : System.Object
     {
         public BehaviourTreeDM m_BehaviourTree;
         public TaskType m_Type;

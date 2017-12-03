@@ -16,6 +16,7 @@ namespace AI
 
         void TickBrain()
         {
+            Debug.Log("Make Decision");
             decisionMaker.MakeDecision();
         }
     }

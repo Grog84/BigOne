@@ -55,7 +55,8 @@ namespace AI
         // Saving Game
         [HideInInspector] public GuardSaveComponent m_SaveComponent;
 
-        // Animation
+        // Follows variables found in the parent definition
+        // Animation 
         //Animator m_Animator;
 
         //// AI
@@ -319,6 +320,7 @@ namespace AI
             eyes = TransformDeepChildExtension.FindDeepChild(transform, "eyes");
             m_Animator = GetComponent<Animator>();
             m_Brain = GetComponent<Brain>();
+            m_Brain.decisionMaker.m_Blackboard = new GuardBlackboard();
             m_Blackboard = m_Brain.decisionMaker.m_Blackboard;
             m_Blackboard.m_Agent = this;
             guardAllert = transform.Find("AllertRange").gameObject;

@@ -48,7 +48,20 @@ namespace AI.BT
 
         public override void MakeDecision()
         {
-            rootTask.Run();
+            if (rootTask != null)
+            {
+                Debug.Log("Called the decision in the tree");
+                rootTask.Run();
+            }
+            else
+            {
+                Debug.Log("Created Tree");
+                BTDMStringConverter converter = new BTDMStringConverter();
+                converter.m_Tree = this;
+                converter.m_Code = codeStructure;
+                converter.BuildTreeFromCode();
+                rootTask.Run();
+            }
         }
     }
 }

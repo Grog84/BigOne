@@ -41,7 +41,7 @@ public class BTDMStringConverter
             int i = 0;
             foreach (var tsk in cmptask.children)
             {
-                string childPrefix = taskToCode.Substring(0, taskToCode.Length - 3) + i.ToString();
+                string childPrefix = taskToCode.Substring(0, taskToCode.Length - 2) + i.ToString();
                 ConvertToCode(tsk, childPrefix);
                 i++;
             }
@@ -78,7 +78,7 @@ public class BTDMStringConverter
             char[] delimiterChars = { 'T' };
             string[] codeSplit = code.Split(delimiterChars);
             int taskType;
-            System.Int32.TryParse(codeSplit[codeSplit.Length], out taskType);
+            System.Int32.TryParse(codeSplit[codeSplit.Length-1], out taskType);
             Task task = GetTask((TaskType)taskType);
             task.m_BehaviourTree = m_Tree;
             return task;
@@ -97,48 +97,92 @@ public class BTDMStringConverter
         {
             var rootTask = (Selector)rootTaskBase;
             rootTask.children = new List<Task>();
+            BuildTreeFromCode(rootTask, codes[0], codesList);
             m_Tree.rootTask = rootTask;
         }
         else
         {
             var rootTask = (Sequence)rootTaskBase;
             rootTask.children = new List<Task>();
+            BuildTreeFromCode(rootTask, codes[0], codesList);
             m_Tree.rootTask = rootTask;
         }
         //codesList.Remove(codes[0]);
-        BuildTreeFromCode(m_Tree.rootTask, codes[0], codesList);
-
+        
     }
 
     // Make it with the 3 possible kind of task polymorphism
-    public void BuildTreeFromCode(Task task, string code, List<string> remainingCodes)
+    public void BuildTreeFromCode(Selector task, string code, List<string> remainingCodes)
     {
-        if (task.m_Type == TaskType.SELECTOR || task.m_Type == TaskType.SEQUENCER)
+        string parentPrefix = code.Split(delimiterChars)[0];
+        int parentNestedLevel = parentPrefix.Length;
+
+        for (int i = 0; i < remainingCodes.Count; i++)// (var cd in remainingCodes)
         {
-            var cmpTask = task as Composite;
-            cmpTask.children = new List<Task>();
-
-            string parentPrefix = code.Split(delimiterChars)[0];
-            int parentNestedLevel = parentPrefix.Length;
-
-            foreach (var cd in remainingCodes)
+            string prefix = remainingCodes[i].Split(delimiterChars)[0];
+            int nestedLevel = prefix.Length;
+            if (nestedLevel - parentNestedLevel == 1)
             {
-                string prefix = cd.Split(delimiterChars)[0];
-                int nestedLevel = prefix.Length;
-                if (nestedLevel - parentNestedLevel == 1)
+                if (parentPrefix == prefix.Substring(0, prefix.Length-1))
                 {
-                    if (parentPrefix == prefix.Substring(0, prefix.Length-2))
+                    Task thisTaskBase = CodeToTask(remainingCodes[i]);
+                    if (thisTaskBase.m_Type == TaskType.SELECTOR)
                     {
-                        Task thisTask = CodeToTask(cd);
-                        cmpTask.children.Add(thisTask);
-                        //remainingCodes.Remove(cd);
-                        BuildTreeFromCode(thisTask, cd, remainingCodes);
+                        var thisTask = (Selector)thisTaskBase;
+                        thisTask.children = new List<Task>();
+                        BuildTreeFromCode(thisTask, remainingCodes[i], remainingCodes);
+                        task.children.Add(thisTask);
                     }
+                    else if (thisTaskBase.m_Type == TaskType.SEQUENCER)
+                    {
+                        var thisTask = (Sequence)thisTaskBase;
+                        thisTask.children = new List<Task>();
+                        BuildTreeFromCode(thisTask, remainingCodes[i], remainingCodes);
+                        task.children.Add(thisTask);
+                    }
+                    else { task.children.Add(thisTaskBase); }
+                    //remainingCodes.Remove(cd);
                 }
             }
-
         }
+
         
+    }
+
+    public void BuildTreeFromCode(Sequence task, string code, List<string> remainingCodes)
+    {
+        string parentPrefix = code.Split(delimiterChars)[0];
+        int parentNestedLevel = parentPrefix.Length;
+
+        for (int i = 0; i < remainingCodes.Count; i++)
+        {
+            string prefix = remainingCodes[i].Split(delimiterChars)[0];
+            int nestedLevel = prefix.Length;
+            if (nestedLevel - parentNestedLevel == 1)
+            {
+                if (parentPrefix == prefix.Substring(0, prefix.Length - 1))
+                {
+                    Task thisTaskBase = CodeToTask(remainingCodes[i]);
+                    if (thisTaskBase.m_Type == TaskType.SELECTOR)
+                    {
+                        var thisTask = (Selector)thisTaskBase;
+                        thisTask.children = new List<Task>();
+                        task.children.Add(thisTask);
+                        BuildTreeFromCode(thisTask, remainingCodes[i], remainingCodes);
+                    }
+                    else if (thisTaskBase.m_Type == TaskType.SEQUENCER)
+                    {
+                        var thisTask = (Sequence)thisTaskBase;
+                        thisTask.children = new List<Task>();
+                        task.children.Add(thisTask);
+                        BuildTreeFromCode(thisTask, remainingCodes[i], remainingCodes);
+                    }
+                    else { task.children.Add(thisTaskBase); }
+                    //remainingCodes.Remove(cd);
+                }
+            }
+        }
+
     }
 
     public Task GetTask(TaskType taskType)

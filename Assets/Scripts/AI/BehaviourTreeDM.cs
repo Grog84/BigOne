@@ -55,7 +55,7 @@ namespace AI.BT
             }
             else
             {
-                Debug.Log("Created Tree");
+                Debug.Log("Creating Tree");
                 BTDMStringConverter converter = new BTDMStringConverter();
                 converter.m_Tree = this;
                 converter.m_Code = codeStructure;

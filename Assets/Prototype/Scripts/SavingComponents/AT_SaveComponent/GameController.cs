@@ -12,7 +12,7 @@ using UnityEditor;
   [HideMonoScript]
 public class GameController :MonoBehaviour {
   
-
+    [ReadOnly]
     [BoxGroup("Profile Settings")]
     public AT_Profile Profile;
 
@@ -21,7 +21,7 @@ public class GameController :MonoBehaviour {
 	public static int lastscene;
     
     [BoxGroup("Out Application Propreties",true,true)]
-    public bool SaveOnClose = false;
+    public bool SaveOnClose = false; 
     [BoxGroup("Out Application Propreties", true, true)]
     public bool LoadOnOpen = false;
 
@@ -68,12 +68,13 @@ public class GameController :MonoBehaviour {
     }
     private void Start()
     {
-       //Caricamento attori (Dati salvati sul disco)
-      
+        //Caricamento attori (Dati salvati sul disco)
+
+        Profile = LoadProfile(profilePath);
         allActor = FindObjectsOfType<Actor>();
 
         //Inizializzazione livelli nuovi
-        Profile.completedLevel = new bool[UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings];
+        
         for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings; i++)
         {
             Profile.completedLevel[i] = false;

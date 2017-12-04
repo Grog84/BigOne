@@ -17,19 +17,29 @@ namespace Character.Actions
 
         private void StartBalance(CharacterStateController controller)
         {
-            
-                controller.m_CharacterController.isInDanger= true;
-
-            controller.m_CharacterController.m_Animator.SetBool("onBoard", true);
-                if(Vector3.Distance(controller.m_CharacterController.CharacterTransform.position, controller.m_CharacterController.balanceCollider.transform.GetChild(0).position) 
+            controller.m_CharacterController.isInDanger= true;
+           
+                if (Vector3.Distance(controller.m_CharacterController.CharacterTransform.position, controller.m_CharacterController.balanceCollider.transform.GetChild(0).position)
                    < Vector3.Distance(controller.m_CharacterController.CharacterTransform.position, controller.m_CharacterController.balanceCollider.transform.GetChild(1).position))
                 {
-                   controller.m_CharacterController.forwardBalance = controller.m_CharacterController.balanceCollider.transform.GetChild(0).gameObject;
+                    controller.m_CharacterController.forwardBalance = controller.m_CharacterController.balanceCollider.transform.GetChild(0).gameObject;
                 }
                 else
                 {
                     controller.m_CharacterController.forwardBalance = controller.m_CharacterController.balanceCollider.transform.GetChild(1).gameObject;
                 }
+
+            if (controller.m_CharacterController.balanceCollider.tag == "Board")
+            { 
+                controller.m_CharacterController.m_Animator.SetBool("onBoard", true);
+                controller.m_CharacterController.startBalanceBoard = true;
+            }
+            else
+            {
+                controller.m_CharacterController.m_Animator.SetBool("onLedge", true);
+                controller.m_CharacterController.startBalanceLedge = true;
+            }
+
         }
 
     }

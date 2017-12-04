@@ -16,6 +16,8 @@ namespace Character
         //
         // BALANCE VARIABLES
          public bool isInBalanceArea;
+         public bool startBalanceBoard;
+         public bool startBalanceLedge;
         // CLIMB VARIABLES
         [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
         [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
@@ -337,12 +339,14 @@ namespace Character
             if (other.gameObject.layer == LayerMask.NameToLayer("Balance"))
             {
                 if(other.tag == "Board")
-                {
-                    //if(forwardCollider != other.gameObject)
-                   // {
+                {  
                         balanceCollider = null;
                         isInBalanceArea = false;
-                    //}
+                }
+                if (other.tag == "Ledge")
+                {
+                    balanceCollider = null;
+                    isInBalanceArea = false;
                 }
             }
 
@@ -529,6 +533,40 @@ namespace Character
 
         #endregion
 
+        #region Balance
+
+        IEnumerator OnBalanceBoard()
+        {
+            startBalanceBoard = false;
+            float positionTime = 0.3f;
+
+            Vector3 dir = balanceCollider.transform.position - CharacterTransform.transform.position;
+            dir.y = 0;
+            dir = dir.normalized;
+
+            yield return StartCoroutine(RotateToward(dir));
+
+            CharacterTransform.DOMove(forwardBalance.transform.position, positionTime);
+            yield return new WaitForSeconds(positionTime);
+        }
+
+        IEnumerator OnBalanceLedge()
+        {
+            startBalanceLedge = false;
+            float positionTime = 0.3f;
+
+            Vector3 dir = forwardBalance.transform.GetChild(0).position - CharacterTransform.transform.position;
+            dir.y = 0;
+            dir = dir.normalized;
+
+            yield return StartCoroutine(RotateToward(dir));
+
+            CharacterTransform.DOMove(forwardBalance.transform.position, positionTime);
+            yield return new WaitForSeconds(positionTime);
+        }
+
+#endregion
+
         #region Rotate Toward Target Coroutine
 
         IEnumerator RotateToward(Vector3 finalDirection)
@@ -661,6 +699,15 @@ namespace Character
                 StartCoroutine(ItemCollection());
             }
 
+            if (startBalanceBoard)
+            {
+                StartCoroutine(OnBalanceBoard());
+            }
+
+            if(startBalanceLedge)
+            {
+                StartCoroutine(OnBalanceLedge());
+            }
         }
 
         private void OnDrawGizmos()

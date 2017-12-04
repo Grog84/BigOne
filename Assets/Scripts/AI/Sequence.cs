@@ -6,7 +6,6 @@ namespace AI.BT
     {
         public override TaskState Run()
         {
-            Debug.Log("Sequence Called, children count : " + children.Count);
             foreach (var child in children)
             {
                 if (child.Run() == TaskState.FAILURE)

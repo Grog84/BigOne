@@ -50,12 +50,10 @@ namespace AI.BT
         {
             if (rootTask != null)
             {
-                Debug.Log("Called the decision in the tree");
                 rootTask.Run();
             }
             else
             {
-                Debug.Log("Creating Tree");
                 BTDMStringConverter converter = new BTDMStringConverter();
                 converter.m_Tree = this;
                 converter.m_Code = codeStructure;

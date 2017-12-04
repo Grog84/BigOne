@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 114159225348741878}
   - component: {fileID: 114457326688147732}
   - component: {fileID: 114358415208295798}
+  - component: {fileID: 114573114107718460}
   m_Layer: 8
   m_Name: Mother
   m_TagString: Player
@@ -2162,8 +2163,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1395000936074360}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.887, z: 0}
-  m_LocalScale: {x: 20, y: 1, z: 20}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 22, y: 1, z: 22}
   m_Children: []
   m_Father: {fileID: 4931122489464732}
   m_RootOrder: 5
@@ -3153,6 +3154,21 @@ MonoBehaviour:
   pos: 0
   pointers: []
   arrowDistance: 0
+--- !u!114 &114573114107718460
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1046753759377328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa13af8bc4c6ef547b61ff4e9663d14b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Cone: {fileID: 1395000936074360}
+  locked: 0
+  xzScale: 22
+  yScale: 1
 --- !u!114 &114699240813639512
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3164,10 +3180,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc04c104d4a4df4c86633c095bd26ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isInDanger: 0
   m_MoveSpeedMultiplier: 0
   m_TurnAmount: 0
   m_ForwardAmount: 0
   ray_length: 0
+  isInBalanceArea: 0
+  startBalanceBoard: 0
+  startBalanceLedge: 0
   isInClimbArea: 0
   isClimbDirectionRight: 0
   climbingBottom: 0
@@ -3214,6 +3234,8 @@ MonoBehaviour:
   pushHit: {fileID: 0}
   pushObject: {fileID: 0}
   pushCollider: {fileID: 0}
+  balanceCollider: {fileID: 0}
+  forwardBalance: {fileID: 0}
   isDefeated: 0
   footStepsEmitter: {fileID: 0}
   walkStatusRange: 1

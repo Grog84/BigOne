@@ -15,9 +15,9 @@ namespace Character
         [HideInInspector] public float ray_length;
         //
         // BALANCE VARIABLES
-         public bool isInBalanceArea;
-         public bool startBalanceBoard;
-         public bool startBalanceLedge;
+        [HideInInspector] public bool isInBalanceArea;
+        [HideInInspector] public bool startBalanceBoard;
+        [HideInInspector] public bool startBalanceLedge;
         // CLIMB VARIABLES
         [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
         [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
@@ -78,8 +78,8 @@ namespace Character
         [HideInInspector] public GameObject pushObject;
         [HideInInspector] public GameObject pushCollider = null;
 
-         public GameObject balanceCollider;
-         public GameObject forwardBalance;
+        [HideInInspector] public GameObject balanceCollider;
+        [HideInInspector] public GameObject forwardBalance;
         //
         [HideInInspector] public bool isDefeated = false;
 

@@ -12,11 +12,19 @@ public class NavPointCreatorEditor : Editor
     static GameObject activeObj;
     static Vector2 oldMousePos = Vector2.zero;
 
+    static bool showPath = false;
+    static float sphereMovementTotalTime = 10f;
+    static float sphereMovementTime = 0f;
+
     static void OnSceneGUI(SceneView sceneView)
     {
+        if (showPath && PatrolEditorHandle.IsMouseInValidArea)
+            ShowPath();
+
         if (PatrolEditorHandle.isActive)
             HandleLevelEditorPlacement();
 
+        SceneView.RepaintAll();
     }
 
     static void HandleLevelEditorPlacement()
@@ -86,6 +94,33 @@ public class NavPointCreatorEditor : Editor
         UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
     }
 
+    static void ShowPath()
+    {
+        sphereMovementTime = (float)EditorApplication.timeSinceStartup;
+        sphereMovementTime %= sphereMovementTotalTime;
+        Handles.color = Color.red;
+
+        // draw line between waypoints
+        for (int i = 0; i < m_Target.m_Guard.wayPointList.Count; i++)
+        {
+            if (i == m_Target.m_Guard.wayPointList.Count - 1)
+            {
+                Handles.DrawLine(m_Target.m_Guard.wayPointList[i].transform.position, m_Target.m_Guard.wayPointList[0].transform.position);
+                Vector3 positionDiff = m_Target.m_Guard.wayPointList[0].transform.position - m_Target.m_Guard.wayPointList[i].transform.position;
+
+                Handles.DrawWireCube(m_Target.m_Guard.wayPointList[i].transform.position + positionDiff * sphereMovementTime / sphereMovementTotalTime,
+                    new Vector3(0.1f, 0.1f, 0.1f));
+            }
+            else
+            {
+                Handles.DrawLine(m_Target.m_Guard.wayPointList[i].transform.position, m_Target.m_Guard.wayPointList[i + 1].transform.position);
+                Vector3 positionDiff = m_Target.m_Guard.wayPointList[i + 1].transform.position - m_Target.m_Guard.wayPointList[i].transform.position;
+                Handles.DrawWireCube(m_Target.m_Guard.wayPointList[i].transform.position + positionDiff * sphereMovementTime / sphereMovementTotalTime,
+                    new Vector3(0.1f, 0.1f, 0.1f));
+            }
+        }
+    }
+
     public override void OnInspectorGUI()
     {
         m_Target = (NavPointCreator)target;
@@ -100,8 +135,25 @@ public class NavPointCreatorEditor : Editor
         {
             if (GUILayout.Button("ADD"))
             {
+                SceneView.onSceneGUIDelegate -= OnSceneGUI;
                 SceneView.onSceneGUIDelegate += OnSceneGUI;
                 PatrolEditorHandle.isActive = true;
+
+            }
+
+            if (GUILayout.Button("SHOW"))
+            {
+                showPath = !showPath;
+                if (showPath)
+                {
+                    Debug.Log("Show Path");
+                    SceneView.onSceneGUIDelegate -= OnSceneGUI;
+                    SceneView.onSceneGUIDelegate += OnSceneGUI;
+                }
+                else
+                {
+                    SceneView.onSceneGUIDelegate -= OnSceneGUI;
+                }
 
             }
 
@@ -113,8 +165,10 @@ public class NavPointCreatorEditor : Editor
                     m_Target.m_Guard.wayPointList.Clear();
                 }
             }
+
         }
         GUILayout.EndHorizontal();
     }
+
 
 }

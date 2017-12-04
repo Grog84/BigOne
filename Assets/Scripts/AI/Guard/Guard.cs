@@ -354,7 +354,10 @@ namespace AI
             UpdatePerceptionUI();
             ChangeStateFromGauge();
             GetOtherAlarmed();
+
+            
         }
+
     }
 
     

@@ -18,7 +18,7 @@ public class NavPointCreatorEditor : Editor
 
     static void OnSceneGUI(SceneView sceneView)
     {
-        if (showPath && PatrolEditorHandle.IsMouseInValidArea)
+        if (showPath)
             ShowPath();
 
         if (PatrolEditorHandle.isActive)
@@ -98,7 +98,7 @@ public class NavPointCreatorEditor : Editor
     {
         sphereMovementTime = (float)EditorApplication.timeSinceStartup;
         sphereMovementTime %= sphereMovementTotalTime;
-        Handles.color = Color.red;
+        Handles.color = m_Target.gizmoColor;
 
         // draw line between waypoints
         for (int i = 0; i < m_Target.m_Guard.wayPointList.Count; i++)

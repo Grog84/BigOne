@@ -7,6 +7,7 @@ public class NavPointCreator : MonoBehaviour
 {
     public Guard m_Guard;
     public GameObject navPoint;
+    public Color gizmoColor = Color.red;
 
     //Gizmos
     float sphereMovementTotalTime = 10f;

@@ -315,6 +315,7 @@ GameObject:
   - component: {fileID: 114319331313540930}
   - component: {fileID: 114951182589854320}
   - component: {fileID: 114253847387447656}
+  - component: {fileID: 114937581473148492}
   m_Layer: 8
   m_Name: Boy
   m_TagString: Player
@@ -3067,6 +3068,10 @@ MonoBehaviour:
   isInBalanceArea: 0
   startBalanceBoard: 0
   startBalanceLedge: 0
+  choosePoint: 0
+  isInJointArea: 0
+  animSpeed: 0
+  isLedgeLimit: 0
   isInClimbArea: 0
   isClimbDirectionRight: 0
   climbingBottom: 0
@@ -3115,6 +3120,7 @@ MonoBehaviour:
   pushCollider: {fileID: 0}
   balanceCollider: {fileID: 0}
   forwardBalance: {fileID: 0}
+  balanceJoint: {fileID: 0}
   isDefeated: 0
   footStepsEmitter: {fileID: 0}
   walkStatusRange: 1
@@ -3256,6 +3262,34 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114937581473148492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236579459611486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a76e7361c0340e14e8c0d9ee6368c479, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  data:
+    name: 
+    pos: {x: 0, y: 0, z: 0}
+    rot: {x: 0, y: 0, z: 0, w: 0}
+    isDoorOpen: 0
+    m_Controller: {fileID: 0}
+    activeState: 0
+  thisObjectName: 
 --- !u!114 &114951182589854320
 MonoBehaviour:
   m_ObjectHideFlags: 1

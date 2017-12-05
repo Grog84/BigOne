@@ -11,7 +11,8 @@ namespace Character.Actions
     {
         float movement;
         float angleSign = 1f;
-        
+        float forward;
+        float backward;
 
         public override void Execute(CharacterStateController controller)
         {
@@ -33,36 +34,135 @@ namespace Character.Actions
                     angleSign = -1f;
                 else
                     angleSign = 1f;
-               
 
-               
-                if (controller.m_CharacterController.forwardBalance.name == "Point1")
-                {
-                    controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward * (movement * angleSign * -1) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);                 
-                }
-                else
-                {
-                    controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward * (movement * angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
-                }
 
-               if (Input.GetButtonDown("Interact") && controller.m_CharacterController.isInJointArea)
+            if (Input.GetAxis("Horizontal") > 0)
+            {
+                forward = Input.GetAxis("Horizontal");
+            }
+            else
+            {
+                forward = 0;
+            }
+
+            if (Input.GetAxis("Horizontal") < 0)
+            {
+                backward = Input.GetAxis("Horizontal");
+                //controller.m_CharacterController.isLedgeLimit = false;
+            }
+            else
+            {
+                backward = 0;
+            }
+
+            if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
+            {
+                backward = 0;
+                forward = 0;
+                movement = 0;
+            }
+            
+            // START IN POINT 1
+            if (controller.m_CharacterController.forwardBalance.name == "Point1")
+            {
+               //if (controller.m_CharacterController.isLedgeLimit)
+               //{
+               //   Vector3 validDir = controller.m_CharacterController.CharacterTransform.position - controller.m_CharacterController.balanceJoint.transform.position;
+
+               //   if (Vector3.Angle(controller.m_CharacterController.forwardBalance.transform.forward, validDir) > 90)
+               //   {
+               //       controller.m_CharacterController.ledgeForwardActive = true;
+               //       controller.m_CharacterController.ledgeBackwardActive = false;
+               //   }
+               //   else if (Vector3.Angle(controller.m_CharacterController.forwardBalance.transform.forward, validDir) < 90)
+               //   {
+               //       controller.m_CharacterController.ledgeForwardActive = false;
+               //       controller.m_CharacterController.ledgeBackwardActive = true;
+               //   }
+                     
+               //}
+               //else if(!controller.m_CharacterController.isLedgeLimit)
+               //{
+               //    controller.m_CharacterController.ledgeForwardActive = true;
+               //    controller.m_CharacterController.ledgeBackwardActive = true;
+               //}
+
+               if (controller.m_CharacterController.ledgeForwardActive && !controller.m_CharacterController.ledgeBackwardActive)
                {
-                    if(controller.m_CharacterController.balanceJoint.GetComponent<BalanceJoint>().Point1.transform.parent == controller.m_CharacterController.forwardBalance.transform.parent)
-                    {
-                        controller.m_CharacterController.forwardBalance = controller.m_CharacterController.balanceJoint.GetComponent<BalanceJoint>().Point2;
-                        controller.m_CharacterController.startBalanceLedge = true;
+                   controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward * (forward * angleSign * -1) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
+               }
+               else if (controller.m_CharacterController.ledgeBackwardActive && !controller.m_CharacterController.ledgeForwardActive)
+               {
+                   controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward * (backward * angleSign * -1) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
+               }
+               else
+               {
+                   controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward * (backward * angleSign * -1) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
+                   controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward * (forward * angleSign * -1) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
+               }
+              
+            } 
 
-                    }
-                    else
-                    {
-                        controller.m_CharacterController.forwardBalance = controller.m_CharacterController.balanceJoint.GetComponent<BalanceJoint>().Point1;
-                        controller.m_CharacterController.startBalanceLedge = true;
-                    }
+            // START IN POINT 2
+            else
+            {
+               //if (controller.m_CharacterController.isLedgeLimit)
+               //{
+               //    Vector3 validDir = controller.m_CharacterController.CharacterTransform.position - controller.m_CharacterController.balanceJoint.transform.position;
+
+               //    if(Vector3.Angle(controller.m_CharacterController.forwardBalance.transform.forward, validDir ) > 90)
+               //    {
+               //        controller.m_CharacterController.ledgeForwardActive = false;
+               //        controller.m_CharacterController.ledgeBackwardActive = true;
+               //    }
+               //    else if(Vector3.Angle(controller.m_CharacterController.forwardBalance.transform.forward, validDir) < 90)
+               //    {
+               //        controller.m_CharacterController.ledgeForwardActive = true;
+               //        controller.m_CharacterController.ledgeBackwardActive = false;
+               //    }
+
+
+               //}
+               //else if (!controller.m_CharacterController.isLedgeLimit)
+               //{
+               //    controller.m_CharacterController.ledgeForwardActive = true;
+               //    controller.m_CharacterController.ledgeBackwardActive = true;
+               //}
+
+               if(controller.m_CharacterController.ledgeForwardActive && !controller.m_CharacterController.ledgeBackwardActive)
+               {
+                  controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward * (forward * angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
+               }
+               else if(controller.m_CharacterController.ledgeBackwardActive && !controller.m_CharacterController.ledgeForwardActive)
+               {
+                  controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward * (backward * angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
+               }
+               else
+               {
+                  controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward * (backward * angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
+                  controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward * (forward * angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
                }
 
+            }
+              
+            //    //INTERACT
+            //   if (Input.GetButtonDown("Interact") && controller.m_CharacterController.isInJointArea)
+            //   {
+            //        if(controller.m_CharacterController.balanceJoint.GetComponent<BalanceJoint>().Point1.transform.parent == controller.m_CharacterController.forwardBalance.transform.parent)
+            //        {
+            //            controller.m_CharacterController.forwardBalance = controller.m_CharacterController.balanceJoint.GetComponent<BalanceJoint>().Point2;
+            //            controller.m_CharacterController.startBalanceLedge = true;
+
+            //        }
+            //        else
+            //        {
+            //            controller.m_CharacterController.forwardBalance = controller.m_CharacterController.balanceJoint.GetComponent<BalanceJoint>().Point1;
+            //            controller.m_CharacterController.startBalanceLedge = true;
+            //        }
+            //   }
+            //Debug.Log("Forward = " + forward + " Backward = " + backward);
 
             // Animator
-            //float animSpeed = 1;
             controller.m_CharacterController.m_ForwardAmount = movement * angleSign;
 
             if (movement == 0)

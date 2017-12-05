@@ -21,6 +21,9 @@ namespace Character
         [HideInInspector] public bool choosePoint;
         [HideInInspector] public bool isInJointArea;
         [HideInInspector] public float animSpeed;
+        public bool isLedgeLimit;
+        public bool ledgeForwardActive = true;
+        public bool ledgeBackwardActive = true;
         // CLIMB VARIABLES
         [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
         [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
@@ -269,6 +272,13 @@ namespace Character
             {
                 balanceCollider = other.gameObject;
                 isInBalanceArea = true;
+
+                if (other.tag == "Joint")
+                {
+                    balanceJoint = other.gameObject;
+                    isInJointArea = true;
+                    isLedgeLimit = true;
+                }
             }
         }
 
@@ -320,6 +330,7 @@ namespace Character
                 {
                     balanceJoint = other.gameObject;
                     isInJointArea = true;
+                    isLedgeLimit = true;
                 }
             }
         }
@@ -375,8 +386,9 @@ namespace Character
 
                 if (other.tag == "Joint")
                 {
-                    balanceJoint = null;
+                    //balanceJoint = null;
                     isInJointArea = false;
+                    isLedgeLimit = false;
                 }
             }
 

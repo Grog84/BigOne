@@ -36,7 +36,7 @@ namespace MissionManagerStuff
         [SceneObjectsOnly]
         [InlineEditor(InlineEditorModes.LargePreview)]
         public GameObject missionGiver;
-        private Mission newMission;
+        
 
         [ReadOnly]
         public int missionIndex;
@@ -189,27 +189,9 @@ namespace MissionManagerStuff
 
             if (!error)
             {
-
                 Debug.Log("All field is valid, adding new mission, check MissionContainer for edit");
-                QuestManager QuestManager =GetComponent<QuestManager>();
-                
-                newMission.missionName = this.missionName;
-                newMission.missionType = this.missionType;
-                newMission.missionGrade = this.missionGrade;
-                newMission.missionGiver = this.missionGiver;
-                newMission.available = this.available;
-                newMission.completed = this.completed;
-                newMission.Obj = this.Obj;
-                newMission.pointA = this.pointA;
-                newMission.pointA_Timed = this.pointA_Timed;
-                newMission.pointB = this.pointB;
-                newMission.pointB_Timed = this.pointB_Timed;
-                newMission.receiver = this.receiver;
-                newMission.time = this.time;
-                newMission.missionIndex = this.missionIndex;
+                GetComponent<QuestManager>().addNewMission(new Mission(this.missionName, this.missionType, this.missionGrade,this.missionIndex,this.missionGiver, this.pointA,this.pointB,this.Obj,this.receiver,this.pointA_Timed,this.pointB_Timed,this.time));
                 missionIndex++;
-
-                QuestManager.addNewMission(newMission);
             }
 
         }

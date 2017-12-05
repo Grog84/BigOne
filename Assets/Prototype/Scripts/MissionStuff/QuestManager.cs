@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
-using UnityEngine;using Sirenix.OdinInspector;
+using UnityEngine;
+using Sirenix.OdinInspector;
 
 
 namespace MissionManagerStuff
@@ -27,23 +28,19 @@ namespace MissionManagerStuff
         {
             missionContainer.MissionList.Add(newMission);           
         }
+      
 
+        public void Load()
+        {
+
+
+        }
+        public void Save()
+        {
+
+        }
 
        
-    }
-    [Serializable]
-    public enum MISSIONTYPE
-    {
-        SPOSTAMENTO_AB,
-        RICERCA_CONSEGNA_OGGETTO,
-        SPOSTAMENTO_AB_TIMED
-    }
-
-    [Serializable]
-    public enum MISSIONGRADE
-    {
-        PRIMARIA, SUBPRIMARIA, SECONDARIA
-
     }
 }
 

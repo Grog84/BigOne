@@ -62,10 +62,21 @@ namespace MissionManagerStuff
         public int time;
         #endregion
 
-        Mission()
+        public Mission(string _missionName,MISSIONTYPE _missionType,MISSIONGRADE _missionGrade,int _missionIndex,GameObject _missionGiver, GameObject _pointA, GameObject _pointB, GameObject _obj, GameObject _receiver, GameObject _pointATi, GameObject _pointBTi,int _time)
         {
 
-
+            missionName = _missionName;
+            missionType = _missionType;
+            missionGrade = _missionGrade;
+            missionIndex = _missionIndex;
+            missionGiver = _missionGiver;
+            pointA = _pointA;
+            pointB = _pointB;
+            Obj = _obj;
+            receiver = _receiver;
+            pointA_Timed = _pointATi;
+            pointB_Timed = _pointBTi;
+            time = _time;
         }
 
     }

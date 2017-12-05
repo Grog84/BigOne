@@ -9,7 +9,7 @@ public class PauseGame : MonoBehaviour
     public bool canvasTrigger = false;
 
     private CheckPointManager CP_Controller;
-
+   [SerializeField] private  MissionManagerStuff.QuestManager QM_Controller;
     // Update is called once per frame
     void Update()
     {
@@ -17,24 +17,30 @@ public class PauseGame : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             canvasTrigger = !canvasTrigger;
-            Pause();
+         if (canvasTrigger)
+        {
+            canvas.gameObject.SetActive(true);
+          //  Time.timeScale = 0;
+        }
+        else
+        {
+            canvas.gameObject.SetActive(false);
+           // //Time.timeScale = 1;
+        }
+           QM_Controller.ShowActiveQuestOnMenu();
         }
 
     }
     public void Pause()
     {
-        if (canvasTrigger)
-        {
-            canvas.gameObject.SetActive(true);
-            Time.timeScale = 0;
-        }
-        else
-        {
-            canvas.gameObject.SetActive(false);
-            Time.timeScale = 1;
-        }
+    }
+    public void Awake()
+    {
+        canvas.gameObject.SetActive(true);
 
-
+        QM_Controller.ShowActiveQuestOnMenu();
+        canvas.gameObject.SetActive(false);
+        
     }
     public void ResumeGame()
     {
@@ -43,7 +49,7 @@ public class PauseGame : MonoBehaviour
     }
     public void ReturnMenu()
     {
-        Time.timeScale = 1;
+        ////Time.timeScale = 1;
         SceneManager.LoadScene(0);
 
     }
@@ -51,14 +57,14 @@ public class PauseGame : MonoBehaviour
     {
         int SceneIndex;
         SceneIndex = SceneManager.GetActiveScene().buildIndex;
-        Time.timeScale = 1;
+     //   //Time.timeScale = 1;
         SceneManager.LoadScene(SceneIndex);
     }
 
     public void LastCheckPoint()
     {
         CP_Controller = GetComponent<CheckPointManager>();
-        Time.timeScale = 1;
+        //Time.timeScale = 1;
         CP_Controller.LoadAllObj();
     }
 

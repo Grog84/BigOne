@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 using System.Linq;
+using Sirenix.OdinInspector.Demos;
 
 namespace MissionManagerStuff
 {
@@ -24,6 +25,13 @@ namespace MissionManagerStuff
         public string missionName;
 
 
+        [InfoBox("Attivare per inserire Descrizione")]
+        public bool NeedDescription;
+
+       [ShowIf("NeedDescription")]
+        [TextArea]
+        public string missionDescription;
+
         [HideInInspector]
         public bool available;
 
@@ -34,7 +42,6 @@ namespace MissionManagerStuff
 
         [InfoBox("Oggetto che ti consegna la quest")]
         [SceneObjectsOnly]
-        [InlineEditor(InlineEditorModes.LargePreview)]
         public GameObject missionGiver;
         
 
@@ -50,14 +57,12 @@ namespace MissionManagerStuff
         #region MissionType 0
         [ShowIf("isAB")]
         [BoxGroup("Mission Type 0 Box")]
-        [SceneObjectsOnly]
-        [InlineEditor(InlineEditorModes.LargePreview)]
+        [SceneObjectsOnly]       
         public GameObject pointA;
 
         [ShowIf("isAB")]
         [BoxGroup("Mission Type 0 Box")]
         [SceneObjectsOnly]
-        [InlineEditor(InlineEditorModes.LargePreview)]
         public GameObject pointB;
         #endregion
 
@@ -65,13 +70,11 @@ namespace MissionManagerStuff
         [BoxGroup("Mission Type 1 Box")]
         [ShowIf("isObj")]
           [SceneObjectsOnly]
-        [InlineEditor(InlineEditorModes.LargePreview)]
         public GameObject Obj;
 
         [BoxGroup("Mission Type 1 Box")]
         [ShowIf("isObj")]
           [SceneObjectsOnly]
-        [InlineEditor(InlineEditorModes.LargePreview)]
         public GameObject receiver;
         #endregion
 
@@ -79,13 +82,11 @@ namespace MissionManagerStuff
         [BoxGroup("Mission Type 2 Box")]
         [ShowIf("isABTi")]
           [SceneObjectsOnly]
-        [InlineEditor(InlineEditorModes.LargePreview)]
         public GameObject pointA_Timed;
 
         [BoxGroup("Mission Type 2 Box")]
         [ShowIf("isABTi")]
           [SceneObjectsOnly]
-        [InlineEditor(InlineEditorModes.LargePreview)]
         public GameObject pointB_Timed;
 
 
@@ -99,6 +100,9 @@ namespace MissionManagerStuff
         {
 
         }
+        [Button("R")]
+        public void resetIndex()
+        { missionIndex = 0; }
         private void OnValidate()
         {
             if (missionType == MISSIONTYPE.SPOSTAMENTO_AB)
@@ -121,12 +125,13 @@ namespace MissionManagerStuff
             }
 
         }
-        [GUIColor(0.3f, 0.8f, 0.8f, 1f)]
+
+        [GUIColor(0.8f, 0.3f, 0.8f, 1f)]
         [Button("Aggiungi Quest", ButtonSizes.Medium)]
         public void CreateQuest()
         {
             bool error = false;
-            if (missionName.Any(char.IsWhiteSpace) || missionName == "")
+            if (missionName == "")
             {
                 Debug.LogError("Invalid: Mission as no name assigned");
                 error = true;
@@ -190,7 +195,7 @@ namespace MissionManagerStuff
             if (!error)
             {
                 Debug.Log("All field is valid, adding new mission, check MissionContainer for edit");
-                GetComponent<QuestManager>().addNewMission(new Mission(this.missionName, this.missionType, this.missionGrade,this.missionIndex,this.missionGiver, this.pointA,this.pointB,this.Obj,this.receiver,this.pointA_Timed,this.pointB_Timed,this.time));
+                GetComponent<QuestManager>().addNewMission(new Mission(this.missionName, this.missionType, this.missionGrade,this.missionDescription,this.missionIndex,this.missionGiver, this.pointA,this.pointB,this.Obj,this.receiver,this.pointA_Timed,this.pointB_Timed,this.time));
                 missionIndex++;
             }
 

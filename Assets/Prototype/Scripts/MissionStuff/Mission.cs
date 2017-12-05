@@ -7,7 +7,7 @@ namespace MissionManagerStuff
     [Serializable]
     public class Mission
     {
-        [ReadOnly]
+        //[ReadOnly]
         public string missionName;
         [ReadOnly]
         public MISSIONTYPE missionType;
@@ -15,6 +15,13 @@ namespace MissionManagerStuff
         public MISSIONGRADE missionGrade;
         [ReadOnly]
         public int missionIndex;
+        public bool ShowDescription;
+
+        [ShowIf("ShowDescription")]
+        [ReadOnly]
+        [TextArea]
+        public string missionDescription;
+
 
         [ReadOnly]
         public bool available;
@@ -62,12 +69,13 @@ namespace MissionManagerStuff
         public int time;
         #endregion
 
-        public Mission(string _missionName,MISSIONTYPE _missionType,MISSIONGRADE _missionGrade,int _missionIndex,GameObject _missionGiver, GameObject _pointA, GameObject _pointB, GameObject _obj, GameObject _receiver, GameObject _pointATi, GameObject _pointBTi,int _time)
+        public Mission(string _missionName,MISSIONTYPE _missionType,MISSIONGRADE _missionGrade,string _missionDescription,int _missionIndex,GameObject _missionGiver, GameObject _pointA, GameObject _pointB, GameObject _obj, GameObject _receiver, GameObject _pointATi, GameObject _pointBTi,int _time)
         {
 
             missionName = _missionName;
             missionType = _missionType;
             missionGrade = _missionGrade;
+            missionDescription = _missionDescription;
             missionIndex = _missionIndex;
             missionGiver = _missionGiver;
             pointA = _pointA;

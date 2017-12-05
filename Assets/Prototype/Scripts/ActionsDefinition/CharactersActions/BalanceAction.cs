@@ -22,15 +22,7 @@ namespace Character.Actions
         {
 
            
-                if (Input.GetAxis("Vertical") != 0)
-                {
-                    movement = Input.GetAxis("Vertical");
-                }
-                else
-                {
-                    movement = 0;
-                }
-
+            //BOARD
             if (controller.m_CharacterController.forwardBalance.tag == "Board")
             {
                 if (Input.GetAxis("Vertical") != 0)
@@ -48,8 +40,9 @@ namespace Character.Actions
                     angleSign = -1f;
 
                  controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward *(movement*angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
-                
+
             }
+            // LEDGE
             else if (controller.m_CharacterController.forwardBalance.tag == "Ledge")
             {
 
@@ -62,16 +55,25 @@ namespace Character.Actions
                     movement = 0;
                 }
 
-                if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) <= 90)
+                if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) <= 45)
                     angleSign = -1f;
                 else
                     angleSign = 1f;
+               
 
-                controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward * (movement * angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
+               
+                if (controller.m_CharacterController.forwardBalance.name == "Point1")
+                {
+                    controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward * (movement * angleSign * -1) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);                 
+                }
+                else
+                {
+                    controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward * (movement * angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
+                }
             }
 
             // Animator
-            controller.m_CharacterController.m_ForwardAmount = movement *angleSign;
+            controller.m_CharacterController.m_ForwardAmount = movement * angleSign;
 
         }
     }

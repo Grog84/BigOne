@@ -20,6 +20,7 @@ namespace Character.Actions
             controller.m_CharacterController.isInDanger = false;
             controller.m_CharacterController.m_Animator.SetBool("onBoard", false);
             controller.m_CharacterController.m_Animator.SetBool("onLedge", false);
+            controller.m_CharacterController.m_ForwardAmount = 0;
         }
 
     }

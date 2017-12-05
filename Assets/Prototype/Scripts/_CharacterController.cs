@@ -261,6 +261,11 @@ namespace Character
                   isInItemArea = true;
                   ItemCollider.GetComponent<CollectablesIconsActivation>().ShowIcon(this.gameObject);
             }
+            //if (other.gameObject.layer == LayerMask.NameToLayer("Balance"))
+            //{
+            //    balanceCollider = other.gameObject;
+            //    isInBalanceArea = true;
+            //}
         }
 
         private void OnTriggerEnter(Collider other)

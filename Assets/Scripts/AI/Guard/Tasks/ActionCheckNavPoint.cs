@@ -9,6 +9,7 @@ namespace AI.BT
 
         public override TaskState Run()
         {
+            Debug.Log("CheckNavPointAction");
             m_BehaviourTree.m_Blackboard.m_Agent.GetComponent<Guard>().CheckNextPoint();
             return TaskState.SUCCESS;
         }

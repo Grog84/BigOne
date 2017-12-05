@@ -50,7 +50,6 @@ namespace AI
         bool isPerceptionBlocked = false;
 
         float perceptionPercentage = 0f;
-        [HideInInspector] public bool isPlayerInSight = false;
         [HideInInspector] public bool isOtherAlarmed = false;
         // Saving Game
         [HideInInspector] public GuardSaveComponent m_SaveComponent;
@@ -72,7 +71,7 @@ namespace AI
                 GMController.instance.curiousGuards--;
 
             m_State = GuardState.NORMAL;
-            m_Blackboard.SetIntValue("GuardState", (int)GuardState.NORMAL);
+            SetBlackboardValue("GuardState", (int)GuardState.NORMAL);
             LoadStats(normalStats);
             guardAllert.SetActive(true);
         }
@@ -81,7 +80,7 @@ namespace AI
         {
             GMController.instance.curiousGuards++;
             m_State = GuardState.CURIOUS;
-            m_Blackboard.SetIntValue("GuardState", (int)GuardState.CURIOUS);
+            SetBlackboardValue("GuardState", (int)GuardState.CURIOUS);
             LoadStats(curiousStats);
         }
 
@@ -93,7 +92,7 @@ namespace AI
 
             GMController.instance.alarmedGuards++;
             m_State = GuardState.ALARMED;
-            m_Blackboard.SetIntValue("GuardState", (int)GuardState.ALARMED);
+            SetBlackboardValue("GuardState", (int)GuardState.ALARMED);
             LoadStats(alarmedStats);
             guardAllert.SetActive(false);
             isOtherAlarmed = false;
@@ -102,31 +101,44 @@ namespace AI
         public void GetDistracted()
         {
             m_State = GuardState.DISTRACTED;
-            m_Blackboard.SetIntValue("GuardState", (int)GuardState.DISTRACTED);
+            SetBlackboardValue("GuardState", (int)GuardState.DISTRACTED);
             LoadStats(distractedStats);
-        }
-
-        public void SetPlayerInSight()
-        {
-            isPlayerInSight = true;
-            m_Blackboard.SetBoolValue("PlayerInSight", true);
-        }
-
-        public void SetPlayerOutOfSight()
-        {
-            isPlayerInSight = false;
-            StartCoroutine(OutOfSightHysteresis());
         }
 
         public void SetOtherAlarmed()
         {
             isOtherAlarmed = true;
-            m_Blackboard.SetBoolValue("OtherAlarmed", true);
+            SetBlackboardValue("OtherAlarmed", true);
         }
-        
-        public void GetOtherAlarmed()
+
+        public void SetBlackboardValue(string valueName, int value)
         {
-            isOtherAlarmed = m_Blackboard.GetBoolValue("OtherAlarmed");
+            m_Blackboard.SetIntValue(valueName, value);
+        }
+
+        public void SetBlackboardValue(string valueName, bool value)
+        {
+            m_Blackboard.SetBoolValue(valueName, value);
+        }
+
+        public void SetBlackboardValue(string valueName, Vector3 value)
+        {
+            m_Blackboard.SetVector3Value(valueName, value);
+        }
+
+        public int GetBlackboardIntValue(string valueName)
+        {
+            return 0;
+        }
+
+        public bool GetBlackboardBoolValue(string valueName)
+        {
+            return false;
+        }
+
+        public Vector3 GetBlackboardVector3Value(string valueName)
+        {
+            return resetPlayerPosition;
         }
 
         internal GuardState GetState
@@ -138,14 +150,14 @@ namespace AI
             }
         }
 
-        IEnumerator OutOfSightHysteresis()
+        public IEnumerator OutOfSightHysteresis()
         {
             float timer = 0f;
             while (timer < stats.outOfSightHysteresis)
             {
                 timer += Time.deltaTime;
                 yield return null;
-                if (isPlayerInSight)
+                if (GetBlackboardBoolValue("PlayerInSight"))
                     yield break;
             }
 
@@ -165,8 +177,9 @@ namespace AI
         {
             bool noRaycastHitting = true;
 
-            if (isPlayerInSight && perceptionPercentage < 100f && GMController.instance.GetGameStatus())
+            if (GetBlackboardBoolValue("PlayerInSight") && perceptionPercentage < 100f && GMController.instance.GetGameStatus())
             {
+                
                 Vector3 direction;
 
                 for (int i = 0; i < lookAtPositions.Length; i++)
@@ -210,7 +223,9 @@ namespace AI
                     if (!isPerceptionBlocked)
                         perceptionPercentage += stats.fillingSpeed * stats.torsoMultiplier * Time.deltaTime;
                 }
+                
             }
+           
 
             if (!isPerceptionBlocked && noRaycastHitting && perceptionPercentage > 0f)
             {
@@ -223,8 +238,9 @@ namespace AI
 
         public void CheckNextPoint()
         {
+            Debug.Log("CheckNavPoint");
             navPointTimer += Time.deltaTime;
-
+            //checkNavPointTime = wayPointList[checkingWayPoint].secondsStaying;
             if (navPointTimer <= 2f)
             {
                 float step = normalStats.angularSpeed * Time.deltaTime;
@@ -234,6 +250,7 @@ namespace AI
             }
             else if (navPointTimer >= checkNavPointTime - 2f)
             {
+                
                 // start facing the next point of the navigation
                 float step = normalStats.angularSpeed * Time.deltaTime;
                 Vector3 targetDir = wayPointListTransform[nextWayPoint].position - transform.position;
@@ -245,7 +262,7 @@ namespace AI
             if (navPointTimer >= checkNavPointTime)
             {
                 navPointTimer = 0;
-                m_Blackboard.SetBoolValue("CheckingNavPoint", false);
+                SetBlackboardValue("CheckingNavPoint", false);
             }
         }
 
@@ -331,7 +348,8 @@ namespace AI
             {
                 wayPointListTransform[i] = wayPointList[i].transform;
             }
-
+            Debug.Log(wayPointListTransform.Length);
+            
             // Finds the position the guards are looking at
             GameObject[] lookAtPositionsObj = GameObject.FindGameObjectsWithTag("LookAtPosition");
             lookAtPositions = new Transform[lookAtPositionsObj.Length];
@@ -346,6 +364,10 @@ namespace AI
         private void Start()
         {
             LoadStats(normalStats);
+            m_NavMeshAgent.destination = wayPointListTransform[0].position;
+            SetBlackboardValue("RandomPick", randomPick);
+            SetBlackboardValue("NumberOfNavPoints", wayPointList.Count);
+
         }
 
         private void Update()
@@ -353,8 +375,7 @@ namespace AI
             LookAround();
             UpdatePerceptionUI();
             ChangeStateFromGauge();
-            GetOtherAlarmed();
-
+            
             
         }
 

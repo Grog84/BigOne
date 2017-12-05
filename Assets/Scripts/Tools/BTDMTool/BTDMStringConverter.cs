@@ -213,10 +213,16 @@ public class BTDMStringConverter
                 return new ActionReachLastPosition();
             case TaskType.GUARD_WAIT_NAVPOINT:
                 return new ActionWaitNavPoint();
+            case TaskType.GUARD_START_WAITING:
+                return new ActionStartWaiting();
+            case TaskType.GUARD_SWITCH_NAVPOINT:
+                return new ActionSwitchNavPoint();
             case TaskType.GUARD_IS_ALARMED:
                 return new ConditionAlarmed();
             case TaskType.GUARD_IS_CURIOUS:
                 return new ConditionCurious();
+            case TaskType.GUARD_IS_OTHER_ALARMED:
+                return new ConditionIsOtherAlarmed();
             case TaskType.GUARD_IS_WAITING:
                 return new ConditionIsWaiting();
             case TaskType.GUARD_IS_LAST_PERCIEVED_POSITION_REACHED:

@@ -13,73 +13,105 @@ namespace AI
         bool randomPick = false;
         bool otherAlarmed = false;
         bool isCheckingNavPoint = false;
+        int currentNavPoint = 0;
+        int numberOfNavPoints;
+        float navPointTimer = 0;
         Vector3 lastPercievedPosition;
         Vector3 resetPlayerPosition = new Vector3(1000, 1000, 1000);
 
         public override int GetIntValue(string valueName)
         {
-            if (valueName == "GuardState")
+            switch (valueName)
             {
-                return (int)guardState;
+                case "GuardState":
+                    return (int)guardState;
+                case "CurrentNavPoint":
+                    return currentNavPoint;
+                case "NumberOfNavPoints":
+                    return numberOfNavPoints;
+                default:
+                    return -1;
             }
-
-            return -1;
+    
         }
 
         public override void SetIntValue(string valueName, int value)
         {
-            if (valueName == "GuardState")
+            switch (valueName)
             {
-                guardState = (GuardState)value;
+                case "GuardState":
+                    guardState = (GuardState)value;
+                    break;
+                case "CurrentNavPoint":
+                    currentNavPoint = value;
+                    break;
+                case "NumberOfNavPoints":
+                    numberOfNavPoints = value;
+                    break;
+                default:
+                    break;
             }
+        }
 
+        public override float GetFloatValue(string valueName)
+        {
+            switch (valueName)
+            {
+                case "NavPointTimer":
+                    return navPointTimer;
+                default:
+                    return -1;
+            }
+        }
+
+        public override void SetFloatValue(string valueName, float value)
+        {
+            switch (valueName)
+            {
+                case "NavPointTimer":
+                    navPointTimer = value;
+                    break;
+                default:
+                    break;
+            }
         }
 
         public override bool GetBoolValue(string valueName)
         {
-            if (valueName == "PlayerInSight")
+            switch (valueName)
             {
-                return isPlayerInSight;
+                case "PlayerInSight":
+                    return isPlayerInSight;
+                case "RandomPick":
+                    return randomPick;
+                case "OtherAlarmed":
+                    return otherAlarmed;
+                case "CheckingNavPoint":
+                    return isCheckingNavPoint;
+                default:
+                    return false;
             }
-
-            if(valueName == "RandomValue")
-            {
-                return randomPick;
-            }
-
-            if(valueName == "OtherAlarmed")
-            {
-                return otherAlarmed;
-            }
-
-            if(valueName == "CheckingNavPoint")
-            {
-                return isCheckingNavPoint;
-            }
-            return false;
         }
 
         public override void SetBoolValue(string valueName, bool value)
         {
-            if (valueName == "PlayerInSight")
+            switch (valueName)
             {
-                isPlayerInSight = value;
-            }
-
-            if (valueName == "RandomValue")
-            {
-                 randomPick = value;
-            }
-
-            if(valueName == "OtherAllarmed")
-            {
-                otherAlarmed = value;
-            }
-
-            if(valueName == "CheckingNavPoint")
-            {
-                isCheckingNavPoint = value;
-            }
+                case "PlayerInSight":
+                    isPlayerInSight = value;
+                    break;
+                case "RandomPick":
+                    randomPick = value;
+                    break;
+                case "OtherAlarmed":
+                    otherAlarmed = value;
+                    break;
+                case "CheckingNavPoint":
+                    isCheckingNavPoint = value;
+                    break;
+                default:
+                    break;
+            }     
         }
 
         public override Vector3 GetVector3Value(string valueName)

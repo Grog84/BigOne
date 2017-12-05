@@ -13,6 +13,10 @@ namespace AI
 
         public abstract void SetIntValue(string valueName, int value);
 
+        public abstract float GetFloatValue(string valueName);
+
+        public abstract void SetFloatValue(string valueName, float value);
+
         public abstract bool GetBoolValue(string valueName);
 
         public abstract void SetBoolValue(string valueName, bool value);

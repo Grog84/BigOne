@@ -9,7 +9,11 @@ namespace AI.BT
         public override TaskState Run()
         {
             if(m_BehaviourTree.m_Blackboard.GetBoolValue("ChekingNavPoint"))
+            {
+                Debug.Log("Aspetto");
                 return TaskState.SUCCESS;
+
+            }
             else
                 return TaskState.FAILURE;
         }

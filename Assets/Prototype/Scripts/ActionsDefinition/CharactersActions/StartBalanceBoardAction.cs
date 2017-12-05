@@ -35,8 +35,7 @@ namespace Character.Actions
             
                 controller.m_CharacterController.m_Animator.SetBool("onBoard", true);
                 controller.m_CharacterController.startBalanceBoard = true;
-
-
+              
         }
 
     }

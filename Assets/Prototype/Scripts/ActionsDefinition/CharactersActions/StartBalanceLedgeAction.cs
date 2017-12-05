@@ -33,6 +33,7 @@ namespace Character.Actions
 
             controller.m_CharacterController.m_Animator.SetBool("onLedge", true);
             controller.m_CharacterController.startBalanceLedge = true;
+            controller.m_CharacterController.animSpeed = controller.m_CharacterController.m_Animator.speed;
 
         }
 

@@ -11,6 +11,7 @@ namespace Character.Actions
     {
         float movement;
         float angleSign = 1f;
+        
 
         public override void Execute(CharacterStateController controller)
         {
@@ -58,11 +59,20 @@ namespace Character.Actions
                         controller.m_CharacterController.startBalanceLedge = true;
                     }
                }
-            
+
 
             // Animator
+            //float animSpeed = 1;
             controller.m_CharacterController.m_ForwardAmount = movement * angleSign;
 
+            if (movement == 0)
+            {
+                controller.m_CharacterController.m_Animator.speed = 0;
+            }
+            else
+            {
+                controller.m_CharacterController.m_Animator.speed = controller.m_CharacterController.animSpeed;
+            }
         }
     }
 }

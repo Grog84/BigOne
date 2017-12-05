@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ffedece9bcbbd4baec2ae9d1095f4c, type: 3}
+  m_Name: BalanceLedge
+  m_EditorClassIdentifier: 
+  actions:
+  - {fileID: 11400000, guid: 513abcf8502430d44bfd1db291eabf6e, type: 2}
+  - {fileID: 11400000, guid: 91bc3ae93d818b042be6c7de64775cc1, type: 2}
+  enterActions:
+  - {fileID: 11400000, guid: 5f41f481746f0904dbd0091ed57f6bcb, type: 2}
+  exitActions:
+  - {fileID: 11400000, guid: 31331c577d332694ab2f04c41ba53694, type: 2}
+  transitions:
+  - decision:
+    - {fileID: 11400000, guid: 880a038420696bc4a982ef96cb3208ac, type: 2}
+    trueState: {fileID: 11400000, guid: 0671d112d18c20d43959d00b038f5c4a, type: 2}
+    falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
+  sceneGizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

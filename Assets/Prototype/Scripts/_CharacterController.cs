@@ -15,9 +15,11 @@ namespace Character
         [HideInInspector] public float ray_length;
         //
         // BALANCE VARIABLES
-        [HideInInspector] public bool isInBalanceArea;
+         public bool isInBalanceArea;
         [HideInInspector] public bool startBalanceBoard;
         [HideInInspector] public bool startBalanceLedge;
+        [HideInInspector] public bool choosePoint;
+         public bool isInJointArea;
         // CLIMB VARIABLES
         [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
         [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
@@ -80,6 +82,7 @@ namespace Character
 
         [HideInInspector] public GameObject balanceCollider;
         [HideInInspector] public GameObject forwardBalance;
+        [HideInInspector] public GameObject balanceJoint;
         //
         [HideInInspector] public bool isDefeated = false;
 
@@ -261,11 +264,11 @@ namespace Character
                   isInItemArea = true;
                   ItemCollider.GetComponent<CollectablesIconsActivation>().ShowIcon(this.gameObject);
             }
-            //if (other.gameObject.layer == LayerMask.NameToLayer("Balance"))
-            //{
-            //    balanceCollider = other.gameObject;
-            //    isInBalanceArea = true;
-            //}
+            if (other.gameObject.layer == LayerMask.NameToLayer("Balance"))
+            {
+                balanceCollider = other.gameObject;
+                isInBalanceArea = true;
+            }
         }
 
         private void OnTriggerEnter(Collider other)
@@ -300,8 +303,23 @@ namespace Character
             }
             if (other.gameObject.layer == LayerMask.NameToLayer("Balance"))
             {
-                balanceCollider = other.gameObject;
-                isInBalanceArea = true;
+
+                if (other.tag == "Board")
+                {
+                    balanceCollider = other.gameObject;
+                    isInBalanceArea = true;
+                }
+                if (other.tag == "Ledge")
+                {
+                    balanceCollider = other.gameObject;
+                    isInBalanceArea = true;
+                }            
+
+                if (other.tag == "Joint")
+                {
+                    balanceJoint = other.gameObject;
+                    isInJointArea = true;
+                }
             }
         }
 
@@ -345,13 +363,19 @@ namespace Character
             {
                 if(other.tag == "Board")
                 {  
-                        balanceCollider = null;
-                        isInBalanceArea = false;
+                    balanceCollider = null;
+                    isInBalanceArea = false;
                 }
                 if (other.tag == "Ledge")
                 {
                     balanceCollider = null;
                     isInBalanceArea = false;
+                }
+
+                if (other.tag == "Joint")
+                {
+                    balanceJoint = null;
+                    isInJointArea = false;
                 }
             }
 
@@ -540,6 +564,22 @@ namespace Character
 
         #region Balance
 
+        IEnumerator BalancePoint()
+        {
+            choosePoint = false;
+
+            if (Vector3.Distance(CharacterTransform.position, balanceCollider.transform.GetChild(0).position)
+                  < Vector3.Distance(CharacterTransform.position, balanceCollider.transform.GetChild(1).position))
+            {
+                forwardBalance = balanceCollider.transform.GetChild(0).gameObject;
+            }
+            else
+            {
+                forwardBalance = balanceCollider.transform.GetChild(1).gameObject;
+            }
+            yield return null;
+        }
+
         IEnumerator OnBalanceBoard()
         {
             startBalanceBoard = false;
@@ -712,6 +752,11 @@ namespace Character
             if(startBalanceLedge)
             {
                 StartCoroutine(OnBalanceLedge());
+            }
+
+            if(choosePoint)
+            {
+                StartCoroutine(BalancePoint());
             }
         }
 

@@ -10,15 +10,18 @@ public class MapEditor : Editor
     public static MapEditorDatabase m_Database;
 
     static GUIStyle style = new GUIStyle();
+    //static GUIStyle toggleStyle = new GUIStyle();
     static Vector2 scrollPosition = Vector2.zero;
     static int itemCount;
     static bool[] blocksStatus;
     static int offset;
     static bool isStart = true;
 
-    static int blockTagSpacing = 15;
-    static int buttonSize = 128;
-    static int buttonSpacing = 35;
+    static int blockTagSpacing = 20;
+    static int buttonSize = 80;
+    //static int buttonSpacing = 35;
+
+    static int firstBlockWidth = 130;
 
     //static Transform m_LevelParent;
     //static Transform LevelParent
@@ -71,6 +74,9 @@ public class MapEditor : Editor
 
         m_Database = AssetDatabase.LoadAssetAtPath<MapEditorDatabase>("Assets/Scripts/Tools/MapEditor/MapEditorDatabase.asset");
         style.normal.textColor = Color.black;
+
+        //toggleStyle.fontSize = 8;
+        //toggleStyle.onActive.textColor = Color.blue;
 
     }
 
@@ -167,22 +173,28 @@ public class MapEditor : Editor
     {
         Handles.BeginGUI();
 
-        GUI.Box(new Rect(0, 0, 110, sceneView.position.height - 35), GUIContent.none, EditorStyles.textArea);
+        GUI.Box(new Rect(0, sceneView.position.height - 145, firstBlockWidth, 110), GUIContent.none, EditorStyles.textArea);
+        GUI.Box(new Rect(firstBlockWidth, sceneView.position.height - 145, sceneView.position.width - 200, 110), GUIContent.none, EditorStyles.textArea);
+        GUI.Box(new Rect(sceneView.position.width - 200, sceneView.position.height - 145, 200, 110), GUIContent.none, EditorStyles.textArea);
 
-        GUI.Box(new Rect(sceneView.position.width - 110 , 0, sceneView.position.width, sceneView.position.height - 35), GUIContent.none, EditorStyles.textArea);
+        //GUI.Box(new Rect(sceneView.position.width - 110 , 0, sceneView.position.width, sceneView.position.height - 35), GUIContent.none, EditorStyles.textArea);
 
-        offset = 0;
+        offset = 10 + firstBlockWidth;
 
+        for (int i = 0; i < m_Database.blocksList.Count; ++i)
+        {
+            DrawToggle(i, sceneView.position);
+        }
 
-        scrollPosition = GUI.BeginScrollView(new Rect(0, 0, 125, sceneView.position.height - 35), scrollPosition, new Rect(0, 0, 110, itemCount * buttonSize + 25));
+        scrollPosition = GUI.BeginScrollView(new Rect(firstBlockWidth, sceneView.position.height - 145, sceneView.position.width - 200, 110),
+        scrollPosition, new Rect(firstBlockWidth, sceneView.position.height - 145, itemCount * buttonSize + 25, 90));
 
         for (int i = 0; i < m_Database.blocksList.Count; ++i)
         {
             DrawCustomBlock(i, sceneView.position, offset);
             if (blocksStatus[i])
-                offset += m_Database.blocksList[i].prefabsList.Count * buttonSize + blockTagSpacing;
-            else
-                offset += blockTagSpacing;
+                offset += m_Database.blocksList[i].prefabsList.Count * buttonSize;
+
         }
 
         GUI.EndScrollView();
@@ -190,9 +202,22 @@ public class MapEditor : Editor
         Handles.EndGUI();
     }
 
+    static void DrawToggle(int index, Rect sceneView)
+    {
+
+        blocksStatus[index] = EditorGUI.Toggle(new Rect(5, sceneView.height - 140 + index * blockTagSpacing,
+            firstBlockWidth, blockTagSpacing), m_Database.blocksList[index].Name, blocksStatus[index]);
+    }
+
     static void DrawCustomBlock(int index, Rect sceneView, int offset)
     {
-        blocksStatus[index] = EditorGUI.Foldout(new Rect(0, offset, 125, blockTagSpacing), blocksStatus[index], m_Database.blocksList[index].Name);
+        //blocksStatus[index] = EditorGUI.Foldout(new Rect(5, sceneView.height - 145 + index * blockTagSpacing, firstBlockWidth, blockTagSpacing),
+        //    blocksStatus[index], m_Database.blocksList[index].Name);
+
+        //Debug.Log(sceneView.height - 145 + index * blockTagSpacing);
+        //Debug.Log(blocksStatus[index]);
+        //blocksStatus[index] = EditorGUI.Toggle(new Rect(5, sceneView.height - 145 + index * blockTagSpacing,
+        //    firstBlockWidth, blockTagSpacing), m_Database.blocksList[index].Name, blocksStatus[index]);
 
         if (blocksStatus[index])
         {
@@ -218,8 +243,10 @@ public class MapEditor : Editor
         GUIContent buttonContent = new GUIContent(previewImage);
 
 
-        GUI.Label(new Rect(5, offset + index * buttonSize + 15, 100, 20), m_Database.blocksList[blockIndex].prefabsList[index].Name, style);
-        bool isToggleDown = GUI.Toggle(new Rect(5, offset + index * buttonSize + 35, 100, 100), isActive, buttonContent, GUI.skin.button);
+        GUI.Label(new Rect(offset + index * buttonSize, sceneViewRect.height - 140, buttonSize, 20),
+            m_Database.blocksList[blockIndex].prefabsList[index].Name, style);
+        bool isToggleDown = GUI.Toggle(new Rect(offset + index * buttonSize, sceneViewRect.height - 125, 70, 70),
+            isActive, buttonContent, GUI.skin.button);
 
         //If this button is clicked but it wasn't clicked before (ie. if the user has just pressed the button)
         if (isToggleDown == true && isActive == false)

@@ -41,7 +41,6 @@ public class MapEditorHandle : Editor
         }
 
         UpdateHandlePosition(sceneView);
-        //UpdateIsMouseInValidArea(sceneView.position);
         UpdateRepaint();
 
         DrawCubeDrawPreview();
@@ -51,20 +50,6 @@ public class MapEditorHandle : Editor
     {
         return UnityEditor.SceneManagement.EditorSceneManager.GetActiveScene().name != "Menu";
     }
-
-    //static void UpdateIsMouseInValidArea(Rect sceneViewRect)
-    //{
-    //    //Make sure the cube handle is only drawn when the mouse is within a position that we want
-    //    //In this case we simply hide the cube cursor when the mouse is hovering over custom GUI elements in the lower
-    //    //are of the sceneView which we will create in E07
-    //    bool isInValidArea = Event.current.mousePosition.y < sceneViewRect.height - 35;
-
-    //    if (isInValidArea != IsMouseInValidArea)
-    //    {
-    //        IsMouseInValidArea = isInValidArea;
-    //        SceneView.RepaintAll();
-    //    }
-    //}
 
     static void UpdateHandlePosition(SceneView sceneView)
     {
@@ -77,8 +62,6 @@ public class MapEditorHandle : Editor
 
         Ray ray = HandleUtility.GUIPointToWorldRay(mousePosition);
         RaycastHit hit;
-
-        // 0, 0, 110, sceneView.position.height - 35
 
         if (Physics.Raycast(ray, out hit, Mathf.Infinity) &&
             Event.current.mousePosition.x > 110 &&

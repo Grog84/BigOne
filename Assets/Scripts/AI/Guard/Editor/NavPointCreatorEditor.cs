@@ -52,7 +52,6 @@ public class NavPointCreatorEditor : Editor
             {
                 if (!hasClickedOnce)
                 {
-                    Debug.Log("First Click");
                     hasClickedOnce = true;
                     AddNavPoint(PatrolEditorHandle.CurrentHandlePosition);
                     oldMousePos = new Vector2(Event.current.mousePosition.x, Event.current.mousePosition.y);
@@ -63,6 +62,7 @@ public class NavPointCreatorEditor : Editor
                     SceneView.onSceneGUIDelegate -= OnSceneGUI;
                     m_Target.AddNavpoint(activeObj.GetComponent<NavPoint>());
                     PatrolEditorHandle.isActive = false;
+                    UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
                 }
                 
             }
@@ -146,7 +146,6 @@ public class NavPointCreatorEditor : Editor
                 showPath = !showPath;
                 if (showPath)
                 {
-                    Debug.Log("Show Path");
                     SceneView.onSceneGUIDelegate -= OnSceneGUI;
                     SceneView.onSceneGUIDelegate += OnSceneGUI;
                 }

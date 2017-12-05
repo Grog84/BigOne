@@ -97,7 +97,6 @@ public class PatrolEditorHandle : Editor
 
     static void DrawHandlesCube(Vector3 center)
     {
-        GameObject selectedPrefab = MapEditor.m_Database.blocksList[MapEditor.SelectedBlock].prefabsList[MapEditor.SelectedPrefab].Prefab;
         Vector3 bounds = new Vector3(0.5f, 0.5f, 0.5f);
 
         Vector3 p1 = center + Vector3.right * bounds.x + Vector3.forward * bounds.z;

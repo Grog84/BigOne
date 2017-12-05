@@ -19,9 +19,11 @@ public class MapEditor : Editor
 
     static int blockTagSpacing = 20;
     static int buttonSize = 80;
+    static int materialButtonSize = 30;
     //static int buttonSpacing = 35;
 
     static int firstBlockWidth = 130;
+    static int lastBlockWidth = 150;
 
     //static Transform m_LevelParent;
     //static Transform LevelParent
@@ -64,6 +66,18 @@ public class MapEditor : Editor
         set
         {
             EditorPrefs.SetInt("SelectedPrefab", value);
+        }
+    }
+
+    public static int SelectedMaterial
+    {
+        get
+        {
+            return EditorPrefs.GetInt("SelectedMaterial", 0);
+        }
+        set
+        {
+            EditorPrefs.SetInt("SelectedMaterial", value);
         }
     }
 
@@ -174,8 +188,9 @@ public class MapEditor : Editor
         Handles.BeginGUI();
 
         GUI.Box(new Rect(0, sceneView.position.height - 145, firstBlockWidth, 110), GUIContent.none, EditorStyles.textArea);
-        GUI.Box(new Rect(firstBlockWidth, sceneView.position.height - 145, sceneView.position.width - 200, 110), GUIContent.none, EditorStyles.textArea);
-        GUI.Box(new Rect(sceneView.position.width - 200, sceneView.position.height - 145, 200, 110), GUIContent.none, EditorStyles.textArea);
+        GUI.Box(new Rect(firstBlockWidth, sceneView.position.height - 145, sceneView.position.width - lastBlockWidth - firstBlockWidth, 110),
+            GUIContent.none, EditorStyles.textArea);
+        GUI.Box(new Rect(sceneView.position.width - lastBlockWidth, sceneView.position.height - 145, lastBlockWidth, 110), GUIContent.none, EditorStyles.textArea);
 
         //GUI.Box(new Rect(sceneView.position.width - 110 , 0, sceneView.position.width, sceneView.position.height - 35), GUIContent.none, EditorStyles.textArea);
 
@@ -186,7 +201,8 @@ public class MapEditor : Editor
             DrawToggle(i, sceneView.position);
         }
 
-        scrollPosition = GUI.BeginScrollView(new Rect(firstBlockWidth, sceneView.position.height - 145, sceneView.position.width - 200, 110),
+        scrollPosition = GUI.BeginScrollView(new Rect(firstBlockWidth, sceneView.position.height - 145,
+            sceneView.position.width - lastBlockWidth - firstBlockWidth, 110),
         scrollPosition, new Rect(firstBlockWidth, sceneView.position.height - 145, itemCount * buttonSize + 25, 90));
 
         for (int i = 0; i < m_Database.blocksList.Count; ++i)
@@ -199,6 +215,11 @@ public class MapEditor : Editor
 
         GUI.EndScrollView();
 
+        for (int i = 0; i < m_Database.blocksList[SelectedBlock].prefabsList[SelectedPrefab].materialList.Count + 1; ++i)
+        {
+            DrawMaterialButton(i, sceneView.position);
+        }
+
         Handles.EndGUI();
     }
 
@@ -207,6 +228,45 @@ public class MapEditor : Editor
 
         blocksStatus[index] = EditorGUI.Toggle(new Rect(5, sceneView.height - 140 + index * blockTagSpacing,
             firstBlockWidth, blockTagSpacing), m_Database.blocksList[index].Name, blocksStatus[index]);
+    }
+
+    static void DrawMaterialButton(int materialIndex, Rect sceneView)
+    {
+        bool isActive = false;
+
+        if (ToolMenuEditor.SelectedTool == 1 && materialIndex == SelectedMaterial)
+        {
+            isActive = true;
+        }
+
+        bool isToggleDown;
+
+        if (materialIndex == 0)
+        {
+            Texture2D previewImage = new Texture2D(128, 128);
+            GUIContent buttonContent = new GUIContent(previewImage);
+            isToggleDown = GUI.Toggle(new Rect(sceneView.width - lastBlockWidth + 20 + (materialIndex % 3) * (materialButtonSize + 5),
+                sceneView.height - 125 + (materialIndex / 3) * (materialButtonSize + 5), materialButtonSize, materialButtonSize),
+                isActive, buttonContent, GUI.skin.button);
+        }
+        else
+        {
+            //By passing a Prefab or GameObject into AssetPreview.GetAssetPreview you get a texture that shows this object
+            Texture2D previewImage = AssetPreview.GetAssetPreview(m_Database.blocksList[SelectedBlock].prefabsList[SelectedPrefab].materialList[materialIndex-1]);
+            GUIContent buttonContent = new GUIContent(previewImage);
+
+            isToggleDown = GUI.Toggle(new Rect(sceneView.width - lastBlockWidth + 20 + (materialIndex % 3) * (materialButtonSize + 5),
+                sceneView.height - 125 + (materialIndex / 3) * (materialButtonSize + 5), materialButtonSize, materialButtonSize),
+                isActive, buttonContent, GUI.skin.button);
+        }
+
+
+        //If this button is clicked but it wasn't clicked before (ie. if the user has just pressed the button)
+        if (isToggleDown == true && isActive == false)
+        {
+            SelectedMaterial = materialIndex;
+            ToolMenuEditor.SelectedTool = 1;
+        }
     }
 
     static void DrawCustomBlock(int index, Rect sceneView, int offset)
@@ -251,6 +311,7 @@ public class MapEditor : Editor
         //If this button is clicked but it wasn't clicked before (ie. if the user has just pressed the button)
         if (isToggleDown == true && isActive == false)
         {
+            SelectedMaterial = 0;
             SelectedBlock = blockIndex;
             SelectedPrefab = index;
             ToolMenuEditor.SelectedTool = 1;
@@ -267,6 +328,10 @@ public class MapEditor : Editor
         GameObject newObj = (GameObject)PrefabUtility.InstantiatePrefab(prefab);
         //newObj.transform.parent = LevelParent;
         newObj.transform.position = position;
+        if (SelectedMaterial != 0)
+        {
+            newObj.GetComponent<Renderer>().material = m_Database.blocksList[SelectedBlock].prefabsList[SelectedPrefab].materialList[SelectedMaterial - 1];
+        }
 
         //Make sure a proper Undo/Redo step is created. This is a special type for newly created objects
         Undo.RegisterCreatedObjectUndo(newObj, "Add " + prefab.name);

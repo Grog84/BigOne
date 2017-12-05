@@ -6,46 +6,20 @@ using StateMachine;
 
 namespace Character.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/Balance")]
-    public class BalanceAction : _Action
+    [CreateAssetMenu(menuName = "Prototype/Actions/Characters/BalanceLedge")]
+    public class BalanceLedgeAction: _Action
     {
-        Vector3 m_Move;
         float movement;
         float angleSign = 1f;
+        
 
         public override void Execute(CharacterStateController controller)
         {
-            Balance(controller);
+            BalanceLedge(controller);
         }
 
-        private void Balance(CharacterStateController controller)
+        private void BalanceLedge(CharacterStateController controller)
         {
-
-           
-            //BOARD
-            if (controller.m_CharacterController.forwardBalance.tag == "Board")
-            {
-                if (Input.GetAxis("Vertical") != 0)
-                {
-                    movement = Input.GetAxis("Vertical");
-                }
-                else
-                {
-                    movement = 0;
-                }
-
-                if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) <= 90)
-                    angleSign = 1f;
-                else
-                    angleSign = -1f;
-
-                 controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward *(movement*angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
-
-            }
-            // LEDGE
-            else if (controller.m_CharacterController.forwardBalance.tag == "Ledge")
-            {
-
                 if (Input.GetAxis("Horizontal") != 0)
                 {
                     movement = Input.GetAxis("Horizontal");
@@ -70,11 +44,35 @@ namespace Character.Actions
                 {
                     controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward * (movement * angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
                 }
-            }
+
+               if (Input.GetButtonDown("Interact") && controller.m_CharacterController.isInJointArea)
+               {
+                    if(controller.m_CharacterController.balanceJoint.GetComponent<BalanceJoint>().Point1.transform.parent == controller.m_CharacterController.forwardBalance.transform.parent)
+                    {
+                        controller.m_CharacterController.forwardBalance = controller.m_CharacterController.balanceJoint.GetComponent<BalanceJoint>().Point2;
+                        controller.m_CharacterController.startBalanceLedge = true;
+
+                    }
+                    else
+                    {
+                        controller.m_CharacterController.forwardBalance = controller.m_CharacterController.balanceJoint.GetComponent<BalanceJoint>().Point1;
+                        controller.m_CharacterController.startBalanceLedge = true;
+                    }
+               }
+
 
             // Animator
+            //float animSpeed = 1;
             controller.m_CharacterController.m_ForwardAmount = movement * angleSign;
 
+            if (movement == 0)
+            {
+                controller.m_CharacterController.m_Animator.speed = 0;
+            }
+            else
+            {
+                controller.m_CharacterController.m_Animator.speed = controller.m_CharacterController.animSpeed;
+            }
         }
     }
 }

@@ -9,10 +9,6 @@ namespace Character.Actions
     [CreateAssetMenu(menuName = "Prototype/Actions/Characters/BalanceLedgeCheck")]
     public class BalanceLedgeCheckAction: _Action
     {
-        float movement;
-        float angleSign = 1f;
-        float forward;
-        float backward;
 
         public override void Execute(CharacterStateController controller)
         {
@@ -21,7 +17,7 @@ namespace Character.Actions
 
         private void BalanceLedge(CharacterStateController controller)
         {
-            // START IN POINT 1
+            // CHECK ALLOWED MOVEMENTS WHEN STARTING IN POINT 1
             if (controller.m_CharacterController.forwardBalance.name == "Point1")
             {
                if (controller.m_CharacterController.isLedgeLimit)
@@ -46,9 +42,9 @@ namespace Character.Actions
                    controller.m_CharacterController.ledgeBackwardActive = true;
                }
               
-            } 
+            }
 
-            // START IN POINT 2
+            //  CHECK ALLOWED MOVEMENTS WHEN STARTING IN POINT 2
             else
             {
                if (controller.m_CharacterController.isLedgeLimit)

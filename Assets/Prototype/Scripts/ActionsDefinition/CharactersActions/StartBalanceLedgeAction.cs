@@ -29,8 +29,6 @@ namespace Character.Actions
                 controller.m_CharacterController.forwardBalance = controller.m_CharacterController.balanceCollider.transform.GetChild(1).gameObject;
             }
 
-            //controller.m_CharacterController.choosePoint = true;
-
             controller.m_CharacterController.m_Animator.SetBool("onLedge", true);
             controller.m_CharacterController.startBalanceLedge = true;
             controller.m_CharacterController.animSpeed = controller.m_CharacterController.m_Animator.speed;

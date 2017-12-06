@@ -49,6 +49,11 @@ namespace AI
             throw new System.NotImplementedException();
         }
 
+        public override void ReachNavPoint()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void LookAtManager()
         {
             if(GetBlackboardBoolValue("lookAtPlayer"))

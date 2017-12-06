@@ -113,32 +113,28 @@ public class AT_LoadSceneASync : MonoBehaviour
 
     IEnumerator LoadingText()
     {
-        while (!ao.isDone)
-        {
 
-            switch (TextBox.text)
-            {
-                case "Caricamento in corso":
-                    TextBox.text = "Caricamento in corso.";
-                    yield return new WaitForSecondsRealtime(00.5f);
-                    break;
-                case "Caricamento in corso.":
-                    TextBox.text = "Caricamento in corso..";
-                    yield return new WaitForSecondsRealtime(00.5f);
-                    break;
-                case "Caricamento in corso..":
-                    TextBox.text = "Caricamento in corso...";
-                    yield return new WaitForSecondsRealtime(00.5f);
-                    break;
-                case "Caricamento in corso...":
-                    TextBox.text = "Caricamento in corso \n Non chiudere il gioco";
-                    yield return new WaitForSecondsRealtime(00.5f);
-                    break;
+        //switch (TextBox.text)
+        //{
+        //    case "Caricamento in corso":
+        //        TextBox.text = "Caricamento in corso.";
+        //        yield return new WaitForSecondsRealtime(00.5f);
 
-            }
-        }
+        //    case "Caricamento in corso.":
+        //        TextBox.text = "Caricamento in corso..";
+        //        yield return new WaitForSecondsRealtime(00.5f);
+        //        break;
+        //    case "Caricamento in corso..":
+        //        TextBox.text = "Caricamento in corso...";
+        //        yield return new WaitForSecondsRealtime(00.5f);
+        //        break;
+        //    case "Caricamento in corso...":
+        //        TextBox.text = "Caricamento in corso \n Non chiudere il gioco";
+        //        yield return new WaitForSecondsRealtime(00.5f);
+        //        break;
+
+        //}
         yield return null;
-
     }
 
     #region Codice Da Trasferire

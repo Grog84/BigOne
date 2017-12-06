@@ -11,7 +11,7 @@ namespace MissionManagerStuff
     public class QuestManager : SerializedMonoBehaviour
     {
         string questPath;
-        private Vector3 Giu = new Vector3 { x=0f, y=-70f, z=0f };
+        private Vector3 Giu = new Vector3 { x=0f, y=-80f, z=0f };
         private GameObject QuestMenu;
 
 
@@ -23,7 +23,7 @@ namespace MissionManagerStuff
         {
             questPath= System.IO.Path.Combine(Application.persistentDataPath, "quest.json");
             QuestMenu = GameObject.Find("Pause_Quest");
-            
+         //   missionContainer = new MissionContainer();
         }
         void Start()
         {
@@ -33,10 +33,10 @@ namespace MissionManagerStuff
         // Update is called once per frame
         void Update()
         {
-
+            /*
             QuestMenu = GameObject.Find("Pause_Quest");
             //Debug.Log(QuestMenu.transform.position);
-            checkIFnewMissionIsAvailable();
+            checkIFnewMissionIsAvailable();*/
         }
 
         private void checkIFnewMissionIsAvailable()
@@ -83,7 +83,7 @@ namespace MissionManagerStuff
             if (newMission)
             {
                 QuestMenu = GameObject.Find("Pause_Quest");
-                QuestMenu.GetComponent<GameObject>();
+          
                 foreach (Mission M in missionContainer.MissionList)
                 {
                     Debug.Log(QuestMenu.transform.position);

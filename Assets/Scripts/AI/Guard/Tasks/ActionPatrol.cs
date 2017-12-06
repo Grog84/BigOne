@@ -8,11 +8,8 @@ namespace AI.BT
     {
         public override TaskState Run()
         {
-            Debug.Log("Patrol");
-            Guard guard = m_BehaviourTree.m_Blackboard.m_Agent.GetComponent<Guard>();
-
-            m_BehaviourTree.m_Blackboard.m_Agent.m_NavMeshAgent.destination = guard.wayPointListTransform[guard.nextWayPoint].position;
-            m_BehaviourTree.m_Blackboard.m_Agent.m_NavMeshAgent.isStopped = false;
+            //Debug.Log("Patrol");
+            m_BehaviourTree.m_Blackboard.m_Agent.ReachNavPoint();
 
             return TaskState.SUCCESS;
         }

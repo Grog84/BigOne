@@ -16,23 +16,25 @@ public class PauseGame : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            canvasTrigger = !canvasTrigger;
-         if (canvasTrigger)
-        {
-            canvas.gameObject.SetActive(true);
-          //  Time.timeScale = 0;
-        }
-        else
-        {
-            canvas.gameObject.SetActive(false);
-           // //Time.timeScale = 1;
-        }
-           QM_Controller.ShowActiveQuestOnMenu();
+            
+            Pause();
+            QM_Controller.ShowActiveQuestOnMenu();
         }
 
     }
     public void Pause()
     {
+        canvasTrigger = !canvasTrigger;
+        if (canvasTrigger)
+        {
+            canvas.gameObject.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            canvas.gameObject.SetActive(false);
+            Time.timeScale = 1;
+        }
     }
     public void Awake()
     {
@@ -44,7 +46,7 @@ public class PauseGame : MonoBehaviour
     }
     public void ResumeGame()
     {
-        canvasTrigger = !canvasTrigger;
+       
         Pause();
     }
     public void ReturnMenu()
@@ -55,17 +57,14 @@ public class PauseGame : MonoBehaviour
     }
     public void ReloadScene()
     {
-        int SceneIndex;
-        SceneIndex = SceneManager.GetActiveScene().buildIndex;
-     //   //Time.timeScale = 1;
-        SceneManager.LoadScene(SceneIndex);
+        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void LastCheckPoint()
     {
-        CP_Controller = GetComponent<CheckPointManager>();
-        //Time.timeScale = 1;
-        CP_Controller.LoadAllObj();
+        GameController Gc = FindObjectOfType<GameController>();
+        Gc.Load();
     }
 
 }

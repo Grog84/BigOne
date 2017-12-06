@@ -127,17 +127,17 @@ namespace AI
 
         public int GetBlackboardIntValue(string valueName)
         {
-            return 0;
+            return m_Blackboard.GetIntValue(valueName);
         }
 
         public bool GetBlackboardBoolValue(string valueName)
         {
-            return false;
+            return m_Blackboard.GetBoolValue(valueName);
         }
 
         public Vector3 GetBlackboardVector3Value(string valueName)
         {
-            return resetPlayerPosition;
+            return m_Blackboard.GetVector3Value(valueName);
         }
 
         internal GuardState GetState
@@ -274,7 +274,7 @@ namespace AI
             navPointTimer = 0;
             SetBlackboardValue("CheckingNavPoint", false);
             SetBlackboardValue("WaitingCoroutineRunning", false);
-
+            yield return null;
         }
 
         // method used to manage the state of the guard from the gauge of perception
@@ -335,10 +335,22 @@ namespace AI
             result = transform.position;
         }
 
+        // Updates the pointed nav point from the blackboard value
         public override void UpdateNavPoint()
         {
+            //Debug.Log("Changed to navpoint: " + GetBlackboardIntValue("CurrentNavPoint"));
+            //Debug.Log("Changed to navpoint: " + m_Blackboard.GetIntValue("CurrentNavPoint"));
             checkingWayPoint = m_Blackboard.GetIntValue("CurrentNavPoint");
             m_NavMeshAgent.SetDestination(wayPointListTransform[checkingWayPoint].position);
+            m_NavMeshAgent.isStopped = true;
+        }
+
+        // Commands to reach the point
+        public override void ReachNavPoint()
+        {
+            //Debug.Log("Reach navpoint: " + GetBlackboardIntValue("CurrentNavPoint"));
+            m_NavMeshAgent.destination = wayPointListTransform[GetBlackboardIntValue("CurrentNavPoint")].position;
+            m_NavMeshAgent.isStopped = false;
         }
 
         private void UpdatePerceptionUI()
@@ -365,7 +377,6 @@ namespace AI
             {
                 wayPointListTransform[i] = wayPointList[i].transform;
             }
-            Debug.Log(wayPointListTransform.Length);
             
             // Finds the position the guards are looking at
             GameObject[] lookAtPositionsObj = GameObject.FindGameObjectsWithTag("LookAtPosition");

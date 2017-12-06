@@ -8,6 +8,7 @@ namespace AI.BT
     {
         public override TaskState Run()
         {
+            Debug.Log("Condition is waiting");
             if (m_BehaviourTree.m_Blackboard.GetBoolValue("CheckingNavPoint"))
             {
                 return TaskState.SUCCESS;

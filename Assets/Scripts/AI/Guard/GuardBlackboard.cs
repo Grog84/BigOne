@@ -13,6 +13,7 @@ namespace AI
         bool randomPick = false;
         bool otherAlarmed = false;
         bool isCheckingNavPoint = false;
+        bool isCheckingNavPointCoroutineRunning = false;
         int currentNavPoint = 0;
         int numberOfNavPoints;
         float navPointTimer = 0;
@@ -88,7 +89,10 @@ namespace AI
                     return otherAlarmed;
                 case "CheckingNavPoint":
                     return isCheckingNavPoint;
+                case "WaitingCoroutineRunning":
+                    return isCheckingNavPointCoroutineRunning;
                 default:
+                    Debug.Log("Default");
                     return false;
             }
         }
@@ -108,6 +112,9 @@ namespace AI
                     break;
                 case "CheckingNavPoint":
                     isCheckingNavPoint = value;
+                    break;
+                case "WaitingCoroutineRunning":
+                    isCheckingNavPointCoroutineRunning = value;
                     break;
                 default:
                     break;

@@ -9,9 +9,14 @@ namespace AI.BT
 
         public override TaskState Run()
         {
-            Debug.Log("CheckNavPointAction");
-            m_BehaviourTree.m_Blackboard.m_Agent.GetComponent<Guard>().CheckNextPoint();
-            return TaskState.SUCCESS;
+            if (m_BehaviourTree.m_Blackboard.GetBoolValue("WaitingCoroutineRunning"))
+            { return TaskState.SUCCESS; }
+            else
+            {
+                m_BehaviourTree.m_Blackboard.SetBoolValue("WaitingCoroutineRunning", true);
+                m_BehaviourTree.m_Blackboard.m_Agent.GetComponent<Guard>().CheckNextPoint();
+                return TaskState.SUCCESS;
+            }
         }
     }
 }

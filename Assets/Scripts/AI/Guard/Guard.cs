@@ -238,32 +238,44 @@ namespace AI
 
         public void CheckNextPoint()
         {
-            Debug.Log("CheckNavPoint");
-            navPointTimer += Time.deltaTime;
-            //checkNavPointTime = wayPointList[checkingWayPoint].secondsStaying;
-            if (navPointTimer <= 2f)
+            StartCoroutine(CheckNextPointCO());
+        }
+
+        public IEnumerator CheckNextPointCO()
+        {
+            checkNavPointTime = wayPointList[checkingWayPoint].secondsStaying;
+
+            //Debug.Log("Started waiting coroutine: " + checkNavPointTime);
+            while (navPointTimer <= checkNavPointTime)
             {
-                float step = normalStats.angularSpeed * Time.deltaTime;
-                Vector3 newDir = Vector3.RotateTowards(transform.forward, wayPointList[checkingWayPoint].facingDirection, step, 0.0f);
-                transform.rotation = Quaternion.LookRotation(newDir);
-                m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
-            }
-            else if (navPointTimer >= checkNavPointTime - 2f)
-            {
+                navPointTimer += Time.deltaTime;
+                if (navPointTimer <= 2f)
+                {
+                    float step = normalStats.angularSpeed * Time.deltaTime;
+                    Vector3 newDir = Vector3.RotateTowards(transform.forward, wayPointList[checkingWayPoint].facingDirection, step, 0.0f);
+                    transform.rotation = Quaternion.LookRotation(newDir);
+                    m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
+                }
+                else if (navPointTimer >= checkNavPointTime - 2f)
+                {
                 
-                // start facing the next point of the navigation
-                float step = normalStats.angularSpeed * Time.deltaTime;
-                Vector3 targetDir = wayPointListTransform[nextWayPoint].position - transform.position;
-                Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
-                transform.rotation = Quaternion.LookRotation(newDir);
-                m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
+                    // start facing the next point of the navigation
+                    float step = normalStats.angularSpeed * Time.deltaTime;
+                    Vector3 targetDir = wayPointListTransform[nextWayPoint].position - transform.position;
+                    Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+                    transform.rotation = Quaternion.LookRotation(newDir);
+                    m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
+                }
+
+                yield return null;
             }
 
-            if (navPointTimer >= checkNavPointTime)
-            {
-                navPointTimer = 0;
-                SetBlackboardValue("CheckingNavPoint", false);
-            }
+            
+            //Debug.Log("finished waiting");
+            navPointTimer = 0;
+            SetBlackboardValue("CheckingNavPoint", false);
+            SetBlackboardValue("WaitingCoroutineRunning", false);
+
         }
 
         // method used to manage the state of the guard from the gauge of perception

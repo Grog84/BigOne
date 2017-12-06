@@ -231,6 +231,11 @@ public class BTDMStringConverter
                 return new ConditionLastNodeReached();
             case TaskType.GUARD_IS_CHAR_VISIBLE:
                 return new ConditionPlayerVisible();
+            case TaskType.QUEST_NPC_WATCH_PLAYER:
+                return new ActionWatchPlayer();
+            case TaskType.QUEST_NPC_HAS_SAW_PLAYER:
+                return new ConditionPlayerSaw();
+
             default:
                 return null;
         }

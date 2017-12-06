@@ -10,6 +10,7 @@ namespace AI.BT
         {
             m_BehaviourTree.m_Blackboard.m_Agent.m_NavMeshAgent.destination = 
                 m_BehaviourTree.m_Blackboard.GetVector3Value("LastPercievedPosition");
+            m_BehaviourTree.m_Blackboard.m_Agent.m_NavMeshAgent.isStopped = false;
 
             return TaskState.SUCCESS;;
         }

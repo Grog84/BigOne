@@ -8,8 +8,10 @@ namespace AI.BT
     {
         public override TaskState Run()
         {
-            if (m_BehaviourTree.m_Blackboard.GetIntValue("GuardState") == (int)GuardState.ALARMED)
+            if (m_BehaviourTree.m_Blackboard.GetBoolValue("PlayerInSight"))
+            {
                 return TaskState.SUCCESS;
+            }
             else
                 return TaskState.FAILURE;
         }

@@ -9,15 +9,20 @@ namespace AI
     public class GuardBlackboard : Blackboard
     {
         GuardState guardState = GuardState.NORMAL;
+
         bool isPlayerInSight = false;
         bool randomPick = false;
         bool otherAlarmed = false;
         bool isCheckingNavPoint = false;
         bool isCheckingNavPointCoroutineRunning = false;
+
         int currentNavPoint = 0;
         int numberOfNavPoints;
+
         float navPointTimer = 0;
+
         Vector3 lastPercievedPosition;
+        Vector3 navigationPosition;
         Vector3 resetPlayerPosition = new Vector3(1000, 1000, 1000);
 
         public override int GetIntValue(string valueName)
@@ -123,9 +128,14 @@ namespace AI
 
         public override Vector3 GetVector3Value(string valueName)
         {
-            if(valueName == "LastPercievedPosition")
+            switch (valueName)
             {
-                return lastPercievedPosition;
+                case "LastPercievedPosition":
+                    return lastPercievedPosition;
+                case "NavigationPosition":
+                    return navigationPosition;
+                default:
+                    break;
             }
 
             return resetPlayerPosition;
@@ -133,10 +143,18 @@ namespace AI
 
         public override void SetVector3Value(string valueName, Vector3 value)
         {
-            if(valueName == "LastPercievedPosition")
+            switch (valueName)
             {
-                lastPercievedPosition = value;
+                case "LastPercievedPosition":
+                    lastPercievedPosition = value;
+                    break;
+                case "NavigationPosition":
+                    navigationPosition = value;
+                    break;
+                default:
+                    break;
             }
+            
         }
     }
 }

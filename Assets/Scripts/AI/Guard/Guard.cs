@@ -73,6 +73,7 @@ namespace AI
             SetBlackboardValue("GuardState", (int)GuardState.NORMAL);
             LoadStats(normalStats);
             guardAllert.SetActive(true);
+            SetBlackboardValue("NavigationPosition", wayPointListTransform[m_Blackboard.GetIntValue("CurrentNavPoint")].position);
         }
 
         public void GetCurious()
@@ -323,24 +324,28 @@ namespace AI
         // get a random point to check when reached the last precieved position
         public void GetRandomPoint(out Vector3 result)
         {
-            for (int i = 0; i < 30; i++)
+            int i = 0;
+            result = transform.position;
+
+            for (i = 0; i < 30; i++)
             {
                 Vector3 randomPoint = transform.position + Random.insideUnitSphere * alarmedStats.localSearchRange;
+                randomPoint = new Vector3(randomPoint.x, transform.position.y + 1, randomPoint.z);
                 NavMeshHit hit;
-                if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+                if (NavMesh.SamplePosition(randomPoint, out hit, 2.0f, NavMesh.AllAreas) && Vector3.Distance(transform.position, randomPoint) > 10)
                 {
                     result = hit.position;
+                    break;
                 }
             }
-            result = transform.position;
+
         }
 
         // Updates the pointed nav point from the blackboard value
         public override void UpdateNavPoint()
         {
-            //Debug.Log("Changed to navpoint: " + GetBlackboardIntValue("CurrentNavPoint"));
-            //Debug.Log("Changed to navpoint: " + m_Blackboard.GetIntValue("CurrentNavPoint"));
             checkingWayPoint = m_Blackboard.GetIntValue("CurrentNavPoint");
+            SetBlackboardValue("NavigationPosition", wayPointListTransform[checkingWayPoint].position);
             m_NavMeshAgent.SetDestination(wayPointListTransform[checkingWayPoint].position);
             m_NavMeshAgent.isStopped = true;
         }
@@ -348,14 +353,18 @@ namespace AI
         // Commands to reach the point
         public override void ReachNavPoint()
         {
-            //Debug.Log("Reach navpoint: " + GetBlackboardIntValue("CurrentNavPoint"));
-            m_NavMeshAgent.destination = wayPointListTransform[GetBlackboardIntValue("CurrentNavPoint")].position;
+            m_NavMeshAgent.destination = GetBlackboardVector3Value("NavigationPosition");
             m_NavMeshAgent.isStopped = false;
         }
 
         private void UpdatePerceptionUI()
         {
             perceptionBar.SetFillingPerc(Mathf.Clamp(perceptionPercentage, 0f, 100f));
+        }
+
+        public void SetPerceptionToValue(float value)
+        {
+            perceptionPercentage = value;
         }
 
         private void Awake()
@@ -403,8 +412,19 @@ namespace AI
             LookAround();
             UpdatePerceptionUI();
             ChangeStateFromGauge();
-            
-            
+
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            if (m_Blackboard != null)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireSphere( GetBlackboardVector3Value("LastPercievedPosition") , 1);
+
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireSphere(GetBlackboardVector3Value("NavigationPosition"), 1);
+            }
         }
 
     }

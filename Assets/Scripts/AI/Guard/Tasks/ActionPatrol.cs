@@ -8,7 +8,6 @@ namespace AI.BT
     {
         public override TaskState Run()
         {
-            //Debug.Log("Patrol");
             m_BehaviourTree.m_Blackboard.m_Agent.ReachNavPoint();
 
             return TaskState.SUCCESS;

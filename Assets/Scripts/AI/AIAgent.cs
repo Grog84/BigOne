@@ -24,6 +24,8 @@ namespace AI
             return gameObject.name;
         }
 
+        public abstract void UpdateNavPoint();
+
     }
 }
 

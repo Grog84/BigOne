@@ -15,8 +15,6 @@ namespace AI.BT
             if (m_BehaviourTree.m_Blackboard.m_Agent.m_NavMeshAgent.remainingDistance 
                 <= m_BehaviourTree.m_Blackboard.m_Agent.m_NavMeshAgent.stoppingDistance)
             {
-
-                Debug.Log("Raggiunto");
                 return TaskState.SUCCESS;
 
             }

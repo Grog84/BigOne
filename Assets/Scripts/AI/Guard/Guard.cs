@@ -62,7 +62,6 @@ namespace AI
         //Brain m_Brain;
         //Blackboard m_Blackboard;
 
-
         public void GetNormal()
         {
             if (m_State == GuardState.ALARMED)
@@ -334,6 +333,12 @@ namespace AI
                 }
             }
             result = transform.position;
+        }
+
+        public override void UpdateNavPoint()
+        {
+            checkingWayPoint = m_Blackboard.GetIntValue("CurrentNavPoint");
+            m_NavMeshAgent.SetDestination(wayPointListTransform[checkingWayPoint].position);
         }
 
         private void UpdatePerceptionUI()

@@ -25,6 +25,7 @@ namespace AI
         }
 
         public abstract void UpdateNavPoint();
+        public abstract void ReachNavPoint();
 
     }
 }

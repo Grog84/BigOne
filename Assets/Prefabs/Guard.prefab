@@ -454,6 +454,7 @@ GameObject:
   - component: {fileID: 114876821729729712}
   - component: {fileID: 114875479976392488}
   - component: {fileID: 114528073490817216}
+  - component: {fileID: 114360030719028360}
   m_Layer: 17
   m_Name: Guard
   m_TagString: Enemy
@@ -2455,6 +2456,19 @@ MonoBehaviour:
   m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114360030719028360
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1328685680502708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95e4deac6bf6c6c42b357648dd0dff71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Guard: {fileID: 0}
+  playerTransform: {fileID: 0}
 --- !u!114 &114368057561308332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2616,6 +2630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Guard: {fileID: 114983923712983390}
   navPoint: {fileID: 1980602909535040, guid: 77701d11bda0b9b4985d48ef40481d50, type: 2}
+  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114983923712983390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2645,7 +2660,6 @@ MonoBehaviour:
   wayPointListTransform: []
   playerLastPercieved: {x: 1000, y: 1000, z: 1000}
   hasRadio: 0
-  isPlayerInSight: 0
   isOtherAlarmed: 0
   m_SaveComponent: {fileID: 0}
 --- !u!136 &136112457474815546

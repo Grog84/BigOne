@@ -126,6 +126,8 @@ namespace MissionManagerStuff
 
         }
 
+        QuestManager QM;
+
         [GUIColor(0.8f, 0.3f, 0.8f, 1f)]
         [Button("Aggiungi Quest", ButtonSizes.Medium)]
         public void CreateQuest()

@@ -18,12 +18,11 @@ namespace Character
         [HideInInspector] public bool isInBalanceArea;
         [HideInInspector] public bool startBalanceBoard;
         [HideInInspector] public bool startBalanceLedge;
-        [HideInInspector] public bool choosePoint;
         [HideInInspector] public bool isInJointArea;
         [HideInInspector] public float animSpeed;
-        public bool isLedgeLimit;
-        public bool ledgeForwardActive = true;
-        public bool ledgeBackwardActive = true;
+        [HideInInspector] public bool isLedgeLimit;
+        [HideInInspector] public bool ledgeForwardActive = true;
+        [HideInInspector] public bool ledgeBackwardActive = true;
         // CLIMB VARIABLES
         [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
         [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
@@ -577,22 +576,6 @@ namespace Character
 
         #region Balance
 
-        IEnumerator BalancePoint()
-        {
-            choosePoint = false;
-
-            if (Vector3.Distance(CharacterTransform.position, balanceCollider.transform.GetChild(0).position)
-                  < Vector3.Distance(CharacterTransform.position, balanceCollider.transform.GetChild(1).position))
-            {
-                forwardBalance = balanceCollider.transform.GetChild(0).gameObject;
-            }
-            else
-            {
-                forwardBalance = balanceCollider.transform.GetChild(1).gameObject;
-            }
-            yield return null;
-        }
-
         IEnumerator OnBalanceBoard()
         {
             startBalanceBoard = false;
@@ -767,10 +750,6 @@ namespace Character
                 StartCoroutine(OnBalanceLedge());
             }
 
-            if(choosePoint)
-            {
-                StartCoroutine(BalancePoint());
-            }
         }
 
         private void OnDrawGizmos()

@@ -6,14 +6,18 @@ using Sirenix.OdinInspector.Demos;
 
 namespace MissionManagerStuff
 {
-    [Serializable][HideMonoScript]
+    [Serializable]
+    [HideMonoScript]
+    [ExecuteInEditMode]
     public class MissionCreator : SerializedMonoBehaviour
     {
+        #region MissionCreator
+        /*
 
         [InfoBox("Selezionare Tipo Missione")]
         public MISSIONTYPE missionType;
 
-    
+
 
         [DetailedInfoBox("Selezionare il grado di missione, premere per maggiorni info", "Missione Principale: Missione iniziale, e principale del livello, determina la condizione di vittoria;\n\n" +
         "Missione Subprimaria: Missione da completare prima della principale per completare la principale, completare prima le subprimarie;\n\n" +
@@ -28,7 +32,7 @@ namespace MissionManagerStuff
         [InfoBox("Attivare per inserire Descrizione")]
         public bool NeedDescription;
 
-       [ShowIf("NeedDescription")]
+        [ShowIf("NeedDescription")]
         [TextArea]
         public string missionDescription;
 
@@ -43,7 +47,7 @@ namespace MissionManagerStuff
         [InfoBox("Oggetto che ti consegna la quest")]
         [SceneObjectsOnly]
         public GameObject missionGiver;
-        
+
 
         [ReadOnly]
         public int missionIndex;
@@ -51,13 +55,13 @@ namespace MissionManagerStuff
         private bool isAB;
         private bool isObj;
         private bool isABTi;
-        
+
         [Space]
         [Space]
         #region MissionType 0
         [ShowIf("isAB")]
         [BoxGroup("Mission Type 0 Box")]
-        [SceneObjectsOnly]       
+        [SceneObjectsOnly]
         public GameObject pointA;
 
         [ShowIf("isAB")]
@@ -69,24 +73,24 @@ namespace MissionManagerStuff
         #region MissionType 1
         [BoxGroup("Mission Type 1 Box")]
         [ShowIf("isObj")]
-          [SceneObjectsOnly]
+        [SceneObjectsOnly]
         public GameObject Obj;
 
         [BoxGroup("Mission Type 1 Box")]
         [ShowIf("isObj")]
-          [SceneObjectsOnly]
+        [SceneObjectsOnly]
         public GameObject receiver;
         #endregion
 
         #region MissionType 2
         [BoxGroup("Mission Type 2 Box")]
         [ShowIf("isABTi")]
-          [SceneObjectsOnly]
+        [SceneObjectsOnly]
         public GameObject pointA_Timed;
 
         [BoxGroup("Mission Type 2 Box")]
         [ShowIf("isABTi")]
-          [SceneObjectsOnly]
+        [SceneObjectsOnly]
         public GameObject pointB_Timed;
 
 
@@ -94,15 +98,15 @@ namespace MissionManagerStuff
         [ShowIf("isABTi")]
         public int time;
         #endregion
-      
-        
-        private void Start()
-        {
 
-        }
+
+
         [Button("R")]
         public void resetIndex()
-        { missionIndex = 0; }
+        {
+            missionIndex = 0;
+        }
+
         private void OnValidate()
         {
             if (missionType == MISSIONTYPE.SPOSTAMENTO_AB)
@@ -129,7 +133,9 @@ namespace MissionManagerStuff
         QuestManager QM;
 
         [GUIColor(0.8f, 0.3f, 0.8f, 1f)]
+        [PropertyOrder(-1)]
         [Button("Aggiungi Quest", ButtonSizes.Medium)]
+
         public void CreateQuest()
         {
             bool error = false;
@@ -197,11 +203,14 @@ namespace MissionManagerStuff
             if (!error)
             {
                 Debug.Log("All field is valid, adding new mission, check MissionContainer for edit");
-                GetComponent<QuestManager>().addNewMission(new Mission(this.missionName, this.missionType, this.missionGrade,this.missionDescription,this.missionIndex,this.missionGiver, this.pointA,this.pointB,this.Obj,this.receiver,this.pointA_Timed,this.pointB_Timed,this.time));
+                addNewMission(new Mission(this.missionName, this.missionType, this.missionGrade, this.missionDescription, this.missionIndex, this.missionGiver, this.pointA, this.pointB, this.Obj, this.receiver, this.pointA_Timed, this.pointB_Timed, this.time));
                 missionIndex++;
             }
 
         }
-    }
 
+
+ */
+        #endregion
 }
+    }

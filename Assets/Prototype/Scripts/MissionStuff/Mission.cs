@@ -7,28 +7,31 @@ namespace MissionManagerStuff
     [Serializable]
     public class Mission
     {
-        //[ReadOnly]
+        ////[ReadOnly]
         public string missionName;
-        [ReadOnly]
+        //[ReadOnly]
+        [InfoBox("Nome Missione")]
         public MISSIONTYPE missionType;
-        [ReadOnly]
+        //[ReadOnly]
         public MISSIONGRADE missionGrade;
-        [ReadOnly]
+        //[ReadOnly]
         public int missionIndex;
         public bool ShowDescription;
 
         [ShowIf("ShowDescription")]
-        [ReadOnly]
+        //[ReadOnly]
         [TextArea]
         public string missionDescription;
 
 
-        [ReadOnly]
+        //[ReadOnly]
         public bool available;
-        [ReadOnly]
+        //[ReadOnly]
         public bool completed;
-        [ReadOnly]
+        ////[ReadOnly]
         public GameObject missionGiver;
+        [HideInInspector]
+        public bool Printed=false;
    [Space]
         [Space]
         private bool isAB;
@@ -39,33 +42,33 @@ namespace MissionManagerStuff
         #region MissionType 0
 
         [TabGroup("MissionTab", "AB_Mission")]
-        [ReadOnly]
+        //[ReadOnly]
         public GameObject pointA;
 
         [TabGroup("MissionTab", "AB_Mission")]
-        [ReadOnly]
+        //[ReadOnly]
         public GameObject pointB;
         #endregion
 
         #region MissionType 1
         [TabGroup("MissionTab", "Obj_Mission")]
-        [ReadOnly]
+        //[ReadOnly]
         public GameObject Obj;
         [TabGroup("MissionTab", "Obj_Mission")]
-        [ReadOnly]
+        //[ReadOnly]
         public GameObject receiver;
         #endregion
 
         #region MissionType 2
         [TabGroup("MissionTab", "ABTi_Mission")]
-        [ReadOnly]
+        //[ReadOnly]
         public GameObject pointA_Timed;
         [TabGroup("MissionTab", "ABTi_Mission")]
-        [ReadOnly]
+        //[ReadOnly]
         public GameObject pointB_Timed;
 
         [TabGroup("MissionTab", "ABTi_Mission")]
-        [ReadOnly]
+        //[ReadOnly]
         public int time;
         #endregion
 

@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4359571734659602}
-  - component: {fileID: 114430100765514940}
   - component: {fileID: 114448421236641560}
   m_Layer: 0
   m_Name: QuestManager
@@ -41,40 +40,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114430100765514940
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1563811827186240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 409305760c826c54a8eb1131d6e648b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serializationData:
-    SerializedFormat: 2
-    SerializedBytes: 
-    ReferencedUnityObjects: []
-    SerializedBytesString: 
-    Prefab: {fileID: 0}
-    PrefabModificationsReferencedUnityObjects: []
-    PrefabModifications: []
-    SerializationNodes: []
-  missionType: 2
-  missionGrade: 1
-  missionName: Consegna
-  available: 0
-  completed: 0
-  missionGiver: {fileID: 0}
-  missionIndex: 0
-  pointA: {fileID: 0}
-  pointB: {fileID: 0}
-  Obj: {fileID: 0}
-  receiver: {fileID: 0}
-  pointA_Timed: {fileID: 0}
-  pointB_Timed: {fileID: 0}
-  time: 0
 --- !u!114 &114448421236641560
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -95,19 +60,55 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  missionContainer:
-    MissionList:
-    - missionName: Consegna
-      missionType: 1
-      missionGrade: 1
-      missionIndex: 0
-      available: 0
-      completed: 0
-      missionGiver: {fileID: 0}
-      pointA: {fileID: 0}
-      pointB: {fileID: 0}
-      Obj: {fileID: 0}
-      receiver: {fileID: 0}
-      pointA_Timed: {fileID: 0}
-      pointB_Timed: {fileID: 0}
-      time: 0
+  missionType: 0
+  missionGrade: 0
+  missionName: 
+  NeedDescription: 0
+  missionDescription: 
+  available: 0
+  completed: 0
+  missionGiver: {fileID: 0}
+  missionIndex: 0
+  pointA: {fileID: 0}
+  pointB: {fileID: 0}
+  Obj: {fileID: 0}
+  receiver: {fileID: 0}
+  pointA_Timed: {fileID: 0}
+  pointB_Timed: {fileID: 0}
+  time: 0
+  QuestMenu: {fileID: 0}
+  MissionList:
+  - missionName: Porta la chiave a Samir
+    missionType: 0
+    missionGrade: 0
+    missionIndex: 0
+    ShowDescription: 0
+    missionDescription: 
+    available: 0
+    completed: 0
+    missionGiver: {fileID: 0}
+    Printed: 0
+    pointA: {fileID: 0}
+    pointB: {fileID: 0}
+    Obj: {fileID: 0}
+    receiver: {fileID: 0}
+    pointA_Timed: {fileID: 0}
+    pointB_Timed: {fileID: 0}
+    time: 0
+  - missionName: Porta il prosciutto in casa
+    missionType: 0
+    missionGrade: 0
+    missionIndex: 0
+    ShowDescription: 0
+    missionDescription: 
+    available: 0
+    completed: 0
+    missionGiver: {fileID: 0}
+    Printed: 0
+    pointA: {fileID: 0}
+    pointB: {fileID: 0}
+    Obj: {fileID: 0}
+    receiver: {fileID: 0}
+    pointA_Timed: {fileID: 0}
+    pointB_Timed: {fileID: 0}
+    time: 0

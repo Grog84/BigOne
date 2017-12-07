@@ -561,7 +561,7 @@ namespace Character
 
         private IEnumerator ItemCollection()
         {
-            float collectTime = 2f;
+            float collectTime = 0.3f;
 
 
             m_CharController.enabled = false;

@@ -62,6 +62,7 @@ public class NavPointCreatorEditor : Editor
                     SceneView.onSceneGUIDelegate -= OnSceneGUI;
                     m_Target.AddNavpoint(activeObj.GetComponent<NavPoint>());
                     PatrolEditorHandle.isActive = false;
+                    EditorUtility.SetDirty(m_Target.m_Guard);
                     UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
                 }
                 

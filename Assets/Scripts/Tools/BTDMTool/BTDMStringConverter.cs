@@ -217,6 +217,8 @@ public class BTDMStringConverter
                 return new ActionStartWaiting();
             case TaskType.GUARD_SWITCH_NAVPOINT:
                 return new ActionSwitchNavPoint();
+            case TaskType.GUARD_DEFEAT_PLAYER:
+                return new ActionDefeatPlayer();
             case TaskType.GUARD_IS_ALARMED:
                 return new ConditionAlarmed();
             case TaskType.GUARD_IS_CURIOUS:
@@ -227,6 +229,8 @@ public class BTDMStringConverter
                 return new ConditionIsWaiting();
             case TaskType.GUARD_IS_LAST_PERCIEVED_POSITION_REACHED:
                 return new ConditionLastHeardSeenPosition();
+            case TaskType.GUARD_IS_PLAYER_REACHED:
+                return new ConditionPlayerReached();
             case TaskType.GUARD_IS_LAST_NODE_REACHED:
                 return new ConditionLastNodeReached();
             case TaskType.GUARD_IS_CHAR_VISIBLE:

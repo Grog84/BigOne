@@ -25,25 +25,6 @@ public class MapEditor : Editor
     static int firstBlockWidth = 130;
     static int lastBlockWidth = 150;
 
-    //static Transform m_LevelParent;
-    //static Transform LevelParent
-    //{
-    //    get
-    //    {
-    //        if (m_LevelParent == null)
-    //        {
-    //            GameObject go = GameObject.Find("Level");
-
-    //            if (go != null)
-    //            {
-    //                m_LevelParent = go.transform;
-    //            }
-    //        }
-
-    //        return m_LevelParent;
-    //    }
-    //}
-
     public static int SelectedBlock
     {
         get
@@ -165,6 +146,7 @@ public class MapEditor : Editor
                         if (SelectedPrefab < m_Database.blocksList[SelectedBlock].prefabsList.Count)
                         {
                             AddGameObject(MapEditorHandle.CurrentHandlePosition, m_Database.blocksList[SelectedBlock].prefabsList[SelectedPrefab].Prefab);
+                            
                         }
                     }
                 }
@@ -331,6 +313,12 @@ public class MapEditor : Editor
         if (SelectedMaterial != 0)
         {
             newObj.GetComponent<Renderer>().material = m_Database.blocksList[SelectedBlock].prefabsList[SelectedPrefab].materialList[SelectedMaterial - 1];
+        }
+
+        if (MapEditorHandle.CurrentHandleNormal.y < 0.1)
+        {
+            Quaternion rotation = Quaternion.LookRotation(MapEditorHandle.CurrentHandleNormal);
+            newObj.transform.rotation = rotation;
         }
 
         //Make sure a proper Undo/Redo step is created. This is a special type for newly created objects

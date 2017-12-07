@@ -8,6 +8,7 @@ public class MapEditorHandle : Editor
 {
 
     public static Vector3 CurrentHandlePosition = Vector3.zero;
+    public static Vector3 CurrentHandleNormal = Vector3.zero;
     public static bool IsMouseInValidArea = true;
 
     static Vector3 m_OldHandlePosition = Vector3.zero;
@@ -69,6 +70,7 @@ public class MapEditorHandle : Editor
         {
             IsMouseInValidArea = true;
             CurrentHandlePosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+            CurrentHandleNormal = hit.normal;
         }
         else
         {

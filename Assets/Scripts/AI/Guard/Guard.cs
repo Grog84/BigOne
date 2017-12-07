@@ -51,7 +51,6 @@ namespace AI
         static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
 
         public bool hasRadio = false;
-        bool isPerceptionBlocked = false;
 
         float perceptionPercentage = 0f;
         [HideInInspector] public bool isOtherAlarmed = false;
@@ -76,6 +75,7 @@ namespace AI
 
             m_State = GuardState.NORMAL;
             SetBlackboardValue("GuardState", (int)GuardState.NORMAL);
+            SetBlackboardValue("IsRelaxing", true);
             LoadStats(normalStats);
             guardAllert.SetActive(true);
             SetBlackboardValue("NavigationPosition", wayPointListTransform[m_Blackboard.GetIntValue("CurrentNavPoint")].position);
@@ -86,6 +86,7 @@ namespace AI
             GMController.instance.curiousGuards++;
             m_State = GuardState.CURIOUS;
             SetBlackboardValue("GuardState", (int)GuardState.CURIOUS);
+            SetBlackboardValue("IsRelaxing", false);
             LoadStats(curiousStats);
         }
 
@@ -101,6 +102,7 @@ namespace AI
             LoadStats(alarmedStats);
             guardAllert.SetActive(false);
             isOtherAlarmed = false;
+            SetBlackboardValue("IsRelaxing", false);
         }
 
         public void GetDistracted()
@@ -205,8 +207,8 @@ namespace AI
                             UpdateMyPlayerPosition();
                         }
 
-                        if (!isPerceptionBlocked)
-                            perceptionPercentage += stats.fillingSpeed * Time.deltaTime;
+                        
+                        perceptionPercentage += stats.fillingSpeed * Time.deltaTime;
                     }
                 }
 
@@ -225,14 +227,14 @@ namespace AI
                         UpdateMyPlayerPosition();
                     }
 
-                    if (!isPerceptionBlocked)
-                        perceptionPercentage += stats.fillingSpeed * stats.torsoMultiplier * Time.deltaTime;
+                    
+                    perceptionPercentage += stats.fillingSpeed * stats.torsoMultiplier * Time.deltaTime;
                 }
                 
             }
            
 
-            if (!isPerceptionBlocked && noRaycastHitting && perceptionPercentage > 0f)
+            if (GetBlackboardBoolValue("IsRelaxing") && noRaycastHitting && perceptionPercentage > 0f)
             {
                 perceptionPercentage -= stats.fillingSpeed * stats.noSeeMultiplier * Time.deltaTime;
             }

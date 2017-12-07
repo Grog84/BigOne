@@ -15,6 +15,7 @@ namespace AI
         bool otherAlarmed = false;
         bool isCheckingNavPoint = false;
         bool isCheckingNavPointCoroutineRunning = false;
+        bool isRelaxing = false;
 
         int currentNavPoint = 0;
         int numberOfNavPoints;
@@ -96,6 +97,8 @@ namespace AI
                     return isCheckingNavPoint;
                 case "WaitingCoroutineRunning":
                     return isCheckingNavPointCoroutineRunning;
+                case "IsRelaxing":
+                    return isRelaxing;
                 default:
                     Debug.Log("Default");
                     return false;
@@ -120,6 +123,9 @@ namespace AI
                     break;
                 case "WaitingCoroutineRunning":
                     isCheckingNavPointCoroutineRunning = value;
+                    break;
+                case "IsRelaxing":
+                    isRelaxing = value;
                     break;
                 default:
                     break;

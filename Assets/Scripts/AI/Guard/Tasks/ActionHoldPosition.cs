@@ -9,6 +9,7 @@ namespace AI.BT
         public override TaskState Run()
         {
             m_BehaviourTree.m_Blackboard.m_Agent.m_NavMeshAgent.isStopped = true;
+            m_BehaviourTree.m_Blackboard.SetBoolValue("IsRelaxing", true);
             return TaskState.SUCCESS;
         }
     }

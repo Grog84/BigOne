@@ -13,6 +13,7 @@ namespace AI
 
         [Header("Agent Navigation")]
         public bool randomPick;
+        [SerializeField]
         public List<NavPoint> wayPointList;
 
         [Space(10)]
@@ -25,6 +26,9 @@ namespace AI
         [Space(10)]
         [Header("Agent Perception Component")]
         [HideInInspector]public GameObject guardAllert;
+
+        // Player
+        [HideInInspector] public CharacterInterface[] characterInterfaces;
 
         // State
         GuardState m_State = GuardState.NORMAL;
@@ -51,6 +55,7 @@ namespace AI
 
         float perceptionPercentage = 0f;
         [HideInInspector] public bool isOtherAlarmed = false;
+
         // Saving Game
         [HideInInspector] public GuardSaveComponent m_SaveComponent;
 
@@ -329,7 +334,7 @@ namespace AI
 
             for (i = 0; i < 30; i++)
             {
-                Vector3 randomPoint = transform.position + Random.insideUnitSphere * alarmedStats.localSearchRange;
+                Vector3 randomPoint = GetBlackboardVector3Value("LastPercievedPosition") + Random.insideUnitSphere * alarmedStats.localSearchRange;
                 randomPoint = new Vector3(randomPoint.x, transform.position.y + 1, randomPoint.z);
                 NavMeshHit hit;
                 if (NavMesh.SamplePosition(randomPoint, out hit, 2.0f, NavMesh.AllAreas) && Vector3.Distance(transform.position, randomPoint) > 10)
@@ -355,6 +360,11 @@ namespace AI
         {
             m_NavMeshAgent.destination = GetBlackboardVector3Value("NavigationPosition");
             m_NavMeshAgent.isStopped = false;
+        }
+
+        public void DefeatPlayer()
+        {
+            characterInterfaces[(int)GMController.instance.isCharacterPlaying].DefeatPlayer();
         }
 
         private void UpdatePerceptionUI()
@@ -404,6 +414,8 @@ namespace AI
             m_NavMeshAgent.destination = wayPointListTransform[0].position;
             SetBlackboardValue("RandomPick", randomPick);
             SetBlackboardValue("NumberOfNavPoints", wayPointList.Count);
+
+            characterInterfaces = GMController.instance.m_CharacterInterfaces;
 
         }
 

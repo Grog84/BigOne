@@ -25,7 +25,7 @@ namespace Character.Actions
             }
             else if (controller.m_CharacterController.climbingBottom)
             {
-                controller.m_CharacterController.climbAnchorBottom = controller.m_CharacterController.climbCollider.transform.parent.transform.GetChild(3);
+                controller.m_CharacterController.climbAnchorBottom = controller.m_CharacterController.climbCollider.transform.parent.transform.GetChild(0);
                 //Debug.Log("Salgo");
                 controller.m_CharacterController.startClimbAnimationBottom = true;
             }

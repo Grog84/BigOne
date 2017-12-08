@@ -100,6 +100,7 @@ namespace AI
             m_NavMeshAgent = GetComponent<NavMeshAgent>();
             m_Animator = GetComponent<Animator>();
             m_Brain = GetComponent<Brain>();
+            m_Brain.decisionMaker = Instantiate(m_Brain.decisionMaker);
             m_Brain.decisionMaker.m_Blackboard = new QuestNpcBlackboard();
             m_Blackboard = m_Brain.decisionMaker.m_Blackboard;
             m_Blackboard.m_Agent = this;

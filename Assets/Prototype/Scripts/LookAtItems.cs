@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using RootMotion.FinalIK;
 using DG.Tweening;
+using Character;
 
 public class LookAtItems : MonoBehaviour {
 
-    public LookAtIK gazeAt;                       // Take the LookAtIk component we want to move
-    public Transform cameraObject;                // Reference to the Camera LookAt object
+    [HideInInspector] public _CharacterController controller;
+    [HideInInspector] public LookAtIK gazeAt;                       // Take the LookAtIk component we want to move
+    [HideInInspector] public Transform cameraObject;                // Reference to the Camera LookAt object
     public List<Transform> targets;
     public GameObject currentItem;
 
-    [HideInInspector] public float headClamp;    // Reference to the maximum weight according to inspector values
-
 	void Start ()
     {
+        controller = transform.parent.GetComponent<_CharacterController>();
+        gazeAt = controller.playerSight;
         targets = new List<Transform>();
-        headClamp = gazeAt.solver.headWeight;
+        cameraObject = controller.cameraObject;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,7 +26,7 @@ public class LookAtItems : MonoBehaviour {
         if (other.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
             targets.Add(other.transform);
-            gazeAt.solver.headWeight = 0;
+            controller.dontLookAt = true;
         }
     }
 
@@ -50,21 +52,28 @@ public class LookAtItems : MonoBehaviour {
     private void OnTriggerExit(Collider other)
     {
         targets.Remove(other.transform);
-        gazeAt.solver.headWeight = 0;
+        controller.dontLookAt = true;
         currentItem = null;
+
         if (targets.Count == 0)
         {
+            StandardTarget();
+        }
+    }
+
+    void StandardTarget()
+    {
+        if(controller.isDontLookAtDone)
+        {
             gazeAt.solver.target = cameraObject;
-            gazeAt.solver.headWeight = 0;
         }
     }
 
     void LateUpdate ()
     {
-        // Turn head speed
-        if (gazeAt.solver.headWeight < headClamp)
+        if(controller.isDontLookAtDone && gazeAt.solver.headWeight <= 0)
         {
-            gazeAt.solver.headWeight += Time.deltaTime;
+            controller.canLookAt = true;
         }
 
         // Check if currentItem has been picked up
@@ -73,8 +82,8 @@ public class LookAtItems : MonoBehaviour {
             targets.Remove(currentItem.transform);
             if (targets.Count == 0)
             {
-                gazeAt.solver.target = cameraObject;
-                gazeAt.solver.headWeight = 0;
+                controller.dontLookAt = true;
+                StandardTarget();
                 currentItem = null;
             }
         }

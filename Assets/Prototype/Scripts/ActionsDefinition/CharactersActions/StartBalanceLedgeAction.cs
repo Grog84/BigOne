@@ -31,6 +31,7 @@ namespace Character.Actions
                 controller.m_CharacterController.m_ForwardAmount = 1f;
             }
 
+
             controller.m_CharacterController.m_Animator.SetBool("onLedge", true);
             controller.m_CharacterController.isBalanceCRDone = false;
             controller.m_CharacterController.startBalanceLedge = true;

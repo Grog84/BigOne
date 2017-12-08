@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using RootMotion.FinalIK;
 
 namespace Character
 {
     public class _CharacterController : MonoBehaviour
     {
-        public bool isInDanger = false;
+        [HideInInspector] public bool isInDanger = false;
         [HideInInspector] public float m_MoveSpeedMultiplier;
         [HideInInspector] public float m_TurnAmount;                   // Unutilized for the moment
-         public float m_ForwardAmount;
+        [HideInInspector] public float m_ForwardAmount;
         [HideInInspector] public float ray_length;
         //
         // BALANCE VARIABLES
@@ -90,14 +91,21 @@ namespace Character
         [HideInInspector] public GameObject boardOppositePoint;
         //
         [HideInInspector] public bool isDefeated = false;
-
         [HideInInspector] public FootstepsEmitter footStepsEmitter;
         [HideInInspector] public float walkStatusRange = 1f;
         // Alpha management for Icons
         [HideInInspector] public Color alphaZero;
         [HideInInspector] public Color alphaMax;
         [HideInInspector] public Transform playerIcon;
-        //
+        //LOOK AT
+        public GameObject LookAtItems;
+        [HideInInspector] public Transform cameraObject;
+        [HideInInspector] public LookAtIK playerSight;
+        [HideInInspector] public float headClamp;
+        [HideInInspector] public bool canLookAt = false;
+        [HideInInspector] public bool dontLookAt = false;
+        [HideInInspector] public bool isCanLookAtDone = true;
+        [HideInInspector] public bool isDontLookAtDone = true;
 
         public Transform playerHead;
         public Transform playerCanvas;
@@ -123,6 +131,9 @@ namespace Character
             alphaMax = new Color(100, 100, 100, 255);
             alphaZero = new Color(0, 0, 0, 0);
             playerIcon = playerCanvas.GetChild(0);
+            playerSight = GetComponent<LookAtIK>();
+            headClamp = playerSight.solver.headWeight;
+            cameraObject = playerSight.solver.target;
         }
 
         // Use this for initialization
@@ -598,7 +609,6 @@ namespace Character
         {
             startBalanceLedge = false;
             float positionTime = 0.5f;         
-
             Vector3 dir = forwardBalance.transform.GetChild(0).position - forwardBalance.transform.position;
             dir.y = 0;
             dir = dir.normalized;
@@ -688,6 +698,39 @@ namespace Character
 
         #endregion
 
+        #region LookAt
+
+        IEnumerator DontLookAt()
+        {
+            dontLookAt = false;
+            isDontLookAtDone = false;
+
+            Debug.Log(playerSight.solver.headWeight > 0);
+            while (playerSight.solver.headWeight > 0)
+            {
+                playerSight.solver.headWeight -= Time.deltaTime;
+            }
+
+            yield return isDontLookAtDone = true;
+            
+        }
+
+        IEnumerator CanLookAt()
+        {
+            canLookAt = false;
+            isCanLookAtDone = false;
+
+            while (playerSight.solver.headWeight < headClamp)
+            {
+                playerSight.solver.headWeight += Time.deltaTime;
+            }
+          
+             yield return isCanLookAtDone = true;
+            
+        }
+
+#endregion
+
         private void OnAnimatorIK(int layerIndex)
         {
             
@@ -754,6 +797,15 @@ namespace Character
                 StartCoroutine(OnBalanceLedge());
             }
 
+            if(canLookAt)
+            {
+                StartCoroutine(CanLookAt());
+            }
+
+            if (dontLookAt)
+            {
+                StartCoroutine(DontLookAt());
+            }
         }
 
         private void OnDrawGizmos()

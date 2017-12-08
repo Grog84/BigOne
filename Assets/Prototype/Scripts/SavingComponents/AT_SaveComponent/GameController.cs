@@ -154,7 +154,7 @@ public class GameController :MonoBehaviour {
 
 
         profile.LastScene = SceneManager.GetActiveScene().buildIndex;
-        for (int i = 0; i <= profile.LastScene; i++)
+        for (int i = 0; i <= profile.LastScene-1; i++)
         {
             profile.completedLevel[i] = true;
         }

@@ -18,7 +18,7 @@ public class PauseGame : MonoBehaviour
         {
             
             Pause();
-            //QM_Controller.ShowActiveQuestOnMenu();
+        
         }
 
     }

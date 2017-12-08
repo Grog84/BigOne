@@ -117,6 +117,7 @@ namespace MissionManagerStuff
 
         private void OnValidate()
         {
+          
             if (missionType == MISSIONTYPE.SPOSTAMENTO_AB)
             {
                 isAB = true;
@@ -135,14 +136,7 @@ namespace MissionManagerStuff
                 isObj = false;
                 isABTi = true;
             }
-            if(QuestMenu.gameObject.name=="Pause_Quest")
-            {
-                IsCorrect = false;
-            }
-            else
-            {
-                IsCorrect = true;
-            }
+          
             SceneIndexNumber = SceneManager.GetActiveScene().buildIndex;
         }
 
@@ -220,8 +214,9 @@ namespace MissionManagerStuff
             {
                 SceneIndexNumber = SceneManager.GetActiveScene().buildIndex;
                 Debug.Log("All field is valid, adding new mission, check MissionContainer for edit");
-              MissionList.Add(new Mission(this.missionName, this.missionType, this.missionGrade, this.missionDescription, this.missionIndex, this.missionGiver, this.pointA, this.pointB, this.Obj, this.receiver, this.pointA_Timed, this.pointB_Timed, this.time,SceneIndexNumber));
+                MissionList.Add(new Mission(this.missionName, this.missionType, this.missionGrade, this.missionDescription, this.missionIndex, this.missionGiver, this.pointA, this.pointB, this.Obj, this.receiver, this.pointA_Timed, this.pointB_Timed, this.time,SceneIndexNumber));
                 missionIndex++;
+              
             }
 
         }
@@ -232,8 +227,8 @@ namespace MissionManagerStuff
         private Vector3 Giu = new Vector3 { x=0f, y=-80f, z=0f };
 
         [InfoBox("Collegare il Canvas: 'pause_Quest' Dentro Canvas =>Canvas_Pause")]
-        [InfoBox("Non Valido",InfoMessageType.Error,"IsCorrect")]
-        public GameObject QuestMenu=null;
+        [InfoBox("Non Valido", InfoMessageType.Error, "IsCorrect")]
+        public GameObject QuestMenu;
         Text Testo;
         public List<Mission> MissionList;
         //public MissionContainer missionContainer;
@@ -247,6 +242,9 @@ namespace MissionManagerStuff
         void Start()
         {  
             giveMissionGiverComponent();
+            InitializedQuestObject();
+            InizializedQuestReceiver();
+            QuestMenu = transform.Find("Pause_Quest").gameObject;
         }
         // Update is called once per frame
         void Update()
@@ -254,8 +252,7 @@ namespace MissionManagerStuff
            checkIFnewMissionIsAvailable();
         }
         
-        [PropertyOrder(-1)]
-        [Button("Prova", ButtonSizes.Medium)]
+        
         private void checkIFnewMissionIsAvailable()
         {
            foreach(Mission m in MissionList)
@@ -307,16 +304,14 @@ namespace MissionManagerStuff
         {
             foreach (Mission m in MissionList)
             {
+                if (m.missionGiver.gameObject.GetComponent<QuestGiver>() == null)
+                {
+                    m.missionGiver.gameObject.AddComponent<QuestGiver>();
+                }
                 m.missionGiver.gameObject.GetComponent<QuestGiver>().myMission = m;
                 m.missionGiver.gameObject.GetComponent<QuestGiver>().missionIndex = m.missionIndex;
 
             }
-        }
-
-        public void addNewMission(Mission newMission)
-        {
-           MissionList.Add(newMission);  
-            
         }
         
         [PropertyOrder(-2)]
@@ -344,7 +339,30 @@ namespace MissionManagerStuff
               
 
         }
+        public void InitializedQuestObject()
+        {
+            if (Obj.GetComponent<QuestObject>() == null)
+            {
+                Obj.AddComponent<QuestObject>();
+            }
+            Obj.GetComponent<QuestObject>().name=Obj.gameObject.name;
+          
+        }
 
+        public void InizializedQuestReceiver()
+        {
+            foreach (Mission m in MissionList)
+            {
+                if (m.receiver = receiver)
+                {
+                    if (receiver.GetComponent<QuestReceiver>() == null)
+                    {
+                        receiver.AddComponent<QuestReceiver>();
+                    }
+                    receiver.GetComponent<QuestReceiver>().myMission = m;
+                }
+            }
+        }
        
     }
 }

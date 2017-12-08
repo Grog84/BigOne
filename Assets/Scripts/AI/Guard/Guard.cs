@@ -267,7 +267,7 @@ namespace AI
                     transform.rotation = Quaternion.LookRotation(newDir);
                     m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
                     m_Animator.SetFloat("Turn", step);
-                    m_Animator.SetFloat("Forward", step*5f);
+                    //m_Animator.SetFloat("Forward", step*5f);
                 }
                 else if (navPointTimer >= checkNavPointTime - 2f)
                 {
@@ -281,7 +281,7 @@ namespace AI
                     transform.rotation = Quaternion.LookRotation(newDir);
                     m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
                     m_Animator.SetFloat("Turn", step);
-                    m_Animator.SetFloat("Forward", step*5f);
+                    //m_Animator.SetFloat("Forward", step*5f);
                 }
 
                 if (m_State == GuardState.ALARMED || m_State == GuardState.CURIOUS)

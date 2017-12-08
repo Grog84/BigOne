@@ -266,6 +266,8 @@ namespace AI
                     Vector3 newDir = Vector3.RotateTowards(transform.forward, wayPointList[wayPoint].facingDirection, step, 0.0f);
                     transform.rotation = Quaternion.LookRotation(newDir);
                     m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
+                    m_Animator.SetFloat("Turn", step);
+                    m_Animator.SetFloat("Forward", step*5f);
                 }
                 else if (navPointTimer >= checkNavPointTime - 2f)
                 {
@@ -278,6 +280,8 @@ namespace AI
                     Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
                     transform.rotation = Quaternion.LookRotation(newDir);
                     m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
+                    m_Animator.SetFloat("Turn", step);
+                    m_Animator.SetFloat("Forward", step*5f);
                 }
 
                 if (m_State == GuardState.ALARMED || m_State == GuardState.CURIOUS)
@@ -449,9 +453,12 @@ namespace AI
             move = transform.InverseTransformDirection(move);
             move = Vector3.ProjectOnPlane(move, Vector3.down);
             m_TurnAmount = Mathf.Atan2(move.x, move.z);
-            
+            float m_ForwardAmount = move.z;
+            if (m_State == GuardState.NORMAL)
+                m_ForwardAmount = Mathf.Clamp(m_ForwardAmount, 0, 0.5f);
+
             m_Animator.SetFloat("Turn", m_TurnAmount);
-            m_Animator.SetFloat("Forward", move.z);
+            m_Animator.SetFloat("Forward", m_ForwardAmount);
         }
 
         private void OnDrawGizmosSelected()

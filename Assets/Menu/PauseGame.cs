@@ -18,7 +18,7 @@ public class PauseGame : MonoBehaviour
         {
             
             Pause();
-            QM_Controller.ShowActiveQuestOnMenu();
+            //QM_Controller.ShowActiveQuestOnMenu();
         }
 
     }
@@ -40,7 +40,7 @@ public class PauseGame : MonoBehaviour
     {
         canvas.gameObject.SetActive(true);
 
-        QM_Controller.ShowActiveQuestOnMenu();
+        //QM_Controller.ShowActiveQuestOnMenu();
         canvas.gameObject.SetActive(false);
         
     }

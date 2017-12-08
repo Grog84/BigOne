@@ -406,7 +406,9 @@ namespace AI
             perceptionBar = GetComponentInChildren<PerceptionBar>();
             eyes = TransformDeepChildExtension.FindDeepChild(transform, "eyes");
             m_Animator = GetComponent<Animator>();
+
             m_Brain = GetComponent<Brain>();
+            m_Brain.decisionMaker = Instantiate(m_Brain.decisionMaker);
             m_Brain.decisionMaker.m_Blackboard = new GuardBlackboard();
             m_Blackboard = m_Brain.decisionMaker.m_Blackboard;
             m_Blackboard.m_Agent = this;

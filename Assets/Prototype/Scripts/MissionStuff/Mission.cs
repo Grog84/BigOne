@@ -10,7 +10,7 @@ namespace MissionManagerStuff
         ////[ReadOnly]
         public string missionName;
         //[ReadOnly]
-        [InfoBox("Nome Missione")]
+        
         public MISSIONTYPE missionType;
         //[ReadOnly]
         public MISSIONGRADE missionGrade;
@@ -28,6 +28,9 @@ namespace MissionManagerStuff
         public bool available;
         //[ReadOnly]
         public bool completed;
+
+        [ReadOnly]
+        public int SceneIndexNumber;
         ////[ReadOnly]
         public GameObject missionGiver;
         [HideInInspector]
@@ -37,8 +40,8 @@ namespace MissionManagerStuff
         private bool isAB;
         private bool isObj;
         private bool isABTi;
-     
-
+        [HideInPlayMode]
+        public bool isStriked = false;
         #region MissionType 0
 
         [TabGroup("MissionTab", "AB_Mission")]
@@ -72,7 +75,7 @@ namespace MissionManagerStuff
         public int time;
         #endregion
 
-        public Mission(string _missionName,MISSIONTYPE _missionType,MISSIONGRADE _missionGrade,string _missionDescription,int _missionIndex,GameObject _missionGiver, GameObject _pointA, GameObject _pointB, GameObject _obj, GameObject _receiver, GameObject _pointATi, GameObject _pointBTi,int _time)
+        public Mission(string _missionName,MISSIONTYPE _missionType,MISSIONGRADE _missionGrade,string _missionDescription,int _missionIndex,GameObject _missionGiver, GameObject _pointA, GameObject _pointB, GameObject _obj, GameObject _receiver, GameObject _pointATi, GameObject _pointBTi,int _time,int _sceneIndexNumber)
         {
 
             missionName = _missionName;
@@ -88,6 +91,7 @@ namespace MissionManagerStuff
             pointA_Timed = _pointATi;
             pointB_Timed = _pointBTi;
             time = _time;
+            SceneIndexNumber = _sceneIndexNumber;
         }
 
     }

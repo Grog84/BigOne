@@ -6,14 +6,17 @@ namespace MissionManagerStuff
     public class QuestGiver:SerializedMonoBehaviour
     {
         public int missionIndex;
+        [ReadOnly]
         public Mission myMission;
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                myMission.available = true;               
-            }
+            //Ignore... for research purpose only
+            //if(Input.GetKeyDown(KeyCode.Space))
+            //    {
+            //    myMission.available = true;
+            //    myMission.completed = true;
+            //}
         }
 
 

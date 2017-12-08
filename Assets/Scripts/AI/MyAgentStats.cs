@@ -10,5 +10,6 @@ public class MyAgentStats : ScriptableObject {
     public float angularSpeed = 180f;
     public float acceleration = 10f;
     public float stoppingDistance = 2f;
+    public float spotRotatingSpeed = 3f;
 
 }

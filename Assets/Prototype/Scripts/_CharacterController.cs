@@ -414,7 +414,7 @@ namespace Character
         {
             useEndClimbIk = true;
             startClimbAnimationEnd = false;
-            float climbTime = 2f;
+            float climbTime = 1.3f;
             Vector3 difPos = endClimbAnchor.position - transform.position;
 
 

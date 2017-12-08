@@ -5,11 +5,13 @@ using Sirenix.OdinInspector;
 using UnityEngine.UI;
 using System.IO;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 namespace MissionManagerStuff
 {
     [Serializable]
-    //[ExecuteInEditMode]
+   
+
     public class QuestManager : SerializedMonoBehaviour
     {
 
@@ -51,6 +53,9 @@ namespace MissionManagerStuff
         [SceneObjectsOnly]
         public GameObject missionGiver;
 
+        [HideInInspector]
+        [ReadOnly]
+        public int SceneIndexNumber;
 
         //[ReadOnly]
         public int missionIndex;
@@ -102,9 +107,9 @@ namespace MissionManagerStuff
         public int time;
         #endregion
 
+        private bool isStriked = false;
 
-
-        [Button("R")]
+        [Button("Reset Index Missioni",ButtonSizes.Medium)]
         public void resetIndex()
         {
             missionIndex = 0;
@@ -138,6 +143,7 @@ namespace MissionManagerStuff
             {
                 IsCorrect = true;
             }
+            SceneIndexNumber = SceneManager.GetActiveScene().buildIndex;
         }
 
         QuestManager QM;
@@ -212,8 +218,9 @@ namespace MissionManagerStuff
 
             if (!error)
             {
+                SceneIndexNumber = SceneManager.GetActiveScene().buildIndex;
                 Debug.Log("All field is valid, adding new mission, check MissionContainer for edit");
-               addNewMission(new Mission(this.missionName, this.missionType, this.missionGrade, this.missionDescription, this.missionIndex, this.missionGiver, this.pointA, this.pointB, this.Obj, this.receiver, this.pointA_Timed, this.pointB_Timed, this.time));
+              MissionList.Add(new Mission(this.missionName, this.missionType, this.missionGrade, this.missionDescription, this.missionIndex, this.missionGiver, this.pointA, this.pointB, this.Obj, this.receiver, this.pointA_Timed, this.pointB_Timed, this.time,SceneIndexNumber));
                 missionIndex++;
             }
 
@@ -226,27 +233,27 @@ namespace MissionManagerStuff
 
         [InfoBox("Collegare il Canvas: 'pause_Quest' Dentro Canvas =>Canvas_Pause")]
         [InfoBox("Non Valido",InfoMessageType.Error,"IsCorrect")]
-        public GameObject QuestMenu;
-
-        public List<Mission> MissionList = new List<Mission>();
-       // public MissionContainer missionContainer;
+        public GameObject QuestMenu=null;
+        Text Testo;
+        public List<Mission> MissionList;
+        //public MissionContainer missionContainer;
        
-      static  int  index = 1;
+        static  int  index = 1;
         // Use this for initialization
         private void Awake()
-        {
+        {      
             questPath= System.IO.Path.Combine(Application.persistentDataPath, "quest.json");    
         }
         void Start()
         {  
             giveMissionGiverComponent();
         }
-
         // Update is called once per frame
         void Update()
         {
            checkIFnewMissionIsAvailable();
         }
+        
         [PropertyOrder(-1)]
         [Button("Prova", ButtonSizes.Medium)]
         private void checkIFnewMissionIsAvailable()
@@ -263,25 +270,43 @@ namespace MissionManagerStuff
                              QuestMenu.transform)
                              .transform.position += Giu;
                         QuestMenu.transform.GetChild(index).gameObject.SetActive(true);
-                        Text Testo = QuestMenu.transform.GetChild(index).GetComponent<Text>();
+                         Testo = QuestMenu.transform.GetChild(index).GetComponent<Text>();
                         Testo.text = m.missionName;
                         index++;
                         m.Printed = true;
+                      
+                    }
+                    if(m.Printed)
+                    {
+                        if(m.completed)
+                        {
+                            if (!m.isStriked)
+                            {
+                                Testo.text = StrikeThrough(Testo.text);
+                                m.isStriked = true;
+                             
+                            }
+                        }
                     }
                 }
-
+                
             }
         }
 
+        public string StrikeThrough(string s)
+        {
+            string strikethrough = "";
+            foreach (char c in s)
+            {
+                strikethrough = strikethrough + c + '\u0336';
+            }
+            return strikethrough;
+        }
 
         private void giveMissionGiverComponent()
         {
             foreach (Mission m in MissionList)
             {
-                if (m.missionGiver.gameObject.GetComponent<QuestGiver>() == null)
-                {
-                    m.missionGiver.gameObject.AddComponent<QuestGiver>();
-                }
                 m.missionGiver.gameObject.GetComponent<QuestGiver>().myMission = m;
                 m.missionGiver.gameObject.GetComponent<QuestGiver>().missionIndex = m.missionIndex;
 
@@ -293,31 +318,20 @@ namespace MissionManagerStuff
            MissionList.Add(newMission);  
             
         }
-        [PropertyOrder(0)]
-        [Button("ClearList")]
-        public void Clear()
-        {
-            MissionList.Clear();
-
-        }
+        
         [PropertyOrder(-2)]
         [HideInEditorMode]
         [Button("Salva Quest",ButtonSizes.Medium)]
         public void Save()
         {
-
-            SaveMission(MissionList);
-            
+            SaveMission(MissionList);            
         }
         private void OnApplicationQuit()
         {
             Save();
         }
         
-        public void ShowActiveQuestOnMenu()
-        {
-        }
-        
+                
         public void SaveMission(List<Mission> missionList)
         {
 

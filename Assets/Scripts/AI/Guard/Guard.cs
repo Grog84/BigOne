@@ -258,20 +258,43 @@ namespace AI
                 navPointTimer += Time.deltaTime;
                 if (navPointTimer <= 2f)
                 {
-                    float step = normalStats.angularSpeed * Time.deltaTime;
-                    Vector3 newDir = Vector3.RotateTowards(transform.forward, wayPointList[checkingWayPoint].facingDirection, step, 0.0f);
+                    //float step = normalStats.angularSpeed * Time.deltaTime;
+                    float step = normalStats.spotRotatingSpeed * Time.deltaTime;
+                    int wayPoint = (checkingWayPoint - 1);
+                    if (wayPoint < 0)
+                        wayPoint = wayPointList.Count - 1;
+                    Vector3 newDir = Vector3.RotateTowards(transform.forward, wayPointList[wayPoint].facingDirection, step, 0.0f);
+                    //m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
+                    m_TurnAmount = (transform.forward - newDir).magnitude * 10f;
+                    //m_Animator.SetFloat("Turn", step);
+                    m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
+                    //m_Animator.SetFloat("Forward", step*5f);
                     transform.rotation = Quaternion.LookRotation(newDir);
-                    m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
                 }
                 else if (navPointTimer >= checkNavPointTime - 2f)
                 {
                 
                     // start facing the next point of the navigation
-                    float step = normalStats.angularSpeed * Time.deltaTime;
-                    Vector3 targetDir = wayPointListTransform[nextWayPoint].position - transform.position;
+                    //float step = normalStats.angularSpeed * Time.deltaTime;
+                    float step = normalStats.spotRotatingSpeed * Time.deltaTime;
+                    Vector3 targetDir = wayPointListTransform[checkingWayPoint].position - transform.position;
+                    targetDir = new Vector3(targetDir.x, transform.position.y, targetDir.z);
                     Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+                    //m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
+                    m_TurnAmount = (transform.forward - newDir).magnitude * 10f;
+                    //m_Animator.SetFloat("Turn", step);
+                    m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
+                    //m_Animator.SetFloat("Forward", step*5f);
                     transform.rotation = Quaternion.LookRotation(newDir);
-                    m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
+                }
+
+                if (m_State == GuardState.ALARMED || m_State == GuardState.CURIOUS)
+                {
+                    SetBlackboardValue("CheckingNavPoint", false);
+                    SetBlackboardValue("WaitingCoroutineRunning", false);
+
+                    yield break;
+
                 }
 
                 yield return null;
@@ -352,6 +375,7 @@ namespace AI
         public override void UpdateNavPoint()
         {
             checkingWayPoint = m_Blackboard.GetIntValue("CurrentNavPoint");
+            nextWayPoint = (m_Blackboard.GetIntValue("CurrentNavPoint") + 1) % wayPointListTransform.Length;
             SetBlackboardValue("NavigationPosition", wayPointListTransform[checkingWayPoint].position);
             m_NavMeshAgent.SetDestination(wayPointListTransform[checkingWayPoint].position);
             m_NavMeshAgent.isStopped = true;
@@ -386,7 +410,9 @@ namespace AI
             perceptionBar = GetComponentInChildren<PerceptionBar>();
             eyes = TransformDeepChildExtension.FindDeepChild(transform, "eyes");
             m_Animator = GetComponent<Animator>();
+
             m_Brain = GetComponent<Brain>();
+            m_Brain.decisionMaker = Instantiate(m_Brain.decisionMaker);
             m_Brain.decisionMaker.m_Blackboard = new GuardBlackboard();
             m_Blackboard = m_Brain.decisionMaker.m_Blackboard;
             m_Blackboard.m_Agent = this;
@@ -426,7 +452,19 @@ namespace AI
             LookAround();
             UpdatePerceptionUI();
             ChangeStateFromGauge();
+            //m_Animator.SetFloat("Forward", m_NavMeshAgent.speed);
 
+            Vector3 move = m_NavMeshAgent.velocity;
+            if (move.magnitude > 1f) move.Normalize();
+            move = transform.InverseTransformDirection(move);
+            move = Vector3.ProjectOnPlane(move, Vector3.down);
+            m_TurnAmount = Mathf.Atan2(move.x, move.z);
+            float m_ForwardAmount = move.z;
+            if (m_State == GuardState.NORMAL)
+                m_ForwardAmount = Mathf.Clamp(m_ForwardAmount, 0, 0.5f);
+
+            m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
+            m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
         }
 
         private void OnDrawGizmosSelected()

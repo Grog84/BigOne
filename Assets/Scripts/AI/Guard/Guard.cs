@@ -264,10 +264,12 @@ namespace AI
                     if (wayPoint < 0)
                         wayPoint = wayPointList.Count - 1;
                     Vector3 newDir = Vector3.RotateTowards(transform.forward, wayPointList[wayPoint].facingDirection, step, 0.0f);
-                    transform.rotation = Quaternion.LookRotation(newDir);
-                    m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
-                    m_Animator.SetFloat("Turn", step);
+                    //m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
+                    m_TurnAmount = (transform.forward - newDir).magnitude * 10f;
+                    //m_Animator.SetFloat("Turn", step);
+                    m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
                     //m_Animator.SetFloat("Forward", step*5f);
+                    transform.rotation = Quaternion.LookRotation(newDir);
                 }
                 else if (navPointTimer >= checkNavPointTime - 2f)
                 {
@@ -278,10 +280,12 @@ namespace AI
                     Vector3 targetDir = wayPointListTransform[checkingWayPoint].position - transform.position;
                     targetDir = new Vector3(targetDir.x, transform.position.y, targetDir.z);
                     Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
-                    transform.rotation = Quaternion.LookRotation(newDir);
-                    m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
-                    m_Animator.SetFloat("Turn", step);
+                    //m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
+                    m_TurnAmount = (transform.forward - newDir).magnitude * 10f;
+                    //m_Animator.SetFloat("Turn", step);
+                    m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
                     //m_Animator.SetFloat("Forward", step*5f);
+                    transform.rotation = Quaternion.LookRotation(newDir);
                 }
 
                 if (m_State == GuardState.ALARMED || m_State == GuardState.CURIOUS)
@@ -459,8 +463,8 @@ namespace AI
             if (m_State == GuardState.NORMAL)
                 m_ForwardAmount = Mathf.Clamp(m_ForwardAmount, 0, 0.5f);
 
-            m_Animator.SetFloat("Turn", m_TurnAmount);
-            m_Animator.SetFloat("Forward", m_ForwardAmount);
+            m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
+            m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
         }
 
         private void OnDrawGizmosSelected()

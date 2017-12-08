@@ -23,13 +23,17 @@ namespace Character.Actions
                < Vector3.Distance(controller.m_CharacterController.CharacterTransform.position, controller.m_CharacterController.balanceCollider.transform.GetChild(1).position))
             {
                 controller.m_CharacterController.forwardBalance = controller.m_CharacterController.balanceCollider.transform.GetChild(0).gameObject;
+                controller.m_CharacterController.m_ForwardAmount = -1f;
             }
             else
             {
                 controller.m_CharacterController.forwardBalance = controller.m_CharacterController.balanceCollider.transform.GetChild(1).gameObject;
+                controller.m_CharacterController.m_ForwardAmount = 1f;
             }
 
+
             controller.m_CharacterController.m_Animator.SetBool("onLedge", true);
+            controller.m_CharacterController.isBalanceCRDone = false;
             controller.m_CharacterController.startBalanceLedge = true;
             controller.m_CharacterController.animSpeed = controller.m_CharacterController.m_Animator.speed;
 

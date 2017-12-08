@@ -8,8 +8,7 @@ public class QuestNpcInteraction : MonoBehaviour {
 
     GameObject m_Npc;
     QuestNpc m_QuestGiver;
-    Transform playerHead;
-    public Transform origin;
+    
 
     private void Awake()
     {
@@ -21,23 +20,12 @@ public class QuestNpcInteraction : MonoBehaviour {
     {
         if(other.tag == "Player")
         {
-            playerHead = other.GetComponent<_CharacterController>().playerHead;
-            if (Physics.Raycast(origin.position, playerHead.position))
-            {
-                m_QuestGiver.SetBlackboardValue("playerSaw", true);
-            }
-            else
-            {
-                m_QuestGiver.SetBlackboardValue("playerSaw", false);
-            }
+           if(Input.GetButtonDown("Interact") && !m_QuestGiver.m_Blackboard.GetBoolValue("playerInteracted"))
+           {
+                m_QuestGiver.m_Blackboard.SetBoolValue("playerInteracted", true);
+           }
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            m_QuestGiver.SetBlackboardValue("playerSaw", false);
-        }
-    }
+    
 }

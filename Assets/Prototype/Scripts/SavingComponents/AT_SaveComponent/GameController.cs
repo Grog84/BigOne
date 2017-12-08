@@ -75,7 +75,7 @@ public class GameController :MonoBehaviour {
 
         //Inizializzazione livelli nuovi
         
-        for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings; i++)
+        for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings-1; i++)
         {
             Profile.completedLevel[i] = false;
         }
@@ -151,14 +151,11 @@ public class GameController :MonoBehaviour {
 
     private static void SaveProfile(string path, AT_Profile profile)
     {
-
-
-        profile.LastScene = SceneManager.GetActiveScene().buildIndex;
-        for (int i = 0; i <= profile.LastScene-1; i++)
-        {
-            profile.completedLevel[i] = true;
-        }
-
+        //profile.LastScene = SceneManager.GetActiveScene().buildIndex;
+        //for (int i = 0; i <= profile.LastScene-1; i++)
+        //{
+        //    profile.completedLevel[i] = true;
+        //}
         string json = JsonUtility.ToJson(profile);
 
         StreamWriter sw = File.CreateText(path);

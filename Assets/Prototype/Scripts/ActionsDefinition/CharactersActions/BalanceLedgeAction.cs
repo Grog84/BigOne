@@ -21,6 +21,7 @@ namespace Character.Actions
 
         private void BalanceLedge(CharacterStateController controller)
         {
+          
             if (Input.GetAxis("Horizontal") != 0)
             {
                 movement = Input.GetAxis("Horizontal");
@@ -29,6 +30,7 @@ namespace Character.Actions
             {
                 movement = 0;
             }
+            
 
             if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) <= 45)
             {
@@ -104,17 +106,21 @@ namespace Character.Actions
                }
 
             }
- 
-            // ANIMATOR
-            controller.m_CharacterController.m_ForwardAmount = movement * angleSign;
 
-            if (movement == 0)
+            // ANIMATOR
+            // Assign m_ForwardAmount value except when in coroutine
+            if (controller.m_CharacterController.isBalanceCRDone)
             {
-                controller.m_CharacterController.m_Animator.speed = 0;
-            }
-            else
-            {
-                controller.m_CharacterController.m_Animator.speed = controller.m_CharacterController.animSpeed;
+                controller.m_CharacterController.m_ForwardAmount = movement * angleSign;
+
+                if (movement == 0)
+                {
+                    controller.m_CharacterController.m_Animator.speed = 0;
+                }
+                else
+                {
+                    controller.m_CharacterController.m_Animator.speed = controller.m_CharacterController.animSpeed;
+                }
             }
         }
     }

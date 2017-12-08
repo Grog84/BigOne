@@ -235,11 +235,24 @@ public class BTDMStringConverter
                 return new ConditionLastNodeReached();
             case TaskType.GUARD_IS_CHAR_VISIBLE:
                 return new ConditionPlayerVisible();
+            case TaskType.QUEST_NPC_GIVE_REWARD:
+                return new ActionGiveReward();
+            case TaskType.QUEST_NPC_IDLE:
+                return new ActionIdle();
+            case TaskType.QUEST_NPC_QUEST_NOT_COMPLETED:
+                return new ActionQuestNotCompleted();
+            case TaskType.QUEST_NPC_REQUEST:
+                return new ActionRequest();
             case TaskType.QUEST_NPC_WATCH_PLAYER:
                 return new ActionWatchPlayer();
+            case TaskType.QUEST_NPC_HAS_PLAYER_INTERACTED:
+                return new ConditionPlayerInteracted();
             case TaskType.QUEST_NPC_HAS_SAW_PLAYER:
                 return new ConditionPlayerSaw();
-
+            case TaskType.QUEST_NPC_IS_QUEST_AVAILABLE:
+                return new ConditionQuestAvailable();
+            case TaskType.QUEST_NPC_IS_QUEST_COMPLETED:
+                return new ConditionQuestCompleted();
             default:
                 return null;
         }

@@ -258,8 +258,12 @@ namespace AI
                 navPointTimer += Time.deltaTime;
                 if (navPointTimer <= 2f)
                 {
-                    float step = normalStats.angularSpeed * Time.deltaTime;
-                    Vector3 newDir = Vector3.RotateTowards(transform.forward, wayPointList[checkingWayPoint].facingDirection, step, 0.0f);
+                    //float step = normalStats.angularSpeed * Time.deltaTime;
+                    float step = normalStats.spotRotatingSpeed * Time.deltaTime;
+                    int wayPoint = (checkingWayPoint - 1);
+                    if (wayPoint < 0)
+                        wayPoint = wayPointList.Count - 1;
+                    Vector3 newDir = Vector3.RotateTowards(transform.forward, wayPointList[wayPoint].facingDirection, step, 0.0f);
                     transform.rotation = Quaternion.LookRotation(newDir);
                     m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
                 }
@@ -267,11 +271,22 @@ namespace AI
                 {
                 
                     // start facing the next point of the navigation
-                    float step = normalStats.angularSpeed * Time.deltaTime;
-                    Vector3 targetDir = wayPointListTransform[nextWayPoint].position - transform.position;
+                    //float step = normalStats.angularSpeed * Time.deltaTime;
+                    float step = normalStats.spotRotatingSpeed * Time.deltaTime;
+                    Vector3 targetDir = wayPointListTransform[checkingWayPoint].position - transform.position;
+                    targetDir = new Vector3(targetDir.x, transform.position.y, targetDir.z);
                     Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
                     transform.rotation = Quaternion.LookRotation(newDir);
                     m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
+                }
+
+                if (m_State == GuardState.ALARMED || m_State == GuardState.CURIOUS)
+                {
+                    SetBlackboardValue("CheckingNavPoint", false);
+                    SetBlackboardValue("WaitingCoroutineRunning", false);
+
+                    yield break;
+
                 }
 
                 yield return null;
@@ -352,6 +367,7 @@ namespace AI
         public override void UpdateNavPoint()
         {
             checkingWayPoint = m_Blackboard.GetIntValue("CurrentNavPoint");
+            nextWayPoint = (m_Blackboard.GetIntValue("CurrentNavPoint") + 1) % wayPointListTransform.Length;
             SetBlackboardValue("NavigationPosition", wayPointListTransform[checkingWayPoint].position);
             m_NavMeshAgent.SetDestination(wayPointListTransform[checkingWayPoint].position);
             m_NavMeshAgent.isStopped = true;

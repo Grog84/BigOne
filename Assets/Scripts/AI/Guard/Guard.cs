@@ -442,7 +442,16 @@ namespace AI
             LookAround();
             UpdatePerceptionUI();
             ChangeStateFromGauge();
+            //m_Animator.SetFloat("Forward", m_NavMeshAgent.speed);
 
+            Vector3 move = m_NavMeshAgent.velocity;
+            if (move.magnitude > 1f) move.Normalize();
+            move = transform.InverseTransformDirection(move);
+            move = Vector3.ProjectOnPlane(move, Vector3.down);
+            m_TurnAmount = Mathf.Atan2(move.x, move.z);
+            
+            m_Animator.SetFloat("Turn", m_TurnAmount);
+            m_Animator.SetFloat("Forward", move.z);
         }
 
         private void OnDrawGizmosSelected()

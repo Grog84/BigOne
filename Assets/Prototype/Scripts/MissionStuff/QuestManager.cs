@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using UnityEngine.UI;
 using System.IO;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 namespace MissionManagerStuff
 {
@@ -51,6 +52,9 @@ namespace MissionManagerStuff
         [SceneObjectsOnly]
         public GameObject missionGiver;
 
+        [HideInInspector]
+        [ReadOnly]
+        public int SceneIndexNumber;
 
         //[ReadOnly]
         public int missionIndex;
@@ -104,7 +108,7 @@ namespace MissionManagerStuff
 
 
 
-        [Button("R")]
+        [Button("Reset Index Missioni",ButtonSizes.Medium)]
         public void resetIndex()
         {
             missionIndex = 0;
@@ -138,6 +142,7 @@ namespace MissionManagerStuff
             {
                 IsCorrect = true;
             }
+            SceneIndexNumber = SceneManager.GetActiveScene().buildIndex;
         }
 
         QuestManager QM;
@@ -212,8 +217,9 @@ namespace MissionManagerStuff
 
             if (!error)
             {
+                SceneIndexNumber = SceneManager.GetActiveScene().buildIndex;
                 Debug.Log("All field is valid, adding new mission, check MissionContainer for edit");
-               addNewMission(new Mission(this.missionName, this.missionType, this.missionGrade, this.missionDescription, this.missionIndex, this.missionGiver, this.pointA, this.pointB, this.Obj, this.receiver, this.pointA_Timed, this.pointB_Timed, this.time));
+               addNewMission(new Mission(this.missionName, this.missionType, this.missionGrade, this.missionDescription, this.missionIndex, this.missionGiver, this.pointA, this.pointB, this.Obj, this.receiver, this.pointA_Timed, this.pointB_Timed, this.time,SceneIndexNumber));
                 missionIndex++;
             }
 
@@ -278,10 +284,6 @@ namespace MissionManagerStuff
         {
             foreach (Mission m in MissionList)
             {
-                if (m.missionGiver.gameObject.GetComponent<QuestGiver>() == null)
-                {
-                    m.missionGiver.gameObject.AddComponent<QuestGiver>();
-                }
                 m.missionGiver.gameObject.GetComponent<QuestGiver>().myMission = m;
                 m.missionGiver.gameObject.GetComponent<QuestGiver>().missionIndex = m.missionIndex;
 
@@ -293,13 +295,13 @@ namespace MissionManagerStuff
            MissionList.Add(newMission);  
             
         }
-        [PropertyOrder(0)]
-        [Button("ClearList")]
-        public void Clear()
-        {
-            MissionList.Clear();
+        //[PropertyOrder(0)]
+        //[Button("ClearList",ButtonSizes.Medium)]
+        //public void Clear()
+        //{
+        //    MissionList.Clear();
 
-        }
+        //}
         [PropertyOrder(-2)]
         [HideInEditorMode]
         [Button("Salva Quest",ButtonSizes.Medium)]

@@ -10,12 +10,9 @@ namespace MissionManagerStuff
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                myMission.available = true;               
-            }
+            
         }
-
+        
 
     }
 }

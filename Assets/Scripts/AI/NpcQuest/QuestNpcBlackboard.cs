@@ -8,6 +8,9 @@ namespace AI
     [System.Serializable]
     public class QuestNpcBlackboard : Blackboard
     {
+        bool questAvailable = false;
+        bool questCompleted = false;
+        bool playerHasInteracted = false;
         bool isLookingAtPlayer = false;
         bool playerSaw = false;
 
@@ -60,6 +63,12 @@ namespace AI
                     return playerSaw;
                 case "lookAtPlayer":
                     return isLookingAtPlayer;
+                case "playerInteracted":
+                    return playerHasInteracted;
+                case "questAvailable":
+                    return questAvailable;
+                case "questCompleted":
+                    return questCompleted;
                 default:
                     Debug.Log("Default");
                     return false;
@@ -75,6 +84,15 @@ namespace AI
                     break;
                 case "lookAtPlayer":
                     isLookingAtPlayer = value;
+                    break;
+                case "playerInteracted":
+                    playerHasInteracted = value;
+                    break;
+                case "questAvailable":
+                    questAvailable = value;
+                    break;
+                case "questCompleted":
+                    questCompleted = value;
                     break;
                 default:
                     break;

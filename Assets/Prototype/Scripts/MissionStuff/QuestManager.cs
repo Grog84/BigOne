@@ -10,7 +10,8 @@ using UnityEngine.SceneManagement;
 namespace MissionManagerStuff
 {
     [Serializable]
-    //[ExecuteInEditMode]
+   
+
     public class QuestManager : SerializedMonoBehaviour
     {
 
@@ -106,7 +107,7 @@ namespace MissionManagerStuff
         public int time;
         #endregion
 
-
+        private bool isStriked = false;
 
         [Button("Reset Index Missioni",ButtonSizes.Medium)]
         public void resetIndex()
@@ -219,7 +220,7 @@ namespace MissionManagerStuff
             {
                 SceneIndexNumber = SceneManager.GetActiveScene().buildIndex;
                 Debug.Log("All field is valid, adding new mission, check MissionContainer for edit");
-               addNewMission(new Mission(this.missionName, this.missionType, this.missionGrade, this.missionDescription, this.missionIndex, this.missionGiver, this.pointA, this.pointB, this.Obj, this.receiver, this.pointA_Timed, this.pointB_Timed, this.time,SceneIndexNumber));
+              MissionList.Add(new Mission(this.missionName, this.missionType, this.missionGrade, this.missionDescription, this.missionIndex, this.missionGiver, this.pointA, this.pointB, this.Obj, this.receiver, this.pointA_Timed, this.pointB_Timed, this.time,SceneIndexNumber));
                 missionIndex++;
             }
 
@@ -234,13 +235,14 @@ namespace MissionManagerStuff
         [InfoBox("Non Valido",InfoMessageType.Error,"IsCorrect")]
         public GameObject QuestMenu;
 
-        public List<Mission> MissionList = new List<Mission>();
+        public List<Mission> MissionList;
        // public MissionContainer missionContainer;
        
       static  int  index = 1;
         // Use this for initialization
         private void Awake()
         {
+            
             questPath= System.IO.Path.Combine(Application.persistentDataPath, "quest.json");    
         }
         void Start()
@@ -253,6 +255,7 @@ namespace MissionManagerStuff
         {
            checkIFnewMissionIsAvailable();
         }
+        Text Testo;
         [PropertyOrder(-1)]
         [Button("Prova", ButtonSizes.Medium)]
         private void checkIFnewMissionIsAvailable()
@@ -269,16 +272,37 @@ namespace MissionManagerStuff
                              QuestMenu.transform)
                              .transform.position += Giu;
                         QuestMenu.transform.GetChild(index).gameObject.SetActive(true);
-                        Text Testo = QuestMenu.transform.GetChild(index).GetComponent<Text>();
+                         Testo = QuestMenu.transform.GetChild(index).GetComponent<Text>();
                         Testo.text = m.missionName;
                         index++;
                         m.Printed = true;
+                      
+                    }
+                    if(m.Printed)
+                    {
+                        if(m.completed)
+                        {
+                            if (!m.isStriked)
+                            {
+                                Testo.text = StrikeThrough(Testo.text);
+                                m.isStriked = true;
+                             
+                            }
+                        }
                     }
                 }
-
+                
             }
         }
-
+        public string StrikeThrough(string s)
+        {
+            string strikethrough = "";
+            foreach (char c in s)
+            {
+                strikethrough = strikethrough + c + '\u0336';
+            }
+            return strikethrough;
+        }
 
         private void giveMissionGiverComponent()
         {

@@ -10,7 +10,7 @@ namespace MissionManagerStuff
         ////[ReadOnly]
         public string missionName;
         //[ReadOnly]
-        [InfoBox("Nome Missione")]
+        
         public MISSIONTYPE missionType;
         //[ReadOnly]
         public MISSIONGRADE missionGrade;
@@ -40,8 +40,8 @@ namespace MissionManagerStuff
         private bool isAB;
         private bool isObj;
         private bool isABTi;
-     
-
+        [HideInPlayMode]
+        public bool isStriked = false;
         #region MissionType 0
 
         [TabGroup("MissionTab", "AB_Mission")]

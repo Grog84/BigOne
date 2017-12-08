@@ -23,10 +23,12 @@ namespace Character.Actions
                < Vector3.Distance(controller.m_CharacterController.CharacterTransform.position, controller.m_CharacterController.balanceCollider.transform.GetChild(1).position))
             {
                 controller.m_CharacterController.forwardBalance = controller.m_CharacterController.balanceCollider.transform.GetChild(0).gameObject;
+                controller.m_CharacterController.boardOppositePoint = controller.m_CharacterController.balanceCollider.transform.GetChild(1).gameObject;
             }
             else
             {
                 controller.m_CharacterController.forwardBalance = controller.m_CharacterController.balanceCollider.transform.GetChild(1).gameObject;
+                controller.m_CharacterController.boardOppositePoint = controller.m_CharacterController.balanceCollider.transform.GetChild(0).gameObject;
             }
 
            

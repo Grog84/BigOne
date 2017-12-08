@@ -86,6 +86,7 @@ namespace Character
         [HideInInspector] public GameObject balanceCollider;
         [HideInInspector] public GameObject forwardBalance;
         [HideInInspector] public GameObject balanceJoint;
+        [HideInInspector] public GameObject boardOppositePoint;
         //
         [HideInInspector] public bool isDefeated = false;
 
@@ -581,7 +582,7 @@ namespace Character
             startBalanceBoard = false;
             float positionTime = 0.3f;
 
-            Vector3 dir = balanceCollider.transform.position - CharacterTransform.transform.position;
+            Vector3 dir = boardOppositePoint.transform.position - forwardBalance.transform.position; //- CharacterTransform.transform.position;
             dir.y = 0;
             dir = dir.normalized;
 

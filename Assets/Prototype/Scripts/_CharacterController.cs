@@ -596,7 +596,7 @@ namespace Character
             startBalanceLedge = false;
             float positionTime = 0.3f;
 
-            Vector3 dir = forwardBalance.transform.GetChild(0).position - CharacterTransform.transform.position;
+            Vector3 dir = forwardBalance.transform.GetChild(0).position - forwardBalance.transform.position;
             dir.y = 0;
             dir = dir.normalized;
 

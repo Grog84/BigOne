@@ -37,11 +37,15 @@ namespace Character.Actions
 
             controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward *(movement*angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
 
-            
-           
+
+
 
             // Animator
-            controller.m_CharacterController.m_ForwardAmount = movement * angleSign;
+            // Assign m_ForwardAmount value except when in coroutine
+            if (controller.m_CharacterController.isBalanceCRDone)
+            {
+                controller.m_CharacterController.m_ForwardAmount = movement * angleSign;
+            }
 
         }
     }

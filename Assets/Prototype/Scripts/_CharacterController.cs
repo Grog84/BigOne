@@ -11,7 +11,7 @@ namespace Character
         public bool isInDanger = false;
         [HideInInspector] public float m_MoveSpeedMultiplier;
         [HideInInspector] public float m_TurnAmount;                   // Unutilized for the moment
-        [HideInInspector] public float m_ForwardAmount;
+         public float m_ForwardAmount;
         [HideInInspector] public float ray_length;
         //
         // BALANCE VARIABLES
@@ -23,6 +23,7 @@ namespace Character
         [HideInInspector] public bool isLedgeLimit;
         [HideInInspector] public bool ledgeForwardActive = true;
         [HideInInspector] public bool ledgeBackwardActive = true;
+        [HideInInspector] public bool isBalanceCRDone = true;
         // CLIMB VARIABLES
         [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
         [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
@@ -582,7 +583,7 @@ namespace Character
             startBalanceBoard = false;
             float positionTime = 0.3f;
 
-            Vector3 dir = boardOppositePoint.transform.position - forwardBalance.transform.position; //- CharacterTransform.transform.position;
+            Vector3 dir = boardOppositePoint.transform.position - forwardBalance.transform.position;
             dir.y = 0;
             dir = dir.normalized;
 
@@ -590,12 +591,13 @@ namespace Character
 
             CharacterTransform.DOMove(forwardBalance.transform.position, positionTime);
             yield return new WaitForSeconds(positionTime);
+            isBalanceCRDone = true;
         }
 
         IEnumerator OnBalanceLedge()
         {
             startBalanceLedge = false;
-            float positionTime = 0.3f;
+            float positionTime = 0.5f;         
 
             Vector3 dir = forwardBalance.transform.GetChild(0).position - forwardBalance.transform.position;
             dir.y = 0;
@@ -605,6 +607,7 @@ namespace Character
 
             CharacterTransform.DOMove(forwardBalance.transform.position, positionTime);
             yield return new WaitForSeconds(positionTime);
+            isBalanceCRDone = true;
         }
 
 #endregion

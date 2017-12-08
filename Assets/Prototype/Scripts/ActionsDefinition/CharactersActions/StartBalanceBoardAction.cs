@@ -31,10 +31,11 @@ namespace Character.Actions
                 controller.m_CharacterController.boardOppositePoint = controller.m_CharacterController.balanceCollider.transform.GetChild(0).gameObject;
             }
 
-           
-                controller.m_CharacterController.m_Animator.SetBool("onBoard", true);
-                controller.m_CharacterController.startBalanceBoard = true;
-              
+            controller.m_CharacterController.m_ForwardAmount = 1f;
+            controller.m_CharacterController.m_Animator.SetBool("onBoard", true);
+            controller.m_CharacterController.isBalanceCRDone = false;
+            controller.m_CharacterController.startBalanceBoard = true;
+
         }
 
     }

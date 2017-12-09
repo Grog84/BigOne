@@ -15,8 +15,9 @@ namespace Character.Actions
         }
 
         private void SetForwardAmount(CharacterStateController controller)
-        {     
-           controller.m_CharacterController.m_Animator.SetFloat("Forward", controller.m_CharacterController.m_ForwardAmount, 0.1f, Time.deltaTime);           
+        {
+            //controller.m_CharacterController.m_Animator.SetFloat("Forward", controller.m_CharacterController.m_ForwardAmount, 0.1f, Time.deltaTime);    
+            controller.m_CharacterController.m_Animator.SetFloat("Forward", Mathf.Clamp(controller.m_CharacterController.m_ForwardAmount, -0.5f, 0.5f), 0.1f, Time.deltaTime);
         }
     }
 }

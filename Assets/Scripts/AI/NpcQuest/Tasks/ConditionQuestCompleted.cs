@@ -8,7 +8,7 @@ namespace AI.BT
     {
         public override TaskState Run()
         {
-            if (m_BehaviourTree.m_Blackboard.GetBoolValue("questAvailable") && !m_BehaviourTree.m_Blackboard.GetBoolValue("questCompleted"))
+            if (m_BehaviourTree.m_Blackboard.GetBoolValue("questAvailable") && !m_BehaviourTree.m_Blackboard.GetBoolValue("questCompleted") && m_BehaviourTree.m_Blackboard.GetBoolValue("questComplete"))
             {
                 return TaskState.SUCCESS;
             }

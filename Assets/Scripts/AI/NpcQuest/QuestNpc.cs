@@ -12,6 +12,7 @@ namespace AI
     public class QuestNpc : AIAgent
     {
         QuestGiver m_QuestGiver;
+        QuestObject m_QuestObject;
         public PlayableDirector m_PlayableDirector;
 
         LookAtIK lookAtComponent;
@@ -106,6 +107,7 @@ namespace AI
             m_Blackboard = m_Brain.decisionMaker.m_Blackboard;
             m_Blackboard.m_Agent = this;
             m_QuestGiver = GetComponent<QuestGiver>();
+            m_QuestObject = m_QuestGiver.myMission.Obj.GetComponent<QuestObject>();
         }
 
         private void Start()
@@ -120,6 +122,7 @@ namespace AI
         {
             m_QuestGiver.myMission.available = GetQuestAvailable();
             m_QuestGiver.myMission.completed = GetQuestCompleted();
+            SetBlackboardValue("questComplete", m_QuestObject.Picked);
             LookAtManager();
         }
     }

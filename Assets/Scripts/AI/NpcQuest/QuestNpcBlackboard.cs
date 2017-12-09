@@ -8,6 +8,7 @@ namespace AI
     [System.Serializable]
     public class QuestNpcBlackboard : Blackboard
     {
+        bool objectiveComplete = false;
         bool questAvailable = false;
         bool questCompleted = false;
         bool playerHasInteracted = false;
@@ -69,6 +70,8 @@ namespace AI
                     return questAvailable;
                 case "questCompleted":
                     return questCompleted;
+                case "objectiveComplete":
+                    return objectiveComplete;
                 default:
                     Debug.Log("Default");
                     return false;
@@ -93,6 +96,9 @@ namespace AI
                     break;
                 case "questCompleted":
                     questCompleted = value;
+                    break;
+                case "objectiveComplete":
+                    objectiveComplete = value;
                     break;
                 default:
                     break;

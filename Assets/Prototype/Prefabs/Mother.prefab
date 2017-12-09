@@ -26,6 +26,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1014206293884684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4365444763163472}
+  m_Layer: 8
+  m_Name: PlayerGaze
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1029681196648594
 GameObject:
   m_ObjectHideFlags: 1
@@ -1615,6 +1630,19 @@ Transform:
   m_Father: {fileID: 4415505705976916}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4365444763163472
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1014206293884684}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.624, z: 1.248}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4931122489464732}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4370059031270746
 Transform:
   m_ObjectHideFlags: 1
@@ -2212,6 +2240,7 @@ Transform:
   - {fileID: 4472100261506210}
   - {fileID: 224077759982679830}
   - {fileID: 4909371252321070}
+  - {fileID: 4365444763163472}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3085,6 +3114,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   gazeAt: {fileID: 114835592958906586}
   cameraObject: {fileID: 0}
+  playerGaze: {fileID: 0}
   targets: []
   currentItem: {fileID: 0}
 --- !u!114 &114358415208295798
@@ -3279,14 +3309,16 @@ MonoBehaviour:
   alphaZero: {r: 0, g: 0, b: 0, a: 0}
   alphaMax: {r: 0, g: 0, b: 0, a: 0}
   playerIcon: {fileID: 0}
-  LookAtItems: {fileID: 1807714182878650}
-  cameraObject: {fileID: 0}
   playerSight: {fileID: 0}
   headClamp: 0
   canLookAt: 0
   dontLookAt: 0
   isCanLookAtDone: 1
   isDontLookAtDone: 1
+  cameraPoint: {fileID: 0}
+  isDefaultLookAt: 0
+  playerGaze: {fileID: 4365444763163472}
+  LookAtItems: {fileID: 1807714182878650}
   playerHead: {fileID: 4672722663747394}
   playerCanvas: {fileID: 224077759982679830}
   cancelIcon: {fileID: 21300000, guid: a32234460bd57c2489b9f547f8898f48, type: 3}

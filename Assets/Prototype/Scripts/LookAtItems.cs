@@ -10,6 +10,7 @@ public class LookAtItems : MonoBehaviour {
     [HideInInspector] public _CharacterController controller;
     [HideInInspector] public LookAtIK gazeAt;                       // Take the LookAtIk component we want to move
     [HideInInspector] public Transform cameraObject;                // Reference to the Camera LookAt object
+    [HideInInspector] public Transform playerGaze;
     public List<Transform> targets;
     public GameObject currentItem;
 
@@ -18,7 +19,8 @@ public class LookAtItems : MonoBehaviour {
         controller = transform.parent.GetComponent<_CharacterController>();
         gazeAt = controller.playerSight;
         targets = new List<Transform>();
-        cameraObject = controller.cameraObject;
+        cameraObject = controller.cameraPoint.transform;
+        playerGaze = controller.playerGaze;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,7 +28,6 @@ public class LookAtItems : MonoBehaviour {
         if (other.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
             targets.Add(other.transform);
-            controller.dontLookAt = true;
         }
     }
 
@@ -36,15 +37,16 @@ public class LookAtItems : MonoBehaviour {
         {
             if(i == 0)
             {
-                gazeAt.solver.target = targets[i];
+                gazeAt.solver.target = playerGaze;
+                playerGaze.DOMove(targets[i].position, 1f);
                 currentItem = targets[i].gameObject;
             }
             // Look the closest item
             else if ((Vector3.Distance(gameObject.transform.parent.position, targets[i].position)) < 
                    (Vector3.Distance(gameObject.transform.parent.position, targets[i-1].position)))
                  {
-                     gazeAt.solver.target = targets[i];
-                     currentItem = targets[i].gameObject;
+                    playerGaze.DOMove(targets[i].position, 1f);
+                    currentItem = targets[i].gameObject;
                  }
         }
     }
@@ -52,40 +54,58 @@ public class LookAtItems : MonoBehaviour {
     private void OnTriggerExit(Collider other)
     {
         targets.Remove(other.transform);
-        controller.dontLookAt = true;
+       
         currentItem = null;
+        playerGaze.DOMove(cameraObject.position, 1f);
 
         if (targets.Count == 0)
         {
-            StandardTarget();
+            if (playerGaze.transform.position != cameraObject.transform.position)
+            {
+                playerGaze.DOMove(cameraObject.position, 1f);
+            }
+            else
+            {
+                controller.isDefaultLookAt = true;
+                currentItem = null;
+            }
         }
     }
 
-    void StandardTarget()
-    {
-        if(controller.isDontLookAtDone)
-        {
-            gazeAt.solver.target = cameraObject;
-        }
-    }
+ 
 
-    void LateUpdate ()
+    void Update ()
     {
-        if(controller.isDontLookAtDone && gazeAt.solver.headWeight <= 0)
+        if (targets.Count == 0)
         {
-            controller.canLookAt = true;
+            if (playerGaze.transform.position != cameraObject.transform.position)
+            {
+                playerGaze.DOMove(cameraObject.position, 1f);
+            }
+            else
+            {
+                controller.isDefaultLookAt = true;
+                currentItem = null;
+            }
         }
-
         // Check if currentItem has been picked up
         if (currentItem != null && currentItem.activeSelf == false)
         {   
             targets.Remove(currentItem.transform);
+
             if (targets.Count == 0)
             {
-                controller.dontLookAt = true;
-                StandardTarget();
-                currentItem = null;
+                if (playerGaze.transform.position != cameraObject.transform.position)
+                {
+                    playerGaze.DOMove(cameraObject.position, 1f);
+                }
+                else
+                {
+                    controller.isDefaultLookAt = true;
+                    currentItem = null;
+                }
             }
+
         }
     }
 }

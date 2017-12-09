@@ -98,15 +98,17 @@ namespace Character
         [HideInInspector] public Color alphaMax;
         [HideInInspector] public Transform playerIcon;
         //LOOK AT
-        public GameObject LookAtItems;
-        [HideInInspector] public Transform cameraObject;
         [HideInInspector] public LookAtIK playerSight;
         [HideInInspector] public float headClamp;
         [HideInInspector] public bool canLookAt = false;
         [HideInInspector] public bool dontLookAt = false;
         [HideInInspector] public bool isCanLookAtDone = true;
         [HideInInspector] public bool isDontLookAtDone = true;
+        [HideInInspector] public GameObject cameraPoint;
+        [HideInInspector] public bool isDefaultLookAt = false;
 
+        public Transform playerGaze;
+        public GameObject LookAtItems;
         public Transform playerHead;
         public Transform playerCanvas;
         public Sprite cancelIcon;
@@ -133,7 +135,7 @@ namespace Character
             playerIcon = playerCanvas.GetChild(0);
             playerSight = GetComponent<LookAtIK>();
             headClamp = playerSight.solver.headWeight;
-            cameraObject = playerSight.solver.target;
+            cameraPoint = m_Camera.Find("LookAtTarget").gameObject;
         }
 
         // Use this for initialization
@@ -142,7 +144,7 @@ namespace Character
             isInClimbArea = false;
             isInPushArea = false;
             ray_length = m_CharController.bounds.size.y / 2.0f + 0.1f;
-
+            playerSight.solver.target = cameraPoint.transform;
         }
 
         #region Raycast Check
@@ -729,6 +731,13 @@ namespace Character
             
         }
 
+        IEnumerator ResetLookAtTarget()
+        {
+            isDefaultLookAt = false;
+            playerSight.solver.target = cameraPoint.transform;
+            yield return null;
+        }
+
 #endregion
 
         private void OnAnimatorIK(int layerIndex)
@@ -805,6 +814,11 @@ namespace Character
             if (dontLookAt)
             {
                 StartCoroutine(DontLookAt());
+            }
+
+            if (isDefaultLookAt)
+            {
+                StartCoroutine(ResetLookAtTarget());
             }
         }
 

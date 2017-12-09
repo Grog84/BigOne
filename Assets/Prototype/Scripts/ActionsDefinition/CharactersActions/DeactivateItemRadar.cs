@@ -21,7 +21,7 @@ namespace Character.Actions
             GameObject itemRadar;
             itemRadar = controller.m_CharacterController.LookAtItems;
             controller.m_CharacterController.canLookAt = true;
-            controller.m_CharacterController.playerSight.solver.target = controller.m_CharacterController.cameraObject;
+            controller.m_CharacterController.playerSight.solver.target = controller.m_CharacterController.cameraPoint.transform;
 
             itemRadar.GetComponent<LookAtItems>().targets.Clear();
             itemRadar.SetActive(false);

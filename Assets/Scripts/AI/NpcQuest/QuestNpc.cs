@@ -83,6 +83,7 @@ namespace AI
         {
             if(GetBlackboardBoolValue("lookAtPlayer"))
             {
+                lookAtComponent.solver.target = lookAtTarget;
                 // Turn head speed
                 if (lookAtComponent.solver.headWeight < headClamp)
                 {
@@ -112,6 +113,7 @@ namespace AI
             SetQuestAvailable();
             SetQuestCompleted();
             headClamp = lookAtComponent.solver.headWeight;
+            lookAtComponent.solver.headWeight = 0;
         }
 
         private void Update()

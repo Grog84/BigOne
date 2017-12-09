@@ -5,15 +5,16 @@ using UnityEngine.UI;
 
 public class Keys : Collectables
 {
-    public Transform canvas;
     public Sprite key;
 
+    [HideInInspector] public Transform canvas;
     [HideInInspector] public Transform icon;
     [HideInInspector] public Color alphaZero;
     [HideInInspector] public Color alphaMax;
 
     private void Awake()
     {
+        canvas = GameObject.Find("Canvas").transform;
         alphaZero = new Color(0, 0, 0, 0);
         alphaMax = new Color(100, 100, 100, 255);
 

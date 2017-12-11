@@ -520,7 +520,7 @@ GameObject:
   - component: {fileID: 64850190407633250}
   - component: {fileID: 114400579412553984}
   - component: {fileID: 114753835586872490}
-  m_Layer: 17
+  m_Layer: 2
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -810,7 +810,7 @@ GameObject:
   - component: {fileID: 64234208831877610}
   - component: {fileID: 54035954519201308}
   - component: {fileID: 114806635680365808}
-  m_Layer: 18
+  m_Layer: 2
   m_Name: AllertRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -845,7 +845,7 @@ GameObject:
   - component: {fileID: 23945217179286106}
   - component: {fileID: 114432743528457550}
   - component: {fileID: 114660674004793234}
-  m_Layer: 17
+  m_Layer: 2
   m_Name: AgentAvoidance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1403,7 +1403,7 @@ Transform:
   m_GameObject: {fileID: 1456795827827300}
   m_LocalRotation: {x: 5.2040645e-18, y: -3.523657e-19, z: -2.7105054e-20, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 4841109162615534}
   m_RootOrder: 0
@@ -1708,7 +1708,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1328685680502708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.2176208, y: 0.15864742, z: -19.75396}
+  m_LocalPosition: {x: -1.019, y: -0.446, z: -16.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4652379004832004}
@@ -2614,9 +2614,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Cone: {fileID: 1456795827827300}
-  xScale: 4
-  yScale: 4
-  zScale: 4
+  xScale: 10
+  yScale: 10
+  zScale: 10
 --- !u!114 &114876821729729712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2630,7 +2630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Guard: {fileID: 114983923712983390}
   navPoint: {fileID: 1980602909535040, guid: 77701d11bda0b9b4985d48ef40481d50, type: 2}
-  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  gizmoColor: {r: 0.17727897, g: 0.1002379, b: 0.75735295, a: 1}
 --- !u!114 &114983923712983390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2646,7 +2646,11 @@ MonoBehaviour:
   m_Animator: {fileID: 0}
   m_Brain: {fileID: 0}
   randomPick: 0
-  wayPointList: []
+  wayPointList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   normalStats: {fileID: 11400000, guid: 60303f557bedec64b8706f449d3a1f2e, type: 2}
   curiousStats: {fileID: 11400000, guid: 65d182ec121724149a6ebcbac4da92ef, type: 2}
   alarmedStats: {fileID: 11400000, guid: 360d559c06ee96b4c92cdb42b65643f3, type: 2}

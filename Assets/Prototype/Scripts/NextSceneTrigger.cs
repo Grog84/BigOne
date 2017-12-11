@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
+public enum Requirements
+{
+    ONE,
+    BOTH
+};
+
 public class NextSceneTrigger : MonoBehaviour {
 
     public bool withInteraction = false;
     public bool goToNextScene = true;
     public int sceneIndex = 0;
-
+    public Requirements requirements;
     private bool canChangeScene = false;
     private Icons canvasIcon;
-
+   [HideInInspector] public int playerCount = 0; 
 
     private void Awake()
     {
@@ -23,16 +29,35 @@ public class NextSceneTrigger : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            if (!withInteraction && goToNextScene)
-                GMController.instance.MoveToNextScene();
-            else if (!withInteraction && !goToNextScene)
+            playerCount++;
+
+            if (requirements == Requirements.ONE)
             {
-                GMController.instance.MoveToScene(sceneIndex);
+                if (!withInteraction && goToNextScene)
+                    GMController.instance.MoveToNextScene();
+                else if (!withInteraction && !goToNextScene)
+                {
+                    GMController.instance.MoveToScene(sceneIndex);
+                }
+                else
+                {
+                    canChangeScene = true;
+                    canvasIcon.transform.Find("ChangeScene").gameObject.SetActive(true);
+                }
             }
-            else
+            else if (requirements == Requirements.BOTH && playerCount == 2)
             {
-                canChangeScene = true;
-                canvasIcon.transform.Find("ChangeScene").gameObject.SetActive(true);
+                if (!withInteraction && goToNextScene)
+                    GMController.instance.MoveToNextScene();
+                else if (!withInteraction && !goToNextScene)
+                {
+                    GMController.instance.MoveToScene(sceneIndex);
+                }
+                else
+                {
+                    canChangeScene = true;
+                    canvasIcon.transform.Find("ChangeScene").gameObject.SetActive(true);
+                }
             }
         }
 
@@ -42,6 +67,7 @@ public class NextSceneTrigger : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
+            playerCount--;
             canChangeScene = false;
             canvasIcon.transform.Find("ChangeScene").gameObject.SetActive(false);
         }

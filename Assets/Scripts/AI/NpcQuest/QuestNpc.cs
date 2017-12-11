@@ -12,8 +12,8 @@ namespace AI
     public class QuestNpc : AIAgent
     {
         QuestGiver m_QuestGiver;
-        QuestObject m_QuestObject;
-        public PlayableDirector m_PlayableDirector;
+        public QuestObject m_QuestObject;
+        [HideInInspector]public PlayableDirector m_PlayableDirector;
 
         LookAtIK lookAtComponent;
         public Transform lookAtTarget;
@@ -81,20 +81,22 @@ namespace AI
         }
 
         public void LookAtManager()
-        {
-            if(GetBlackboardBoolValue("lookAtPlayer"))
-            {
-                lookAtComponent.solver.target = lookAtTarget;
-                // Turn head speed
-                if (lookAtComponent.solver.headWeight < headClamp)
+        {         
+                if (GetBlackboardBoolValue("lookAtPlayer"))
                 {
-                    lookAtComponent.solver.headWeight += Time.deltaTime;
+                Debug.Log("ti guardo un sacco");
+                    lookAtComponent.solver.target = lookAtTarget;
+                    // Turn head speed
+                    if (lookAtComponent.solver.headWeight < headClamp)
+                    {
+                        lookAtComponent.solver.headWeight += Time.deltaTime;
+                    }
                 }
-            }
-            else
-            {
-                lookAtComponent.solver.headWeight -= Time.deltaTime;
-            }
+                else
+                {
+                    lookAtComponent.solver.headWeight -= Time.deltaTime;
+                }
+            
         }
 
         private void Awake()
@@ -107,22 +109,24 @@ namespace AI
             m_Blackboard = m_Brain.decisionMaker.m_Blackboard;
             m_Blackboard.m_Agent = this;
             m_QuestGiver = GetComponent<QuestGiver>();
-            m_QuestObject = m_QuestGiver.myMission.Obj.GetComponent<QuestObject>();
+            m_PlayableDirector = GetComponent<PlayableDirector>();
         }
 
         private void Start()
         {
             SetQuestAvailable();
             SetQuestCompleted();
-            headClamp = lookAtComponent.solver.headWeight;
-            lookAtComponent.solver.headWeight = 0;
+            Debug.Log("Stop");
+            Debug.Log(m_QuestGiver.myMission.Obj);
+            m_QuestObject = m_QuestGiver.myMission.Obj.GetComponent<QuestObject>();
+
         }
 
         private void Update()
         {
             m_QuestGiver.myMission.available = GetQuestAvailable();
             m_QuestGiver.myMission.completed = GetQuestCompleted();
-            SetBlackboardValue("questComplete", m_QuestObject.Picked);
+            SetBlackboardValue("questCompleted", m_QuestObject.Picked);
             LookAtManager();
         }
     }

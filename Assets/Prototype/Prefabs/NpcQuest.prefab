@@ -39,6 +39,9 @@ GameObject:
   - component: {fileID: 195056896313138844}
   - component: {fileID: 114634155340079328}
   - component: {fileID: 114710614542916358}
+  - component: {fileID: 320252643927573894}
+  - component: {fileID: 114342064529669790}
+  - component: {fileID: 114489252075288664}
   m_Layer: 0
   m_Name: NpcQuest
   m_TagString: Npc
@@ -878,6 +881,23 @@ GameObject:
   - component: {fileID: 4035502956312712}
   m_Layer: 0
   m_Name: mixamorig:LeftEye
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1705869083052078
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4619792473195428}
+  - component: {fileID: 54134721432490638}
+  - component: {fileID: 65128437676661294}
+  m_Layer: 18
+  m_Name: NpcInteraction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1829,6 +1849,19 @@ Transform:
   m_Father: {fileID: 4441889665970574}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4619792473195428
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1705869083052078}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.032, y: 0.93, z: 1.009}
+  m_LocalScale: {x: 2.2172525, y: 1.9478139, z: 1.964598}
+  m_Children: []
+  m_Father: {fileID: 4759615175686448}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4635551682456720
 Transform:
   m_ObjectHideFlags: 1
@@ -1985,7 +2018,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1037715182921442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.091122, y: -0.43, z: -9.200983}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4258985855076522}
@@ -1993,6 +2026,7 @@ Transform:
   - {fileID: 4441889665970574}
   - {fileID: 224247466084116896}
   - {fileID: 4193615611923170}
+  - {fileID: 4619792473195428}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -160.3, z: 0}
@@ -2219,6 +2253,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1371870388455636}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &54134721432490638
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1705869083052078}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!54 &54687329918612382
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -2248,6 +2297,18 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!65 &65128437676661294
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1705869083052078}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95495291616165860
 Animator:
   serializedVersion: 3
@@ -2281,6 +2342,47 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114342064529669790
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1037715182921442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 506f28507f1588047a27490a6b3b79fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  missionIndex: 0
+  myMission:
+    missionName: trova la fede
+    missionType: 1
+    missionGrade: 0
+    missionIndex: 0
+    ShowDescription: 0
+    missionDescription: 
+    available: 0
+    completed: 0
+    SceneIndexNumber: 0
+    missionGiver: {fileID: 0}
+    Printed: 0
+    isStriked: 0
+    pointA: {fileID: 0}
+    pointB: {fileID: 0}
+    Obj: {fileID: 0}
+    receiver: {fileID: 0}
+    pointA_Timed: {fileID: 0}
+    pointB_Timed: {fileID: 0}
+    time: 0
 --- !u!114 &114394799557797210
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2313,7 +2415,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 085fc65a68076b84ea4095e949605e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Npc: {fileID: 0}
+  m_QuestGiver: {fileID: 0}
+  playerHead: {fileID: 0}
   origin: {fileID: 4433082280233768}
+--- !u!114 &114489252075288664
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1037715182921442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f6585494e1739e4e92031531653cd79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NavMeshAgent: {fileID: 0}
+  m_Animator: {fileID: 0}
+  m_Brain: {fileID: 0}
+  m_QuestObject: {fileID: 0}
+  m_PlayableDirector: {fileID: 320252643927573894}
+  lookAtTarget: {fileID: 0}
+  headClamp: 0
+  playerSaw: 0
 --- !u!114 &114634155340079328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2326,7 +2450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickDelay: 1
-  decisionMaker: {fileID: 0}
+  decisionMaker: {fileID: 11400000, guid: 9a2552123f4df6649a45461c0e2e31af, type: 2}
 --- !u!114 &114710614542916358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2708,3 +2832,21 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0.5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!320 &320252643927573894
+PlayableDirector:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1037715182921442}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: c6dc0957dcf323d41b41e034925450b3, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 114201235909199602, guid: c6dc0957dcf323d41b41e034925450b3, type: 2}
+    value: {fileID: 1037715182921442}
+  m_ExposedReferences:
+    m_References: []

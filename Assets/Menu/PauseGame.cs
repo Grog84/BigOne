@@ -38,8 +38,11 @@ public class PauseGame : MonoBehaviour
     }
     public void Awake()
     {
-        canvas.gameObject.SetActive(true);
+        canvas.gameObject.SetActive(true);     
+    }
 
+    private void Start()
+    {
         //QM_Controller.ShowActiveQuestOnMenu();
         canvas.gameObject.SetActive(false);
         

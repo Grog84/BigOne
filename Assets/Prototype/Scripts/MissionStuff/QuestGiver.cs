@@ -6,7 +6,7 @@ namespace MissionManagerStuff
     public class QuestGiver:SerializedMonoBehaviour
     {
         public int missionIndex;
-        [ReadOnly]
+       
         public Mission myMission;
         
 

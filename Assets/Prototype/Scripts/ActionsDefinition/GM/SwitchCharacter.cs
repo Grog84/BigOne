@@ -15,7 +15,7 @@ namespace GM.Actions
 
         private void Switch(GMStateController controller)
         {
-            if (Input.GetKeyDown(KeyCode.Tab) && GMController.instance.canSwitch == true)
+            if (Input.GetButtonDown("Submit") && GMController.instance.canSwitch == true)
             {
                 if (controller.m_GM.isCharacterPlaying == CharacterActive.Boy)
                 {

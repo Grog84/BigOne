@@ -201,7 +201,6 @@ namespace AI
                     ray = new Ray(eyes.position, direction);
                     isRayHitting = Physics.Raycast(ray, out rayHit, Mathf.Infinity, visionLayerMask);
                     isRayHitting = isRayHitting && rayHit.transform.tag == "Player";
-                    Debug.Log(rayHit.transform.name);
 
                     if (isRayHitting)
                     {

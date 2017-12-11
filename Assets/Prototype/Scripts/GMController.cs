@@ -10,6 +10,9 @@ public enum CameraActive {ThirdPersonCameraScript, FirstPersonCameraScript}
 public enum DayNight { Day, Night}
 public class GMController : MonoBehaviour {
 
+    //Switch Player
+    public bool canSwitch = false;
+
     // Transform of the active player
     public CharacterActive activePlayerAtStart;
     public DayNight isDayOrNight;

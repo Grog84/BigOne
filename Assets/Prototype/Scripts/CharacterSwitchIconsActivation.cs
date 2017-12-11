@@ -17,6 +17,7 @@ public class CharacterSwitchIconsActivation : MonoBehaviour
     [HideInInspector] public Color alphaZero;
     [HideInInspector] public Color alphaMax;
     [HideInInspector] public Transform Icons;
+    [HideInInspector] public Vector3 newPlayer;
 
     void Awake()
     {
@@ -47,8 +48,11 @@ public class CharacterSwitchIconsActivation : MonoBehaviour
 
     public void ShowIcon(GameObject player)
     {
-      SwapIcons();
-      player.GetComponent<_CharacterController>().IconPriority(Icons, degrees);           
+        Transform activePlayer = player.GetComponent<_CharacterController>().m_Camera;
+        SwapIcons();
+        newPlayer = new Vector3(activePlayer.position.x, Icons.position.y, activePlayer.position.z);
+        Icons.DOLookAt(newPlayer, 0.1f);
+        player.GetComponent<_CharacterController>().IconPriority(Icons, degrees);           
     }
 
 

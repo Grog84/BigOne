@@ -9,7 +9,6 @@ using AI;
 public class EnemyRadar : MonoBehaviour
 {
 
-    [HideInInspector] public float pos;
     [HideInInspector] public GameObject target;
     [HideInInspector] public Vector3 newTarget;
 
@@ -19,7 +18,7 @@ public class EnemyRadar : MonoBehaviour
 
     void Awake ()
     {
-        transform.position = transform.parent.position + Vector3.up * transform.parent.GetComponent<_CharacterController>().m_CharController.bounds.size.y / 2.0f + new Vector3(0,pos,0);    
+        transform.position = transform.parent.position + Vector3.up * transform.parent.GetComponent<_CharacterController>().m_CharController.bounds.size.y / 2.0f;    
     }
 
     private void Update()

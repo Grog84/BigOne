@@ -61,7 +61,7 @@ public class MenuUIManager : MonoBehaviour
 
 	public void StartNewGame() // Start new game function
 	{
-		SceneManager.LoadSceneAsync(2);
+		SceneManager.LoadSceneAsync(1);
 	}
 
 	public void NewGameButton() // Start new game button function

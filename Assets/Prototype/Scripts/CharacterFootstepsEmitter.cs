@@ -7,6 +7,7 @@ using AI;
 public class CharacterFootstepsEmitter : FootstepsEmitter
 {
     public Transform[] origin;
+    public LayerMask audioLayer;
     private _CharacterController controller;
 
     public void Awake()
@@ -47,13 +48,13 @@ public class CharacterFootstepsEmitter : FootstepsEmitter
 
             // Raycast da player a nemico 
             Debug.DrawRay(m_Ray.origin,m_Ray.direction,Color.red);
-            if (Physics.Raycast(m_Ray, out m_RayHit, controller.m_WalkSoundrange_sq))
+            if (Physics.Raycast(m_Ray, out m_RayHit, controller.m_WalkSoundrange_sq, audioLayer))
             {
                 if (m_RayHit.transform.tag == "Enemy")
                 {
                     GMController.instance.lastHeardPlayerPosition = controller.CharacterTransform.position;
-                    var enemyController = m_RayHit.transform.GetComponent<_AgentController>();
-                    enemyController.hasHeardPlayer = true;
+                    var enemyController = m_RayHit.transform.GetComponent<Guard>();
+                    enemyController.HearPlayer();
                     Debug.Log("Ahah!");
 
                 }

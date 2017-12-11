@@ -6,14 +6,14 @@ using UnityEngine.UI;
 
 public class TriggerOnCheckPoint:MonoBehaviour
 {
-    public GameController Save;
+    public SaveManager Save;
     public Text Testo;
 
 
 
     private void Awake()
     {
-        Save = FindObjectOfType<GameController>();
+        Save = FindObjectOfType<SaveManager>();
         Text[] temp = FindObjectsOfType<Text>();
         foreach(Text a in temp)
         {

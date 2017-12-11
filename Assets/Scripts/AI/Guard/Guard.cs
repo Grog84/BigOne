@@ -407,6 +407,7 @@ namespace AI
 
         public void DefeatPlayer()
         {
+            Debug.Log("DEFEAT");
             characterInterfaces[(int)GMController.instance.isCharacterPlaying].DefeatPlayer();
         }
 
@@ -429,6 +430,20 @@ namespace AI
             {
                 GetAlarmed();
             }
+        }
+
+        public void ResetForReload(int wayPoint)
+        {
+            m_Brain.decisionMaker.m_Blackboard = new GuardBlackboard();
+            m_Blackboard = m_Brain.decisionMaker.m_Blackboard;
+            m_Blackboard.m_Agent = this;
+
+            perceptionPercentage = 0;
+
+            SetBlackboardValue("CurrentNavPoint", wayPoint);
+            SetBlackboardValue("RandomPick", randomPick);
+            SetBlackboardValue("NumberOfNavPoints", wayPointList.Count);
+            GetNormal();
         }
 
         private void Awake()

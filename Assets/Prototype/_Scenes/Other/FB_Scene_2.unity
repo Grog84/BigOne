@@ -5249,6 +5249,48 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &946964427
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4460695928880140, guid: 94e28e9b30e5ec34db6a5dc74c17e968, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4460695928880140, guid: 94e28e9b30e5ec34db6a5dc74c17e968, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4460695928880140, guid: 94e28e9b30e5ec34db6a5dc74c17e968, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4460695928880140, guid: 94e28e9b30e5ec34db6a5dc74c17e968, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4460695928880140, guid: 94e28e9b30e5ec34db6a5dc74c17e968, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4460695928880140, guid: 94e28e9b30e5ec34db6a5dc74c17e968, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4460695928880140, guid: 94e28e9b30e5ec34db6a5dc74c17e968, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4460695928880140, guid: 94e28e9b30e5ec34db6a5dc74c17e968, type: 2}
+      propertyPath: m_RootOrder
+      value: 39
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 94e28e9b30e5ec34db6a5dc74c17e968, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &963031134
 Prefab:
   m_ObjectHideFlags: 0
@@ -5324,7 +5366,7 @@ MonoBehaviour:
   fadeOutTime: 1
   deathAnimationTime: 1
   deathTimer: 0
-  m_CheckpointManager: {fileID: 0}
+  m_SaveManager: {fileID: 0}
   m_CharacterInterfaces: []
   playerTransform: []
   m_MainCamera: []
@@ -6173,11 +6215,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 114234166378658538, guid: ac2752dd92e2046499789efc8d2e61b2,
-        type: 2}
-      propertyPath: cameraObject
-      value: 
-      objectReference: {fileID: 2061517431}
     - target: {fileID: 114951182589854320, guid: ac2752dd92e2046499789efc8d2e61b2,
         type: 2}
       propertyPath: solver.target
@@ -6189,6 +6226,11 @@ Prefab:
       value: 
       objectReference: {fileID: 114937581473148492, guid: ac2752dd92e2046499789efc8d2e61b2,
         type: 2}
+    - target: {fileID: 114234166378658538, guid: ac2752dd92e2046499789efc8d2e61b2,
+        type: 2}
+      propertyPath: cameraObject
+      value: 
+      objectReference: {fileID: 2061517431}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ac2752dd92e2046499789efc8d2e61b2, type: 2}
   m_IsPrefabParent: 0
@@ -8688,6 +8730,17 @@ Prefab:
       propertyPath: m_BaseOffset
       value: -0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 114528073490817216, guid: 6252c75f47e4ea84f8fa551fe224e692,
+        type: 2}
+      propertyPath: m_EventPath
+      value: event:/SFX/Steps
+      objectReference: {fileID: 0}
+    - target: {fileID: 114220130372242938, guid: 6252c75f47e4ea84f8fa551fe224e692,
+        type: 2}
+      propertyPath: serializationData.Prefab
+      value: 
+      objectReference: {fileID: 114220130372242938, guid: 6252c75f47e4ea84f8fa551fe224e692,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6252c75f47e4ea84f8fa551fe224e692, type: 2}
   m_IsPrefabParent: 0

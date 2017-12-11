@@ -28,13 +28,13 @@ public class MenuUIManager : MonoBehaviour
 	public int variabileCheckAreYouSure; // Variable that allow to the "AreYouSureMenu" what button has activated him;
 	public Button areYouSureYesButton; // The "Yes Button" in the "Security Menu"
     public Button areYouSureNoButton; // The "No Button" in the "Security Menu"
-    private GameController GC;
+    private SaveManager SM;
 
 	// FINTA VARIABILE INT DI LIVELLI SBLOCCATI
 
     void Start() //Disable all the GameObject-Menu that has not to be on the screen
     {
-        GC = FindObjectOfType<GameController>();
+        SM = FindObjectOfType<SaveManager>();
         mainMenu.gameObject.SetActive(true);
         settingsMenu.gameObject.SetActive(false);
         audioMenu.gameObject.SetActive(false);
@@ -46,7 +46,7 @@ public class MenuUIManager : MonoBehaviour
         areYouSure.gameObject.SetActive(false);
         eventSystem.SetSelectedGameObject(firstSelectedMainMenuButton);
 //        variabileCheckMenu = 0;
-		if (GameController.getlastScene() > 1) // If there is a save file, allow the "Continue Button" to appear in the Main Menu
+		if (SaveManager.getlastScene() > 1) // If there is a save file, allow the "Continue Button" to appear in the Main Menu
             continueButton.SetActive(true);
         else // If there is not a save file, the "Continue Button" will not appear in the Main Menu
             continueButton.SetActive(false);
@@ -67,7 +67,7 @@ public class MenuUIManager : MonoBehaviour
 	public void NewGameButton() // Start new game button function
     {
 		variabileCheckAreYouSure = 1;
-		if (GameController.getlastScene () > 1) {
+		if (SaveManager.getlastScene () > 1) {
 			AreYouSure ();
 		} else
 			StartNewGame ();
@@ -159,7 +159,7 @@ public class MenuUIManager : MonoBehaviour
 
     public void Continue() // Load the previous game
     {
-        GC.LoadLastScene();
+        SM.LoadLastScene();
     }
 
 	public void SelectLevelMenu() // Enabled the Select Level Menu and disable all the others
@@ -198,7 +198,7 @@ public class MenuUIManager : MonoBehaviour
 
 	public void SelectLevelButtonCheck()
 	{
-		if (GameController.getlastScene () > 1) 
+		if (SaveManager.getlastScene () > 1) 
 		{
 			variabileCheckAreYouSure = 2;
 			AreYouSure ();
@@ -251,7 +251,7 @@ public class MenuUIManager : MonoBehaviour
 
         for (int i = 0; i < 9; i++)
         {
-            if(GC.Profile.completedLevel[i])
+            if(SM.Profile.completedLevel[i])
             {
                 LevelSelect[i].enabled = true;
 

@@ -66,7 +66,7 @@ public class PauseGame : MonoBehaviour
 
     public void LastCheckPoint()
     {
-        GameController Gc = FindObjectOfType<GameController>();
+        SaveManager Gc = FindObjectOfType<SaveManager>();
         Gc.Load();
     }
 

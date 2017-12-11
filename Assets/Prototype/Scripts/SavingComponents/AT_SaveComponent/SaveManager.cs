@@ -10,7 +10,7 @@ using UnityEditor;
 
 
   [HideMonoScript]
-public class GameController :MonoBehaviour {
+public class SaveManager :MonoBehaviour {
   
     [ReadOnly]
     [BoxGroup("Profile Settings")]

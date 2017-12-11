@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
-public enum CameraActive {ThirdPersonCameraScript, FirstPersonCameraScript}
+public enum CameraActive {ThirdPersonCameraScript, FirstPersonCameraScript, LedgeCamera}
 public enum DayNight { Day, Night}
 public class GMController : MonoBehaviour {
 

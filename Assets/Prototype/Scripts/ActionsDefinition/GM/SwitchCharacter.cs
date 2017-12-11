@@ -26,6 +26,7 @@ namespace GM.Actions
                     controller.m_GM.isCharacterPlaying = CharacterActive.Boy;
                 }
                 GMController.instance.canSwitch = false;
+                GMController.instance.SaveCheckpoint();
             }
         }
     }

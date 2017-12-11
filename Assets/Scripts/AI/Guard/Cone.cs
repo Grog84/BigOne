@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StateMachine;
 
 namespace AI
 {
@@ -16,7 +17,7 @@ namespace AI
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.tag == "Player")
+            if (other.tag == "Player" && other.transform.GetComponent<CharacterStateController>().thisCharacter == GMController.instance.isCharacterPlaying)
             {
                 m_Guard.SetBlackboardValue("PlayerInSight", true);
             }
@@ -24,7 +25,7 @@ namespace AI
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.tag == "Player")
+            if (other.tag == "Player" && other.transform.GetComponent<CharacterStateController>().thisCharacter == GMController.instance.isCharacterPlaying)
             {
                 StartCoroutine(m_Guard.OutOfSightHysteresis());
             }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using SaveGame;
+using StateMachine;
 
 namespace AI
 {
@@ -203,7 +204,10 @@ namespace AI
 
                     ray = new Ray(eyes.position, direction);
                     isRayHitting = Physics.Raycast(ray, out rayHit, Mathf.Infinity, visionLayerMask);
-                    isRayHitting = isRayHitting && rayHit.transform.tag == "Player";
+                    isRayHitting = isRayHitting && rayHit.transform.tag == "Player" && 
+                        rayHit.transform.GetComponent<CharacterStateController>().thisCharacter == GMController.instance.isCharacterPlaying;
+
+                    Debug.DrawLine(eyes.position, lookAtPositions[i].position - eyes.position);
 
                     if (isRayHitting)
                     {
@@ -228,7 +232,8 @@ namespace AI
 
                 ray = new Ray(eyes.position, direction);
                 isRayHitting = Physics.Raycast(ray, out rayHit, Mathf.Infinity, visionLayerMask);
-                isRayHitting = isRayHitting && rayHit.transform.tag == "Player";
+                isRayHitting = isRayHitting && rayHit.transform.tag == "Player" &&
+                    rayHit.transform.GetComponent<CharacterStateController>().thisCharacter == GMController.instance.isCharacterPlaying;
 
                 if (isRayHitting)
                 {

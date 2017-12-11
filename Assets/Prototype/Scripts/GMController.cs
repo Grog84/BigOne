@@ -33,8 +33,8 @@ public class GMController : MonoBehaviour {
     [HideInInspector] public Transform[] allEnemiesTransform;
 
     // Variables used in order to trigger transitions when the game is not active
-    [HideInInspector] public bool isGameActive = false;
-    [HideInInspector] public CharacterActive isCharacterPlaying;
+    public bool isGameActive = false;
+    public CharacterActive isCharacterPlaying;
     [HideInInspector] public Image fadeEffect;
     
     [Range(0.5f, 5f)]

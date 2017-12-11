@@ -28,28 +28,31 @@ public class CharacterSwitch : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (players.Count > 1)
+        if (other.tag == "Player")
         {
-            if (GMController.instance.isCharacterPlaying == players[0].GetComponent<CharacterStateController>().thisCharacter || (GMController.instance.isCharacterPlaying == players[1].GetComponent<CharacterStateController>().thisCharacter))
+            if (players.Count > 1)
+            {
+                if (GMController.instance.isCharacterPlaying == players[0].GetComponent<CharacterStateController>().thisCharacter || (GMController.instance.isCharacterPlaying == players[1].GetComponent<CharacterStateController>().thisCharacter))
+                {
+                    activePlayer = other.gameObject;
+                    character = other.GetComponent<CharacterStateController>().thisCharacter;
+                    GetComponent<CharacterSwitchIconsActivation>().ShowIcon(activePlayer);
+                    GMController.instance.canSwitch = true;
+                }
+
+            }
+            else if (GMController.instance.isCharacterPlaying == players[0].GetComponent<CharacterStateController>().thisCharacter)
             {
                 activePlayer = other.gameObject;
                 character = other.GetComponent<CharacterStateController>().thisCharacter;
                 GetComponent<CharacterSwitchIconsActivation>().ShowIcon(activePlayer);
                 GMController.instance.canSwitch = true;
             }
-            
-        }
-        else if (GMController.instance.isCharacterPlaying == players[0].GetComponent<CharacterStateController>().thisCharacter)
-        {
-            activePlayer = other.gameObject;
-            character = other.GetComponent<CharacterStateController>().thisCharacter;
-            GetComponent<CharacterSwitchIconsActivation>().ShowIcon(activePlayer);
-            GMController.instance.canSwitch = true;
-        }
-        else if(GMController.instance.isCharacterPlaying != players[0].GetComponent<CharacterStateController>().thisCharacter)
-        {
-            GetComponent<CharacterSwitchIconsActivation>().HideIcons();
-            GMController.instance.canSwitch = false;
+            else if (GMController.instance.isCharacterPlaying != players[0].GetComponent<CharacterStateController>().thisCharacter)
+            {
+                GetComponent<CharacterSwitchIconsActivation>().HideIcons();
+                GMController.instance.canSwitch = false;
+            }
         }
     }
 

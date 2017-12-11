@@ -19,7 +19,7 @@ namespace Character.Actions
         private void EndCameraLedge(CharacterStateController controller)
         {
             LedgeCameraScript thisCamera = (LedgeCameraScript)GMController.instance.m_MainCamera[2];
-            thisCamera.myCamera.m_Priority = 0;
+           // thisCamera.myCamera.m_Priority = 0;
         }
     }
 }

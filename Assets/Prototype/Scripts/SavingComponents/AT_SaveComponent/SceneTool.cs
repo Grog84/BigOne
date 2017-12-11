@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using Sirenix.OdinInspector;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class SceneTool : MonoBehaviour {
 
@@ -24,7 +26,9 @@ public class SceneTool : MonoBehaviour {
         buildSceneName = new string[SceneManager.sceneCountInBuildSettings];
         for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
         {
+#if UNITY_EDITOR
             buildSceneName[i] = EditorBuildSettings.scenes[i].path.ToString();
+#endif
         }
 	}
 

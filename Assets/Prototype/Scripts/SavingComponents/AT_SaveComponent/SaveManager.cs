@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
 using System.IO;
-using UnityEditor;
 
 
   [HideMonoScript]

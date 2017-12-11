@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using AI.BT;
 using AI;
 using System.Linq;
@@ -117,8 +119,10 @@ public class BTDMMaker : MonoBehaviour {
     public void SaveTree()
     {
         behaviourTree = ScriptableObject.CreateInstance<BehaviourTreeDM>();
+#if UNITY_EDITOR
         AssetDatabase.CreateAsset(behaviourTree, "Assets/ScriptableObjects/AI/NewBDTM.asset");
         AssetDatabase.SaveAssets();
+#endif
         AssignRoot();
         AssignBlackboard();
         BuildTree(rootTask, behaviourTree.rootTask);

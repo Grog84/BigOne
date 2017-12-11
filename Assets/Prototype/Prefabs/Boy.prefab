@@ -310,11 +310,12 @@ GameObject:
   - component: {fileID: 143626487709842166}
   - component: {fileID: 114099655126269870}
   - component: {fileID: 114342614479072684}
-  - component: {fileID: 114888755817776138}
-  - component: {fileID: 114553567268930278}
   - component: {fileID: 114319331313540930}
+  - component: {fileID: 114888755817776138}
   - component: {fileID: 114951182589854320}
+  - component: {fileID: 114553567268930278}
   - component: {fileID: 114253847387447656}
+  - component: {fileID: 114240594305102658}
   - component: {fileID: 114937581473148492}
   m_Layer: 8
   m_Name: Boy
@@ -1413,7 +1414,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1236579459611486}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.69, y: -0.5, z: -27.25}
+  m_LocalPosition: {x: -6.424, y: -0.37, z: 14.62}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 4404718081447118}
@@ -2584,6 +2585,26 @@ MonoBehaviour:
   playerGaze: {fileID: 0}
   targets: []
   currentItem: {fileID: 0}
+--- !u!114 &114240594305102658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1236579459611486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1606c19e96abc3544a2a5d507c75d688, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EventPath: event:/SFX/Steps
+  playStep: 0
+  origin:
+  - {fileID: 4042092016516534}
+  - {fileID: 4585802036996506}
+  - {fileID: 4346419378541898}
+  audioLayer:
+    serializedVersion: 2
+    m_Bits: 131073
 --- !u!114 &114242406604693528
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3329,9 +3350,6 @@ MonoBehaviour:
     name: 
     pos: {x: 0, y: 0, z: 0}
     rot: {x: 0, y: 0, z: 0, w: 0}
-    isDoorOpen: 0
-    m_Controller: {fileID: 0}
-    activeState: 0
   thisObjectName: 
 --- !u!114 &114951182589854320
 MonoBehaviour:

@@ -58,14 +58,14 @@ namespace SaveGame
             PlayerPrefs.SetFloat("LastSceneIndex", SceneIndex);
             //ScreenCapture.CaptureScreenshot("Assets/Prototype/Images/ScreenInput.png");
 
-            if (GMController.instance.m_CheckpointManager.SaveOnClose)
-            {
-                SaveData();
-            }
-            if (memorizeOnClose)
-            {
-                PlayerPrefs.Save();
-            }
+            //if (GMController.instance.m_CheckpointManager.SaveOnClose)
+            //{
+            //    SaveData();
+            //}
+            //if (memorizeOnClose)
+            //{
+            //    PlayerPrefs.Save();
+            //}
 
 
         }

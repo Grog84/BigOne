@@ -5,10 +5,12 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
-
 public enum CameraActive {ThirdPersonCameraScript, FirstPersonCameraScript}
 public enum DayNight { Day, Night}
 public class GMController : MonoBehaviour {
+
+    //Switch Player
+    public bool canSwitch = false;
 
     // Transform of the active player
     public CharacterActive activePlayerAtStart;
@@ -45,7 +47,8 @@ public class GMController : MonoBehaviour {
     public float deathTimer = 0f;
 
     // Save game references and variables
-    [HideInInspector] public CheckPointManager m_CheckpointManager;
+    //[HideInInspector] public CheckPointManager m_CheckpointManager;
+    [HideInInspector] public SaveManager m_SaveManager;
 
     // Character interface used to acces those methods requiring both Character controller and character stte machine controller
     [HideInInspector] public CharacterInterface[] m_CharacterInterfaces;
@@ -67,7 +70,8 @@ public class GMController : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
-        m_CheckpointManager = GetComponent<CheckPointManager>();
+        //m_CheckpointManager = GetComponent<CheckPointManager>();
+        
         fadeEffect = GameObject.Find("FadeEffect").GetComponent<Image>();
 
         isCharacterPlaying = activePlayerAtStart;
@@ -104,7 +108,8 @@ public class GMController : MonoBehaviour {
         m_MainCamera = new CameraScript[2];
         m_MainCamera[0] = GameObject.Find("ThirdPersonCamera").GetComponent<ThirdPersonCameraScript>();
         m_MainCamera[1] = GameObject.Find("FirstPersonCamera").GetComponent<FirstPersonCameraScript>();
-        
+
+        m_SaveManager = FindObjectOfType<SaveManager>();
         SaveCheckpoint();
     }
 
@@ -136,12 +141,12 @@ public class GMController : MonoBehaviour {
 
     public void SaveCheckpoint()
     {
-        m_CheckpointManager.SaveAllObj();
+        m_SaveManager.Save();
     }
 
     public void LoadCheckpoint()
     {
-        m_CheckpointManager.LoadAllObj();
+        m_SaveManager.Load();
     }
 
     public IEnumerator WaitDeathAnimation()

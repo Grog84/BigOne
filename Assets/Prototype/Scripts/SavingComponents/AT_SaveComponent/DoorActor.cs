@@ -1,6 +1,8 @@
 ﻿public class DoorActor : Actor
 {
     private Doors m_Door;
+    int isDoorOpen;
+
     public override void Awake()
     {
         base.Awake();
@@ -10,7 +12,7 @@
     {
         base.StoreData();
       
-        data.isDoorOpen = m_Door.isDoorOpen ? 1 : 0;
+        isDoorOpen = m_Door.isDoorOpen ? 1 : 0;
     }
 
 
@@ -18,7 +20,7 @@
     {
 
         base.LoadData();
-        int status = data.isDoorOpen;
+        int status = isDoorOpen;
         if (status == 0)
             m_Door.isDoorOpen = false;
         else

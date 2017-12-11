@@ -8,7 +8,7 @@ public class AgentAvoidance : MonoBehaviour {
 
     [HideInInspector] public float myOrder = 0f;
 
-    [HideInInspector] public _AgentController m_AgentController;
+    [HideInInspector] public Guard m_Guard;
     [HideInInspector] public NavMeshAgent m_NavmeshAgent;
     [HideInInspector] public NavMeshObstacle m_NavmeshObstacle;
 
@@ -16,7 +16,7 @@ public class AgentAvoidance : MonoBehaviour {
     {
         m_NavmeshAgent = GetComponentInParent<NavMeshAgent>();
         m_NavmeshObstacle = GetComponentInParent<NavMeshObstacle>();
-        m_AgentController = GetComponentInParent<_AgentController>();
+        m_Guard = GetComponentInParent<Guard>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,7 +37,7 @@ public class AgentAvoidance : MonoBehaviour {
 
         else if (other.tag == "Player")
         {
-            m_AgentController.sightPercentage = 110f;
+            m_Guard.GetAlarmed();
         }
     }
 

@@ -125,9 +125,9 @@ GameObject:
   - component: {fileID: 20001932675841192}
   - component: {fileID: 124789450552353986}
   - component: {fileID: 92456317225158828}
-  - component: {fileID: 81524554339943822}
   - component: {fileID: 114524706211795172}
   - component: {fileID: 114488478674170926}
+  - component: {fileID: 114675832953967654}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -401,13 +401,6 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
---- !u!81 &81524554339943822
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1836883229050346}
-  m_Enabled: 1
 --- !u!92 &92160726913245094
 Behaviour:
   m_ObjectHideFlags: 1
@@ -544,14 +537,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 122419
   activatedByTrigger: 0
-  minCamDistance: 0.3
+  minCamDistance: 0.1
   maxDistance: 2.5
   clipPointPositionArray:
-  - {x: -5.162217, y: 6.414316, z: -28.31229}
-  - {x: -5.289256, y: 6.414316, z: -28.43476}
-  - {x: -5.159993, y: 6.513523, z: -28.3146}
-  - {x: -5.287032, y: 6.513523, z: -28.43707}
-  - {x: -4.461572, y: 6.428408, z: -29.16619}
+  - {x: -1.654515, y: -0.9493596, z: 0.383789}
+  - {x: -1.695259, y: -0.9493596, z: 0.5554805}
+  - {x: -1.69256, y: -0.8581274, z: 0.3747603}
+  - {x: -1.733305, y: -0.8581274, z: 0.5464519}
+  - {x: -2.677638, y: -1.33708, z: 0.2316699}
 --- !u!114 &114488478674170926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -569,7 +562,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 122419
   activatedByTrigger: 0
-  minCamDistance: 0.3
+  minCamDistance: 0.1
   maxDistance: 2.5
 --- !u!114 &114524706211795172
 MonoBehaviour:
@@ -585,7 +578,7 @@ MonoBehaviour:
   m_ShowDebugText: 0
   m_ShowCameraFrustum: 1
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
+  m_UpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
     m_Time: 2
@@ -639,10 +632,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 122419
   activatedByTrigger: 0
-  minCamDistance: 0.3
+  minCamDistance: 0.1
   maxDistance: 2.5
   yAngleMin: -75
   yAngleMax: 40
+--- !u!114 &114675832953967654
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1836883229050346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ListenerNumber: 0
 --- !u!114 &114805826676908730
 MonoBehaviour:
   m_ObjectHideFlags: 1

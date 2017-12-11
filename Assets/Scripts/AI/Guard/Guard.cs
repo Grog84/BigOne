@@ -55,6 +55,10 @@ namespace AI
         float perceptionPercentage = 0f;
         [HideInInspector] public bool isOtherAlarmed = false;
 
+        public LayerMask visionLayerMask;
+
+        int heardCounter = 0;
+
         // Saving Game
         [HideInInspector] public GuardSaveComponent m_SaveComponent;
 
@@ -73,6 +77,7 @@ namespace AI
             else if (m_State == GuardState.CURIOUS)
                 GMController.instance.curiousGuards--;
 
+            heardCounter = 0;
             m_State = GuardState.NORMAL;
             SetBlackboardValue("GuardState", (int)GuardState.NORMAL);
             SetBlackboardValue("IsRelaxing", true);
@@ -188,12 +193,19 @@ namespace AI
             {
                 
                 Vector3 direction;
+                RaycastHit rayHit;
+                bool isRayHitting;
+                Ray ray;
 
                 for (int i = 0; i < lookAtPositions.Length; i++)
                 {
-                    direction = (lookAtPositions[i].position - transform.position).normalized;
+                    direction = (lookAtPositions[i].position - eyes.position).normalized;
 
-                    if (Physics.Raycast(eyes.position, direction))
+                    ray = new Ray(eyes.position, direction);
+                    isRayHitting = Physics.Raycast(ray, out rayHit, Mathf.Infinity, visionLayerMask);
+                    isRayHitting = isRayHitting && rayHit.transform.tag == "Player";
+
+                    if (isRayHitting)
                     {
                         noRaycastHitting = false;
                         if (hasRadio)
@@ -212,8 +224,13 @@ namespace AI
                     }
                 }
 
-                direction = (lookAtPositionCentral.position - transform.position).normalized;
-                if (Physics.Raycast(eyes.position, direction))
+                direction = (lookAtPositionCentral.position - eyes.position).normalized;
+
+                ray = new Ray(eyes.position, direction);
+                isRayHitting = Physics.Raycast(ray, out rayHit, Mathf.Infinity, visionLayerMask);
+                isRayHitting = isRayHitting && rayHit.transform.tag == "Player";
+
+                if (isRayHitting)
                 {
                     noRaycastHitting = false;
                     if (hasRadio)
@@ -390,6 +407,7 @@ namespace AI
 
         public void DefeatPlayer()
         {
+            Debug.Log("DEFEAT");
             characterInterfaces[(int)GMController.instance.isCharacterPlaying].DefeatPlayer();
         }
 
@@ -401,6 +419,31 @@ namespace AI
         public void SetPerceptionToValue(float value)
         {
             perceptionPercentage = value;
+        }
+
+        public void HearPlayer()
+        {
+            heardCounter++;
+            perceptionPercentage += 20f;
+
+            if (heardCounter >= 3)
+            {
+                GetAlarmed();
+            }
+        }
+
+        public void ResetForReload(int wayPoint)
+        {
+            m_Brain.decisionMaker.m_Blackboard = new GuardBlackboard();
+            m_Blackboard = m_Brain.decisionMaker.m_Blackboard;
+            m_Blackboard.m_Agent = this;
+
+            perceptionPercentage = 0;
+
+            SetBlackboardValue("CurrentNavPoint", wayPoint);
+            SetBlackboardValue("RandomPick", randomPick);
+            SetBlackboardValue("NumberOfNavPoints", wayPointList.Count);
+            GetNormal();
         }
 
         private void Awake()

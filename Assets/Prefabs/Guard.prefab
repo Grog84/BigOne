@@ -455,6 +455,7 @@ GameObject:
   - component: {fileID: 114875479976392488}
   - component: {fileID: 114528073490817216}
   - component: {fileID: 114360030719028360}
+  - component: {fileID: 114220130372242938}
   m_Layer: 17
   m_Name: Guard
   m_TagString: Enemy
@@ -520,7 +521,7 @@ GameObject:
   - component: {fileID: 64850190407633250}
   - component: {fileID: 114400579412553984}
   - component: {fileID: 114753835586872490}
-  m_Layer: 17
+  m_Layer: 2
   m_Name: Cone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -810,7 +811,7 @@ GameObject:
   - component: {fileID: 64234208831877610}
   - component: {fileID: 54035954519201308}
   - component: {fileID: 114806635680365808}
-  m_Layer: 18
+  m_Layer: 2
   m_Name: AllertRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -845,7 +846,7 @@ GameObject:
   - component: {fileID: 23945217179286106}
   - component: {fileID: 114432743528457550}
   - component: {fileID: 114660674004793234}
-  m_Layer: 17
+  m_Layer: 2
   m_Name: AgentAvoidance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1403,7 +1404,7 @@ Transform:
   m_GameObject: {fileID: 1456795827827300}
   m_LocalRotation: {x: 5.2040645e-18, y: -3.523657e-19, z: -2.7105054e-20, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 4841109162615534}
   m_RootOrder: 0
@@ -1708,7 +1709,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1328685680502708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.2176208, y: 0.15864742, z: -19.75396}
+  m_LocalPosition: {x: -1.019, y: -0.446, z: -16.07}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4652379004832004}
@@ -2456,6 +2457,31 @@ MonoBehaviour:
   m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114220130372242938
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1328685680502708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64f77290738ea65478cdf2540ea43b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  data:
+    name: 
+    pos: {x: 0, y: 0, z: 0}
+    rot: {x: 0, y: 0, z: 0, w: 0}
+  thisObjectName: 
 --- !u!114 &114360030719028360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2533,7 +2559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8341aaf769ebeed42a12cd4e59d975ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EventPath: 
+  m_EventPath: event:/SFX/Steps
   playStep: 0
 --- !u!114 &114660674004793234
 MonoBehaviour:
@@ -2614,9 +2640,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Cone: {fileID: 1456795827827300}
-  xScale: 4
-  yScale: 4
-  zScale: 4
+  xScale: 10
+  yScale: 10
+  zScale: 10
 --- !u!114 &114876821729729712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2630,7 +2656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Guard: {fileID: 114983923712983390}
   navPoint: {fileID: 1980602909535040, guid: 77701d11bda0b9b4985d48ef40481d50, type: 2}
-  gizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  gizmoColor: {r: 0.17727897, g: 0.1002379, b: 0.75735295, a: 1}
 --- !u!114 &114983923712983390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2646,7 +2672,11 @@ MonoBehaviour:
   m_Animator: {fileID: 0}
   m_Brain: {fileID: 0}
   randomPick: 0
-  wayPointList: []
+  wayPointList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   normalStats: {fileID: 11400000, guid: 60303f557bedec64b8706f449d3a1f2e, type: 2}
   curiousStats: {fileID: 11400000, guid: 65d182ec121724149a6ebcbac4da92ef, type: 2}
   alarmedStats: {fileID: 11400000, guid: 360d559c06ee96b4c92cdb42b65643f3, type: 2}
@@ -2662,6 +2692,9 @@ MonoBehaviour:
   playerLastPercieved: {x: 1000, y: 1000, z: 1000}
   hasRadio: 0
   isOtherAlarmed: 0
+  visionLayerMask:
+    serializedVersion: 2
+    m_Bits: 257
   m_SaveComponent: {fileID: 0}
 --- !u!136 &136112457474815546
 CapsuleCollider:
@@ -2899,7 +2932,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: -0.1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!222 &222733750171404032

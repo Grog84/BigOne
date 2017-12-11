@@ -237,15 +237,16 @@ namespace MissionManagerStuff
         // Use this for initialization
         private void Awake()
         {      
+            QuestMenu = GameObject.Find("Pause_Quest");
             questPath= System.IO.Path.Combine(Application.persistentDataPath, "quest.json");    
-        }
-        void Start()
-        {  
             giveMissionGiverComponent();
             InitializedQuestObject();
             InizializedQuestReceiver();
-            QuestMenu = transform.Find("Pause_Quest").gameObject;
         }
+
+        //void Start()
+        //{  
+        //}
         // Update is called once per frame
         void Update()
         {
@@ -341,26 +342,26 @@ namespace MissionManagerStuff
         }
         public void InitializedQuestObject()
         {
-            if (Obj.GetComponent<QuestObject>() == null)
+            foreach (Mission m in MissionList)
             {
-                Obj.AddComponent<QuestObject>();
+                if (m.Obj.GetComponent<QuestObject>() == null)
+                {
+                    m.Obj.AddComponent<QuestObject>();
+                }
+                m.Obj.GetComponent<QuestObject>().name = m.Obj.gameObject.name;
             }
-            Obj.GetComponent<QuestObject>().name=Obj.gameObject.name;
           
         }
 
         public void InizializedQuestReceiver()
         {
             foreach (Mission m in MissionList)
-            {
-                if (m.receiver = receiver)
-                {
-                    if (receiver.GetComponent<QuestReceiver>() == null)
+            {               
+                    if (m.receiver.GetComponent<QuestReceiver>() == null)
                     {
-                        receiver.AddComponent<QuestReceiver>();
+                        m.receiver.AddComponent<QuestReceiver>();
                     }
-                    receiver.GetComponent<QuestReceiver>().myMission = m;
-                }
+                    m.receiver.GetComponent<QuestReceiver>().myMission = m;  
             }
         }
        

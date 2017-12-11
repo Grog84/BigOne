@@ -8,7 +8,7 @@ public class QuestNpcPerception : MonoBehaviour {
 
     GameObject m_Npc;
     QuestNpc m_QuestGiver;
-    Transform playerHead;
+    public Transform playerHead;
     public Transform origin;
 
     private void Awake()
@@ -17,12 +17,19 @@ public class QuestNpcPerception : MonoBehaviour {
         m_QuestGiver = m_Npc.GetComponent<QuestNpc>();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        playerHead = other.GetComponent<_CharacterController>().playerHead;
+        m_QuestGiver.lookAtTarget = playerHead;
+        m_Npc.GetComponent<Animator>().SetTrigger("PlayerSaw");
+
+    }
+
+
     private void OnTriggerStay(Collider other)
     {
         if(other.tag == "Player")
         {
-            playerHead = other.GetComponent<_CharacterController>().playerHead;
-            m_QuestGiver.lookAtTarget = playerHead;
             if (Physics.Raycast(origin.position, playerHead.position))
             {
                 m_QuestGiver.SetBlackboardValue("playerSaw", true);

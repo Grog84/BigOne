@@ -57,6 +57,8 @@ namespace AI
 
         public LayerMask visionLayerMask;
 
+        int heardCounter = 0;
+
         // Saving Game
         [HideInInspector] public GuardSaveComponent m_SaveComponent;
 
@@ -75,6 +77,7 @@ namespace AI
             else if (m_State == GuardState.CURIOUS)
                 GMController.instance.curiousGuards--;
 
+            heardCounter = 0;
             m_State = GuardState.NORMAL;
             SetBlackboardValue("GuardState", (int)GuardState.NORMAL);
             SetBlackboardValue("IsRelaxing", true);
@@ -415,6 +418,17 @@ namespace AI
         public void SetPerceptionToValue(float value)
         {
             perceptionPercentage = value;
+        }
+
+        public void HearPlayer()
+        {
+            heardCounter++;
+            perceptionPercentage += 20f;
+
+            if (heardCounter >= 3)
+            {
+                GetAlarmed();
+            }
         }
 
         private void Awake()

@@ -7,14 +7,14 @@ public class Keys : Collectables
 {
     public Sprite key;
 
-    [HideInInspector] public Transform canvas;
-    [HideInInspector] public Transform icon;
+     public Transform canvas;
+     public Transform icon;
     [HideInInspector] public Color alphaZero;
     [HideInInspector] public Color alphaMax;
 
     private void Awake()
     {
-        canvas = GameObject.Find("Canvas").transform;
+        canvas = GameObject.Find("MainCanvas").transform;
         alphaZero = new Color(0, 0, 0, 0);
         alphaMax = new Color(100, 100, 100, 255);
 

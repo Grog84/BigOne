@@ -1,10 +1,9 @@
-﻿using System.Collections;
+﻿#if UNITY_EDITOR
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#if UNITY_EDITOR
 using UnityEditor;
 using UnityEditor.SceneManagement;
-#endif
 
 public class MapTool : MonoBehaviour
 {
@@ -20,9 +19,7 @@ public class MapTool : MonoBehaviour
     public void LoadConfig()
     {
         MapToolConfig myConfigFile = GetProfileFromPrefs();
-#if UNITY_EDITOR
         EditorSceneManager.RestoreSceneManagerSetup(myConfigFile.sceneSetup);
-#endif
     }
 
     MapToolConfig GetProfileFromPrefs()
@@ -92,3 +89,4 @@ public class MapTool : MonoBehaviour
     }
 
 }
+#endif

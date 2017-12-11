@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#if UNITY_EDITOR
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,3 +30,4 @@ public class CompositeTool : MonoBehaviour {
         //thistask.transform.localScale = new Vector3(1f, 1f, 0f);
     }
 }
+#endif

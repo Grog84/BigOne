@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4699908173629156}
   - component: {fileID: 114430014747400976}
-  - component: {fileID: 114581267002960726}
   - component: {fileID: 114418254047589940}
-  - component: {fileID: 114847800606801434}
+  - component: {fileID: 114803376806484316}
+  - component: {fileID: 114519096876152336}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -73,7 +73,7 @@ MonoBehaviour:
   stateTimeElapsed: 0
   lastActiveState: {fileID: 0}
   m_GM: {fileID: 0}
---- !u!114 &114581267002960726
+--- !u!114 &114519096876152336
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -84,10 +84,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c717b5cf866354eafb7484a38f0af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canSwitch: 0
   activePlayerAtStart: 0
+  isDayOrNight: 0
+  activeCamera: 0
   lastSeenPlayerPosition: {x: 1000, y: 1000, z: 1000}
   lastHeardPlayerPosition: {x: 1000, y: 1000, z: 1000}
-  suspiciousGuards: 0
+  lastPercievedPlayerPosition: {x: 1000, y: 1000, z: 1000}
+  curiousGuards: 0
   alarmedGuards: 0
   allEnemiesTransform: []
   isGameActive: 0
@@ -97,12 +101,12 @@ MonoBehaviour:
   fadeOutTime: 1
   deathAnimationTime: 1
   deathTimer: 0
-  m_CheckpointManager: {fileID: 0}
+  m_SaveManager: {fileID: 0}
   m_CharacterInterfaces: []
-  playerTransform:
-  - {fileID: 0}
-  m_MainCamera: {fileID: 0}
---- !u!114 &114847800606801434
+  playerTransform: []
+  m_MainCamera: []
+  players: []
+--- !u!114 &114803376806484316
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -110,11 +114,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1201084854281568}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 486eb6637d7a77540be68f78ad118bdd, type: 3}
+  m_Script: {fileID: 11500000, guid: 2398b4c724ab6ca4884488c8d9f447b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  saveObjName: 
-  savePosition: 0
-  saveRotation: 0
-  setOnAwake: 0
-  memorizeOnClose: 1
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  data:
+    name: 
+    pos: {x: 0, y: 0, z: 0}
+    rot: {x: 0, y: 0, z: 0, w: 0}
+  thisObjectName: 

@@ -105,9 +105,10 @@ public class GMController : MonoBehaviour {
             allEnemiesTransform[i] = allEnemies[i].transform;
         }
 
-        m_MainCamera = new CameraScript[2];
+        m_MainCamera = new CameraScript[3];
         m_MainCamera[0] = GameObject.Find("ThirdPersonCamera").GetComponent<ThirdPersonCameraScript>();
         m_MainCamera[1] = GameObject.Find("FirstPersonCamera").GetComponent<FirstPersonCameraScript>();
+        m_MainCamera[2] = GameObject.Find("LedgeCamera").GetComponent<LedgeCameraScript>();
 
         m_SaveManager = FindObjectOfType<SaveManager>();
         SaveCheckpoint();

@@ -10,10 +10,13 @@ public class CameraScript : MonoBehaviour
     //references to other virtual cameras
     private GameObject firstPersonCamera;
     private GameObject thirdPersonCamera;
+    private GameObject ledgeCamera;
     private CinemachineVirtualCamera firstPersonVirtualCamera;
     private CinemachineVirtualCamera thirdPersonVirtualCamera;
     private FirstPersonCameraScript firstPersonCameraScript;
     private ThirdPersonCameraScript thirdPersonCameraScript;
+    private CinemachineVirtualCamera ledgeVirtualCamera;
+    private LedgeCameraScript ledgeCameraScript;
 
     //check wich character is in trigger
     [HideInInspector]public bool motherInTrigger = false;
@@ -81,6 +84,9 @@ public class CameraScript : MonoBehaviour
         thirdPersonCamera = GameObject.Find("ThirdPersonCamera");
         thirdPersonVirtualCamera = thirdPersonCamera.GetComponent<CinemachineVirtualCamera>();
         thirdPersonCameraScript = thirdPersonCamera.GetComponent<ThirdPersonCameraScript>();
+        ledgeCamera = GameObject.Find("LedgeCamera");
+        ledgeVirtualCamera = ledgeCamera.GetComponent<CinemachineVirtualCamera>();
+        ledgeCameraScript = ledgeCamera.GetComponent<LedgeCameraScript>();
         BJoints = GameObject.Find("Alpha_Joints");
         boyJoints = BJoints.GetComponent<Renderer>();
         BSkin = GameObject.Find("Alpha_Surface");
@@ -95,13 +101,17 @@ public class CameraScript : MonoBehaviour
     private void Update()
     {
         //check which camera is active
-        if (thirdPersonVirtualCamera.m_Priority > firstPersonVirtualCamera.m_Priority)
+        if (thirdPersonVirtualCamera.m_Priority > firstPersonVirtualCamera.m_Priority && thirdPersonVirtualCamera.m_Priority > ledgeVirtualCamera.m_Priority)
         {
-            GMController.instance.activeCamera = (CameraActive)0;
+            GMController.instance.activeCamera = 0;
         }
-        else if (firstPersonVirtualCamera.m_Priority > thirdPersonVirtualCamera.m_Priority)
+        else if (firstPersonVirtualCamera.m_Priority > thirdPersonVirtualCamera.m_Priority && firstPersonVirtualCamera.m_Priority > ledgeVirtualCamera.m_Priority)
         {
             GMController.instance.activeCamera = (CameraActive)1;
+        }
+        else if(ledgeVirtualCamera.m_Priority > thirdPersonVirtualCamera.m_Priority && ledgeVirtualCamera.m_Priority > firstPersonVirtualCamera.m_Priority)
+        {
+            GMController.instance.activeCamera = (CameraActive)2;
         }
 
         #region Fade

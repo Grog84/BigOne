@@ -11,6 +11,8 @@ public class QuestNpcPerception : MonoBehaviour {
     public Transform playerHead;
     public Transform origin;
 
+    public LayerMask visionLayerMask;
+
     private void Awake()
     {
         m_Npc = transform.parent.gameObject;
@@ -27,14 +29,17 @@ public class QuestNpcPerception : MonoBehaviour {
 
 
     private void OnTriggerStay(Collider other)
-    {
+    { 
         if(other.tag == "Player")
         {
-            if (Physics.Raycast(origin.position, playerHead.position))
-            {
+            Ray ray = new Ray (origin.position,playerHead.position);
+            
+            if (Physics.Raycast(ray ,Mathf.Infinity,visionLayerMask))
+            {     
+                Debug.DrawLine(origin.position, playerHead.position, Color.red);
                 m_QuestGiver.SetBlackboardValue("playerSaw", true);
-
-            }
+                
+            }                  
             else
             {
                 m_QuestGiver.SetBlackboardValue("playerSaw", false);

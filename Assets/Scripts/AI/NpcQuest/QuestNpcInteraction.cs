@@ -20,9 +20,10 @@ public class QuestNpcInteraction : MonoBehaviour {
     {
         if(other.tag == "Player")
         {
-           if(Input.GetButtonDown("Interact") && !m_QuestGiver.m_Blackboard.GetBoolValue("playerInteracted"))
+           if(Input.GetButtonDown("Interact") && m_QuestGiver.canInteract)
            {
                 m_QuestGiver.m_Blackboard.SetBoolValue("playerInteracted", true);
+                m_QuestGiver.canInteract = false;
            }
         }
     }

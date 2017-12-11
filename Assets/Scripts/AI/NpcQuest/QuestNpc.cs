@@ -12,9 +12,9 @@ namespace AI
     public class QuestNpc : AIAgent
     {
         QuestGiver m_QuestGiver;
-        public QuestObject m_QuestObject;
+        QuestObject m_QuestObject;
         [HideInInspector]public PlayableDirector m_PlayableDirector;
-
+        public bool canInteract = true;
         LookAtIK lookAtComponent;
         public Transform lookAtTarget;
         [HideInInspector] public float headClamp;    // Reference to the maximum weight according to inspector values
@@ -42,12 +42,17 @@ namespace AI
 
         public int GetBlackboardIntValue(string valueName)
         {
-            return 0;
+            return m_Blackboard.GetIntValue(valueName);
         }
 
         public bool GetBlackboardBoolValue(string valueName)
+        {       
+            return m_Blackboard.GetBoolValue(valueName);
+        }
+
+        public void SetInteractionFalse()
         {
-            return false;
+            canInteract = true;
         }
 
         public override void UpdateNavPoint()
@@ -81,21 +86,22 @@ namespace AI
         }
 
         public void LookAtManager()
-        {         
-                if (GetBlackboardBoolValue("lookAtPlayer"))
-                {
+        {
+            Debug.Log("lookattarget");
+            if (GetBlackboardBoolValue("playerSaw") == true)
+            {
                 Debug.Log("ti guardo un sacco");
-                    lookAtComponent.solver.target = lookAtTarget;
-                    // Turn head speed
-                    if (lookAtComponent.solver.headWeight < headClamp)
-                    {
-                        lookAtComponent.solver.headWeight += Time.deltaTime;
-                    }
-                }
-                else
+                lookAtComponent.solver.target = lookAtTarget;
+                // Turn head speed
+                if (lookAtComponent.solver.headWeight < headClamp)
                 {
-                    lookAtComponent.solver.headWeight -= Time.deltaTime;
+                    lookAtComponent.solver.headWeight += Time.deltaTime;
                 }
+            }
+            //else
+            //{
+            //    lookAtComponent.solver.headWeight -= Time.deltaTime;
+            //}
             
         }
 
@@ -110,6 +116,7 @@ namespace AI
             m_Blackboard.m_Agent = this;
             m_QuestGiver = GetComponent<QuestGiver>();
             m_PlayableDirector = GetComponent<PlayableDirector>();
+            lookAtComponent = GetComponent<LookAtIK>();
         }
 
         private void Start()
@@ -128,6 +135,7 @@ namespace AI
             m_QuestGiver.myMission.completed = GetQuestCompleted();
             SetBlackboardValue("questCompleted", m_QuestObject.Picked);
             LookAtManager();
+            Debug.Log(GetBlackboardBoolValue("playerInteracted"));
         }
     }
 

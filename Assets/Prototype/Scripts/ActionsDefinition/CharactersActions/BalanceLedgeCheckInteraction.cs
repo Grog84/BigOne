@@ -16,27 +16,12 @@ namespace Character.Actions
         }
 
         private void BalanceLedge(CharacterStateController controller)
-        { 
+        {
             //INTERACT
-            if (Input.GetButtonDown("Interact") && controller.m_CharacterController.isInJointArea && controller.m_CharacterController.isBalanceCRDone)
+            if ((controller.m_CharacterController.m_ForwardAmount == 1 || controller.m_CharacterController.m_ForwardAmount == -1) && controller.m_CharacterController.isInJointArea && controller.m_CharacterController.isBalanceCRDone)
             {
                 controller.m_CharacterController.isBalanceCRDone = false;
-                #region Animator
-
-                // IF POINT 1 IS CLOSER TO PLAYER
-                if (Vector3.Distance(controller.m_CharacterController.CharacterTransform.position, controller.m_CharacterController.forwardBalance.transform.parent.GetChild(0).position)
-                < Vector3.Distance(controller.m_CharacterController.CharacterTransform.position, controller.m_CharacterController.forwardBalance.transform.parent.GetChild(1).position))
-                {
-                    controller.m_CharacterController.m_ForwardAmount = 1f;
-                }
-                // IF POINT 2 IS CLOSER TO PLAYER
-                else
-                {
-                    controller.m_CharacterController.m_ForwardAmount = -1f;
-                }
-
-                #endregion
-
+               
                 if (controller.m_CharacterController.balanceJoint.GetComponent<BalanceJoint>().Point1.transform.parent == controller.m_CharacterController.forwardBalance.transform.parent)
                 {
                    controller.m_CharacterController.forwardBalance = controller.m_CharacterController.balanceJoint.GetComponent<BalanceJoint>().Point2;      

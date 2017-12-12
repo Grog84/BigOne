@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using AI;
 
 public enum CameraActive {ThirdPersonCameraScript, FirstPersonCameraScript, LedgeCamera}
 public enum DayNight { Day, Night}
@@ -31,6 +32,7 @@ public class GMController : MonoBehaviour {
 
     // Transform of all the agents who could hear or see the player
     [HideInInspector] public Transform[] allEnemiesTransform;
+    [HideInInspector] public Guard[] allGuards;
 
     // Variables used in order to trigger transitions when the game is not active
     public bool isGameActive = false;
@@ -100,9 +102,11 @@ public class GMController : MonoBehaviour {
 
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         allEnemiesTransform = new Transform[allEnemies.Length];
+        allGuards = new Guard[allEnemies.Length];
         for (int i = 0; i < allEnemiesTransform.Length; i++)
         {
             allEnemiesTransform[i] = allEnemies[i].transform;
+            allGuards[i] = allEnemies[i].GetComponent<Guard>();
         }
 
         m_MainCamera = new CameraScript[3];
@@ -177,6 +181,13 @@ public class GMController : MonoBehaviour {
         }
     }
 
+    public void ResetGuardsBlackBoard()
+    {
+        foreach (var guard in allGuards)
+        {
+            guard.SetBlackboardValue("PlayerInSight", false);
+        }
+    }
 }
 
 

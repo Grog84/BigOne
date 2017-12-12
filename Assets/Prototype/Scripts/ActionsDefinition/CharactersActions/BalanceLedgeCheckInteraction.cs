@@ -18,7 +18,7 @@ namespace Character.Actions
         private void BalanceLedge(CharacterStateController controller)
         {
             //INTERACT
-            if ((controller.m_CharacterController.m_ForwardAmount == 1 || controller.m_CharacterController.m_ForwardAmount == -1) && controller.m_CharacterController.isInJointArea && controller.m_CharacterController.isBalanceCRDone)
+            if (Mathf.Abs(controller.m_CharacterController.m_ForwardAmount) == 1 && controller.m_CharacterController.isInJointArea && controller.m_CharacterController.isBalanceCRDone)
             {
                 controller.m_CharacterController.isBalanceCRDone = false;
                

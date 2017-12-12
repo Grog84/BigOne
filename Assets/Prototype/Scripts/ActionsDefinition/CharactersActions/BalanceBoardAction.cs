@@ -19,7 +19,9 @@ namespace Character.Actions
 
         private void Balance(CharacterStateController controller)
         {
-   
+            if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) < 45 ||
+                Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) > 135)
+            {
                 if (Input.GetAxis("Vertical") != 0)
                 {
                     movement = Input.GetAxis("Vertical");
@@ -28,17 +30,37 @@ namespace Character.Actions
                 {
                     movement = 0;
                 }
-
-                if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) <= 90)
-                    angleSign = 1f;
+            }
+            else 
+            if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) > 45 &&
+                    Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) < 135)
+            {
+                if (Input.GetAxis("Horizontal") != 0)
+                {
+                    movement = Input.GetAxis("Horizontal");
+                }
                 else
-                    angleSign = -1f;
+                {
+                    movement = 0;
+                }
+            }
 
+            if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) <= 135 &&
+                Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) >= 45)
+            {
+                angleSign = 1f;
+            }
+            else
+            {
+                angleSign = -1f;
+            }
+
+            Debug.Log("Right: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) 
+                + "Forward: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward)
+                + "Up: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.up, controller.m_CharacterController.m_Camera.forward));
+            //  LOCK CAMERA UNDER AN ANGLE OF 135° BETWEEN THE CHARACTER UP AND CAMERA FORWARD
 
             controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward *(movement*angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
-
-
-
 
             // Animator
             // Assign m_ForwardAmount value except when in coroutine

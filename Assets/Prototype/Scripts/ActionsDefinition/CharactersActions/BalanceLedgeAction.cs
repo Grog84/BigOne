@@ -106,7 +106,7 @@ namespace Character.Actions
                }
 
             }
-
+           
             // ANIMATOR
             // Assign m_ForwardAmount value except when in coroutine
             if (controller.m_CharacterController.isBalanceCRDone)
@@ -122,6 +122,7 @@ namespace Character.Actions
                     controller.m_CharacterController.m_Animator.speed = controller.m_CharacterController.animSpeed;
                 }
             }
+            Debug.Log(controller.m_CharacterController.m_ForwardAmount);
         }
     }
 }

@@ -51,7 +51,6 @@ public class CharacterSwitch : MonoBehaviour
             else if (GMController.instance.isCharacterPlaying != players[0].GetComponent<CharacterStateController>().thisCharacter)
             {
                 GetComponent<CharacterSwitchIconsActivation>().HideIcons();
-                GMController.instance.canSwitch = false;
             }
         }
     }

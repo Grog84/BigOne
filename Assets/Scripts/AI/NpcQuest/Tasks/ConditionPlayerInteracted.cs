@@ -8,9 +8,9 @@ namespace AI.BT
     {
         public override TaskState Run()
         {
-                Debug.Log("Ho Interagito!!");
-            if (m_BehaviourTree.m_Blackboard.GetBoolValue("playerInteracted"))
+            if (m_BehaviourTree.m_Blackboard.GetBoolValue("playerInteracted") == true)
             {
+                Debug.Log("Ho Interagito!!");
                 m_BehaviourTree.m_Blackboard.SetBoolValue("playerInteracted", false);
                 return TaskState.SUCCESS;
             }

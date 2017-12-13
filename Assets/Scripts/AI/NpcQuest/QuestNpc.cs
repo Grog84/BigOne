@@ -52,6 +52,7 @@ namespace AI
 
         public void SetInteractionFalse()
         {
+            Debug.Log("puoi interagire");
             canInteract = true;
         }
 
@@ -87,10 +88,9 @@ namespace AI
 
         public void LookAtManager()
         {
-            Debug.Log("lookattarget");
             if (GetBlackboardBoolValue("playerSaw") == true)
             {
-                Debug.Log("ti guardo un sacco");
+                
                 lookAtComponent.solver.target = lookAtTarget;
                 // Turn head speed
                 if (lookAtComponent.solver.headWeight < headClamp)

@@ -172,6 +172,7 @@ public class CameraScript : MonoBehaviour
         mat.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
         mat.material.renderQueue = 3000;
         mat.material.DOFade(0, 0.3f);
+        Debug.Log(mat.material.color.a);
         yield return null;
     }
 

@@ -10,7 +10,7 @@ namespace AI.BT
         {
             if (m_BehaviourTree.m_Blackboard.GetBoolValue("playerSaw"))
             {
-                Debug.Log("TihoVisto");
+
                 return TaskState.SUCCESS;
             }
             else

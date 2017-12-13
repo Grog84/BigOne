@@ -8,7 +8,8 @@ public class QuestNpcPerception : MonoBehaviour {
 
     GameObject m_Npc;
     QuestNpc m_QuestGiver;
-    public Transform playerHead;
+    private Transform target;
+    private Transform raycastTarget;
     public Transform origin;
 
     public LayerMask visionLayerMask;
@@ -21,9 +22,13 @@ public class QuestNpcPerception : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        playerHead = other.GetComponent<_CharacterController>().playerHead;
-        m_QuestGiver.lookAtTarget = playerHead;
-        m_Npc.GetComponent<Animator>().SetTrigger("PlayerSaw");
+        if(other.tag == "Player")
+        {
+            target = other.transform;
+            raycastTarget = target.FindDeepChildByTag("LookAtPositionCentral");
+            m_Npc.GetComponent<Animator>().SetTrigger("PlayerSaw");
+            m_QuestGiver.lookAtTarget = target;
+        }
 
     }
 
@@ -32,13 +37,14 @@ public class QuestNpcPerception : MonoBehaviour {
     { 
         if(other.tag == "Player")
         {
-            Ray ray = new Ray (origin.position,playerHead.position);
-            
+            Ray ray = new Ray (origin.position, (raycastTarget.position - origin.position).normalized);
+            RaycastHit hit = new RaycastHit();
+            bool hasHit = Physics.Raycast(ray,out hit, Mathf.Infinity, visionLayerMask);
+            Debug.Log(hit.transform.gameObject.name);
             if (Physics.Raycast(ray ,Mathf.Infinity,visionLayerMask))
-            {     
-                Debug.DrawLine(origin.position, playerHead.position, Color.red);
-                m_QuestGiver.SetBlackboardValue("playerSaw", true);
-                
+            {
+                Debug.DrawRay(origin.position, (raycastTarget.position - origin.position).normalized);
+                m_QuestGiver.SetBlackboardValue("playerSaw", true);                
             }                  
             else
             {

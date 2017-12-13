@@ -31,6 +31,7 @@ namespace Character.Actions
                 controller.m_CharacterController.m_ForwardAmount = 1f;
             }
 
+            controller.m_CharacterController.ledgeCRTime = Vector3.Distance(controller.m_CharacterController.CharacterTransform.position, controller.m_CharacterController.forwardBalance.transform.position) / controller.characterStats.m_BalanceMovementSpeed;
 
             controller.m_CharacterController.m_Animator.SetBool("onLedge", true);
             controller.m_CharacterController.isBalanceCRDone = false;

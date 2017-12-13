@@ -25,6 +25,7 @@ namespace Character
         [HideInInspector] public bool ledgeForwardActive = true;
         [HideInInspector] public bool ledgeBackwardActive = true;
         [HideInInspector] public bool isBalanceCRDone = true;
+        [HideInInspector] public float ledgeCRTime;
         // CLIMB VARIABLES
         [HideInInspector] public bool isInClimbArea;                   // The player is in the trigger area for Climbing
         [HideInInspector] public bool isClimbDirectionRight;           // The player is facing the climbable object
@@ -607,19 +608,20 @@ namespace Character
             isBalanceCRDone = true;
         }
 
-        IEnumerator OnBalanceLedge()
+        IEnumerator OnBalanceLedge(float crTime)
         {
+
             startBalanceLedge = false;
-            float positionTime = 0.5f;         
             Vector3 dir = forwardBalance.transform.GetChild(0).position - forwardBalance.transform.position;
             dir.y = 0;
             dir = dir.normalized;
 
             yield return StartCoroutine(RotateToward(dir));
 
-            CharacterTransform.DOMove(forwardBalance.transform.position, positionTime);
-            yield return new WaitForSeconds(positionTime);
+            CharacterTransform.DOMove(forwardBalance.transform.position, crTime);
+            yield return new WaitForSeconds(crTime);
             isBalanceCRDone = true;
+          
         }
 
 #endregion
@@ -803,7 +805,7 @@ namespace Character
 
             if(startBalanceLedge)
             {
-                StartCoroutine(OnBalanceLedge());
+                StartCoroutine(OnBalanceLedge(ledgeCRTime));
             }
 
             if(canLookAt)

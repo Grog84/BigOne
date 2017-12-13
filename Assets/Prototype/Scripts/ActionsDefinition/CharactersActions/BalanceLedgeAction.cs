@@ -122,7 +122,7 @@ namespace Character.Actions
                     controller.m_CharacterController.m_Animator.speed = controller.m_CharacterController.animSpeed;
                 }
             }
-            Debug.Log(controller.m_CharacterController.m_ForwardAmount);
+           // Debug.Log(controller.m_CharacterController.m_ForwardAmount);
         }
     }
 }

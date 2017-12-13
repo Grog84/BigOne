@@ -13,7 +13,6 @@ public class CharacterSwitchIconsActivation : MonoBehaviour
     public Sprite interact;
     public int degrees;
 
-    [HideInInspector] public GameObject controller;
     [HideInInspector] public Color alphaZero;
     [HideInInspector] public Color alphaMax;
     [HideInInspector] public Transform Icons;
@@ -21,7 +20,6 @@ public class CharacterSwitchIconsActivation : MonoBehaviour
 
     void Awake()
     {
-        controller = GetComponent<CharacterSwitch>().activePlayer;
         alphaZero = new Color(0, 0, 0, 0);
         alphaMax = new Color(100, 100, 100, 255); ;
 

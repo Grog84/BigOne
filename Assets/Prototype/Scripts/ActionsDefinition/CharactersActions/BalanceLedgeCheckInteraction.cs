@@ -9,7 +9,6 @@ namespace Character.Actions
     [CreateAssetMenu(menuName = "Prototype/Actions/Characters/BalanceLedgeCheckInteraction")]
     public class BalanceLedgeCheckInteraction: _Action
     {
-
         public override void Execute(CharacterStateController controller)
         {
             BalanceLedge(controller);
@@ -18,10 +17,12 @@ namespace Character.Actions
         private void BalanceLedge(CharacterStateController controller)
         {
             //INTERACT
-            if (Mathf.Abs(controller.m_CharacterController.m_ForwardAmount) == 1 && controller.m_CharacterController.isInJointArea && controller.m_CharacterController.isBalanceCRDone)
+            if (Mathf.Abs(controller.m_CharacterController.m_ForwardAmount) >= 0.5 && controller.m_CharacterController.isInJointArea && controller.m_CharacterController.isBalanceCRDone)
             {
                 controller.m_CharacterController.isBalanceCRDone = false;
-               
+
+                controller.m_CharacterController.ledgeCRTime = Vector3.Distance(controller.m_CharacterController.balanceJoint.GetComponent<BalanceJoint>().Point1.transform.position, controller.m_CharacterController.balanceJoint.GetComponent<BalanceJoint>().Point2.transform.position)/controller.characterStats.m_BalanceMovementSpeed;
+
                 if (controller.m_CharacterController.balanceJoint.GetComponent<BalanceJoint>().Point1.transform.parent == controller.m_CharacterController.forwardBalance.transform.parent)
                 {
                    controller.m_CharacterController.forwardBalance = controller.m_CharacterController.balanceJoint.GetComponent<BalanceJoint>().Point2;      

@@ -133,9 +133,9 @@ namespace AI
         {
             m_QuestGiver.myMission.available = GetQuestAvailable();
             m_QuestGiver.myMission.completed = GetQuestCompleted();
-            SetBlackboardValue("questCompleted", m_QuestObject.Picked);
+            SetBlackboardValue("objectiveComplete", m_QuestObject.Picked);
             LookAtManager();
-            Debug.Log(GetBlackboardBoolValue("playerInteracted"));
+            Debug.Log(m_QuestObject.Picked);
         }
     }
 

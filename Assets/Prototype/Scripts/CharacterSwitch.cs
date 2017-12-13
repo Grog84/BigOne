@@ -36,7 +36,7 @@ public class CharacterSwitch : MonoBehaviour
                 {
                     activePlayer = other.gameObject;
                     character = other.GetComponent<CharacterStateController>().thisCharacter;
-                    GetComponent<CharacterSwitchIconsActivation>().ShowIcon(activePlayer);
+                    transform.parent.GetComponent<CharacterSwitchIconsActivation>().ShowIcon(activePlayer);
                     GMController.instance.canSwitch = true;
                 }
 
@@ -45,12 +45,12 @@ public class CharacterSwitch : MonoBehaviour
             {
                 activePlayer = other.gameObject;
                 character = other.GetComponent<CharacterStateController>().thisCharacter;
-                GetComponent<CharacterSwitchIconsActivation>().ShowIcon(activePlayer);
+                transform.parent.GetComponent<CharacterSwitchIconsActivation>().ShowIcon(activePlayer);
                 GMController.instance.canSwitch = true;
             }
             else if (GMController.instance.isCharacterPlaying != players[0].GetComponent<CharacterStateController>().thisCharacter)
             {
-                GetComponent<CharacterSwitchIconsActivation>().HideIcons();
+                transform.parent.GetComponent<CharacterSwitchIconsActivation>().HideIcons();
             }
         }
     }
@@ -60,7 +60,7 @@ public class CharacterSwitch : MonoBehaviour
         if (other.tag == "Player")
         {
             players.Remove(other.gameObject);
-            GetComponent<CharacterSwitchIconsActivation>().HideIcons();
+            transform.parent.GetComponent<CharacterSwitchIconsActivation>().HideIcons();
             character = CharacterActive.None;
             GMController.instance.canSwitch = false;
         }

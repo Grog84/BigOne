@@ -237,7 +237,7 @@ namespace MissionManagerStuff
         // Use this for initialization
         private void Awake()
         {      
-            QuestMenu = GameObject.Find("Pause_Quest");
+   //         QuestMenu = GameObject.Find("Pause_Quest");
             questPath= System.IO.Path.Combine(Application.persistentDataPath, "quest.json");    
             giveMissionGiverComponent();
             InitializedQuestObject();

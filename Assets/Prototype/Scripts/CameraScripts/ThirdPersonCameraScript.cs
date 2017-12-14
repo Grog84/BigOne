@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 using StateMachine;
+using DG.Tweening;
 
 
 
 public class ThirdPersonCameraScript : CameraScript {
 
-        
+
 
     // max and min angles of the camera movement
+    protected bool isCameraCRDone = true;
+    protected bool isCameraCR = false;
     protected float yAngleMin = -40.0F;
-    protected float yAngelMax = 70.0F;
+    public float yAngleMax = 70.0F;
     protected CinemachineVirtualCamera cam;
     private CameraScript mainCam;
     private CharacterStateController currentActivePlayer;
@@ -62,14 +65,29 @@ public class ThirdPersonCameraScript : CameraScript {
         //baunderies of the camera movement
         if (currentActivePlayer.currentState.name != "BalanceBoard")
         {
-            yAngelMax = 70f;
+            currentY -= Input.GetAxis("Mouse Y");
+            isCameraCR = false;
+            isCameraCRDone = true;
+            yAngleMax = 70f;
         }
         else
         {
-            yAngelMax = yAngleMaxBoard;
+           
+
+            if (!isCameraCR && isCameraCRDone)
+            {
+                Debug.Log("Entro");
+                StartCoroutine(CameraLerp(yAngleMax, yAngleMaxBoard));
+            }
+
+            if (!isCameraCRDone)
+            {
+                yAngleMax = yAngleMaxBoard;
+                //currentY -= Input.GetAxis("Mouse Y");
+            }
         }
 
-        currentY = Mathf.Clamp(currentY, yAngleMin, yAngelMax);
+        currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
 
         //camera management of the bound to the player, movement, rotation and look direction
         dir.Set(0, 0, -distance);
@@ -106,6 +124,7 @@ public class ThirdPersonCameraScript : CameraScript {
                 distance = finalDist;
             }
         }
+
     }
     //method used to populate and update the array containing the coordinates of the clipPonts
     public void clipPointsPosition(Vector3 cameraPosition, Quaternion atRotation, ref Vector3[] clipArray)
@@ -128,6 +147,18 @@ public class ThirdPersonCameraScript : CameraScript {
         //center
         clipArray[4] = cameraPosition - cam.transform.forward;
 
+    }
+
+    IEnumerator CameraLerp(float value1, float value2)
+    {
+        Debug.Log("Lerpo");
+        isCameraCR = true;
+
+        DOTween.To(() => value1, x => value1 = x, value2, 2f);
+       // Mathf.Lerp(value1, value2, 2 * Time.deltaTime);
+
+        yield return new WaitForSeconds(2f);
+        isCameraCRDone = false;
     }
 
     public override void SwitchLookAt()

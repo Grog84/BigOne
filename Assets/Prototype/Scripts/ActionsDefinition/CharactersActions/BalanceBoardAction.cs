@@ -55,9 +55,9 @@ namespace Character.Actions
                 angleSign = -1f;
             }
 
-            Debug.Log("Right: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) 
-                + "Forward: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward)
-                + "Up: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.up, controller.m_CharacterController.m_Camera.forward));
+            //Debug.Log("Right: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) 
+              //  + "Forward: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward)
+              //  + "Up: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.up, controller.m_CharacterController.m_Camera.forward));
             //  LOCK CAMERA UNDER AN ANGLE OF 135° BETWEEN THE CHARACTER UP AND CAMERA FORWARD
 
             controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward *(movement*angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);

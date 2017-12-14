@@ -9,7 +9,7 @@ public class PauseGame : MonoBehaviour
     public bool canvasTrigger = false;
 
     private CheckPointManager CP_Controller;
-   [SerializeField] private  MissionManagerStuff.QuestManager QM_Controller;
+   [SerializeField] private  QuestManager.QuestManager QM_Controller;
     // Update is called once per frame
     void Update()
     {

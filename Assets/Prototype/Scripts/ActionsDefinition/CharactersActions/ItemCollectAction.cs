@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using DG.Tweening;
 using StateMachine;
-using MissionManagerStuff;
+using QuestManager;
 
 namespace Character.Actions
 {

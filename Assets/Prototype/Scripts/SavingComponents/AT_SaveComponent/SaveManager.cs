@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.SceneManagement;
 using System.IO;
+using QuestManager;
 
 
   [HideMonoScript]
@@ -13,7 +14,7 @@ public class SaveManager :MonoBehaviour {
   
     [ReadOnly]
     [BoxGroup("Profile Settings")]
-    public AT_Profile Profile;
+    public Profile Profile;
 
 
 
@@ -69,7 +70,7 @@ public class SaveManager :MonoBehaviour {
     {
         //Caricamento attori (Dati salvati sul disco)
 
-        Profile = LoadProfile(profilePath);
+        Profile = Profile.LoadProfile(profilePath);
         allActor = FindObjectsOfType<Actor>();
 
         //Inizializzazione livelli nuovi
@@ -108,7 +109,7 @@ public class SaveManager :MonoBehaviour {
     {
         Profile.Save();
         SaveTime(DateTime.Now);
-        SaveProfile(profilePath, Profile);
+       Profile.SaveProfile(profilePath, Profile);
         SaveData.Save(dataPath, SaveData.actorContainer);
         
         Debug.Log("Salvato");
@@ -117,13 +118,13 @@ public class SaveManager :MonoBehaviour {
     [Button("Load Check point", ButtonSizes.Medium)]
     public  void Load()
     {
-        Profile = LoadProfile(profilePath);
+        Profile = Profile.LoadProfile(profilePath);
         if(allActor.Length!=0)
         SaveData.Load(dataPath,allActor);
     }
     private void OnApplicationQuit()
     {
-        SaveProfile(profilePath, Profile);
+        Profile.SaveProfile(profilePath, Profile);
         if(SaveOnClose)
         {
             Save();
@@ -137,7 +138,7 @@ public class SaveManager :MonoBehaviour {
 
 	IEnumerator AsycLoad()
 	{
-		Profile= LoadProfile(profilePath);
+		Profile= Profile.LoadProfile(profilePath);
 		SceneManager.LoadSceneAsync(Profile.LastScene);
 		yield return null;
 	}
@@ -148,28 +149,7 @@ public class SaveManager :MonoBehaviour {
 		return lastscene;
 	}
 
-    private static void SaveProfile(string path, AT_Profile profile)
-    {
-        //profile.LastScene = SceneManager.GetActiveScene().buildIndex;
-        //for (int i = 0; i <= profile.LastScene-1; i++)
-        //{
-        //    profile.completedLevel[i] = true;
-        //}
-        string json = JsonUtility.ToJson(profile);
-
-        StreamWriter sw = File.CreateText(path);
-        sw.Close();
-
-        File.WriteAllText(path, json);
-            }
-    private static AT_Profile LoadProfile(string path)
-    {
-        string json = File.ReadAllText(path);
-
-        return JsonUtility.FromJson<AT_Profile>(json);
-
-
-    }
+   
 
     public  void SaveTime(DateTime dateTimeNow)
     {

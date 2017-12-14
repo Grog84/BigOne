@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
 
-namespace MissionManagerStuff
+namespace QuestManager
 {
     public class QuestGiver:SerializedMonoBehaviour
     {
         public int missionIndex;
        
-        public Mission myMission;
+        public Quest myMission;
         
 
         private void Update()
@@ -23,13 +23,7 @@ namespace MissionManagerStuff
         public void AnalyzeQuestStatus(GameObject questObject)
         {
 
-            if (questObject.GetComponent<QuestObject>().Picked == true)
-            {
-                if (questObject.GetComponent<QuestObject>().Bringed == true)
-                {
-                    myMission.completed = true;
-                }
-            }
+            
 
         }
     }

@@ -4,12 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-namespace MissionManagerStuff
+namespace QuestManager
 {
     public class QuestObject:SerializedMonoBehaviour
     {
         [HideInInspector]
-        public Mission m_Mission;
+        public Quest m_Mission;
         [HideInInspector]
         public string m_Name;
 

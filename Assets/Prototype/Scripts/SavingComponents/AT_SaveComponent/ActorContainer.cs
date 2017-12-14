@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
- [Serializable]
+[Serializable]
 public class ActorContainer  {
 
     public List<ActorData> actors = new List<ActorData>();
 }
-
 

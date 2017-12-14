@@ -8,12 +8,13 @@ namespace AI
     [System.Serializable]
     public class QuestNpcBlackboard : Blackboard
     {
-        bool objectiveComplete = false;
+        bool questTurnInStatus = false;
         bool questAvailable = false;
         bool questCompleted = false;
         bool playerHasInteracted = false;
         bool isLookingAtPlayer = false;
         bool playerSaw = false;
+        bool questActive = false;
 
         public override int GetIntValue(string valueName)
         {
@@ -70,8 +71,10 @@ namespace AI
                     return questAvailable;
                 case "questCompleted":
                     return questCompleted;
-                case "objectiveComplete":
-                    return objectiveComplete;
+                case "questTurnInStatus":
+                    return questTurnInStatus;
+                case "questActive":
+                    return questActive;
                 default:
                     Debug.Log("Default");
                     return false;
@@ -97,8 +100,11 @@ namespace AI
                 case "questCompleted":
                     questCompleted = value;
                     break;
-                case "objectiveComplete":
-                    objectiveComplete = value;
+                case "questTurnInStatus":
+                    questTurnInStatus = value;
+                    break;
+                case "questActive":
+                    questActive=value;
                     break;
                 default:
                     break;

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using SaveGame;
 using RootMotion.FinalIK;
-using MissionManagerStuff;
+using QuestManager;
 using UnityEngine.Playables;
 
 namespace AI
@@ -12,7 +12,7 @@ namespace AI
     public class QuestNpc : AIAgent
     {
         QuestGiver m_QuestGiver;
-        QuestObject m_QuestObject;
+      
         [HideInInspector]public PlayableDirector m_PlayableDirector;
         public bool canInteract = true;
         LookAtIK lookAtComponent;
@@ -65,26 +65,7 @@ namespace AI
         {
             throw new System.NotImplementedException();
         }
-
-        public void SetQuestAvailable()
-        {
-            SetBlackboardValue("questAvailable", m_QuestGiver.myMission.available);
-        }
-
-        public void SetQuestCompleted()
-        {
-            SetBlackboardValue("questCompleted", m_QuestGiver.myMission.completed);
-        }
             
-        public bool GetQuestAvailable()
-        {
-            return GetBlackboardBoolValue("questAvailable");
-        }
-
-        public bool GetQuestCompleted()
-        {
-            return GetBlackboardBoolValue("questCompleted");
-        }
 
         public void LookAtManager()
         {
@@ -105,6 +86,20 @@ namespace AI
             
         }
 
+        public void UpdateBlackBoard()
+        {
+            /*
+             if(missionActive)
+                  setblackboardboolvalue(questAvailable mymissionisactive)
+
+             if(missionCompleted)
+                  setblackboardboolvalue(questCompleted mymissioniscompleted)
+
+            if(objectiveCompleted)
+                 setBlackboardboolValue(ObjCompleted, mymissionTurnedInStatus)
+                   */
+        }
+
         private void Awake()
         {
             m_NavMeshAgent = GetComponent<NavMeshAgent>();
@@ -121,21 +116,17 @@ namespace AI
 
         private void Start()
         {
-            SetQuestAvailable();
-            SetQuestCompleted();
+            //SetQuestAvailable();
+            //SetQuestCompleted();
             Debug.Log("Stop");
             Debug.Log(m_QuestGiver.myMission.Obj);
-            m_QuestObject = m_QuestGiver.myMission.Obj.GetComponent<QuestObject>();
+        
 
         }
 
         private void Update()
         {
-            m_QuestGiver.myMission.available = GetQuestAvailable();
-            m_QuestGiver.myMission.completed = GetQuestCompleted();
-            SetBlackboardValue("objectiveComplete", m_QuestObject.Picked);
-            LookAtManager();
-            Debug.Log(m_QuestObject.Picked);
+            LookAtManager();     
         }
     }
 

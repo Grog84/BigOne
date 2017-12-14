@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public class SaveData  {
@@ -56,6 +57,8 @@ public class SaveData  {
 
         return JsonUtility.FromJson<ActorContainer>(json);
 
+        BinaryFormatter BF = new BinaryFormatter();
+   
     }
 
     private static void SaveActors(string path, ActorContainer actors)

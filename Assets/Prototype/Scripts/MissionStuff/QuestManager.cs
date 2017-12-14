@@ -7,7 +7,7 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-namespace MissionManagerStuff
+namespace QuestManager
 {
     [Serializable]
    
@@ -20,14 +20,14 @@ namespace MissionManagerStuff
 
 
         [InfoBox("Selezionare Tipo Missione")]
-        public MISSIONTYPE missionType;
+        public QUESTTYPE missionType;
 
 
 
         [DetailedInfoBox("Selezionare il grado di missione, premere per maggiorni info", "Missione Principale: Missione iniziale, e principale del livello, determina la condizione di vittoria;\n\n" +
         "Missione Subprimaria: Missione da completare prima della principale per completare la principale, completare prima le subprimarie;\n\n" +
         "Missioni Secondaria: Missioni Facoltaitve, possono facilitare o allungare la missione principale, compaiono sempre in fondo all'elenco delle missioni")]
-        public MISSIONGRADE missionGrade;
+        public QUESTGRADE missionGrade;
 
 
         [InfoBox("Nome Missione")]
@@ -118,19 +118,19 @@ namespace MissionManagerStuff
         private void OnValidate()
         {
           
-            if (missionType == MISSIONTYPE.SPOSTAMENTO_AB)
+            if (missionType == QUESTTYPE.SPOSTAMENTO_AB)
             {
                 isAB = true;
                 isObj = false;
                 isABTi = false;
             }
-            if (missionType == MISSIONTYPE.RICERCA_CONSEGNA_OGGETTO)
+            if (missionType == QUESTTYPE.RICERCA_CONSEGNA_OGGETTO)
             {
                 isAB = false;
                 isObj = true;
                 isABTi = false;
             }
-            if (missionType == MISSIONTYPE.SPOSTAMENTO_AB_TIMED)
+            if (missionType == QUESTTYPE.SPOSTAMENTO_AB_TIMED)
             {
                 isAB = false;
                 isObj = false;
@@ -164,7 +164,7 @@ namespace MissionManagerStuff
                 Debug.LogError("Invalid: No Mission Giver Assigned");
                 error = true;
             }
-            if (missionType == MISSIONTYPE.SPOSTAMENTO_AB)
+            if (missionType == QUESTTYPE.SPOSTAMENTO_AB)
             {
                 if (pointA == null)
                 {
@@ -177,7 +177,7 @@ namespace MissionManagerStuff
                     error = true;
                 }
             }
-            if (missionType == MISSIONTYPE.RICERCA_CONSEGNA_OGGETTO)
+            if (missionType == QUESTTYPE.RICERCA_CONSEGNA_OGGETTO)
             {
                 if (Obj == null)
                 {
@@ -190,7 +190,7 @@ namespace MissionManagerStuff
                     error = true;
                 }
             }
-            if (missionType == MISSIONTYPE.SPOSTAMENTO_AB_TIMED)
+            if (missionType == QUESTTYPE.SPOSTAMENTO_AB_TIMED)
             {
                 if (pointA_Timed == null)
                 {
@@ -214,7 +214,7 @@ namespace MissionManagerStuff
             {
                 SceneIndexNumber = SceneManager.GetActiveScene().buildIndex;
                 Debug.Log("All field is valid, adding new mission, check MissionContainer for edit");
-                MissionList.Add(new Mission(this.missionName, this.missionType, this.missionGrade, this.missionDescription, this.missionIndex, this.missionGiver, this.pointA, this.pointB, this.Obj, this.receiver, this.pointA_Timed, this.pointB_Timed, this.time,SceneIndexNumber));
+                MissionList.Add(new Quest(this.missionName, this.missionType, this.missionGrade, this.missionDescription, this.missionIndex, this.missionGiver, this.pointA, this.pointB, this.Obj, this.receiver, this.pointA_Timed, this.pointB_Timed, this.time,SceneIndexNumber));
                 missionIndex++;
               
             }
@@ -230,7 +230,7 @@ namespace MissionManagerStuff
         [InfoBox("Non Valido", InfoMessageType.Error, "IsCorrect")]
         public GameObject QuestMenu;
         Text Testo;
-        public List<Mission> MissionList;
+        public List<Quest> MissionList;
         //public MissionContainer missionContainer;
        
         static  int  index = 1;
@@ -256,7 +256,7 @@ namespace MissionManagerStuff
         
         private void checkIFnewMissionIsAvailable()
         {
-           foreach(Mission m in MissionList)
+           foreach(Quest m in MissionList)
             {
                 if(m.available)
                 {
@@ -269,7 +269,7 @@ namespace MissionManagerStuff
                              .transform.position += Giu;
                         QuestMenu.transform.GetChild(index).gameObject.SetActive(true);
                          Testo = QuestMenu.transform.GetChild(index).GetComponent<Text>();
-                        Testo.text = m.missionName;
+                        Testo.text = m.questName;
                         index++;
                         m.Printed = true;
                       
@@ -303,14 +303,14 @@ namespace MissionManagerStuff
 
         private void giveMissionGiverComponent()
         {
-            foreach (Mission m in MissionList)
+            foreach (Quest m in MissionList)
             {
-                if (m.missionGiver.gameObject.GetComponent<QuestGiver>() == null)
+                if (m.questGiver.gameObject.GetComponent<QuestGiver>() == null)
                 {
-                    m.missionGiver.gameObject.AddComponent<QuestGiver>();
+                    m.questGiver.gameObject.AddComponent<QuestGiver>();
                 }
-                m.missionGiver.gameObject.GetComponent<QuestGiver>().myMission = m;
-                m.missionGiver.gameObject.GetComponent<QuestGiver>().missionIndex = m.missionIndex;
+                m.questGiver.gameObject.GetComponent<QuestGiver>().myMission = m;
+                m.questGiver.gameObject.GetComponent<QuestGiver>().missionIndex = m.questIndex;
 
             }
         }
@@ -328,7 +328,7 @@ namespace MissionManagerStuff
         }
         
                 
-        public void SaveMission(List<Mission> missionList)
+        public void SaveMission(List<Quest> missionList)
         {
 
             string json = JsonUtility.ToJson(missionList);
@@ -342,7 +342,7 @@ namespace MissionManagerStuff
         }
         public void InitializedQuestObject()
         {
-            foreach (Mission m in MissionList)
+            foreach (Quest m in MissionList)
             {
                 if (m.Obj.GetComponent<QuestObject>() == null)
                 {
@@ -355,7 +355,7 @@ namespace MissionManagerStuff
 
         public void InizializedQuestReceiver()
         {
-            foreach (Mission m in MissionList)
+            foreach (Quest m in MissionList)
             {               
                     if (m.receiver.GetComponent<QuestReceiver>() == null)
                     {

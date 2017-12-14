@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Runtime.Serialization.Formatters;
+using System.IO;
 using UnityEngine.UI;
 
 
@@ -9,7 +11,7 @@ using UnityEngine.UI;
 public class AT_LoadSceneASync : MonoBehaviour
 {
 
-    public AT_Profile Profiler;
+    //public AT_Profile Profiler;
 
     AsyncOperation ao;
 
@@ -21,40 +23,13 @@ public class AT_LoadSceneASync : MonoBehaviour
     [SerializeField] public Button[] ButtonStatus;
 
     private void Awake()
-    {/*
-        if (Profiler != null)
-        {
-            Profiler.completedLevel = new bool[SceneManager.sceneCountInBuildSettings-1];
-            for (int i = 0; i < Profiler.completedLevel.Length; i++)
-            {
-                if (i < Profiler.currentLevelIndex)
-                {
-                    Profiler.completedLevel[i] = true;
-                }
-                else
-                {
-                    Profiler.completedLevel[i] = false;
-                }
-            }
-          
-            for (int i = 0; i < Profiler.completedLevel.Length; i++)
-            {
-                if(Profiler.completedLevel[i]==true)
-                {
-                    ButtonStatus[i].interactable = true;
-                }
-                else
-                {
-                    ButtonStatus[i].interactable = false;
-                }
-            }
-        }*/
+    {
+      
     }
     private void Start()
     {
-        //LastSceneButton.transform.GetChild(0).GetComponent<Text>().text = "Load last Scene Saved : " + Profiler.currentLevelIndex;
     }
-    //   public Image yourNameHere;
+  
     public void StartLoad(int index)
     {
 
@@ -70,7 +45,7 @@ public class AT_LoadSceneASync : MonoBehaviour
 
     public void LoadLastScene()
     {
-      //  StartCoroutine(AsynchronousLoad(Profiler.currentLevelIndex));
+  
         TextBox.text = "Caricamento in corso";
         StartCoroutine(LoadingText());
 
@@ -101,7 +76,7 @@ public class AT_LoadSceneASync : MonoBehaviour
         while (!ao.isDone)
         {
             Debug.Log("State: " + ao.isDone + " Allowed: " + ao.allowSceneActivation);
-            // Loading completed
+          
             if (ao.progress == 0.9f)
             {
                 ao.allowSceneActivation = true;
@@ -112,28 +87,7 @@ public class AT_LoadSceneASync : MonoBehaviour
     }
 
     IEnumerator LoadingText()
-    {
-
-        //switch (TextBox.text)
-        //{
-        //    case "Caricamento in corso":
-        //        TextBox.text = "Caricamento in corso.";
-        //        yield return new WaitForSecondsRealtime(00.5f);
-
-        //    case "Caricamento in corso.":
-        //        TextBox.text = "Caricamento in corso..";
-        //        yield return new WaitForSecondsRealtime(00.5f);
-        //        break;
-        //    case "Caricamento in corso..":
-        //        TextBox.text = "Caricamento in corso...";
-        //        yield return new WaitForSecondsRealtime(00.5f);
-        //        break;
-        //    case "Caricamento in corso...":
-        //        TextBox.text = "Caricamento in corso \n Non chiudere il gioco";
-        //        yield return new WaitForSecondsRealtime(00.5f);
-        //        break;
-
-        //}
+    {      
         yield return null;
     }
 
@@ -163,8 +117,6 @@ public class AT_LoadSceneASync : MonoBehaviour
     //}
 
     #endregion
-
-
     #region FadeButton
     //public void FadeOut()
     //{

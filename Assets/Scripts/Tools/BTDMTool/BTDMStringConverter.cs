@@ -250,7 +250,7 @@ public class BTDMStringConverter
             case TaskType.QUEST_NPC_HAS_SAW_PLAYER:
                 return new ConditionPlayerSaw();
             case TaskType.QUEST_NPC_IS_QUEST_AVAILABLE:
-                return new ConditionQuestAvailable();
+                return new ConditionQuestActive();
             case TaskType.QUEST_NPC_IS_QUEST_COMPLETED:
                 return new ConditionQuestCompleted();
             default:

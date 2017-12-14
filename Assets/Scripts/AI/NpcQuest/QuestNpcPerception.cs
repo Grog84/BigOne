@@ -27,6 +27,7 @@ public class QuestNpcPerception : MonoBehaviour {
             target = other.transform;
             raycastTarget = target.FindDeepChildByTag("LookAtPositionCentral");
             m_Npc.GetComponent<Animator>().SetTrigger("PlayerSaw");
+            Debug.Log("Ciao");
             m_QuestGiver.lookAtTarget = target;
         }
 
@@ -40,7 +41,7 @@ public class QuestNpcPerception : MonoBehaviour {
             Ray ray = new Ray (origin.position, (raycastTarget.position - origin.position).normalized);
             RaycastHit hit = new RaycastHit();
             bool hasHit = Physics.Raycast(ray,out hit, Mathf.Infinity, visionLayerMask);
-            Debug.Log(hit.transform.gameObject.name);
+
             if (Physics.Raycast(ray ,Mathf.Infinity,visionLayerMask))
             {
                 Debug.DrawRay(origin.position, (raycastTarget.position - origin.position).normalized);

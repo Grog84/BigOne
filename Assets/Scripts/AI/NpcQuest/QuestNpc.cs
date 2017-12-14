@@ -88,16 +88,11 @@ namespace AI
 
         public void UpdateBlackBoard()
         {
-            /*
-             if(missionActive)
-                  setblackboardboolvalue(questAvailable mymissionisactive)
+            SetBlackboardValue("questAvailable", m_QuestGiver.myMission.active);
+            SetBlackboardValue("questCompleted", m_QuestGiver.myMission.completed);
 
-             if(missionCompleted)
-                  setblackboardboolvalue(questCompleted mymissioniscompleted)
-
-            if(objectiveCompleted)
-                 setBlackboardboolValue(ObjCompleted, mymissionTurnedInStatus)
-                   */
+            SetBlackboardValue("questTurnInStatus", m_QuestGiver.myMission.turnInStatus);
+                   
         }
 
         private void Awake()

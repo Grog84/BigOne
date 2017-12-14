@@ -245,14 +245,18 @@ public class BTDMStringConverter
                 return new ActionRequest();
             case TaskType.QUEST_NPC_WATCH_PLAYER:
                 return new ActionWatchPlayer();
+            case TaskType.QUEST_NPC_THANKS:
+                return new ActionThanks();
             case TaskType.QUEST_NPC_HAS_PLAYER_INTERACTED:
                 return new ConditionPlayerInteracted();
             case TaskType.QUEST_NPC_HAS_SAW_PLAYER:
                 return new ConditionPlayerSaw();
             case TaskType.QUEST_NPC_IS_QUEST_AVAILABLE:
-                return new ConditionQuestActive();
+                return new ConditionQuestAvailable();
             case TaskType.QUEST_NPC_IS_QUEST_COMPLETED:
                 return new ConditionQuestCompleted();
+            case TaskType.QUEST_NPC_IS_QUEST_TURNED_IN:
+                return new ConditionQuestTurnedIn();
             default:
                 return null;
         }

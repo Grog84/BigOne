@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System.IO;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using AI;
 
 namespace QuestManager
 {
@@ -238,15 +239,18 @@ namespace QuestManager
         private void Awake()
         {      
    //         QuestMenu = GameObject.Find("Pause_Quest");
-            questPath= System.IO.Path.Combine(Application.persistentDataPath, "quest.json");    
-            giveMissionGiverComponent();
+            questPath= System.IO.Path.Combine(Application.persistentDataPath, "quest.json");
+            
+        }
+
+        void Start()
+        {
+            AssignQuestToQuestGivers();
             InitializedQuestObject();
             InizializedQuestReceiver();
         }
 
-        //void Start()
-        //{  
-        //}
+
         // Update is called once per frame
         void Update()
         {
@@ -301,17 +305,25 @@ namespace QuestManager
             return strikethrough;
         }
 
-        private void giveMissionGiverComponent()
+        private void AssignQuestToQuestGivers()
         {
             foreach (Quest m in MissionList)
             {
-                if (m.questGiver.gameObject.GetComponent<QuestGiver>() == null)
+                QuestGiver QG;
+                QG = m.questGiver.gameObject.GetComponent<QuestGiver>();
+                if (QG == null)
                 {
-                    m.questGiver.gameObject.AddComponent<QuestGiver>();
+                    QG = m.questGiver.gameObject.AddComponent<QuestGiver>();
                 }
-                m.questGiver.gameObject.GetComponent<QuestGiver>().myMission = m;
-                m.questGiver.gameObject.GetComponent<QuestGiver>().missionIndex = m.questIndex;
+                QG.myMission = m;
+                QG.missionIndex = m.questIndex;
 
+                QuestNpc QNPC;
+                QNPC = m.questGiver.gameObject.GetComponent<QuestNpc>();
+                if (QNPC != null)
+                {
+                    QNPC.UpdateBlackBoard();
+                }
             }
         }
         

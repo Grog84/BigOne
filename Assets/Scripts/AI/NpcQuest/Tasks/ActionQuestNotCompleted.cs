@@ -10,6 +10,7 @@ namespace AI.BT
         {
             //trigger animazione di NO
             m_BehaviourTree.m_Blackboard.m_Agent.m_Animator.SetTrigger("isNegative");
+            Debug.Log("Nonnono!");
 
             return TaskState.SUCCESS;
         }

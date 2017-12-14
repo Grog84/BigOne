@@ -25,7 +25,7 @@ namespace Character.Actions
             {
                 if (controller.m_CharacterController.ItemCollider.transform.parent.GetComponent<QuestObject>() != null)
                 {
-                    controller.m_CharacterController.ItemCollider.transform.parent.GetComponent<QuestObject>().Picked = true;
+                    //controller.m_CharacterController.ItemCollider.transform.parent.GetComponent<QuestObject>().Picked = true;
                 }
                 controller.m_CharacterController.startItemAnimation = true;
                 controller.m_CharacterController.Keychain.Add(controller.m_CharacterController.ItemCollider.gameObject);
@@ -37,7 +37,7 @@ namespace Character.Actions
             {
                 if(controller.m_CharacterController.ItemCollider.transform.parent.GetComponent<QuestObject>() != null)
                 {
-                    controller.m_CharacterController.ItemCollider.transform.parent.GetComponent<QuestObject>().Picked = true;
+                    //controller.m_CharacterController.ItemCollider.transform.parent.GetComponent<QuestObject>().Picked = true;
                 }
                 controller.m_CharacterController.startItemAnimation = true;
                 controller.m_CharacterController.Keychain.Add(controller.m_CharacterController.ItemCollider.gameObject);

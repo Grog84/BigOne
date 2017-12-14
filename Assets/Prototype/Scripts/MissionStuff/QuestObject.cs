@@ -9,11 +9,19 @@ namespace MissionManagerStuff
     public class QuestObject:SerializedMonoBehaviour
     {
         [HideInInspector]
-        public string name;
+        public Mission m_Mission;
         [HideInInspector]
-        public bool Picked = false;
-        [HideInInspector]
-        public bool Bringed = false;
+        public string m_Name;
+
+        //[HideInInspector]
+        //public bool Picked = false;
+        //[HideInInspector]
+        //public bool Bringed = false;
+
+        public void CompleteQuest()
+        {
+            m_Mission.completed = true;
+        }
 
     }
 }

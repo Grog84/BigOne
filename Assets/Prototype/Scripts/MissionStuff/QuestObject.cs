@@ -8,7 +8,7 @@ namespace QuestManager
 {
     public class QuestObject:SerializedMonoBehaviour
     {
-        [HideInInspector]
+        
         public Quest m_Mission;
         [HideInInspector]
         public string m_Name;
@@ -20,7 +20,8 @@ namespace QuestManager
 
         public void CompleteQuest()
         {
-            m_Mission.completed = true;
+            Debug.Log("Complete Quest!");
+            m_Mission.SetCompleted();
         }
 
     }

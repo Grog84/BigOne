@@ -10,7 +10,7 @@ namespace AI.BT
         {
             if (m_BehaviourTree.m_Blackboard.GetBoolValue("playerInteracted") == true)
             {
-                Debug.Log("Ho Interagito!!");
+
                 m_BehaviourTree.m_Blackboard.SetBoolValue("playerInteracted", false);
                 return TaskState.SUCCESS;
             }

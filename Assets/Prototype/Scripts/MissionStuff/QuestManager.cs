@@ -240,7 +240,7 @@ namespace QuestManager
         {      
    //         QuestMenu = GameObject.Find("Pause_Quest");
             questPath= System.IO.Path.Combine(Application.persistentDataPath, "quest.json");
-            
+            ActivatePrimaryQuests();
         }
 
         void Start()
@@ -305,16 +305,29 @@ namespace QuestManager
             return strikethrough;
         }
 
+        private void ActivatePrimaryQuests()
+        {
+            foreach (Quest q in MissionList)
+            {
+                q.available = true;
+            }
+
+        }
+
         private void AssignQuestToQuestGivers()
         {
+            int i = 0;
             foreach (Quest m in MissionList)
             {
+                Debug.Log(i);
+                i++;
                 QuestGiver QG;
                 QG = m.questGiver.gameObject.GetComponent<QuestGiver>();
                 if (QG == null)
                 {
                     QG = m.questGiver.gameObject.AddComponent<QuestGiver>();
                 }
+
                 QG.myMission = m;
                 QG.missionIndex = m.questIndex;
 
@@ -356,11 +369,14 @@ namespace QuestManager
         {
             foreach (Quest m in MissionList)
             {
-                if (m.Obj.GetComponent<QuestObject>() == null)
+                QuestObject QObj;
+                QObj = m.Obj.GetComponent<QuestObject>();
+                if (QObj == null)
                 {
-                    m.Obj.AddComponent<QuestObject>();
+                    QObj = m.Obj.AddComponent<QuestObject>();
                 }
-                m.Obj.GetComponent<QuestObject>().name = m.Obj.gameObject.name;
+                QObj.m_Name = m.Obj.gameObject.name;
+                QObj.m_Mission = m;
             }
           
         }

@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114710614542916358}
   - component: {fileID: 320252643927573894}
   - component: {fileID: 114489252075288664}
+  - component: {fileID: 114532481173038526}
   m_Layer: 17
   m_Name: NpcQuest
   m_TagString: Npc
@@ -2362,6 +2363,49 @@ MonoBehaviour:
   lookAtTarget: {fileID: 0}
   headClamp: 0
   playerSaw: 0
+--- !u!114 &114532481173038526
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1037715182921442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 506f28507f1588047a27490a6b3b79fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  missionIndex: 0
+  myMission:
+    questName: 
+    questType: 0
+    questGrade: 0
+    questIndex: 0
+    ShowDescription: 0
+    questDescription: 
+    available: 0
+    active: 0
+    completed: 0
+    turnInStatus: 0
+    SceneIndexNumber: 0
+    questGiver: {fileID: 0}
+    Printed: 0
+    isStriked: 0
+    pointA: {fileID: 0}
+    pointB: {fileID: 0}
+    Obj: {fileID: 0}
+    receiver: {fileID: 0}
+    pointA_Timed: {fileID: 0}
+    pointB_Timed: {fileID: 0}
+    time: 0
 --- !u!114 &114634155340079328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2374,7 +2418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tickDelay: 0.5
-  decisionMaker: {fileID: 11400000, guid: 8fd253efaaa836246907fe0145d71d69, type: 2}
+  decisionMaker: {fileID: 11400000, guid: 2840a926095d2e44c84d2970651bfa27, type: 2}
 --- !u!114 &114710614542916358
 MonoBehaviour:
   m_ObjectHideFlags: 1

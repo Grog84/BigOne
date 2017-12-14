@@ -23,9 +23,10 @@ namespace Character.Actions
             // Pick up Keys
             if (GMController.instance.isCharacterPlaying == CharacterActive.Mother && controller.m_CharacterController.ItemCollider.tag == "Key")
             {
-                if (controller.m_CharacterController.ItemCollider.transform.parent.GetComponent<QuestObject>() != null)
+                if (controller.m_CharacterController.ItemCollider.transform.GetComponent<QuestObject>() != null)
                 {
                     //controller.m_CharacterController.ItemCollider.transform.parent.GetComponent<QuestObject>().Picked = true;
+                    controller.m_CharacterController.ItemCollider.transform.GetComponent<QuestObject>().CompleteQuest();
                 }
                 controller.m_CharacterController.startItemAnimation = true;
                 controller.m_CharacterController.Keychain.Add(controller.m_CharacterController.ItemCollider.gameObject);
@@ -35,9 +36,10 @@ namespace Character.Actions
             }
             else if (controller.m_CharacterController.ItemCollider.tag != "Key")
             {
-                if(controller.m_CharacterController.ItemCollider.transform.parent.GetComponent<QuestObject>() != null)
+                if(controller.m_CharacterController.ItemCollider.transform.GetComponent<QuestObject>() != null)
                 {
                     //controller.m_CharacterController.ItemCollider.transform.parent.GetComponent<QuestObject>().Picked = true;
+                    controller.m_CharacterController.ItemCollider.transform.GetComponent<QuestObject>().CompleteQuest();
                 }
                 controller.m_CharacterController.startItemAnimation = true;
                 controller.m_CharacterController.Keychain.Add(controller.m_CharacterController.ItemCollider.gameObject);

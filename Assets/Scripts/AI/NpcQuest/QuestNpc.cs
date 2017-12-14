@@ -52,7 +52,7 @@ namespace AI
 
         public void SetInteractionFalse()
         {
-            Debug.Log("puoi interagire");
+
             canInteract = true;
         }
 
@@ -88,11 +88,26 @@ namespace AI
 
         public void UpdateBlackBoard()
         {
-            SetBlackboardValue("questAvailable", m_QuestGiver.myMission.active);
+
+            //Debug.Log("Updated blackboard");
+            SetBlackboardValue("questAvailable", m_QuestGiver.myMission.available);
             SetBlackboardValue("questCompleted", m_QuestGiver.myMission.completed);
 
             SetBlackboardValue("questTurnInStatus", m_QuestGiver.myMission.turnInStatus);
-                   
+
+            //Debug.Log("Quest : " + m_QuestGiver.myMission.available + " - " + m_QuestGiver.myMission.completed + " - " + m_QuestGiver.myMission.turnInStatus);
+            //Debug.Log("Quest : " + GetBlackboardBoolValue("questAvailable") + " - " + GetBlackboardBoolValue("questCompleted") + " - " +
+            //    GetBlackboardBoolValue("questTurnInStatus"));
+        }
+
+        public void SetQuestActive()
+        {
+            m_QuestGiver.myMission.active = true;
+        }
+
+        public void SetQuestTurnedIn()
+        {
+            m_QuestGiver.myMission.turnInStatus = true;
         }
 
         private void Awake()
@@ -104,6 +119,7 @@ namespace AI
             m_Brain.decisionMaker.m_Blackboard = new QuestNpcBlackboard();
             m_Blackboard = m_Brain.decisionMaker.m_Blackboard;
             m_Blackboard.m_Agent = this;
+
             m_QuestGiver = GetComponent<QuestGiver>();
             m_PlayableDirector = GetComponent<PlayableDirector>();
             lookAtComponent = GetComponent<LookAtIK>();

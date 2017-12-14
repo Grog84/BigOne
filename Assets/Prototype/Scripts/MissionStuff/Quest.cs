@@ -1,6 +1,8 @@
 ﻿using System;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using AI;
+
 
 namespace QuestManager
 {
@@ -28,6 +30,7 @@ namespace QuestManager
         public bool available;
 
         public bool active;
+
         //[ReadOnly]
         public bool completed;
 
@@ -98,21 +101,28 @@ namespace QuestManager
             time = _time;
             SceneIndexNumber = _sceneIndexNumber;
         }
+
         public void SetCompleted()
         {
+            Debug.Log("Set completed");
             switch(questType)
             {
 
                 case QUESTTYPE.RICERCA_CONSEGNA_OGGETTO:
                     completed = true;
-                    //GetComponent<QuestNpc>().UpdateBlackboard();
-                    
+                    receiver.GetComponent<QuestNpc>().UpdateBlackBoard();
                     break;
+
                 default: break;
 
 
             }
 
+        }
+
+        public void SetActive()
+        {
+            active = true;
         }
     }
 

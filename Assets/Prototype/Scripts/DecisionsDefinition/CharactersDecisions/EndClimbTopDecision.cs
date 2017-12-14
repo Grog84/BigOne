@@ -16,7 +16,7 @@ namespace Character.Decisions
 
         private bool CheckIfClimbingTop(CharacterStateController controller)
         {
-            if (controller.m_CharacterController.climbingTop && Input.GetButtonDown("Interact"))
+            if (controller.m_CharacterController.climbingTop && Input.GetButtonDown("Interact") && !controller.m_CharacterController.startClimbEnd)
             {
 
            

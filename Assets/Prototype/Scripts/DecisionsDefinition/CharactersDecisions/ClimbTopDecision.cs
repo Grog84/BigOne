@@ -17,7 +17,7 @@ namespace Character.Decisions
         private bool CheckIfClimbingTop(CharacterStateController controller)
         {
             // Debug.Log(controller.m_CharacterController.isInClimbArea + " " + controller.m_CharacterController.isClimbDirectionRight + " " + Input.GetKeyDown(KeyCode.E));
-            if (controller.m_CharacterController.isInClimbArea && controller.m_CharacterController.isClimbDirectionRight && Input.GetButtonDown("Interact"))
+            if (controller.m_CharacterController.isInClimbArea && controller.m_CharacterController.isClimbDirectionRight && Input.GetButtonDown("Interact") && !controller.m_CharacterController.startClimbEnd)
             {
 
                 return true;

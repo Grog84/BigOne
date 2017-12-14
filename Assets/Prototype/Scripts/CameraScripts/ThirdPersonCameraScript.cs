@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using StateMachine;
+
+
 
 public class ThirdPersonCameraScript : CameraScript {
 
@@ -12,8 +15,8 @@ public class ThirdPersonCameraScript : CameraScript {
     protected float yAngelMax = 70.0F;
     protected CinemachineVirtualCamera cam;
     private CameraScript mainCam;
-
-
+    private CharacterStateController currentActivePlayer;
+    public float yAngleMaxBoard = 40f;
     //Variable for the offset of the raycast that check the collisions of the camera
     private float collisionOffeset = 4.004f;
     //array of the actual position of the clip points
@@ -55,7 +58,17 @@ public class ThirdPersonCameraScript : CameraScript {
         // camera movement by axis
         currentX += Input.GetAxis("Mouse X");
         currentY -= Input.GetAxis("Mouse Y");
+        
         //baunderies of the camera movement
+        if (currentActivePlayer.currentState.name != "BalanceBoard")
+        {
+            yAngelMax = 70f;
+        }
+        else
+        {
+            yAngelMax = yAngleMaxBoard;
+        }
+
         currentY = Mathf.Clamp(currentY, yAngleMin, yAngelMax);
 
         //camera management of the bound to the player, movement, rotation and look direction
@@ -121,11 +134,13 @@ public class ThirdPersonCameraScript : CameraScript {
     {
         if ((int)GMController.instance.isCharacterPlaying == 0)
         {
+            currentActivePlayer = boyLookAt.GetComponent<CharacterStateController>();
             StartCoroutine(ResetCameraPriority());
             lookAt = boyLookAtByTag;
         }
         else if ((int)GMController.instance.isCharacterPlaying == 1)
         {
+            currentActivePlayer = motherLookAt.GetComponent<CharacterStateController>();
             StartCoroutine(ResetCameraPriority());
             lookAt = motherLookAtByTag;
         }

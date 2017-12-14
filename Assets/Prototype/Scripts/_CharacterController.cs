@@ -38,6 +38,7 @@ namespace Character
         [HideInInspector] public bool useEndClimbIk;
         [HideInInspector] public float ikWeight = 1;
         [HideInInspector] public bool secureFall;
+        [HideInInspector] public bool isClimbCRDone = true;
         //
         // PUSH VARIABLES
         [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing
@@ -69,6 +70,8 @@ namespace Character
         [HideInInspector] public Transform CharacterTransform;         // A reference to the character assigned to the state controller transform
         [HideInInspector] public Rigidbody m_Rigidbody;                // A reference to the rigidbody
         [HideInInspector] public CharacterController m_CharController; // A reference to the Character controller component
+        [HideInInspector] public LookAtIK playerSight;
+        [HideInInspector] public GrounderFBBIK playerGrounderIK;
 
         // COLLIDERS REFERENCES      
         [HideInInspector] public GameObject climbCollider;
@@ -99,7 +102,6 @@ namespace Character
         [HideInInspector] public Color alphaMax;
         [HideInInspector] public Transform playerIcon;
         //LOOK AT
-        [HideInInspector] public LookAtIK playerSight;
         [HideInInspector] public float headClamp;
         [HideInInspector] public bool canLookAt = false;
         [HideInInspector] public bool dontLookAt = false;
@@ -125,6 +127,7 @@ namespace Character
 
         private void Awake()
         {
+            playerGrounderIK = GetComponent<GrounderFBBIK>();
             CharacterTransform = GetComponent<Transform>();          // A reference to the character assigned to the state controller transform
             m_Animator = GetComponent<Animator>();
             m_CharController = GetComponent<CharacterController>();
@@ -427,6 +430,7 @@ namespace Character
 
         private IEnumerator ReachPointEnd()
         {
+            Debug.Log("Fine CLimb");
             useEndClimbIk = true;
             startClimbAnimationEnd = false;
             float climbTime = 1.3f;
@@ -445,6 +449,7 @@ namespace Character
 
         private IEnumerator ReachPointTop()
         {
+            Debug.Log("Inizio CLimb");
             startClimbAnimationTop = false;
             Vector3 difPos = climbAnchorTop.position - transform.position;
             float climbTime = 0.2f;
@@ -459,6 +464,7 @@ namespace Character
             CharacterTransform.DOBlendableMoveBy(new Vector3(difPos.x, 0, difPos.z), climbTime);
             yield return new WaitForSeconds(climbTime);
             climbingTop = false;
+            isClimbCRDone = true;
             m_CharController.enabled = true;
             yield return null;
         }

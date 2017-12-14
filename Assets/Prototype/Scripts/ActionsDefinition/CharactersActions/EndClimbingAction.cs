@@ -20,9 +20,10 @@ namespace Character.Actions
         {
             if (controller.m_CharacterController.climbingTop)
             {
+                controller.m_CharacterController.playerGrounderIK.weight = 0.5f;
                 controller.m_CharacterController.endClimbAnchor = controller.m_CharacterController.climbCollider.transform.parent.transform.GetChild(4);
-                controller.m_CharacterController.startClimbAnimationEnd = true;
                 controller.m_CharacterController.startClimbEnd = true;
+                controller.m_CharacterController.startClimbAnimationEnd = true;
             }
         }
     }

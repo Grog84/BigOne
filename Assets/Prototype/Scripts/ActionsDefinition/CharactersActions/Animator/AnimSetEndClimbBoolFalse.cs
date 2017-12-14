@@ -23,7 +23,7 @@ namespace Character.Actions
 
             if (!controller.m_CharacterController.startClimbAnimationEnd)
             {
-                controller.m_CharacterController.m_Animator.SetBool("isEndClimb", false);
+                controller.m_CharacterController.m_Animator.SetBool("isStartClimb", false);
             }
          
          

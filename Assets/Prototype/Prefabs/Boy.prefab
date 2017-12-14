@@ -1414,7 +1414,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1236579459611486}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.424, y: -0.37, z: 14.62}
+  m_LocalPosition: {x: -6.424, y: 5.721, z: -26.094}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 4404718081447118}
@@ -2223,7 +2223,7 @@ Transform:
   m_GameObject: {fileID: 1318345514017304}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 22, y: 1, z: 22}
+  m_LocalScale: {x: 24.1, y: 10.7, z: 24.1}
   m_Children: []
   m_Father: {fileID: 4213731339692590}
   m_RootOrder: 5
@@ -2618,7 +2618,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPointer: {fileID: 1436485109730562, guid: abdcf18b21064d44fa2ac7a9a2b81a65,
     type: 2}
-  pos: 0
   pointers: []
   arrowDistance: 0
 --- !u!114 &114253847387447656
@@ -2634,8 +2633,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Cone: {fileID: 1318345514017304}
   locked: 0
-  xzScale: 22
-  yScale: 1
+  xzScale: 24.1
+  yScale: 10.7
 --- !u!114 &114319331313540930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3125,6 +3124,7 @@ MonoBehaviour:
   ledgeForwardActive: 1
   ledgeBackwardActive: 1
   isBalanceCRDone: 1
+  ledgeCRTime: 0
   isInClimbArea: 0
   isClimbDirectionRight: 0
   climbingBottom: 0
@@ -3136,6 +3136,7 @@ MonoBehaviour:
   useEndClimbIk: 0
   ikWeight: 1
   secureFall: 0
+  isClimbCRDone: 1
   isInPushArea: 0
   isPushDirectionRight: 0
   isPushLimit: 0
@@ -3217,7 +3218,7 @@ MonoBehaviour:
   solver:
     layers:
       serializedVersion: 2
-      m_Bits: 1
+      m_Bits: 1048577
     maxStep: 0.5
     heightOffset: 0
     footSpeed: 2.5

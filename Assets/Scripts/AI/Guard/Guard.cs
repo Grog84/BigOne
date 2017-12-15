@@ -65,7 +65,7 @@ namespace AI
         [HideInInspector] public GuardSaveComponent m_SaveComponent;
 
         //Gizmos
-        Color statusColor = Color.green;
+        public Color statusColor = Color.green;
 
         // Follows variables found in the parent definition
         // Animation 
@@ -589,7 +589,7 @@ namespace AI
             }
 
             Gizmos.color = statusColor;
-            Gizmos.DrawWireSphere(transform.position, 0.6f);
+            Gizmos.DrawSphere(transform.position, 0.3f);
         }
 
     }

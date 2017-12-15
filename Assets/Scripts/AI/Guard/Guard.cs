@@ -43,10 +43,11 @@ namespace AI
         [HideInInspector] public Transform[] wayPointListTransform;
 
         // Perception
-        Transform[] lookAtPositions;
-        Transform lookAtPositionCentral;
+        Transform[][] lookAtPositions;
+        Transform[] lookAtPositionCentral;
         PerceptionBar perceptionBar;
         Transform eyes;
+        Cone m_Cone;
        
         [HideInInspector]public Vector3 playerLastPercieved = new Vector3(1000f, 1000f, 1000f);
         static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
@@ -192,22 +193,69 @@ namespace AI
 
             if (GetBlackboardBoolValue("PlayerInSight") && perceptionPercentage < 100f && GMController.instance.GetGameStatus())
             {
-                
-                Vector3 direction;
+                Debug.Log(GMController.instance.isCharacterPlaying);
+                Vector3 direction, distance;
                 RaycastHit rayHit;
                 bool isRayHitting;
                 Ray ray;
 
-                for (int i = 0; i < lookAtPositions.Length; i++)
+                float angle_theta;
+                float angle_psi;
+
+                for (int i = 0; i < lookAtPositions[(int)GMController.instance.isCharacterPlaying].Length; i++)
                 {
-                    direction = (lookAtPositions[i].position - eyes.position).normalized;
+                    //direction = (lookAtPositions[i].position - eyes.position).normalized;
+                    distance = (lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position - eyes.position);
+                    angle_psi = Mathf.Atan(distance.y / distance.z) * 180f / Mathf.PI;
+                    angle_theta = Mathf.Atan(distance.x / distance.z) * 180f / Mathf.PI;
 
+                    Debug.Log("psi: " + angle_psi + " - " + m_Cone.max_psi_Angle);
+                    Debug.Log("theta: " + angle_theta + " - " + m_Cone.max_theta_Angle);
+                    Debug.Log("distance " + distance.magnitude);
+
+                    if (angle_psi <= m_Cone.max_psi_Angle && angle_theta <= m_Cone.max_theta_Angle)
+                    {
+                        Debug.Log("In cone");
+                        direction = distance.normalized;
+                        ray = new Ray(eyes.position, direction);
+                        isRayHitting = Physics.Raycast(ray, out rayHit, m_Cone.raycastLength, visionLayerMask);
+                        isRayHitting = isRayHitting && rayHit.transform.tag == "Player" && 
+                            rayHit.transform.GetComponent<CharacterStateController>().thisCharacter == GMController.instance.isCharacterPlaying;
+
+                        Debug.DrawLine(eyes.position, lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position - eyes.position, Color.red);
+
+                        if (isRayHitting)
+                        {
+                            noRaycastHitting = false;
+                            if (hasRadio)
+                            {
+                                GMController.instance.UpdatePlayerPosition();
+                                playerLastPercieved = GMController.instance.lastPercievedPlayerPosition;
+                                UpdateLastPercievedDestination();
+                            }
+                            else
+                            {
+                                UpdateMyPlayerPosition();
+                            }
+
+                        
+                            perceptionPercentage += stats.fillingSpeed * Time.deltaTime;
+                        }
+                    }
+                }
+
+                //direction = (lookAtPositionCentral.position - eyes.position).normalized;
+                distance = (lookAtPositionCentral[(int)GMController.instance.isCharacterPlaying].position - eyes.position);
+                angle_psi = Mathf.Atan(distance.y / distance.z) * 180f / Mathf.PI;
+                angle_theta = Mathf.Atan(distance.x / distance.z) * 180f / Mathf.PI;
+
+                if (angle_psi <= m_Cone.max_psi_Angle && angle_theta <= m_Cone.max_theta_Angle)
+                {
+                    direction = distance.normalized;
                     ray = new Ray(eyes.position, direction);
-                    isRayHitting = Physics.Raycast(ray, out rayHit, Mathf.Infinity, visionLayerMask);
-                    isRayHitting = isRayHitting && rayHit.transform.tag == "Player" && 
+                    isRayHitting = Physics.Raycast(ray, out rayHit, m_Cone.raycastLength, visionLayerMask);
+                    isRayHitting = isRayHitting && rayHit.transform.tag == "Player" &&
                         rayHit.transform.GetComponent<CharacterStateController>().thisCharacter == GMController.instance.isCharacterPlaying;
-
-                    Debug.DrawLine(eyes.position, lookAtPositions[i].position - eyes.position);
 
                     if (isRayHitting)
                     {
@@ -223,36 +271,10 @@ namespace AI
                             UpdateMyPlayerPosition();
                         }
 
-                        
-                        perceptionPercentage += stats.fillingSpeed * Time.deltaTime;
+
+                        perceptionPercentage += stats.fillingSpeed * stats.torsoMultiplier * Time.deltaTime;
                     }
                 }
-
-                direction = (lookAtPositionCentral.position - eyes.position).normalized;
-
-                ray = new Ray(eyes.position, direction);
-                isRayHitting = Physics.Raycast(ray, out rayHit, Mathf.Infinity, visionLayerMask);
-                isRayHitting = isRayHitting && rayHit.transform.tag == "Player" &&
-                    rayHit.transform.GetComponent<CharacterStateController>().thisCharacter == GMController.instance.isCharacterPlaying;
-
-                if (isRayHitting)
-                {
-                    noRaycastHitting = false;
-                    if (hasRadio)
-                    {
-                        GMController.instance.UpdatePlayerPosition();
-                        playerLastPercieved = GMController.instance.lastPercievedPlayerPosition;
-                        UpdateLastPercievedDestination();
-                    }
-                    else
-                    {
-                        UpdateMyPlayerPosition();
-                    }
-
-                    
-                    perceptionPercentage += stats.fillingSpeed * stats.torsoMultiplier * Time.deltaTime;
-                }
-                
             }
            
 
@@ -457,6 +479,7 @@ namespace AI
             m_NavMeshAgent = GetComponent<NavMeshAgent>();
             perceptionBar = GetComponentInChildren<PerceptionBar>();
             eyes = TransformDeepChildExtension.FindDeepChild(transform, "eyes");
+            m_Cone = TransformDeepChildExtension.FindDeepChild(transform, "Cone").GetComponent<Cone>();
             m_Animator = GetComponent<Animator>();
 
             m_Brain = GetComponent<Brain>();
@@ -475,13 +498,46 @@ namespace AI
             
             // Finds the position the guards are looking at
             GameObject[] lookAtPositionsObj = GameObject.FindGameObjectsWithTag("LookAtPosition");
-            lookAtPositions = new Transform[lookAtPositionsObj.Length];
+            lookAtPositions = new Transform[2][];
+            lookAtPositions[0] = new Transform[lookAtPositionsObj.Length/2];
+            lookAtPositions[1] = new Transform[lookAtPositionsObj.Length/2];
+
+            int boyIdx = 0, motherIdx = 0;
+            
             for (int i = 0; i < lookAtPositionsObj.Length; i++)
             {
-                lookAtPositions[i] = lookAtPositionsObj[i].transform;
-            }
-            lookAtPositionCentral = GameObject.FindGameObjectsWithTag("LookAtPositionCentral")[0].transform;
+                // find parent name boy or mother and assign accordingly
+                // create two counter for the array position
+                Transform lookAt = lookAtPositionsObj[i].transform;
+                if (lookAt.root.gameObject.name == "Boy")
+                {
+                    lookAtPositions[(int)CharacterActive.Boy][boyIdx] = lookAt;
+                    boyIdx++;
 
+                }
+                else if (lookAt.root.gameObject.name == "Mother")
+                {
+                    lookAtPositions[(int)CharacterActive.Mother][motherIdx] = lookAt;
+                    motherIdx++;
+                }
+
+            }
+
+            GameObject[] lookAtPositionsCentralObj = GameObject.FindGameObjectsWithTag("LookAtPositionCentral");
+            lookAtPositionCentral = new Transform[lookAtPositionsCentralObj.Length];
+            for (int i = 0; i < lookAtPositionsCentralObj.Length; i++)
+            {
+                Transform lookAtCentral = lookAtPositionsCentralObj[i].transform;
+                if (lookAtCentral.root.gameObject.name == "Boy")
+                {
+                    lookAtPositionCentral[(int)CharacterActive.Boy] = lookAtCentral;
+
+                }
+                else if (lookAtCentral.root.gameObject.name == "Mother")
+                {
+                    lookAtPositionCentral[(int)CharacterActive.Mother] = lookAtCentral;
+                }
+            }
         }
 
         private void Start()

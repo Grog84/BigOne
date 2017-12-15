@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using AI;
 
 public class ConeScale : MonoBehaviour {
 
@@ -16,5 +17,6 @@ public class ConeScale : MonoBehaviour {
     private void OnValidate()
     {
         m_Cone.transform.localScale= new Vector3(xScale, yScale, zScale);
+        m_Cone.GetComponent<Cone>().UpdateRaycastParams();
     }
 }

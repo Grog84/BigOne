@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#if UNITY_EDITOR
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -13,3 +14,4 @@ public class MapEditorResetPrefs : MonoBehaviour {
 		EditorPrefs.SetInt("SelectedMaterial", 0);
 	}
 }
+#endif

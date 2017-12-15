@@ -64,6 +64,9 @@ namespace AI
         // Saving Game
         [HideInInspector] public GuardSaveComponent m_SaveComponent;
 
+        //Gizmos
+        Color statusColor = Color.green;
+
         // Follows variables found in the parent definition
         // Animation 
         //Animator m_Animator;
@@ -86,6 +89,8 @@ namespace AI
             LoadStats(normalStats);
             guardAllert.SetActive(true);
             SetBlackboardValue("NavigationPosition", wayPointListTransform[m_Blackboard.GetIntValue("CurrentNavPoint")].position);
+
+            statusColor = Color.green;
         }
 
         public void GetCurious()
@@ -95,6 +100,8 @@ namespace AI
             SetBlackboardValue("GuardState", (int)GuardState.CURIOUS);
             SetBlackboardValue("IsRelaxing", false);
             LoadStats(curiousStats);
+
+            statusColor = Color.yellow;
         }
 
         public void GetAlarmed()
@@ -110,6 +117,8 @@ namespace AI
             guardAllert.SetActive(false);
             isOtherAlarmed = false;
             SetBlackboardValue("IsRelaxing", false);
+
+            statusColor = Color.red;
         }
 
         public void GetDistracted()
@@ -117,6 +126,8 @@ namespace AI
             m_State = GuardState.DISTRACTED;
             SetBlackboardValue("GuardState", (int)GuardState.DISTRACTED);
             LoadStats(distractedStats);
+
+            statusColor = Color.blue;
         }
 
         public void SetOtherAlarmed()
@@ -209,13 +220,8 @@ namespace AI
                     angle_psi = Mathf.Atan(distance.y / distance.z) * 180f / Mathf.PI;
                     angle_theta = Mathf.Atan(distance.x / distance.z) * 180f / Mathf.PI;
 
-                    Debug.Log("psi: " + angle_psi + " - " + m_Cone.max_psi_Angle);
-                    Debug.Log("theta: " + angle_theta + " - " + m_Cone.max_theta_Angle);
-                    Debug.Log("distance " + distance.magnitude);
-
                     if (angle_psi <= m_Cone.max_psi_Angle && angle_theta <= m_Cone.max_theta_Angle)
                     {
-                        Debug.Log("In cone");
                         direction = distance.normalized;
                         ray = new Ray(eyes.position, direction);
                         isRayHitting = Physics.Raycast(ray, out rayHit, m_Cone.raycastLength, visionLayerMask);
@@ -581,6 +587,9 @@ namespace AI
                 Gizmos.color = Color.green;
                 Gizmos.DrawWireSphere(GetBlackboardVector3Value("NavigationPosition"), 1);
             }
+
+            Gizmos.color = statusColor;
+            Gizmos.DrawWireSphere(transform.position, 0.6f);
         }
 
     }

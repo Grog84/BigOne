@@ -17,6 +17,23 @@ namespace AI
         void TickBrain()
         {
             decisionMaker.MakeDecision();
+            UpdateTickDelay();
         }
+
+        void UpdateTickDelay()
+        {
+            float distance = (GMController.instance.playerTransform[(int)GMController.instance.isCharacterPlaying].position - transform.position).sqrMagnitude;
+            if (distance < 30)
+            {
+                tickDelay = 0.3f;
+            }
+            else if (distance >= 30 && distance < 100)
+            {
+                tickDelay = 1f;
+            }
+            else
+                tickDelay = 5f;
+        }
+
     }
 }

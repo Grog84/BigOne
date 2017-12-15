@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 using AI;
+using Sirenix.OdinInspector;
 
 public enum CameraActive {ThirdPersonCameraScript, FirstPersonCameraScript, LedgeCamera}
 public enum DayNight { Day, Night}
@@ -35,8 +36,8 @@ public class GMController : MonoBehaviour {
     [HideInInspector] public Guard[] allGuards;
 
     // Variables used in order to trigger transitions when the game is not active
-    public bool isGameActive = false;
-    public CharacterActive isCharacterPlaying;
+    [ReadOnly] public bool isGameActive = false;
+    [ReadOnly] public CharacterActive isCharacterPlaying;
     [HideInInspector] public Image fadeEffect;
     
     [Range(0.5f, 5f)]
@@ -46,7 +47,7 @@ public class GMController : MonoBehaviour {
     [Range(0.5f, 5f)]
     public float deathAnimationTime = 1f;
 
-    public float deathTimer = 0f;
+    [ReadOnly] public float deathTimer = 0f;
 
     // Save game references and variables
     //[HideInInspector] public CheckPointManager m_CheckpointManager;

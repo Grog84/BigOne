@@ -204,7 +204,7 @@ namespace AI
 
             if (GetBlackboardBoolValue("PlayerInSight") && perceptionPercentage < 100f && GMController.instance.GetGameStatus())
             {
-                Debug.Log(GMController.instance.isCharacterPlaying);
+                //Debug.Log(GMController.instance.isCharacterPlaying);
                 Vector3 direction, distance;
                 RaycastHit rayHit;
                 bool isRayHitting;
@@ -216,6 +216,7 @@ namespace AI
                 for (int i = 0; i < lookAtPositions[(int)GMController.instance.isCharacterPlaying].Length; i++)
                 {
                     //direction = (lookAtPositions[i].position - eyes.position).normalized;
+                    
                     distance = (lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position - eyes.position);
                     angle_psi = Mathf.Atan(distance.y / distance.z) * 180f / Mathf.PI;
                     angle_theta = Mathf.Atan(distance.x / distance.z) * 180f / Mathf.PI;
@@ -228,7 +229,7 @@ namespace AI
                         isRayHitting = isRayHitting && rayHit.transform.tag == "Player" && 
                             rayHit.transform.GetComponent<CharacterStateController>().thisCharacter == GMController.instance.isCharacterPlaying;
 
-                        Debug.DrawLine(eyes.position, lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position - eyes.position, Color.red);
+                        Debug.DrawLine(eyes.position, lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position, Color.red);
 
                         if (isRayHitting)
                         {
@@ -378,7 +379,7 @@ namespace AI
         // update the personal known positoin of the player
         public void UpdateMyPlayerPosition()
         {
-            playerLastPercieved = GMController.instance.players[(int)GMController.instance.isCharacterPlaying].transform.position;
+            playerLastPercieved = GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].transform.position;
             UpdateLastPercievedDestination();
         }
 
@@ -440,8 +441,8 @@ namespace AI
 
         public void DefeatPlayer()
         {
-            Debug.Log("DEFEAT");
-            characterInterfaces[(int)GMController.instance.isCharacterPlaying].DefeatPlayer();
+            if(GMController.instance.isCharacterPlaying == CharacterActive.Boy || GMController.instance.isCharacterPlaying == CharacterActive.Mother)
+                GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].DefeatPlayer();
         }
 
         private void UpdatePerceptionUI()
@@ -590,6 +591,13 @@ namespace AI
 
             Gizmos.color = statusColor;
             Gizmos.DrawSphere(transform.position, 0.3f);
+
+            Gizmos.color = Color.green;
+            for (int i = 0; i < lookAtPositions[(int)GMController.instance.isCharacterPlaying].Length; i++)
+            {
+                Gizmos.DrawSphere(lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position, 0.1f);
+            }
+            Gizmos.DrawSphere(eyes.position, 0.1f);
         }
 
     }

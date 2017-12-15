@@ -10,7 +10,7 @@ namespace GM.Decisions
     {
         public override bool Decide(GMStateController controller)
         {
-            return controller.m_GM.deathTimer <= controller.m_GM.deathAnimationTime;
+            return controller.m_GM.deathTimer >= controller.m_GM.deathAnimationTime;
         }
     }
 }

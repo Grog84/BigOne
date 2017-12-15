@@ -22,17 +22,20 @@ namespace AI
 
         void UpdateTickDelay()
         {
-            float distance = (GMController.instance.playerTransform[(int)GMController.instance.isCharacterPlaying].position - transform.position).sqrMagnitude;
-            if (distance < 30)
+            if (GMController.instance.isCharacterPlaying == CharacterActive.Boy || GMController.instance.isCharacterPlaying == CharacterActive.Mother)
             {
-                tickDelay = 0.3f;
+                float distance = (GMController.instance.playerTransform[(int)GMController.instance.isCharacterPlaying].position - transform.position).sqrMagnitude;
+                if (distance < 30)
+                {
+                    tickDelay = 0.3f;
+                }
+                else if (distance >= 30 && distance < 100)
+                {
+                    tickDelay = 1f;
+                }
+                else
+                    tickDelay = 5f;
             }
-            else if (distance >= 30 && distance < 100)
-            {
-                tickDelay = 1f;
-            }
-            else
-                tickDelay = 5f;
         }
 
     }

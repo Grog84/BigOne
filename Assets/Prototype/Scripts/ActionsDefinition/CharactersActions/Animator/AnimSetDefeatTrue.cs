@@ -15,6 +15,7 @@ namespace Character.Actions
 
         private void UpdateAnimatorForDefeat(CharacterStateController controller)
         {
+            Debug.Log("Action animator dead");
             controller.m_CharacterController.m_Animator.SetBool("isDead", true);
             Debug.Log(controller.m_CharacterController.m_Animator.GetBool("isDead"));
         }

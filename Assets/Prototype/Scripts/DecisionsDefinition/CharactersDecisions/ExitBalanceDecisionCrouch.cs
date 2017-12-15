@@ -5,8 +5,8 @@ using StateMachine;
 
 namespace Character.Decisions
 {
-    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/ExitBalanceDecision")]
-    public class ExitBalanceDecision : Decision
+    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/ExitBalanceDecisionCrouch")]
+    public class ExitBalanceDecisionCrouch : Decision
     {
         public override bool Decide(CharacterStateController controller)
         {
@@ -17,7 +17,7 @@ namespace Character.Decisions
         private bool CheckIfEndBalance(CharacterStateController controller)
         {
 
-            if (!controller.m_CharacterController.isInBalanceArea && controller.m_CharacterController.m_Animator.GetBool("isWalking"))
+            if (!controller.m_CharacterController.isInBalanceArea && !controller.m_CharacterController.m_Animator.GetBool("isWalking"))
             {
 
                 return true;

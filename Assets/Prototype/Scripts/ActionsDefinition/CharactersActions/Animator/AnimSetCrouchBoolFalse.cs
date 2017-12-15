@@ -16,7 +16,7 @@ namespace Character.Actions
 
         private void UpdateAnimatorForCrouch(CharacterStateController controller)
         {
-            controller.m_CharacterController.m_Animator.SetBool("Crouch", false);
+           controller.m_CharacterController.m_Animator.SetBool("Crouch", false);
         }
     }
 }

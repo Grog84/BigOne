@@ -5,8 +5,8 @@ using StateMachine;
 
 namespace Character.Decisions
 {
-    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/EndExitClimbDecision")]
-    public class EndExitClimbDecision : Decision
+    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/EndExitClimbDecisionCrouch")]
+    public class EndExitClimbDecisionCrouch : Decision
     {
         public override bool Decide(CharacterStateController controller)
         {
@@ -18,7 +18,7 @@ namespace Character.Decisions
         {
 
             if (!controller.m_CharacterController.startClimbAnimationEnd 
-                && !controller.m_CharacterController.startClimbEnd && controller.m_CharacterController.m_Animator.GetBool("isWalking"))
+                && !controller.m_CharacterController.startClimbEnd && !controller.m_CharacterController.m_Animator.GetBool("isWalking"))
             {
 
                 return true;

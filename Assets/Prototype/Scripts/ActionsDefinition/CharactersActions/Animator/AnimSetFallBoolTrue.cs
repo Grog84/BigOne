@@ -18,6 +18,7 @@ namespace Character.Actions
         {
 
             controller.m_CharacterController.m_Animator.SetBool("isFalling", true);
+            controller.m_CharacterController.m_Animator.SetBool("isStartClimb", false);
 
 
         }

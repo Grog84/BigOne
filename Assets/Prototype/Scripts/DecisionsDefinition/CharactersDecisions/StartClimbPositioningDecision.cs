@@ -17,7 +17,7 @@ namespace Character.Decisions
         private bool CheckIfEndPushing(CharacterStateController controller)
         {
 
-            if (!controller.m_CharacterController.startClimbAnimationBottom && controller.m_CharacterController.isClimbCRDone)
+            if (controller.m_CharacterController.isBottomClimbCRDone && controller.m_CharacterController.isClimbCRDone)
             {
 
                 return true;

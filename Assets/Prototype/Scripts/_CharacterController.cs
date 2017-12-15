@@ -39,6 +39,7 @@ namespace Character
         [HideInInspector] public float ikWeight = 1;
         [HideInInspector] public bool secureFall;
         [HideInInspector] public bool isClimbCRDone = true;
+        [HideInInspector] public bool isBottomClimbCRDone = true;
         //
         // PUSH VARIABLES
         [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing
@@ -472,6 +473,7 @@ namespace Character
 
         private IEnumerator ReachPointBottom()
         {
+            startClimbAnimationBottom = false;
             float climbTime = 0.5f;
             Vector3 bot = climbAnchorBottom.parent.position - climbAnchorBottom.position;
             bot.y = 0;
@@ -484,8 +486,8 @@ namespace Character
             CharacterTransform.DOMove(climbAnchorBottom.position, climbTime);
             yield return new WaitForSeconds(climbTime);
             climbingBottom = false;
-            startClimbAnimationBottom = false;
             m_CharController.enabled = true;
+            isBottomClimbCRDone = true;
             yield return null;
         }
         #endregion

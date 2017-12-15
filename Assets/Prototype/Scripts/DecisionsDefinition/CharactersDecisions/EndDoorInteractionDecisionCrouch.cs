@@ -5,8 +5,8 @@ using StateMachine;
 
 namespace Character.Decisions
 {
-    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/EndItemCollectDecision")]
-    public class EndItemCollectDecision : Decision
+    [CreateAssetMenu(menuName = "Prototype/Decisions/Characters/EndDoorInteractionDecisionCrouch")]
+    public class EndDoorInteractionDecisionCrouch : Decision
     {
         public override bool Decide(CharacterStateController controller)
         {
@@ -17,7 +17,7 @@ namespace Character.Decisions
         private bool CheckIfEndDoorInteraction(CharacterStateController controller)
         {
 
-            if (controller.m_CharacterController.isItemCREnd && controller.m_CharacterController.m_Animator.GetBool("isWalking"))
+            if (!controller.m_CharacterController.startDoorAction && !controller.m_CharacterController.isEndDoorAction && !controller.m_CharacterController.m_Animator.GetBool("isWalking"))
             {
 
                 return true;

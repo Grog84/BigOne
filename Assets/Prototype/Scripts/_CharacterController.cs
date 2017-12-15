@@ -48,16 +48,19 @@ namespace Character
         [HideInInspector] public bool isPushing;                       // Define the start push actions
         [HideInInspector] public bool isExitPush;                      // Indicates if the DetachFormPushable coroutine is finished
         //
-        // DOORS & ITEMS VARIABLES
+        // DOORS VARIABLES
         [HideInInspector] public bool isInDoorArea;                    // Detect if the player is in the Door trigger area
         [HideInInspector] public bool isDoorDirectionRight;            // Detect if the player is looking toward the door
-        [HideInInspector] public bool isInItemArea;                     // Detect if the player is in the key object interactable area
         [HideInInspector] public bool startDoorAction;                 // Starts the DoorInteraction courutine
-        [HideInInspector] public bool startItemAnimation;              // Starts the item collection courutine
         [HideInInspector] public bool isEndDoorAction;                 // Indicates if the DoorInteraction coroutine is finished
         [HideInInspector] public bool isDoorOpen;                      // Indicates if the door has to be opended or closed in the RotateDoor coroutine
         [HideInInspector] public bool isDoorRotate;                    // Indicates if the RotateDoor coroutine is finished
         [HideInInspector] public bool isEndAnim = false;               // Indicates if the player playing the door animation
+        //
+        // ITEMS VARIABLES
+        [HideInInspector] public bool startItemAnimation;              // Starts the item collection courutine
+        [HideInInspector] public bool isInItemArea;                     // Detect if the player is in the key object interactable area
+        [HideInInspector] public bool isItemCREnd = true;
         //
         [HideInInspector] public bool canStep = true;
         [HideInInspector] public float m_WalkSoundrange_sq;            // squared value
@@ -585,14 +588,15 @@ namespace Character
 
         private IEnumerator ItemCollection()
         {
+            startItemAnimation = false;
             float collectTime = 0.3f;
 
 
             m_CharController.enabled = false;
 
             yield return new WaitForSeconds(collectTime);
-            startItemAnimation = false;
             m_CharController.enabled = true;
+            isItemCREnd = true;
             yield return null;
         }
 

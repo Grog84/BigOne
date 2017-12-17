@@ -15,11 +15,9 @@ public class ThirdPersonCameraScript : CameraScript {
     protected bool isCameraCRDone = true;
     protected bool isCameraCR = false;
     protected float yAngleMin = -40.0F;
-    public float yAngleMax = 70.0F;
+    protected float yAngleMax = 70.0F;
     protected CinemachineVirtualCamera cam;
     private CameraScript mainCam;
-    private CharacterStateController currentActivePlayer;
-    public float yAngleMaxBoard = 40f;
     //Variable for the offset of the raycast that check the collisions of the camera
     private float collisionOffeset = 4.004f;
     //array of the actual position of the clip points
@@ -45,48 +43,10 @@ public class ThirdPersonCameraScript : CameraScript {
 
     private void Update()
     {
-        //cam.m_Lens.FieldOfView = Fov;
-
-        //if (Input.GetButtonDown("Pause"))
-        //{
-        //    Cursor.lockState = CursorLockMode.None;                     //Reabilitate the mouse cursor pressing ESC
-
-        //}
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    Cursor.lockState = CursorLockMode.Locked;
-
-        //}
 
         // camera movement by axis
         currentX += Input.GetAxis("Mouse X");
         currentY -= Input.GetAxis("Mouse Y");
-        
-        //baunderies of the camera movement
-        if (currentActivePlayer.currentState.name != "BalanceBoard")
-        {
-            currentY -= Input.GetAxis("Mouse Y");
-            isCameraCR = false;
-            isCameraCRDone = true;
-            yAngleMax = 70f;
-        }
-        else
-        {
-           
-
-            if (!isCameraCR && isCameraCRDone)
-            {
-                Debug.Log("Entro");
-                StartCoroutine(CameraLerp(yAngleMax, yAngleMaxBoard));
-            }
-
-            if (!isCameraCRDone)
-            {
-                yAngleMax = yAngleMaxBoard;
-                //currentY -= Input.GetAxis("Mouse Y");
-            }
-        }
-
         currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
 
         //camera management of the bound to the player, movement, rotation and look direction
@@ -149,29 +109,17 @@ public class ThirdPersonCameraScript : CameraScript {
 
     }
 
-    IEnumerator CameraLerp(float value1, float value2)
-    {
-        Debug.Log("Lerpo");
-        isCameraCR = true;
-
-        DOTween.To(() => value1, x => value1 = x, value2, 2f);
-       // Mathf.Lerp(value1, value2, 2 * Time.deltaTime);
-
-        yield return new WaitForSeconds(2f);
-        isCameraCRDone = false;
-    }
-
     public override void SwitchLookAt()
     {
         if ((int)GMController.instance.isCharacterPlaying == 0)
         {
-            currentActivePlayer = boyLookAt.GetComponent<CharacterStateController>();
+           
             StartCoroutine(ResetCameraPriority());
             lookAt = boyLookAtByTag;
         }
         else if ((int)GMController.instance.isCharacterPlaying == 1)
         {
-            currentActivePlayer = motherLookAt.GetComponent<CharacterStateController>();
+            
             StartCoroutine(ResetCameraPriority());
             lookAt = motherLookAtByTag;
         }

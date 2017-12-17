@@ -15,8 +15,7 @@ public class CameraScript : MonoBehaviour
     private CinemachineVirtualCamera thirdPersonVirtualCamera;
     private FirstPersonCameraScript firstPersonCameraScript;
     private ThirdPersonCameraScript thirdPersonCameraScript;
-    private CinemachineVirtualCamera ledgeVirtualCamera;
-    private LedgeCameraScript ledgeCameraScript;
+
 
     //check wich character is in trigger
     [HideInInspector]public bool motherInTrigger = false;
@@ -41,12 +40,12 @@ public class CameraScript : MonoBehaviour
     //check if the camera is in a different state from the normal gameplay Camera
     [HideInInspector]public bool activatedByTrigger = false;
     //variables initialized at start 
-    protected Transform motherLookAt;
-    protected Transform boyLookAt;
-    protected Transform motherLookAtByTag;
-    protected Transform boyLookAtByTag;
-    protected Transform lookAt;                    // object that the camera is looking at
-    protected Transform camTransform;
+    [HideInInspector] public Transform motherLookAt;
+    [HideInInspector] public Transform boyLookAt;
+    [HideInInspector] public Transform motherLookAtByTag;
+    [HideInInspector] public Transform boyLookAtByTag;
+    [HideInInspector] public Transform lookAt;                    // object that the camera is looking at
+    [HideInInspector] public Transform camTransform;
 
     //minimum distance of the camera to the character before switching to fps
     [Tooltip("distanza alla quale la telecamera passa in prima persona")]
@@ -85,8 +84,6 @@ public class CameraScript : MonoBehaviour
         thirdPersonVirtualCamera = thirdPersonCamera.GetComponent<CinemachineVirtualCamera>();
         thirdPersonCameraScript = thirdPersonCamera.GetComponent<ThirdPersonCameraScript>();
         ledgeCamera = GameObject.Find("LedgeCamera");
-        ledgeVirtualCamera = ledgeCamera.GetComponent<CinemachineVirtualCamera>();
-        ledgeCameraScript = ledgeCamera.GetComponent<LedgeCameraScript>();
         BJoints = GameObject.Find("Alpha_Joints");
         boyJoints = BJoints.GetComponent<Renderer>();
         BSkin = GameObject.Find("Alpha_Surface");
@@ -101,17 +98,13 @@ public class CameraScript : MonoBehaviour
     private void Update()
     {
         //check which camera is active
-        if (thirdPersonVirtualCamera.m_Priority > firstPersonVirtualCamera.m_Priority && thirdPersonVirtualCamera.m_Priority > ledgeVirtualCamera.m_Priority)
+        if (thirdPersonVirtualCamera.m_Priority > firstPersonVirtualCamera.m_Priority)
         {
             GMController.instance.activeCamera = 0;
         }
-        else if (firstPersonVirtualCamera.m_Priority > thirdPersonVirtualCamera.m_Priority && firstPersonVirtualCamera.m_Priority > ledgeVirtualCamera.m_Priority)
+        else if (firstPersonVirtualCamera.m_Priority > thirdPersonVirtualCamera.m_Priority)
         {
             GMController.instance.activeCamera = (CameraActive)1;
-        }
-        else if(ledgeVirtualCamera.m_Priority > thirdPersonVirtualCamera.m_Priority && ledgeVirtualCamera.m_Priority > firstPersonVirtualCamera.m_Priority)
-        {
-            GMController.instance.activeCamera = (CameraActive)2;
         }
 
         #region Fade

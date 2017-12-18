@@ -15,13 +15,14 @@ namespace AI
         {
             m_Guard = GetComponentInParent<Guard>();
             UpdateRaycastParams();
+            
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.tag == "Player" && other.transform.GetComponent<CharacterStateController>().thisCharacter == GMController.instance.isCharacterPlaying)
             {
-                m_Guard.SetBlackboardValue("PlayerInSight", true);
+                m_Guard.SetBlackboardValue("PlayerInCone", true);
             }
         }
 
@@ -29,9 +30,18 @@ namespace AI
         {
             if (other.tag == "Player" && other.transform.GetComponent<CharacterStateController>().thisCharacter == GMController.instance.isCharacterPlaying)
             {
-                StartCoroutine(m_Guard.OutOfSightHysteresis());
+                m_Guard.SetBlackboardValue("PlayerInCone", false);
+                //StartCoroutine(m_Guard.OutOfSightHysteresis());
             }
         }
+
+        //private void OnTriggerStay(Collider other)
+        //{
+        //    if (other.tag == "Player" && other.transform.GetComponent<CharacterStateController>().thisCharacter == GMController.instance.isCharacterPlaying)
+        //    {
+        //        m_Guard.SetBlackboardValue("PlayerInCone", true);
+        //    }
+        //}
 
         public void UpdateRaycastParams()
         {

@@ -16,6 +16,7 @@ namespace AI
         bool isCheckingNavPoint = false;
         bool isCheckingNavPointCoroutineRunning = false;
         bool isRelaxing = false;
+        bool isInCone = false;
 
         int currentNavPoint = 0;
         int numberOfNavPoints;
@@ -99,6 +100,8 @@ namespace AI
                     return isCheckingNavPointCoroutineRunning;
                 case "IsRelaxing":
                     return isRelaxing;
+                case "PlayerInCone":
+                    return isInCone;
                 default:
                     Debug.Log("Default");
                     return false;
@@ -126,6 +129,9 @@ namespace AI
                     break;
                 case "IsRelaxing":
                     isRelaxing = value;
+                    break;
+                case "PlayerInCone":
+                    isInCone = value;
                     break;
                 default:
                     break;

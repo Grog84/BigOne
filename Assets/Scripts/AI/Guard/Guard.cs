@@ -48,7 +48,8 @@ namespace AI
         PerceptionBar perceptionBar;
         Transform eyes;
         Cone m_Cone;
-       
+        bool hysteresisCORunning = false;
+
         [HideInInspector]public Vector3 playerLastPercieved = new Vector3(1000f, 1000f, 1000f);
         static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
 
@@ -66,7 +67,9 @@ namespace AI
 
         //Gizmos
         public Color statusColor = Color.green;
-
+        //public Color coneColor = Color.green;
+        //public bool checkConeStatus = false;
+        
         // Follows variables found in the parent definition
         // Animation 
         //Animator m_Animator;
@@ -183,10 +186,14 @@ namespace AI
                 timer += Time.deltaTime;
                 yield return null;
                 if (GetBlackboardBoolValue("PlayerInSight"))
+                {
+                    hysteresisCORunning = false;
                     yield break;
+                }
             }
 
             m_Blackboard.SetBoolValue("PlayerInSight", false);
+            hysteresisCORunning = false;
         }
 
         private void LoadStats(GuardStats thisStats)
@@ -202,7 +209,7 @@ namespace AI
         {
             bool noRaycastHitting = true;
 
-            if (GetBlackboardBoolValue("PlayerInSight") && perceptionPercentage < 100f && GMController.instance.GetGameStatus())
+            if (GetBlackboardBoolValue("PlayerInCone") && perceptionPercentage < 100f && GMController.instance.GetGameStatus())
             {
                 //Debug.Log(GMController.instance.isCharacterPlaying);
                 Vector3 direction, distance;
@@ -218,18 +225,21 @@ namespace AI
                     //direction = (lookAtPositions[i].position - eyes.position).normalized;
                     
                     distance = (lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position - eyes.position);
-                    angle_psi = Mathf.Atan(distance.y / distance.z) * 180f / Mathf.PI;
-                    angle_theta = Mathf.Atan(distance.x / distance.z) * 180f / Mathf.PI;
+                    angle_psi = Mathf.Abs(Mathf.Atan(distance.y / distance.z) * 180f / Mathf.PI);
+                    angle_theta = Mathf.Abs(Mathf.Atan(distance.x / distance.z) * 180f / Mathf.PI);
+                    direction = distance.normalized;
 
-                    if (angle_psi <= m_Cone.max_psi_Angle && angle_theta <= m_Cone.max_theta_Angle)
+                    if (angle_psi <= m_Cone.max_psi_Angle && angle_theta <= m_Cone.max_theta_Angle && Vector3.Dot(direction, transform.forward) > 0f)
                     {
-                        direction = distance.normalized;
+                        //Debug.Log(angle_psi + " " + angle_theta);
+                        //Debug.Log(Vector3.Dot(distance.normalized, transform.forward));
+
                         ray = new Ray(eyes.position, direction);
                         isRayHitting = Physics.Raycast(ray, out rayHit, m_Cone.raycastLength, visionLayerMask);
                         isRayHitting = isRayHitting && rayHit.transform.tag == "Player" && 
                             rayHit.transform.GetComponent<CharacterStateController>().thisCharacter == GMController.instance.isCharacterPlaying;
 
-                        Debug.DrawLine(eyes.position, lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position, Color.red);
+                        Debug.DrawLine(eyes.position, eyes.position + direction * m_Cone.raycastLength, Color.red);
 
                         if (isRayHitting)
                         {
@@ -255,10 +265,10 @@ namespace AI
                 distance = (lookAtPositionCentral[(int)GMController.instance.isCharacterPlaying].position - eyes.position);
                 angle_psi = Mathf.Atan(distance.y / distance.z) * 180f / Mathf.PI;
                 angle_theta = Mathf.Atan(distance.x / distance.z) * 180f / Mathf.PI;
+                direction = distance.normalized;
 
-                if (angle_psi <= m_Cone.max_psi_Angle && angle_theta <= m_Cone.max_theta_Angle)
+                if (angle_psi <= m_Cone.max_psi_Angle && angle_theta <= m_Cone.max_theta_Angle && Vector3.Dot(direction, transform.forward) > 0f)
                 {
-                    direction = distance.normalized;
                     ray = new Ray(eyes.position, direction);
                     isRayHitting = Physics.Raycast(ray, out rayHit, m_Cone.raycastLength, visionLayerMask);
                     isRayHitting = isRayHitting && rayHit.transform.tag == "Player" &&
@@ -283,15 +293,31 @@ namespace AI
                     }
                 }
             }
-           
 
-            if (GetBlackboardBoolValue("IsRelaxing") && noRaycastHitting && perceptionPercentage > 0f)
+            //SetBlackboardValue("PlayerInSight", !noRaycastHitting);
+
+            if (noRaycastHitting)
             {
-                perceptionPercentage -= stats.fillingSpeed * stats.noSeeMultiplier * Time.deltaTime;
+                if (!hysteresisCORunning)
+                {
+                    hysteresisCORunning = true;
+                    StartCoroutine(OutOfSightHysteresis());
+                }
+
+                // if (GetBlackboardBoolValue("IsRelaxing") && noRaycastHitting && perceptionPercentage > 0f)
+                if (GetBlackboardBoolValue("IsRelaxing") && perceptionPercentage > 0f)
+                {
+                    perceptionPercentage -= stats.fillingSpeed * stats.noSeeMultiplier * Time.deltaTime;
+                }
             }
 
             perceptionPercentage = Mathf.Clamp(perceptionPercentage, 0f, 100f);
-            
+            //if (GetBlackboardBoolValue("PlayerInCone"))
+            //{
+            //    coneColor = Color.red;
+            //}
+            //else
+            //    coneColor = Color.green;
         }
 
         public void CheckNextPoint()
@@ -576,6 +602,10 @@ namespace AI
 
             m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
             m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
+
+
+
+            //checkConeStatus = GetBlackboardBoolValue("PlayerInCone");
         }
 
         private void OnDrawGizmosSelected()
@@ -592,12 +622,15 @@ namespace AI
             Gizmos.color = statusColor;
             Gizmos.DrawSphere(transform.position, 0.3f);
 
-            Gizmos.color = Color.green;
-            for (int i = 0; i < lookAtPositions[(int)GMController.instance.isCharacterPlaying].Length; i++)
-            {
-                Gizmos.DrawSphere(lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position, 0.1f);
-            }
-            Gizmos.DrawSphere(eyes.position, 0.1f);
+            //Gizmos.color = Color.green;
+            //for (int i = 0; i < lookAtPositions[(int)GMController.instance.isCharacterPlaying].Length; i++)
+            //{
+            //    Gizmos.DrawSphere(lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position, 0.1f);
+            //}
+            //Gizmos.DrawSphere(eyes.position, 0.1f);
+
+            //Gizmos.color = coneColor;
+            //Gizmos.DrawSphere(eyes.position, 0.1f);
         }
 
     }

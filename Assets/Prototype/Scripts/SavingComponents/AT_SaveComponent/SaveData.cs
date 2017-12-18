@@ -1,7 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
+using System.Text;
+using Convertitore;
 using UnityEngine;
 
 public class SaveData  {
@@ -12,6 +16,8 @@ public class SaveData  {
     public static event SerializeAction OnLoaded;
     public static event SerializeAction OnBeforeSave;
 
+
+  static  Converter C = new Converter();
     public static void Load(string path,Actor[] actors)
     {
         actorContainer = LoadActors(path);
@@ -54,22 +60,49 @@ public class SaveData  {
     private static ActorContainer LoadActors(string path)
     {
         string json = File.ReadAllText(path);
+        string[] savedData;
+        string save = "";
+        savedData = json.Split(' ');
+        for (int i = 0; i < savedData.Length; i++)
+        {
+            save += (char)Convert.ToInt32(C.FromTo(16, 10, savedData[i]));
+        }
 
-        return JsonUtility.FromJson<ActorContainer>(json);
+        return JsonUtility.FromJson<ActorContainer>(save);
 
-        BinaryFormatter BF = new BinaryFormatter();
+     
    
     }
 
     private static void SaveActors(string path, ActorContainer actors)
     {
         string json = JsonUtility.ToJson(actors);
-
+     
+        string[] savedData;
+        string save = "";
         StreamWriter sw = File.CreateText(path);
         sw.Close();
+        foreach (char a in json)
+        {
+            save += C.FromTo(10, 16, Convert.ToInt32(a).ToString()) + " ";
+        }
+        json = save;
 
         File.WriteAllText(path, json);
+    }
 
+    // Encrypt a file. 
+    public static void AddEncryption(string FileName)
+    {
 
+        
+        File.Encrypt(FileName);
+       
+    }
+
+    // Decrypt a file. 
+    public static void RemoveEncryption(string FileName)
+    {
+        File.Decrypt(FileName);
     }
 }

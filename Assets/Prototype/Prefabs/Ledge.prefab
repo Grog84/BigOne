@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 33856790512520144}
   - component: {fileID: 65655557087715296}
   - component: {fileID: 114453611316559856}
+  - component: {fileID: 114815372272133902}
   m_Layer: 19
   m_Name: Trigger1
   m_TagString: Ledge
@@ -352,7 +353,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 40
+    FieldOfView: 60
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -369,3 +370,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114815372272133902
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1885342971699224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f1f371aaccfeb7478710fac1d8f0491, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  motherInTrigger: 0
+  boyInTrigger: 0
+  layerIgnored:
+    serializedVersion: 2
+    m_Bits: 2096695
+  activatedByTrigger: 0
+  motherLookAt: {fileID: 0}
+  boyLookAt: {fileID: 0}
+  motherLookAtByTag: {fileID: 0}
+  boyLookAtByTag: {fileID: 0}
+  lookAt: {fileID: 0}
+  camTransform: {fileID: 0}
+  minCamDistance: 1
+  maxDistance: 2.5
+  priorityAmount: 200

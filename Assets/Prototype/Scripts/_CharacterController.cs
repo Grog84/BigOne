@@ -467,6 +467,8 @@ namespace Character
             CharacterTransform.DOBlendableMoveBy(new Vector3(0, difPos.y, 0), 0.5f);
             CharacterTransform.DOBlendableMoveBy(new Vector3(difPos.x, 0, difPos.z), climbTime);
             yield return new WaitForSeconds(climbTime);
+            m_Animator.SetBool("isClimbing", true);
+            yield return new WaitForSeconds(0.5f);
             climbingTop = false;
             isClimbCRDone = true;
             m_CharController.enabled = true;
@@ -488,6 +490,8 @@ namespace Character
 
             CharacterTransform.DOMove(climbAnchorBottom.position, climbTime);
             yield return new WaitForSeconds(climbTime);
+            m_Animator.SetBool("isClimbing", true);
+            yield return new WaitForSeconds(0.5f);
             climbingBottom = false;
             m_CharController.enabled = true;
             isBottomClimbCRDone = true;
@@ -617,6 +621,7 @@ namespace Character
 
             CharacterTransform.DOMove(forwardBalance.transform.position, positionTime);
             yield return new WaitForSeconds(positionTime);
+            m_Animator.applyRootMotion = true;
             isBalanceCRDone = true;
         }
 
@@ -650,6 +655,7 @@ namespace Character
                 CharacterTransform.rotation = Quaternion.LookRotation(newDir);
                 yield return null;
             }
+            CharacterTransform.rotation = Quaternion.LookRotation(finalDirection);
         }
 
         #endregion

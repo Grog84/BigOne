@@ -50,18 +50,29 @@ namespace Character.Actions
                 down = 0;
             }
 
-            if (!controller.m_CharacterController.climbingTop)
-            {
-                controller.m_CharacterController.CharacterTransform.Translate(Vector3.up * up * controller.characterStats.m_ClimbSpeed * Time.deltaTime);//0.0.1
+            //if (!controller.m_CharacterController.climbingTop)
+            //{
+            //    controller.m_CharacterController.CharacterTransform.Translate(Vector3.up * up * controller.characterStats.m_ClimbSpeed * Time.deltaTime);//0.0.1
 
-            }
-            if (!controller.m_CharacterController.climbingBottom)
-            {
-                controller.m_CharacterController.CharacterTransform.Translate(Vector3.up * down * controller.characterStats.m_ClimbSpeed * Time.deltaTime);//0.0.1
+            //}
+            //if (!controller.m_CharacterController.climbingBottom)
+            //{
+            //    controller.m_CharacterController.CharacterTransform.Translate(Vector3.up * down * controller.characterStats.m_ClimbSpeed * Time.deltaTime);//0.0.1
 
-            }
+            //}
             // Animator
             controller.m_CharacterController.m_ForwardAmount = movement;
+
+            // Assign m_ForwardAmount value except when in coroutine
+            if (movement == 0)
+            {
+               controller.m_CharacterController.m_Animator.speed = 0;
+            }
+            else
+            {
+               controller.m_CharacterController.m_Animator.speed = controller.m_CharacterController.animSpeed;
+            }
+            
 
             RaycastHit hit;
 

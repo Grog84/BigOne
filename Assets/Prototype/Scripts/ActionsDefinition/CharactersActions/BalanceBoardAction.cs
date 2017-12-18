@@ -32,12 +32,16 @@ namespace Character.Actions
                 }
             }
             else 
-            if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) > 45 &&
-                    Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) < 135)
+            if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) >= 45 &&
+                    Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) <= 135)
             {
                 if (Input.GetAxis("Horizontal") != 0)
                 {
                     movement = Input.GetAxis("Horizontal");
+                }
+                else if (Input.GetAxis("Vertical") != 0)
+                {
+                    movement = Input.GetAxis("Vertical");
                 }
                 else
                 {
@@ -53,15 +57,25 @@ namespace Character.Actions
             else
             {
                 angleSign = -1f;
-            }    
+            }
 
-           // controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward *(movement*angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
-
+            //TRANSFORM MOVEMENT
+            //controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward *(movement*angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
+            Debug.Log("Forward: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) + " Right: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward));
             // Animator
             // Assign m_ForwardAmount value except when in coroutine
             if (controller.m_CharacterController.isBalanceCRDone)
             {
                 controller.m_CharacterController.m_ForwardAmount = movement * angleSign;
+
+                if (movement == 0)
+                {
+                    controller.m_CharacterController.m_Animator.speed = 0;
+                }
+                else
+                {
+                    controller.m_CharacterController.m_Animator.speed = controller.m_CharacterController.animSpeed;
+                }
             }
         }
     }

@@ -32,6 +32,7 @@ namespace Character.Actions
             }
 
             controller.m_CharacterController.m_ForwardAmount = 1f;
+            controller.m_CharacterController.animSpeed = controller.m_CharacterController.m_Animator.speed;
             controller.m_CharacterController.m_Animator.SetBool("onBoard", true);
             controller.m_CharacterController.isBalanceCRDone = false;
             controller.m_CharacterController.startBalanceBoard = true;

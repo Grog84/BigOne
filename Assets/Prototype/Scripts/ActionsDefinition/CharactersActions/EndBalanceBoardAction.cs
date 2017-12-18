@@ -17,6 +17,7 @@ namespace Character.Actions
 
         private void EndBalance(CharacterStateController controller)
         {
+            controller.m_CharacterController.m_Animator.speed = controller.m_CharacterController.animSpeed;
             controller.m_CharacterController.m_Animator.applyRootMotion = false;
             controller.m_CharacterController.isInDanger = false;
             controller.m_CharacterController.m_Animator.SetBool("onBoard", false);

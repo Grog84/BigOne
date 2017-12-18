@@ -15,12 +15,12 @@ public class InputManager : MonoBehaviour {
     public float JoystickXSensitivity = 1f;
     public float JoystickYSensitivity = 1f;
 
-    public enum inputState
+    public enum InputState
     {
         MouseKeyboard,
         Controller
     };
-    private inputState m_State = inputState.MouseKeyboard;
+    private InputState m_State = InputState.MouseKeyboard;
 
     private void Start()
     {
@@ -38,24 +38,24 @@ public class InputManager : MonoBehaviour {
     {
         switch (m_State)
         {
-            case inputState.MouseKeyboard:
+            case InputState.MouseKeyboard:
                 if (isControlerInput())
                 {
-                    m_State = inputState.Controller;
+                    m_State = InputState.Controller;
                     Debug.Log("JoyStick being used");
                 }
                 break;
-            case inputState.Controller:
+            case InputState.Controller:
                 if (isMouseKeyboard())
                 {
-                    m_State = inputState.MouseKeyboard;
+                    m_State = InputState.MouseKeyboard;
                     Debug.Log("Mouse & Keyboard being used");
                 }
                 break;
         }
     }
 
-    public inputState GetInputState()
+    public InputState GetInputState()
     {
         return m_State;
     }

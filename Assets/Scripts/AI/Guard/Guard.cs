@@ -481,10 +481,10 @@ namespace AI
             perceptionPercentage = value;
         }
 
-        public void HearPlayer()
+        public void HearPlayer(float perceptionAmount)
         {
             heardCounter++;
-            perceptionPercentage += 20f;
+            perceptionPercentage += perceptionAmount;
 
             if (heardCounter >= 3)
             {

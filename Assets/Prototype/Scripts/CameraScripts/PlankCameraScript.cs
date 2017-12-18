@@ -31,8 +31,9 @@ public class PlankCameraScript : CameraScript {
         mainCam = Camera.main.GetComponent<CameraScript>();
         this.minCamDistance = mainCam.minCamDistance;
         this.maxDistance = mainCam.maxDistance;
+        inputManager = InputManager.instance;
         //cam.m_Lens.FieldOfView = mainCam.Fov;
-       
+
         SwitchLookAt();
 
         clipPointPositionArray = new Vector3[5];
@@ -44,11 +45,13 @@ public class PlankCameraScript : CameraScript {
 
     private void Update()
     {
-        
+
         // camera movement by axis
-        currentX += Input.GetAxis("Mouse X");
-        currentY -= Input.GetAxis("Mouse Y");
-        
+        currentX += Input.GetAxis("Mouse X") * inputManager.MouseXSensitivity;
+        currentX += Input.GetAxis("Joystick X") * inputManager.JoystickXSensitivity;
+        currentY -= Input.GetAxis("Mouse Y") * inputManager.MouseYSensitivity;
+        currentY -= Input.GetAxis("Joystick Y") * inputManager.JoystickYSensitivity;
+
         //baunderies of the camera movement
         if (currentActivePlayer.currentState.name != "BalanceBoard")
         {

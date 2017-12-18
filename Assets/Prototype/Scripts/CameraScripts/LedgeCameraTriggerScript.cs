@@ -21,7 +21,11 @@ public class LedgeCameraTriggerScript : CameraScript
     {
         if (cam.m_LookAt != null)
         {
+            currentX += Input.GetAxis("Mouse X");
+            currentY -= Input.GetAxis("Mouse Y");
+
             cam.transform.position = cam.m_LookAt.position + (myForward * -mainCam.maxDistance);
+            
         }
     }
 

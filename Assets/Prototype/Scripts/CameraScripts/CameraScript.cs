@@ -16,6 +16,8 @@ public class CameraScript : MonoBehaviour
     private FirstPersonCameraScript firstPersonCameraScript;
     private ThirdPersonCameraScript thirdPersonCameraScript;
 
+    // reference to input Manager
+    protected InputManager inputManager;
 
     //check wich character is in trigger
     [HideInInspector]public bool motherInTrigger = false;

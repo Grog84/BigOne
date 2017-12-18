@@ -14,13 +14,11 @@ public class CharacterFootstepsEmitter : FootstepsEmitter
     public void Awake()
     {
         controller = GetComponent<_CharacterController>();
-
     }
 
     public override void MakeStep()
     {
         base.MakeStep();
-        //Debug.Log(controller.m_WalkSoundrange_sq);
 
         // Controllo nemici a tiro d'orecchio
 
@@ -29,6 +27,7 @@ public class CharacterFootstepsEmitter : FootstepsEmitter
             Vector3 enemyPosition = GMController.instance.allEnemiesTransform[i].position;
             float distance = Vector3.SqrMagnitude(controller.CharacterTransform.position - enemyPosition);
             //if (distance < controller.m_CharacterController.m_WalkSoundrange_sq * Mathf.Pow(controller.m_CharacterController.floorNoiseMultiplier, 2.0f))
+            //Debug.Log(distance + " " + controller.m_SoundStatusRange);
             if (distance < controller.m_SoundStatusRange)
             {
                 Debug.Log(" Guard in Sound Range ");

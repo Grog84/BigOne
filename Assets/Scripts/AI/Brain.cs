@@ -11,21 +11,30 @@ namespace AI
         public float tickDelay = 1;
         [ReadOnly]
         public float distance = 0f;
-
-        public float shortRange = 100;
+        [Space(10)]
+        [MinMaxSlider(0, 2000, true)]
+        public Vector2 midRangeArea;
+        [Space(10)]
         public float shortRangeTickDelay = 0.2f;
 
-        public float midRange = 200;
         public float midRangeTickDelay = 1f;
 
-        public float longRange = 500;
         public float longRangeTickDelay = 5f;
 
         public DecisionMaker decisionMaker;
 
         void Start()
         {
-            InvokeRepeating("TickBrain", tickDelay, tickDelay);
+            StartCoroutine(BrainCO());
+        }
+
+        IEnumerator BrainCO()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(tickDelay);
+                TickBrain();
+            }
         }
 
         void TickBrain()
@@ -36,34 +45,21 @@ namespace AI
 
         void UpdateTickDelay()
         {
+            
             if (GMController.instance.isCharacterPlaying == CharacterActive.Boy || GMController.instance.isCharacterPlaying == CharacterActive.Mother)
             {
                 distance = (GMController.instance.playerTransform[(int)GMController.instance.isCharacterPlaying].position - transform.position).sqrMagnitude;
-                if (distance < 30)
+                if (distance < midRangeArea.x)
                 {
                     tickDelay = shortRangeTickDelay;
                 }
-                else if (distance >= 30 && distance < 100)
+                else if (distance >= midRangeArea.x && distance < midRangeArea.y)
                 {
                     tickDelay = midRangeTickDelay;
                 }
                 else
                     tickDelay = longRangeTickDelay;
             }
-        }
-
-        private void OnValidate()
-        {
-            if (midRange <= shortRange)
-            {
-                midRange = shortRange + 1;
-            }
-
-            if (longRange <= midRange)
-            {
-                longRange = midRange += 1;
-            }
-
         }
 
     }

@@ -67,7 +67,7 @@ namespace Character
         [HideInInspector] public bool canStep = true;
         [HideInInspector] public SoundStatus m_SoundStatus;
         [HideInInspector] public float m_Soundrange_sq;
-        [HideInInspector] public float m_SoundStatusRange = 1f;
+        public float m_SoundStatusRange = 1f;
         [HideInInspector] public float floorNoiseMultiplier;
         [HideInInspector] public FootstepsEmitter footStepsEmitter;
 
@@ -441,8 +441,7 @@ namespace Character
         }
 
         private void UpdateSoundRange()  // This could be improved by updating only the data necessary
-        {
-            
+        {   
             m_Soundrange_sq = m_SoundStatusRange * m_SoundStatusRange * m_ForwardAmount;
         }
 

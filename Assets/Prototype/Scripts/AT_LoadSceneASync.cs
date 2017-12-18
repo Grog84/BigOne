@@ -11,8 +11,8 @@ using UnityEngine.UI;
 public class AT_LoadSceneASync : MonoBehaviour
 {
 
-    //public AT_Profile Profiler;
-
+    public Profile Profiler;
+    public SaveManager SM;
     AsyncOperation ao;
 
     public int _index;
@@ -24,10 +24,14 @@ public class AT_LoadSceneASync : MonoBehaviour
 
     private void Awake()
     {
-      
+        dataPath = Path.Combine(Application.persistentDataPath, "Profile.json");
     }
+    string dataPath = "";
     private void Start()
     {
+ 
+        Profiler =Profile.LoadProfile(dataPath);
+
     }
   
     public void StartLoad(int index)
@@ -45,7 +49,7 @@ public class AT_LoadSceneASync : MonoBehaviour
 
     public void LoadLastScene()
     {
-  
+        StartCoroutine(AsynchronousLoad(Profiler.LastScene));
         TextBox.text = "Caricamento in corso";
         StartCoroutine(LoadingText());
 

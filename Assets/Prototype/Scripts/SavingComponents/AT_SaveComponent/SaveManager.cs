@@ -119,8 +119,9 @@ public class SaveManager :MonoBehaviour {
     public  void Load()
     {
         Profile = Profile.LoadProfile(profilePath);
-        if(allActor.Length!=0)
-        SaveData.Load(dataPath,allActor);
+        if (allActor.Length != 0)
+            SaveData.Load(dataPath, allActor);
+
     }
     private void OnApplicationQuit()
     {

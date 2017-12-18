@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using System;
+using Convertitore;
 using System.IO;
 
 
@@ -13,8 +14,8 @@ using System.IO;
         public string idProfile;
 
         public int LastScene;
-
-        [Serializable]
+     static Converter C = new Converter();
+    [Serializable]
         public struct customDateTime
         {
             public int year; public int month; public int day;
@@ -34,17 +35,27 @@ using System.IO;
         {
 
             string json = JsonUtility.ToJson(profile);
-
-            StreamWriter sw = File.CreateText(path);
+        string save = "";
+        StreamWriter sw = File.CreateText(path);
             sw.Close();
-
-            File.WriteAllText(path, json);
+        foreach (char a in json)
+        {
+            save += C.FromTo(10, 16, Convert.ToInt32(a).ToString()) + " ";
+        }
+        json = save;
+        File.WriteAllText(path, json);
         }
         public static Profile LoadProfile(string path)
         {
             string json = File.ReadAllText(path);
-
-            return JsonUtility.FromJson<Profile>(json);
+        string[] savedData;
+        string save = "";
+        savedData = json.Split(' ');
+        for (int i = 0; i < savedData.Length; i++)
+        {
+            save += (char)Convert.ToInt32(C.FromTo(16, 10, savedData[i]));
+        }
+        return JsonUtility.FromJson<Profile>(save);
 
 
         }

@@ -7,6 +7,7 @@ using RootMotion.FinalIK;
 
 namespace Character
 {
+    public enum SoundStatus { WALK, CROUCH, RUN}
     public class _CharacterController : MonoBehaviour
     {
         [HideInInspector] public bool isInDanger = false;
@@ -62,9 +63,13 @@ namespace Character
         [HideInInspector] public bool isInItemArea;                     // Detect if the player is in the key object interactable area
         [HideInInspector] public bool isItemCREnd = true;
         //
+        //SOUND EMISSION VARIABLES
         [HideInInspector] public bool canStep = true;
-        [HideInInspector] public float m_WalkSoundrange_sq;            // squared value
+        [HideInInspector] public SoundStatus m_SoundStatus;
+        [HideInInspector] public float m_Soundrange_sq;
+        [HideInInspector] public float m_SoundStatusRange = 1f;
         [HideInInspector] public float floorNoiseMultiplier;
+        [HideInInspector] public FootstepsEmitter footStepsEmitter;
 
         [HideInInspector] public float charDepth;
         [HideInInspector] public float charSize;
@@ -99,8 +104,6 @@ namespace Character
         [HideInInspector] public GameObject boardOppositePoint;
         //
         [HideInInspector] public bool isDefeated = false;
-        [HideInInspector] public FootstepsEmitter footStepsEmitter;
-        [HideInInspector] public float walkStatusRange = 1f;
         // Alpha management for Icons
         [HideInInspector] public Color alphaZero;
         [HideInInspector] public Color alphaMax;
@@ -418,9 +421,29 @@ namespace Character
 
         #endregion
 
+        public void UpdateSoundStatus(SoundStatus soundStatus)
+        {
+            m_SoundStatus = soundStatus;
+            switch (m_SoundStatus)
+            {
+                case SoundStatus.WALK:
+                    m_SoundStatusRange = m_CharStats.m_WalkSoundrange;
+                    break;
+                case SoundStatus.CROUCH:
+                    m_SoundStatusRange = m_CharStats.m_CrouchSoundrange;
+                    break;
+                case SoundStatus.RUN:
+                    m_SoundStatusRange = m_CharStats.m_RunSoundrange;
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void UpdateSoundRange()  // This could be improved by updating only the data necessary
         {
-            m_WalkSoundrange_sq = walkStatusRange * walkStatusRange * m_ForwardAmount;
+            
+            m_Soundrange_sq = m_SoundStatusRange * m_SoundStatusRange * m_ForwardAmount;
         }
 
         #region Climb Coroutine
@@ -836,10 +859,10 @@ namespace Character
             }
         }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawWireSphere(transform.position, walkStatusRange);
-        }
+        //private void OnDrawGizmos()
+        //{
+        //    Gizmos.DrawWireSphere(transform.position, m_SoundStatusRange);
+        //}
 
     }
 }

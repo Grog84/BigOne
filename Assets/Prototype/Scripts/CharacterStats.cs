@@ -41,6 +41,10 @@ public class CharacterStats : ScriptableObject { // nope...here stats only shoul
     public float m_CrouchSoundrange = 1.0f;
     public float m_RunSoundrange = 5.0f;
     [Space(10)]
+    [Range(1, 99)]
+    public float m_InnerAreaPerc = 30;
+
+    [Space(10)]
     [Header("Character Collider Parameters")]
     public float crouchedColliderHeightDimension = 0.0f;
     public float crouchedColliderYOffset = 0.0f;

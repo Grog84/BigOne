@@ -610,6 +610,8 @@ namespace AI
 
         private void OnDrawGizmosSelected()
         {
+            if (!Application.isPlaying) return;
+
             if (m_Blackboard != null)
             {
                 Gizmos.color = Color.red;

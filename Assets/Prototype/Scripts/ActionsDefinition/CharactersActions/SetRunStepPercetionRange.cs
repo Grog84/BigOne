@@ -17,7 +17,7 @@ namespace Character.Actions
 
         private void SetRange(CharacterStateController controller)
         {
-            controller.m_CharacterController.walkStatusRange = controller.m_CharacterController.m_CharStats.m_RunSoundrange;
+            controller.m_CharacterController.UpdateSoundStatus(SoundStatus.RUN);
         }
 
     }

@@ -19,7 +19,8 @@ public class ThirdPersonCameraScript : CameraScript {
     protected CinemachineVirtualCamera cam;
     private CameraScript mainCam;
     //Variable for the offset of the raycast that check the collisions of the camera
-    private float collisionOffeset = 4.004f;
+    private float collisionOffesetX = 4.004f;
+    private float collisionOffsetY = 0f;
     //array of the actual position of the clip points
     [HideInInspector]
     public Vector3[] clipPointPositionArray;
@@ -30,6 +31,7 @@ public class ThirdPersonCameraScript : CameraScript {
         mainCam = Camera.main.GetComponent<CameraScript>();
         this.minCamDistance = mainCam.minCamDistance;
         this.maxDistance = mainCam.maxDistance;
+        inputManager = InputManager.instance;
         //cam.m_Lens.FieldOfView = mainCam.Fov;
        
         SwitchLookAt();
@@ -45,8 +47,10 @@ public class ThirdPersonCameraScript : CameraScript {
     {
 
         // camera movement by axis
-        currentX += Input.GetAxis("Mouse X");
-        currentY -= Input.GetAxis("Mouse Y");
+        currentX += Input.GetAxis("Mouse X") * inputManager.MouseXSensitivity;
+        currentX += Input.GetAxis("Joystick X") * inputManager.JoystickXSensitivity;
+        currentY -= Input.GetAxis("Mouse Y") * inputManager.MouseYSensitivity;
+        currentY -= Input.GetAxis("Joystick Y") * inputManager.JoystickYSensitivity;
         currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
 
         //camera management of the bound to the player, movement, rotation and look direction
@@ -60,10 +64,10 @@ public class ThirdPersonCameraScript : CameraScript {
 
 
         //Series of Debug controlls 
-        //Debug.DrawRay (lookAt.position, clipPointPositionArray [0] - lookAt.position, Color.red);
-        //Debug.DrawRay (lookAt.position, clipPointPositionArray [1] - lookAt.position, Color.green);
-        //Debug.DrawRay (lookAt.position, clipPointPositionArray [2] - lookAt.position, Color.blue);
-        //Debug.DrawRay (lookAt.position, clipPointPositionArray [3] - lookAt.position);
+        Debug.DrawRay (lookAt.position, clipPointPositionArray [0] - lookAt.position, Color.red);
+        Debug.DrawRay (lookAt.position, clipPointPositionArray [1] - lookAt.position, Color.green);
+        Debug.DrawRay (lookAt.position, clipPointPositionArray [2] - lookAt.position, Color.blue);
+        Debug.DrawRay (lookAt.position, clipPointPositionArray [3] - lookAt.position);
         Debug.DrawRay(lookAt.position, clipPointPositionArray[4] - lookAt.position);
 
 
@@ -92,7 +96,7 @@ public class ThirdPersonCameraScript : CameraScript {
         clipArray = new Vector3[5];
 
         float z = cam.m_Lens.NearClipPlane;
-        float x = Mathf.Tan(cam.m_Lens.FieldOfView/ collisionOffeset) * z;
+        float x = Mathf.Tan(cam.m_Lens.FieldOfView/ collisionOffesetX) * z;
         float y = x / cam.m_Lens.Aspect;
 
 

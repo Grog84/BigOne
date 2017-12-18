@@ -18,6 +18,7 @@ public class FirstPersonCameraScript : CameraScript {
         mainCam = Camera.main.GetComponent<CameraScript>();
         this.minCamDistance = mainCam.minCamDistance;
         this.maxDistance = mainCam.maxDistance;
+        inputManager = InputManager.instance;
         //myCamera.m_Lens.FieldOfView = mainCam.Fov;
         myTransform = GetComponent<Transform>();
         myCamera = GetComponent<CinemachineVirtualCamera>();
@@ -32,8 +33,10 @@ public class FirstPersonCameraScript : CameraScript {
         // camera movement and limit of movement
         currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
 
-        currentX += Input.GetAxis("Mouse X");
-        currentY -= Input.GetAxis("Mouse Y");
+        currentX += Input.GetAxis("Mouse X") * inputManager.MouseXSensitivity;
+        currentX += Input.GetAxis("Joystick X") * inputManager.JoystickXSensitivity;
+        currentY -= Input.GetAxis("Mouse Y") * inputManager.MouseYSensitivity;
+        currentY -= Input.GetAxis("Joystick Y") * inputManager.JoystickYSensitivity;
         rotation = Quaternion.Euler (currentY, currentX, 0);
         transform.rotation = rotation;
     }

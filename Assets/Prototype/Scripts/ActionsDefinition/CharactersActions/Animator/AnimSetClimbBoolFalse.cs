@@ -16,8 +16,10 @@ namespace Character.Actions
 
         private void UpdateAnimatorForClimb(CharacterStateController controller)
         {
+            controller.m_CharacterController.m_Animator.speed = controller.m_CharacterController.animSpeed;
             controller.m_CharacterController.m_Animator.SetBool("isClimbing", false);
             controller.m_CharacterController.secureFall = false;
+            controller.m_CharacterController.m_Animator.applyRootMotion = false;
         }
     }
 }

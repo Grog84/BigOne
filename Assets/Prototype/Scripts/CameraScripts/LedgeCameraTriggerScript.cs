@@ -6,6 +6,7 @@ using Cinemachine;
 public class LedgeCameraTriggerScript : CameraScript
 {
     protected CinemachineVirtualCamera cam;
+    private Transform camPosition;
     public int priorityAmount = 0;
     private CameraScript mainCam;
     private Vector3 myForward;
@@ -15,17 +16,14 @@ public class LedgeCameraTriggerScript : CameraScript
         myForward = transform.parent.forward;
         mainCam = Camera.main.GetComponent<CameraScript>();
         cam = GetComponentInChildren<CinemachineVirtualCamera>();
+        camPosition = transform.GetChild(2);
     }
 
     private void Update()
     {
         if (cam.m_LookAt != null)
         {
-            currentX += Input.GetAxis("Mouse X");
-            currentY -= Input.GetAxis("Mouse Y");
-
-            cam.transform.position = cam.m_LookAt.position + (myForward * -mainCam.maxDistance);
-            
+            camPosition.position = cam.m_LookAt.position + (myForward * -mainCam.maxDistance);          
         }
     }
 

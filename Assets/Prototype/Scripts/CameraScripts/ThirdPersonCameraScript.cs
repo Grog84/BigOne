@@ -9,11 +9,7 @@ using DG.Tweening;
 
 public class ThirdPersonCameraScript : CameraScript {
 
-
-
     // max and min angles of the camera movement
-    protected bool isCameraCRDone = true;
-    protected bool isCameraCR = false;
     protected float yAngleMin = -40.0F;
     protected float yAngleMax = 70.0F;
     protected CinemachineVirtualCamera cam;
@@ -68,7 +64,7 @@ public class ThirdPersonCameraScript : CameraScript {
         Debug.DrawRay (lookAt.position, clipPointPositionArray [1] - lookAt.position, Color.green);
         Debug.DrawRay (lookAt.position, clipPointPositionArray [2] - lookAt.position, Color.blue);
         Debug.DrawRay (lookAt.position, clipPointPositionArray [3] - lookAt.position);
-        Debug.DrawRay(lookAt.position, clipPointPositionArray[4] - lookAt.position);
+        Debug.DrawRay (lookAt.position, clipPointPositionArray[4] - lookAt.position);
 
 
         // Camera repositioning on collision

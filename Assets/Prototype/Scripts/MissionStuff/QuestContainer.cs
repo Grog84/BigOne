@@ -7,9 +7,10 @@ using UnityEngine;
 namespace QuestManager
 {
     [Serializable]
-    public class QuestContainer
+    [CreateAssetMenu(menuName ="Prototype/QuestContainer")]
+    public class QuestContainer:ScriptableObject
     {          
-        public List<Quest> MissionList= new List<Quest>();
+        public List<Quest> QuestList= new List<Quest>();
    
     }
 }

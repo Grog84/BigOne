@@ -34,6 +34,28 @@ public class CharacterInterface : MonoBehaviour {
         }
 
         m_CharController.m_Animator.SetBool("isDead", false);
+        // Temporary checks given the current animator structure
+        if (m_CharController.m_Animator.GetBool("isClimbing"))
+        {
+            m_CharController.m_Animator.SetBool("isClimbing", false);
+        }
+        if (m_CharController.m_Animator.GetBool("onBoard"))
+        {
+            m_CharController.m_Animator.SetBool("onBoard", false);
+        }
+        if (m_CharController.m_Animator.GetBool("onLedge"))
+        {
+            m_CharController.m_Animator.SetBool("onLedge", false);
+        }
+        if (m_CharController.m_Animator.GetBool("Crouch"))
+        {
+            m_CharController.m_Animator.SetBool("Crouch", false);
+        }
+        if (!m_CharController.m_Animator.GetBool("isWalking"))
+        {
+            m_CharController.m_Animator.SetBool("isWalking", true);
+        }
+
         m_CharController.isDefeated = false;
         defeatCoroutinePlaying = false;
         //yield return StartCoroutine(GMController.instance.WaitAndRestart());

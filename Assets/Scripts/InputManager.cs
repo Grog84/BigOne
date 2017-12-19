@@ -15,11 +15,15 @@ public class InputManager : MonoBehaviour {
     public float JoystickXSensitivity = 1f;
     public float JoystickYSensitivity = 1f;
 
+    bool hasReceivedInputs = false;
+    bool updateTick = true;
+
     public enum InputState
     {
         MouseKeyboard,
         Controller
     };
+
     private InputState m_State = InputState.MouseKeyboard;
 
     private void Start()
@@ -34,25 +38,52 @@ public class InputManager : MonoBehaviour {
             Destroy(gameObject);
     }
 
-    private void OnGUI()
+    private void Update()
     {
-        switch (m_State)
+
+        if (updateTick)
         {
-            case InputState.MouseKeyboard:
-                if (isControlerInput())
+            bool joyInput = isControllerInput();
+            if (hasReceivedInputs)
+            {
+                updateTick = false;
+
+                if (joyInput)
                 {
+                    Debug.Log("joy last");
                     m_State = InputState.Controller;
-                    Debug.Log("JoyStick being used");
                 }
-                break;
-            case InputState.Controller:
-                if (isMouseKeyboard())
+                else
                 {
+                    Debug.Log("key last");
                     m_State = InputState.MouseKeyboard;
-                    Debug.Log("Mouse & Keyboard being used");
                 }
-                break;
+
+                hasReceivedInputs = false;
+                StartCoroutine(ResetUpdateTick());
+
+            }
+            else
+            {
+                if (joyInput)
+                {
+                    Debug.Log("joy last");
+                    m_State = InputState.Controller;
+                }
+                updateTick = true;
+            }
+
         }
+    }
+
+    IEnumerator ResetUpdateTick()
+    {
+
+        while (Input.GetAxis("Horizontal") != 0.0f || Input.GetAxis("Vertical") != 0.0f)
+        {
+            yield return null;
+        }
+        updateTick = true;
     }
 
     public InputState GetInputState()
@@ -60,24 +91,24 @@ public class InputManager : MonoBehaviour {
         return m_State;
     }
 
-    private bool isMouseKeyboard()
-    {
-        // mouse & keyboard buttons
-        if (Event.current.isKey ||
-            Event.current.isMouse)
-        {
-            return true;
-        }
-        // mouse movement
-        if (Input.GetAxis("Mouse X") != 0.0f ||
-            Input.GetAxis("Mouse Y") != 0.0f)
-        {
-            return true;
-        }
-        return false;
-    }
+    //private bool isMouseKeyboard()
+    //{
+    //    // mouse & keyboard buttons
+    //    if (Input.anyKey)
+    //    {
+    //        Debug.Log("Tastiera");
+    //        return true;
+    //    }
+    //    // mouse movement
+    //    if (Input.GetAxis("Mouse X") != 0.0f ||
+    //        Input.GetAxis("Mouse Y") != 0.0f)
+    //    {
+    //        return true;
+    //    }
+    //    return false;
+    //}
 
-    private bool isControlerInput()
+    private bool isControllerInput()
     {
         // joystick buttons
         if (Input.GetKey(KeyCode.JoystickButton0) ||
@@ -106,12 +137,31 @@ public class InputManager : MonoBehaviour {
 
         // joystick axis
         if (Input.GetAxis("Joystick X") != 0.0f ||
-           Input.GetAxis("Joystick Y") != 0.0f)
+            Input.GetAxis("Joystick Y") != 0.0f ||
+           (Input.GetAxis("Horizontal") != 0.0f && hasReceivedInputs == false)||
+           (Input.GetAxis("Vertical") != 0.0f && hasReceivedInputs == false))
         {
+            Debug.Log("Joystick Di Merda");
+
             return true;
         }
 
         return false;
+    }
+
+    private void OnGUI()
+    {
+        if(updateTick)
+        {
+            if (Event.current.isKey)
+            {
+                hasReceivedInputs = true;
+            }
+            else if (Event.current.isMouse)
+            { 
+                hasReceivedInputs = true;
+            }
+        }
     }
 
 }

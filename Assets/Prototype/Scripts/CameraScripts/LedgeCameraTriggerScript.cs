@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class LedgeCameraTriggerScript : CameraScript
+public class LedgeCameraTriggerScript : MonoBehaviour
 {
-    protected CinemachineVirtualCamera cam;
+    private CinemachineVirtualCamera cam;
     private Transform camPosition;
     public int priorityAmount = 0;
     private CameraScript mainCam;

@@ -19,10 +19,8 @@ public class LedgeCameraScript : CameraScript {
         this.minCamDistance = mainCam.minCamDistance;
         this.maxDistance = mainCam.maxDistance;
         inputManager = InputManager.instance;
-        //cam.m_Lens.FieldOfView = mainCam.Fov;
-       
+        //cam.m_Lens.FieldOfView = mainCam.Fov;       
         SwitchLookAt();
-
         camTransform = transform;
         cam = this.GetComponent<CinemachineVirtualCamera>();
     }

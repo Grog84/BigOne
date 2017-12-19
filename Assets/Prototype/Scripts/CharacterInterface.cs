@@ -20,7 +20,6 @@ public class CharacterInterface : MonoBehaviour {
     public void RevivePlayer()
     {
         m_CharController.m_Animator.SetFloat("Forward", 0f);
-        m_CharController.m_Animator.SetBool("isDead", false); // dovrebbe esser lo stato
         m_CharStateController.TransitionToState(m_CharStateController.gameStartState);
     }
 
@@ -33,6 +32,8 @@ public class CharacterInterface : MonoBehaviour {
             GMController.instance.deathTimer += Time.deltaTime;
             yield return null;
         }
+
+        m_CharController.m_Animator.SetBool("isDead", false);
         m_CharController.isDefeated = false;
         defeatCoroutinePlaying = false;
         //yield return StartCoroutine(GMController.instance.WaitAndRestart());

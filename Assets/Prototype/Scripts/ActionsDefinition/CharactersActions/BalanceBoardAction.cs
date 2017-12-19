@@ -46,15 +46,23 @@ namespace Character.Actions
                   }
                   else
                   {
-                       if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) >= 135)
-                       {
-                            movement = Input.GetAxis("Vertical");
-                       }
-                       else
-                       if(Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) <= 45)
-                       {
-                            movement = (Input.GetAxis("Vertical")) * -1;
-                       }
+                        if(Input.GetAxis("Horizontal") < 0)
+                        {
+                            movement = Mathf.Abs(Input.GetAxis("Vertical")) * -1;
+                        }
+                        else
+                        {
+                            movement = Mathf.Abs(Input.GetAxis("Vertical"));
+                        }
+                        //if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) >= 135)
+                        //{
+                        //    movement = Input.GetAxis("Vertical");
+                        //}
+                        //else
+                        //if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) <= 45)
+                        //{
+                        //    movement = (Input.GetAxis("Vertical")) * -1;
+                        //}
                   }
                }
                else

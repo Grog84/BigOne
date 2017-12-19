@@ -33,7 +33,7 @@ public class CharacterFootstepsEmitter : FootstepsEmitter
             //Debug.Log(distance + " " + controller.m_SoundStatusRange);
             if (distance < controller.m_SoundStatusRange)
             {
-                Debug.Log(" Guard in Sound Range ");
+                //Debug.Log(" Guard in Sound Range ");
                 EmitSound(enemyPosition);
             }
         }

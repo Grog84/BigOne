@@ -34,6 +34,7 @@ public class CharacterInterface : MonoBehaviour {
         }
 
         m_CharController.m_Animator.SetBool("isDead", false);
+
         // Temporary checks given the current animator structure
         if (m_CharController.m_Animator.GetBool("isClimbing"))
         {

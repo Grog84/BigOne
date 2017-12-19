@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Prototype/FloorStats")]
+[System.Serializable]
 public class FloorDescription : ScriptableObject {
 
     public string floorName;

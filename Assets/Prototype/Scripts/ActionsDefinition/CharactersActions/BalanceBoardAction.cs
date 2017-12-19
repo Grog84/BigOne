@@ -21,7 +21,7 @@ namespace Character.Actions
         {
             // ANGLE FOR INPUT
             if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) < 45 ||
-                Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) > 135)
+                Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) >= 135)
             {
                 if (Input.GetAxis("Vertical") != 0)
                 {
@@ -33,7 +33,7 @@ namespace Character.Actions
                 }
             }
             else 
-            if(Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) <= 45 ||
+            if(Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) < 45 ||
                Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) >= 135)
             {
                if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)

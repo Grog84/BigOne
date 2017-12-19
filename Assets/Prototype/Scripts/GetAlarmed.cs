@@ -16,8 +16,7 @@ public class GetAlarmed : MonoBehaviour
        {
             if(hit.transform.tag == "Enemy" && hit.transform.GetComponent<Guard>().GetState == GuardState.ALARMED)
             {
-                transform.parent.GetComponent<Guard>().SetOtherAlarmed();
-                transform.parent.GetComponent<Guard>().playerLastPercieved = hit.transform.GetComponent<Guard>().playerLastPercieved; 
+                transform.parent.GetComponent<Guard>().SetOtherAlarmed(hit.transform.GetComponent<Guard>()); 
             }
        }
       

@@ -50,8 +50,8 @@ namespace AI
         Transform eyes;
         Cone m_Cone;
         bool hysteresisCORunning = false;
+        bool noRaycastHitting = true;
 
-        [HideInInspector]public Vector3 playerLastPercieved = new Vector3(1000f, 1000f, 1000f);
         static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
 
         public bool hasRadio = false;
@@ -71,8 +71,10 @@ namespace AI
         public Color statusColor = Color.green;
         [Sirenix.OdinInspector.ReadOnly]
         public Vector3 lastPerceptionPoint = Vector3.zero;
+        [Sirenix.OdinInspector.ReadOnly]
+        public bool playerInSight = false;
         //public bool checkConeStatus = false;
-        
+
         // Follows variables found in the parent definition
         // Animation 
         //Animator m_Animator;
@@ -119,6 +121,7 @@ namespace AI
             GMController.instance.alarmedGuards++;
             m_State = GuardState.ALARMED;
             SetBlackboardValue("GuardState", (int)GuardState.ALARMED);
+            SetBlackboardValue("OtherAlarmed", false);
             LoadStats(alarmedStats);
             guardAllert.SetActive(false);
             isOtherAlarmed = false;
@@ -136,10 +139,12 @@ namespace AI
             statusColor = Color.blue;
         }
 
-        public void SetOtherAlarmed()
+        public void SetOtherAlarmed(Guard otherGuard)
         {
             isOtherAlarmed = true;
             SetBlackboardValue("OtherAlarmed", true);
+            SetBlackboardValue("LastPercievedPosition", otherGuard.GetBlackboardVector3Value("LastPercievedPosition"));
+
         }
 
         public void SetBlackboardValue(string valueName, int value)
@@ -188,7 +193,7 @@ namespace AI
             {
                 timer += Time.deltaTime;
                 yield return null;
-                if (GetBlackboardBoolValue("PlayerInSight"))
+                if (!noRaycastHitting)
                 {
                     hysteresisCORunning = false;
                     yield break;
@@ -197,6 +202,8 @@ namespace AI
 
             m_Blackboard.SetBoolValue("PlayerInSight", false);
             hysteresisCORunning = false;
+
+            Debug.Log("hyst coroutine over");
         }
 
         private void LoadStats(GuardStats thisStats)
@@ -210,11 +217,10 @@ namespace AI
 
         private void LookAround()
         {
-            bool noRaycastHitting = true;
+            noRaycastHitting = true;
 
             if (GetBlackboardBoolValue("PlayerInCone") && perceptionPercentage < 100f && GMController.instance.GetGameStatus())
             {
-                //Debug.Log(GMController.instance.isCharacterPlaying);
                 Vector3 direction, distance;
                 RaycastHit rayHit;
                 bool isRayHitting;
@@ -225,8 +231,6 @@ namespace AI
 
                 for (int i = 0; i < lookAtPositions[(int)GMController.instance.isCharacterPlaying].Length; i++)
                 {
-                    //direction = (lookAtPositions[i].position - eyes.position).normalized;
-                    
                     distance = (lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position - eyes.position);
                     angle_psi = Mathf.Abs(Mathf.Atan(distance.y / distance.z) * 180f / Mathf.PI);
                     angle_theta = Mathf.Abs(Mathf.Atan(distance.x / distance.z) * 180f / Mathf.PI);
@@ -234,9 +238,6 @@ namespace AI
 
                     if (angle_psi <= m_Cone.max_psi_Angle && angle_theta <= m_Cone.max_theta_Angle && Vector3.Dot(direction, transform.forward) > 0f)
                     {
-                        //Debug.Log(angle_psi + " " + angle_theta);
-                        //Debug.Log(Vector3.Dot(distance.normalized, transform.forward));
-
                         ray = new Ray(eyes.position, direction);
                         isRayHitting = Physics.Raycast(ray, out rayHit, m_Cone.raycastLength, visionLayerMask);
                         isRayHitting = isRayHitting && rayHit.transform.tag == "Player" && 
@@ -247,24 +248,12 @@ namespace AI
                         if (isRayHitting)
                         {
                             noRaycastHitting = false;
-                            if (hasRadio)
-                            {
-                                GMController.instance.UpdatePlayerPosition();
-                                playerLastPercieved = GMController.instance.lastPercievedPlayerPosition;
-                                UpdateLastPercievedDestination();
-                            }
-                            else
-                            {
-                                UpdateMyPlayerPosition();
-                            }
-
-                        
                             perceptionPercentage += stats.fillingSpeed * Time.deltaTime;
                         }
                     }
                 }
 
-                //direction = (lookAtPositionCentral.position - eyes.position).normalized;
+
                 distance = (lookAtPositionCentral[(int)GMController.instance.isCharacterPlaying].position - eyes.position);
                 angle_psi = Mathf.Atan(distance.y / distance.z) * 180f / Mathf.PI;
                 angle_theta = Mathf.Atan(distance.x / distance.z) * 180f / Mathf.PI;
@@ -280,29 +269,18 @@ namespace AI
                     if (isRayHitting)
                     {
                         noRaycastHitting = false;
-                        if (hasRadio)
-                        {
-                            GMController.instance.UpdatePlayerPosition();
-                            playerLastPercieved = GMController.instance.lastPercievedPlayerPosition;
-                            UpdateLastPercievedDestination();
-                        }
-                        else
-                        {
-                            UpdateMyPlayerPosition();
-                        }
-
-
                         perceptionPercentage += stats.fillingSpeed * stats.torsoMultiplier * Time.deltaTime;
                     }
                 }
             }
 
-            //SetBlackboardValue("PlayerInSight", !noRaycastHitting);
+            // SetBlackboardValue("PlayerInSight", !noRaycastHitting);
 
             if (noRaycastHitting)
             {
-                if (!hysteresisCORunning)
+                if (!hysteresisCORunning && GetBlackboardBoolValue("PlayerInSight"))
                 {
+                    Debug.Log("hyst running");
                     hysteresisCORunning = true;
                     StartCoroutine(OutOfSightHysteresis());
                 }
@@ -315,16 +293,16 @@ namespace AI
             }
             else
             {
-                SetBlackboardValue("LastPercievedPosition", GMController.instance.playerTransform[(int)GMController.instance.isCharacterPlaying].position);
+                SetBlackboardValue("PlayerInSight", true);
+                UpdateLastPercievedDestination();
+                if (hasRadio)
+                {
+                    GMController.instance.UpdatePlayerPosition();
+                }
             }
 
             perceptionPercentage = Mathf.Clamp(perceptionPercentage, 0f, 100f);
-            //if (GetBlackboardBoolValue("PlayerInCone"))
-            //{
-            //    coneColor = Color.red;
-            //}
-            //else
-            //    coneColor = Color.green;
+            
         }
 
         public void CheckNextPoint()
@@ -409,30 +387,16 @@ namespace AI
             }
         }
 
-        // update the personal known positoin of the player
-        public void UpdateMyPlayerPosition()
-        {
-            playerLastPercieved = GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].transform.position;
-            UpdateLastPercievedDestination();
-        }
-
         // update the personal known position of the player on the blackboard
         public void UpdateLastPercievedDestination()
         {
-            m_Blackboard.SetVector3Value("LastPercievedPosition", playerLastPercieved);
-        }
-
-        // reset the personal known positoin of the player
-        public void ResetMyPlayerPosition()
-        {
-            playerLastPercieved = resetPlayerPosition;
-            ResetLastPercievedPosition();
+            SetBlackboardValue("LastPercievedPosition", GMController.instance.playerTransform[(int)GMController.instance.isCharacterPlaying].position);
         }
 
         // reset the personal known position of the player on the blackboard
         public void ResetLastPercievedPosition()
         {
-            m_Blackboard.SetVector3Value("LastPercievedPosition", playerLastPercieved);
+            m_Blackboard.SetVector3Value("LastPercievedPosition", resetPlayerPosition);
         }
 
         // get a random point to check when reached the last precieved position
@@ -614,7 +578,8 @@ namespace AI
 
 
             lastPerceptionPoint = GetBlackboardVector3Value("LastPercievedPosition");
-            Debug.Log(GetBlackboardBoolValue("IsRelaxing"));
+            playerInSight = GetBlackboardBoolValue("PlayerInSight");
+            //Debug.Log(GetBlackboardBoolValue("IsRelaxing"));
             //checkConeStatus = GetBlackboardBoolValue("PlayerInCone");
         }
 
@@ -643,6 +608,13 @@ namespace AI
 
             //Gizmos.color = coneColor;
             //Gizmos.DrawSphere(eyes.position, 0.1f);
+
+            //if (GetBlackboardBoolValue("PlayerInCone"))
+            //{
+            //    coneColor = Color.red;
+            //}
+            //else
+            //    coneColor = Color.green;
         }
 
     }

@@ -30,7 +30,6 @@ namespace Character.Actions
                 controller.m_CharacterController.forwardBalance = controller.m_CharacterController.balanceCollider.transform.GetChild(1).gameObject;
                 controller.m_CharacterController.boardOppositePoint = controller.m_CharacterController.balanceCollider.transform.GetChild(0).gameObject;
             }
-
             controller.m_CharacterController.m_ForwardAmount = 1f;
             controller.m_CharacterController.animSpeed = controller.m_CharacterController.m_Animator.speed;
             controller.m_CharacterController.m_Animator.SetBool("onBoard", true);

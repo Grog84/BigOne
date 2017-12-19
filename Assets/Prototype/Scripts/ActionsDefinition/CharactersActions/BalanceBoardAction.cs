@@ -19,6 +19,7 @@ namespace Character.Actions
 
         private void Balance(CharacterStateController controller)
         {
+            // ANGLE FOR INPUT
             if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) < 45 ||
                 Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) > 135)
             {
@@ -32,23 +33,34 @@ namespace Character.Actions
                 }
             }
             else 
-            if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) >= 45 &&
-                    Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) <= 135)
+            if(Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) <= 45 ||
+               Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) >= 135)
             {
-                if (Input.GetAxis("Horizontal") != 0)
-                {
-                    movement = Input.GetAxis("Horizontal");
-                }
-                else if (Input.GetAxis("Vertical") != 0)
-                {
-                    movement = Input.GetAxis("Vertical");
-                }
-                else
-                {
-                    movement = 0;
-                }
+               if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+               {
+                  if (Mathf.Abs(Input.GetAxis("Horizontal")) >= Mathf.Abs(Input.GetAxis("Vertical")))
+                  {
+                     movement = Input.GetAxis("Horizontal");
+                  }
+                  else
+                  {
+                       if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) >= 135)
+                       {
+                            movement = Input.GetAxis("Vertical");
+                       }
+                       else
+                       if(Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) <= 45)
+                       {
+                            movement = (Input.GetAxis("Vertical")) * -1;
+                       }
+                  }
+               }
+               else
+               {
+                  movement = 0;
+               }
             }
-
+            // ANGLE FOR SIGN
             if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) <= 135 &&
                 Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) >= 45)
             {

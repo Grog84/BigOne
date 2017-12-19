@@ -15,13 +15,13 @@ namespace Character
         [HideInInspector] public float m_TurnAmount;                   // Unutilized for the moment
         [HideInInspector] public float m_ForwardAmount;
         [HideInInspector] public float ray_length;
+        [HideInInspector] public float animSpeed;
         //
         // BALANCE VARIABLES
         [HideInInspector] public bool isInBalanceArea;
         [HideInInspector] public bool startBalanceBoard;
         [HideInInspector] public bool startBalanceLedge;
         [HideInInspector] public bool isInJointArea;
-        [HideInInspector] public float animSpeed;
         [HideInInspector] public bool isLedgeLimit;
         [HideInInspector] public bool ledgeForwardActive = true;
         [HideInInspector] public bool ledgeBackwardActive = true;

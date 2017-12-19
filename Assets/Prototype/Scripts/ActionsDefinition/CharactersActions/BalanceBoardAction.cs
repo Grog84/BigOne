@@ -11,7 +11,8 @@ namespace Character.Actions
     {
         float movement;
         float angleSign = 1f;
-
+        Vector3 camera;
+        Vector3 dir;
         public override void Execute(CharacterStateController controller)
         {
             Balance(controller);
@@ -21,9 +22,11 @@ namespace Character.Actions
         {
             #region Movemets and Angles
 
+            camera = new Vector3(controller.m_CharacterController.m_Camera.position.x, controller.m_CharacterController.CharacterTransform.position.y, controller.m_CharacterController.m_Camera.position.z);
+            dir = (controller.m_CharacterController.CharacterTransform.position - camera).normalized;
             // ANGLE FOR INPUT
-            if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) < 45 ||
-                Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) >= 135)
+            if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, dir) <= 45 ||
+                Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, dir) >= 135)
             {
                 if (Input.GetAxis("Vertical") != 0)
                 {
@@ -35,8 +38,8 @@ namespace Character.Actions
                 }
             }
             else 
-            if(Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) < 45 ||
-               Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) >= 135)
+            if((Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, dir) <= 45 ||
+               Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, dir) >= 135))
             {
                if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
                {
@@ -70,9 +73,14 @@ namespace Character.Actions
                   movement = 0;
                }
             }
+            //if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.up, controller.m_CharacterController.m_Camera.forward) >= 90)
+            //{
+
+            //}
+
             // ANGLE FOR SIGN
-            if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) <= 135 &&
-                Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) >= 45)
+            if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, dir) <= 135 &&
+                Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, dir) >= 45)
             {
                 angleSign = 1f;
             }
@@ -85,7 +93,9 @@ namespace Character.Actions
             //controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward *(movement*angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
 #endregion     
 
-            // Debug.Log("Forward: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) + " Right: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward));
+             Debug.Log("Forward: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) + 
+                        " Right: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) + 
+                         " UP: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.up, controller.m_CharacterController.m_Camera.forward));
 
             #region Animator
 

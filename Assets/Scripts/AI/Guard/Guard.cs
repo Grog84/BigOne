@@ -203,7 +203,6 @@ namespace AI
             m_Blackboard.SetBoolValue("PlayerInSight", false);
             hysteresisCORunning = false;
 
-            Debug.Log("hyst coroutine over");
         }
 
         private void LoadStats(GuardStats thisStats)
@@ -280,7 +279,6 @@ namespace AI
             {
                 if (!hysteresisCORunning && GetBlackboardBoolValue("PlayerInSight"))
                 {
-                    Debug.Log("hyst running");
                     hysteresisCORunning = true;
                     StartCoroutine(OutOfSightHysteresis());
                 }

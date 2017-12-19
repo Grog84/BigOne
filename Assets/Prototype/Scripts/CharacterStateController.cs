@@ -9,9 +9,9 @@ namespace StateMachine
     public class CharacterStateController : StateController
     {
 
-        public CharacterStats characterStats;
         public CharacterActive thisCharacter;
 
+        [HideInInspector] public CharacterStats characterStats;
         [HideInInspector] public State gameStartState;
         [HideInInspector] public State defeatedState;
         [HideInInspector] public _CharacterController m_CharacterController;
@@ -26,7 +26,7 @@ namespace StateMachine
 
             lastActiveState = currentState;
 
-            m_CharacterController = GetComponent<_CharacterController>();
+            m_CharacterController = GetComponent<_CharacterController>();   
 
             if (thisCharacter == CharacterActive.Boy)
                 gameStartState = (State)Resources.Load("GameStart_Boy");
@@ -34,6 +34,11 @@ namespace StateMachine
                 gameStartState = (State)Resources.Load("GameStart_Mother");
             defeatedState = (State)Resources.Load("Defeated");
 
+        }
+
+        private void Start()
+        {
+            characterStats = m_CharacterController.m_CharStats;
         }
 
         public override void TransitionToState(State nextState)

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using SaveGame;
 using StateMachine;
+using Sirenix.OdinInspector;
 
 namespace AI
 {
@@ -66,8 +67,10 @@ namespace AI
         [HideInInspector] public GuardSaveComponent m_SaveComponent;
 
         //Gizmos
+        [ReadOnly]
         public Color statusColor = Color.green;
-        //public Color coneColor = Color.green;
+        [Sirenix.OdinInspector.ReadOnly]
+        public Vector3 lastPerceptionPoint = Vector3.zero;
         //public bool checkConeStatus = false;
         
         // Follows variables found in the parent definition
@@ -310,6 +313,10 @@ namespace AI
                     perceptionPercentage -= stats.fillingSpeed * stats.noSeeMultiplier * Time.deltaTime;
                 }
             }
+            else
+            {
+                SetBlackboardValue("LastPercievedPosition", GMController.instance.playerTransform[(int)GMController.instance.isCharacterPlaying].position);
+            }
 
             perceptionPercentage = Mathf.Clamp(perceptionPercentage, 0f, 100f);
             //if (GetBlackboardBoolValue("PlayerInCone"))
@@ -486,6 +493,8 @@ namespace AI
             heardCounter++;
             perceptionPercentage += perceptionAmount;
 
+            SetBlackboardValue("LastPercievedPosition", GMController.instance.playerTransform[(int)GMController.instance.isCharacterPlaying].position);
+
             if (heardCounter >= 3)
             {
                 GetAlarmed();
@@ -604,7 +613,8 @@ namespace AI
             m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
 
 
-
+            lastPerceptionPoint = GetBlackboardVector3Value("LastPercievedPosition");
+            Debug.Log(GetBlackboardBoolValue("IsRelaxing"));
             //checkConeStatus = GetBlackboardBoolValue("PlayerInCone");
         }
 

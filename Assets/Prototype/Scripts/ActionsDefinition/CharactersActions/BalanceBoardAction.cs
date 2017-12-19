@@ -19,6 +19,8 @@ namespace Character.Actions
 
         private void Balance(CharacterStateController controller)
         {
+            #region Movemets and Angles
+
             // ANGLE FOR INPUT
             if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) < 45 ||
                 Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) >= 135)
@@ -73,8 +75,12 @@ namespace Character.Actions
 
             //TRANSFORM MOVEMENT
             //controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward *(movement*angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
-            Debug.Log("Forward: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) + " Right: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward));
-            // Animator
+#endregion     
+
+            // Debug.Log("Forward: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) + " Right: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward));
+
+            #region Animator
+
             // Assign m_ForwardAmount value except when in coroutine
             if (controller.m_CharacterController.isBalanceCRDone)
             {
@@ -89,6 +95,7 @@ namespace Character.Actions
                     controller.m_CharacterController.m_Animator.speed = controller.m_CharacterController.animSpeed;
                 }
             }
+#endregion
         }
     }
 }

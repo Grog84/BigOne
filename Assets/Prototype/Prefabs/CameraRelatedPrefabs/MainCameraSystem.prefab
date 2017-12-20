@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4191252781899732}
   - component: {fileID: 114943229866691724}
   - component: {fileID: 114811419283669438}
+  - component: {fileID: 114954993301194238}
   m_Layer: 0
   m_Name: PlankCamera
   m_TagString: Untagged
@@ -38,6 +39,7 @@ GameObject:
   - component: {fileID: 4893929149345182}
   - component: {fileID: 114939537741546496}
   - component: {fileID: 114465304061493806}
+  - component: {fileID: 114499247210586888}
   m_Layer: 0
   m_Name: ThirdPersonCamera
   m_TagString: Untagged
@@ -650,16 +652,16 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 122419
   activatedByTrigger: 0
+  motherLookAt: {fileID: 0}
+  boyLookAt: {fileID: 0}
+  motherLookAtByTag: {fileID: 0}
+  boyLookAtByTag: {fileID: 0}
+  lookAt: {fileID: 0}
+  camTransform: {fileID: 4893929149345182}
   minCamDistance: 0.1
+  nearClipPlaneDistance: 0.1
+  distance: 2.5
   maxDistance: 2.5
-  yAngleMax: 70
-  yAngleMaxBoard: 40
-  clipPointPositionArray:
-  - {x: -8.56638, y: 6.28921, z: -29.87305}
-  - {x: -8.714872, y: 6.28921, z: -29.77772}
-  - {x: -8.570913, y: 6.388114, z: -29.88012}
-  - {x: -8.719406, y: 6.388114, z: -29.78478}
-  - {x: -9.235036, y: 6.245659, z: -30.75126}
 --- !u!114 &114488478674170926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -677,8 +679,33 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 122419
   activatedByTrigger: 0
+  motherLookAt: {fileID: 0}
+  boyLookAt: {fileID: 0}
+  motherLookAtByTag: {fileID: 0}
+  boyLookAtByTag: {fileID: 0}
+  lookAt: {fileID: 0}
+  camTransform: {fileID: 0}
   minCamDistance: 0.1
+  nearClipPlaneDistance: 0.1
+  distance: 2.5
   maxDistance: 2.5
+--- !u!114 &114499247210586888
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1179170789158732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4480aafa6772547856320a59c71e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipPointPositionArray:
+  - {x: 0.6381595, y: 0.228489, z: -13.7637}
+  - {x: 0.5873042, y: 0.228489, z: -13.93268}
+  - {x: 0.6285543, y: 0.3272395, z: -13.76081}
+  - {x: 0.5776991, y: 0.3272395, z: -13.92978}
+  - {x: 1.655865, y: 0.3890262, z: -14.16214}
 --- !u!114 &114524706211795172
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -747,7 +774,15 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 122419
   activatedByTrigger: 0
+  motherLookAt: {fileID: 0}
+  boyLookAt: {fileID: 0}
+  motherLookAtByTag: {fileID: 0}
+  boyLookAtByTag: {fileID: 0}
+  lookAt: {fileID: 0}
+  camTransform: {fileID: 0}
   minCamDistance: 0.1
+  nearClipPlaneDistance: 0.1
+  distance: 2.5
   maxDistance: 2.5
   yAngleMin: -75
   yAngleMax: 40
@@ -796,16 +831,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 122419
   activatedByTrigger: 0
+  motherLookAt: {fileID: 0}
+  boyLookAt: {fileID: 0}
+  motherLookAtByTag: {fileID: 0}
+  boyLookAtByTag: {fileID: 0}
+  lookAt: {fileID: 0}
+  camTransform: {fileID: 4191252781899732}
   minCamDistance: 0.1
+  nearClipPlaneDistance: 0.1
+  distance: 2.5
   maxDistance: 2.5
   yAngleMin: -40
   yAngleMax: 40
-  clipPointPositionArray:
-  - {x: -8.540151, y: 6.000165, z: -29.8322}
-  - {x: -8.688643, y: 6.000165, z: -29.73687}
-  - {x: -8.551163, y: 6.097308, z: -29.84935}
-  - {x: -8.699655, y: 6.097308, z: -29.75402}
-  - {x: -9.201509, y: 5.822852, z: -30.69904}
 --- !u!114 &114939537741546496
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -856,6 +893,18 @@ MonoBehaviour:
     FarClipPlane: 5000
     Dutch: 0
   m_ComponentOwner: {fileID: 4679190109134496}
+--- !u!114 &114954993301194238
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1177691943210086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc4480aafa6772547856320a59c71e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clipPointPositionArray: []
 --- !u!124 &124079901784835890
 Behaviour:
   m_ObjectHideFlags: 1

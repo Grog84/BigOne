@@ -6,6 +6,7 @@ using Cinemachine;
 public class LedgeCameraTriggerScript : MonoBehaviour
 {
     private CinemachineVirtualCamera cam;
+    private LedgeCameraScript myCameraScript;
     private Transform camPosition;
     public int priorityAmount = 0;
     private CameraScript mainCam;
@@ -13,9 +14,11 @@ public class LedgeCameraTriggerScript : MonoBehaviour
 
     private void Start()
     {
-        myForward = transform.parent.forward;
-        mainCam = Camera.main.GetComponent<CameraScript>();
         cam = GetComponentInChildren<CinemachineVirtualCamera>();
+        cam.m_LookAt = null;
+        myForward = transform.parent.forward;
+        myCameraScript = cam.GetComponent<LedgeCameraScript>();
+        mainCam = Camera.main.GetComponent<CameraScript>();
         camPosition = transform.GetChild(2);
     }
 
@@ -23,7 +26,7 @@ public class LedgeCameraTriggerScript : MonoBehaviour
     {
         if (cam.m_LookAt != null)
         {
-            camPosition.position = cam.m_LookAt.position + (myForward * -mainCam.maxDistance);          
+            camPosition.position = cam.m_LookAt.position + (myForward * -myCameraScript.distance);
         }
     }
 

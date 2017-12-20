@@ -37,7 +37,8 @@ public class CameraScript : MonoBehaviour
     //Array of cameras used to reset the priority to default on swtich
     protected CinemachineVirtualCamera[] camerasInScene;
     [SerializeField]
-    protected LayerMask layerIgnored = ~(1 << 8);
+    [HideInInspector]
+    public LayerMask layerIgnored = ~(1 << 8);
 
     //check if the camera is in a different state from the normal gameplay Camera
     [HideInInspector]public bool activatedByTrigger = false;
@@ -54,8 +55,8 @@ public class CameraScript : MonoBehaviour
     public float minCamDistance = 1f;
     //public int Fov = 60;
     //camera variables for the position 
-    protected float nearClipPlaneDistance = 0.1f;
-    protected float distance = 2.5f;
+    [HideInInspector] public float nearClipPlaneDistance = 0.1f;
+    [HideInInspector] public float distance = 2.5f;
     //maximum distance from the character
     public float maxDistance = 2.5f;
     // position of the camera assigned in the camera movement

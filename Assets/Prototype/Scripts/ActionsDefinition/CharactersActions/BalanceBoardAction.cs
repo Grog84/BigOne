@@ -50,40 +50,41 @@ namespace Character.Actions
                   }
                   else
                   {
-                        // JOISTICK
-                        if (Input.GetAxis("Horizontal") > 0.1)
-                        {
-                            movement = Mathf.Abs(Input.GetAxis("Vertical"));
-                        }
-                        else if (Input.GetAxis("Horizontal") < -0.1)
-                        {
-                            movement = Mathf.Abs(Input.GetAxis("Vertical")) * -1;
+                        if ((int)InputManager.instance.GetInputState() == 1)
+                        {// JOISTICK
+                            if (Input.GetAxis("Horizontal") > 0.1)
+                            {
+                                movement = Mathf.Abs(Input.GetAxis("Vertical"));
+                            }
+                            else if (Input.GetAxis("Horizontal") < -0.1)
+                            {
+                                movement = Mathf.Abs(Input.GetAxis("Vertical")) * -1;
+                            }
+                            else
+                            {
+                                movement = 0;
+                            }
                         }
                         else
                         {
-                            movement = 0;
-                        }
                         // KEYBOARD
-                        //if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) >= 135)
-                        //{
-                        //    movement = Input.GetAxis("Vertical");
-                        //}
-                        //else
-                        //if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) <= 45)
-                        //{
-                        //    movement = (Input.GetAxis("Vertical")) * -1;
-                        //}
+                        if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) >= 135)
+                        {
+                            movement = Input.GetAxis("Vertical");
+                        }
+                        else
+                        if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) <= 45)
+                        {
+                            movement = (Input.GetAxis("Vertical")) * -1;
+                        }
                     }
+                }
                }
                else
                {
                   movement = 0;
                }
-            }
-            //if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.up, controller.m_CharacterController.m_Camera.forward) >= 90)
-            //{
-
-            //}
+            }          
 
             // ANGLE FOR SIGN
             if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, dir) <= 135 &&
@@ -99,10 +100,6 @@ namespace Character.Actions
             //TRANSFORM MOVEMENT
             //controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.forwardBalance.transform.forward *(movement*angleSign) * controller.characterStats.m_BalanceMovementSpeed * Time.deltaTime);
 #endregion     
-
-             Debug.Log("Forward: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, controller.m_CharacterController.m_Camera.forward) + 
-                        " Right: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) + 
-                         " UP: " + Vector3.Angle(controller.m_CharacterController.CharacterTransform.up, controller.m_CharacterController.m_Camera.forward));
 
             #region Animator
 

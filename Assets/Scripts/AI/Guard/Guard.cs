@@ -51,6 +51,7 @@ namespace AI
         Cone m_Cone;
         bool hysteresisCORunning = false;
         bool noRaycastHitting = true;
+        Animator m_UIAnimator;
 
         static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
 
@@ -443,6 +444,9 @@ namespace AI
         private void UpdatePerceptionUI()
         {
             perceptionBar.SetFillingPerc(Mathf.Clamp(perceptionPercentage, 0f, 100f));
+
+            //m_UIAnimator.GetCurrentAnimatorStateInfo().normalizedTime
+
         }
 
         public void SetPerceptionToValue(float value)
@@ -485,6 +489,7 @@ namespace AI
             eyes = TransformDeepChildExtension.FindDeepChild(transform, "eyes");
             m_Cone = TransformDeepChildExtension.FindDeepChild(transform, "Cone").GetComponent<Cone>();
             m_Animator = GetComponent<Animator>();
+            m_UIAnimator = GetComponentInChildren<Animator>();
 
             m_Brain = GetComponent<Brain>();
             m_Brain.decisionMaker = Instantiate(m_Brain.decisionMaker);

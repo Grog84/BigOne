@@ -42,7 +42,7 @@ namespace Character.Actions
             }
 
 
-            if (Input.GetAxis("Horizontal") > 0)
+            if (Input.GetAxis("Horizontal") >= 0.3)
             {
                 forward = Input.GetAxis("Horizontal");
             }
@@ -51,7 +51,7 @@ namespace Character.Actions
                 forward = 0;
             }
 
-            if (Input.GetAxis("Horizontal") < 0)
+            if (Input.GetAxis("Horizontal") <= -0.3)
             {
                 backward = Input.GetAxis("Horizontal");
             }

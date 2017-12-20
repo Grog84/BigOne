@@ -9,38 +9,37 @@ namespace QuestManager
     [Serializable]
     public class Quest
     {
-        ////[ReadOnly]
+       
         public string questName;
-        //[ReadOnly]
+ 
         
         public QUESTTYPE questType;
-        //[ReadOnly]
+    
         public QUESTGRADE questGrade;
-        //[ReadOnly]
+ 
         public int questIndex;
         public bool ShowDescription;
 
         [ShowIf("ShowDescription")]
-        //[ReadOnly]
+    
         [TextArea]
         public string questDescription;
 
-
-        //[ReadOnly]
+        
         public bool available;
 
         public bool active;
 
-        //[ReadOnly]
+       
         public bool completed;
 
         public bool turnInStatus;
 
         [ReadOnly]
         public int SceneIndexNumber;
-        ////[ReadOnly]
+       
         public GameObject questGiver;
-        [HideInInspector]
+      
         public bool Printed=false;
 
         [Space(3f)]
@@ -48,7 +47,7 @@ namespace QuestManager
         private bool isAB;
         private bool isObj;
         private bool isABTi;
-        [HideInPlayMode]
+ 
         public bool isStriked = false;
         #region questType 0
 

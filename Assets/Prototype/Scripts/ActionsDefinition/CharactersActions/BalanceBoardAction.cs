@@ -24,6 +24,7 @@ namespace Character.Actions
 
             camera = new Vector3(controller.m_CharacterController.m_Camera.position.x, controller.m_CharacterController.CharacterTransform.position.y, controller.m_CharacterController.m_Camera.position.z);
             dir = (controller.m_CharacterController.CharacterTransform.position - camera).normalized;
+
             // ANGLE FOR INPUT
             if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, dir) <= 45 ||
                 Vector3.Angle(controller.m_CharacterController.CharacterTransform.forward, dir) >= 135)
@@ -49,14 +50,20 @@ namespace Character.Actions
                   }
                   else
                   {
-                        if(Input.GetAxis("Horizontal") < 0)
+                        // JOISTICK
+                        if (Input.GetAxis("Horizontal") > 0.1)
+                        {
+                            movement = Mathf.Abs(Input.GetAxis("Vertical"));
+                        }
+                        else if (Input.GetAxis("Horizontal") < -0.1)
                         {
                             movement = Mathf.Abs(Input.GetAxis("Vertical")) * -1;
                         }
                         else
                         {
-                            movement = Mathf.Abs(Input.GetAxis("Vertical"));
+                            movement = 0;
                         }
+                        // KEYBOARD
                         //if (Vector3.Angle(controller.m_CharacterController.CharacterTransform.right, controller.m_CharacterController.m_Camera.forward) >= 135)
                         //{
                         //    movement = Input.GetAxis("Vertical");
@@ -66,7 +73,7 @@ namespace Character.Actions
                         //{
                         //    movement = (Input.GetAxis("Vertical")) * -1;
                         //}
-                  }
+                    }
                }
                else
                {

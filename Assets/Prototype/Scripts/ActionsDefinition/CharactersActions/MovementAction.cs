@@ -20,10 +20,25 @@ namespace Character.Actions
 
         private void Walk(CharacterStateController controller)
         {
-
+            float h = 0;
+            float v = 0;
             //float get from the axis used in the vector3 m_Move
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
+            if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.3f)
+            {
+                h = Input.GetAxis("Horizontal");
+            }
+            else
+            {
+                h = 0;
+            }
+            if (Mathf.Abs(Input.GetAxis("Vertical")) > 0.3f)
+            {
+                v = Input.GetAxis("Vertical");
+            }
+            else
+            {
+                v = 0;
+            }
 
            
             //calculate move direction to pass to character

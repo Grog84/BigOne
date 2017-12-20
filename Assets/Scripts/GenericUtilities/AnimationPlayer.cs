@@ -5,27 +5,25 @@ using UnityEngine;
 public static class AnimationPlayer
 {
 
-    //public static Animator PlayUntilTime(this Animator animator, float normalizedTime, string animationName)
-    //{
-    //    AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo();
-    //    float currentAnimationTime = stateInfo.normalizedTime;
-    //    float animationSpeed;
+    public static void PlayUntilTime(this Animator anim, float normalizedTime)
+    {
+        AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+        float currentAnimationTime = stateInfo.normalizedTime;
+        float animationSpeed;
 
-    //    if (normalizedTime < currentAnimationTime)
-    //        animationSpeed = -1f;
-    //    else if (normalizedTime > currentAnimationTime)
-    //        animationSpeed = 1f;
-    //    else
-    //        animationSpeed = 0f;
+        if (normalizedTime < currentAnimationTime)
+            animationSpeed = -1f;
+        else if (normalizedTime > currentAnimationTime)
+            animationSpeed = 1f;
+        else
+            return;
 
-    //    AnimatorStateInfo.speedMultiplier = animationSpeed;
-    //    int stateHash = animator.StringToHash(animationName);
+        anim.speed = animationSpeed;
 
-    //    animator.Play(stateHash, -1, currentAnimationTime);
+        var comp = anim.gameObject.AddComponent<AnimationPlayerComponent>();
+        comp.SetAnimator(anim);
 
-        
-
-    //}
+    }
 
 
 }

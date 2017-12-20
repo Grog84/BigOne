@@ -443,10 +443,9 @@ namespace AI
 
         private void UpdatePerceptionUI()
         {
-            perceptionBar.SetFillingPerc(Mathf.Clamp(perceptionPercentage, 0f, 100f));
-
-            //m_UIAnimator.GetCurrentAnimatorStateInfo().normalizedTime
-
+            perceptionBar.SetFillingPerc(perceptionPercentage);
+            //perceptionBar.SetFillingPerc(100);
+            //m_UIAnimator.PlayUntilTime(perceptionPercentage/100f);
         }
 
         public void SetPerceptionToValue(float value)
@@ -489,7 +488,7 @@ namespace AI
             eyes = TransformDeepChildExtension.FindDeepChild(transform, "eyes");
             m_Cone = TransformDeepChildExtension.FindDeepChild(transform, "Cone").GetComponent<Cone>();
             m_Animator = GetComponent<Animator>();
-            m_UIAnimator = GetComponentInChildren<Animator>();
+            m_UIAnimator = perceptionBar.gameObject.GetComponent<Animator>();
 
             m_Brain = GetComponent<Brain>();
             m_Brain.decisionMaker = Instantiate(m_Brain.decisionMaker);

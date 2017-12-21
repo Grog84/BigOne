@@ -47,7 +47,7 @@ GameObject:
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1795072442526108
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,6 +57,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4212316269728816}
   - component: {fileID: 212178512586907984}
+  - component: {fileID: 95304576499160108}
   m_Layer: 18
   m_Name: Pointer
   m_TagString: Untagged
@@ -173,6 +174,23 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!95 &95304576499160108
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1795072442526108}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9752f9976aa8b46448e6b54fb11c7eba, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114248999214539586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -211,11 +229,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c38d686f5ccce14f85ef50757a65b44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos: 0
   target: {fileID: 0}
   newTarget: {x: 0, y: 0, z: 0}
   enemyClose: {fileID: 0}
-  colorTime: 3
+  colorTime: 1
 --- !u!212 &212178512586907984
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -248,7 +265,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f588d850485d0ae479d73cf3bd0b7b00, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cb06e1f9a8417374fa03519b585e0ba9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

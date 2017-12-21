@@ -8,13 +8,16 @@ public class PerceptionBar : MonoBehaviour {
     private float fillingPerc;
     private Image m_Image;
     private Camera cameraToLookAt;
+    private Animator m_UIAnimator;
 
     private void Awake()
     {
         m_Image = GetComponentInChildren<Image>();
         GameObject cameraObj = GameObject.FindWithTag("MainCamera");
         cameraToLookAt = cameraObj.GetComponent<Camera>();
-        m_Image.fillAmount = 0f;
+        //m_Image.fillAmount = 0f;
+        m_UIAnimator = GetComponentInChildren<Animator>();
+        m_UIAnimator.speed = 0;
     }
 
     // Update is called once per frame
@@ -31,11 +34,13 @@ public class PerceptionBar : MonoBehaviour {
 
     private void UpdateFillingPerc()
     {
-        m_Image.fillAmount = fillingPerc;
+        //m_Image.fillAmount = fillingPerc;
+        m_UIAnimator.PlayTime(fillingPerc);
     }
 
     public void SetFillingPerc(float fill)
     {
         fillingPerc = fill/100.0f;
+        fillingPerc = Mathf.Clamp(fillingPerc,0, 0.99f);
     }
 }

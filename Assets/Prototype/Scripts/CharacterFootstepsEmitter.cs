@@ -68,7 +68,6 @@ public class CharacterFootstepsEmitter : FootstepsEmitter
                         m = maxAmount / (controller.m_SoundStatusRange - innerRange);
                         enemyController.HearPlayer(maxAmount - m * (controller.m_SoundStatusRange - distance));
                     }
-                    Debug.Log("Ahah!");
                     break;
                 }
             }

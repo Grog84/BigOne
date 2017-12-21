@@ -51,7 +51,6 @@ namespace AI
         Cone m_Cone;
         bool hysteresisCORunning = false;
         bool noRaycastHitting = true;
-        Animator m_UIAnimator;
 
         static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
 
@@ -218,6 +217,9 @@ namespace AI
         private void LookAround()
         {
             noRaycastHitting = true;
+
+            if (GMController.instance.isCharacterPlaying == CharacterActive.None)
+                return;
 
             if (GetBlackboardBoolValue("PlayerInCone") && perceptionPercentage < 100f && GMController.instance.GetGameStatus())
             {
@@ -444,8 +446,6 @@ namespace AI
         private void UpdatePerceptionUI()
         {
             perceptionBar.SetFillingPerc(perceptionPercentage);
-            //perceptionBar.SetFillingPerc(100);
-            //m_UIAnimator.PlayUntilTime(perceptionPercentage/100f);
         }
 
         public void SetPerceptionToValue(float value)
@@ -488,7 +488,6 @@ namespace AI
             eyes = TransformDeepChildExtension.FindDeepChild(transform, "eyes");
             m_Cone = TransformDeepChildExtension.FindDeepChild(transform, "Cone").GetComponent<Cone>();
             m_Animator = GetComponent<Animator>();
-            m_UIAnimator = perceptionBar.gameObject.GetComponent<Animator>();
 
             m_Brain = GetComponent<Brain>();
             m_Brain.decisionMaker = Instantiate(m_Brain.decisionMaker);

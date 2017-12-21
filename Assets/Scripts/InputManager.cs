@@ -50,12 +50,10 @@ public class InputManager : MonoBehaviour {
 
                 if (joyInput)
                 {
-                    Debug.Log("joy last");
                     m_State = InputState.Controller;
                 }
                 else
                 {
-                    Debug.Log("key last");
                     m_State = InputState.MouseKeyboard;
                 }
 
@@ -67,7 +65,6 @@ public class InputManager : MonoBehaviour {
             {
                 if (joyInput)
                 {
-                    Debug.Log("joy last");
                     m_State = InputState.Controller;
                 }
                 updateTick = true;
@@ -141,8 +138,6 @@ public class InputManager : MonoBehaviour {
            (Input.GetAxis("Horizontal") != 0.0f && hasReceivedInputs == false)||
            (Input.GetAxis("Vertical") != 0.0f && hasReceivedInputs == false))
         {
-            Debug.Log("Joystick Di Merda");
-
             return true;
         }
 

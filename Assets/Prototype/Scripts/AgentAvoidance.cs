@@ -37,8 +37,9 @@ public class AgentAvoidance : MonoBehaviour {
 
         else if (other.tag == "Player")
         {
-            m_Guard.GetAlarmed();
+            m_Guard.playerInCollisionArea = true;
             m_Guard.UpdateLastPercievedDestination();
+            m_Guard.GetAlarmed();
         }
     }
 
@@ -55,6 +56,11 @@ public class AgentAvoidance : MonoBehaviour {
                 otherAgentAvoidance.m_NavmeshObstacle.enabled = false;
                 otherAgentAvoidance.m_NavmeshAgent.enabled = true;
             }
+        }
+
+        else if (other.tag == "Player")
+        {
+            m_Guard.playerInCollisionArea = false;
         }
     }
 }

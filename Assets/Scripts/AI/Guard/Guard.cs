@@ -55,6 +55,7 @@ namespace AI
         static Vector3 resetPlayerPosition = new Vector3(1000f, 1000f, 1000f);
 
         public bool hasRadio = false;
+        [HideInInspector] public bool playerInCollisionArea = false;
 
         float perceptionPercentage = 0f;
         [HideInInspector] public bool isOtherAlarmed = false;
@@ -220,6 +221,17 @@ namespace AI
 
             if (GMController.instance.isCharacterPlaying == CharacterActive.None)
                 return;
+
+            if (playerInCollisionArea)
+            {
+                SetBlackboardValue("PlayerInSight", true);
+                UpdateLastPercievedDestination();
+                if (hasRadio)
+                {
+                    GMController.instance.UpdatePlayerPosition();
+                }
+                return;
+            }
 
             if (GetBlackboardBoolValue("PlayerInCone") && perceptionPercentage < 100f && GMController.instance.GetGameStatus())
             {

@@ -36,9 +36,6 @@ public class CameraScript : MonoBehaviour
 
     //Array of cameras used to reset the priority to default on swtich
     protected CinemachineVirtualCamera[] camerasInScene;
-    [SerializeField]
-    [HideInInspector]
-    public LayerMask layerIgnored = ~(1 << 8);
 
     //check if the camera is in a different state from the normal gameplay Camera
     [HideInInspector]public bool activatedByTrigger = false;

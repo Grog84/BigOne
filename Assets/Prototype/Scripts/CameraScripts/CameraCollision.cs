@@ -6,12 +6,14 @@ public class CameraCollision : MonoBehaviour
     private CameraScript mainCam;
     private CameraScript myCameraScript;
     //Variable for the offset of the raycast that check the collisions of the camera
-    private float collisionOffesetX = 4.004f;
-    private float collisionOffsetY = 0f;
+    public float collisionOffesetX = 4.004f;
+    public float collisionOffsetY = 0f;
+    public float collisionOffsetZ = 0f;
     //array of the actual position of the clip points
     [HideInInspector]
     public Vector3[] clipPointPositionArray;
-
+    [SerializeField]
+    public LayerMask layerIgnored = ~(1 << 8);
 
     private void Start()
     {
@@ -40,7 +42,7 @@ public class CameraCollision : MonoBehaviour
         {
             Ray ray = new Ray(myCameraScript.lookAt.position, clipPointPositionArray[i] - myCameraScript.lookAt.position);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, myCameraScript.maxDistance, myCameraScript.layerIgnored))
+            if (Physics.Raycast(ray, out hit, myCameraScript.maxDistance, layerIgnored))
             {
                 finalDist = Mathf.Min(hit.distance, finalDist);
                 myCameraScript.distance = finalDist;
@@ -58,19 +60,19 @@ public class CameraCollision : MonoBehaviour
     {
         clipArray = new Vector3[5];
 
-        float z = cam.m_Lens.NearClipPlane;
+        float z = Camera.main.nearClipPlane;
         float x = Mathf.Tan(cam.m_Lens.FieldOfView / collisionOffesetX) * z;
-        float y = x / cam.m_Lens.Aspect;
+        float y = (x / cam.m_Lens.Aspect)+collisionOffsetY;
 
 
         //top left
-        clipArray[0] = (atRotation * new Vector3(-x, y, z)) + cameraPosition;
+        clipArray[0] = (atRotation * new Vector3(-x, y, (z+collisionOffsetZ))) + cameraPosition;
         //top right
-        clipArray[1] = (atRotation * new Vector3(x, y, z)) + cameraPosition;
+        clipArray[1] = (atRotation * new Vector3(x, y, (z + collisionOffsetZ))) + cameraPosition;
         //bottom left
-        clipArray[2] = (atRotation * new Vector3(-x, -y, z)) + cameraPosition;
+        clipArray[2] = (atRotation * new Vector3(-x, -y, (z + collisionOffsetZ))) + cameraPosition;
         //bottom right
-        clipArray[3] = (atRotation * new Vector3(x, -y, z)) + cameraPosition;
+        clipArray[3] = (atRotation * new Vector3(x, -y, (z + collisionOffsetZ))) + cameraPosition;
         //center
         clipArray[4] = cameraPosition - cam.transform.forward;
 

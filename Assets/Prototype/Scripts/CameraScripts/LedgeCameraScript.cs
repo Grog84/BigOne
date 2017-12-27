@@ -41,7 +41,7 @@ public class LedgeCameraScript : CameraScript {
         currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
         currentX = Mathf.Clamp(currentX, xAngleMin, xAngleMax);
         cinemachineTransposer.m_FollowOffset.z = -currentX;
-        cinemachineTransposer.m_FollowOffset.y = -currentY;
+        cinemachineTransposer.m_FollowOffset.y = currentY;
     }
 
     public override void SwitchLookAt()

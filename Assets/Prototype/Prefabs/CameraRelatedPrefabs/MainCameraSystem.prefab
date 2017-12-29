@@ -281,8 +281,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1836883229050346}
-  m_LocalRotation: {x: -0.08932068, y: -0.7773582, z: -0.113404326, w: 0.61227083}
-  m_LocalPosition: {x: -4.5427485, y: 5.8273344, z: -25.63706}
+  m_LocalRotation: {x: -0.122300796, y: -0.770088, z: -0.15527697, w: 0.60654444}
+  m_LocalPosition: {x: -6.87187, y: 6.5415554, z: -26.19838}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4750568747975990}
@@ -374,8 +374,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
-  far clip plane: 5000
+  near clip plane: 0.01
+  far clip plane: 500
   field of view: 60
   orthographic: 0
   orthographic size: 10
@@ -598,14 +598,14 @@ MonoBehaviour:
   m_ExcludedPropertiesInInspector:
   - m_Script
   m_LockStageInInspector: 
-  m_Priority: 0
+  m_Priority: 100
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
     OrthographicSize: 10
-    NearClipPlane: 0.1
-    FarClipPlane: 5000
+    NearClipPlane: 0.01
+    FarClipPlane: 500
     Dutch: 0
   m_ComponentOwner: {fileID: 4102918376474834}
 --- !u!114 &114388052098539488
@@ -655,9 +655,9 @@ MonoBehaviour:
   boyLookAtByTag: {fileID: 0}
   lookAt: {fileID: 0}
   camTransform: {fileID: 4893929149345182}
-  minCamDistance: 0.1
+  minCamDistance: 0.2
   nearClipPlaneDistance: 0.1
-  distance: 1.821955
+  distance: 0.8367293
   maxDistance: 2.5
 --- !u!114 &114488478674170926
 MonoBehaviour:
@@ -671,8 +671,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   motherInTrigger: 0
-  boyInTrigger: 0
-  activatedByTrigger: 0
+  boyInTrigger: 1
+  activatedByTrigger: 1
   motherLookAt: {fileID: 0}
   boyLookAt: {fileID: 0}
   motherLookAtByTag: {fileID: 0}
@@ -698,11 +698,11 @@ MonoBehaviour:
   collisionOffsetY: 0
   collisionOffsetZ: -0.11
   clipPointPositionArray:
-  - {x: -26.38947, y: -12.00806, z: -1.22496}
-  - {x: -26.34238, y: -12.00806, z: -1.016017}
-  - {x: -26.45357, y: -11.90707, z: -1.210515}
-  - {x: -26.40648, y: -11.90707, z: -1.001573}
-  - {x: -27.20749, y: -12.49748, z: -0.9308364}
+  - {x: 7.308443, y: -1.060246, z: -10.17734}
+  - {x: 7.298272, y: -1.060246, z: -10.15849}
+  - {x: 7.302114, y: -1.05058, z: -10.18075}
+  - {x: 7.291943, y: -1.05058, z: -10.1619}
+  - {x: 6.664725, y: -1.592645, z: -10.51249}
   layerIgnored:
     serializedVersion: 2
     m_Bits: 56883
@@ -777,7 +777,7 @@ MonoBehaviour:
   boyLookAtByTag: {fileID: 0}
   lookAt: {fileID: 0}
   camTransform: {fileID: 0}
-  minCamDistance: 0.1
+  minCamDistance: 0.2
   nearClipPlaneDistance: 0.1
   distance: 2.5
   maxDistance: 2.5
@@ -831,9 +831,9 @@ MonoBehaviour:
   boyLookAtByTag: {fileID: 0}
   lookAt: {fileID: 0}
   camTransform: {fileID: 4191252781899732}
-  minCamDistance: 0.1
+  minCamDistance: 0.2
   nearClipPlaneDistance: 0.1
-  distance: 1.832319
+  distance: 0.8367293
   maxDistance: 2.5
   yAngleMin: -40
   yAngleMax: 40
@@ -902,11 +902,11 @@ MonoBehaviour:
   collisionOffsetY: 0
   collisionOffsetZ: -0.11
   clipPointPositionArray:
-  - {x: -26.38947, y: -12.00806, z: -1.22496}
-  - {x: -26.34238, y: -12.00806, z: -1.016017}
-  - {x: -26.45357, y: -11.90707, z: -1.210515}
-  - {x: -26.40648, y: -11.90707, z: -1.001573}
-  - {x: -27.20749, y: -12.49748, z: -0.9308364}
+  - {x: 7.308443, y: -1.060246, z: -10.17734}
+  - {x: 7.298272, y: -1.060246, z: -10.15849}
+  - {x: 7.302114, y: -1.05058, z: -10.18075}
+  - {x: 7.291943, y: -1.05058, z: -10.1619}
+  - {x: 6.664725, y: -1.592645, z: -10.51249}
   layerIgnored:
     serializedVersion: 2
     m_Bits: 56883

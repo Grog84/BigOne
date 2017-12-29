@@ -11,6 +11,7 @@ public class LedgeCameraTriggerScript : MonoBehaviour
     public int priorityAmount = 0;
     private CameraScript mainCam;
     private Vector3 myForward;
+    public int childPosition = 0;
 
     private void Start()
     {
@@ -19,7 +20,7 @@ public class LedgeCameraTriggerScript : MonoBehaviour
         myForward = transform.parent.forward;
         myCameraScript = cam.GetComponent<LedgeCameraScript>();
         mainCam = Camera.main.GetComponent<CameraScript>();
-        camPosition = transform.GetChild(2);
+        camPosition = transform.GetChild(childPosition);
     }
 
     private void Update()

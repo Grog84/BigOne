@@ -22,7 +22,6 @@ public class LedgeCameraScript : CameraScript {
         mainCam = Camera.main.GetComponent<CameraScript>();
         this.minCamDistance = mainCam.minCamDistance;
         this.maxDistance = mainCam.maxDistance;
-        inputManager = InputManager.instance;
         //cam.m_Lens.FieldOfView = mainCam.Fov;       
         SwitchLookAt();
         camTransform = transform;

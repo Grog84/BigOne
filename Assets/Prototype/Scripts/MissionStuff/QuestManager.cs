@@ -279,10 +279,10 @@ namespace QuestManager
 
         void Start()
         {
+            InizializeQuestPoint();
             AssignQuestToQuestGivers();
             InitializedQuestObject();
             InizializedQuestReceiver();
-            InizializeQuestPoint();
         }
 
 

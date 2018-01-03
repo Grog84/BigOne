@@ -129,8 +129,8 @@ namespace AI
         {
             //SetQuestAvailable();
             //SetQuestCompleted();
-            Debug.Log("Stop");
-            Debug.Log(m_QuestGiver.myMission.Obj);
+            //Debug.Log("Stop");
+            //Debug.Log(m_QuestGiver.myMission.Obj);
         
 
         }

@@ -112,6 +112,16 @@ namespace QuestManager
                     receiver.GetComponent<QuestNpc>().UpdateBlackBoard();
                     break;
 
+
+                case QUESTTYPE.SPOSTAMENTO_AB:
+                    completed = true;
+
+                    break;
+                       
+                case QUESTTYPE.SPOSTAMENTO_AB_TIMED:
+                    completed = true;
+
+                    break;
                 default: break;
 
 

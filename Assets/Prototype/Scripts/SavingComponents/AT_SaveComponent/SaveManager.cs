@@ -74,7 +74,7 @@ public class SaveManager :MonoBehaviour {
         allActor = FindObjectsOfType<Actor>();
 
         //Inizializzazione livelli nuovi
-        
+        Profile.completedLevel = new bool[UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings - 1];
         for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings-1; i++)
         {
             Profile.completedLevel[i] = false;
@@ -102,17 +102,15 @@ public class SaveManager :MonoBehaviour {
         return actor;
 
     }
-    
+
     [HideInEditorMode]
     [Button("Save Check point", ButtonSizes.Medium)]
-    public  void Save()
+    public void Save()
     {
         Profile.Save();
         SaveTime(DateTime.Now);
-       Profile.SaveProfile(profilePath, Profile);
+        Profile.SaveProfile(profilePath, Profile);
         SaveData.Save(dataPath, SaveData.actorContainer);
-        
-        Debug.Log("Salvato");
     }
     [HideInEditorMode]
     [Button("Load Check point", ButtonSizes.Medium)]

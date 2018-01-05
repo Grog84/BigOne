@@ -16,7 +16,9 @@ public class LedgeCameraScript : CameraScript {
     protected CinemachineVirtualCamera cam;
     private CameraScript mainCam;
     CinemachineTransposer cinemachineTransposer;
-  
+    [HideInInspector]
+    public bool ledge = false;
+
     private void Start()
     {
         mainCam = Camera.main.GetComponent<CameraScript>();
@@ -27,7 +29,6 @@ public class LedgeCameraScript : CameraScript {
         camTransform = transform;
         cam = this.GetComponent<CinemachineVirtualCamera>();
         cinemachineTransposer = cam.GetCinemachineComponent<CinemachineTransposer>();
-        Debug.Log(cinemachineTransposer);
     }
 
     private void Update()
@@ -39,7 +40,16 @@ public class LedgeCameraScript : CameraScript {
         currentY -= Input.GetAxis("Joystick Y") * (InputManager.instance.JoystickYSensitivity * ledgeSensibilityModifier);
         currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
         currentX = Mathf.Clamp(currentX, xAngleMin, xAngleMax);
-        cinemachineTransposer.m_FollowOffset.z = -currentX;
+
+        if (ledge)
+        {
+            cinemachineTransposer.m_FollowOffset.z = -currentX;
+        }
+        else
+        {
+            cinemachineTransposer.m_FollowOffset.x = -currentX;
+        }
+
         cinemachineTransposer.m_FollowOffset.y = currentY;
     }
 

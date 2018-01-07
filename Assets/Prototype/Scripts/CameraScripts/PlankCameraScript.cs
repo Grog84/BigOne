@@ -22,16 +22,15 @@ public class PlankCameraScript : CameraScript {
   
     private void Start()
     {
+        SwitchLookAt();
+
         mainCam = Camera.main.GetComponent<CameraScript>();
         this.minCamDistance = mainCam.minCamDistance;
         this.maxDistance = mainCam.maxDistance;
         //inputManager = InputManager.instance;
         //cam.m_Lens.FieldOfView = mainCam.Fov;
 
-        SwitchLookAt();
 
-        
-        
         cam = this.GetComponent<CinemachineVirtualCamera>();
         //Cursor.lockState = CursorLockMode.Locked;
         cam.m_Lens.NearClipPlane = nearClipPlaneDistance;

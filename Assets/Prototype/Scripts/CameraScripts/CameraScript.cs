@@ -92,11 +92,12 @@ public class CameraScript : MonoBehaviour
         MotherJoints = MJoints.GetComponent<Renderer>();
         MSkin = GameObject.Find("Beta_Surface");
         MotherSkin = MSkin.GetComponent<Renderer>();
-
     }
 
     private void Update()
     {
+        //StartCoroutine(EnableCollisions());
+
         //check which camera is active
         if (thirdPersonVirtualCamera.m_Priority > firstPersonVirtualCamera.m_Priority)
         {
@@ -195,6 +196,49 @@ public class CameraScript : MonoBehaviour
                 camerasInScene[c].m_Priority = 0;
             }
         }
+
+        yield return null;
+    }
+
+    protected IEnumerator EnableCollisions()
+    {
+        int highestPriority = 0;
+
+        for (int i = 0; i < camerasInScene.Length; i++)
+        {
+            if(camerasInScene[i].gameObject.GetComponent<CameraCollision>() != null)
+            {
+                if(camerasInScene[i].m_Priority > highestPriority)
+                {
+                    highestPriority = camerasInScene[i].m_Priority;
+                   
+                }
+                else
+                {
+                    yield return null;
+                }
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+
+        for (int i = 0; i < camerasInScene.Length; i++)
+        {
+            if (camerasInScene[i].gameObject.GetComponent<CameraCollision>() != null)
+            {
+                if(camerasInScene[i].m_Priority == highestPriority)
+                {
+                    camerasInScene[i].GetComponent<CameraCollision>().enabled = true;
+                }
+                else
+                {
+                    camerasInScene[i].GetComponent<CameraCollision>().enabled = false;
+                }
+            }
+        }
+
         yield return null;
     }
 

@@ -17,10 +17,22 @@ public class LedgeCameraTriggerScript : MonoBehaviour
     {
         cam = GetComponentInChildren<CinemachineVirtualCamera>();
         cam.m_LookAt = null;
-        myForward = transform.parent.forward;
         myCameraScript = cam.GetComponent<LedgeCameraScript>();
         mainCam = Camera.main.GetComponent<CameraScript>();
         camPosition = transform.GetChild(childPosition);
+
+        if (transform.gameObject.name != "Trigger1")
+        {
+            myForward = transform.forward;
+            myCameraScript.ledge = false;
+        }
+        else
+        {
+            myForward = transform.parent.forward;
+            myCameraScript.ledge = true;
+
+        }
+
     }
 
     private void Update()

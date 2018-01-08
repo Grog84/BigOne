@@ -112,7 +112,6 @@ namespace Character.Actions
                 {
                     controller.m_CharacterController.secureFall = true;
                     controller.m_CharacterController.isInDanger = false;
-                    controller.m_CharacterController.ShowCancelIcon();
                     controller.m_CharacterController.ShowStopClimbIcon();
                     controller.m_CharacterController.RotateCanvas();
                 }
@@ -122,7 +121,6 @@ namespace Character.Actions
                 controller.m_CharacterController.secureFall = false;
                 controller.m_CharacterController.isInDanger = true;
                 controller.m_CharacterController.ShowDisabledCancelIcon();
-                controller.m_CharacterController.ShowStopClimbIcon();
                 controller.m_CharacterController.RotateCanvas();
             }
 

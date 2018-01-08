@@ -161,23 +161,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1141461474752112
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 224355532555391266}
-  - component: {fileID: 222344048630825972}
-  - component: {fileID: 114796414554051842}
-  m_Layer: 16
-  m_Name: Action
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1141888679709084
 GameObject:
   m_ObjectHideFlags: 1
@@ -2562,8 +2545,8 @@ MonoBehaviour:
   remainState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
   stateTimeElapsed: 0
   lastActiveState: {fileID: 11400000, guid: 0671d112d18c20d43959d00b038f5c4a, type: 2}
-  characterStats: {fileID: 11400000, guid: add5aecf61b0d6246ba4b2e7034d6878, type: 2}
   thisCharacter: 0
+  characterStats: {fileID: 11400000, guid: add5aecf61b0d6246ba4b2e7034d6878, type: 2}
   gameStartState: {fileID: 11400000, guid: 94f03c507bbcfec4ba82d6ec06fb81c3, type: 2}
   defeatedState: {fileID: 11400000, guid: 536d2a2fc2ef7e14f8c4e2e2798a7e64, type: 2}
   m_CharacterController: {fileID: 114342614479072684}
@@ -2597,6 +2580,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EventPath: event:/SFX/Steps
+  m_Database: {fileID: 0}
+  lastEntry:
+    m_Material: {fileID: 0}
+    m_Description: {fileID: 0}
   playStep: 0
   origin:
   - {fileID: 4042092016516534}
@@ -3115,11 +3102,11 @@ MonoBehaviour:
   m_TurnAmount: 0
   m_ForwardAmount: 0.029714517
   ray_length: 0.66
+  animSpeed: 0
   isInBalanceArea: 0
   startBalanceBoard: 0
   startBalanceLedge: 0
   isInJointArea: 0
-  animSpeed: 0
   isLedgeLimit: 0
   ledgeForwardActive: 1
   ledgeBackwardActive: 1
@@ -3137,6 +3124,7 @@ MonoBehaviour:
   ikWeight: 1
   secureFall: 0
   isClimbCRDone: 1
+  isBottomClimbCRDone: 1
   isInPushArea: 0
   isPushDirectionRight: 0
   isPushLimit: 0
@@ -3144,16 +3132,20 @@ MonoBehaviour:
   isExitPush: 0
   isInDoorArea: 0
   isDoorDirectionRight: 0
-  isInItemArea: 0
   startDoorAction: 0
-  startItemAnimation: 0
   isEndDoorAction: 0
   isDoorOpen: 0
   isDoorRotate: 0
   isEndAnim: 0
+  startItemAnimation: 0
+  isInItemArea: 0
+  isItemCREnd: 1
   canStep: 1
-  m_WalkSoundrange_sq: 9
+  m_SoundStatus: 0
+  m_Soundrange_sq: 0
+  m_SoundStatusRange: 1
   floorNoiseMultiplier: 0
+  footStepsEmitter: {fileID: 0}
   charDepth: 0
   charSize: 0
   m_Animator: {fileID: 95539346152527064}
@@ -3161,6 +3153,8 @@ MonoBehaviour:
   CharacterTransform: {fileID: 0}
   m_Rigidbody: {fileID: 0}
   m_CharController: {fileID: 143626487709842166}
+  playerSight: {fileID: 0}
+  playerGrounderIK: {fileID: 0}
   climbCollider: {fileID: 0}
   climbAnchorTop: {fileID: 0}
   climbAnchorBottom: {fileID: 0}
@@ -3177,12 +3171,9 @@ MonoBehaviour:
   balanceJoint: {fileID: 0}
   boardOppositePoint: {fileID: 0}
   isDefeated: 0
-  footStepsEmitter: {fileID: 0}
-  walkStatusRange: 1
   alphaZero: {r: 0, g: 0, b: 0, a: 0}
   alphaMax: {r: 0, g: 0, b: 0, a: 0}
   playerIcon: {fileID: 0}
-  playerSight: {fileID: 0}
   headClamp: 0
   canLookAt: 0
   dontLookAt: 0
@@ -3194,10 +3185,10 @@ MonoBehaviour:
   LookAtItems: {fileID: 1607925131303736}
   playerHead: {fileID: 4620284774424666}
   playerCanvas: {fileID: 224086358171913308}
-  cancelIcon: {fileID: 21300000, guid: a32234460bd57c2489b9f547f8898f48, type: 3}
-  cantCancelIcon: {fileID: 21300000, guid: a0541ef54953be241bee0b478c919ef1, type: 3}
-  stopPush: {fileID: 21300000, guid: 1ae50588e47040646aa2a0a445c90251, type: 3}
-  stopClimb: {fileID: 21300000, guid: b18e99347c3a0ce4da6953dcfa8c6aef, type: 3}
+  cantCancelClimbIcon: {fileID: 21300000, guid: e7357956acda35744b95000ed9e9041c,
+    type: 3}
+  stopPush: {fileID: 21300000, guid: d6f24d6c90df0f94e8a37c2e401a7c7f, type: 3}
+  stopClimb: {fileID: 21300000, guid: 9deb38f5538b8f842b5b2dbf015e86e6, type: 3}
   m_CharStats: {fileID: 11400000, guid: add5aecf61b0d6246ba4b2e7034d6878, type: 2}
   m_WalkNoiseLayerMask:
     serializedVersion: 2
@@ -3260,33 +3251,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
---- !u!114 &114796414554051842
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1141461474752112}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
 --- !u!114 &114888755817776138
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3615,12 +3579,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!222 &222344048630825972
-CanvasRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1141461474752112}
 --- !u!222 &222525476549723670
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -3666,24 +3624,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 492, y: 659}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!224 &224355532555391266
-RectTransform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1141461474752112}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.49999928, y: 0.5, z: 0.99999857}
-  m_Children: []
-  m_Father: {fileID: 224425017826542788}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.5, y: 0.0000009536743}
-  m_SizeDelta: {x: 1, y: 1}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224425017826542788
 RectTransform:
   m_ObjectHideFlags: 1
@@ -3695,7 +3635,6 @@ RectTransform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 224503945990542188}
-  - {fileID: 224355532555391266}
   m_Father: {fileID: 224086358171913308}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

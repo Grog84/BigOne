@@ -10,7 +10,6 @@ public class CharacterSwitchIconsActivation : MonoBehaviour
 {
     public Transform CharacterSwitchCanvas;
     public Sprite switchIcon;
-    public Sprite interact;
     public int degrees;
 
     [HideInInspector] public Color alphaZero;
@@ -30,18 +29,12 @@ public class CharacterSwitchIconsActivation : MonoBehaviour
     {
         Icons.GetChild(0).GetComponent<Image>().color = alphaZero;
         Icons.GetChild(0).GetComponent<Image>().sprite = null;
-
-        Icons.GetChild(1).GetComponent<Image>().sprite = null;
-        Icons.GetChild(1).GetComponent<Image>().color = alphaZero;
     }
 
     public void SwapIcons()
     {
         Icons.GetChild(0).GetComponent<Image>().sprite = switchIcon;
         Icons.GetChild(0).GetComponent<Image>().color = alphaMax;
-
-        Icons.GetChild(1).GetComponent<Image>().sprite = interact;
-        Icons.GetChild(1).GetComponent<Image>().color = alphaMax;
     }
 
     public void ShowIcon(GameObject player)

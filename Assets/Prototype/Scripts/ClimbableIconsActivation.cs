@@ -10,7 +10,6 @@ public class ClimbableIconsActivation : MonoBehaviour
 {
     public Transform ClimbableCanvas;
     public Sprite startClimbIcon;
-    public Sprite interact;
     public Sprite endClimbIcon;
     public Collider Top;
     public Collider Bottom;
@@ -21,7 +20,7 @@ public class ClimbableIconsActivation : MonoBehaviour
     [HideInInspector] public Color alphaMax;
     [HideInInspector] public Transform bottomIcons;
     [HideInInspector] public Transform topIcons;
-
+    [HideInInspector] public Transform activePlayer;
 
     void Awake()
     {
@@ -34,33 +33,27 @@ public class ClimbableIconsActivation : MonoBehaviour
     }
 	
     public void HideIcons(Transform position)
-    {
-         
+    {       
         position.GetChild(0).GetComponent<Image>().color = alphaZero;
         position.GetChild(0).GetComponent<Image>().sprite = null;
-    
-        position.GetChild(1).GetComponent<Image>().color = alphaZero;
-        position.GetChild(1).GetComponent<Image>().sprite = null;
-
-       
     }
 
     public void SwapIcons(Transform position)
     {
         position.GetChild(0).GetComponent<Image>().sprite = startClimbIcon;
         position.GetChild(0).GetComponent<Image>().color = alphaMax;
-
-        position.GetChild(1).GetComponent<Image>().sprite = interact;
-        position.GetChild(1).GetComponent<Image>().color = alphaMax;
     }
 
     public void ShowIcon(GameObject player)
     {
         //Boy
         if (GMController.instance.isCharacterPlaying == controllerBoy.thisCharacter)
-        {            
+        {
+            activePlayer = player.GetComponent<_CharacterController>().m_Camera;
+
             if (controllerBoy.currentState.name != "Climbing")
             {
+               
                 // Start climb from Bottom
                 if ( controllerBoy.m_CharacterController.climbCollider.transform == Bottom.transform)
                 {
@@ -68,6 +61,7 @@ public class ClimbableIconsActivation : MonoBehaviour
                     {
                         SwapIcons(bottomIcons);
                         player.GetComponent<_CharacterController>().IconPriority(bottomIcons, degrees);
+                        bottomIcons.DOLookAt(activePlayer.position, 0.1f);
                     }
                    else 
                    {
@@ -78,20 +72,22 @@ public class ClimbableIconsActivation : MonoBehaviour
                 else if (controllerBoy.m_CharacterController.climbCollider.transform == Top.transform)
                 {
                     SwapIcons(topIcons);
-                    topIcons.DOLocalRotate(new Vector3(0, 0, 0), 0.1f);
+                    //topIcons.DOLocalRotate(new Vector3(0, 0, 0), 0.1f);
                     player.GetComponent<_CharacterController>().IconPriority(topIcons, degrees);
+                    topIcons.DOLookAt(activePlayer.position, 0.1f);
                 }
             }
             // End Climb Icon
             else if (controllerBoy.currentState.name == "Climbing" )
             {
                 HideIcons(bottomIcons);
-
+               
                 if (controllerBoy.m_CharacterController.climbCollider.transform == Top.transform)
                 {
                     SwapIcons(topIcons);
-                    topIcons.DOLocalRotate(new Vector3(0, 180, 0), 0.1f);
+                    //topIcons.DOLocalRotate(new Vector3(0, 180, 0), 0.1f);
                     player.GetComponent<_CharacterController>().IconPriority(topIcons, degrees);
+                    topIcons.DOLookAt(activePlayer.position, 0.1f);
                 }
                 else
                 {

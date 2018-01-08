@@ -121,8 +121,7 @@ namespace Character
         public GameObject LookAtItems;
         public Transform playerHead;
         public Transform playerCanvas;
-        public Sprite cancelIcon;
-        public Sprite cantCancelIcon;
+        public Sprite cantCancelClimbIcon;
         public Sprite stopPush;
         public Sprite stopClimb;
         public CharacterStats m_CharStats;
@@ -699,25 +698,19 @@ namespace Character
 
         public void ShowStopPushIcon()
         {
-            playerIcon.GetChild(1).GetComponent<Image>().sprite = stopPush;
-            playerIcon.GetChild(1).GetComponent<Image>().color = alphaMax;
+            playerIcon.GetChild(0).GetComponent<Image>().sprite = stopPush;
+            playerIcon.GetChild(0).GetComponent<Image>().color = alphaMax;
         }
 
         public void ShowStopClimbIcon()
         {
-            playerIcon.GetChild(1).GetComponent<Image>().sprite = stopClimb;
-            playerIcon.GetChild(1).GetComponent<Image>().color = alphaMax;
-        }
-
-        public void ShowCancelIcon()
-        {
-            playerIcon.GetChild(0).GetComponent<Image>().sprite = cancelIcon;
+            playerIcon.GetChild(0).GetComponent<Image>().sprite = stopClimb;
             playerIcon.GetChild(0).GetComponent<Image>().color = alphaMax;
         }
 
         public void ShowDisabledCancelIcon()
         {
-            playerIcon.GetChild(0).GetComponent<Image>().sprite = cantCancelIcon;
+            playerIcon.GetChild(0).GetComponent<Image>().sprite = cantCancelClimbIcon;
             playerIcon.GetChild(0).GetComponent<Image>().color = alphaMax;
         }
 
@@ -725,8 +718,6 @@ namespace Character
         {
             playerIcon.GetChild(0).GetComponent<Image>().color = alphaZero;
             playerIcon.GetChild(0).GetComponent<Image>().sprite = null;
-            playerIcon.GetChild(1).GetComponent<Image>().color = alphaZero;
-            playerIcon.GetChild(1).GetComponent<Image>().sprite = null;
         }
 
         public void RotateCanvas()

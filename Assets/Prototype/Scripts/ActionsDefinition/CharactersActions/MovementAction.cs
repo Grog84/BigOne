@@ -23,23 +23,31 @@ namespace Character.Actions
             float h = 0;
             float v = 0;
             //float get from the axis used in the vector3 m_Move
-            if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.3f)
+            if ((int)InputManager.instance.GetInputState() == 1)
+            {
+                if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.3f)
+                {
+                    h = Input.GetAxis("Horizontal");
+                }
+                else
+                {
+                    h = 0;
+                }
+                if (Mathf.Abs(Input.GetAxis("Vertical")) > 0.3f)
+                {
+                    v = Input.GetAxis("Vertical");
+                }
+                else
+                {
+                    v = 0;
+                }
+            }
+            else
             {
                 h = Input.GetAxis("Horizontal");
-            }
-            else
-            {
-                h = 0;
-            }
-            if (Mathf.Abs(Input.GetAxis("Vertical")) > 0.3f)
-            {
                 v = Input.GetAxis("Vertical");
-            }
-            else
-            {
-                v = 0;
-            }
 
+            }
            
             //calculate move direction to pass to character
             if (controller.m_CharacterController.m_Camera != null)

@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using StateMachine;
 using Character;
+using DG.Tweening;
 
 public class PushableIconsActivation : MonoBehaviour
 {
     public Transform PushableCanvas;
     public Sprite startPush;
-    public Sprite pushButton;
     public Collider trigger1;
     public Collider trigger2;
     public Collider trigger3;
@@ -23,7 +23,7 @@ public class PushableIconsActivation : MonoBehaviour
     [HideInInspector] public Transform trig2;
     [HideInInspector] public Transform trig3;
     [HideInInspector] public Transform trig4;
-
+    [HideInInspector] public Transform activePlayer;
     [HideInInspector] public bool stopUpdate = true;
 
     void Awake()
@@ -41,18 +41,13 @@ public class PushableIconsActivation : MonoBehaviour
     public void HideIcons(Transform trigger)
     {
         trigger.GetChild(0).GetComponent<Image>().color = alphaZero;
-        trigger.GetChild(0).GetComponent<Image>().sprite = null;
-        trigger.GetChild(1).GetComponent<Image>().color = alphaZero;
-        trigger.GetChild(1).GetComponent<Image>().sprite = null;    
+        trigger.GetChild(0).GetComponent<Image>().sprite = null;  
     }
 	
     public void SwapIcons(Transform trigger)
     {
         trigger.GetChild(0).GetComponent<Image>().sprite = startPush;
         trigger.GetChild(0).GetComponent<Image>().color = alphaMax;
-
-        trigger.GetChild(1).GetComponent<Image>().sprite = pushButton;
-        trigger.GetChild(1).GetComponent<Image>().color = alphaMax;
     }
 
     public void ShowIcon(GameObject player)
@@ -60,6 +55,7 @@ public class PushableIconsActivation : MonoBehaviour
         //Mother
         if (GMController.instance.isCharacterPlaying == controllerMother.thisCharacter)
         {
+            activePlayer = player.GetComponent<_CharacterController>().m_Camera;
             // Pushable Icons
             if (controllerMother.m_CharacterController.isPushDirectionRight && controllerMother.currentState.name != "Pushing")
             {
@@ -67,24 +63,28 @@ public class PushableIconsActivation : MonoBehaviour
                 {
                     SwapIcons(trig1);
                     player.GetComponent<_CharacterController>().IconPriority(trig1, degrees);
+                    trig1.DOLookAt(activePlayer.position, 0.1f);
                     stopUpdate = false;
                 }
                 else if (controllerMother.m_CharacterController.pushCollider.transform == trigger2.transform)
                 {
                     SwapIcons(trig2);
                     player.GetComponent<_CharacterController>().IconPriority(trig2, degrees);
+                    trig2.DOLookAt(activePlayer.position, 0.1f);
                     stopUpdate = false;
                 }
                 else if (controllerMother.m_CharacterController.pushCollider.transform == trigger3.transform)
                 {
                     SwapIcons(trig3);
                     player.GetComponent<_CharacterController>().IconPriority(trig3, degrees);
+                    trig3.DOLookAt(activePlayer.position, 0.1f);
                     stopUpdate = false;
                 }
                 else if (controllerMother.m_CharacterController.pushCollider.transform == trigger4.transform)
                 {
                     SwapIcons(trig4);
                     player.GetComponent<_CharacterController>().IconPriority(trig4, degrees);
+                    trig4.DOLookAt(activePlayer.position, 0.1f);
                     stopUpdate = false;
                 }
             }          

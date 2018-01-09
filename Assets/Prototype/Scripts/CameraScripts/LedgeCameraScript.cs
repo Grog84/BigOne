@@ -16,9 +16,6 @@ public class LedgeCameraScript : CameraScript {
     protected CinemachineVirtualCamera cam;
     private CameraScript mainCam;
     CinemachineTransposer cinemachineTransposer;
-    [HideInInspector]
-    public bool ledge = false;
-
     private void Start()
     {
         mainCam = Camera.main.GetComponent<CameraScript>();

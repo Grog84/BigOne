@@ -12,6 +12,7 @@ public class ClimbCamera : CameraScript
     protected CinemachineVirtualCamera cam;
     private CameraScript mainCam;
     protected CharacterStateController controllerBoy;
+    protected CharacterStateController controllerMother;
     public float blendAmount;
     public int xAngleMax = 45;
     private Vector3 cameraProjection;
@@ -29,13 +30,14 @@ public class ClimbCamera : CameraScript
         camTransform.forward = boyLookAt.forward;
         camTransform.position = boyLookAt.position + (-boyLookAt.forward * maxDistance);
         controllerBoy = boyLookAt.GetComponent<CharacterStateController>();
+        controllerBoy = motherLookAt.GetComponent<CharacterStateController>();
     }
 
     private void Update()
     {
-        Debug.Log("Angolo" + Vector3.Angle(boyLookAt.forward, cameraProjectionDir));
-        Debug.Log("Dot:" + Vector3.Dot(boyLookAt.right, camTransform.forward));
-        Debug.Log("currentX" + currentX);
+        //Debug.Log("Angolo" + Vector3.Angle(boyLookAt.forward, cameraProjectionDir));
+        //Debug.Log("Dot:" + Vector3.Dot(boyLookAt.right, camTransform.forward));
+        //Debug.Log("currentX" + currentX);
 
         cameraProjection = new Vector3(camTransform.position.x, boyLookAt.position.y, camTransform.position.z);
         cameraProjectionDir = (boyLookAt.position - cameraProjection).normalized;
@@ -70,6 +72,14 @@ public class ClimbCamera : CameraScript
                 currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
             }
         }
+        //else if (controllerBoy.currentState.name == "BalanceLedge" || controllerMother.currentState.name == "BalanceLedge")
+        //{
+        //    cam.m_Priority = 150;
+        //    if(Vector3.Angle(boyLookAt.forward, cameraProjectionDir) >= 180 - xAngleMax)
+        //    {
+
+        //    }
+        //}
         else
         {
             cam.m_Priority = 0;

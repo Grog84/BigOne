@@ -25,6 +25,6 @@ namespace AI
             m_NavMeshAgent.isStopped = false;
         }
 
-        public 
+        
     }
 }

@@ -33,9 +33,9 @@ public class ClimbCamera : CameraScript
 
     private void Update()
     {
-        Debug.Log("Angolo" + Vector3.Angle(boyLookAt.forward, cameraProjectionDir));
-        Debug.Log("Dot:" + Vector3.Dot(boyLookAt.right, camTransform.forward));
-        Debug.Log("currentX" + currentX);
+        //Debug.Log("Angolo" + Vector3.Angle(boyLookAt.forward, cameraProjectionDir));
+        //Debug.Log("Dot:" + Vector3.Dot(boyLookAt.right, camTransform.forward));
+        //Debug.Log("currentX" + currentX);
 
         cameraProjection = new Vector3(camTransform.position.x, boyLookAt.position.y, camTransform.position.z);
         cameraProjectionDir = (boyLookAt.position - cameraProjection).normalized;

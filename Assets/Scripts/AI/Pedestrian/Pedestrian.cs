@@ -10,6 +10,7 @@ namespace AI
         public float sightRange = 5f;
 
         Vector3 currentWayPoint;
+        float sightRangeSqr;
 
         // Updates the pointed nav point from the blackboard value
         public override void UpdateNavPoint()
@@ -25,6 +26,25 @@ namespace AI
             m_NavMeshAgent.isStopped = false;
         }
 
-        
+        public void CheckPlayerDistance()
+        {
+            Vector3 playerPos = GMController.instance.playerTransform[(int)GMController.instance.isCharacterPlaying].position;
+
+            if ((transform.position - playerPos).sqrMagnitude < sightRangeSqr)
+            {
+                m_Blackboard.SetBoolValue("PlayerInSight", true);
+            }
+            else
+            {
+                m_Blackboard.SetBoolValue("PlayerInSight", false);
+            }
+
+        }
+
+        private void Awake()
+        {
+            sightRangeSqr = sightRange * sightRange;
+        }
+
     }
 }

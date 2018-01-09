@@ -14,9 +14,11 @@ public class ThirdPersonCameraScript : CameraScript {
     protected float yAngleMax = 70.0F;
     protected CinemachineVirtualCamera cam;
     private CameraScript mainCam;
-    
+    protected CharacterStateController controllerBoy;
+    //public float currentXLockPositiveAngle = 4000;
+    //public float currentXLockNegativeAngle = -4000;
   
-    private void Start()
+    protected void Start()
     {
         mainCam = Camera.main.GetComponent<CameraScript>();
         this.minCamDistance = mainCam.minCamDistance;
@@ -30,9 +32,10 @@ public class ThirdPersonCameraScript : CameraScript {
         cam = this.GetComponent<CinemachineVirtualCamera>();
         //Cursor.lockState = CursorLockMode.Locked;
         cam.m_Lens.NearClipPlane = nearClipPlaneDistance;
+        controllerBoy = boyLookAt.GetComponent<CharacterStateController>();
     }
 
-    private void Update()
+    protected void Update()
     {
 
         // camera movement by axis
@@ -48,8 +51,11 @@ public class ThirdPersonCameraScript : CameraScript {
         rotation = Quaternion.Euler(currentY, currentX, 0);
         camTransform.LookAt(lookAt.position);
 
-       
+
+
+
     }
+
 
     public override void SwitchLookAt()
     {

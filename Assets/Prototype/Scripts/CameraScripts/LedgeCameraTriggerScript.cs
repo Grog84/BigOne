@@ -21,17 +21,16 @@ public class LedgeCameraTriggerScript : MonoBehaviour
         mainCam = Camera.main.GetComponent<CameraScript>();
         camPosition = transform.GetChild(childPosition);
 
-        if (transform.gameObject.name != "Trigger1")
-        {
-            myForward = transform.forward;
-            myCameraScript.ledge = false;
-        }
-        else
-        {
-            myForward = transform.parent.forward;
-            myCameraScript.ledge = true;
-
-        }
+        //if (transform.gameObject.name != "Trigger1")
+        //{
+        //    myForward = transform.forward;
+        //    myCameraScript.ledge = false;
+        //}
+        //else
+        //{
+        myForward = transform.parent.forward;
+        myCameraScript.ledge = true;
+        //}
 
     }
 

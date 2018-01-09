@@ -41,14 +41,14 @@ public class LedgeCameraScript : CameraScript {
         currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
         currentX = Mathf.Clamp(currentX, xAngleMin, xAngleMax);
 
-        if (ledge)
-        {
+        //if (ledge)
+        //{
             cinemachineTransposer.m_FollowOffset.z = -currentX;
-        }
-        else
-        {
-            cinemachineTransposer.m_FollowOffset.x = -currentX;
-        }
+        //}
+        //else
+        //{
+        //    cinemachineTransposer.m_FollowOffset.x = -currentX;
+        //}
 
         cinemachineTransposer.m_FollowOffset.y = currentY;
     }

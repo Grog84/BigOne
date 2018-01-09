@@ -68,6 +68,7 @@ public class CameraScript : MonoBehaviour
     protected void Awake()
     {
         camerasInScene = FindObjectsOfType<CinemachineVirtualCamera>();
+        StartCoroutine(ResetCameraPriority());
         motherLookAt = GameObject.Find("Mother").GetComponent<Transform>();
         boyLookAt = GameObject.Find("Boy").GetComponent<Transform>();
 

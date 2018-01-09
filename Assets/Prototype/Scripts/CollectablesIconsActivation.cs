@@ -10,8 +10,8 @@ public class CollectablesIconsActivation : MonoBehaviour
 {
 
     public Transform CollectableCanvas;
-    public Sprite collectable;
-    public Sprite interact;
+    public Sprite collectableIcon;
+    public Sprite keyIcon;
     public int degrees;
     
 
@@ -19,7 +19,7 @@ public class CollectablesIconsActivation : MonoBehaviour
     [HideInInspector] public Color alphaMax;
     [HideInInspector] public Transform icons;
     [HideInInspector] public Collider trigger;
-
+    [HideInInspector] public Transform activePlayer;
 
     void Awake()
     {     
@@ -33,28 +33,20 @@ public class CollectablesIconsActivation : MonoBehaviour
     public void HideIcons()
     {
         icons.GetChild(0).GetComponent<Image>().color = alphaZero;
-        icons.GetChild(0).GetComponent<Image>().sprite = null;
-        icons.GetChild(1).GetComponent<Image>().color = alphaZero;
-        icons.GetChild(1).GetComponent<Image>().sprite = null;
+        icons.GetChild(0).GetComponent<Image>().sprite = null;     
     }
 
     public void SwapIcons (CharacterStateController playerState)
     {
         if (gameObject.tag == "Key" && playerState.thisCharacter == CharacterActive.Mother)
         {
-            icons.GetChild(0).GetComponent<Image>().sprite = collectable;
+            icons.GetChild(0).GetComponent<Image>().sprite = keyIcon;
             icons.GetChild(0).GetComponent<Image>().color = alphaMax;
-
-            icons.GetChild(1).GetComponent<Image>().sprite = interact;
-            icons.GetChild(1).GetComponent<Image>().color = alphaMax;
         }
         else if (gameObject.tag != "Key")
         {
-            icons.GetChild(0).GetComponent<Image>().sprite = collectable;
+            icons.GetChild(0).GetComponent<Image>().sprite = collectableIcon;
             icons.GetChild(0).GetComponent<Image>().color = alphaMax;
-
-            icons.GetChild(1).GetComponent<Image>().sprite = interact;
-            icons.GetChild(1).GetComponent<Image>().color = alphaMax;
         }
     }
 
@@ -64,6 +56,7 @@ public class CollectablesIconsActivation : MonoBehaviour
 
         if (GMController.instance.isCharacterPlaying == playerState.thisCharacter)
         {
+            activePlayer = player.GetComponent<_CharacterController>().m_Camera;
             // Collectable icons 
             if (playerState.m_CharacterController.isInItemArea)
             {
@@ -74,7 +67,7 @@ public class CollectablesIconsActivation : MonoBehaviour
                     {
                         SwapIcons(playerState);
                         player.GetComponent<_CharacterController>().IconPriority(icons, degrees);
-
+                        icons.DOLookAt(activePlayer.position, 0.1f);
                     }                  
                 }
    

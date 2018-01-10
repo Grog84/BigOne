@@ -131,7 +131,7 @@ namespace QuestManager
         [BoxGroup("MissionCreator")]
         [ShowIf("CreateMission")]
         [ShowIf("isABTi")]
-        public int time;
+        public float time;
         #endregion
 
         private bool isStriked = false;
@@ -272,7 +272,6 @@ namespace QuestManager
       //  Use this for initialization
         private void Awake()
         {
-           
             questPath = System.IO.Path.Combine(Application.persistentDataPath, "quest.json");
             ActivatePrimaryQuests();
         }
@@ -290,6 +289,37 @@ namespace QuestManager
         void Update()
         {
             checkIFnewMissionIsAvailable();
+            timerDown();
+        }
+
+        private void timerDown()
+        {
+            GameObject Timer = GameObject.Find("Timer");
+           
+            foreach(Quest q in QC.QuestList)
+            {
+                if (q.questType == QUESTTYPE.SPOSTAMENTO_AB_TIMED)
+                {
+                    if (q.active)
+                    {
+                        Timer.SetActive(true);
+                        if (!q.completed)
+                        {
+                            if (q.time > 0)
+                            {
+                                q.time -= Time.deltaTime;
+                            }
+                            if (q.time < 0)
+                            {
+                                Debug.Log("Snake, rispondimi Snake, SNAKE, SNAKEEEEEEEEEEEEEEE!!!");
+                                q.time = q.backUpTime;
+                                GMController.instance.LoadCheckpoint();
+                            }
+                            Timer.GetComponent<Text>().text =Mathf.Round(q.time).ToString();
+                        }
+                    }
+                }
+            }
         }
 
         private void OnApplicationQuit()
@@ -308,7 +338,6 @@ namespace QuestManager
                 {
                     if (!m.Printed)
                     {
-
                         Instantiate(
                              QuestMenu.transform.GetChild(QuestMenu.transform.childCount - 1).gameObject,
                              QuestMenu.transform)
@@ -318,24 +347,20 @@ namespace QuestManager
                         Testo.text = m.questName;
                         index++;
                         m.Printed = true;
-
                     }
                     if (m.Printed)
                     {
                         if (m.completed)
-                        {
+                        {                           
                             if (!m.isStriked)
                             {
                                 Testo.text = StrikeThrough(Testo.text);
                                 m.isStriked = true;
-
                             }
                         }
                     }
                 }
-
             }
-
         }
 
         public string StrikeThrough(string s)
@@ -357,15 +382,13 @@ namespace QuestManager
                     q.available = true;
                 }
             }
-
         }
 
         private void AssignQuestToQuestGivers()
         {
             int i = 0;
             foreach (Quest m in  QC.QuestList)
-            {
-               
+            {               
                 QuestGiver QG;
                 QG = m.questGiver.gameObject.GetComponent<QuestGiver>();
                 if (QG == null)
@@ -378,6 +401,7 @@ namespace QuestManager
 
                 QuestNpc QNPC;
                 QNPC = m.questGiver.gameObject.GetComponent<QuestNpc>();
+                QNPC.m_QuestGiver = m.questGiver.gameObject.GetComponent<QuestGiver>();
                 if (QNPC != null)
                 {
                     QNPC.UpdateBlackBoard();
@@ -426,12 +450,30 @@ namespace QuestManager
                         m.pointA.AddComponent<QuestPoint>();
                     }
                     m.pointA.GetComponent<QuestPoint>().m_Quest=m;
+                    m.pointA.GetComponent<QuestPoint>().m_Point = POINT.POINT_A;
                    
                     if (m.pointB.GetComponent<QuestPoint>() == null)
                     {
                         m.pointB.AddComponent<QuestPoint>();
                     }
                     m.pointB.GetComponent<QuestPoint>().m_Quest = m;
+                    m.pointB.GetComponent<QuestPoint>().m_Point = POINT.POINT_B;
+                }
+                if (m.questType == QUESTTYPE.SPOSTAMENTO_AB_TIMED)
+                {
+                    if (m.pointA_Timed.GetComponent<QuestPoint>() == null)
+                    {
+                        m.pointA_Timed.AddComponent<QuestPoint>();
+                    }
+                    m.pointA_Timed.GetComponent<QuestPoint>().m_Quest = m;
+                    m.pointA_Timed.GetComponent<QuestPoint>().m_Point = POINT.POINT_A;
+
+                    if (m.pointB_Timed.GetComponent<QuestPoint>() == null)
+                    {
+                        m.pointB_Timed.AddComponent<QuestPoint>();
+                    }
+                    m.pointB_Timed.GetComponent<QuestPoint>().m_Quest = m;
+                    m.pointB_Timed.GetComponent<QuestPoint>().m_Point = POINT.POINT_B;
                 }
 
             }

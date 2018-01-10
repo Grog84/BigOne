@@ -79,10 +79,10 @@ namespace QuestManager
 
         [TabGroup("questTab", "ABTi_quest")]
         //[ReadOnly]
-        public int time;
+        public float time;
         #endregion
-
-        public Quest(string _questName,QUESTTYPE _questType,QUESTGRADE _questGrade,string _questDescription,int _questIndex,GameObject _questGiver, GameObject _pointA, GameObject _pointB, GameObject _obj, GameObject _receiver, GameObject _pointATi, GameObject _pointBTi,int _time,int _sceneIndexNumber)
+       [HideInInspector] public int backUpTime;
+        public Quest(string _questName,QUESTTYPE _questType,QUESTGRADE _questGrade,string _questDescription,int _questIndex,GameObject _questGiver, GameObject _pointA, GameObject _pointB, GameObject _obj, GameObject _receiver, GameObject _pointATi, GameObject _pointBTi,float _time,int _sceneIndexNumber)
         {
 
             questName = _questName;
@@ -99,6 +99,7 @@ namespace QuestManager
             pointB_Timed = _pointBTi;
             time = _time;
             SceneIndexNumber = _sceneIndexNumber;
+            backUpTime = (int)time;
         }
 
         public void SetCompleted()

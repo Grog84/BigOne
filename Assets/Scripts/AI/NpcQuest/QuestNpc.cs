@@ -11,7 +11,7 @@ namespace AI
 {
     public class QuestNpc : AIAgent
     {
-        QuestGiver m_QuestGiver;
+        [HideInInspector] public QuestGiver m_QuestGiver;
       
         [HideInInspector]public PlayableDirector m_PlayableDirector;
         public bool canInteract = true;
@@ -89,7 +89,8 @@ namespace AI
         public void UpdateBlackBoard()
         {
 
-            //Debug.Log("Updated blackboard");
+            Debug.Log(m_QuestGiver.myMission.questName);
+            
             SetBlackboardValue("questAvailable", m_QuestGiver.myMission.available);
             SetBlackboardValue("questCompleted", m_QuestGiver.myMission.completed);
 
@@ -120,7 +121,7 @@ namespace AI
             m_Blackboard = m_Brain.decisionMaker.m_Blackboard;
             m_Blackboard.m_Agent = this;
 
-            m_QuestGiver = GetComponent<QuestGiver>();
+           // m_QuestGiver = GetComponent<QuestGiver>();
             m_PlayableDirector = GetComponent<PlayableDirector>();
             lookAtComponent = GetComponent<LookAtIK>();
         }

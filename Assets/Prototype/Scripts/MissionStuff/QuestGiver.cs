@@ -8,6 +8,7 @@ namespace QuestManager
         public int missionIndex;
        
         public Quest myMission;
+       
         
 
         private void Update()

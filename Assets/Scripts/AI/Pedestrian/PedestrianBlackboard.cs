@@ -9,6 +9,8 @@ namespace AI
     public class PedestrianBlackboard: Blackboard
     {
         bool isPlayerInSight;
+        bool isPlayerVisible;
+        bool isPlayerClimbing;
 
         public override int GetIntValue(string valueName)
         {
@@ -73,6 +75,10 @@ namespace AI
             {
                 case "PlayerInSight":
                     return isPlayerInSight;
+                case "PlayerIsVisible":
+                    return isPlayerVisible;
+                case "PlayerIsClimbing":
+                    return isPlayerClimbing;
                 default:
                     Debug.Log("Default");
                     return false;
@@ -85,6 +91,12 @@ namespace AI
             {
                 case "PlayerInSight":
                     isPlayerInSight = value;
+                    break;
+                case "PlayerIsVisible":
+                    isPlayerVisible = value;
+                    break;
+                case "PlayerIsClimbing":
+                    isPlayerClimbing = value;
                     break;
                 default:
                     break;

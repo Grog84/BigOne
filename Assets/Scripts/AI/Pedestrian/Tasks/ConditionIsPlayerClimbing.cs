@@ -1,18 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace AI.BT
+﻿namespace AI.BT
 {
-    public class ConditionPedestrianPlayerVisible : Task 
+    public class ConditionIsPlayerClimbing : Task
     {
         Pedestrian pedestrian;
         public override TaskState Run()
         {
             pedestrian = (Pedestrian)m_BehaviourTree.m_Blackboard.m_Agent;
-            pedestrian.LookAtPlayer();
+            pedestrian.CheckPlayerClimbing();
 
-            if (m_BehaviourTree.m_Blackboard.GetBoolValue("PlayerIsVisible"))
+            if (m_BehaviourTree.m_Blackboard.GetBoolValue("PlayerIsClimbing"))
             {
                 return TaskState.SUCCESS;
             }

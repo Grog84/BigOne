@@ -13,7 +13,7 @@ public class BTDMMaker : MonoBehaviour {
     public GameObject rootTask;
     public Blackboard thisBlackboard;
 
-    public enum AgentType { GUARD, PEDESTRIAN }
+    public enum AgentType { GUARD, NPC, PEDESTRIAN }
     public AgentType thisAgentType = AgentType.GUARD;
 
     public GameObject selector;

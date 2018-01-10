@@ -198,6 +198,10 @@ public class BTDMStringConverter
     {
         switch (taskType)
         {
+            case TaskType.IS_LAST_NODE_REACHED:
+                return new ConditionLastNodeReached();
+            case TaskType.PATROL:
+                return new ActionPatrol();
             case TaskType.GUARD_ALARMED:
                 return new ActionAlarmed();
             case TaskType.GUARD_CHAR_CHASE:
@@ -206,8 +210,6 @@ public class BTDMStringConverter
                 return new ActionCheckNavPoint();
             case TaskType.GUARD_STOP:
                 return new ActionHoldPosition();
-            case TaskType.GUARD_PATROL:
-                return new ActionPatrol();
             case TaskType.GUARD_RANDOM_PATROL:
                 return new ActionRandomPatrol();
             case TaskType.GUARD_REACH_LAST_PERCIEVED_POSITION:
@@ -232,8 +234,6 @@ public class BTDMStringConverter
                 return new ConditionLastHeardSeenPosition();
             case TaskType.GUARD_IS_PLAYER_REACHED:
                 return new ConditionPlayerReached();
-            case TaskType.GUARD_IS_LAST_NODE_REACHED:
-                return new ConditionLastNodeReached();
             case TaskType.GUARD_IS_CHAR_VISIBLE:
                 return new ConditionPlayerVisible();
             case TaskType.QUEST_NPC_GIVE_REWARD:
@@ -258,6 +258,14 @@ public class BTDMStringConverter
                 return new ConditionQuestCompleted();
             case TaskType.QUEST_NPC_IS_QUEST_TURNED_IN:
                 return new ConditionQuestTurnedIn();
+            case TaskType.PEDESTRIAN_DEFEAT_PLAYER:
+                return new ActionPedestrianDefeatPlayer();
+            case TaskType.PEDESTRIAN_PICK_NEW_DESTINATION:
+                return new ActionPedestrianPickNewDestinationt();
+            case TaskType.PEDESTRIAN_IS_PLAYER_CLIMBING:
+                return new ConditionIsPlayerClimbing();
+            case TaskType.PEDESTRIAN_IS_PLAYER_IN_RANGE:
+                return new ConditionPedestrianPlayerInRange();
             case TaskType.PEDESTRIAN_IS_PLAYER_VISIBLE:
                 return new ConditionPedestrianPlayerVisible();
             default:

@@ -41,21 +41,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1312184728257620
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4345206077179428}
-  m_Layer: 19
-  m_Name: CamPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1334525840608164
 GameObject:
   m_ObjectHideFlags: 1
@@ -71,24 +56,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1385386577885982
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4708137319443900}
-  - component: {fileID: 114805777894856532}
-  - component: {fileID: 114146103349972228}
-  - component: {fileID: 114781133019574942}
-  m_Layer: 0
-  m_Name: cm
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1604267253680534
 GameObject:
   m_ObjectHideFlags: 1
@@ -101,24 +68,6 @@ GameObject:
   m_Name: Point1
   m_TagString: Ledge
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1642810034240562
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4938978843251762}
-  - component: {fileID: 114781062629468100}
-  - component: {fileID: 114934859900538826}
-  - component: {fileID: 114025404896431206}
-  m_Layer: 0
-  m_Name: LedgeCamera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -147,7 +96,6 @@ GameObject:
   - component: {fileID: 4265622159232346}
   - component: {fileID: 33856790512520144}
   - component: {fileID: 65655557087715296}
-  - component: {fileID: 114453611316559856}
   m_Layer: 19
   m_Name: Trigger1
   m_TagString: Ledge
@@ -195,24 +143,9 @@ Transform:
   m_Children:
   - {fileID: 4016719626478196}
   - {fileID: 4538907883946380}
-  - {fileID: 4345206077179428}
   m_Father: {fileID: 4169774466796190}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!4 &4345206077179428
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1312184728257620}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4938978843251762}
-  m_Father: {fileID: 4265622159232346}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4538907883946380
 Transform:
   m_ObjectHideFlags: 1
@@ -253,33 +186,6 @@ Transform:
   m_Father: {fileID: 4016719626478196}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
---- !u!4 &4708137319443900
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1385386577885982}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4938978843251762}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4938978843251762
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1642810034240562}
-  m_LocalRotation: {x: 0.006679884, y: 0.43316185, z: -0.0032103814, w: 0.9012857}
-  m_LocalPosition: {x: 0.00000026527135, y: -1.6347742, z: -0.8141816}
-  m_LocalScale: {x: 0.54460615, y: 1.6347742, z: 2.2252686}
-  m_Children:
-  - {fileID: 4708137319443900}
-  m_Father: {fileID: 4345206077179428}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33856790512520144
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -299,143 +205,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.021149, y: 1.7166342, z: 1}
   m_Center: {x: 1.0105747, y: 0.35831705, z: 6.4279e-16}
---- !u!114 &114025404896431206
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1642810034240562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc4480aafa6772547856320a59c71e75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collisionOffesetX: 4.15
-  collisionOffsetY: 0
-  collisionOffsetZ: -0.14
-  clipPointPositionArray:
-  - {x: -7.340551, y: -1.220254, z: -8.306313}
-  - {x: -7.863166, y: -1.220254, z: -8.605468}
-  - {x: -7.358385, y: -0.8834358, z: -8.275157}
-  - {x: -7.881, y: -0.8834358, z: -8.574312}
-  - {x: -7.136545, y: -0.9501028, z: -9.268777}
-  layerIgnored:
-    serializedVersion: 2
-    m_Bits: 56883
---- !u!114 &114146103349972228
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1385386577885982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4044717213e31446939f7bd49c896ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowGuides: 1
-  m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_HorizontalDamping: 0.5
-  m_VerticalDamping: 0.5
-  m_ScreenX: 0.4998251
-  m_ScreenY: 0.502331
-  m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0.002097911
-  m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 0.8
-  m_BiasX: 0
-  m_BiasY: 0
---- !u!114 &114453611316559856
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1885342971699224}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f1f371aaccfeb7478710fac1d8f0491, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  priorityAmount: 200
-  childPosition: 2
---- !u!114 &114781062629468100
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1642810034240562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HideHeaderInInspector: 0
-  m_ExcludedPropertiesInInspector:
-  - m_Script
-  m_LockStageInInspector: 
-  m_Priority: 0
-  m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 4345206077179428}
-  m_Lens:
-    FieldOfView: 60
-    OrthographicSize: 10
-    NearClipPlane: 0.1
-    FarClipPlane: 5000
-    Dutch: 0
-  m_ComponentOwner: {fileID: 4708137319443900}
---- !u!114 &114781133019574942
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1385386577885982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FollowOffset: {x: 0, y: -1, z: -1.495}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
-  m_BindingMode: 1
---- !u!114 &114805777894856532
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1385386577885982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114934859900538826
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1642810034240562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0d31f88ad79de64dab721d6a4e3133d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  motherInTrigger: 0
-  boyInTrigger: 0
-  activatedByTrigger: 0
-  motherLookAt: {fileID: 0}
-  boyLookAt: {fileID: 0}
-  motherLookAtByTag: {fileID: 0}
-  boyLookAtByTag: {fileID: 0}
-  lookAt: {fileID: 0}
-  camTransform: {fileID: 4938978843251762}
-  minCamDistance: 0.1
-  nearClipPlaneDistance: 0.1
-  distance: 2.5
-  maxDistance: 2.5
-  yAngleMin: -1
-  yAngleMax: 1
-  xAngleMin: -1.5
-  xAngleMax: 1.5
-  ledgeSensibilityModifier: 0.1

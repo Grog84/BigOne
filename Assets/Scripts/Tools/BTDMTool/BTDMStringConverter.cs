@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using AI.BT;
+
 public class BTDMStringConverter
 {
     public BehaviourTreeDM m_Tree;
@@ -257,6 +258,8 @@ public class BTDMStringConverter
                 return new ConditionQuestCompleted();
             case TaskType.QUEST_NPC_IS_QUEST_TURNED_IN:
                 return new ConditionQuestTurnedIn();
+            case TaskType.PEDESTRIAN_IS_PLAYER_VISIBLE:
+                return new ConditionPedestrianPlayerVisible();
             default:
                 return null;
         }

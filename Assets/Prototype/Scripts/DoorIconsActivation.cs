@@ -12,8 +12,6 @@ public class DoorIconsActivation : MonoBehaviour
     public Transform DoorCanvas;
     public Sprite openDoor;
     public Sprite cantOpenDoor;
-    public Sprite interact;
-    public Sprite cantInteract;
     public Collider outside;
     public Collider inside;
     public int degrees;
@@ -23,6 +21,7 @@ public class DoorIconsActivation : MonoBehaviour
     [HideInInspector] public Transform hasKey;
     [HideInInspector] public Transform frontIcons;
     [HideInInspector] public Transform backIcons;
+    [HideInInspector] public Transform activePlayer;
 
     void Awake()
     {     
@@ -38,13 +37,9 @@ public class DoorIconsActivation : MonoBehaviour
     {
         frontIcons.GetChild(0).GetComponent<Image>().color = alphaZero;
         frontIcons.GetChild(0).GetComponent<Image>().sprite = null;
-        frontIcons.GetChild(1).GetComponent<Image>().color = alphaZero;
-        frontIcons.GetChild(1).GetComponent<Image>().sprite = null;
-
+        
         backIcons.GetChild(0).GetComponent<Image>().color = alphaZero;
-        backIcons.GetChild(0).GetComponent<Image>().sprite = null;
-        backIcons.GetChild(1).GetComponent<Image>().color = alphaZero;
-        backIcons.GetChild(1).GetComponent<Image>().sprite = null;
+        backIcons.GetChild(0).GetComponent<Image>().sprite = null;      
     }
 
     public void SwapIcons(Transform hasKey, Transform orientation, CharacterStateController playerState)
@@ -53,17 +48,11 @@ public class DoorIconsActivation : MonoBehaviour
         {
             orientation.GetChild(0).GetComponent<Image>().sprite = openDoor;
             orientation.GetChild(0).GetComponent<Image>().color = alphaMax;
-
-            orientation.GetChild(1).GetComponent<Image>().sprite = interact;
-            orientation.GetChild(1).GetComponent<Image>().color = alphaMax;
         }
         else
         {
             orientation.GetChild(0).GetComponent<Image>().sprite = cantOpenDoor;
             orientation.GetChild(0).GetComponent<Image>().color = alphaMax;
-
-            orientation.GetChild(1).GetComponent<Image>().sprite = cantInteract;
-            orientation.GetChild(1).GetComponent<Image>().color = alphaMax;
         }
     }
 
@@ -73,6 +62,7 @@ public class DoorIconsActivation : MonoBehaviour
 
         if (GMController.instance.isCharacterPlaying == playerState.thisCharacter)
         {
+            activePlayer = player.GetComponent<_CharacterController>().m_Camera;
             // Door icons 
             if (playerState.m_CharacterController.isDoorDirectionRight )
             {
@@ -83,12 +73,14 @@ public class DoorIconsActivation : MonoBehaviour
                     {
                         SwapIcons(hasKey, frontIcons, playerState);
                         player.GetComponent<_CharacterController>().IconPriority(frontIcons, degrees);
+                        frontIcons.DOLookAt(activePlayer.position, 0.1f);
 
                     }
                     else if (playerState.m_CharacterController.doorCollider.transform == inside.transform)
                     {
                         SwapIcons(hasKey, backIcons, playerState);
                         player.GetComponent<_CharacterController>().IconPriority(backIcons, degrees);
+                        backIcons.DOLookAt(activePlayer.position, 0.1f);
                     }
                 }
    

@@ -330,6 +330,19 @@ namespace Character
             {
                 doorCollider = other.gameObject;
                 isInDoorArea = true;
+
+                if (other.tag == "LockedDoor")
+                {
+                    for (int i = 0; i < Keychain.Count; i++)
+                    {
+                        if(Keychain[i].GetComponent<Keys>().ItemID == other.transform.parent.GetChild(0).GetChild(0).GetComponent<Doors>().doorID)
+                        {
+                            HideHUDIcons(Keychain[i].gameObject.GetComponent<Keys>().icon);
+                            other.transform.parent.GetChild(0).GetChild(0).tag = "UnlockedDoor";
+                            other.transform.parent.GetChild(0).GetChild(0).GetComponent<Doors>().hasKey = true;
+                        }
+                    }
+                }
             }
             if (other.gameObject.layer == LayerMask.NameToLayer("Interactable"))
             {
@@ -574,6 +587,7 @@ namespace Character
             yield return StartCoroutine(RotateToward(dir));
 
             m_CharController.enabled = false;
+            doorCollider.transform.parent.GetComponent<DoorIconsActivation>().HideIcons();
             CharacterTransform.DOMove(doorCollider.transform.GetChild(0).position, InteractTime);
 
             yield return new WaitForSeconds(InteractTime);

@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class EnemyClose : MonoBehaviour
 {
-    [HideInInspector] public GameObject enemyPointer;
+     public GameObject enemyPointer;
 
     public List<GameObject> pointers;
-    public float arrowDistance;
 
     private void Awake()
     {

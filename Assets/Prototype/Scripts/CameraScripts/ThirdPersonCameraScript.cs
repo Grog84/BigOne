@@ -39,8 +39,8 @@ public class ThirdPersonCameraScript : CameraScript {
     {
 
         // camera movement by axis
-        currentX += Input.GetAxis("Mouse X") * InputManager.instance.MouseXSensitivity;
-        currentX += Input.GetAxis("Joystick X") * InputManager.instance.JoystickXSensitivity;
+        currentX -= Input.GetAxis("Mouse X") * InputManager.instance.MouseXSensitivity;
+        currentX -= Input.GetAxis("Joystick X") * InputManager.instance.JoystickXSensitivity;
         currentY -= Input.GetAxis("Mouse Y") * InputManager.instance.MouseYSensitivity;
         currentY -= Input.GetAxis("Joystick Y") * InputManager.instance.JoystickYSensitivity;
         currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
@@ -48,14 +48,11 @@ public class ThirdPersonCameraScript : CameraScript {
         //camera management of the bound to the player, movement, rotation and look direction
         dir.Set(0, 0, -distance);
         camTransform.position = lookAt.position + rotation * dir;
-        rotation = Quaternion.Euler(currentY, currentX, 0);
+        rotation = Quaternion.Euler(currentY, -currentX, 0);
         camTransform.LookAt(lookAt.position);
 
-
-
-
     }
-
+     
 
     public override void SwitchLookAt()
     {

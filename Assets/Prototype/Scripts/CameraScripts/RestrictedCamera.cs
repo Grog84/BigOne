@@ -4,6 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using StateMachine;
 using DG.Tweening;
+using Character;
 
 public class RestrictedCamera : CameraScript
 {
@@ -16,7 +17,7 @@ public class RestrictedCamera : CameraScript
     public int xAngleMax = 45;
     private Vector3 cameraProjection;
     private Vector3 cameraProjectionDir;
-   // public bool resetCameraPos = false;
+    public bool resetCameraPos = false;
     
     public void Start()
     {
@@ -35,18 +36,21 @@ public class RestrictedCamera : CameraScript
 
     private void Update()
     {
-        //Debug.Log("Angolo" + Vector3.Angle(boyLookAt.forward, cameraProjectionDir));
-        //Debug.Log("Dot:" + Vector3.Dot(boyLookAt.right, camTransform.forward));
-        //Debug.Log("currentX" + currentX);
+        Debug.Log("Angolo " + lookAt.eulerAngles.y); 
 
+        //Debug.Log("Dot: " + Vector3.Dot(boyLookAt.right, camTransform.forward));
+        Debug.Log("currentX " + currentX);
+        //Debug.Log(boyLookAt.forward); 
         cameraProjection = new Vector3(camTransform.position.x, boyLookAt.position.y, camTransform.position.z);
         cameraProjectionDir = (boyLookAt.position - cameraProjection).normalized;
 
         if (controllerBoy.currentState.name == "Climbing")
         {
-            //ResetCameraPosition("Climbing");
+            ResetCameraPosition("Climbing");
             cam.m_Priority = 150;
-           
+             
+            if (resetCameraPos == true)
+            {
                 if (Vector3.Angle(boyLookAt.forward, cameraProjectionDir) <= xAngleMax)
                 {
                     CamMovement();
@@ -73,13 +77,15 @@ public class RestrictedCamera : CameraScript
                     currentY -= Input.GetAxis("Joystick Y") * InputManager.instance.JoystickYSensitivity;
                     currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
                 }
-            
+                
+            }
         }   
         else if (controllerBoy.currentState.name == "BalanceLedge" || controllerMother.currentState.name == "BalanceLedge")
         {
-            //ResetCameraPosition("BalanceLedge");
+            ResetCameraPosition("BalanceLedge");
             cam.m_Priority = 150;
-           
+            if (resetCameraPos == true)
+            {
                 if (Vector3.Angle(boyLookAt.forward, cameraProjectionDir) >= 180 - xAngleMax)
                 {
                     CamMovement();
@@ -106,77 +112,83 @@ public class RestrictedCamera : CameraScript
                     currentY -= Input.GetAxis("Joystick Y") * InputManager.instance.JoystickYSensitivity;
                     currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
                 }
-            
+
+            }
         }
         else
         {
-            //resetCameraPos = false;
-           
+            resetCameraPos = false;
             cam.m_Priority = 0;
-            if (Vector3.Angle(boyLookAt.forward, cameraProjectionDir) <= xAngleMax)
-            {
-                CamMovement();
-            }
-            else if (Vector3.Angle(boyLookAt.forward, cameraProjectionDir) > xAngleMax && Vector3.Dot(boyLookAt.right, camTransform.forward) < 0)
-            {
-                if (Input.GetAxis("Mouse X") > 0 || Input.GetAxis("Joystick X") > 0)
-                {
-                    currentX += Input.GetAxis("Mouse X") * InputManager.instance.MouseXSensitivity;
-                    currentX += Input.GetAxis("Joystick X") * InputManager.instance.JoystickXSensitivity;
-                }
-                currentY -= Input.GetAxis("Mouse Y") * InputManager.instance.MouseYSensitivity;
-                currentY -= Input.GetAxis("Joystick Y") * InputManager.instance.JoystickYSensitivity;
-                currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
-            }
-            else if (Vector3.Angle(boyLookAt.forward, cameraProjectionDir) > xAngleMax && Vector3.Dot(boyLookAt.right, camTransform.forward) > 0)
-            {
-                if (Input.GetAxis("Mouse X") < 0 || Input.GetAxis("Joystick X") < 0)
-                {
-                    currentX += Input.GetAxis("Mouse X") * InputManager.instance.MouseXSensitivity;
-                    currentX += Input.GetAxis("Joystick X") * InputManager.instance.JoystickXSensitivity;
-                }
-                currentY -= Input.GetAxis("Mouse Y") * InputManager.instance.MouseYSensitivity;
-                currentY -= Input.GetAxis("Joystick Y") * InputManager.instance.JoystickYSensitivity;
-                currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
-            }
-             
+            //if (Vector3.Angle(boyLookAt.forward, cameraProjectionDir) <= xAngleMax)
+            //{
+            //    CamMovement();
+            //}
+            //else if (Vector3.Angle(boyLookAt.forward, cameraProjectionDir) > xAngleMax && Vector3.Dot(boyLookAt.right, camTransform.forward) < 0)
+            //{
+            //    if (Input.GetAxis("Mouse X") > 0 || Input.GetAxis("Joystick X") > 0)
+            //    {
+            //        currentX += Input.GetAxis("Mouse X") * InputManager.instance.MouseXSensitivity;
+            //        currentX += Input.GetAxis("Joystick X") * InputManager.instance.JoystickXSensitivity;
+            //    }
+            //    currentY -= Input.GetAxis("Mouse Y") * InputManager.instance.MouseYSensitivity;
+            //    currentY -= Input.GetAxis("Joystick Y") * InputManager.instance.JoystickYSensitivity;
+            //    currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
+            //}
+            //else if (Vector3.Angle(boyLookAt.forward, cameraProjectionDir) > xAngleMax && Vector3.Dot(boyLookAt.right, camTransform.forward) > 0)
+            //{
+            //    if (Input.GetAxis("Mouse X") < 0 || Input.GetAxis("Joystick X") < 0)
+            //    {
+            //        currentX += Input.GetAxis("Mouse X") * InputManager.instance.MouseXSensitivity;
+            //        currentX += Input.GetAxis("Joystick X") * InputManager.instance.JoystickXSensitivity;
+            //    }
+            //    currentY -= Input.GetAxis("Mouse Y") * InputManager.instance.MouseYSensitivity;
+            //    currentY -= Input.GetAxis("Joystick Y") * InputManager.instance.JoystickYSensitivity;
+            //    currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
+            //}
+
         }
-
-
-        dir.Set(0, 0, -distance);
-        camTransform.position = lookAt.position + rotation * dir;
-        rotation = Quaternion.Euler(currentY, currentX, 0);
-        camTransform.LookAt(lookAt.position);
-
+        if (resetCameraPos == true)
+        {
+            dir.Set(0, 0, -distance);
+            camTransform.position = lookAt.position + rotation * dir;
+            rotation = Quaternion.Euler(currentY, currentX, 0);
+            camTransform.LookAt(lookAt.position);
+        }
     }
 
     private void CamMovement()
     {
+       
         currentX += Input.GetAxis("Mouse X") * InputManager.instance.MouseXSensitivity;
         currentX += Input.GetAxis("Joystick X") * InputManager.instance.JoystickXSensitivity;
         currentY -= Input.GetAxis("Mouse Y") * InputManager.instance.MouseYSensitivity;
         currentY -= Input.GetAxis("Joystick Y") * InputManager.instance.JoystickYSensitivity;
         currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
+       
     }
 
-    //private void ResetCameraPosition (string balanceTipe)
-    //{
-    //    if(balanceTipe == "Climbing" && resetCameraPos == false)
-    //    {
-    //        camTransform.forward = boyLookAt.forward;
-    //        camTransform.position = boyLookAt.position + (-boyLookAt.forward * maxDistance);
-    //        resetCameraPos = true;
-    //        
-    //    }
-    //    else if(balanceTipe == "BalanceLedge" && resetCameraPos == false)
-    //    {
-    //        camTransform.forward = -boyLookAt.forward;
-    //        camTransform.position = boyLookAt.position + (-boyLookAt.forward * maxDistance);
-    //        resetCameraPos = true; 
-    //        Debug.Log("asd");
-    //    }
-    //    
-    //}
+    private void ResetCameraPosition(string balanceTipe)
+    {
+        
+        if (balanceTipe == "Climbing" && resetCameraPos == false)
+        {
+                 
+            currentY = 0;
+            currentX = lookAt.eulerAngles.y; 
+            resetCameraPos = true;
+            Debug.Log("climb");
+
+        }
+        else if (balanceTipe == "BalanceLedge" && resetCameraPos == false) 
+        {
+            currentY = 0;
+            currentX = lookAt.eulerAngles.y - 180;
+
+            resetCameraPos = true;
+            Debug.Log("asd");
+        }
+
+    }
 
 
 

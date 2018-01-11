@@ -9,7 +9,7 @@ using System.Linq;
 
 public class BTDMMaker : MonoBehaviour {
 
-    public BehaviourTreeDM behaviourTree;
+    [HideInInspector] public BehaviourTreeDM behaviourTree;
     public GameObject rootTask;
     public Blackboard thisBlackboard;
 
@@ -86,6 +86,14 @@ public class BTDMMaker : MonoBehaviour {
                 behaviourTree.m_Blackboard = new GuardBlackboard();
                 thisBlackboard = behaviourTree.m_Blackboard;
                 break;
+            case AgentType.NPC:
+                behaviourTree.m_Blackboard = new QuestNpcBlackboard();
+                thisBlackboard = behaviourTree.m_Blackboard;
+                break;
+            case AgentType.PEDESTRIAN:
+                behaviourTree.m_Blackboard = new PedestrianBlackboard();
+                thisBlackboard = behaviourTree.m_Blackboard;
+                break;
             default:
                 break;
         }
@@ -118,10 +126,10 @@ public class BTDMMaker : MonoBehaviour {
     public void SaveTree()
     {
         behaviourTree = ScriptableObject.CreateInstance<BehaviourTreeDM>();
-#if UNITY_EDITOR
+
         AssetDatabase.CreateAsset(behaviourTree, "Assets/ScriptableObjects/AI/NewBDTM.asset");
         AssetDatabase.SaveAssets();
-#endif
+
         AssignRoot();
         AssignBlackboard();
         BuildTree(rootTask, behaviourTree.rootTask);

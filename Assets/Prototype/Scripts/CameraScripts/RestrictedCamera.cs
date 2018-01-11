@@ -36,7 +36,7 @@ public class RestrictedCamera : CameraScript
 
     private void Update()
     {
-        Debug.Log("Angolo " + lookAt.eulerAngles.y); 
+       // Debug.Log("Angolo " + lookAt.eulerAngles.y); 
 
         //Debug.Log("Dot: " + Vector3.Dot(boyLookAt.right, camTransform.forward));
         Debug.Log("currentX " + currentX);

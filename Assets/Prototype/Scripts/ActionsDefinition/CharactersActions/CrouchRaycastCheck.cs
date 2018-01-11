@@ -21,19 +21,19 @@ namespace Character.Actions
 
             for (int i = 0; i < controller.m_CharacterController.BoundRaycasts.Length; i++)
             {
-                Debug.DrawRay(controller.m_CharacterController.BoundRaycasts[i] + Vector3.up, Vector3.up, Color.red);
+                Debug.DrawRay(controller.m_CharacterController.m_CharController.bounds.center + controller.m_CharacterController.BoundRaycasts[i], Vector3.up, Color.red);
 
-                //if (Physics.Raycast(controller.m_CharacterController.BoundRaycasts[i] + Vector3.up, Vector3.up, out hit, controller.characterStats.m_CrouchRay ))
-                //{
-                //    if(hit.transform.gameObject.layer == LayerMask.NameToLayer("Default"))
-                //    {
-                //        controller.m_CharacterController.canStand = false;
-                //    }
-                //    else
-                //    {
-                //        controller.m_CharacterController.canStand = true;
-                //    }
-                //}
+                if (Physics.Raycast(controller.m_CharacterController.m_CharController.bounds.center + controller.m_CharacterController.BoundRaycasts[i], Vector3.up, out hit, controller.characterStats.m_CrouchRay))
+                {
+                    if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Default"))
+                    {
+                        controller.m_CharacterController.canStand = false;
+                    }
+                }
+                else
+                {
+                   controller.m_CharacterController.canStand = true;
+                }
             }
 
         }

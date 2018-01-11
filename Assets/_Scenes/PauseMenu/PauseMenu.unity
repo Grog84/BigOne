@@ -247,7 +247,7 @@ GameObject:
   m_Component:
   - component: {fileID: 631209201}
   m_Layer: 0
-  m_Name: EmptyExitGame
+  m_Name: EmptyExitToMainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -334,6 +334,34 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 951846619}
+--- !u!1 &987454192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 987454193}
+  m_Layer: 0
+  m_Name: EmptyBackToGame
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &987454193
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 987454192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 586.61383, y: 249.93408, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1235524467
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,8 +477,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1713016341}
+  - component: {fileID: 1713016342}
   m_Layer: 0
-  m_Name: EmptyMainMenuPause
+  m_Name: EmptyPauseMenuUIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -469,6 +498,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1713016342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1713016340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab8a2b07ec90dd6499ad3ea6e7b08f31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuPanel: {fileID: 0}
+  backToGameButton: {fileID: 0}
+  controlsButton: {fileID: 0}
+  controlsPanel: {fileID: 0}
+  backToMainMenu: {fileID: 0}
+  diaryPanel: {fileID: 0}
+  diaryButton: {fileID: 0}
+  backToMainMenuYesButton: {fileID: 0}
+  backToMainMenuNoButton: {fileID: 0}
 --- !u!1 &1780103443
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,6 +741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvas: {fileID: 2084326259}
   canvasTrigger: 0
+  QM_Controller: {fileID: 0}
 --- !u!114 &2084326256
 MonoBehaviour:
   m_ObjectHideFlags: 0

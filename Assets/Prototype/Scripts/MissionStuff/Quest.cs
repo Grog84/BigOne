@@ -81,7 +81,23 @@ namespace QuestManager
         //[ReadOnly]
         public float time;
         #endregion
-       [HideInInspector] public int backUpTime;
+        [HideInInspector]
+        public int backUpTime;
+        [HideInInspector]
+        public string pointA_ObjName;
+        [HideInInspector]
+        public string pointB_ObjName;
+        [HideInInspector]
+        public string Obj_ObjName;
+        [HideInInspector]
+        public string receiver_ObjName;
+       [HideInInspector]
+        public string pointATimed_ObjName;
+     [HideInInspector]
+        public string pointBTimed_ObjName;
+        [HideInInspector]
+        public string questGiver_ObjName;
+
         public Quest(string _questName,QUESTTYPE _questType,QUESTGRADE _questGrade,string _questDescription,int _questIndex,GameObject _questGiver, GameObject _pointA, GameObject _pointB, GameObject _obj, GameObject _receiver, GameObject _pointATi, GameObject _pointBTi,float _time,int _sceneIndexNumber)
         {
 

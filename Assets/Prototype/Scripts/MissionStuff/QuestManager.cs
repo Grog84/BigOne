@@ -11,8 +11,6 @@ using AI;
 namespace QuestManager
 {
     [Serializable]
-
-
     public class QuestManager : SerializedMonoBehaviour
     {
         
@@ -245,7 +243,7 @@ namespace QuestManager
                 Debug.Log("All field is valid, adding new mission, check MissionContainer for edit");
                  QC.QuestList.Add(new Quest(this.missionName, this.missionType, this.missionGrade, this.missionDescription, this.missionIndex, this.missionGiver, this.pointA, this.pointB, this.Obj, this.receiver, this.pointA_Timed, this.pointB_Timed, this.time, SceneIndexNumber));
                 missionIndex++;
-
+                SaveQuestGameObjectName();
             }
 
         }
@@ -278,13 +276,12 @@ namespace QuestManager
 
         void Start()
         {
-            InizializeQuestPoint();
+            LoadQuestGameObjectName();
             AssignQuestToQuestGivers();
+            InizializeQuestPoint();
             InitializedQuestObject();
             InizializedQuestReceiver();
         }
-
-
         //Update is called once per frame
         void Update()
         {
@@ -328,6 +325,7 @@ namespace QuestManager
             {
                 m.Printed = false;
             }
+            SaveQuestGameObjectName();
         }
 
         private void checkIFnewMissionIsAvailable()
@@ -402,8 +400,9 @@ namespace QuestManager
                 QuestNpc QNPC;
                 QNPC = m.questGiver.gameObject.GetComponent<QuestNpc>();
                 QNPC.m_QuestGiver = m.questGiver.gameObject.GetComponent<QuestGiver>();
+                QNPC.m_QuestGiver.myMission = m;
                 if (QNPC != null)
-                {
+                {                   
                     QNPC.UpdateBlackBoard();
                 }
             }
@@ -432,13 +431,18 @@ namespace QuestManager
         {
             foreach (Quest m in  QC.QuestList)
             {
+                if(m.questType== QUESTTYPE.RICERCA_CONSEGNA_OGGETTO)
+                {
+
                 if (m.receiver.GetComponent<QuestReceiver>() == null)
                 {
                     m.receiver.AddComponent<QuestReceiver>();
                 }
                 m.receiver.GetComponent<QuestReceiver>().myMission = m;
+                }
             }
         }
+
         public void InizializeQuestPoint()
         {
             foreach(Quest m in QC.QuestList)
@@ -480,6 +484,58 @@ namespace QuestManager
 
         }
 
+        public void SaveQuestGameObjectName()
+        {
+            foreach(Quest q in QC.QuestList)
+            {
+                q.questGiver_ObjName = q.questGiver.name;
+                switch(q.questType)
+                {
+                    case QUESTTYPE.RICERCA_CONSEGNA_OGGETTO:
+                        if(q.Obj != null)
+                            q.Obj_ObjName = q.Obj.name;
+                        if (q.receiver != null)
+                            q.receiver_ObjName = q.receiver.name;
+                        break;
+                    case QUESTTYPE.SPOSTAMENTO_AB:
+                        if (q.pointA != null)
+                            q.pointA_ObjName = q.pointA.name;
+                        if (q.pointA != null)
+                            q.pointA_ObjName = q.pointA.name;
+                        break;
+                    case QUESTTYPE.SPOSTAMENTO_AB_TIMED:
+                        if (q.pointA_Timed != null)
+                            q.pointATimed_ObjName = q.pointA_Timed.name;
+                        if (q.pointB_Timed != null)
+                            q.pointBTimed_ObjName = q.pointB_Timed.name;
+                        break;
+                }
+
+            }
+        }
+        [Button("Carica Oggetti")]
+        public void LoadQuestGameObjectName()
+        {
+            foreach (Quest q in QC.QuestList)
+            {
+                q.questGiver = GameObject.Find(q.questGiver_ObjName);
+                switch (q.questType)
+                {
+                    case QUESTTYPE.RICERCA_CONSEGNA_OGGETTO:
+                        q.Obj = GameObject.Find(q.Obj_ObjName);
+                        q.receiver = GameObject.Find(q.receiver_ObjName);
+                        break;
+                    case QUESTTYPE.SPOSTAMENTO_AB:
+                     q.pointA = GameObject.Find(q.pointA_ObjName);
+                        q.pointB = GameObject.Find(q.pointB_ObjName);
+                        break;
+                    case QUESTTYPE.SPOSTAMENTO_AB_TIMED:
+                      q.pointA_Timed = GameObject.Find(q.pointATimed_ObjName);
+                        q.pointB_Timed = GameObject.Find(q.pointBTimed_ObjName);
+                        break;
+                }
+            }
+        }
     }
 }
 

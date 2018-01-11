@@ -89,7 +89,7 @@ namespace AI
         public void UpdateBlackBoard()
         {
 
-            Debug.Log(m_QuestGiver.myMission.questName);
+           
             
             SetBlackboardValue("questAvailable", m_QuestGiver.myMission.available);
             SetBlackboardValue("questCompleted", m_QuestGiver.myMission.completed);

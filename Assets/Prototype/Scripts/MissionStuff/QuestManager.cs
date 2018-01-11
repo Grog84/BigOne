@@ -171,8 +171,7 @@ namespace QuestManager
         [BoxGroup("MissionCreator")]
         [ShowIf("CreateMission")]
         [GUIColor(0.8f, 0.5f, 0.7f, 1f)]
-        [PropertyOrder(-1)]
-        [Button("Aggiungi Quest", ButtonSizes.Medium)]
+        [Button("Aggiungi Quest", ButtonSizes.Gigantic)]
         public void CreateQuest()
         {
             bool error = false;
@@ -513,7 +512,7 @@ namespace QuestManager
 
             }
         }
-        [Button("Carica Oggetti")]
+       
         public void LoadQuestGameObjectName()
         {
             foreach (Quest q in QC.QuestList)

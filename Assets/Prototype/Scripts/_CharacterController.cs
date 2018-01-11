@@ -10,6 +10,8 @@ namespace Character
     public enum SoundStatus { WALK, CROUCH, RUN}
     public class _CharacterController : MonoBehaviour
     {
+         public bool canStand = true;
+         public bool Crouch = false;
         [HideInInspector] public bool isInDanger = false;
         [HideInInspector] public float m_MoveSpeedMultiplier;
         [HideInInspector] public float m_TurnAmount;                   // Unutilized for the moment
@@ -127,6 +129,7 @@ namespace Character
         public CharacterStats m_CharStats;
         public LayerMask m_WalkNoiseLayerMask;
         public List<GameObject> Keychain;                               // List of all the key items collected by the player
+        public Vector3[] BoundRaycasts = new Vector3[5];              
 
         private bool oneStepCoroutineController = true;                 // used to make sure only one step coroutine is runnin at a given time
 

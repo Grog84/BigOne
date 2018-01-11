@@ -15,6 +15,7 @@ public class CharacterStats : ScriptableObject { // nope...here stats only shoul
     public float m_RunOnStarisSpeed = 3.0f;
     public float m_RotateSpeed = 3.0f;
     public float m_MovementSpeed = 3.0f;
+    public float m_CrouchRay = 1.0f;
     [Space(10)]
     public float m_ClimbSpeed = 3.0f;
     public float m_DistanceFromWallClimbing = 4f;

@@ -15,10 +15,17 @@ public class RestrictedCamera : CameraScript
     protected CharacterStateController controllerBoy;
     protected CharacterStateController controllerMother;
     public int xAngleMax = 45;
+    // used to calculate the angles between the camera and the player
     private Vector3 cameraProjection;
     private Vector3 cameraProjectionDir;
+    //used for not repeating the resetcamera method
     public bool resetCameraPos = false;
-    
+    //used to get the referance to the ledge trigger used at the moment
+    private _CharacterController boyCharacter;
+    private _CharacterController motherCharacter;
+    //used to recognize whitch character interacted with the trigger
+    bool boyActive = true;
+
     public void Start()
     {
         mainCam = Camera.main.GetComponent<CameraScript>();
@@ -32,15 +39,18 @@ public class RestrictedCamera : CameraScript
         camTransform.position = boyLookAt.position + (-boyLookAt.forward * maxDistance);
         controllerBoy = boyLookAt.GetComponent<CharacterStateController>();
         controllerMother = motherLookAt.GetComponent<CharacterStateController>();
+        boyCharacter = boyLookAt.GetComponent<_CharacterController>();
+        motherCharacter = motherLookAt.GetComponent<_CharacterController>();
     }
 
     private void Update()
     {
-       // Debug.Log("Angolo " + lookAt.eulerAngles.y); 
-
+        //Debug.Log("Angolo " + boyCharacter.balanceCollider.transform.eulerAngles.y); 
         //Debug.Log("Dot: " + Vector3.Dot(boyLookAt.right, camTransform.forward));
         //Debug.Log("currentX " + currentX);
         //Debug.Log(boyLookAt.forward); 
+
+        //projection of the camera angle on a 2d plane
         cameraProjection = new Vector3(camTransform.position.x, boyLookAt.position.y, camTransform.position.z);
         cameraProjectionDir = (boyLookAt.position - cameraProjection).normalized;
 
@@ -53,10 +63,12 @@ public class RestrictedCamera : CameraScript
             {
                 if (Vector3.Angle(boyLookAt.forward, cameraProjectionDir) <= xAngleMax)
                 {
+                    //enabling inputs of the camera
                     CamMovement();
                 }
                 else if (Vector3.Angle(boyLookAt.forward, cameraProjectionDir) > xAngleMax && Vector3.Dot(boyLookAt.right, camTransform.forward) < 0)
                 {
+                    //restricting the inputs of the camera when reaching the desired angle
                     if (Input.GetAxis("Mouse X") > 0 || Input.GetAxis("Joystick X") > 0)
                     {
                         currentX += Input.GetAxis("Mouse X") * InputManager.instance.MouseXSensitivity;
@@ -68,6 +80,7 @@ public class RestrictedCamera : CameraScript
                 }
                 else if (Vector3.Angle(boyLookAt.forward, cameraProjectionDir) > xAngleMax && Vector3.Dot(boyLookAt.right, camTransform.forward) > 0)
                 {
+                    //restricting the inputs of the camera when reaching the desired angle
                     if (Input.GetAxis("Mouse X") < 0 || Input.GetAxis("Joystick X") < 0)
                     {
                         currentX += Input.GetAxis("Mouse X") * InputManager.instance.MouseXSensitivity;
@@ -88,10 +101,12 @@ public class RestrictedCamera : CameraScript
             {
                 if (Vector3.Angle(boyLookAt.forward, cameraProjectionDir) >= 180 - xAngleMax)
                 {
+                    //enabling inputs of the camera
                     CamMovement();
                 }
                 else if (Vector3.Angle(boyLookAt.forward, cameraProjectionDir) < 180 - xAngleMax && Vector3.Dot(boyLookAt.right, camTransform.forward) <= 0)
                 {
+                    //restricting the inputs of the camera when reaching the desired angle
                     if (Input.GetAxis("Mouse X") < 0 || Input.GetAxis("Joystick X") < 0)
                     {
                         currentX += Input.GetAxis("Mouse X") * InputManager.instance.MouseXSensitivity;
@@ -103,6 +118,7 @@ public class RestrictedCamera : CameraScript
                 }
                 else if (Vector3.Angle(boyLookAt.forward, cameraProjectionDir) < 180 - xAngleMax && Vector3.Dot(boyLookAt.right, camTransform.forward) >= 0)
                 {
+                    //restricting the inputs of the camera when reaching the desired angle
                     if (Input.GetAxis("Mouse X") > 0 || Input.GetAxis("Joystick X") > 0)
                     {
                         currentX += Input.GetAxis("Mouse X") * InputManager.instance.MouseXSensitivity;
@@ -119,32 +135,7 @@ public class RestrictedCamera : CameraScript
         {
             resetCameraPos = false;
             cam.m_Priority = 0;
-            //if (Vector3.Angle(boyLookAt.forward, cameraProjectionDir) <= xAngleMax)
-            //{
-            //    CamMovement();
-            //}
-            //else if (Vector3.Angle(boyLookAt.forward, cameraProjectionDir) > xAngleMax && Vector3.Dot(boyLookAt.right, camTransform.forward) < 0)
-            //{
-            //    if (Input.GetAxis("Mouse X") > 0 || Input.GetAxis("Joystick X") > 0)
-            //    {
-            //        currentX += Input.GetAxis("Mouse X") * InputManager.instance.MouseXSensitivity;
-            //        currentX += Input.GetAxis("Joystick X") * InputManager.instance.JoystickXSensitivity;
-            //    }
-            //    currentY -= Input.GetAxis("Mouse Y") * InputManager.instance.MouseYSensitivity;
-            //    currentY -= Input.GetAxis("Joystick Y") * InputManager.instance.JoystickYSensitivity;
-            //    currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
-            //}
-            //else if (Vector3.Angle(boyLookAt.forward, cameraProjectionDir) > xAngleMax && Vector3.Dot(boyLookAt.right, camTransform.forward) > 0)
-            //{
-            //    if (Input.GetAxis("Mouse X") < 0 || Input.GetAxis("Joystick X") < 0)
-            //    {
-            //        currentX += Input.GetAxis("Mouse X") * InputManager.instance.MouseXSensitivity;
-            //        currentX += Input.GetAxis("Joystick X") * InputManager.instance.JoystickXSensitivity;
-            //    }
-            //    currentY -= Input.GetAxis("Mouse Y") * InputManager.instance.MouseYSensitivity;
-            //    currentY -= Input.GetAxis("Joystick Y") * InputManager.instance.JoystickYSensitivity;
-            //    currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
-            //}
+            
 
         }
         if (resetCameraPos == true)
@@ -172,37 +163,45 @@ public class RestrictedCamera : CameraScript
         
         if (balanceTipe == "Climbing" && resetCameraPos == false)
         {
-                 
+            //forcing the input f the camera t reposition it at the back of the character
             currentY = 0;
             currentX = lookAt.eulerAngles.y; 
             resetCameraPos = true;
-            Debug.Log("climb");
+            //Debug.Log("climb");
 
         }
         else if (balanceTipe == "BalanceLedge" && resetCameraPos == false) 
         {
-            currentY = 0;
-            currentX = lookAt.eulerAngles.y - 180;
+            //forcing the input f the camera t reposition it at the front of the character
+            currentY = 0; 
+            if(boyActive)
+            {
+                currentX = boyCharacter.balanceCollider.transform.eulerAngles.y - 90;
+               // Debug.Log("Balance");
+            }
+            else if(!boyActive)
+            {
+                currentX = motherCharacter.balanceCollider.transform.eulerAngles.y - 90;
+            }  
 
             resetCameraPos = true;
-            Debug.Log("asd");
-        }
+        } 
 
-    }
-
+    }  
 
 
-    public override void SwitchLookAt()
+
+    public override void SwitchLookAt() 
     {
         if ((int)GMController.instance.isCharacterPlaying == 0)
         {
-
+            boyActive = true;
             StartCoroutine(ResetCameraPriority());
             lookAt = boyLookAtByTag;
         }
         else if ((int)GMController.instance.isCharacterPlaying == 1)
         {
-
+            boyActive = false;
             StartCoroutine(ResetCameraPriority());
             lookAt = motherLookAtByTag;
         }

@@ -2,11 +2,9 @@
 {
     public class ConditionIsPlayerClimbing : Task
     {
-        Pedestrian pedestrian;
         public override TaskState Run()
         {
-            pedestrian = (Pedestrian)m_BehaviourTree.m_Blackboard.m_Agent;
-            pedestrian.CheckPlayerClimbing();
+            m_BehaviourTree.m_Blackboard.m_Agent.GetComponent<Pedestrian>().CheckPlayerClimbing();
 
             if (m_BehaviourTree.m_Blackboard.GetBoolValue("PlayerIsClimbing"))
             {

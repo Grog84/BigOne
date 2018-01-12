@@ -39,7 +39,7 @@ public class RestrictedCamera : CameraScript
        // Debug.Log("Angolo " + lookAt.eulerAngles.y); 
 
         //Debug.Log("Dot: " + Vector3.Dot(boyLookAt.right, camTransform.forward));
-        Debug.Log("currentX " + currentX);
+        //Debug.Log("currentX " + currentX);
         //Debug.Log(boyLookAt.forward); 
         cameraProjection = new Vector3(camTransform.position.x, boyLookAt.position.y, camTransform.position.z);
         cameraProjectionDir = (boyLookAt.position - cameraProjection).normalized;

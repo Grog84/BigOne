@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using SaveGame;
 using StateMachine;
 
@@ -29,6 +30,8 @@ namespace AI
 
         GameObject[] pedestrianTargets;
         int currentTargetIdx;
+
+        [HideInInspector] public float m_TurnAmount;
 
         // Updates the pointed nav point from the blackboard value
         public override void UpdateNavPoint()
@@ -136,7 +139,7 @@ namespace AI
         public void CheckPlayerClimbing()
         {
             // TODO    mettere il riferimento all'altezza eccessiva anziche questo bool messo a caso come segnaposto
-            bool isPlayerClimbing = GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].m_CharController.isClimbCRDone;
+            bool isPlayerClimbing = GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].m_CharController.isInDanger;
             m_Blackboard.SetBoolValue("PlayerIsClimbing", isPlayerClimbing);
         }
 
@@ -153,13 +156,18 @@ namespace AI
             while (newTargetIdx == currentTargetIdx)
             {
                 newTargetIdx = Random.Range(0, pedestrianTargets.Length);
+                Debug.Log(newTargetIdx + " vs " + currentTargetIdx);
             }
-            m_NavMeshAgent.SetDestination(pedestrianTargets[currentTargetIdx].transform.position);
             currentTargetIdx = newTargetIdx;
+            Debug.Log("Found destination: " + pedestrianTargets[currentTargetIdx].transform.position);
+            m_NavMeshAgent.SetDestination(pedestrianTargets[currentTargetIdx].transform.position);
         }
 
         private void Awake()
         {
+            m_NavMeshAgent = GetComponent<NavMeshAgent>();
+            m_Animator = GetComponent<Animator>();
+
             sightRangeSqr = sightRange * sightRange;
 
             GameObject[] lookAtPositionsObj = GameObject.FindGameObjectsWithTag("LookAtPosition");
@@ -169,11 +177,28 @@ namespace AI
 
             eyes = TransformDeepChildExtension.FindDeepChild(transform, "eyes");
 
+        }
+
+        private void Start()
+        { 
             pedestrianTargets = GameObject.FindGameObjectsWithTag("PedestrianTarget");
             currentTargetIdx = -1;
             PickNewDestination();
-
         }
 
+        private void Update()
+        {
+            Vector3 move = m_NavMeshAgent.velocity;
+            if (move.magnitude > 1f) move.Normalize();
+            move = transform.InverseTransformDirection(move);
+            move = Vector3.ProjectOnPlane(move, Vector3.down);
+            m_TurnAmount = Mathf.Atan2(move.x, move.z);
+            float m_ForwardAmount = move.z;
+            
+            m_ForwardAmount = Mathf.Clamp(m_ForwardAmount, 0, 0.5f);
+
+            m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
+            m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
+        }
     }
 }

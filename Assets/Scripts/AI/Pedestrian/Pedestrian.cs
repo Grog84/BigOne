@@ -156,10 +156,10 @@ namespace AI
             while (newTargetIdx == currentTargetIdx)
             {
                 newTargetIdx = Random.Range(0, pedestrianTargets.Length);
-                Debug.Log(newTargetIdx + " vs " + currentTargetIdx);
+                //Debug.Log(newTargetIdx + " vs " + currentTargetIdx);
             }
             currentTargetIdx = newTargetIdx;
-            Debug.Log("Found destination: " + pedestrianTargets[currentTargetIdx].transform.position);
+            //Debug.Log("Found destination: " + pedestrianTargets[currentTargetIdx].transform.position);
             //m_NavMeshAgent.SetDestination(pedestrianTargets[currentTargetIdx].transform.position);
             m_NavMeshAgent.destination = pedestrianTargets[currentTargetIdx].transform.position;
         }

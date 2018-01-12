@@ -29,11 +29,11 @@ public class CameraCollision : MonoBehaviour
 
 
         //Series of Debug controlls 
-        Debug.DrawRay(myCameraScript.lookAt.position, clipPointPositionArray[0] - myCameraScript.lookAt.position, Color.red);
-        Debug.DrawRay(myCameraScript.lookAt.position, clipPointPositionArray[1] - myCameraScript.lookAt.position, Color.green);
-        Debug.DrawRay(myCameraScript.lookAt.position, clipPointPositionArray[2] - myCameraScript.lookAt.position, Color.blue);
-        Debug.DrawRay(myCameraScript.lookAt.position, clipPointPositionArray[3] - myCameraScript.lookAt.position);
-        Debug.DrawRay(myCameraScript.lookAt.position, clipPointPositionArray[4] - myCameraScript.lookAt.position);
+        //Debug.DrawRay(myCameraScript.lookAt.position, clipPointPositionArray[0] - myCameraScript.lookAt.position, Color.red);
+        //Debug.DrawRay(myCameraScript.lookAt.position, clipPointPositionArray[1] - myCameraScript.lookAt.position, Color.green);
+        //Debug.DrawRay(myCameraScript.lookAt.position, clipPointPositionArray[2] - myCameraScript.lookAt.position, Color.blue);
+        //Debug.DrawRay(myCameraScript.lookAt.position, clipPointPositionArray[3] - myCameraScript.lookAt.position);
+        //Debug.DrawRay(myCameraScript.lookAt.position, clipPointPositionArray[4] - myCameraScript.lookAt.position);
 
 
         // Camera repositioning on collision

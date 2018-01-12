@@ -160,7 +160,8 @@ namespace AI
             }
             currentTargetIdx = newTargetIdx;
             Debug.Log("Found destination: " + pedestrianTargets[currentTargetIdx].transform.position);
-            m_NavMeshAgent.SetDestination(pedestrianTargets[currentTargetIdx].transform.position);
+            //m_NavMeshAgent.SetDestination(pedestrianTargets[currentTargetIdx].transform.position);
+            m_NavMeshAgent.destination = pedestrianTargets[currentTargetIdx].transform.position;
         }
 
         private void Awake()
@@ -176,6 +177,12 @@ namespace AI
             lookAtPositions[1] = new Transform[lookAtPositionsObj.Length / 2];
 
             eyes = TransformDeepChildExtension.FindDeepChild(transform, "eyes");
+
+            m_Brain = GetComponent<Brain>();
+            m_Brain.decisionMaker = Instantiate(m_Brain.decisionMaker);
+            m_Brain.decisionMaker.m_Blackboard = new PedestrianBlackboard();
+            m_Blackboard = m_Brain.decisionMaker.m_Blackboard;
+            m_Blackboard.m_Agent = this;
 
         }
 

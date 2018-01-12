@@ -21,13 +21,13 @@ public class NavMeshAgentControlMixerBehaviour : PlayableBehaviour
             ScriptPlayable<NavMeshAgentControlBehaviour> inputPlayable = (ScriptPlayable<NavMeshAgentControlBehaviour>)playable.GetInput(i);
             NavMeshAgentControlBehaviour input = inputPlayable.GetBehaviour();
 
-            if (inputWeight > 0.5f && !input.destinationSet && input.destination)
+            if (inputWeight > 0.5f && input.destination)
             {
                 if (!trackBinding.isOnNavMesh)
                     continue;
 
                 trackBinding.SetDestination (input.destination.position);
-                input.destinationSet = true;
+                
             }
         }
     }

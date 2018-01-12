@@ -12,7 +12,7 @@ public class NavMeshAgentControlClip : PlayableAsset, ITimelineClipAsset
 
     public ClipCaps clipCaps
     {
-        get { return ClipCaps.None; }
+        get { return ClipCaps.Looping; }
     }
 
     public override Playable CreatePlayable (PlayableGraph graph, GameObject owner)

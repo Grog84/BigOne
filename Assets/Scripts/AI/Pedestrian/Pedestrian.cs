@@ -27,6 +27,9 @@ namespace AI
         Vector3 currentWayPoint;
         float sightRangeSqr;
 
+        GameObject[] pedestrianTargets;
+        int currentTargetIdx;
+
         // Updates the pointed nav point from the blackboard value
         public override void UpdateNavPoint()
         {
@@ -145,7 +148,14 @@ namespace AI
 
         public void PickNewDestination()
         {
-            // TODO     metodo per prendere una nuova destinazione
+            int newTargetIdx = currentTargetIdx;
+
+            while (newTargetIdx == currentTargetIdx)
+            {
+                newTargetIdx = Random.Range(0, pedestrianTargets.Length);
+            }
+            m_NavMeshAgent.SetDestination(pedestrianTargets[currentTargetIdx].transform.position);
+            currentTargetIdx = newTargetIdx;
         }
 
         private void Awake()
@@ -158,6 +168,11 @@ namespace AI
             lookAtPositions[1] = new Transform[lookAtPositionsObj.Length / 2];
 
             eyes = TransformDeepChildExtension.FindDeepChild(transform, "eyes");
+
+            pedestrianTargets = GameObject.FindGameObjectsWithTag("PedestrianTarget");
+            currentTargetIdx = -1;
+            PickNewDestination();
+
         }
 
     }

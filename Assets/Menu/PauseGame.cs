@@ -5,12 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class PauseGame : MonoBehaviour
 {
-    public Transform canvas;
+    public Transform canvasPause;
     public bool canvasTrigger = false;
 
     private CheckPointManager CP_Controller;
    [SerializeField] private  QuestManager.QuestManager QM_Controller;
-    // Update is called once per frame
+    
+
+	// Update is called once per frame
     void Update()
     {
 
@@ -22,36 +24,44 @@ public class PauseGame : MonoBehaviour
         }
 
     }
-    public void Pause()
+    
+
+     public void Awake()
     {
-        canvasTrigger = !canvasTrigger;
-        if (canvasTrigger)
-        {
-            canvas.gameObject.SetActive(true);
-            Time.timeScale = 0;
-        }
-        else
-        {
-            canvas.gameObject.SetActive(false);
-            Time.timeScale = 1;
-        }
-    }
-    public void Awake()
-    {
-        canvas.gameObject.SetActive(true);     
+        canvasPause.gameObject.SetActive(false);     
     }
 
     private void Start()
     {
         //QM_Controller.ShowActiveQuestOnMenu();
-        canvas.gameObject.SetActive(false);
+       // canvasPause.gameObject.SetActive(false);
         
     }
+
+
+	public void Pause()
+	{
+		canvasTrigger = !canvasTrigger;
+		if (canvasTrigger)
+		{
+			canvasPause.gameObject.SetActive(true);
+			Time.timeScale = 0;
+		}
+		else
+		{
+			canvasPause.gameObject.SetActive(false);
+			Time.timeScale = 1;
+		}
+	}
+
+
+
     public void ResumeGame()
     {
-       
         Pause();
     }
+
+
     public void ReturnMenu()
     {
         ////Time.timeScale = 1;

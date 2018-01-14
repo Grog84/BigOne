@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class PauseMenuUIManager : MonoBehaviour
+	// public class PauseMenuUIManager : MonoBehaviour
+public class PauseMenuUIManager : PauseGame
+
 {
     public GameObject pauseMenuPanel; // Pause Menu
 	public GameObject backToGameButton; // Back to the game button
@@ -16,35 +18,42 @@ public class PauseMenuUIManager : MonoBehaviour
 	public GameObject firstSelectedBackToMainMenu; // First button selected in the Back to game choice
     public GameObject diaryPanel; // Diary panel
 	public GameObject diaryButton; // Diary Button
+	public GameObject backtoMenuSure; // Back to Menu Areyousure panel
     public Button backToMainMenuYesButton; // The "Yes Button" in the "Security Menu"
     public Button backToMainMenuNoButton; // The "No Button" in the "Security Menu"
 	public EventSystem eventSystem;
 
-    void Start() //Disable all the GameObject-Menu that has not to be on the screen
+
+	/*   void Start() //Disable all the GameObject-Menu that has not to be on the screen
     {
-        pauseMenuPanel.gameObject.SetActive(true);
+         pauseMenuPanel.gameObject.SetActive(true);
         backToGameButton.gameObject.SetActive(true);
         controlsButton.gameObject.SetActive(true);
 		controlsImage.gameObject.SetActive (false);
         diaryButton.gameObject.SetActive(true);
         backToMainMenu.gameObject.SetActive(true);
         diaryPanel.gameObject.SetActive(true);
-        backToMainMenuYesButton.gameObject.SetActive(false);
-        backToMainMenuNoButton.gameObject.SetActive(false);
-		eventSystem.SetSelectedGameObject(firstSelectedPauseMenuButton);
-    }
+		backtoMenuSure.gameObject.SetActive(false);
+        //backToMainMenuYesButton.gameObject.SetActive(false);
+        //backToMainMenuNoButton.gameObject.SetActive(false);
+		eventSystem.SetSelectedGameObject(firstSelectedPauseMenuButton);   
+
+    }*/
 
     public void BackToGame() // Back to game function
     {
-        pauseMenuPanel.gameObject.SetActive(false); // Close the Pause Menu Panel
+        //pauseMenuPanel.gameObject.SetActive(false); // Close the Pause Menu Panel
+		Pause();
+
     }
 
     public void Controls() // Show the controls image
     {
         controlsImage.gameObject.SetActive(true); // Activate the controls image
         diaryPanel.gameObject.SetActive(false);
-        backToMainMenuYesButton.gameObject.SetActive(false);
-        backToMainMenuNoButton.gameObject.SetActive(false);
+       // backToMainMenuYesButton.gameObject.SetActive(false);
+       // backToMainMenuNoButton.gameObject.SetActive(false);
+		backtoMenuSure.gameObject.SetActive(false);
     }
 
 	public void FadesPauseMenu(string pauseMenuType) // Set the time to wait until the fade animation is finished
@@ -56,29 +65,34 @@ public class PauseMenuUIManager : MonoBehaviour
 	{
 		controlsImage.gameObject.SetActive(false); // Activate the diary panel
         diaryPanel.gameObject.SetActive(true);
-        backToMainMenuYesButton.gameObject.SetActive(false);
-        backToMainMenuNoButton.gameObject.SetActive(false);
+		backtoMenuSure.gameObject.SetActive(false);
+        //backToMainMenuYesButton.gameObject.SetActive(false);
+        //backToMainMenuNoButton.gameObject.SetActive(false);
     }
 
 	public void BackToMainMenuChoice()// Enable the choice to go the Main Menu
     {
+		diaryPanel.gameObject.SetActive(false);
+		controlsImage.gameObject.SetActive(false);
+		backtoMenuSure.gameObject.SetActive(true);
 		eventSystem.SetSelectedGameObject(firstSelectedBackToMainMenu);
-        backToMainMenuYesButton.gameObject.SetActive(true);
-        backToMainMenuNoButton.gameObject.SetActive(true);
+       //backToMainMenuYesButton.gameObject.SetActive(true);
+       //backToMainMenuNoButton.gameObject.SetActive(true);
     }
 
     public void BackToMainMenuNO()// Close the choice to go the Main Menu
     {
 		eventSystem.SetSelectedGameObject(firstSelectedPauseMenuButton);
-        backToMainMenuYesButton.gameObject.SetActive(false);
-        backToMainMenuNoButton.gameObject.SetActive(false);
+        //backToMainMenuYesButton.gameObject.SetActive(false);
+        //backToMainMenuNoButton.gameObject.SetActive(false);
+		backtoMenuSure.gameObject.SetActive(false);
         controlsImage.gameObject.SetActive(false);
         diaryPanel.gameObject.SetActive(true);
     }
 
     public void BackToMainMenuYes()// Go to the Main Menu
     {
-
+		ReturnMenu ();
     }
 
 }

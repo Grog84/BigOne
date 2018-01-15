@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 	// public class PauseMenuUIManager : MonoBehaviour
-public class PauseMenuUIManager : PauseGame
+public class PauseMenuUIManager : MonoBehaviour
 
 {
     public GameObject pauseMenuPanel; // Pause Menu
@@ -24,27 +24,59 @@ public class PauseMenuUIManager : PauseGame
 	public EventSystem eventSystem;
 
 
-	/*   void Start() //Disable all the GameObject-Menu that has not to be on the screen
-    {
-         pauseMenuPanel.gameObject.SetActive(true);
-        backToGameButton.gameObject.SetActive(true);
-        controlsButton.gameObject.SetActive(true);
-		controlsImage.gameObject.SetActive (false);
-        diaryButton.gameObject.SetActive(true);
-        backToMainMenu.gameObject.SetActive(true);
-        diaryPanel.gameObject.SetActive(true);
-		backtoMenuSure.gameObject.SetActive(false);
-        //backToMainMenuYesButton.gameObject.SetActive(false);
-        //backToMainMenuNoButton.gameObject.SetActive(false);
-		eventSystem.SetSelectedGameObject(firstSelectedPauseMenuButton);   
+    //void Start() //Disable all the GameObject-Menu that has not to be on the screen
+    //{
+    //    pauseMenuPanel.gameObject.SetActive(true);
+    //    backToGameButton.gameObject.SetActive(true);
+    //    controlsButton.gameObject.SetActive(true);
+    //    controlsImage.gameObject.SetActive(false);
+    //    diaryButton.gameObject.SetActive(true);
+    //    backToMainMenu.gameObject.SetActive(true);
+    //    diaryPanel.gameObject.SetActive(true);
+    //    backtoMenuSure.gameObject.SetActive(false);
+    //    backToMainMenuYesButton.gameObject.SetActive(false);
+    //    backToMainMenuNoButton.gameObject.SetActive(false);
+    //    eventSystem.SetSelectedGameObject(firstSelectedPauseMenuButton);
+    //}
 
-    }*/
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {         
+            Pause();
+        }
+    }
+    public void Awake()
+    {
+        pauseMenuPanel.gameObject.SetActive(false);
+    }
+    
+
+    public void Pause()
+    {
+
+        if (!pauseMenuPanel.gameObject.activeSelf)
+        {
+            pauseMenuPanel.gameObject.SetActive(true);
+        }
+        else 
+        {
+      
+            pauseMenuPanel.SetActive(false);
+            BackToGame();
+        }
+    }
+
 
     public void BackToGame() // Back to game function
     {
-        //pauseMenuPanel.gameObject.SetActive(false); // Close the Pause Menu Panel
-		Pause();
-
+       
+        pauseMenuPanel.gameObject.SetActive(false); // Close the Pause Menu Panel
+        diaryPanel.gameObject.SetActive(true);
+        backtoMenuSure.gameObject.SetActive(false);
+        controlsImage.gameObject.SetActive(false); 
+   
     }
 
     public void Controls() // Show the controls image
@@ -92,7 +124,7 @@ public class PauseMenuUIManager : PauseGame
 
     public void BackToMainMenuYes()// Go to the Main Menu
     {
-		ReturnMenu ();
+	//	ReturnMenu ();
     }
 
 }

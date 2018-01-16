@@ -15,20 +15,16 @@ public class PauseGame : MonoBehaviour
 	// Update is called once per frame
     void Update()
     {
-
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            
-            Pause();
-        
+        {            
+            Pause();       
         }
-
     }
-    
 
-     public void Awake()
+
+    public void Awake()
     {
-        canvasPause.gameObject.SetActive(false);     
+        canvasPause.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -45,12 +41,10 @@ public class PauseGame : MonoBehaviour
 		if (canvasTrigger)
 		{
 			canvasPause.gameObject.SetActive(true);
-			Time.timeScale = 0;
 		}
 		else
 		{
 			canvasPause.gameObject.SetActive(false);
-			Time.timeScale = 1;
 		}
 	}
 

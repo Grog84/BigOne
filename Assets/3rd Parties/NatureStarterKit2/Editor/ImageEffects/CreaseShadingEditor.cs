@@ -2,7 +2,6 @@ using System;
 using UnityEditor;
 using UnityEditor.AnimatedValues;
 using UnityEngine;
-using 
 
 namespace UnityStandardAssets.ImageEffects
 {

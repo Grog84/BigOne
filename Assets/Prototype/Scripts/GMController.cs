@@ -125,6 +125,7 @@ public class GMController : MonoBehaviour {
         SaveCheckpoint();
 
         bkgMusic = FMODUnity.RuntimeManager.CreateInstance(m_BkgMusicPath);
+        SetFMODParameter(bkgMusic, "GuardStatus", 0f);
         bkgMusic.start();
     }
 

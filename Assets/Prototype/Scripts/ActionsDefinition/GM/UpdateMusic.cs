@@ -13,7 +13,7 @@ namespace GM.Actions
 
         private void MusicUpdate(GMStateController controller)
         {
-            if (GMController.instance.curiousGuards > 0 || GMController.instance.alarmedGuards > 0)
+            if (GMController.instance.curiousGuards > 0 || GMController.instance.alarmedGuards > 0 )
             {
                 float detectionLevel = 0;
 

@@ -467,7 +467,7 @@ namespace AI
 
         public float GetPerceptionValue()
         {
-            return perceptionPercentage;
+            return Mathf.Clamp(perceptionPercentage, 0, 100f);
         }
 
         public void HearPlayer(float perceptionAmount)

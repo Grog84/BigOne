@@ -465,6 +465,11 @@ namespace AI
             perceptionPercentage = value;
         }
 
+        public float GetPerceptionValue()
+        {
+            return perceptionPercentage;
+        }
+
         public void HearPlayer(float perceptionAmount)
         {
             heardCounter++;

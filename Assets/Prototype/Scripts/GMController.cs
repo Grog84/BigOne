@@ -9,6 +9,7 @@ using Sirenix.OdinInspector;
 
 public enum CameraActive {ThirdPersonCameraScript, FirstPersonCameraScript, LedgeCamera}
 public enum DayNight { Day, Night}
+
 public class GMController : MonoBehaviour {
 
     //Switch Player
@@ -61,6 +62,11 @@ public class GMController : MonoBehaviour {
     [HideInInspector] public CameraScript[] m_MainCamera;
 
     [HideInInspector] public GameObject[] players;
+
+    // Music
+    [FMODUnity.EventRef]
+    public string m_BkgMusicPath;
+    FMOD.Studio.EventInstance bkgMusic;
 
     void Awake() 
     {
@@ -117,6 +123,9 @@ public class GMController : MonoBehaviour {
 
         m_SaveManager = FindObjectOfType<SaveManager>();
         SaveCheckpoint();
+
+        bkgMusic = FMODUnity.RuntimeManager.CreateInstance(m_BkgMusicPath);
+        bkgMusic.start();
     }
 
     public void UpdatePlayerPosition()
@@ -189,6 +198,23 @@ public class GMController : MonoBehaviour {
             guard.SetBlackboardValue("PlayerInSight", false);
         }
     }
+
+    public void SetBkgMusicState(float value)
+    {
+        SetFMODParameter(bkgMusic, "GuardStatus", value);
+    }
+
+    void SetFMODParameter(FMOD.Studio.EventInstance e, string name, float value)
+    {
+        FMOD.Studio.ParameterInstance parameter;
+        FMOD.RESULT getOk = e.getParameter(name, out parameter);
+        if (getOk == FMOD.RESULT.ERR_INVALID_PARAM)
+        {
+            return;
+        }
+        parameter.setValue(value);
+    }
+
 }
 
 

@@ -10,6 +10,8 @@ public class FootstepsEmitter : MonoBehaviour
     public string m_EventPath;
     public AudioDatabase m_Database;
     public AudioEntry lastEntry;
+    public FMOD.Studio.System m_System;
+    public FMOD.Studio.Bus m_Bus;
     
 
     [HideInInspector] public bool playStep = false;
@@ -40,6 +42,7 @@ public class FootstepsEmitter : MonoBehaviour
     void PlayFootstepSound()
     {
         GetFloorComposition();
+        m_System.getBus("" , out m_Bus);
 
         if (m_EventPath != null)
         {

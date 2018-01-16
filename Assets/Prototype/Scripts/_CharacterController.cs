@@ -491,7 +491,6 @@ namespace Character
 
         private IEnumerator ReachPointTop()
         {
-            Debug.Log("Inizio CLimb");
             startClimbAnimationTop = false;
             Vector3 difPos = climbAnchorTop.position - transform.position;
             float climbTime = 0.2f;

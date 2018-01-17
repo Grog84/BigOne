@@ -23,10 +23,8 @@ public class CameraScript : MonoBehaviour
     [HideInInspector]public bool motherInTrigger = false;
     [HideInInspector]public bool boyInTrigger = false;
 
-    // objects of the characters that the camera fades when too close to them
-    private Renderer boyJoints;
+    // objects of the characters that the camera fades when too close to them 
     private Renderer boySkin;
-    private GameObject BJoints;
     private GameObject BSkin;
 
     private Renderer MotherJoints;
@@ -85,9 +83,7 @@ public class CameraScript : MonoBehaviour
         thirdPersonVirtualCamera = thirdPersonCamera.GetComponent<CinemachineVirtualCamera>();
         thirdPersonCameraScript = thirdPersonCamera.GetComponent<ThirdPersonCameraScript>();
         ledgeCamera = GameObject.Find("LedgeCamera");
-        BJoints = GameObject.Find("Alpha_Joints");
-        boyJoints = BJoints.GetComponent<Renderer>();
-        BSkin = GameObject.Find("Alpha_Surface");
+        BSkin = GameObject.Find("BoySkin");
         boySkin = BSkin.GetComponent<Renderer>();
         MJoints = GameObject.Find("Beta_Joints");
         MotherJoints = MJoints.GetComponent<Renderer>();
@@ -125,14 +121,12 @@ public class CameraScript : MonoBehaviour
             || firstPersonVirtualCamera.m_Priority == 100 && activatedByTrigger == false && thirdPersonCameraScript.distance < minCamDistance && (int)GMController.instance.isCharacterPlaying == 0)
 
         {
-            StartCoroutine(SetMaterialTrasparent(boyJoints));
             StartCoroutine(SetMaterialTrasparent(boySkin));
 
         }
         else if (firstPersonVirtualCamera.m_Priority != 100 || (int)GMController.instance.isCharacterPlaying != 0
             || firstPersonVirtualCamera.m_Priority != 100 && activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance )
         {
-            StartCoroutine(SetMaterialOpaque(boyJoints));
             StartCoroutine(SetMaterialOpaque(boySkin));
         }
 

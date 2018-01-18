@@ -55,15 +55,17 @@ public class PauseMenuUIManager : MonoBehaviour
 
     public void Pause()
     {
-
+        
         if (!pauseMenuPanel.gameObject.activeSelf)
         {
             pauseMenuPanel.gameObject.SetActive(true);
+            GMController.instance.isGameActive = false;
+            Time.timeScale = 0;
         }
         else 
         {
-      
             pauseMenuPanel.SetActive(false);
+          
             BackToGame();
         }
     }
@@ -71,7 +73,8 @@ public class PauseMenuUIManager : MonoBehaviour
 
     public void BackToGame() // Back to game function
     {
-       
+        Time.timeScale = 1;
+        GMController.instance.isGameActive = true;
         pauseMenuPanel.gameObject.SetActive(false); // Close the Pause Menu Panel
         diaryPanel.gameObject.SetActive(true);
         backtoMenuSure.gameObject.SetActive(false);

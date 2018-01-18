@@ -334,10 +334,7 @@ namespace QuestManager
                         m.Printed = true;                      
                         QuestMenu.transform.GetChild(index).gameObject.SetActive(true);
                         index++;
-                        Testo = QuestMenu.transform.GetChild(index-1).GetComponent<Text>();
-                        Testo.text = "DIOCANE";
-                        Debug.Log(Testo.text);
-                        Debug.Log(Testo.text);
+                        Testo = QuestMenu.transform.GetChild(index - 1).GetComponent<Text>();                 
                         Testo.text = m.questName;                 
                     }
                     if (m.Printed)

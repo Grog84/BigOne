@@ -68,14 +68,17 @@ public class PlankCameraScript : CameraScript {
     
     public override void SwitchLookAt()
     {
+
         if ((int)GMController.instance.isCharacterPlaying == 0)
         {
+            //Debug.Log("SwitchRestricted");
             currentActivePlayer = boyLookAt.GetComponent<CharacterStateController>();
             StartCoroutine(ResetCameraPriority());
             lookAt = boyLookAtByTag;
         }
         else if ((int)GMController.instance.isCharacterPlaying == 1)
         {
+            //Debug.Log("SwitchRestricted");
             currentActivePlayer = motherLookAt.GetComponent<CharacterStateController>();
             StartCoroutine(ResetCameraPriority());
             lookAt = motherLookAtByTag;

@@ -193,6 +193,7 @@ public class RestrictedCamera : CameraScript
 
     public override void SwitchLookAt() 
     {
+        //Debug.Log("SwitchRestricted");
         if ((int)GMController.instance.isCharacterPlaying == 0)
         {
             boyActive = true;

@@ -89,6 +89,8 @@ public class PauseCamera : CameraScript {
 
     public override void SwitchLookAt()
     {
+       // Debug.Log("SwitchPaused");
+
         if ((int)GMController.instance.isCharacterPlaying == 0)
         {
            

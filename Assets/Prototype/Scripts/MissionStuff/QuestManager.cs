@@ -256,20 +256,21 @@ namespace QuestManager
         [InfoBox("Collegare il Canvas: 'pause_Quest' Dentro Canvas =>Canvas_Pause")]
         [InfoBox("Non Valido", InfoMessageType.Error, "IsCorrect")]
         public GameObject QuestMenu;
-        Text Testo;
+   
         [Space]
         [Space]
         [Header("Quest Container")]
         [InfoBox("Inserire il proprio Contenitore di Quest, Scriptable object da creare",InfoMessageType.None)]
         [AssetList(Path ="Prototype/ScriptableObjects/LevelQuest/")]
         public QuestContainer QC;
-
+        string dataPath;
 
         static int index = 1;
       //  Use this for initialization
         private void Awake()
         {
             questPath = System.IO.Path.Combine(Application.persistentDataPath, "quest.json");
+            dataPath = System.IO.Path.Combine(Application.persistentDataPath, "quest.json");
             ActivatePrimaryQuests();
         }
 
@@ -284,8 +285,8 @@ namespace QuestManager
         //Update is called once per frame
         void Update()
         {
-            checkIFnewMissionIsAvailable();
             timerDown();
+            checkIFnewMissionIsAvailable();
         }
 
         private void timerDown()
@@ -318,15 +319,9 @@ namespace QuestManager
             }
         }
 
-        private void OnApplicationQuit()
-        {
-            foreach (Quest m in QC.QuestList)
-            {
-                m.Printed = false;
-            }
-            SaveQuestGameObjectName();
-        }
 
+
+      public Text Testo;
         private void checkIFnewMissionIsAvailable()
         {
             foreach (Quest m in QC.QuestList)
@@ -335,15 +330,15 @@ namespace QuestManager
                 {
                     if (!m.Printed)
                     {
-                        Instantiate(
-                             QuestMenu.transform.GetChild(QuestMenu.transform.childCount - 1).gameObject,
-                             QuestMenu.transform)
-                             .transform.position += Giu;
+                        Instantiate(QuestMenu.transform.GetChild(QuestMenu.transform.childCount - 1).gameObject,QuestMenu.transform).transform.position += Giu;
+                        m.Printed = true;                      
                         QuestMenu.transform.GetChild(index).gameObject.SetActive(true);
-                        Testo = QuestMenu.transform.GetChild(index).GetComponent<Text>();
-                        Testo.text = m.questName;
                         index++;
-                        m.Printed = true;
+                        Testo = QuestMenu.transform.GetChild(index-1).GetComponent<Text>();
+                        Testo.text = "DIOCANE";
+                        Debug.Log(Testo.text);
+                        Debug.Log(Testo.text);
+                        Testo.text = m.questName;                 
                     }
                     if (m.Printed)
                     {
@@ -389,9 +384,7 @@ namespace QuestManager
                 QuestGiver QG;
                 QG = m.questGiver.gameObject.GetComponent<QuestGiver>();
                 if (QG == null)
-                {
-                    QG = m.questGiver.gameObject.AddComponent<QuestGiver>();
-                }
+                { QG = m.questGiver.gameObject.AddComponent<QuestGiver>();   }
 
                 QG.myMission = m;
                 QG.missionIndex = m.questIndex;
@@ -401,7 +394,7 @@ namespace QuestManager
                 QNPC.m_QuestGiver = m.questGiver.gameObject.GetComponent<QuestGiver>();
                 QNPC.m_QuestGiver.myMission = m;
                 if (QNPC != null)
-                {                   
+                {     
                     QNPC.UpdateBlackBoard();
                 }
             }
@@ -534,6 +527,22 @@ namespace QuestManager
                         break;
                 }
             }
+        }
+
+        public void SaveQuest()
+        {
+            string questSave = JsonUtility.ToJson(QC);
+            SaveData.SaveQuestContainer(dataPath, questSave);
+        }
+
+        private void OnApplicationQuit()
+        {
+            foreach (Quest m in QC.QuestList)
+            {
+                m.Printed = false;
+            }
+            SaveQuestGameObjectName();
+            SaveQuest();
         }
     }
 }

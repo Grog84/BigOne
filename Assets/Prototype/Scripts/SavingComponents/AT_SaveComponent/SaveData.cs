@@ -73,12 +73,26 @@ public class SaveData  {
      
    
     }
+    public static void SaveQuestContainer(string path,string Container)
+    {
 
+        string save = "";
+        StreamWriter sw = File.CreateText(path);
+        sw.Close();
+        foreach (char a in Container)
+        {
+            save += C.FromTo(10, 16, Convert.ToInt32(a).ToString()) + " ";
+        }
+        Container = save;
+
+        File.WriteAllText(path, Container);
+
+    }
     private static void SaveActors(string path, ActorContainer actors)
     {
         string json = JsonUtility.ToJson(actors);
      
-        string[] savedData;
+    
         string save = "";
         StreamWriter sw = File.CreateText(path);
         sw.Close();

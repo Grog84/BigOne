@@ -24,25 +24,10 @@ public class PauseMenuUIManager : MonoBehaviour
 	public EventSystem eventSystem;
 
 
-    //void Start() //Disable all the GameObject-Menu that has not to be on the screen
-    //{
-    //    pauseMenuPanel.gameObject.SetActive(true);
-    //    backToGameButton.gameObject.SetActive(true);
-    //    controlsButton.gameObject.SetActive(true);
-    //    controlsImage.gameObject.SetActive(false);
-    //    diaryButton.gameObject.SetActive(true);
-    //    backToMainMenu.gameObject.SetActive(true);
-    //    diaryPanel.gameObject.SetActive(true);
-    //    backtoMenuSure.gameObject.SetActive(false);
-    //    backToMainMenuYesButton.gameObject.SetActive(false);
-    //    backToMainMenuNoButton.gameObject.SetActive(false);
-    //    eventSystem.SetSelectedGameObject(firstSelectedPauseMenuButton);
-    //}
-
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Pause"))
         {         
             Pause();
         }
@@ -63,9 +48,7 @@ public class PauseMenuUIManager : MonoBehaviour
             Time.timeScale = 0;
         }
         else 
-        {
-            pauseMenuPanel.SetActive(false);
-          
+        {             
             BackToGame();
         }
     }
@@ -75,7 +58,7 @@ public class PauseMenuUIManager : MonoBehaviour
     {
         Time.timeScale = 1;
         GMController.instance.isGameActive = true;
-        pauseMenuPanel.gameObject.SetActive(false); // Close the Pause Menu Panel
+        pauseMenuPanel.SetActive(false);     
         diaryPanel.gameObject.SetActive(true);
         backtoMenuSure.gameObject.SetActive(false);
         controlsImage.gameObject.SetActive(false); 

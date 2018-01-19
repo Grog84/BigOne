@@ -117,7 +117,7 @@ public class GMController : MonoBehaviour {
         }
 
         m_MainCamera = FindObjectsOfType<CameraScript>();
-        Debug.Log(m_MainCamera.Length);
+        //Debug.Log(m_MainCamera.Length);
         
 
         m_SaveManager = FindObjectOfType<SaveManager>();

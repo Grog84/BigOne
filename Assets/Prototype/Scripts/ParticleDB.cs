@@ -11,6 +11,6 @@ public class ParticleDB: ScriptableObject
     [BoxGroup("ParticleDB")]
     [TableMatrix(HorizontalTitle = "Texture", VerticalTitle = "State")]
     //public GameObject[,] LabledTable = new GameObject[15, 10];
-    public ParticleSystem[,] MyDB = new ParticleSystem[10,3];
+    public GameObject[,] MyDB = new GameObject[10,3];
 	
 }

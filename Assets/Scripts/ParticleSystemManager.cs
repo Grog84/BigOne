@@ -29,6 +29,6 @@ public class ParticleSystemManager : MonoBehaviour
         particleData.MyDB[texture, state].transform.position = player.position;
         particleData.MyDB[texture, state].transform.rotation = Quaternion.LookRotation(textureNormal);
         //Emit single burst of particles
-        particleData.MyDB[texture, state].GetComponent<FootstepsParticle>().EmitParticle();
+        particleData.MyDB[texture, state].transform.GetChild(0).GetComponent<FootstepsParticle>().EmitParticle();
     }
 }

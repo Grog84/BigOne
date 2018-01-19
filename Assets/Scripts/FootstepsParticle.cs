@@ -4,7 +4,5 @@ using UnityEngine;
 
 public abstract class FootstepsParticle : MonoBehaviour
 {
-    public abstract void EmitParticle();
-   
-	
+    public abstract void EmitParticle();	
 }

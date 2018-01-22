@@ -8,7 +8,7 @@ public class FootstepsEmitter : MonoBehaviour
 
     [FMODUnity.EventRef]
     public string m_EventPath;
-    public AudioDatabase m_Database;
+    public FootstepsDatabase m_Database;
     public AudioEntry lastEntry;
     public FMOD.Studio.System m_System;
     public FMOD.Studio.Bus m_Bus;

@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Sirenix.OdinInspector;
 
 namespace CustomAudio
 {
-    [CreateAssetMenu(menuName = "Audio/AudioDatabase")]
+    [CreateAssetMenu(menuName = "Audio/FootstepsDatabase")]
     [Serializable]
-    public class AudioDatabase : ScriptableObject {
+    public class FootstepsDatabase : ScriptableObject {
 
         public AudioEntry[] entryList;
 
-        AudioEntry GetEntry(Material material)
+        AudioEntry GetEntry(TerrainTexture texture)
         {
             foreach (AudioEntry entry in entryList)
             {
-                if (entry.m_Material == material)
+                if (entry.m_Texture == texture)
                 {
                     return entry;
                 }
@@ -28,7 +29,9 @@ namespace CustomAudio
     [Serializable]
     public class AudioEntry
     {
-        public Material m_Material;
-        public FloorDescription m_Description;
+        public TerrainTexture m_Texture;
+        [ReadOnly]
+        public string FMOD_Parameter = "";
+        public int value;
     }
 }

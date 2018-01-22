@@ -67,7 +67,6 @@ namespace QuestManager
 
         [BoxGroup("MissionCreator")]
         [ShowIf("CreateMission")]
-        [ReadOnly]
         public int missionIndex;
 
         private bool isAB;

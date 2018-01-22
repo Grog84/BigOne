@@ -23,6 +23,6 @@ public class ButtonUI : MonoBehaviour {
 
     public void SelectButton()
     {
-        m_Manager.eventSystem.SetSelectedGameObject(gameObject);
+    //    m_Manager.eventSystem.SetSelectedGameObject(gameObject);
     }
 }

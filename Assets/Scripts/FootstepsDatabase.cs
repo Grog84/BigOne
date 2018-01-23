@@ -10,28 +10,15 @@ namespace CustomAudio
     [Serializable]
     public class FootstepsDatabase : ScriptableObject {
 
-        public AudioEntry[] entryList;
-
-        AudioEntry GetEntry(TerrainTexture texture)
-        {
-            foreach (AudioEntry entry in entryList)
-            {
-                if (entry.m_Texture == texture)
-                {
-                    return entry;
-                }
-            }
-
-            return null;
-        }
+        [TableList]
+        public List<FootstepsEntryDB> entryList = new List<FootstepsEntryDB>();
     }
 
     [Serializable]
-    public class AudioEntry
+    public class FootstepsEntryDB
     {
-        public TerrainTexture m_Texture;
-        [ReadOnly]
-        public string FMOD_Parameter = "";
-        public int value;
+        public TerrainTexture texture;
+        public int FMODValue;
     }
+
 }

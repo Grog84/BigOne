@@ -265,6 +265,8 @@ namespace QuestManager
         string dataPath;
 
         static int index = 1;
+
+     public bool ResettoAllaChiusura;
       //  Use this for initialization
         private void Awake()
         {
@@ -535,6 +537,10 @@ namespace QuestManager
         {
             foreach (Quest m in QC.QuestList)
             {
+                if (ResettoAllaChiusura)
+                {
+                    m.Reset();
+                }
                 m.Printed = false;
             }
             SaveQuestGameObjectName();

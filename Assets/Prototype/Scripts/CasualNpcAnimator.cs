@@ -8,7 +8,8 @@ public class CasualNpcAnimator : MonoBehaviour
 {
     [HideInInspector] public Animator anim;
     public NpcState currentState;
-    public GameObject crate; 
+    public GameObject crate;
+    public GameObject smartphone;
 
     void Awake()
     {
@@ -19,9 +20,8 @@ public class CasualNpcAnimator : MonoBehaviour
     }
 
 
-    IEnumerator ChangeStance(NpcState state)
+    public IEnumerator ChangeStance(NpcState state)
     {
-
         anim.SetBool("IsSwitching", true);
         yield return new WaitForSeconds(0.1f);
 
@@ -36,10 +36,25 @@ public class CasualNpcAnimator : MonoBehaviour
             anim.SetInteger("Stance", (int)state);
             currentState = (NpcState)anim.GetInteger("Stance");
         }
+
         if (currentState == NpcState.CarryingObject)
+        {
             crate.GetComponent<MeshRenderer>().enabled = true;
+        }
         else
+        {
             crate.GetComponent<MeshRenderer>().enabled = false;
+        }
+
+        if (currentState == NpcState.Texting)
+        {
+            smartphone.GetComponent<MeshRenderer>().enabled = true;
+        }
+        else
+        {
+            smartphone.GetComponent<MeshRenderer>().enabled = false;
+        }
+
         yield return new WaitForSeconds(0.1f);
         anim.SetBool("IsSwitching", false);
     }

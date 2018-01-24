@@ -13,6 +13,7 @@ namespace Character.Actions
         float forward;
         float backward;
         float movement;
+        float offsetRaycast;
 
 
         public override void Execute(CharacterStateController controller)
@@ -28,10 +29,12 @@ namespace Character.Actions
                 Vector3.Angle(controller.m_CharacterController.pushObject.transform.forward.normalized, -controller.m_CharacterController.CharacterTransform.forward.normalized) <= 45)
             {
                 RaycastPoints = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().objectRaycastsX;
+                offsetRaycast = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().quarterWidth * 2;
             }
             else
             {
                 RaycastPoints = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().objectRaycastsZ;
+                offsetRaycast = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().quarterDepth * 2;
             }
             // Use the Raycast grid to check for obstacles
             for (int i = 0; i < RaycastPoints.Length; i++)
@@ -41,7 +44,7 @@ namespace Character.Actions
 
                 if (Physics.Raycast(controller.m_CharacterController.pushObject.transform.position +
                     RaycastPoints[i], controller.m_CharacterController.pushCollider.transform.forward,
-                    out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromPushableObstacle))
+                    out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromPushableObstacle + offsetRaycast))
                 {
 
                     // Layers of Obastacles

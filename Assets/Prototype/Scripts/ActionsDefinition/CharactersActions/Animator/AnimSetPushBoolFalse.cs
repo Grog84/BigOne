@@ -16,7 +16,10 @@ namespace Character.Actions
 
         private void UpdateAnimatorForPush(CharacterStateController controller)
         {
-            controller.m_CharacterController.m_Animator.SetBool("isPushing", false);
+            if (!Input.GetButtonDown("Pause"))
+            {
+                controller.m_CharacterController.m_Animator.SetBool("isPushing", false);
+            }
          
         }
     }

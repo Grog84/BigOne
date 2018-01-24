@@ -17,15 +17,17 @@ public class FootstepsEmitter : MonoBehaviour
     [HideInInspector] public bool playStep = false;
 
     // FMOD Parameters
-    [HideInInspector] float audioWalk = 1f;
-    [HideInInspector] float audioRun;
-    [HideInInspector] float audioCrouch;
+    [HideInInspector] float walkState = 1f;  // 0 - crouch , 1 - Walk , 2 - Run
 
     FootstepsParameters m_footstepsParameters;
+    public TerrainReader m_TerrainReader;
 
     string lastFloorName = "None";
 
-    
+    private void Start()
+    {
+        m_TerrainReader = GetComponent<TerrainReader>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -49,15 +51,9 @@ public class FootstepsEmitter : MonoBehaviour
             FMOD.Studio.EventInstance e = FMODUnity.RuntimeManager.CreateInstance(m_EventPath);
             e.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
 
-            SetParameter(e, "Regular_Walk", audioWalk);
-            SetParameter(e, "Regular_Run", audioRun);
-            SetParameter(e, "Regular_Crouch", audioCrouch);
-            SetParameter(e, "Dirt", m_footstepsParameters.Dirt);
-            SetParameter(e, "HiCutEQ_Walks", m_footstepsParameters.HiCutEQ_Walks);
-            SetParameter(e, "LowCutEQ_Walks", m_footstepsParameters.LowCutEQ_Walks);
-            SetParameter(e, "ReverbLevel", m_footstepsParameters.ReverbLevel);
-            SetParameter(e, "ReverbDiffusion", m_footstepsParameters.ReverbDiffusion);
-            SetParameter(e, "ReverbTime", m_footstepsParameters.ReverbTime);
+            SetParameter(e, "Boy_status", walkState);
+            SetParameter(e, "Boy_surface", (float)m_TerrainReader.surfaceIndex);
+            
 
             //Debug.Log("SoundStart");
             e.start();
@@ -114,19 +110,13 @@ public class FootstepsEmitter : MonoBehaviour
         switch (state)
         {
             case "Walk":
-                audioWalk = 1f;
-                audioRun = 0f;
-                audioCrouch = 0f;
+                walkState = 1f;
                 break;
             case "Run":
-                audioWalk = 0f;
-                audioRun = 1f;
-                audioCrouch = 0f;
+                walkState = 2f;
                 break;
             case "Crouch":
-                audioWalk = 0f;
-                audioRun = 0f;
-                audioCrouch = 1f;
+                walkState = 0f;
                 break;
             default:
                 break;

@@ -24,14 +24,19 @@ public class TerrainReader : MonoBehaviour {
 
     void GetTexMixture(Vector3 position)
     {
-        int mapX = (int)(((m_TerrainPosition.x - position.x) / m_TerrainData.size.x) * alphamapWidth);
-        int mapZ = (int)(((m_TerrainPosition.z - position.z) / m_TerrainData.size.z) * alphamapHeight);
+        int mapX = (int)(((position.x - m_TerrainPosition.x) / m_TerrainData.size.x) * alphamapWidth);
+        int mapZ = (int)(((position.z - m_TerrainPosition.z) / m_TerrainData.size.z) * alphamapHeight);
+
+        if (mapX < 0)
+            Debug.Log("mapX lower than 0");
+        if (mapZ < 0)
+            Debug.Log("mapZ lower than 0");
 
         // get the splat data for this cell as a 1x1xN 3d array (where N = number of textures)
         //float[,,] splatmapData = m_TerrainData.GetAlphamaps(mapX, mapZ, 1, 1);
 
         // extract the 3D array data to a 1D array:
-        
+
 
         for (int i = 0; i < cellMix.Length; i++)
         {
@@ -59,6 +64,7 @@ public class TerrainReader : MonoBehaviour {
             }
         }
 
+        Debug.Log(maxIndex);
         return maxIndex;
 
     }
@@ -95,8 +101,6 @@ public class TerrainReader : MonoBehaviour {
         m_TerrainRay = new Ray(transform.position, Vector3.down);
         Physics.Raycast(m_TerrainRay, out m_TerrainRayHit, 0.5f);
         Debug.DrawLine(m_TerrainRay.origin, m_TerrainRay.origin + m_TerrainRay.direction * 0.1f, Color.red);
-
-        Debug.Log(m_TerrainRayHit.collider);
 
         if (m_TerrainRayHit.collider.tag == "Ground")
         {    

@@ -8,46 +8,46 @@ using Convertitore;
 using System.IO;
 
 
+[Serializable]
+public class Profile
+{
+    public string idProfile;
+    public bool newGame = false;
+    public int LastScene;
+    static Converter C = new Converter();
     [Serializable]
-    public class Profile
+    public struct customDateTime
     {
-        public string idProfile;
+        public int year; public int month; public int day;
 
-        public int LastScene;
-     static Converter C = new Converter();
-    [Serializable]
-        public struct customDateTime
-        {
-            public int year; public int month; public int day;
+        public int hour; public int minute; public int second;
 
-            public int hour; public int minute; public int second;
+    }
+    public customDateTime dateTime;
 
-        }
-        public customDateTime dateTime;
+    public bool[] completedLevel;
 
-        public bool[] completedLevel;
+    public void Save()
+    {
+        LastScene = SceneManager.GetActiveScene().buildIndex;
+    }
+    public static void SaveProfile(string path, Profile profile)
+    {
 
-        public void Save()
-        {
-            LastScene = SceneManager.GetActiveScene().buildIndex;
-        }
-        public static void SaveProfile(string path, Profile profile)
-        {
-
-            string json = JsonUtility.ToJson(profile);
+        string json = JsonUtility.ToJson(profile);
         string save = "";
         StreamWriter sw = File.CreateText(path);
-            sw.Close();
+        sw.Close();
         foreach (char a in json)
         {
             save += C.FromTo(10, 16, Convert.ToInt32(a).ToString()) + " ";
         }
         json = save;
         File.WriteAllText(path, json);
-        }
-        public static Profile LoadProfile(string path)
-        {
-            string json = File.ReadAllText(path);
+    }
+    public static Profile LoadProfile(string path)
+    {
+        string json = File.ReadAllText(path);
         string[] savedData;
         string save = "";
         savedData = json.Split(' ');
@@ -58,6 +58,6 @@ using System.IO;
         return JsonUtility.FromJson<Profile>(save);
 
 
-        }
-
     }
+
+}

@@ -7,8 +7,11 @@ using UnityEngine.EventSystems;
 
 public class MenuUIManager : MonoBehaviour
 {
+
+    #region DEVOTI
+    /*
     public GameObject mainMenu; // Main Menu
-    public GameObject settingsMenu; // Settings Menu
+    public GameObject SettingssMenu; // Settingss Menu
     public GameObject audioMenu; // Audio Menu
     public GameObject videoMenu; // Video Menu
     public GameObject controllerMenu; // Controller Menu
@@ -18,7 +21,7 @@ public class MenuUIManager : MonoBehaviour
     public GameObject continueButton; // Button which allow users to continue previously game
     public EventSystem eventSystem; // The Event System
     public GameObject firstSelectedMainMenuButton; // First button selected in the Main Menu
-    public GameObject firstSelectedSettingsMenuButton; // First button selected in the Settings Menu
+    public GameObject firstSelectedSettingssMenuButton; // First button selected in the Settingss Menu
     public GameObject firstSelectedAudioMenuButton; // First button selected in the Audio Menu
     public GameObject firstSelectedVideoMenuButton; // First button selected in the Video Menu
     public GameObject firstSelectedControllerMenuButton; // First button selected in the Controller Menu
@@ -36,7 +39,7 @@ public class MenuUIManager : MonoBehaviour
     {
         SM = FindObjectOfType<SaveManager>();
         mainMenu.gameObject.SetActive(true);
-        settingsMenu.gameObject.SetActive(false);
+        SettingssMenu.gameObject.SetActive(false);
         audioMenu.gameObject.SetActive(false);
         videoMenu.gameObject.SetActive(false);
         controllerMenu.gameObject.SetActive(false);
@@ -52,7 +55,7 @@ public class MenuUIManager : MonoBehaviour
             continueButton.SetActive(false);
 
         inizialize();
-        // CONTROLLO SUYI BOTTONI DA ATTIVARE
+        // CONTROLLO SUI BOTTONI DA ATTIVARE
         // FOR (BOTTONI)
         //     DEACTIVATE BOTTONI NON BUONI
 
@@ -91,23 +94,23 @@ public class MenuUIManager : MonoBehaviour
 		}
     }
 
-    public void SettingsMenu()// Enabled the Settings Menu and disable all the others
+    public void SettingssMenu()// Enabled the Settingss Menu and disable all the others
     {
         mainMenu.gameObject.SetActive(false);
-        settingsMenu.gameObject.SetActive(true);
+        SettingssMenu.gameObject.SetActive(true);
         audioMenu.gameObject.SetActive(false);
         videoMenu.gameObject.SetActive(false);
         controllerMenu.gameObject.SetActive(false);
         selectLevelMenu.gameObject.SetActive(false);
         exitMenu.gameObject.SetActive(false);
         areYouSure.gameObject.SetActive(false);
-        eventSystem.SetSelectedGameObject(firstSelectedSettingsMenuButton); // Set the first selected button in the menu
+        eventSystem.SetSelectedGameObject(firstSelectedSettingssMenuButton); // Set the first selected button in the menu
     }
 
     public void MainMenu() // Enabled the Main Menu and disable all the others
     {
         mainMenu.gameObject.SetActive(true);
-        settingsMenu.gameObject.SetActive(false);
+        SettingssMenu.gameObject.SetActive(false);
         audioMenu.gameObject.SetActive(false);
         videoMenu.gameObject.SetActive(false);
         controllerMenu.gameObject.SetActive(false);
@@ -121,7 +124,7 @@ public class MenuUIManager : MonoBehaviour
     public void AudioMenu() // Enabled the Audio Menu and disable all the others
     {
         mainMenu.gameObject.SetActive(false);
-        settingsMenu.gameObject.SetActive(false);
+        SettingssMenu.gameObject.SetActive(false);
         audioMenu.gameObject.SetActive(true);
         videoMenu.gameObject.SetActive(false);
         controllerMenu.gameObject.SetActive(false);
@@ -134,7 +137,7 @@ public class MenuUIManager : MonoBehaviour
     public void VideoMenu() // Enabled the Video Menu and disable all the others
     {
         mainMenu.gameObject.SetActive(false);
-        settingsMenu.gameObject.SetActive(false);
+        SettingssMenu.gameObject.SetActive(false);
         audioMenu.gameObject.SetActive(false);
         videoMenu.gameObject.SetActive(true);
         controllerMenu.gameObject.SetActive(false);
@@ -147,7 +150,7 @@ public class MenuUIManager : MonoBehaviour
     public void ControllerMenu() // Enabled the Controller Menu and disable all the others
     {
         mainMenu.gameObject.SetActive(false);
-        settingsMenu.gameObject.SetActive(false);
+        SettingssMenu.gameObject.SetActive(false);
         audioMenu.gameObject.SetActive(false);
         videoMenu.gameObject.SetActive(false);
         controllerMenu.gameObject.SetActive(true);
@@ -167,7 +170,7 @@ public class MenuUIManager : MonoBehaviour
 		//variabileCheckAreYouSure = 2;
 		variabileCheckAreYouSure = 0;
 		mainMenu.gameObject.SetActive(false);
-        settingsMenu.gameObject.SetActive(false);
+        SettingssMenu.gameObject.SetActive(false);
         audioMenu.gameObject.SetActive(false);
         videoMenu.gameObject.SetActive(false);
         controllerMenu.gameObject.SetActive(false);
@@ -181,7 +184,7 @@ public class MenuUIManager : MonoBehaviour
     public void ExitGameMenu() // Enabled the Exit Game Menu and disable all the others
     {
         mainMenu.gameObject.SetActive(false);
-        settingsMenu.gameObject.SetActive(false);
+        SettingssMenu.gameObject.SetActive(false);
         audioMenu.gameObject.SetActive(false);
         videoMenu.gameObject.SetActive(false);
         controllerMenu.gameObject.SetActive(false);
@@ -208,7 +211,7 @@ public class MenuUIManager : MonoBehaviour
 	public void AreYouSure()
     {
 		//mainMenu.gameObject.SetActive(false);
-		settingsMenu.gameObject.SetActive(false);
+		SettingssMenu.gameObject.SetActive(false);
 		audioMenu.gameObject.SetActive(false);
 		videoMenu.gameObject.SetActive(false);
 		controllerMenu.gameObject.SetActive(false);
@@ -265,11 +268,249 @@ public class MenuUIManager : MonoBehaviour
         Debug.Log(LevelSelect.Length + "," + this.selectLevelMenu.transform.childCount);
     }
 
+    */
 
+    #endregion
 
+    #region Tonnini
+    private SaveManager SM;
 
+    GameObject[] UiButton;
+    private void Awake()
+    {
+        UiButton = GameObject.FindGameObjectsWithTag("CanvasUI");
+    }
 
+    private void Start()
+    {
+        SM = FindObjectOfType<SaveManager>();
+        ReturnToMainMenu();
 
+    }
+
+    public void ReturnToMainMenu()
+    {
+        foreach (GameObject a in UiButton)
+        {
+            if(a.name=="EmptyMainMenu")
+            {
+                a.SetActive(true);
+            }
+            else
+            {
+                a.SetActive(false);
+            }
+        }
+    }
+
+    public void OpenLevelSelect()
+    {
+        foreach (GameObject a in UiButton)
+        {
+            if (a.name == "EmptySelectLevelMenu")
+            {
+                a.SetActive(true);
+            }
+            else
+            {
+                a.SetActive(false);
+            }
+        }
+    }
+
+    public void CloseLevelSelect()
+    {
+        foreach (GameObject a in UiButton)
+        {
+            if (a.name == "EmptySelectLevelMenu")
+            {
+                a.SetActive(false);
+            }
+
+        }
+        ReturnToMainMenu();
+    }
+
+    public void OpenSettings()
+    {
+        foreach (GameObject a in UiButton)
+        {
+            if (a.name == "EmptySettingsMenu")
+            {
+                a.SetActive(true);
+            }
+            else
+            {
+                a.SetActive(false);
+            }
+        }
+    }
+
+    public void CloseSettings()
+    {
+        foreach (GameObject a in UiButton)
+        {
+            if (a.name == "EmptySettingsMenu")
+            {
+                a.SetActive(false);
+            }
+            ReturnToMainMenu();
+        }
+    }
+
+    public void OpenAudioSettings()
+    {
+        foreach (GameObject a in UiButton)
+        {
+            if (a.name == "EmptyAudioMenu")
+            {
+                a.SetActive(true);
+            }
+            else
+            {
+                a.SetActive(false);
+            }
+        }
+    }
+
+    public void CloseAudioSettings()
+    {
+        foreach (GameObject a in UiButton)
+        {
+            if (a.name == "EmptyAudioMenu")
+            {
+                a.SetActive(false);
+            
+            }
+            OpenSettings();
+        }
+    }
+
+    public void OpenVideoSettings()
+    {
+        foreach (GameObject a in UiButton)
+        {
+            if (a.name == "EmptyVideoMenu")
+            {
+                a.SetActive(true);
+            }
+            else
+            {
+                a.SetActive(false);
+            }
+        }
+    }
+
+    public void CloseVideoSettings()
+    {
+        foreach (GameObject a in UiButton)
+        {
+            if (a.name == "EmptyVideoMenu")
+            {
+                a.SetActive(false);
+
+            }
+            OpenSettings();
+        }
+    }
+
+    public void OpenControllerMenu()
+    {
+        foreach (GameObject a in UiButton)
+        {
+            if (a.name == "EmptyControllerMenu")
+            {
+                a.SetActive(true);
+            }
+            else
+            {
+                a.SetActive(false);
+            }
+        }
+    }
+
+    public void CloseControllerMenu()
+    {
+        foreach (GameObject a in UiButton)
+        {
+            if (a.name == "EmptyControllerMenu")
+            {
+                a.SetActive(false);
+            }
+            OpenSettings();
+        }
+    }
+
+    public void LoadLevel(int indexValue)
+    {
+        SceneManager.LoadSceneAsync(indexValue);
+    }
+
+    public void Continue()
+    {
+        SM.LoadLastScene();
+    }
+    int ExitOrNewGame;
+    public void StartNewGame()
+    {
+        //Check if new save
+        if (!SM.Profile.newGame)
+        {
+            SceneManager.LoadSceneAsync(1);
+        }
+        else
+        {
+            foreach (GameObject a in UiButton)
+            {
+                if (a.name == "EmptyAreYouSureMenu")
+                {
+                    a.SetActive(true);
+                }
+                else
+                {
+                    a.SetActive(false);
+                }
+            }         
+        }
+    }
+    public void OverwriteProgress()
+    {
+        SceneManager.LoadSceneAsync(1);
+
+    }
+    public void EnableExitPanel()
+    {
+        foreach (GameObject a in UiButton)
+        {
+            if (a.name == "EmptyExitMenu")
+            {
+                a.SetActive(true);
+            }
+            else
+            {
+                a.SetActive(false);
+            }
+        }
+
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+    public void Negate()
+    {
+        foreach (GameObject a in UiButton)
+        {
+            if (a.name == "EmptyAreYouSureMenu"||a.name=="EmptyExitMenu")
+            {
+                a.SetActive(false);
+            }
+            ReturnToMainMenu();
+        }
+
+    }
+
+    #endregion
 
 
 

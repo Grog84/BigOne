@@ -12,7 +12,7 @@ using QuestManager;
   [HideMonoScript]
 public class SaveManager :MonoBehaviour {
   
-    [ReadOnly]
+  //  [ReadOnly]
     [BoxGroup("Profile Settings")]
     public Profile Profile;
 

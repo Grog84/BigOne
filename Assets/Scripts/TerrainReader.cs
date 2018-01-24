@@ -31,7 +31,7 @@ public class TerrainReader : MonoBehaviour {
         //float[,,] splatmapData = m_TerrainData.GetAlphamaps(mapX, mapZ, 1, 1);
 
         // extract the 3D array data to a 1D array:
-        cellMix = new float[splatmapData.GetUpperBound(2) + 1];
+        
 
         for (int i = 0; i < cellMix.Length; i++)
         {
@@ -74,6 +74,8 @@ public class TerrainReader : MonoBehaviour {
         Physics.Raycast(m_TerrainRay, out m_TerrainRayHit, 0.5f);
 
         splatmapData = m_TerrainData.GetAlphamaps(0, 0, alphamapWidth, alphamapHeight);
+        cellMix = new float[splatmapData.GetUpperBound(2) + 1];
+
 
         if (m_TerrainRayHit.collider.tag == "Ground")
         {

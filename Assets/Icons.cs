@@ -40,7 +40,7 @@ public class Icons : MonoBehaviour
             }
             else
             {
-                gameObject.transform.Find("Door").gameObject.SetActive(false);
+                //gameObject.transform.Find("Door").gameObject.SetActive(false);
             }
             // Collect Icon
             if (controllerBoy.m_CharacterController.isInItemArea && !controllerBoy.m_CharacterController.isClimbDirectionRight && !controllerBoy.m_CharacterController.isDoorDirectionRight)

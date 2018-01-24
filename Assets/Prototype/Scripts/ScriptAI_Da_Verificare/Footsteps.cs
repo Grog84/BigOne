@@ -233,4 +233,78 @@ public class Footsteps : MonoBehaviour
 		}
 		return -1;
 	}
+
+
+    //From web
+
+//void Start()
+//{
+//    mTerrainData = Terrain.activeTerrain.terrainData;
+//    alphamapWidth = mTerrainData.alphamapWidth;
+//    alphamapHeight = mTerrainData.alphamapHeight;
+
+//    mSplatmapData = mTerrainData.GetAlphamaps(0, 0, alphamapWidth, alphamapHeight);
+//    mNumTextures = mSplatmapData.Length / (alphamapWidth * alphamapHeight);
+//}
+
+//private Vector3 ConvertToSplatMapCoordinate(Vector3 playerPos)
+//{
+//    Vector3 vecRet = new Vector3();
+//    Terrain ter = Terrain.activeTerrain;
+//    Vector3 terPosition = ter.transform.position;
+//    vecRet.x = ((playerPos.x - terPosition.x) / ter.terrainData.size.x) * ter.terrainData.alphamapWidth;
+//    vecRet.z = ((playerPos.z - terPosition.z) / ter.terrainData.size.z) * ter.terrainData.alphamapHeight;
+//    return vecRet;
+//}
+
+//void Update()
+//{
+//    int terrainIdx = GetActiveTerrainTextureIdx();
+//    PlayFootStepSound(terrainIdx);
+//}
+
+//int GetActiveTerrainTextureIdx()
+//{
+//Vector3 playerPos = PlayerController.Instance.position;
+//Vector3 TerrainCord = ConvertToSplatMapCoordinate(playerPos);
+//int ret = 0;
+//float comp = 0f;
+//for (int i = 0; i < mNumTextures; i++)
+//{
+//    if (comp < mSplatmapData[(int)TerrainCord.z, (int)TerrainCord.x, i])
+//        ret = i;
+//}
+//return ret;
+//}
+
+/* WEB 2
+ You can read values from the "Mix Map" (a.k.a. Splat Map, Alpha Map, Control Texture - these are often used to refer to the same thing) using some undocumented terrain functions. The Mix Map controls the blending of each of your textures across the terrain, and is a 2D grid of values. The size of this grid is determine by the "Control Texture Resolution" setting in the terrain dialog box.
+
+So, you'll need to convert the player's world coordinates to coordinates which represent the grid cell of the "control texture" which the player is currently within. A similar technique is described in this question, but in this case it converts it to the 2d heightmap grid:
+
+How to translate WORLD coordinates to TERRAIN coordinates?
+
+However instead of the heightmap size, you'll need to use the Mix Map size which can be read using the undocumented command, terrain.alphamapResolution.
+
+So, to convert, you need to subtrack the terrain's position, divide by the terrain size, and multiply by that Mix Map Size:
+
+var terrainData = terrain.terrainData;
+var terrainPos = terrain.transform.position;
+var mapX = ((player.x - terrainPos.x) / terrainData.size.x) * terrainData.alphamapWidth;
+var mapZ = ((player.z - terrainPos.z) / terrainData.size.z) * terrainData.alphamapHeight;
+Next you need to use those coordinates to sample the values which control the mix of textures at that position, using the undocumented function GetAlphamaps, like this:
+
+var splatmapData = terrain.GetAlphamaps(x, y, width, height); 
+Because the alphamap data is a 2d grid, the x & y values here are integers, as are the width & height values (which let you sample an area of the grid of any size). Because you're only interested in sampling the cell under the player, the width and height should be 1.
+
+Now you're left with a variable (splatmapData) which contains a 3d array. To read the mix levels of each texture layer, you need something like this:
+
+var texture1Level = splatmapData[0,0,0];  // texture layer 1
+var texture2Level = splatmapData[0,0,1];  // texture layer 2
+var texture3Level = splatmapData[0,0,2];  // texture layer 3
+var texture4Level = splatmapData[0,0,3];  // texture layer 4
+(the reason you have 0,0 at the start is because "splatmapData" could have contained a sampled area larger than 1x1 in size, so this specifies the location within the sampled area. Because our width & height was 1,1 - the sampled area is only one cell in size).
+
+The number of lines above should match the number of texture layers you're using in your terrain. If an area is 100% covered in one texture, you should find that texture level has a value of 1.0, and the rest have a value of 0.0. If there is a blend of textures at that location, you'll find that more than one layer has a value larger than 0.0, and that they all add up to a total of 1.0.
+ */
 }

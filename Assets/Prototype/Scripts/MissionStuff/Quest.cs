@@ -146,6 +146,14 @@ namespace QuestManager
 
         }
 
+        public void Reset()
+        {
+            completed = false;
+            active = false;
+            turnInStatus = false;
+            isStriked = false;
+
+        }
         public void SetActive()
         {
             active = true;

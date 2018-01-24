@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 
 public class TerrainReader : MonoBehaviour {
 
+    public LayerMask groundMask;
     [ReadOnly]
     public TerrainTexture surfaceIndex;
 
@@ -16,11 +17,6 @@ public class TerrainReader : MonoBehaviour {
 
     Ray m_TerrainRay;
     RaycastHit m_TerrainRayHit;
-    float rayMaxDistance = 1f;
-
-    string lastTexture;
-
-    bool onTerrain;
 
     float[] cellMix;
     int alphamapWidth, alphamapHeight;
@@ -28,8 +24,8 @@ public class TerrainReader : MonoBehaviour {
 
     void GetTexMixture(Vector3 position)
     {
-        int mapX = (int)(((position.x - m_TerrainPosition.x) / m_TerrainData.size.x) * alphamapWidth);
-        int mapZ = (int)(((position.z - m_TerrainPosition.z) / m_TerrainData.size.z) * alphamapHeight);
+        int mapX = (int)(((m_TerrainPosition.x - position.x) / m_TerrainData.size.x) * alphamapWidth);
+        int mapZ = (int)(((m_TerrainPosition.z - position.z) / m_TerrainData.size.z) * alphamapHeight);
 
         // get the splat data for this cell as a 1x1xN 3d array (where N = number of textures)
         //float[,,] splatmapData = m_TerrainData.GetAlphamaps(mapX, mapZ, 1, 1);
@@ -74,30 +70,40 @@ public class TerrainReader : MonoBehaviour {
         alphamapWidth = m_TerrainData.alphamapWidth;
         alphamapHeight = m_TerrainData.alphamapHeight;
 
-        m_TerrainRay.direction = Vector3.down;
-        m_TerrainRay.origin = transform.position;
-        Physics.Raycast(m_TerrainRay, out m_TerrainRayHit);
+        m_TerrainRay = new Ray(transform.position, Vector3.down);
+        Physics.Raycast(m_TerrainRay, out m_TerrainRayHit, 0.5f);
 
-        if (m_TerrainRayHit.collider.GetComponent<Terrain>())
+        splatmapData = m_TerrainData.GetAlphamaps(0, 0, alphamapWidth, alphamapHeight);
+
+        if (m_TerrainRayHit.collider.tag == "Ground")
         {
-            onTerrain = true;
             m_Terrain = m_TerrainRayHit.collider.GetComponent<Terrain>();
             m_TerrainPosition = m_Terrain.transform.position;
         }
         else
         {
-            onTerrain = false;
             lastMaterial = m_TerrainRayHit.collider.GetComponent<MeshRenderer>().material;
         }
-
-        splatmapData = m_TerrainData.GetAlphamaps(0, 0, alphamapWidth, alphamapHeight);
-
 
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-         surfaceIndex = (TerrainTexture)GetMainTexture(transform.position);
+        m_TerrainRay = new Ray(transform.position, Vector3.down);
+        Physics.Raycast(m_TerrainRay, out m_TerrainRayHit, 0.5f);
+        Debug.DrawLine(m_TerrainRay.origin, m_TerrainRay.origin + m_TerrainRay.direction * 0.1f, Color.red);
+
+        Debug.Log(m_TerrainRayHit.collider);
+
+        if (m_TerrainRayHit.collider.tag == "Ground")
+        {    
+            surfaceIndex = (TerrainTexture)GetMainTexture(m_TerrainRayHit.point);
+        }
+        else
+        {
+            lastMaterial = m_TerrainRayHit.collider.GetComponent<MeshRenderer>().material;
+        }
+
     }
 }

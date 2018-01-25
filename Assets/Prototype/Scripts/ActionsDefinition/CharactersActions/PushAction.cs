@@ -14,6 +14,9 @@ namespace Character.Actions
         float backward;
         float movement;
         float offsetRaycast;
+        int dir;
+        int count;
+        
 
 
         public override void Execute(CharacterStateController controller)
@@ -37,13 +40,14 @@ namespace Character.Actions
                 offsetRaycast = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().quarterDepth * 2;
             }
             // Use the Raycast grid to check for obstacles
+            count = RaycastPoints.Length;
             for (int i = 0; i < RaycastPoints.Length; i++)
             {
-                Debug.DrawRay(controller.m_CharacterController.pushObject.transform.position + RaycastPoints[i], controller.m_CharacterController.pushCollider.transform.forward, Color.red);
+                Debug.DrawRay(controller.m_CharacterController.pushObject.transform.position + RaycastPoints[i], controller.m_CharacterController.pushCollider.transform.forward * dir, Color.red);
                 RaycastHit hit;
 
                 if (Physics.Raycast(controller.m_CharacterController.pushObject.transform.position +
-                    RaycastPoints[i], controller.m_CharacterController.pushCollider.transform.forward,
+                    RaycastPoints[i], controller.m_CharacterController.pushCollider.transform.forward * dir,
                     out hit, controller.m_CharacterController.m_CharStats.m_DistanceFromPushableObstacle + offsetRaycast))
                 {
 
@@ -53,8 +57,12 @@ namespace Character.Actions
                               hit.transform.gameObject.layer == LayerMask.NameToLayer("Stairs"))
                     {
                         controller.m_CharacterController.isPushLimit = true;
+                        count--;
                     }
-
+                }
+                if (count == RaycastPoints.Length)
+                {
+                    controller.m_CharacterController.isPushLimit = false;
                 }
 
             }
@@ -80,6 +88,7 @@ namespace Character.Actions
             if (Input.GetAxis("Vertical") > 0)
             {
                 forward = Input.GetAxis("Vertical");
+                dir = 1;
             }
             else
             {
@@ -88,8 +97,8 @@ namespace Character.Actions
 
             if (Input.GetAxis("Vertical") < 0)
             {
-                backward = Input.GetAxis("Vertical");
-                controller.m_CharacterController.isPushLimit = false;
+                backward = Input.GetAxis("Vertical");;
+                dir = -1;
             }
             else 
             {
@@ -102,10 +111,17 @@ namespace Character.Actions
                 forward = 0;
             }
 
-
+            Debug.Log(dir);
             if (controller.m_CharacterController.isPushLimit)
             {
-                controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.pushCollider.transform.forward * backward * controller.characterStats.m_PushSpeed * Time.deltaTime);//0.0.1          
+                if (dir < 0)
+                {
+                    controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.pushCollider.transform.forward * forward * controller.characterStats.m_PushSpeed * Time.deltaTime);//0.0.1   
+                }
+                else if (dir > 0)
+                {
+                    controller.m_CharacterController.m_CharController.Move(controller.m_CharacterController.pushCollider.transform.forward * backward * controller.characterStats.m_PushSpeed * Time.deltaTime);//0.0.1 
+                }
             }
             else if (!controller.m_CharacterController.isPushLimit)
             {

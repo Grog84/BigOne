@@ -46,9 +46,9 @@ namespace Character
         [HideInInspector] public bool isBottomClimbCRDone = true;
         //
         // PUSH VARIABLES
-         public bool isInPushArea;                    // The player is in the trigger area for Pushing
-         public bool isPushDirectionRight;            // The player is facing the pushable object
-        [HideInInspector] public bool isPushLimit;                     // Detect push limits like obstacles
+        [HideInInspector] public bool isInPushArea;                    // The player is in the trigger area for Pushing
+        [HideInInspector] public bool isPushDirectionRight;            // The player is facing the pushable object
+        [HideInInspector] public bool isPushLimit;                      // Detect push limits like obstacles
         [HideInInspector] public bool isPushing;                       // Define the start push actions
         [HideInInspector] public bool isExitPush;                      // Indicates if the DetachFormPushable coroutine is finished
         //

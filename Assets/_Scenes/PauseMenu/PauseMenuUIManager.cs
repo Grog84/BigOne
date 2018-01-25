@@ -9,47 +9,52 @@ using UnityEngine.EventSystems;
 public class PauseMenuUIManager : MonoBehaviour
 
 {
-    public GameObject pauseMenuPanel; // Pause Menu
-	public GameObject backToGameButton; // Back to the game button
-	public GameObject controlsButton; // Controls Button
-	public GameObject controlsImage; // Controls Image
-	public GameObject backToMainMenu; // Back to main menu button
-	public GameObject firstSelectedPauseMenuButton; // First button selected in the Main Menu
-	public GameObject firstSelectedBackToMainMenu; // First button selected in the Back to game choice
-    public GameObject diaryPanel; // Diary panel
-	public GameObject diaryButton; // Diary Button
-	public GameObject backtoMenuSure; // Back to Menu Areyousure panel
-    public Button backToMainMenuYesButton; // The "Yes Button" in the "Security Menu"
-    public Button backToMainMenuNoButton; // The "No Button" in the "Security Menu"
-	public EventSystem eventSystem;
 
-
+    public GameObject[] PauseMenuCanvas;
 
     void Update()
     {
         if (Input.GetButtonDown("Pause"))
-        {         
+        {
             Pause();
         }
     }
     public void Awake()
     {
-        pauseMenuPanel.gameObject.SetActive(false);
+        PauseMenuCanvas = GameObject.FindGameObjectsWithTag("Pause Menu");
+        CloseMenu();
     }
-    
+
+    public void CloseMenu()
+    {
+        foreach (GameObject a in PauseMenuCanvas)
+        {
+            if (a.name == "PauseMenuPanel")
+            {
+                a.SetActive(false);
+            }
+        }
+    }
 
     public void Pause()
     {
-        
-        if (!pauseMenuPanel.gameObject.activeSelf)
+
+        foreach (GameObject a in PauseMenuCanvas)
         {
-            pauseMenuPanel.gameObject.SetActive(true);
-            GMController.instance.isGameActive = false;
-            Time.timeScale = 0;
-        }
-        else 
-        {             
-            BackToGame();
+            if (a.name == "PauseMenuPanel")
+            {
+                if (!a.gameObject.activeSelf)
+                {
+                    a.gameObject.SetActive(true);
+                    GMController.instance.isGameActive = false;
+                    Time.timeScale = 0;
+                    OpenDiary();
+                }
+                else
+                {
+                    BackToGame();
+                }
+            }
         }
     }
 
@@ -58,59 +63,81 @@ public class PauseMenuUIManager : MonoBehaviour
     {
         Time.timeScale = 1;
         GMController.instance.isGameActive = true;
-        pauseMenuPanel.SetActive(false);     
-        diaryPanel.gameObject.SetActive(true);
-        backtoMenuSure.gameObject.SetActive(false);
-        controlsImage.gameObject.SetActive(false); 
-   
+
+        foreach (GameObject a in PauseMenuCanvas)
+        {
+            if (a.name == "PauseMenuPanel")
+            {
+                a.gameObject.SetActive(false);
+
+            }
+        }
+    }
+    public void OpenDiary()
+    {
+        foreach (GameObject a in PauseMenuCanvas)
+        {
+            if (a.name == "pause_Quest")
+            {
+                a.gameObject.SetActive(true);
+
+            }
+            else if (a.name == "ControlsImage" || a.name == "MenuAreYouSure")
+            {
+                a.gameObject.SetActive(false);
+            }
+        }
+
     }
 
     public void Controls() // Show the controls image
     {
-        controlsImage.gameObject.SetActive(true); // Activate the controls image
-        diaryPanel.gameObject.SetActive(false);
-       // backToMainMenuYesButton.gameObject.SetActive(false);
-       // backToMainMenuNoButton.gameObject.SetActive(false);
-		backtoMenuSure.gameObject.SetActive(false);
+        foreach (GameObject a in PauseMenuCanvas)
+        {
+            if (a.name == "ControlsImage")
+            {
+                a.gameObject.SetActive(true);
+
+            }
+            else if (a.name == "pause_Quest" || a.name == "MenuAreYouSure")
+            {
+                a.gameObject.SetActive(false);
+            }
+        }
     }
 
-	public void FadesPauseMenu(string pauseMenuType) // Set the time to wait until the fade animation is finished
-	{
-		Invoke (pauseMenuType, 0.2f); // Enable the Fade 
-	}
-
-	public void DiaryPanel()
-	{
-		controlsImage.gameObject.SetActive(false); // Activate the diary panel
-        diaryPanel.gameObject.SetActive(true);
-		backtoMenuSure.gameObject.SetActive(false);
-        //backToMainMenuYesButton.gameObject.SetActive(false);
-        //backToMainMenuNoButton.gameObject.SetActive(false);
-    }
-
-	public void BackToMainMenuChoice()// Enable the choice to go the Main Menu
+    public void FadesPauseMenu(string pauseMenuType) // Set the time to wait until the fade animation is finished
     {
-		diaryPanel.gameObject.SetActive(false);
-		controlsImage.gameObject.SetActive(false);
-		backtoMenuSure.gameObject.SetActive(true);
-		eventSystem.SetSelectedGameObject(firstSelectedBackToMainMenu);
-       //backToMainMenuYesButton.gameObject.SetActive(true);
-       //backToMainMenuNoButton.gameObject.SetActive(true);
+        Invoke(pauseMenuType, 0.2f); // Enable the Fade 
+    }
+
+
+
+    public void BackToMainMenuChoice()// Enable the choice to go the Main Menu
+    {
+        foreach (GameObject a in PauseMenuCanvas)
+        {
+            if (a.name == "MenuAreYouSure")
+            {
+                a.gameObject.SetActive(true);
+                a.gameObject.transform.GetChild(0).GetComponent<Button>().Select();
+
+            }
+            else if (a.name == "pause_Quest" || a.name == "ControlsImage")
+            {
+                a.gameObject.SetActive(false);
+            }
+        }
     }
 
     public void BackToMainMenuNO()// Close the choice to go the Main Menu
     {
-		eventSystem.SetSelectedGameObject(firstSelectedPauseMenuButton);
-        //backToMainMenuYesButton.gameObject.SetActive(false);
-        //backToMainMenuNoButton.gameObject.SetActive(false);
-		backtoMenuSure.gameObject.SetActive(false);
-        controlsImage.gameObject.SetActive(false);
-        diaryPanel.gameObject.SetActive(true);
+        OpenDiary();
     }
 
     public void BackToMainMenuYes()// Go to the Main Menu
     {
-	//	ReturnMenu ();
+        //	ReturnMenu ();
     }
 
 }

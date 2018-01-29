@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
-	// public class PauseMenuUIManager : MonoBehaviour
+// public class PauseMenuUIManager : MonoBehaviour
 public class PauseMenuUIManager : MonoBehaviour
 
 {
@@ -137,7 +138,12 @@ public class PauseMenuUIManager : MonoBehaviour
 
     public void BackToMainMenuYes()// Go to the Main Menu
     {
-        //	ReturnMenu ();
+        ReturnToMainMenu();
     }
 
+    private void ReturnToMainMenu()
+    {
+        SceneManager.LoadSceneAsync(0);
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+    }
 }

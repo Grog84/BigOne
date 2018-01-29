@@ -12,7 +12,8 @@ namespace AI
     public class QuestNpc : AIAgent
     {
         [HideInInspector] public QuestGiver m_QuestGiver;
-      
+        [HideInInspector] public QuestReceiver m_QuestReceinver;
+
         [HideInInspector]public PlayableDirector m_PlayableDirector;
         public bool canInteract = true;
         LookAtIK lookAtComponent;
@@ -89,12 +90,22 @@ namespace AI
         public void UpdateBlackBoard()
         {
 
-           
-            
-            SetBlackboardValue("questAvailable", m_QuestGiver.myMission.available);
-            SetBlackboardValue("questCompleted", m_QuestGiver.myMission.completed);
 
-            SetBlackboardValue("questTurnInStatus", m_QuestGiver.myMission.turnInStatus);
+            if (m_QuestGiver != null)
+            {
+                SetBlackboardValue("questAvailable", m_QuestGiver.myMission.available);
+                SetBlackboardValue("questCompleted", m_QuestGiver.myMission.completed);
+
+                SetBlackboardValue("questTurnInStatus", m_QuestGiver.myMission.turnInStatus);
+            }
+            else if (m_QuestGiver == null)
+            {
+
+                SetBlackboardValue("questAvailable", m_QuestReceinver.myMission.available);
+                SetBlackboardValue("questCompleted", m_QuestReceinver.myMission.completed);
+
+                SetBlackboardValue("questTurnInStatus", m_QuestReceinver.myMission.turnInStatus);
+            }
 
             //Debug.Log("Quest : " + m_QuestGiver.myMission.available + " - " + m_QuestGiver.myMission.completed + " - " + m_QuestGiver.myMission.turnInStatus);
             //Debug.Log("Quest : " + GetBlackboardBoolValue("questAvailable") + " - " + GetBlackboardBoolValue("questCompleted") + " - " +

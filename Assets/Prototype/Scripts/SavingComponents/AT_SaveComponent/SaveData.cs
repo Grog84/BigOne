@@ -60,18 +60,15 @@ public class SaveData  {
     private static ActorContainer LoadActors(string path)
     {
         string json = File.ReadAllText(path);
-        string[] savedData;
-        string save = "";
-        savedData = json.Split(' ');
-        for (int i = 0; i < savedData.Length; i++)
-        {
-            save += (char)Convert.ToInt32(C.FromTo(16, 10, savedData[i]));
-        }
+        //string[] savedData;
+        //string save = "";
+        //savedData = json.Split(' ');
+        //for (int i = 0; i < savedData.Length; i++)
+        //{
+        //    save += (char)Convert.ToInt32(C.FromTo(16, 10, savedData[i]));
+        //}
 
-        return JsonUtility.FromJson<ActorContainer>(save);
-
-     
-   
+        return JsonUtility.FromJson<ActorContainer>(json);  
     }
     public static void SaveQuestContainer(string path,string Container)
     {
@@ -96,27 +93,14 @@ public class SaveData  {
         string save = "";
         StreamWriter sw = File.CreateText(path);
         sw.Close();
-        foreach (char a in json)
-        {
-            save += C.FromTo(10, 16, Convert.ToInt32(a).ToString()) + " ";
-        }
-        json = save;
+        //foreach (char a in json)
+        //{
+        //    save += C.FromTo(10, 16, Convert.ToInt32(a).ToString()) + " ";
+        //}
+        //json = save;
 
         File.WriteAllText(path, json);
     }
 
-    // Encrypt a file. 
-    public static void AddEncryption(string FileName)
-    {
-
-        
-        File.Encrypt(FileName);
-       
-    }
-
-    // Decrypt a file. 
-    public static void RemoveEncryption(string FileName)
-    {
-        File.Decrypt(FileName);
-    }
+   
 }

@@ -12,14 +12,7 @@ namespace QuestManager
         public void AnalyzeQuestStatus(GameObject questObject)
         {
 
-            //if (questObject.GetComponent<QuestObject>().Picked == true)
-            //{
-            //    if (questObject.GetComponent<QuestObject>().Bringed == true)
-            //    {
-            //        myMission.completed = true;
-            //    }
-            //}
-
+          
         }
 
 

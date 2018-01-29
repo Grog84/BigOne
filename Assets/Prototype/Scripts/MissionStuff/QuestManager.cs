@@ -265,7 +265,7 @@ namespace QuestManager
         string dataPath;
 
         static int index = 1;
-
+        GameObject Timer;
      public bool ResettoAllaChiusura;
       //  Use this for initialization
         private void Awake()
@@ -282,6 +282,8 @@ namespace QuestManager
             InizializeQuestPoint();
             InitializedQuestObject();
             InizializedQuestReceiver();
+            Timer = GameObject.Find("Timer");
+            Timer.SetActive(false);
         }
         //Update is called once per frame
         void Update()
@@ -292,8 +294,8 @@ namespace QuestManager
 
         private void timerDown()
         {
-            GameObject Timer = GameObject.Find("Timer");
            
+          
             foreach(Quest q in QC.QuestList)
             {
                 if (q.questType == QUESTTYPE.SPOSTAMENTO_AB_TIMED)
@@ -325,6 +327,7 @@ namespace QuestManager
       public Text Testo;
         private void checkIFnewMissionIsAvailable()
         {
+           
             foreach (Quest m in QC.QuestList)
             {
                 if (m.active)
@@ -350,6 +353,7 @@ namespace QuestManager
                         }
                     }
                 }
+                
             }
         }
 
@@ -429,6 +433,15 @@ namespace QuestManager
                     m.receiver.AddComponent<QuestReceiver>();
                 }
                 m.receiver.GetComponent<QuestReceiver>().myMission = m;
+
+                    //QuestNpc QNPC;
+                    //QNPC = m.receiver.gameObject.GetComponent<QuestNpc>();
+                    //QNPC.m_QuestReceinver = m.receiver.gameObject.GetComponent<QuestReceiver>();
+                    //QNPC.m_QuestReceinver.myMission = m;
+                    //if (QNPC != null)
+                    //{
+                    //    QNPC.UpdateBlackBoard();
+                    //}
                 }
             }
         }

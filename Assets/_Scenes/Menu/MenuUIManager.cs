@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class MenuUIManager : MonoBehaviour
 {
 
-    #region DEVOTI
+    #region OldCode
     /*
     public GameObject mainMenu; // Main Menu
     public GameObject SettingssMenu; // Settingss Menu
@@ -272,7 +272,7 @@ public class MenuUIManager : MonoBehaviour
 
     #endregion
 
-    #region Tonnini
+    #region NewCOde
     private SaveManager SM;
 
     GameObject[] UiButton;
@@ -448,30 +448,31 @@ public class MenuUIManager : MonoBehaviour
 
     public void Continue()
     {
-        SM.LoadLastScene();
+        SM.LoadOnOpen = true;
+      //  SM.LoadLastScene();
     }
     int ExitOrNewGame;
     public void StartNewGame()
-    {
-        //Check if new save
-        if (!SM.Profile.newGame)
-        {
-            SceneManager.LoadSceneAsync(1);
-        }
-        else
-        {
-            foreach (GameObject a in UiButton)
-            {
-                if (a.name == "EmptyAreYouSureMenu")
-                {
-                    a.SetActive(true);
-                }
-                else
-                {
-                    a.SetActive(false);
-                }
-            }         
-        }
+    {    SceneManager.LoadSceneAsync(1);
+        ////Check if new save
+        //if (!SM.Profile.newGame)
+        //{
+        //
+        //}
+        //else
+        //{
+        //    foreach (GameObject a in UiButton)
+        //    {
+        //        if (a.name == "EmptyAreYouSureMenu")
+        //        {
+        //            a.SetActive(true);
+        //        }
+        //        else
+        //        {
+        //            a.SetActive(false);
+        //        }
+        //    }         
+        //}
     }
     public void OverwriteProgress()
     {

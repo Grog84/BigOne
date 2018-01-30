@@ -16,14 +16,14 @@ public class GMActor : Actor
     public override void StoreData()
     {
         base.StoreData();
-        m_CharActive = m_Controller.isCharacterPlaying;
+       // m_CharActive = m_Controller.isCharacterPlaying;
     }
 
 
     public override void LoadData()
     {
         base.LoadData();
-        m_Controller.isCharacterPlaying = m_CharActive;
+        //m_Controller.isCharacterPlaying = m_CharActive;
 
     }
     public override void ApplyData()

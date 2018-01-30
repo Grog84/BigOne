@@ -41,9 +41,9 @@ public class SaveData  {
 
     public static void Save(string path, ActorContainer actors)
     {
-            OnBeforeSave();
-            SaveActors(path, actors);
-            ClearActorList();
+        OnBeforeSave();
+        SaveActors(path, actors);
+        ClearActorList();
     }
 
     public static void addActorData(ActorData data)
@@ -60,9 +60,9 @@ public class SaveData  {
     private static ActorContainer LoadActors(string path)
     {
         string json = File.ReadAllText(path);
-        //string[] savedData;
-        //string save = "";
-        //savedData = json.Split(' ');
+        string[] savedData;
+        string save = "";
+        savedData = json.Split(' ');
         //for (int i = 0; i < savedData.Length; i++)
         //{
         //    save += (char)Convert.ToInt32(C.FromTo(16, 10, savedData[i]));

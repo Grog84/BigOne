@@ -28,30 +28,30 @@ public class TriggerOnCheckPoint:MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider collision)
-    {
-        if(collision.gameObject.name=="Boy"||collision.gameObject.name== "Mother")
-        {
-            Save.Save();
-            Testo.gameObject.SetActive(true);
-            StartCoroutine(SavingStuff());
-        }
-    }
-    IEnumerator SavingStuff()
-    {
-        for (int i = 0; i == 4; i++)
-        {
-            switch (Testo.text)
-            {
-                case "Saving": Testo.text += "."; yield return new WaitForSeconds(0.2f); break;
+    //private void OnTriggerEnter(Collider collision)
+    //{
+    //    if(collision.gameObject.name=="Boy"||collision.gameObject.name== "Mother")
+    //    {
+    //        Save.Save();
+    //        Testo.gameObject.SetActive(true);
+    //        StartCoroutine(SavingStuff());
+    //    }
+    //}
+    //IEnumerator SavingStuff()
+    //{
+    //    for (int i = 0; i == 4; i++)
+    //    {
+    //        switch (Testo.text)
+    //        {
+    //            case "Saving": Testo.text += "."; yield return new WaitForSeconds(0.2f); break;
 
-                case "Saving.": Testo.text += "."; yield return new WaitForSeconds(0.2f); break;
-                case "Saving..": Testo.text += "."; yield return new WaitForSeconds(0.2f); break;
+    //            case "Saving.": Testo.text += "."; yield return new WaitForSeconds(0.2f); break;
+    //            case "Saving..": Testo.text += "."; yield return new WaitForSeconds(0.2f); break;
 
-                case "Saving...": Testo.text = "Saving"; Testo.gameObject.SetActive(false); yield return new WaitForSeconds(0.2f); break;
+    //            case "Saving...": Testo.text = "Saving"; Testo.gameObject.SetActive(false); yield return new WaitForSeconds(0.2f); break;
 
-            }
-        }
-        yield return null;
-    }
+    //        }
+    //    }
+    //    yield return null;
+    //}
 }

@@ -11,12 +11,12 @@ using QuestManager;
 
 
 public class SaveManager :MonoBehaviour {
-  
- // //  [ReadOnly]
- //   [BoxGroup("Profile Settings")]
- //   public Profile Profile;
-	//public static int lastscene;
-    
+
+    //  [ReadOnly]
+    [BoxGroup("Profile Settings")]
+    public Profile PlayerProfile;
+    //public static int lastscene;
+
     [BoxGroup("Out Application Propreties",true,true)]
     public bool SaveOnClose = false; 
     [BoxGroup("Out Application Propreties", true, true)]
@@ -47,14 +47,14 @@ public class SaveManager :MonoBehaviour {
 
     private void Awake()
     {
-		//lastscene = Profile.LastScene;
+		
         allActorData = SaveData.actorContainer.actors;
         dataPath = System.IO.Path.Combine(Application.persistentDataPath, "actors.json");
         profilePath = System.IO.Path.Combine(Application.persistentDataPath, "Profile.json");
         objPrefab = this.gameObject;
      
         oPrefab = objPrefab;
-
+     
         #region Build&Index Stuff's Code
         currentLoadedScene = SceneManager.sceneCount;
         currentSceneInBuild = SceneManager.sceneCountInBuildSettings;
@@ -67,18 +67,22 @@ public class SaveManager :MonoBehaviour {
     {
         //Caricamento attori (Dati salvati sul disco)
 
-        //Profile = Profile.LoadProfile(profilePath);
+       
         allActor = FindObjectsOfType<Actor>();
 
         //Inizializzazione livelli nuovi
-        //Profile.completedLevel = new bool[UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings];
-        //for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings; i++)
-        //{
-        //    Profile.completedLevel[i] = false;
-        //}
+        PlayerProfile.completedLevel = new bool[UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings];
+        for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings; i++)
+        {
+            PlayerProfile.completedLevel[i] = false;
+        }
 
         //Caricamento on Open [continue]
         if (LoadOnOpen)
+        {
+            Load();
+        }
+        if(PlayerProfile.Continue==true)
         {
             Load();
         }
@@ -104,16 +108,17 @@ public class SaveManager :MonoBehaviour {
     [Button("Save Check point", ButtonSizes.Medium)]
     public void Save()
     {
-        //Profile.Save();
+        PlayerProfile.Save();
         //SaveTime(DateTime.Now);
-        //Profile.SaveProfile(profilePath, Profile);
+        Profile.SaveProfile(profilePath, PlayerProfile);
         SaveData.Save(dataPath, SaveData.actorContainer);
+        Debug.Log("SALVO");
     }
     [HideInEditorMode]
     [Button("Load Check point", ButtonSizes.Medium)]
     public  void Load()
     {
-        //Profile = Profile.LoadProfile(profilePath);
+     
         if (allActor.Length != 0)
             SaveData.Load(dataPath, allActor);
         //GMController.instance.isGameActive = true;
@@ -124,7 +129,8 @@ public class SaveManager :MonoBehaviour {
       
         if(SaveOnClose)
         {
-            //Profile.SaveProfile(profilePath, Profile);
+            PlayerProfile.Continue = false;
+            Profile.SaveProfile(profilePath, PlayerProfile);
             Save();
         }
     }
@@ -137,27 +143,13 @@ public class SaveManager :MonoBehaviour {
 
 	IEnumerator AsycLoad()
 	{
-		//Profile= Profile.LoadProfile(profilePath);
-		//SceneManager.LoadSceneAsync(Profile.LastScene);
-        Load();
+        PlayerProfile.Continue= Profile.LoadProfile(profilePath).Continue;
+        SceneManager.LoadScene(PlayerProfile.LastScene);
+
+    
 		yield return null;
 	}
 
-	//public  static int getlastScene()
-	//{
-
-	//	return lastscene;
-	//}
- //   public  void SaveTime(DateTime dateTimeNow)
- //   {
- //       Profile.dateTime.day = dateTimeNow.Day;
- //       Profile.dateTime.minute = dateTimeNow.Minute;
- //       Profile.dateTime.second = dateTimeNow.Second;
- //       Profile.dateTime.hour = dateTimeNow.Hour;
- //       Profile.dateTime.month = dateTimeNow.Month;
- //       Profile.dateTime.year = dateTimeNow.Year;
-
-
- //   }
+  
 
 }

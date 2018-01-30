@@ -8,12 +8,14 @@ namespace AI
     public class Cone : MonoBehaviour
     {
         private Guard m_Guard;
+        
         public float raycastLength;
         public float max_theta_Angle, max_psi_Angle;
 
         private void Awake()
         {
             m_Guard = GetComponentInParent<Guard>();
+            
             UpdateRaycastParams();
             
         }

@@ -2388,7 +2388,7 @@ Canvas:
   m_GameObject: {fileID: 340391048}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 1171150400}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -2727,11 +2727,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4856709013910366, guid: eb6214abb62770345899f727a6c632ce, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -58
+      value: -94.1
       objectReference: {fileID: 0}
     - target: {fileID: 4856709013910366, guid: eb6214abb62770345899f727a6c632ce, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 17.88
+      value: 26.7
       objectReference: {fileID: 0}
     - target: {fileID: 4856709013910366, guid: eb6214abb62770345899f727a6c632ce, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2784,7 +2784,7 @@ Prefab:
     - target: {fileID: 198849988939414412, guid: eb6214abb62770345899f727a6c632ce,
         type: 2}
       propertyPath: randomSeed
-      value: -1347063020
+      value: -2013654587
       objectReference: {fileID: 0}
     - target: {fileID: 198849988939414412, guid: eb6214abb62770345899f727a6c632ce,
         type: 2}
@@ -2815,6 +2815,16 @@ Prefab:
         type: 2}
       propertyPath: EmissionModule.rateOverTime.scalar
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 198849988939414412, guid: eb6214abb62770345899f727a6c632ce,
+        type: 2}
+      propertyPath: InitialModule.startSpeed.scalar
+      value: 1.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 198849988939414412, guid: eb6214abb62770345899f727a6c632ce,
+        type: 2}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 25.31
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eb6214abb62770345899f727a6c632ce, type: 2}
@@ -7944,6 +7954,7 @@ GameObject:
   - component: {fileID: 1389246059}
   - component: {fileID: 1389246058}
   - component: {fileID: 1389246057}
+  - component: {fileID: 1389246060}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -8006,6 +8017,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: -1.496, z: 0}
+--- !u!182 &1389246060
+WindZone:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1389246056}
+  m_Enabled: 1
+  m_Mode: 0
+  m_Radius: 20
+  m_WindMain: -0.2
+  m_WindTurbulence: 0.09
+  m_WindPulseMagnitude: 0.11
+  m_WindPulseFrequency: 0.01
 --- !u!1 &1402787906
 GameObject:
   m_ObjectHideFlags: 0
@@ -10031,31 +10055,35 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 197c8b650518a8f41b9a3288ff9567a7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 8.64
+      value: 8.83
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 197c8b650518a8f41b9a3288ff9567a7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 135.67
+      value: 138.3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 197c8b650518a8f41b9a3288ff9567a7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.0017722612
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 197c8b650518a8f41b9a3288ff9567a7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 197c8b650518a8f41b9a3288ff9567a7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 197c8b650518a8f41b9a3288ff9567a7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9999985
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 197c8b650518a8f41b9a3288ff9567a7, type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 197c8b650518a8f41b9a3288ff9567a7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -0.20300001
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 197c8b650518a8f41b9a3288ff9567a7, type: 3}

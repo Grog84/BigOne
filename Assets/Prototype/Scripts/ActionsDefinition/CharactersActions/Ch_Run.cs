@@ -16,6 +16,7 @@ namespace Character.Actions
         public void Run(CharacterStateController controller)
         {
             controller.characterStats.m_MovementSpeed = controller.characterStats.m_RunSpeed;
+            controller.m_CharacterController.Crouch = false;
         }
 
     }

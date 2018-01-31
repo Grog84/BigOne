@@ -17,12 +17,16 @@ namespace Character.Actions
 
         private void EndBalance(CharacterStateController controller)
         {
-            controller.m_CharacterController.m_Animator.speed = controller.m_CharacterController.animSpeed;
-            controller.m_CharacterController.ledgeForwardActive = true;
-            controller.m_CharacterController.ledgeBackwardActive = true;
-            controller.m_CharacterController.isInDanger = false;
-            controller.m_CharacterController.m_Animator.SetBool("onLedge", false);
-            controller.m_CharacterController.m_ForwardAmount = 0;
+            if (!Input.GetButtonDown("Pause"))
+            {
+                controller.m_CharacterController.m_Animator.speed = controller.m_CharacterController.animSpeed;
+                controller.m_CharacterController.ledgeForwardActive = true;
+                controller.m_CharacterController.ledgeBackwardActive = true;
+                controller.m_CharacterController.isInDanger = false;
+                controller.m_CharacterController.m_Animator.SetBool("onLedge", false);
+                controller.m_CharacterController.m_ForwardAmount = 0;
+            }
+
         }
 
     }

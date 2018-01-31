@@ -10,8 +10,10 @@ using System;
 public class PauseMenuUIManager : MonoBehaviour
 
 {
-
+    PauseCamera pauseCamera;
     public GameObject[] PauseMenuCanvas;
+
+    
 
     void Update()
     {
@@ -22,6 +24,7 @@ public class PauseMenuUIManager : MonoBehaviour
     }
     public void Awake()
     {
+        pauseCamera = FindObjectOfType<PauseCamera>();
         PauseMenuCanvas = GameObject.FindGameObjectsWithTag("Pause Menu");
         CloseMenu();
     }
@@ -47,7 +50,7 @@ public class PauseMenuUIManager : MonoBehaviour
                 if (!a.gameObject.activeSelf)
                 {
                     a.gameObject.SetActive(true);
-                    GMController.instance.isGameActive = false;
+                    //GMController.instance.isGameActive = false;
                     Time.timeScale = 0;
                     OpenDiary();
                 }
@@ -63,7 +66,8 @@ public class PauseMenuUIManager : MonoBehaviour
     public void BackToGame() // Back to game function
     {
         Time.timeScale = 1;
-        GMController.instance.isGameActive = true;
+        //GMController.instance.isGameActive = true;
+        pauseCamera.Resume();
 
         foreach (GameObject a in PauseMenuCanvas)
         {

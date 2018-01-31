@@ -12,7 +12,7 @@ namespace Character
     {
         [HideInInspector] public bool firstCrouch = false;             // used to fill the bounds crouch array 1 time only
         [HideInInspector] public bool canStand = true;
-        [HideInInspector] public bool Crouch = false;
+         public bool Crouch = false;
         [HideInInspector] public bool isInDanger = false;
         [HideInInspector] public float m_MoveSpeedMultiplier;
         [HideInInspector] public float m_TurnAmount;                   // Unutilized for the moment

@@ -12,7 +12,8 @@ using System.IO;
 [CreateAssetMenu(menuName = "Prototype/Profile")]
 public class Profile : ScriptableObject
 {
-   
+
+    public string SavedScene = "";
     public bool newGame = false;
     public int LastScene;
 
@@ -38,6 +39,7 @@ public class Profile : ScriptableObject
         if (SceneManager.GetActiveScene().buildIndex != 0 || SceneManager.GetActiveScene().name != "Menu")
         {
             LastScene = SceneManager.GetActiveScene().buildIndex;
+            SavedScene = SceneManager.GetActiveScene().name;
         }
     }
     public static void SaveProfile(string path, Profile profile)

@@ -71,22 +71,26 @@ public class SaveManager :MonoBehaviour {
         allActor = FindObjectsOfType<Actor>();
 
         //Inizializzazione livelli nuovi
-        PlayerProfile.completedLevel = new bool[UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings];
-        for (int i = 0; i < UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings; i++)
+        PlayerProfile.completedLevel = new bool[UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings-1];
+        for (int i = 0; i < PlayerProfile.completedLevel.Length; i++)
         {
             PlayerProfile.completedLevel[i] = false;
         }
+        if (PlayerProfile.SavedScene == SceneManager.GetActiveScene().name)
+        {
+            //Caricamento on Open [continue]
+            if (LoadOnOpen)
+            {
+                Load();
+            }
 
-        //Caricamento on Open [continue]
-        if (LoadOnOpen)
-        {
-            Load();
-        }
-        if(PlayerProfile.Continue==true)
-        {
-            Load();
+            if (PlayerProfile.Continue == true)
+            {
+                Load();
+            }
         }
     }
+
     public static Actor createActor(string path, Vector3 position, Quaternion rotation)
     {
       
@@ -112,44 +116,46 @@ public class SaveManager :MonoBehaviour {
         //SaveTime(DateTime.Now);
         Profile.SaveProfile(profilePath, PlayerProfile);
         SaveData.Save(dataPath, SaveData.actorContainer);
-        Debug.Log("SALVO");
+     
     }
     [HideInEditorMode]
     [Button("Load Check point", ButtonSizes.Medium)]
     public  void Load()
     {
-     
-        if (allActor.Length != 0)
-            SaveData.Load(dataPath, allActor);
-        //GMController.instance.isGameActive = true;
-
+        if (PlayerProfile.SavedScene == SceneManager.GetActiveScene().name)
+        {
+            if (allActor.Length != 0)
+                SaveData.Load(dataPath, allActor);
+            //GMController.instance.isGameActive = true;
+        }
     }
+
     private void OnApplicationQuit()
     {
-      
-        if(SaveOnClose)
+        PlayerProfile.Continue = false;
+        Profile.SaveProfile(profilePath, PlayerProfile);
+        if (SaveOnClose)
         {
-            PlayerProfile.Continue = false;
-            Profile.SaveProfile(profilePath, PlayerProfile);
+           
+            
             Save();
         }
     }
 
     public void LoadLastScene()
     {
-		StartCoroutine (AsycLoad());
-        
-    }
-
-	IEnumerator AsycLoad()
-	{
-        PlayerProfile.Continue= Profile.LoadProfile(profilePath).Continue;
+		
+       // PlayerProfile.Continue = Profile.LoadProfile(profilePath).Continue;
         SceneManager.LoadScene(PlayerProfile.LastScene);
-
+    }
     
-		yield return null;
-	}
-
-  
+    [BoxGroup("Out Application Propreties", true, true)]
+    [Button("Clear Save File", ButtonSizes.Gigantic)]
+    [ExecuteInEditMode]
+    public void ClearSave()
+    {
+        File.WriteAllText(System.IO.Path.Combine(Application.persistentDataPath, "actors.json"), string.Empty);
+        Debug.Log("All Data Cleared");
+    }
 
 }

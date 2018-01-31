@@ -187,13 +187,14 @@ public class MenuUIManager : MonoBehaviour
 
     public void Continue()
     {
-        SM.PlayerProfile.Continue = true;
-     
-      SM.LoadLastScene();
+        SM.PlayerProfile.Continue = true;    
+        SM.LoadLastScene();
     }
     int ExitOrNewGame;
     public void StartNewGame()
-    {    SceneManager.LoadSceneAsync(1);
+    {
+        SM.PlayerProfile.Continue = false;
+        SceneManager.LoadSceneAsync(1);
        
     }
     public void OverwriteProgress()

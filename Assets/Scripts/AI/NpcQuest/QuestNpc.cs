@@ -122,7 +122,15 @@ namespace AI
             if(m_QuestGiver != null)
             {
                 m_QuestGiver.myMission.SetActive();
-                m_QuestGiver.myMission.receiver.GetComponent<QuestNpc>().UpdateBlackBoard();
+                if (m_QuestGiver.myMission.questType == QUESTTYPE.RICERCA_CONSEGNA_OGGETTO)
+                {
+                    m_QuestGiver.myMission.receiver.GetComponent<QuestNpc>().UpdateBlackBoard();
+                }
+
+                if (m_QuestGiver.myMission.questType == QUESTTYPE.CONSEGNA_OGGETTO)
+                {
+                    m_QuestGiver.myMission.del_receiver.GetComponent<QuestNpc>().UpdateBlackBoard();
+                }
             }
 
         }

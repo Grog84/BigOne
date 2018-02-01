@@ -43,7 +43,7 @@ public class SaveData  {
     {
         OnBeforeSave();
         SaveActors(path, actors);
-        ClearActorList();
+      //  ClearActorList();
     }
 
     public static void addActorData(ActorData data)

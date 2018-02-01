@@ -47,7 +47,8 @@ namespace QuestManager
         private bool isAB;
         private bool isObj;
         private bool isABTi;
- 
+        private bool isDel;
+
         public bool isStriked = false;
         #region questType 0
 
@@ -81,6 +82,13 @@ namespace QuestManager
         //[ReadOnly]
         public float time;
         #endregion
+
+        #region questType 4
+
+
+        [TabGroup("questTab", "Del_quest")]
+        public GameObject del_receiver;
+        #endregion
         [HideInInspector]
         public int backUpTime;
         [HideInInspector]
@@ -91,14 +99,16 @@ namespace QuestManager
         public string Obj_ObjName;
         [HideInInspector]
         public string receiver_ObjName;
-       [HideInInspector]
+        [HideInInspector]
         public string pointATimed_ObjName;
-     [HideInInspector]
+        [HideInInspector]
         public string pointBTimed_ObjName;
         [HideInInspector]
         public string questGiver_ObjName;
+        [HideInInspector]
+        public string questDeliver_ObjName;
 
-        public Quest(string _questName,QUESTTYPE _questType,QUESTGRADE _questGrade,string _questDescription,int _questIndex,GameObject _questGiver, GameObject _pointA, GameObject _pointB, GameObject _obj, GameObject _receiver, GameObject _pointATi, GameObject _pointBTi,float _time,int _sceneIndexNumber)
+        public Quest(string _questName,QUESTTYPE _questType,QUESTGRADE _questGrade,string _questDescription,int _questIndex,GameObject _questGiver, GameObject _pointA, GameObject _pointB, GameObject _obj, GameObject _receiver, GameObject _pointATi, GameObject _pointBTi,GameObject _questDeliver,float _time,int _sceneIndexNumber)
         {
 
             questName = _questName;
@@ -116,11 +126,12 @@ namespace QuestManager
             time = _time;
             SceneIndexNumber = _sceneIndexNumber;
             backUpTime = (int)time;
+            del_receiver = _questDeliver;
         }
 
         public void SetCompleted()
         {
-            Debug.Log("Set completed");
+       
             switch(questType)
             {
 
@@ -129,6 +140,10 @@ namespace QuestManager
                     receiver.GetComponent<QuestNpc>().UpdateBlackBoard();
                     break;
 
+                case QUESTTYPE.CONSEGNA_OGGETTO:
+                    completed = true;
+                    del_receiver.GetComponent<QuestNpc>().UpdateBlackBoard();
+                    break;
 
                 case QUESTTYPE.SPOSTAMENTO_AB:
                     completed = true;
@@ -157,6 +172,10 @@ namespace QuestManager
         public void SetActive()
         {
             active = true;
+            if(this.questType==QUESTTYPE.CONSEGNA_OGGETTO)
+            {
+                SetCompleted();
+            }
         }
     }
 

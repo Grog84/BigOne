@@ -76,6 +76,7 @@ public class SaveManager :MonoBehaviour {
         {
             PlayerProfile.completedLevel[i] = false;
         }
+
         if (PlayerProfile.SavedScene == SceneManager.GetActiveScene().name)
         {
             //Caricamento on Open [continue]
@@ -83,7 +84,6 @@ public class SaveManager :MonoBehaviour {
             {
                 Load();
             }
-
             if (PlayerProfile.Continue == true)
             {
                 Load();
@@ -112,11 +112,9 @@ public class SaveManager :MonoBehaviour {
     [Button("Save Check point", ButtonSizes.Medium)]
     public void Save()
     {
-        PlayerProfile.Save();
-        //SaveTime(DateTime.Now);
+        PlayerProfile.Save();      
         Profile.SaveProfile(profilePath, PlayerProfile);
         SaveData.Save(dataPath, SaveData.actorContainer);
-     
     }
     [HideInEditorMode]
     [Button("Load Check point", ButtonSizes.Medium)]
@@ -145,7 +143,7 @@ public class SaveManager :MonoBehaviour {
     public void LoadLastScene()
     {
 		
-       // PlayerProfile.Continue = Profile.LoadProfile(profilePath).Continue;
+ PlayerProfile.Continue = Profile.LoadProfile(profilePath).Continue;
         SceneManager.LoadScene(PlayerProfile.LastScene);
     }
     

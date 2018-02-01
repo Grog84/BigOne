@@ -8,7 +8,8 @@ namespace QuestManager
     {
         SPOSTAMENTO_AB,
         RICERCA_CONSEGNA_OGGETTO,
-        SPOSTAMENTO_AB_TIMED
+        SPOSTAMENTO_AB_TIMED,
+        CONSEGNA_OGGETTO
     }
 }
 

@@ -72,6 +72,7 @@ namespace QuestManager
         private bool isAB;
         private bool isObj;
         private bool isABTi;
+        private bool isDel;
 
         [Space]
         [Space]
@@ -131,6 +132,18 @@ namespace QuestManager
         public float time;
         #endregion
 
+        [Space]
+        [Space]
+        #region MissionType 4
+
+
+        [BoxGroup("MissionCreator")]
+        [ShowIf("CreateMission")]
+        [ShowIf("isDel")]
+        [SceneObjectsOnly]
+        public GameObject del_receiver;
+        #endregion
+
         private bool isStriked = false;
 
         [BoxGroup("MissionCreator")]
@@ -149,20 +162,30 @@ namespace QuestManager
                 isAB = true;
                 isObj = false;
                 isABTi = false;
+                isDel = false;
             }
             if (missionType == QUESTTYPE.RICERCA_CONSEGNA_OGGETTO)
             {
                 isAB = false;
                 isObj = true;
+                isDel = false;
                 isABTi = false;
             }
             if (missionType == QUESTTYPE.SPOSTAMENTO_AB_TIMED)
             {
                 isAB = false;
                 isObj = false;
+                isDel = false;
                 isABTi = true;
             }
-
+            if(missionType==QUESTTYPE.CONSEGNA_OGGETTO)
+            {
+                isDel = true;
+                isObj = false;
+                isABTi = false;
+                isAB = false;
+            }
+            //Modificare OnDeliver;
             SceneIndexNumber = SceneManager.GetActiveScene().buildIndex;
         }
 
@@ -239,7 +262,7 @@ namespace QuestManager
             {
                 SceneIndexNumber = SceneManager.GetActiveScene().buildIndex;
                 Debug.Log("All field is valid, adding new mission, check MissionContainer for edit");
-                 QC.QuestList.Add(new Quest(this.missionName, this.missionType, this.missionGrade, this.missionDescription, this.missionIndex, this.missionGiver, this.pointA, this.pointB, this.Obj, this.receiver, this.pointA_Timed, this.pointB_Timed, this.time, SceneIndexNumber));
+                QC.QuestList.Add(new Quest(this.missionName, this.missionType, this.missionGrade, this.missionDescription, this.missionIndex, this.missionGiver, this.pointA, this.pointB, this.Obj, this.receiver, this.pointA_Timed, this.pointB_Timed,this.del_receiver, this.time, SceneIndexNumber));
                 missionIndex++;
                 SaveQuestGameObjectName();
             }
@@ -266,7 +289,8 @@ namespace QuestManager
 
         static int index = 1;
         GameObject Timer;
-     public bool ResettoAllaChiusura;
+        public bool ResettoAllaChiusura;
+        public Text Testo;
       //  Use this for initialization
         private void Awake()
         {
@@ -282,9 +306,12 @@ namespace QuestManager
             InizializeQuestPoint();
             InitializedQuestObject();
             InizializedQuestReceiver();
+            InizializeDeliverQuest();
             Timer = GameObject.Find("Timer");
             Timer.SetActive(false);
         }
+
+
         //Update is called once per frame
         void Update()
         {
@@ -322,9 +349,6 @@ namespace QuestManager
             }
         }
 
-
-
-      public Text Testo;
         private void checkIFnewMissionIsAvailable()
         {
            
@@ -421,18 +445,45 @@ namespace QuestManager
 
         }
 
+        public void InizializeDeliverQuest()
+        {
+            foreach (Quest m in QC.QuestList)
+            {
+                if (m.questType == QUESTTYPE.CONSEGNA_OGGETTO)
+                {
+
+                    if (m.del_receiver.GetComponent<QuestReceiver>() == null)
+                    {
+                        m.del_receiver.AddComponent<QuestReceiver>();
+                    }
+                    m.del_receiver.GetComponent<QuestReceiver>().myMission = m;
+                  
+                    QuestNpc QNPC;
+                    QNPC = m.del_receiver.gameObject.GetComponent<QuestNpc>();
+                    QNPC.m_QuestReceiver = m.del_receiver.gameObject.GetComponent<QuestReceiver>();
+                    QNPC.m_QuestReceiver.myMission = m;
+                    
+                    if (QNPC != null)
+                    {
+                        QNPC.UpdateBlackBoard();
+                    }
+
+                }
+            }
+        }
+
         public void InizializedQuestReceiver()
         {
             foreach (Quest m in  QC.QuestList)
             {
-                if(m.questType== QUESTTYPE.RICERCA_CONSEGNA_OGGETTO)
+                if (m.questType == QUESTTYPE.RICERCA_CONSEGNA_OGGETTO)
                 {
 
-                if (m.receiver.GetComponent<QuestReceiver>() == null)
-                {
-                    m.receiver.AddComponent<QuestReceiver>();
-                }
-                m.receiver.GetComponent<QuestReceiver>().myMission = m;
+                    if (m.receiver.GetComponent<QuestReceiver>() == null)
+                    {
+                        m.receiver.AddComponent<QuestReceiver>();
+                    }
+                    m.receiver.GetComponent<QuestReceiver>().myMission = m;
 
                     QuestNpc QNPC;
                     QNPC = m.receiver.gameObject.GetComponent<QuestNpc>();

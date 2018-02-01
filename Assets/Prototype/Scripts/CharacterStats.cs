@@ -5,8 +5,10 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Prototype/CharactersStats")]
 public class CharacterStats : ScriptableObject { // nope...here stats only should be present, another SO should contain the gameobj refs
 
-   
+
     [Header("Character Movement Parameters")]
+    public float m_CarryingItemSpeed = 3.0f;
+    public float m_InjuredWalkSpeed = 2.0f;
     public float m_WalkSpeed = 3.0f;
     public float m_WalkOnStairsSpeed = 3.0f;
     public float m_CrouchSpeed = 3.0f;

@@ -380,7 +380,7 @@ namespace QuestManager
 
         private void AssignQuestToQuestGivers()
         {
-            int i = 0;
+          
             foreach (Quest m in  QC.QuestList)
             {               
                 QuestGiver QG;
@@ -434,14 +434,14 @@ namespace QuestManager
                 }
                 m.receiver.GetComponent<QuestReceiver>().myMission = m;
 
-                    //QuestNpc QNPC;
-                    //QNPC = m.receiver.gameObject.GetComponent<QuestNpc>();
-                    //QNPC.m_QuestReceinver = m.receiver.gameObject.GetComponent<QuestReceiver>();
-                    //QNPC.m_QuestReceinver.myMission = m;
-                    //if (QNPC != null)
-                    //{
-                    //    QNPC.UpdateBlackBoard();
-                    //}
+                    QuestNpc QNPC;
+                    QNPC = m.receiver.gameObject.GetComponent<QuestNpc>();
+                    QNPC.m_QuestReceiver = m.receiver.gameObject.GetComponent<QuestReceiver>();
+                    QNPC.m_QuestReceiver.myMission = m;
+                    if (QNPC != null)
+                    {
+                        QNPC.UpdateBlackBoard();
+                    }
                 }
             }
         }

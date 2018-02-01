@@ -9,8 +9,8 @@ namespace AI.BT
         public override TaskState Run()
         {
             m_BehaviourTree.m_Blackboard.SetBoolValue("questTurnInStatus", true);
-            m_BehaviourTree.m_Blackboard.m_Agent.GetComponent<QuestNpc>().m_PlayableDirector.Play();
             m_BehaviourTree.m_Blackboard.m_Agent.GetComponent<QuestNpc>().SetQuestTurnedIn();
+            m_BehaviourTree.m_Blackboard.m_Agent.GetComponent<QuestNpc>().m_PlayableDirector.Play();
             return TaskState.SUCCESS;
         }
     }

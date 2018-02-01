@@ -104,7 +104,7 @@ namespace AI
             {
                 Debug.Log(m_QuestReceiver.name);
 
-                SetBlackboardValue("questAvailable", m_QuestReceiver.myMission.available);
+                //SetBlackboardValue("questAvailable", m_QuestReceiver.myMission.available);
                 SetBlackboardValue("questCompleted", m_QuestReceiver.myMission.completed);
                 SetBlackboardValue("questActive", m_QuestReceiver.myMission.active);
                 SetBlackboardValue("questTurnInStatus", m_QuestReceiver.myMission.turnInStatus);

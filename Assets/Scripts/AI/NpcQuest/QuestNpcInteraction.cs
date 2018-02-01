@@ -7,23 +7,23 @@ using AI;
 public class QuestNpcInteraction : MonoBehaviour {
 
     GameObject m_Npc;
-    QuestNpc m_QuestGiver;
+    QuestNpc m_QuestNpc;
     
 
     private void Awake()
     {
         m_Npc = transform.parent.gameObject;
-        m_QuestGiver = m_Npc.GetComponent<QuestNpc>();
+        m_QuestNpc = m_Npc.GetComponent<QuestNpc>();
     }
 
     private void OnTriggerStay(Collider other)
     {
         if(other.tag == "Player")
         {
-           if(Input.GetButtonDown("Interact") && m_QuestGiver.canInteract)
+           if(Input.GetButtonDown("Interact") && m_QuestNpc.canInteract)
            {
-                m_QuestGiver.m_Blackboard.SetBoolValue("playerInteracted", true);
-                m_QuestGiver.canInteract = false;
+                m_QuestNpc.m_Blackboard.SetBoolValue("playerInteracted", true);
+                m_QuestNpc.canInteract = false;
            }
         }
     }

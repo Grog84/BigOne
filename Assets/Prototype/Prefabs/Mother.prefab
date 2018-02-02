@@ -2657,7 +2657,7 @@ MonoBehaviour:
     eyes: []
   solver:
     IKPosition: {x: 0, y: 0, z: 0}
-    IKPositionWeight: 1
+    IKPositionWeight: 0.6
     root: {fileID: 4931122489464732}
     iterations: 4
     chain:
@@ -3110,10 +3110,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_EventPath: event:/SFX/Steps
   m_Database: {fileID: 0}
-  lastEntry:
-    m_Material: {fileID: 0}
-    m_Description: {fileID: 0}
   playStep: 0
+  m_TerrainReader: {fileID: 0}
   origin:
   - {fileID: 4409180782181108}
   - {fileID: 4998304293270240}
@@ -3198,7 +3196,6 @@ MonoBehaviour:
   enemyPointer: {fileID: 1436485109730562, guid: abdcf18b21064d44fa2ac7a9a2b81a65,
     type: 2}
   pointers: []
-  arrowDistance: 0
 --- !u!114 &114573114107718460
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3225,6 +3222,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc04c104d4a4df4c86633c095bd26ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstCrouch: 0
+  canStand: 1
+  Crouch: 0
   isInDanger: 0
   m_MoveSpeedMultiplier: 0
   m_TurnAmount: 0
@@ -3283,6 +3283,7 @@ MonoBehaviour:
   m_CharController: {fileID: 0}
   playerSight: {fileID: 0}
   playerGrounderIK: {fileID: 0}
+  npcSightCollider: {fileID: 0}
   climbCollider: {fileID: 0}
   climbAnchorTop: {fileID: 0}
   climbAnchorBottom: {fileID: 0}
@@ -3322,6 +3323,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   Keychain: []
+  BoundRaycasts:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
 --- !u!114 &114835592958906586
 MonoBehaviour:
   m_ObjectHideFlags: 1

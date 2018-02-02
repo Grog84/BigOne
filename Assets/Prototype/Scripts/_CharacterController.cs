@@ -12,7 +12,7 @@ namespace Character
     {
         [HideInInspector] public bool firstCrouch = false;             // used to fill the bounds crouch array 1 time only
         [HideInInspector] public bool canStand = true;
-         public bool Crouch = false;
+        [HideInInspector] public bool Crouch = false;
         [HideInInspector] public bool isInDanger = false;
         [HideInInspector] public float m_MoveSpeedMultiplier;
         [HideInInspector] public float m_TurnAmount;                   // Unutilized for the moment
@@ -85,7 +85,9 @@ namespace Character
         [HideInInspector] public LookAtIK playerSight;
         [HideInInspector] public GrounderFBBIK playerGrounderIK;
 
-        // COLLIDERS REFERENCES      
+        // COLLIDERS REFERENCES  
+        [HideInInspector] public GameObject npcSightCollider;
+
         [HideInInspector] public GameObject climbCollider;
         [HideInInspector] public Transform climbAnchorTop;
         [HideInInspector] public Transform climbAnchorBottom;
@@ -266,12 +268,14 @@ namespace Character
                 ActivateClimbingChoice();
                 climbCollider.transform.parent.GetComponent<ClimbableIconsActivation>().ShowIcon(this.gameObject);
             }
+
             if (other.tag == "Ladder_Top")
             {           
                 climbingTop = true;
                 ActivateClimbingChoice();
                 climbCollider.transform.parent.GetComponent<ClimbableIconsActivation>().ShowIcon(this.gameObject);
             }
+
             if (other.tag == "PushTrigger" && Vector3.Angle(CharacterTransform.forward, other.transform.forward) < 45)
             {
                 pushCollider = other.gameObject;
@@ -283,6 +287,7 @@ namespace Character
             {
                 ActivatePushingChoice();
             }
+
             if (other.tag == "UnlockedDoor" || other.tag == "LockedDoor")
             {
                 doorCollider = other.gameObject;
@@ -290,12 +295,14 @@ namespace Character
                 doorCollider.transform.parent.GetComponent<DoorIconsActivation>().ShowIcon(this.gameObject);
                 
             }
+
             if (other.gameObject.layer == LayerMask.NameToLayer("Interactable"))
             {
                   ItemCollider = other.gameObject;
                   isInItemArea = true;
                   ItemCollider.GetComponent<CollectablesIconsActivation>().ShowIcon(this.gameObject);
             }
+
             if (other.gameObject.layer == LayerMask.NameToLayer("Balance"))
             {
                 balanceCollider = other.gameObject;
@@ -308,6 +315,13 @@ namespace Character
                     isLedgeLimit = true;
                 }
             }
+
+            if (other.tag == "NpcSight")
+            {
+                npcSightCollider = other.gameObject;
+                other.transform.parent.GetComponent<NpcQuestIcons>().ShowIcon(this.gameObject);
+            }
+
         }
 
         private void OnTriggerEnter(Collider other)
@@ -374,6 +388,11 @@ namespace Character
                     isLedgeLimit = true;
                 }
             }
+
+            if (other.tag == "NpcSight")
+            {
+                npcSightCollider = other.gameObject;
+            }
         }
 
         private void OnTriggerExit(Collider other)
@@ -431,6 +450,11 @@ namespace Character
                     isInJointArea = false;
                     isLedgeLimit = false;
                 }
+            }
+            if (other.tag == "NpcSight")
+            {
+                other.transform.parent.GetComponent<NpcQuestIcons>().HideIcons();
+               // npcSightCollider = null;
             }
 
         }

@@ -318,6 +318,7 @@ namespace Character
 
             if (other.tag == "NpcSight")
             {
+                npcSightCollider = other.gameObject;
                 other.transform.parent.GetComponent<NpcQuestIcons>().ShowIcon(this.gameObject);
             }
 
@@ -453,7 +454,7 @@ namespace Character
             if (other.tag == "NpcSight")
             {
                 other.transform.parent.GetComponent<NpcQuestIcons>().HideIcons();
-                npcSightCollider = null;
+               // npcSightCollider = null;
             }
 
         }

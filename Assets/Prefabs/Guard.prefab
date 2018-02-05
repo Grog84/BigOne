@@ -456,6 +456,7 @@ GameObject:
   - component: {fileID: 114875479976392488}
   - component: {fileID: 114528073490817216}
   - component: {fileID: 114360030719028360}
+  - component: {fileID: 114501922300230986}
   - component: {fileID: 114220130372242938}
   m_Layer: 17
   m_Name: Guard
@@ -2639,6 +2640,21 @@ MonoBehaviour:
   m_Guard: {fileID: 0}
   m_NavmeshAgent: {fileID: 0}
   m_NavmeshObstacle: {fileID: 0}
+--- !u!114 &114501922300230986
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1328685680502708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 410c23768eb892e40a0ea4cda67625e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 2097153
+  surfaceIndex: 0
 --- !u!114 &114528073490817216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2650,9 +2666,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8341aaf769ebeed42a12cd4e59d975ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EventPath: event:/SFX/Steps
-  m_Database: {fileID: 0}
+  m_EventPath: event:/SFX/sfx_guard_walk
   playStep: 0
+  footstepsDB: {fileID: 11400000, guid: a5fc6be96c8e12f43a0cbda0778463cd, type: 2}
   m_TerrainReader: {fileID: 0}
 --- !u!114 &114660674004793234
 MonoBehaviour:

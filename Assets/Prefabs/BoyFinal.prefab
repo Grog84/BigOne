@@ -775,6 +775,7 @@ GameObject:
   - component: {fileID: 114952653149960128}
   - component: {fileID: 114437375095499234}
   - component: {fileID: 114034925977762584}
+  - component: {fileID: 114874572526973654}
   - component: {fileID: 114117047334737452}
   m_Layer: 8
   m_Name: BoyFinal
@@ -3184,9 +3185,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1606c19e96abc3544a2a5d507c75d688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EventPath: event:/SFX/Steps
-  m_Database: {fileID: 0}
+  m_EventPath: event:/SFX/sfx_boy_walk
   playStep: 0
+  footstepsDB: {fileID: 11400000, guid: a5fc6be96c8e12f43a0cbda0778463cd, type: 2}
   m_TerrainReader: {fileID: 0}
   origin:
   - {fileID: 4298970675445376}
@@ -3195,6 +3196,21 @@ MonoBehaviour:
   audioLayer:
     serializedVersion: 2
     m_Bits: 131073
+--- !u!114 &114874572526973654
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1515538267651020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 410c23768eb892e40a0ea4cda67625e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 2097153
+  surfaceIndex: 0
 --- !u!114 &114887442163162676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3267,6 +3283,7 @@ MonoBehaviour:
   m_CharController: {fileID: 0}
   playerSight: {fileID: 0}
   playerGrounderIK: {fileID: 0}
+  npcSightCollider: {fileID: 0}
   climbCollider: {fileID: 0}
   climbAnchorTop: {fileID: 0}
   climbAnchorBottom: {fileID: 0}

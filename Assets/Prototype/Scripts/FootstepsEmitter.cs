@@ -8,7 +8,6 @@ public class FootstepsEmitter : MonoBehaviour
 
     [FMODUnity.EventRef]
     public string m_EventPath;
-    public FootstepsDatabase m_Database;
     //public AudioEntry lastEntry;
     public FMOD.Studio.System m_System;
     public FMOD.Studio.Bus m_Bus;
@@ -22,7 +21,7 @@ public class FootstepsEmitter : MonoBehaviour
     public FootstepsDatabase footstepsDB;
 
     FootstepsParameters m_footstepsParameters;
-    public TerrainReader m_TerrainReader;
+    [HideInInspector] public TerrainReader m_TerrainReader;
 
     string lastFloorName = "None";
 

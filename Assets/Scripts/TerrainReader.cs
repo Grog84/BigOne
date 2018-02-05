@@ -59,7 +59,7 @@ public class TerrainReader : MonoBehaviour {
             }
         }
 
-        Debug.Log(maxIndex);
+        //Debug.Log(maxIndex);
         return maxIndex;
 
     }

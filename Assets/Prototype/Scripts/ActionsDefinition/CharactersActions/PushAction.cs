@@ -28,22 +28,26 @@ namespace Character.Actions
         {
             #region Reycasts
             // Check the direction for the Raycast
-            if (Vector3.Angle(controller.m_CharacterController.pushObject.transform.forward.normalized, controller.m_CharacterController.CharacterTransform.forward.normalized) <= 45 ||
-                Vector3.Angle(controller.m_CharacterController.pushObject.transform.forward.normalized, -controller.m_CharacterController.CharacterTransform.forward.normalized) <= 45)
+            if (Vector3.Angle(controller.m_CharacterController.pushObject.transform.forward.normalized, controller.m_CharacterController.pushCollider.transform.forward.normalized) <= 45 ||
+                Vector3.Angle(controller.m_CharacterController.pushObject.transform.forward.normalized, -controller.m_CharacterController.pushCollider.transform.forward.normalized) <= 45)
             {
                 RaycastPoints = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().objectRaycastsX;
-                offsetRaycast = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().quarterWidth * 2;
+                offsetRaycast = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().quarterDepth * 2;
+                //Debug.Log("X");
             }
             else
             {
-                RaycastPoints = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().objectRaycastsZ;
-                offsetRaycast = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().quarterDepth * 2;
+                RaycastPoints = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().objectRaycastsZ;               
+                offsetRaycast = controller.m_CharacterController.pushCollider.transform.parent.GetComponent<PushRaycast>().quarterWidth * 2;
+                //Debug.Log("Z");
             }
             // Use the Raycast grid to check for obstacles
             count = RaycastPoints.Length;
             for (int i = 0; i < RaycastPoints.Length; i++)
             {
                 Debug.DrawRay(controller.m_CharacterController.pushObject.transform.position + RaycastPoints[i], controller.m_CharacterController.pushCollider.transform.forward * dir, Color.red);
+                Debug.DrawRay(controller.m_CharacterController.pushCollider.transform.position, controller.m_CharacterController.pushCollider.transform.forward, Color.blue);
+                Debug.DrawRay(controller.m_CharacterController.pushObject.transform.position, controller.m_CharacterController.pushObject.transform.forward, Color.green);
                 RaycastHit hit;
 
                 if (Physics.Raycast(controller.m_CharacterController.pushObject.transform.position +
@@ -111,7 +115,7 @@ namespace Character.Actions
                 forward = 0;
             }
 
-            Debug.Log(dir);
+       
             if (controller.m_CharacterController.isPushLimit)
             {
                 if (dir < 0)

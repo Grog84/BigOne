@@ -66,7 +66,11 @@ public class GMController : MonoBehaviour {
     // Music
     [FMODUnity.EventRef]
     public string m_BkgMusicPath;
+    [FMODUnity.EventRef]
+    public string m_AmbientMusicPath;
+
     FMOD.Studio.EventInstance bkgMusic;
+    FMOD.Studio.EventInstance ambientMusic;
 
     void Awake() 
     {
@@ -125,7 +129,11 @@ public class GMController : MonoBehaviour {
 
         bkgMusic = FMODUnity.RuntimeManager.CreateInstance(m_BkgMusicPath);
         SetFMODParameter(bkgMusic, "GuardStatus", 0f);
-        bkgMusic.start();
+        //bkgMusic.start();
+
+        ambientMusic = FMODUnity.RuntimeManager.CreateInstance(m_AmbientMusicPath);
+        ambientMusic.setVolume(30f);
+        ambientMusic.start();
     }
 
     public void UpdatePlayerPosition()

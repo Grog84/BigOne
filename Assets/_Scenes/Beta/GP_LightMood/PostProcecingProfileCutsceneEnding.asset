@@ -9,7 +9,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a3bdb2cd68f901469e7cc149151eb49, type: 3}
-  m_Name: PostProcecingProfileMenu
+  m_Name: PostProcecingProfileCutsceneEnding
   m_EditorClassIdentifier: 
   debugViews:
     m_Enabled: 1
@@ -29,20 +29,20 @@ MonoBehaviour:
     m_Settings:
       excludeSkybox: 1
   antialiasing:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       method: 1
       fxaaSettings:
         preset: 2
       taaSettings:
-        jitterSpread: 0.433
-        sharpen: 0.23
+        jitterSpread: 1
+        sharpen: 0
         stationaryBlending: 0.888
         motionBlending: 0.854
   ambientOcclusion:
     m_Enabled: 1
     m_Settings:
-      intensity: 2.03
+      intensity: 0.38
       radius: 1.01
       sampleCount: 16
       downsampling: 1
@@ -100,8 +100,8 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       bloom:
-        intensity: 0.27
-        threshold: 0.4
+        intensity: 0.12
+        threshold: 0.43
         softKnee: 0.262
         radius: 4.87
         antiFlicker: 0
@@ -120,12 +120,12 @@ MonoBehaviour:
         neutralWhiteLevel: 5.3
         neutralWhiteClip: 10
       basic:
-        postExposure: 1.53
+        postExposure: 0.96
         temperature: 28
         tint: 4
         hueShift: 0
         saturation: 0.77
-        contrast: 1.18
+        contrast: 1.49
       channelMixer:
         red: {x: 0.81, y: 0.31, z: -0.04}
         green: {x: 0, y: 1, z: 0}

@@ -82,7 +82,8 @@ public class PauseCamera : CameraScript {
     {
         paused = false;
         cam.m_Priority = 0;
-        triggeredMethod = false;    
+        triggeredMethod = false;
+    //    yield return null;
     }
 
 

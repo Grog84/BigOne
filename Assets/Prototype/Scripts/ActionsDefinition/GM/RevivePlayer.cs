@@ -5,7 +5,7 @@ using StateMachine;
 
 namespace GM.Actions
 {
-    [CreateAssetMenu(menuName = "Prototype/GMActions/RevivePlayer")]
+    [CreateAssetMenu(menuName = "Prototype/Actions/GM/RevivePlayer")]
     public class RevivePlayer : _Action
     {
 
@@ -16,7 +16,9 @@ namespace GM.Actions
 
         private void Revive(GMStateController controller)
         {
-            controller.m_GM.m_CharacterInterfaces[(int)controller.m_GM.isCharacterPlaying].RevivePlayer(); ;
+           
+            controller.m_GM.m_CharacterInterfaces[(int)controller.m_GM.isCharacterPlaying].RevivePlayer();
+        
         }
     }
 }

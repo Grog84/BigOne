@@ -50,7 +50,7 @@ public class PauseMenuUIManager : MonoBehaviour
                 if (!a.gameObject.activeSelf)
                 {
                     a.gameObject.SetActive(true);
-                    //GMController.instance.isGameActive = false;
+                 
                     Time.timeScale = 0;
                     OpenDiary();
                 }
@@ -67,7 +67,7 @@ public class PauseMenuUIManager : MonoBehaviour
     {
         Time.timeScale = 1;
         //GMController.instance.isGameActive = true;
-        pauseCamera.Resume();
+      
 
         foreach (GameObject a in PauseMenuCanvas)
         {

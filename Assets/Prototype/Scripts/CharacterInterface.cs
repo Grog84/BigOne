@@ -19,6 +19,7 @@ public class CharacterInterface : MonoBehaviour {
 
     public void RevivePlayer()
     {
+        Debug.Log("CIAO");
         m_CharController.m_Animator.SetFloat("Forward", 0f);
         m_CharStateController.TransitionToState(m_CharStateController.gameStartState);
     }

@@ -52,9 +52,7 @@ public class SaveManager :MonoBehaviour {
         dataPath = System.IO.Path.Combine(Application.persistentDataPath, "actors.json");
         profilePath = System.IO.Path.Combine(Application.persistentDataPath, "Profile.json");
         objPrefab = this.gameObject;
-     
-        oPrefab = objPrefab;
-     
+        oPrefab = objPrefab;    
         #region Build&Index Stuff's Code
         currentLoadedScene = SceneManager.sceneCount;
         currentSceneInBuild = SceneManager.sceneCountInBuildSettings;
@@ -65,9 +63,7 @@ public class SaveManager :MonoBehaviour {
     }
     private void Start()
     {
-        //Caricamento attori (Dati salvati sul disco)
-
-       
+        //Caricamento attori (Dati salvati sul disco) 
         allActor = FindObjectsOfType<Actor>();
 
         //Inizializzazione livelli nuovi

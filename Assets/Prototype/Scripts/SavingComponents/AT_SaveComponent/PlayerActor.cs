@@ -1,4 +1,7 @@
-﻿public class PlayerActor : Actor
+﻿using StateMachine;
+using UnityEngine;
+
+public class PlayerActor : Actor
 {
 
   
@@ -13,12 +16,16 @@
 
     public override  void LoadData()
     {
+        //Check player attivo, 
+        //Settarlo a GameStart
+
         base.LoadData();
+        
     }
     public override void ApplyData()
     {
         base.ApplyData();
-
+    
     }
 
     private void OnEnable()

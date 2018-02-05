@@ -43,6 +43,7 @@ namespace AI
         // Commands to reach the point
         public override void ReachNavPoint()
         {
+            Debug.Log("current waypoint: " + currentWayPoint);
             m_NavMeshAgent.destination = currentWayPoint;
             m_NavMeshAgent.isStopped = false;
         }
@@ -161,7 +162,10 @@ namespace AI
             currentTargetIdx = newTargetIdx;
             //Debug.Log("Found destination: " + pedestrianTargets[currentTargetIdx].transform.position);
             //m_NavMeshAgent.SetDestination(pedestrianTargets[currentTargetIdx].transform.position);
-            m_NavMeshAgent.destination = pedestrianTargets[currentTargetIdx].transform.position;
+            //m_NavMeshAgent.destination = pedestrianTargets[currentTargetIdx].transform.position;
+
+            currentWayPoint = pedestrianTargets[currentTargetIdx].transform.position;
+            m_NavMeshAgent.destination = currentWayPoint;
         }
 
         private void Awake()
@@ -206,6 +210,8 @@ namespace AI
 
             m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
             m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
+
+            Debug.Log(m_NavMeshAgent.destination);
         }
     }
 }

@@ -14,9 +14,32 @@ public class ConeScale : MonoBehaviour {
     [Range(1f, 30f)]
     public float zScale = 4.0f;
 
-    private void OnValidate()
+    float oldXScale, oldYScale, oldZScale;
+
+    private void Start()
     {
-        m_Cone.transform.localScale= new Vector3(xScale, yScale, zScale);
-        m_Cone.GetComponent<Cone>().UpdateRaycastParams();
+        oldXScale = xScale;
+        oldYScale = yScale;
+        oldZScale = zScale;
     }
+
+    private void Update()
+    {
+        if (oldXScale != xScale || oldYScale != yScale || oldZScale != zScale)
+        {
+            oldXScale = xScale;
+            oldYScale = yScale;
+            oldZScale = zScale;
+
+            m_Cone.transform.localScale = new Vector3(xScale, yScale, zScale);
+            m_Cone.GetComponent<Cone>().UpdateRaycastParams();
+        }
+    }
+
+    // Commented in order to avoid errors in the console
+    //private void OnValidate()
+    //{
+    //    m_Cone.transform.localScale= new Vector3(xScale, yScale, zScale);
+    //    m_Cone.GetComponent<Cone>().UpdateRaycastParams();
+    //}
 }

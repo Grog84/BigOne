@@ -25,6 +25,9 @@ public class FootstepsEmitter : MonoBehaviour
 
     string lastFloorName = "None";
 
+    public string FMODWalkParam;
+    public string FMODSurfaceParam;
+
     private void Start()
     {
         m_TerrainReader = GetComponent<TerrainReader>();
@@ -52,8 +55,8 @@ public class FootstepsEmitter : MonoBehaviour
             FMOD.Studio.EventInstance e = FMODUnity.RuntimeManager.CreateInstance(m_EventPath);
             e.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
 
-            SetParameter(e, "Boy_status", walkState);
-            SetParameter(e, "Boy_surface", (float)footstepsDB.entryList[m_TerrainReader.surfaceIndex].fmodParam);
+            SetParameter(e, FMODWalkParam, walkState);
+            SetParameter(e, FMODSurfaceParam, (float)footstepsDB.entryList[m_TerrainReader.surfaceIndex].fmodParam);
             
 
             //Debug.Log("SoundStart");

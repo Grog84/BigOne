@@ -132,7 +132,6 @@ public class GMController : MonoBehaviour {
         //bkgMusic.start();
 
         ambientMusic = FMODUnity.RuntimeManager.CreateInstance(m_AmbientMusicPath);
-        ambientMusic.setVolume(30f);
         ambientMusic.start();
     }
 

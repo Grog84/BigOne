@@ -21,7 +21,7 @@ public class EnemyRadar : MonoBehaviour
     public Sprite curious;
     public Sprite alarmed;
 
-    void Awake ()
+    void Start ()
     {
         transform.position = transform.parent.position + Vector3.up * transform.parent.GetComponent<_CharacterController>().m_CharController.bounds.size.y / 2.0f;
         //m_PointerAnimator = GetComponentInChildren<Animator>();

@@ -14,8 +14,8 @@ namespace AI
 
         [HideInInspector] public Transform eyes;
 
-        [HideInInspector] public Transform[] lookAtPositions;
-        [HideInInspector] public Transform lookAtPositionCentral;
+        /*[HideInInspector]*/ public Transform[] lookAtPositions;
+        /*[HideInInspector]*/ public Transform lookAtPositionCentral;
         [HideInInspector] public Transform[] wayPointListTransform;
         [HideInInspector] public bool hasHeardPlayer = false;
         [HideInInspector] public bool hasSeenPlayer = false;

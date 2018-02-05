@@ -245,7 +245,11 @@ namespace AI
 
                 for (int i = 0; i < lookAtPositions[(int)GMController.instance.isCharacterPlaying].Length; i++)
                 {
-                    distance = (lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position - eyes.position);
+                    if (lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position != null)
+                        distance = (lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position - eyes.position);
+                    else
+                        continue;
+
                     angle_psi = Mathf.Abs(Mathf.Atan(distance.y / distance.z) * 180f / Mathf.PI);
                     angle_theta = Mathf.Abs(Mathf.Atan(distance.x / distance.z) * 180f / Mathf.PI);
                     direction = distance.normalized;
@@ -551,7 +555,9 @@ namespace AI
             lookAtPositionCentral = new Transform[lookAtPositionsCentralObj.Length];
             for (int i = 0; i < lookAtPositionsCentralObj.Length; i++)
             {
+
                 Transform lookAtCentral = lookAtPositionsCentralObj[i].transform;
+                //Debug.Log("LookAtCentral: " + lookAtCentral.root.gameObject.name);
                 if (lookAtCentral.root.gameObject.name == "Boy")
                 {
                     lookAtPositionCentral[(int)CharacterActive.Boy] = lookAtCentral;

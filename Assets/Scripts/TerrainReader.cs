@@ -71,8 +71,8 @@ public class TerrainReader : MonoBehaviour {
         alphamapWidth = m_TerrainData.alphamapWidth;
         alphamapHeight = m_TerrainData.alphamapHeight;
 
-        m_TerrainRay = new Ray(transform.position, Vector3.down);
-        Physics.Raycast(m_TerrainRay, out m_TerrainRayHit, 0.5f);
+        m_TerrainRay = new Ray(transform.position + Vector3.up, Vector3.down);
+        Physics.Raycast(m_TerrainRay, out m_TerrainRayHit, 1.5f);
 
         splatmapData = m_TerrainData.GetAlphamaps(0, 0, alphamapWidth, alphamapHeight);
         cellMix = new float[splatmapData.GetUpperBound(2) + 1];
@@ -93,8 +93,8 @@ public class TerrainReader : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        m_TerrainRay = new Ray(transform.position, Vector3.down);
-        Physics.Raycast(m_TerrainRay, out m_TerrainRayHit, 0.5f);
+        m_TerrainRay = new Ray(transform.position + Vector3.up, Vector3.down);
+        Physics.Raycast(m_TerrainRay, out m_TerrainRayHit, 1.5f);
         Debug.DrawLine(m_TerrainRay.origin, m_TerrainRay.origin + m_TerrainRay.direction * 0.1f, Color.red);
 
         if (m_TerrainRayHit.collider.tag == "Ground")

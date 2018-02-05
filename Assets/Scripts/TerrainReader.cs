@@ -7,7 +7,7 @@ public class TerrainReader : MonoBehaviour {
 
     public LayerMask groundMask;
     [ReadOnly]
-    public TerrainTexture surfaceIndex;
+    public int surfaceIndex;
 
     Terrain m_Terrain;
     TerrainData m_TerrainData;
@@ -99,7 +99,7 @@ public class TerrainReader : MonoBehaviour {
 
         if (m_TerrainRayHit.collider.tag == "Ground")
         {    
-            surfaceIndex = (TerrainTexture)GetMainTexture(m_TerrainRayHit.point);
+            surfaceIndex = GetMainTexture(m_TerrainRayHit.point);
         }
         else
         {

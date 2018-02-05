@@ -12,13 +12,14 @@ namespace CustomAudio
 
         [TableList]
         public List<FootstepsEntryDB> entryList = new List<FootstepsEntryDB>();
+
     }
 
     [Serializable]
     public class FootstepsEntryDB
     {
-        public TerrainTexture texture;
-        public int FMODValue;
+        public int TextureIdx;
+        public TerrainTexture fmodParam;
     }
 
 }

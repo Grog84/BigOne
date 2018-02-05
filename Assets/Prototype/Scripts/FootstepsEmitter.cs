@@ -19,6 +19,8 @@ public class FootstepsEmitter : MonoBehaviour
     // FMOD Parameters
     [HideInInspector] float walkState = 1f;  // 0 - crouch , 1 - Walk , 2 - Run
 
+    public FootstepsDatabase footstepsDB;
+
     FootstepsParameters m_footstepsParameters;
     public TerrainReader m_TerrainReader;
 
@@ -52,7 +54,7 @@ public class FootstepsEmitter : MonoBehaviour
             e.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
 
             SetParameter(e, "Boy_status", walkState);
-            SetParameter(e, "Boy_surface", (float)m_TerrainReader.surfaceIndex);
+            SetParameter(e, "Boy_surface", (float)footstepsDB.entryList[m_TerrainReader.surfaceIndex].fmodParam);
             
 
             //Debug.Log("SoundStart");
@@ -110,13 +112,13 @@ public class FootstepsEmitter : MonoBehaviour
         switch (state)
         {
             case "Walk":
-                walkState = 1f;
+                walkState = 0f;
                 break;
             case "Run":
-                walkState = 2f;
+                walkState = 1f;
                 break;
             case "Crouch":
-                walkState = 0f;
+                walkState = 2f;
                 break;
             default:
                 break;

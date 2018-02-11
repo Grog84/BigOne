@@ -4,13 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.IO;
 
 public class MenuUIManager : MonoBehaviour
 {
 
-
-
-    #region NewCOde
     private SaveManager SM;
 
     GameObject[] UiButton;
@@ -24,14 +22,14 @@ public class MenuUIManager : MonoBehaviour
         Time.timeScale = 1;
         SM = FindObjectOfType<SaveManager>();
         ReturnToMainMenu();
-
+        ContinueButtonOnOff();
     }
 
     public void ReturnToMainMenu()
     {
         foreach (GameObject a in UiButton)
         {
-            if(a.name=="EmptyMainMenu")
+            if (a.name == "EmptyMainMenu")
             {
                 a.SetActive(true);
             }
@@ -119,7 +117,7 @@ public class MenuUIManager : MonoBehaviour
             if (a.name == "EmptyAudioMenu")
             {
                 a.SetActive(false);
-            
+
             }
             OpenSettings();
         }
@@ -187,7 +185,7 @@ public class MenuUIManager : MonoBehaviour
 
     public void Continue()
     {
-        SM.PlayerProfile.Continue = true;    
+        SM.PlayerProfile.Continue = true;
         SM.LoadLastScene();
     }
     int ExitOrNewGame;
@@ -195,7 +193,7 @@ public class MenuUIManager : MonoBehaviour
     {
         SM.PlayerProfile.Continue = false;
         SceneManager.LoadSceneAsync(1);
-       
+
     }
     public void OverwriteProgress()
     {
@@ -225,7 +223,7 @@ public class MenuUIManager : MonoBehaviour
     {
         foreach (GameObject a in UiButton)
         {
-            if (a.name == "EmptyAreYouSureMenu"||a.name=="EmptyExitMenu")
+            if (a.name == "EmptyAreYouSureMenu" || a.name == "EmptyExitMenu")
             {
                 a.SetActive(false);
             }
@@ -234,9 +232,29 @@ public class MenuUIManager : MonoBehaviour
 
     }
 
-    #endregion
+    void ContinueButtonOnOff()
+    {
+        if (File.Exists(SaveManager.dataPath))
+        {
+            foreach (GameObject a in UiButton)
+            {
+                if (a.name == "EmptyMainMenu")
+                {
+                    a.transform.GetChild(0).gameObject.SetActive(true);
+                }            
+            }
+        }
+        else
+        {
+            foreach (GameObject a in UiButton)
+            {
+                if (a.name == "EmptyMainMenu")
+                {
+                    a.transform.GetChild(0).gameObject.SetActive(false);
+                }
+                
+            }
+        }
 
-
-
-
+    }
 }

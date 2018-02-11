@@ -59,6 +59,7 @@ public class Profile : ScriptableObject
     public static Profile LoadProfile(string path)
     {
         string json = File.ReadAllText(path);
+       
         //string[] savedData;
         //string save = "";
         //savedData = json.Split(' ');

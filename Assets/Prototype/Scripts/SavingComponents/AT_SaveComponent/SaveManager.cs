@@ -42,8 +42,8 @@ public class SaveManager :MonoBehaviour {
     public static GameObject oPrefab;
     public const string playerPath = "/Prototype/Prefabs/";
 
-    private static string dataPath = string.Empty;
-    private static string profilePath = string.Empty;
+    public static string dataPath = string.Empty;
+    public static string profilePath = string.Empty;
 
     private void Awake()
     {

@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 114901043291570180}
   - component: {fileID: 114461382145953290}
   m_Layer: 8
-  m_Name: Boy
+  m_Name: BoyOld
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2524,6 +2524,7 @@ MonoBehaviour:
   m_CharController: {fileID: 0}
   playerSight: {fileID: 0}
   playerGrounderIK: {fileID: 0}
+  npcSightCollider: {fileID: 0}
   climbCollider: {fileID: 0}
   climbAnchorTop: {fileID: 0}
   climbAnchorBottom: {fileID: 0}
@@ -3286,11 +3287,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EventPath: event:/SFX/Steps
-  m_Database: {fileID: 0}
-  lastEntry:
-    m_Material: {fileID: 0}
-    m_Description: {fileID: 0}
   playStep: 0
+  footstepsDB: {fileID: 0}
+  m_TerrainReader: {fileID: 0}
+  FMODWalkParam: 
+  FMODSurfaceParam: 
   origin:
   - {fileID: 4325504291788222}
   - {fileID: 4800080219482162}

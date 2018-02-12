@@ -10,11 +10,15 @@ public class MenuUIManager : MonoBehaviour
 {
 
     private SaveManager SM;
+    private Canvas m_Canvas;
+
+    bool isMouseActive;
 
     GameObject[] UiButton;
     private void Awake()
     {
         UiButton = GameObject.FindGameObjectsWithTag("CanvasUI");
+        m_Canvas = FindObjectOfType<Canvas>();
     }
 
     private void Start()
@@ -256,5 +260,20 @@ public class MenuUIManager : MonoBehaviour
             }
         }
 
+    }
+
+
+    private void Update()
+    {
+        if (isMouseActive && Input.GetAxis("Vertical") != 0)
+        {
+            isMouseActive = false;
+            m_Canvas.GetComponent<GraphicRaycaster>().enabled = false;
+        }
+        else if (!isMouseActive && (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0))
+        {
+            isMouseActive = true;
+            m_Canvas.GetComponent<GraphicRaycaster>().enabled = true;
+        }
     }
 }

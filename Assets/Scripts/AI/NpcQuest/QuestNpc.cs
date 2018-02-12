@@ -102,15 +102,15 @@ namespace AI
             }
             else if (m_QuestGiver == null)
             {
-                Debug.Log(m_QuestReceiver.name);
+                //Debug.Log(m_QuestReceiver.name);
 
                 //SetBlackboardValue("questAvailable", m_QuestReceiver.myMission.available);
                 SetBlackboardValue("questCompleted", m_QuestReceiver.myMission.completed);
                 SetBlackboardValue("questActive", m_QuestReceiver.myMission.active);
                 SetBlackboardValue("questTurnInStatus", m_QuestReceiver.myMission.turnInStatus);
-                Debug.Log(GetBlackboardBoolValue("questCompleted"));
-                Debug.Log(GetBlackboardBoolValue("questAvailable"));
-                Debug.Log(GetBlackboardBoolValue("questTurnInStatus"));
+                //Debug.Log(GetBlackboardBoolValue("questCompleted"));
+                //Debug.Log(GetBlackboardBoolValue("questAvailable"));
+                //Debug.Log(GetBlackboardBoolValue("questTurnInStatus"));
             }
 
             //Debug.Log("Quest : " + m_QuestGiver.myMission.available + " - " + m_QuestGiver.myMission.completed + " - " + m_QuestGiver.myMission.turnInStatus);

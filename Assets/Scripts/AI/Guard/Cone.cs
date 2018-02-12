@@ -12,8 +12,11 @@ namespace AI
         public float raycastLength;
         public float max_theta_Angle, max_psi_Angle;
 
+        Mesh m_Mesh;
+
         private void Awake()
         {
+            m_Mesh = GetComponent<MeshFilter>().sharedMesh;
             m_Guard = GetComponentInParent<Guard>();
             //Debug.Log("Called updateraycast");
             UpdateRaycastParams();
@@ -47,7 +50,7 @@ namespace AI
 
         public void UpdateRaycastParams()
         {
-            Mesh m_Mesh = GetComponent<MeshFilter>().sharedMesh;
+            
             //Debug.Log("Defined cone bounds");
             Vector3 bounds = m_Mesh.bounds.extents;
             raycastLength = bounds.z * 2f * transform.localScale.z;

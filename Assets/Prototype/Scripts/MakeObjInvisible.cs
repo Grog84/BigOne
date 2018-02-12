@@ -5,12 +5,22 @@ using UnityEngine;
 public class MakeObjInvisible : MonoBehaviour {
 
     private List<MeshRenderer> meshRenderers;
+    public bool atStart = true;
 
     // Use this for initialization
     void Start () {
 
+        if(atStart)
+        {
+            MakeInvisible();
+        }
+
+	}
+
+    public void MakeInvisible()
+    {
         meshRenderers = new List<MeshRenderer>();
-        if(GetComponent<MeshRenderer>())
+        if (GetComponent<MeshRenderer>())
             GetComponent<MeshRenderer>().enabled = false;
 
 
@@ -20,9 +30,8 @@ public class MakeObjInvisible : MonoBehaviour {
             {
                 meshRend.enabled = false;
             }
-            
-        }
 
-	}
-	
+        }
+    }
+
 }

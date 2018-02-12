@@ -52,6 +52,8 @@ namespace AI
             Vector3 bounds = m_Mesh.bounds.extents;
             raycastLength = bounds.z * 2f * transform.localScale.z;
 
+            GetComponent<MakeObjInvisible>().MakeInvisible();
+
             max_theta_Angle = Mathf.Atan((bounds.x * transform.localScale.x) / raycastLength) * 180f / Mathf.PI;
             max_psi_Angle = Mathf.Atan((bounds.y * transform.localScale.y) / raycastLength) * 180f / Mathf.PI;
 

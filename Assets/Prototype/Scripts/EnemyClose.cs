@@ -23,7 +23,7 @@ public class EnemyClose : MonoBehaviour
             thisPointer.GetComponent<EnemyRadar>().enemyClose = this.transform;
             if(pointers.Count == 1)
             {
-                GMController.instance.SetBkgMusicState(20);
+                GMController.instance.SetBkgMusicState(22);
             }
         }
     }

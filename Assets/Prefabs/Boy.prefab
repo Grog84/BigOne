@@ -778,6 +778,7 @@ GameObject:
   - component: {fileID: 114874572526973654}
   - component: {fileID: 114117047334737452}
   - component: {fileID: 114864608588236662}
+  - component: {fileID: 114948152685417932}
   m_Layer: 8
   m_Name: Boy
   m_TagString: Player
@@ -3238,6 +3239,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc04c104d4a4df4c86633c095bd26ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasInteractedWithNPC: 0
+  currentConsegnaOggetto: 0
   firstCrouch: 0
   canStand: 1
   Crouch: 0
@@ -3345,6 +3348,19 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
+--- !u!114 &114948152685417932
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1515538267651020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0845e478c00faea43bbb06104fd3d8c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ClimbPath: 
+  m_ClimbPath2: 
 --- !u!114 &114952653149960128
 MonoBehaviour:
   m_ObjectHideFlags: 1

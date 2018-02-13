@@ -68,7 +68,7 @@ namespace AI
         [HideInInspector] public GuardSaveComponent m_SaveComponent;
 
 
-        public GameObject[] lookAtPositionsObj;
+        //public GameObject[] lookAtPositionsObj;
 
         //Gizmos
         [ReadOnly]
@@ -541,7 +541,7 @@ namespace AI
 
             characterInterfaces = GMController.instance.m_CharacterInterfaces;
 
-            lookAtPositionsObj = GameObject.FindGameObjectsWithTag("LookAtGuard");
+            GameObject[] lookAtPositionsObj = GameObject.FindGameObjectsWithTag("LookAtGuard");
 
             lookAtPositions = new Transform[2][];
             lookAtPositions[0] = new Transform[lookAtPositionsObj.Length / 2];

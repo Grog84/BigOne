@@ -11,6 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeb65b0d75ae77b4e9ea3b3defa8a88d, type: 3}
   m_Name: Default_Mother
   m_EditorClassIdentifier: 
+  m_CarryingItemSpeed: 2
+  m_InjuredWalkSpeed: 2
   m_WalkSpeed: 3.2
   m_WalkOnStairsSpeed: 3
   m_CrouchSpeed: 1.9
@@ -19,6 +21,7 @@ MonoBehaviour:
   m_RunOnStarisSpeed: 3
   m_RotateSpeed: 3
   m_MovementSpeed: 3.2
+  m_CrouchRay: 1
   m_ClimbSpeed: 1
   m_DistanceFromWallClimbing: 4
   m_ClimbFallHeight: 1
@@ -33,9 +36,10 @@ MonoBehaviour:
   m_JumpHeight: 3
   m_FallGravity: 20
   m_StairsGravity: 3
-  m_WalkSoundrange: 3
-  m_CrouchSoundrange: 1
-  m_RunSoundrange: 5
+  m_WalkSoundrange: 15
+  m_CrouchSoundrange: 5
+  m_RunSoundrange: 30
+  m_InnerAreaPerc: 30
   crouchedColliderHeightDimension: 0.8
   crouchedColliderYOffset: 0.45
   standingColliderHeightDimension: 1.6

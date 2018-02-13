@@ -177,12 +177,12 @@ public class GMController : MonoBehaviour {
 
     public IEnumerator WaitDeathAnimation()
     {
-        yield return new WaitForSeconds(deathAnimationTime);
+        yield return new WaitForSecondsRealtime(deathAnimationTime);
     }
 
     public IEnumerator WaitFadeOut()
     {
-        yield return new WaitForSeconds(fadeOutTime);
+        yield return new WaitForSecondsRealtime(fadeOutTime);
     }
 
     public void MoveToNextScene()

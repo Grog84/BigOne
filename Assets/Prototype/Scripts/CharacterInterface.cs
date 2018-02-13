@@ -24,13 +24,18 @@ public class CharacterInterface : MonoBehaviour {
         m_CharStateController.TransitionToState(m_CharStateController.gameStartState);
     }
 
+    public void ResetAnimator()
+    {
+        m_CharController.m_Animator.SetBool("isDead", false);
+    }
+
     private IEnumerator PlayerDefeatSequence()
     {
         //yield return null;
         GMController.instance.isCharacterPlaying = CharacterActive.None;
-        while (GMController.instance.deathTimer <= GMController.instance.deathAnimationTime)
+        while (GMController.instance.deathTimer <= GMController.instance.deathAnimationTime + GMController.instance.fadeOutTime)
         {
-            GMController.instance.deathTimer += Time.deltaTime;
+            GMController.instance.deathTimer += Time.fixedDeltaTime;
             yield return null;
         }
 

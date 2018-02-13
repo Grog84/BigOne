@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayFMODOneShot : MonoBehaviour
 {
 
-    [FMODUnity.EventRef]
+    [FMODUnity.MultipleFMOD]
     public string m_ClimbPath;
 
     [FMODUnity.EventRef]

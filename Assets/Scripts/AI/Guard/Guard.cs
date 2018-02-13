@@ -67,6 +67,9 @@ namespace AI
         // Saving Game
         [HideInInspector] public GuardSaveComponent m_SaveComponent;
 
+
+        public GameObject[] lookAtPositionsObj;
+
         //Gizmos
         [ReadOnly]
         public Color statusColor = Color.green;
@@ -525,7 +528,9 @@ namespace AI
             }
             
             // Finds the position the guards are looking at
-            GameObject[] lookAtPositionsObj = GameObject.FindGameObjectsWithTag("LookAtPosition");
+            //GameObject[] lookAtPositionsObj = GameObject.FindGameObjectsWithTag("LookAtPosition");
+            lookAtPositionsObj = GameObject.FindGameObjectsWithTag("LookAtPosition");
+
             lookAtPositions = new Transform[2][];
             lookAtPositions[0] = new Transform[lookAtPositionsObj.Length/2];
             lookAtPositions[1] = new Transform[lookAtPositionsObj.Length/2];

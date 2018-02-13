@@ -12,6 +12,7 @@ public class EnemyRadar : MonoBehaviour
 
     [HideInInspector] public GameObject target;
     [HideInInspector] public Vector3 newTarget;
+    [HideInInspector] public float radarRadius;
 
     //Animator m_PointerAnimator;
 
@@ -20,12 +21,31 @@ public class EnemyRadar : MonoBehaviour
     public Sprite normal;
     public Sprite curious;
     public Sprite alarmed;
+    public float height;
 
     void Start ()
     {
-        transform.position = transform.parent.position + Vector3.up * transform.parent.GetComponent<_CharacterController>().m_CharController.bounds.size.y / 2.0f;
+        transform.position = transform.parent.position + Vector3.up * height;
+        radarRadius = GetComponent<RadarScale>().xzScale;
+        StartCoroutine(CheckEnemy());
         //m_PointerAnimator = GetComponentInChildren<Animator>();
         //m_PointerAnimator.speed = 0;
+    }
+
+    IEnumerator CheckEnemy()
+    {
+        Debug.Log("Controllo");
+        if(Vector3.Distance(transform.position, target.transform.position) > radarRadius)
+        {
+            Debug.Log("Rompo");
+            if (enemyClose.GetComponent<EnemyClose>().pointers.Count == 1)
+            {
+                GMController.instance.SetBkgMusicState(0);
+            }
+            Destroy(gameObject);
+        }
+        yield return new WaitForSeconds(3);
+        StartCoroutine(CheckEnemy());
     }
 
     private void Update()

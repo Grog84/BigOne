@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 
-public class TerrainReader : MonoBehaviour {
+public class TerrainReader : MonoBehaviour
+{
 
     public LayerMask groundMask;
     [ReadOnly]
@@ -65,7 +66,8 @@ public class TerrainReader : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
 
         m_TerrainData = Terrain.activeTerrain.terrainData;
         alphamapWidth = m_TerrainData.alphamapWidth;
@@ -89,22 +91,23 @@ public class TerrainReader : MonoBehaviour {
         }
 
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         m_TerrainRay = new Ray(transform.position + Vector3.up, Vector3.down);
         Physics.Raycast(m_TerrainRay, out m_TerrainRayHit, 1.5f);
         Debug.DrawLine(m_TerrainRay.origin, m_TerrainRay.origin + m_TerrainRay.direction * 0.1f, Color.red);
 
-        if (m_TerrainRayHit.collider.tag == "Ground")
-        {    
+        if (m_TerrainRayHit.collider != null && m_TerrainRayHit.collider.tag == "Ground")
+        {
             surfaceIndex = GetMainTexture(m_TerrainRayHit.point);
         }
         else
         {
             surfaceIndex = 0;
         }
+        
 
     }
 }

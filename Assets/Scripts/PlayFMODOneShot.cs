@@ -17,12 +17,6 @@ public class PlayFMODOneShot : MonoBehaviour
     [FMODUnity.EventRef]
     public string m_LockedDoor;
 
-    [FMODUnity.EventRef]
-    public string m_Push;
-
-    [FMODUnity.EventRef]
-    public string m_Pull;
-
     string[] allSounds;
 
     private void Awake()
@@ -32,8 +26,6 @@ public class PlayFMODOneShot : MonoBehaviour
         allSounds[1] = m_PickItem;
         allSounds[2] = m_OpenDoor;
         allSounds[3] = m_LockedDoor;
-        allSounds[4] = m_Push;
-        allSounds[5] = m_Pull;
     }
 
     public void PlaySound(int soundIdx)

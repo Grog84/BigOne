@@ -12,8 +12,9 @@ public class PauseMenuUIManager : MonoBehaviour
 {
     PauseCamera pauseCamera;
     public GameObject[] PauseMenuCanvas;
-
-    
+    public EventSystem m_EventSystem;
+    bool isMouseActive;
+    public Canvas m_Canvas;
 
     void Update()
     {
@@ -21,7 +22,20 @@ public class PauseMenuUIManager : MonoBehaviour
         {
             Pause();
         }
+
+        if (isMouseActive && Input.GetAxis("Vertical") != 0 && Input.GetAxis("Horizontal") != 0)
+        {
+            isMouseActive = false;
+            m_Canvas.GetComponent<GraphicRaycaster>().enabled = false;
+        }
+        else if (!isMouseActive && (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0))
+        {
+            isMouseActive = true;
+            m_Canvas.GetComponent<GraphicRaycaster>().enabled = true;
+        }
+
     }
+
     public void Awake()
     {
         pauseCamera = FindObjectOfType<PauseCamera>();
@@ -38,6 +52,8 @@ public class PauseMenuUIManager : MonoBehaviour
                 a.SetActive(false);
             }
         }
+
+        
     }
 
     public void Pause()
@@ -77,9 +93,13 @@ public class PauseMenuUIManager : MonoBehaviour
 
             }
         }
+
+        m_EventSystem.SetSelectedGameObject(null);
     }
     public void OpenDiary()
     {
+        m_EventSystem.SetSelectedGameObject(null);
+
         foreach (GameObject a in PauseMenuCanvas)
         {
             if (a.name == "pause_Quest")
@@ -93,6 +113,7 @@ public class PauseMenuUIManager : MonoBehaviour
             }
         }
 
+        m_EventSystem.SetSelectedGameObject(m_EventSystem.firstSelectedGameObject);
     }
 
     public void Controls() // Show the controls image
@@ -115,8 +136,6 @@ public class PauseMenuUIManager : MonoBehaviour
     {
         Invoke(pauseMenuType, 0.2f); // Enable the Fade 
     }
-
-
 
     public void BackToMainMenuChoice()// Enable the choice to go the Main Menu
     {

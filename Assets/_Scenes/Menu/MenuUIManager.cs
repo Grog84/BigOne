@@ -265,7 +265,7 @@ public class MenuUIManager : MonoBehaviour
 
     private void Update()
     {
-        if (isMouseActive && Input.GetAxis("Vertical") != 0)
+        if (isMouseActive && Input.GetAxis("Vertical") != 0 && Input.GetAxis("Horizontal") != 0)
         {
             isMouseActive = false;
             m_Canvas.GetComponent<GraphicRaycaster>().enabled = false;

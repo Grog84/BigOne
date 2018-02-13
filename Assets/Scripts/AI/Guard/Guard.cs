@@ -529,14 +529,26 @@ namespace AI
             
             // Finds the position the guards are looking at
             //GameObject[] lookAtPositionsObj = GameObject.FindGameObjectsWithTag("LookAtPosition");
-            lookAtPositionsObj = GameObject.FindGameObjectsWithTag("LookAtPosition");
+            
+        }
+
+        private void Start()
+        {
+            LoadStats(normalStats);
+            m_NavMeshAgent.destination = wayPointListTransform[0].position;
+            SetBlackboardValue("RandomPick", randomPick);
+            SetBlackboardValue("NumberOfNavPoints", wayPointList.Count);
+
+            characterInterfaces = GMController.instance.m_CharacterInterfaces;
+
+            lookAtPositionsObj = GameObject.FindGameObjectsWithTag("LookAtGuard");
 
             lookAtPositions = new Transform[2][];
-            lookAtPositions[0] = new Transform[lookAtPositionsObj.Length/2];
-            lookAtPositions[1] = new Transform[lookAtPositionsObj.Length/2];
+            lookAtPositions[0] = new Transform[lookAtPositionsObj.Length / 2];
+            lookAtPositions[1] = new Transform[lookAtPositionsObj.Length / 2];
 
             int boyIdx = 0, motherIdx = 0;
-            
+
             for (int i = 0; i < lookAtPositionsObj.Length; i++)
             {
                 // find parent name boy or mother and assign accordingly
@@ -573,16 +585,6 @@ namespace AI
                     lookAtPositionCentral[(int)CharacterActive.Mother] = lookAtCentral;
                 }
             }
-        }
-
-        private void Start()
-        {
-            LoadStats(normalStats);
-            m_NavMeshAgent.destination = wayPointListTransform[0].position;
-            SetBlackboardValue("RandomPick", randomPick);
-            SetBlackboardValue("NumberOfNavPoints", wayPointList.Count);
-
-            characterInterfaces = GMController.instance.m_CharacterInterfaces;
 
         }
 

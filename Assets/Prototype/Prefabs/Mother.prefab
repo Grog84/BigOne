@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 114358415208295798}
   - component: {fileID: 114088535779652082}
   - component: {fileID: 114024513285186588}
+  - component: {fileID: 114611327740731866}
   m_Layer: 8
   m_Name: Mother
   m_TagString: Player
@@ -274,7 +275,7 @@ GameObject:
   - component: {fileID: 4462614950161430}
   m_Layer: 8
   m_Name: LookAtTarget
-  m_TagString: LookAtPosition
+  m_TagString: LookAtGuard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -394,7 +395,7 @@ GameObject:
   - component: {fileID: 4878071000355330}
   m_Layer: 8
   m_Name: LookAtTarget
-  m_TagString: LookAtPosition
+  m_TagString: LookAtGuard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -583,7 +584,7 @@ GameObject:
   - component: {fileID: 4928425703402354}
   m_Layer: 8
   m_Name: LookAtTarget
-  m_TagString: LookAtPosition
+  m_TagString: LookAtGuard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -718,7 +719,7 @@ GameObject:
   - component: {fileID: 4939750881837168}
   m_Layer: 8
   m_Name: LookAtTarget
-  m_TagString: LookAtPosition
+  m_TagString: LookAtGuard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1084,7 +1085,7 @@ GameObject:
   - component: {fileID: 4998304293270240}
   m_Layer: 8
   m_Name: LookAtTarget
-  m_TagString: LookAtPosition
+  m_TagString: LookAtGuard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2215,7 +2216,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1046753759377328}
   m_LocalRotation: {x: -0, y: -0.9914449, z: -0, w: 0.13052654}
-  m_LocalPosition: {x: 82.91, y: 0.069, z: -36.73}
+  m_LocalPosition: {x: 82.91, y: 0, z: -36.73}
   m_LocalScale: {x: 0.9000011, y: 0.9, z: 0.9000011}
   m_Children:
   - {fileID: 4827851014241718}
@@ -3229,6 +3230,19 @@ MonoBehaviour:
   locked: 0
   xzScale: 22
   yScale: 1
+--- !u!114 &114611327740731866
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1046753759377328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0845e478c00faea43bbb06104fd3d8c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ClimbPath: event:/SFX/sfx_boy_climb1
+  m_ClimbPath2: event:/SFX/sfx_DoorMetal_closed
 --- !u!114 &114699240813639512
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3240,6 +3254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc04c104d4a4df4c86633c095bd26ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasInteractedWithNPC: 0
+  currentConsegnaOggetto: 0
   firstCrouch: 0
   canStand: 1
   Crouch: 0

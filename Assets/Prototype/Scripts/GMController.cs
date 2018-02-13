@@ -133,7 +133,7 @@ public class GMController : MonoBehaviour {
 
         bkgMusic = FMODUnity.RuntimeManager.CreateInstance(m_BkgMusicPath);
         SetFMODParameter(bkgMusic, "GuardStatus", 0f);
-        //bkgMusic.start();
+        bkgMusic.start();
 
         ambientMusic = FMODUnity.RuntimeManager.CreateInstance(m_AmbientMusicPath);
         ambientMusic.start();

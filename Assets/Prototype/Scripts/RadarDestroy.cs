@@ -15,6 +15,10 @@ public class RadarDestroy : MonoBehaviour
     {
         if (other.gameObject == transform.parent.GetComponent<EnemyRadar>().target)
         {
+            if (enemyClose.GetComponent<EnemyClose>().pointers.Count == 1)
+            {
+                GMController.instance.SetBkgMusicState(0);
+            }
             enemyClose.GetComponent<EnemyClose>().pointers.Remove(transform.parent.gameObject);
             Destroy(transform.parent.gameObject);
         }

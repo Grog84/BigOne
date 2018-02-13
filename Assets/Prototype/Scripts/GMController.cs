@@ -6,11 +6,14 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 using AI;
 using Sirenix.OdinInspector;
+using QuestManager;
 
 public enum CameraActive {ThirdPersonCameraScript, FirstPersonCameraScript, LedgeCamera}
 public enum DayNight { Day, Night}
 
 public class GMController : MonoBehaviour {
+
+    [HideInInspector] public QuestManager.QuestManager m_QM;
 
     //Switch Player
     public bool canSwitch = false;
@@ -90,6 +93,7 @@ public class GMController : MonoBehaviour {
         isCharacterPlaying = activePlayerAtStart;
         players = GameObject.FindGameObjectsWithTag("Player");
         m_CharacterInterfaces = new CharacterInterface[players.Length];
+        m_QM = GameObject.Find("QuestManager").GetComponent<QuestManager.QuestManager>();
     }
 
     private void Start()

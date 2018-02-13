@@ -12,7 +12,7 @@ namespace AI
         [ReadOnly]
         public float distance = 0f;
         [Space(10)]
-        [MinMaxSlider(0, 2000, true)]
+        [MinMaxSlider(0, 200, true)]
         public Vector2 midRangeArea;
         [Space(10)]
         public float shortRangeTickDelay = 0.2f;

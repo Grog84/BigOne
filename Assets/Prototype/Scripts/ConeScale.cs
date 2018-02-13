@@ -21,6 +21,9 @@ public class ConeScale : MonoBehaviour {
         oldXScale = xScale;
         oldYScale = yScale;
         oldZScale = zScale;
+
+        m_Cone.transform.localScale = new Vector3(xScale, yScale, zScale);
+        m_Cone.GetComponent<Cone>().UpdateRaycastParams();
     }
 
     private void Update()

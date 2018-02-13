@@ -20,13 +20,13 @@ public class ParticleSystemManager : MonoBehaviour
 
     private void Start()
     {
-        player = GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].transform;
+       // player = GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].transform;
     }
 
     public void EmitRightParticle(int texture, int state, Vector3 textureNormal)
     {     
         //Set Position and Rotation
-        particleData.MyDB[texture, state].transform.position = player.position;
+        particleData.MyDB[texture, state].transform.position = GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].transform.position;
         particleData.MyDB[texture, state].transform.rotation = Quaternion.LookRotation(textureNormal);
         //Emit single burst of particles
         particleData.MyDB[texture, state].transform.GetChild(0).GetComponent<FootstepsParticle>().EmitParticle();

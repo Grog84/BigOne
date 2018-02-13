@@ -129,7 +129,7 @@ public class GMController : MonoBehaviour {
         
 
         m_SaveManager = FindObjectOfType<SaveManager>();
-       // SaveCheckpoint();
+        SaveCheckpoint();
 
         bkgMusic = FMODUnity.RuntimeManager.CreateInstance(m_BkgMusicPath);
         SetFMODParameter(bkgMusic, "GuardStatus", 0f);

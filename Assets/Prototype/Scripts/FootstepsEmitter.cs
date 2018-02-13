@@ -47,7 +47,7 @@ public class FootstepsEmitter : MonoBehaviour
 
     void PlayFootstepSound()
     {
-        GetFloorComposition();
+        //GetFloorComposition();
         m_System.getBus("" , out m_Bus);
 
         if (m_EventPath != null)

@@ -1481,7 +1481,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1515538267651020}
   m_LocalRotation: {x: -0, y: 0.9705863, z: -0, w: 0.24075364}
-  m_LocalPosition: {x: -9.81, y: 0.021, z: -26.26}
+  m_LocalPosition: {x: -9.81, y: -0.5, z: -26.26}
   m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 4059790776996518}
@@ -3363,6 +3363,15 @@ MonoBehaviour:
   m_PickItem: event:/SFX/sfx_mother_pickup_key
   m_OpenDoor: event:/SFX/sfx_DoorWooden_Open
   m_LockedDoor: event:/SFX/sfx_DoorWooden_lock
+  m_FMODEventList:
+  - audioTag: Climb
+    audioEntry: event:/SFX/sfx_boy_climb1
+  - audioTag: Pick Up
+    audioEntry: event:/SFX/sfx_mother_pickup_key
+  - audioTag: Open Door
+    audioEntry: event:/SFX/sfx_DoorWooden_Open
+  - audioTag: Locked Door
+    audioEntry: event:/SFX/sfx_DoorWooden_lock
 --- !u!114 &114952653149960128
 MonoBehaviour:
   m_ObjectHideFlags: 1

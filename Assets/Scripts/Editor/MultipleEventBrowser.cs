@@ -61,8 +61,11 @@
 //        Texture2D borderIcon;
 //        GUIStyle eventStyle;
 
+//        //[NonSerialized]
+//        //TreeItem selectedItem = null;
+
 //        [NonSerialized]
-//        TreeItem selectedItem = null;
+//        List<TreeItem> selectedItems = new List<TreeItem>();
 
 //        Dictionary<string, float> previewParamValues = new Dictionary<string, float>();
 //        float previewDistance = 0;
@@ -70,7 +73,7 @@
 
 //        string searchString = "";
 
-//        private SerializedProperty outputProperty;
+//        // private SerializedProperty outputProperty;
 
 //        bool fromInspector = false;
 //        bool showEvents = true;
@@ -118,7 +121,7 @@
 
 //        void SetSelectedItem(TreeItem item)
 //        {
-//            //if (item != selectedItem)
+//            if (selectedItems.FindIndex(item))
 //            {
 //                selectedItem = item;
 
@@ -180,10 +183,10 @@
 
 //                    if (fromInspector && e.clickCount >= 2)
 //                    {
-//                        outputProperty.stringValue = "";
-//                        outputProperty.stringValue = item.EventRef.Path;
-//                        EditorUtils.UpdateParamsOnEmitter(outputProperty.serializedObject, item.EventRef.Path);
-//                        outputProperty.serializedObject.ApplyModifiedProperties();
+//                        //outputProperty.stringValue = "";
+//                        //outputProperty.stringValue = item.EventRef.Path;
+//                        //EditorUtils.UpdateParamsOnEmitter(outputProperty.serializedObject, item.EventRef.Path);
+//                        //outputProperty.serializedObject.ApplyModifiedProperties();
 
 //                        Close();
 //                    }
@@ -221,8 +224,8 @@
 
 //                    if (fromInspector && e.clickCount >= 2)
 //                    {
-//                        outputProperty.stringValue = item.BankRef.Name;
-//                        outputProperty.serializedObject.ApplyModifiedProperties();
+//                        //outputProperty.stringValue = item.BankRef.Name;
+//                        //outputProperty.serializedObject.ApplyModifiedProperties();
 //                        Close();
 //                    }
 
@@ -407,15 +410,15 @@
 
 //                    if (selectedItem.EventRef != null)
 //                    {
-//                        outputProperty.stringValue = "";
-//                        outputProperty.stringValue = selectedItem.EventRef.Path;
-//                        EditorUtils.UpdateParamsOnEmitter(outputProperty.serializedObject, selectedItem.EventRef.Path);
+//                        //outputProperty.stringValue = "";
+//                        //outputProperty.stringValue = selectedItem.EventRef.Path;
+//                        //EditorUtils.UpdateParamsOnEmitter(outputProperty.serializedObject, selectedItem.EventRef.Path);
 //                    }
 //                    else
 //                    {
-//                        outputProperty.stringValue = selectedItem.BankRef.Name;
+//                        //outputProperty.stringValue = selectedItem.BankRef.Name;
 //                    }
-//                    outputProperty.serializedObject.ApplyModifiedProperties();
+//                    //outputProperty.serializedObject.ApplyModifiedProperties();
 //                    Close();
 //                }
 //                if (Event.current.isKey && Event.current.keyCode == KeyCode.Escape)
@@ -843,16 +846,16 @@
 //        {
 //            fromInspector = true;
 //            showBanks = false;
-//            outputProperty = property;
-//            JumpToEvent(outputProperty.stringValue);
+//            //outputProperty = property;
+//            //JumpToEvent(outputProperty.stringValue);
 //        }
 
 //        internal void SelectBank(SerializedProperty property)
 //        {
 //            fromInspector = true;
 //            showEvents = false;
-//            outputProperty = property;
-//            JumpToBank(outputProperty.stringValue);
+//            //outputProperty = property;
+//            //JumpToBank(outputProperty.stringValue);
 //        }
 
 //        public void JumpToEvent(string eventPath)
@@ -939,7 +942,7 @@
 //            treeItems[1].Name = "Snapshots";
 //            treeItems[2].Name = "Banks";
 
-//            outputProperty.stringValue = new List<string>();
+//            // outputProperty.stringValue = new List<string>();
 //        }
 
 //        public static void RepaintEventBrowser()
@@ -950,7 +953,7 @@
 //            }
 //        }
 
-//        static EventBrowser instance;
+//        static MultipleEventBrowser instance;
 
 //        public void OnEnable()
 //        {

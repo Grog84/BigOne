@@ -5,27 +5,18 @@ using UnityEngine;
 public class PlayFMODOneShot : MonoBehaviour
 {
 
-    [FMODUnity.MultipleFMOD]
-    public string m_ClimbPath;
-
-    [FMODUnity.EventRef]
-    public string m_PickItem;
-
-    [FMODUnity.EventRef]
-    public string m_OpenDoor;
-
-    [FMODUnity.EventRef]
-    public string m_LockedDoor;
+    [SerializeField]
+    public FMODEventRef[] m_FMODEventList;
 
     string[] allSounds;
 
     private void Awake()
     {
-        allSounds = new string[6];
-        allSounds[0] = m_ClimbPath;
-        allSounds[1] = m_PickItem;
-        allSounds[2] = m_OpenDoor;
-        allSounds[3] = m_LockedDoor;
+        allSounds = new string[m_FMODEventList.Length];
+        for (int i = 0; i < m_FMODEventList.Length; i++)
+        {
+            allSounds[i] = m_FMODEventList[i].audioEntry;
+        }
     }
 
     public void PlaySound(int soundIdx)

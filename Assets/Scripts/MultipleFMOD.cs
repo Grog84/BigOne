@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+﻿//using UnityEngine;
 
-namespace FMODUnity
-{
-    public class MultipleFMOD : PropertyAttribute
-    {
-    }
-}
+//namespace FMODUnity
+//{
+//    public class MultipleFMOD : PropertyAttribute
+//    {
+//    }
+//}

@@ -6,7 +6,7 @@ public class ParticleSystemManager : MonoBehaviour
 {
     public static ParticleSystemManager instance = null;
     public ParticleDB particleData;
-    Transform player;
+    //Transform player;
 
     void Awake()
     {

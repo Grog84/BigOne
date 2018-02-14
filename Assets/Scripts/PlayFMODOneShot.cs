@@ -8,58 +8,27 @@ public class PlayFMODOneShot : MonoBehaviour
     [SerializeField]
     public FMODEventRef[] m_FMODEventList;
 
-    string[] allSounds;
+    Dictionary<string, string> eventDict = new Dictionary<string, string>();
 
     private void Awake()
     {
-        allSounds = new string[m_FMODEventList.Length];
+        
         for (int i = 0; i < m_FMODEventList.Length; i++)
         {
-            allSounds[i] = m_FMODEventList[i].audioEntry;
+            eventDict.Add(m_FMODEventList[i].audioTag, m_FMODEventList[i].audioEntry);
         }
     }
 
-    public void PlaySound(int soundIdx)
+    public void PlaySound(string key)
     {
-        if (allSounds[soundIdx] != null)
+        if (eventDict[key] != null)
         {
-            FMOD.Studio.EventInstance e = FMODUnity.RuntimeManager.CreateInstance(allSounds[soundIdx]);
+            FMOD.Studio.EventInstance e = FMODUnity.RuntimeManager.CreateInstance(eventDict[key]);
             e.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
 
             e.start();
-            e.release();//Release each event instance immediately, there are fire and forget, one-shot instances. 
+            e.release();
         }
     }
 }
-
-//public class PlayFMODLoop : MonoBehaviour
-//{
-
-//    [FMODUnity.EventRef]
-//    public string m_ClimbPath;
-
-
-//    string[] allSounds;
-
-//    private void Awake()
-//    {
-//        allSounds = new string[6];
-//        allSounds[0] = m_ClimbPath;
-//        allSounds[1] = m_PickItem;
-//        allSounds[2] = m_OpenDoor;
-//        allSounds[3] = m_LockedDoor;
-//    }
-
-//    public void PlaySound(int soundIdx)
-//    {
-//        if (allSounds[soundIdx] != null)
-//        {
-//            FMOD.Studio.EventInstance e = FMODUnity.RuntimeManager.CreateInstance(allSounds[soundIdx]);
-//            e.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform.position));
-
-//            e.start();
-//            e.release();//Release each event instance immediately, there are fire and forget, one-shot instances. 
-//        }
-//    }
-//}
 

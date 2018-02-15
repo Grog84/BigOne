@@ -14,7 +14,7 @@ namespace Character.Decisions
         {
             if (controller.m_CharacterController.hasInteractedWithNPC)
             {
-                Debug.Log(GMController.instance.m_QM.name);
+                //Debug.Log(GMController.instance.m_QM.name);
                 foreach (Quest quest in GMController.instance.m_QM.QC.QuestList)
                 {
                     if (quest.questType == QUESTTYPE.CONSEGNA_OGGETTO && quest.active && !quest.turnInStatus)

@@ -504,6 +504,13 @@ namespace AI
             GetNormal();
         }
 
+        public void HitPlayer()
+        {
+            m_Animator.SetBool("Hit", true);
+            m_NavMeshAgent.speed = 0;
+            DefeatPlayer();
+        }
+
         private void Awake()
         {
             // Get components reference
@@ -649,7 +656,5 @@ namespace AI
         }
 
     }
-
-    
 }
 

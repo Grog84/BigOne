@@ -22,6 +22,7 @@ public class LeafParticleSettings : FootstepsParticle
     }
     public override void EmitParticle()
     {
+        Debug.Log(transform.parent.name);
         //Get Particle Burst Info
         var emission = particle.emission;
         ParticleSystem.Burst[] bursts = new ParticleSystem.Burst[emission.burstCount];
@@ -30,7 +31,6 @@ public class LeafParticleSettings : FootstepsParticle
         int max = bursts[0].maxCount;
 
         particle.Emit(Random.Range(min, max));
-
         if (particleChilds.Length > 0)
         {
             for (int i = 0; i < particleChilds.Length; i++)

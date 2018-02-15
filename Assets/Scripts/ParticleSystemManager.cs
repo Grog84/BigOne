@@ -32,12 +32,15 @@ public class ParticleSystemManager : SerializedMonoBehaviour
     }
 
     public void EmitRightParticle(int texture, int state, Vector3 textureNormal)
-    {     
-        //Set Position and Rotation
-        MyDB[texture, state].transform.position = GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].transform.position + Vector3.up * 0.2f;
-       // MyDB[texture, state].transform.rotation = Quaternion.LookRotation(textureNormal);
-        //Emit single burst of particles
-        MyDB[texture, state].transform.GetChild(0).GetComponent<FootstepsParticle>().EmitParticle();
+    {
+        if (MyDB[texture, state] != null)
+        {
+            //Set Position and Rotation
+            MyDB[texture, state].transform.position = GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].transform.position + Vector3.up * 0.2f;
+            // MyDB[texture, state].transform.rotation = Quaternion.LookRotation(textureNormal);
+            //Emit single burst of particles
+            MyDB[texture, state].transform.GetChild(0).GetComponent<FootstepsParticle>().EmitParticle();
+        }
     }
 
 

@@ -89,16 +89,19 @@ namespace AI
 
         public void UpdateBlackBoard()
         {
-
+           
 
             if (m_QuestReceiver == null)
             {
-                Debug.Log(m_QuestGiver.name);
+                //Debug.Log(m_QuestGiver.name);
                 SetBlackboardValue("questAvailable", m_QuestGiver.myMission.available);
                 SetBlackboardValue("questCompleted", m_QuestGiver.myMission.completed);
                 SetBlackboardValue("questActive", m_QuestGiver.myMission.active);
 
                 SetBlackboardValue("questTurnInStatus", m_QuestGiver.myMission.turnInStatus);
+                //Debug.Log(GetBlackboardBoolValue("questCompleted"));
+                //Debug.Log(GetBlackboardBoolValue("questAvailable"));
+                //Debug.Log(GetBlackboardBoolValue("questTurnInStatus"));
             }
             else if (m_QuestGiver == null)
             {
@@ -112,6 +115,14 @@ namespace AI
                 //Debug.Log(GetBlackboardBoolValue("questAvailable"));
                 //Debug.Log(GetBlackboardBoolValue("questTurnInStatus"));
             }
+            else if(m_QuestGiver != null && m_QuestReceiver != null)
+            {
+                //Debug.Log(m_QuestReceiver.name);
+                SetBlackboardValue("questCompleted", m_QuestReceiver.myMission.completed);
+                SetBlackboardValue("questActive", m_QuestReceiver.myMission.active);
+                SetBlackboardValue("questTurnInStatus", m_QuestReceiver.myMission.turnInStatus);
+            }
+            
 
             //Debug.Log("Quest : " + m_QuestGiver.myMission.available + " - " + m_QuestGiver.myMission.completed + " - " + m_QuestGiver.myMission.turnInStatus);
             //Debug.Log("Quest : " + GetBlackboardBoolValue("questAvailable") + " - " + GetBlackboardBoolValue("questCompleted") + " - " +

@@ -9,41 +9,41 @@ namespace QuestManager
     [Serializable]
     public class Quest
     {
-       
+
         public string questName;
- 
-        
+
+
         public QUESTTYPE questType;
-    
+
         public QUESTGRADE questGrade;
- 
+
         public int questIndex;
         public bool ShowDescription;
 
         [ShowIf("ShowDescription")]
-    
+
         [TextArea]
         public string questDescription;
 
-        
+
         public bool available;
 
         public bool active;
 
-       
+
         public bool completed;
 
         public bool turnInStatus;
 
         [ReadOnly]
         public int SceneIndexNumber;
-       
+
         public GameObject questGiver;
-      
-        public bool Printed=false;
+
+        public bool Printed = false;
 
         [Space(3f)]
-       
+
         private bool isAB;
         private bool isObj;
         private bool isABTi;
@@ -108,7 +108,7 @@ namespace QuestManager
         [HideInInspector]
         public string questDeliver_ObjName;
 
-        public Quest(string _questName,QUESTTYPE _questType,QUESTGRADE _questGrade,string _questDescription,int _questIndex,GameObject _questGiver, GameObject _pointA, GameObject _pointB, GameObject _obj, GameObject _receiver, GameObject _pointATi, GameObject _pointBTi,GameObject _questDeliver,float _time,int _sceneIndexNumber)
+        public Quest(string _questName, QUESTTYPE _questType, QUESTGRADE _questGrade, string _questDescription, int _questIndex, GameObject _questGiver, GameObject _pointA, GameObject _pointB, GameObject _obj, GameObject _receiver, GameObject _pointATi, GameObject _pointBTi, GameObject _questDeliver, float _time, int _sceneIndexNumber)
         {
 
             questName = _questName;
@@ -131,13 +131,14 @@ namespace QuestManager
 
         public void SetCompleted()
         {
-       
-            switch(questType)
+            switch (questType)
             {
 
                 case QUESTTYPE.RICERCA_CONSEGNA_OGGETTO:
                     completed = true;
                     receiver.GetComponent<QuestNpc>().UpdateBlackBoard();
+                    Debug.Log(receiver.GetComponent<QuestNpc>().GetBlackboardBoolValue("questCompleted"));
+
                     break;
 
                 case QUESTTYPE.CONSEGNA_OGGETTO:
@@ -149,7 +150,7 @@ namespace QuestManager
                     completed = true;
 
                     break;
-                       
+
                 case QUESTTYPE.SPOSTAMENTO_AB_TIMED:
                     completed = true;
 
@@ -172,7 +173,7 @@ namespace QuestManager
         public void SetActive()
         {
             active = true;
-            if(this.questType==QUESTTYPE.CONSEGNA_OGGETTO)
+            if (this.questType == QUESTTYPE.CONSEGNA_OGGETTO)
             {
                 SetCompleted();
             }

@@ -10,7 +10,7 @@ public class CutsceneManager : MonoBehaviour
    
     
     public PlayableDirector m_PlayableDirector;
-    public bool trigger = false;
+    protected bool trigger = false;
     public bool characterControlEnabled = false;
     public bool repeatable = false;
 

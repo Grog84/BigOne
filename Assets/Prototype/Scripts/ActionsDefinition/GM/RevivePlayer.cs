@@ -17,7 +17,7 @@ namespace GM.Actions
         private void Revive(GMStateController controller)
         {
             // Debug.Log("Prima");
-            Debug.Log((int)controller.m_GM.isCharacterPlaying);
+            //Debug.Log((int)controller.m_GM.isCharacterPlaying);
             controller.m_GM.m_CharacterInterfaces[(int)controller.m_GM.isCharacterPlaying].RevivePlayer();
            // Debug.Log("Dopo");
         }

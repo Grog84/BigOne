@@ -57,7 +57,7 @@ public class FootstepsEmitter : MonoBehaviour
 
             SetParameter(e, FMODWalkParam, walkState);
             SetParameter(e, FMODSurfaceParam, (float)footstepsDB.entryList[m_TerrainReader.surfaceIndex].fmodParam);
-            Debug.Log(m_TerrainReader.surfaceIndex);
+            //Debug.Log(m_TerrainReader.surfaceIndex);
             if (m_TerrainReader.surfaceIndex >= 1 && m_TerrainReader.surfaceIndex <= 3)
             {
                 // Particle

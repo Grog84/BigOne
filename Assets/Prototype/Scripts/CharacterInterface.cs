@@ -33,13 +33,14 @@ public class CharacterInterface : MonoBehaviour {
     {
         //yield return null;
         GMController.instance.isCharacterPlaying = CharacterActive.None;
-        while (GMController.instance.deathTimer <= GMController.instance.deathAnimationTime + GMController.instance.fadeOutTime)
+        while (GMController.instance.deathTimer <=  GMController.instance.fadeOutTime - 1f)
         {
             GMController.instance.deathTimer += Time.fixedDeltaTime;
             yield return null;
         }
 
         m_CharController.m_Animator.SetBool("isDead", false);
+        yield return null;
 
         // Temporary checks given the current animator structure
         if (m_CharController.m_Animator.GetBool("isClimbing"))

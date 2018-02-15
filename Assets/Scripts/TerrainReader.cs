@@ -89,7 +89,7 @@ public class TerrainReader : MonoBehaviour
             }
             else
             {
-                lastMaterial = m_TerrainRayHit.collider.GetComponent<MeshRenderer>().material;
+                surfaceIndex = 0;
             }
         }        
     }

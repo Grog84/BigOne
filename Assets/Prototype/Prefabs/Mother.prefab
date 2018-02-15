@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 114088535779652082}
   - component: {fileID: 114024513285186588}
   - component: {fileID: 114611327740731866}
+  - component: {fileID: 114817173771888442}
   m_Layer: 8
   m_Name: Mother
   m_TagString: Player
@@ -3242,13 +3243,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FMODEventList:
-  - audioTag: Climb
-    audioEntry: event:/SFX/sfx_boy_climb1
-  - audioTag: Pick Up
+  - audioTag: PickUp
     audioEntry: event:/SFX/sfx_mother_pickup_key
-  - audioTag: Open Door
+  - audioTag: OpenDoor
     audioEntry: event:/SFX/sfx_DoorWooden_Open
-  - audioTag: Locked Door
+  - audioTag: LockedDoor
     audioEntry: event:/SFX/sfx_DoorWooden_lock
 --- !u!114 &114699240813639512
 MonoBehaviour:
@@ -3370,6 +3369,22 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
+--- !u!114 &114817173771888442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1046753759377328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dd43fa54e58bd468291c3cadf1bb1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FMODEventList:
+  - audioTag: Push
+    audioEntry: event:/SFX/sfx_wooden_push
+  - audioTag: Pull
+    audioEntry: event:/SFX/sfx_wooden_pull
 --- !u!114 &114835592958906586
 MonoBehaviour:
   m_ObjectHideFlags: 1

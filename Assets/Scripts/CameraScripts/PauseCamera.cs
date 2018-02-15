@@ -7,7 +7,8 @@ using DG.Tweening;
 
 
 
-public class PauseCamera : CameraScript {
+public class PauseCamera : CameraScript
+{
 
     // max and min angles of the camera movement
     protected float yAngleMin = -40.0F;
@@ -17,35 +18,35 @@ public class PauseCamera : CameraScript {
     protected CharacterStateController controllerBoy;
     bool triggeredMethod = false;
     bool paused = false;
-  
+
     protected void Start()
     {
         mainCam = Camera.main.GetComponent<CameraScript>();
         this.minCamDistance = mainCam.minCamDistance;
         this.maxDistance = mainCam.maxDistance;
-       
+
         SwitchLookAt();
         camTransform = transform;
         cam = this.GetComponent<CinemachineVirtualCamera>();
         //Cursor.lockState = CursorLockMode.Locked;
         cam.m_Lens.NearClipPlane = nearClipPlaneDistance;
-       
+
     }
 
     private void Update()
     {
-        if(Input.GetButtonDown("Pause") && !paused)
-        {
-            paused = true;
-            transform.position = PositionOnActiveCamera().transform.position;
-            transform.forward = PositionOnActiveCamera().transform.forward;
+        //if (Input.GetButtonDown("Pause") && !paused)
+        //{
+        //    paused = true;
+        //    transform.position = PositionOnActiveCamera().transform.position;
+        //    transform.forward = PositionOnActiveCamera().transform.forward;
 
-            cam.m_Priority = 1000;
-        }
-        else if (Input.GetButtonDown("Pause") && paused)
-        {
-            Resume();
-        }
+        //    cam.m_Priority = 1000;
+        //}
+        //else if (Input.GetButtonDown("Pause") && paused)
+        //{
+        //    Resume();
+        //}
     }
 
     private CinemachineVirtualCamera PositionOnActiveCamera()
@@ -60,10 +61,10 @@ public class PauseCamera : CameraScript {
                     highestPriority = camerasInScene[i].m_Priority;
 
                 }
-                
+
             }
 
-            for (int i = 0; i < camerasInScene.Length; i++) 
+            for (int i = 0; i < camerasInScene.Length; i++)
             {
                 if (camerasInScene[i].m_Priority == highestPriority)
                 {
@@ -71,7 +72,7 @@ public class PauseCamera : CameraScript {
                     //transform.forward = camerasInScene[i].transform.forward;
                     return camerasInScene[i];
                 }
-                
+
             }
             triggeredMethod = true;
         }
@@ -80,27 +81,38 @@ public class PauseCamera : CameraScript {
 
     public void Resume()
     {
-        paused = false;
-        cam.m_Priority = 0;
-        triggeredMethod = false;
-    //    yield return null;
+        if (paused)
+        {
+            paused = false;
+            cam.m_Priority = 0;
+            triggeredMethod = false;
+        }
+        else
+        {
+            paused = true;
+            transform.position = PositionOnActiveCamera().transform.position;
+            transform.forward = PositionOnActiveCamera().transform.forward;
+
+            cam.m_Priority = 1000;
+        }
+        //    yield return null;
     }
 
 
 
     public override void SwitchLookAt()
     {
-       // Debug.Log("SwitchPaused");
+        // Debug.Log("SwitchPaused");
 
         if ((int)GMController.instance.isCharacterPlaying == 0)
         {
-           
+
             StartCoroutine(ResetCameraPriority());
             lookAt = boyLookAtByTag;
         }
         else if ((int)GMController.instance.isCharacterPlaying == 1)
         {
-            
+
             StartCoroutine(ResetCameraPriority());
             lookAt = motherLookAtByTag;
         }

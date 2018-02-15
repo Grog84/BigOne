@@ -13,6 +13,7 @@ public class TerrainReader : MonoBehaviour
     Terrain m_Terrain;
     TerrainData m_TerrainData;
     Vector3 m_TerrainPosition;
+    public Vector3 terrainNormal;
 
     Material lastMaterial;
 
@@ -74,22 +75,23 @@ public class TerrainReader : MonoBehaviour
         alphamapHeight = m_TerrainData.alphamapHeight;
 
         m_TerrainRay = new Ray(transform.position + Vector3.up, Vector3.down);
-        Physics.Raycast(m_TerrainRay, out m_TerrainRayHit, 1.5f);
-
-        splatmapData = m_TerrainData.GetAlphamaps(0, 0, alphamapWidth, alphamapHeight);
-        cellMix = new float[splatmapData.GetUpperBound(2) + 1];
-
-
-        if (m_TerrainRayHit.collider.tag == "Ground")
+        if(Physics.Raycast(m_TerrainRay, out m_TerrainRayHit, 1.5f))
         {
-            m_Terrain = m_TerrainRayHit.collider.GetComponent<Terrain>();
-            m_TerrainPosition = m_Terrain.transform.position;
-        }
-        else
-        {
-            lastMaterial = m_TerrainRayHit.collider.GetComponent<MeshRenderer>().material;
-        }
+            splatmapData = m_TerrainData.GetAlphamaps(0, 0, alphamapWidth, alphamapHeight);
+            cellMix = new float[splatmapData.GetUpperBound(2) + 1];
 
+            terrainNormal = m_TerrainRayHit.normal;
+
+            if (m_TerrainRayHit.collider.tag == "Ground")
+            {
+                m_Terrain = m_TerrainRayHit.collider.GetComponent<Terrain>();
+                m_TerrainPosition = m_Terrain.transform.position;
+            }
+            else
+            {
+                lastMaterial = m_TerrainRayHit.collider.GetComponent<MeshRenderer>().material;
+            }
+        }        
     }
 
     // Update is called once per frame

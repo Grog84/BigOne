@@ -1,12 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
-public class ParticleSystemManager : MonoBehaviour
+public class ParticleSystemManager : SerializedMonoBehaviour
 {
     public static ParticleSystemManager instance = null;
     public ParticleDB particleData;
     //Transform player;
+
+    [BoxGroup("ParticleDB")]
+    [TableMatrix(HorizontalTitle = "Texture", VerticalTitle = "State")]
+    //public GameObject[,] LabledTable = new GameObject[15, 10];
+    //[Sirenix.Serialization.OdinSerialize]
+    [SerializeField]
+    public GameObject[,] MyDB = new GameObject[4, 3];
 
     void Awake()
     {
@@ -26,9 +34,11 @@ public class ParticleSystemManager : MonoBehaviour
     public void EmitRightParticle(int texture, int state, Vector3 textureNormal)
     {     
         //Set Position and Rotation
-        particleData.MyDB[texture, state].transform.position = GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].transform.position;
-        particleData.MyDB[texture, state].transform.rotation = Quaternion.LookRotation(textureNormal);
+        MyDB[texture, state].transform.position = GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].transform.position + Vector3.up * 0.2f;
+       // MyDB[texture, state].transform.rotation = Quaternion.LookRotation(textureNormal);
         //Emit single burst of particles
-        particleData.MyDB[texture, state].transform.GetChild(0).GetComponent<FootstepsParticle>().EmitParticle();
+        MyDB[texture, state].transform.GetChild(0).GetComponent<FootstepsParticle>().EmitParticle();
     }
+
+
 }

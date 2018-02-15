@@ -53,12 +53,12 @@ public class PauseMenuUIManager : MonoBehaviour
             }
         }
 
-        
+
     }
 
     public void Pause()
     {
-
+        pauseCamera.Resume();
         foreach (GameObject a in PauseMenuCanvas)
         {
             if (a.name == "PauseMenuPanel")
@@ -66,12 +66,14 @@ public class PauseMenuUIManager : MonoBehaviour
                 if (!a.gameObject.activeSelf)
                 {
                     a.gameObject.SetActive(true);
-                 
+
                     Time.timeScale = 0;
                     OpenDiary();
+                    //pauseCamera.Resume();
                 }
                 else
                 {
+                    //pauseCamera.Resume();
                     BackToGame();
                 }
             }
@@ -83,7 +85,7 @@ public class PauseMenuUIManager : MonoBehaviour
     {
         Time.timeScale = 1;
         //GMController.instance.isGameActive = true;
-      
+        //pauseCamera.Resume();
 
         foreach (GameObject a in PauseMenuCanvas)
         {

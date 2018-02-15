@@ -459,7 +459,10 @@ namespace AI
         public void DefeatPlayer()
         {
             if(GMController.instance.isCharacterPlaying == CharacterActive.Boy || GMController.instance.isCharacterPlaying == CharacterActive.Mother)
+            {
+                m_NavMeshAgent.speed = 0;
                 GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].DefeatPlayer();
+            }
         }
 
         private void UpdatePerceptionUI()
@@ -504,12 +507,12 @@ namespace AI
             GetNormal();
         }
 
-        public void HitPlayer()
-        {
-            m_Animator.SetBool("Hit", true);
-            m_NavMeshAgent.speed = 0;
-            DefeatPlayer();
-        }
+        //public void HitPlayer()
+        //{
+        //    m_Animator.SetBool("Hit", true);
+        //    m_NavMeshAgent.speed = 0;
+        //    DefeatPlayer();
+        //}
 
         private void Awake()
         {

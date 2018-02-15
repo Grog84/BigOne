@@ -10,7 +10,7 @@ public class CutsceneManager : MonoBehaviour
    
     
     public PlayableDirector m_PlayableDirector;
-    protected bool trigger = false;
+    public bool trigger = false;
     public bool characterControlEnabled = false;
     public bool repeatable = false;
 
@@ -18,30 +18,31 @@ public class CutsceneManager : MonoBehaviour
     {
         if (trigger == false)
         {
+            if (!repeatable)
+            {
+                trigger = true;
+            }
             playableDirector.Play();
+
+            if(characterControlEnabled == false)
+            {
+                if(playableDirector.playableGraph.IsPlaying())
+                {
+                    Debug.Log("INIZIATO");
+                    GMController.instance.SetActive(false);
+                }
+
+                yield return new WaitForSeconds((float)playableDirector.duration);
+
+                if(playableDirector.state != PlayState.Playing)
+                {
+                    Debug.Log("FINITO");
+                    GMController.instance.SetActive(true);
+                }
+            }
         }
 
-        if (!repeatable)
-        {
-            trigger = true;
-        }
         
-        if(characterControlEnabled == false)
-        {
-            if(playableDirector.playableGraph.IsPlaying())
-            {
-                Debug.Log("INIZIATO");
-                GMController.instance.SetActive(false);
-            }
-
-            yield return new WaitForSeconds((float)playableDirector.duration);
-
-            if(playableDirector.state != PlayState.Playing)
-            {
-                Debug.Log("FINITO");
-                GMController.instance.SetActive(true);
-            }
-        }
 
 
 

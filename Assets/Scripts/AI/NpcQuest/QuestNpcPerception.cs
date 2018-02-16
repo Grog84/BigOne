@@ -26,7 +26,7 @@ public class QuestNpcPerception : MonoBehaviour {
         {
             target = other.transform;
             raycastTarget = target.FindDeepChildByTag("LookAtPositionCentral");
-            m_Npc.GetComponent<Animator>().SetTrigger("PlayerSaw");
+            m_Npc.GetComponent<Animator>().SetBool("PlayerSaw",true);
 
             m_QuestGiver.lookAtTarget = target;
         }

@@ -23,7 +23,7 @@ public class QuestNpcInteraction : MonoBehaviour {
            if(Input.GetButtonDown("Interact") && m_QuestNpc.canInteract)
            {
                 other.GetComponent<_CharacterController>().hasInteractedWithNPC = true;
-           
+                m_QuestNpc.StopWaving();
                 m_QuestNpc.m_Blackboard.SetBoolValue("playerInteracted", true);
                 m_QuestNpc.canInteract = false;
            }

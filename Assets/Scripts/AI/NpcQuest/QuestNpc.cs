@@ -159,6 +159,11 @@ namespace AI
 
         }
 
+        public void StopWaving()
+        {
+            m_Animator.SetBool("PlayerSaw", false);
+        }
+
         private void Awake()
         {
             m_NavMeshAgent = GetComponent<NavMeshAgent>();

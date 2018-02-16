@@ -458,8 +458,11 @@ namespace AI
 
         public void DefeatPlayer()
         {
+            
             if(GMController.instance.isCharacterPlaying == CharacterActive.Boy || GMController.instance.isCharacterPlaying == CharacterActive.Mother)
             {
+                Debug.Log("DefeatGuard");
+
                 m_NavMeshAgent.speed = 0;
                 GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].DefeatPlayer();
             }

@@ -8,6 +8,7 @@ namespace AI.BT
         {
             if (m_BehaviourTree.m_Blackboard.GetBoolValue("PlayerInSight"))
             {
+                Debug.Log("PlayerReached");
                 if ((m_BehaviourTree.m_Blackboard.m_Agent.m_NavMeshAgent.remainingDistance <= m_BehaviourTree.m_Blackboard.m_Agent.m_NavMeshAgent.stoppingDistance) &&
                     !m_BehaviourTree.m_Blackboard.m_Agent.m_NavMeshAgent.isPathStale)
                 {

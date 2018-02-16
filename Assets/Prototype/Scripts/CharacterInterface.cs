@@ -13,6 +13,7 @@ public class CharacterInterface : MonoBehaviour {
 
     public void DefeatPlayer()
     {
+        Debug.Log("DefeatCharacter");
         m_CharController.m_Animator.SetBool("isDead", true); // dovrebbe esser lo stato
         m_CharController.isDefeated = true;
     }

@@ -27,10 +27,10 @@ public class CameraScript : MonoBehaviour
     private Renderer boySkin;
     private GameObject BSkin;
 
-    private Renderer MotherJoints;
+    
     private Renderer MotherSkin;
-    private GameObject MJoints;
     private GameObject MSkin;
+    
 
     //Array of cameras used to reset the priority to default on swtich
     protected CinemachineVirtualCamera[] camerasInScene;
@@ -84,10 +84,8 @@ public class CameraScript : MonoBehaviour
         thirdPersonCameraScript = thirdPersonCamera.GetComponent<ThirdPersonCameraScript>();
         ledgeCamera = GameObject.Find("LedgeCamera");
         BSkin = GameObject.Find("BoySkin");
-        boySkin = BSkin.GetComponent<Renderer>();
-        MJoints = GameObject.Find("Beta_Joints");
-        MotherJoints = MJoints.GetComponent<Renderer>();
-        MSkin = GameObject.Find("Beta_Surface");
+        boySkin = BSkin.GetComponent<Renderer>(); 
+        MSkin = GameObject.Find("MotherSkin");
         MotherSkin = MSkin.GetComponent<Renderer>();
     }
 
@@ -134,14 +132,13 @@ public class CameraScript : MonoBehaviour
         if (firstPersonVirtualCamera.m_Priority == 100 && ((int)GMController.instance.isCharacterPlaying == 1 && motherInTrigger == true)
             || firstPersonVirtualCamera.m_Priority == 100 && activatedByTrigger == false && thirdPersonCameraScript.distance < minCamDistance && (int)GMController.instance.isCharacterPlaying == 1)
         {
-            StartCoroutine(SetMaterialTrasparent(MotherJoints));
+
             StartCoroutine(SetMaterialTrasparent(MotherSkin));
 
         }
         else if (firstPersonVirtualCamera.m_Priority != 100 || (int)GMController.instance.isCharacterPlaying != 1
              || firstPersonVirtualCamera.m_Priority != 100 && activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance )
         {
-            StartCoroutine(SetMaterialOpaque(MotherJoints));
             StartCoroutine(SetMaterialOpaque(MotherSkin));
         }
 #endregion

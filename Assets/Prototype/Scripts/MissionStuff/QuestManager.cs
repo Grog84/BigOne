@@ -307,8 +307,8 @@ namespace QuestManager
             InitializedQuestObject();
             InizializedQuestReceiver();
             InizializeDeliverQuest();
-            Timer = GameObject.Find("Timer");
-            Timer.SetActive(false);
+            //Timer = GameObject.Find("Timer");
+            //Timer.SetActive(false);
         }
 
 

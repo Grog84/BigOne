@@ -158,6 +158,7 @@ namespace AI
 
         public void SetBlackboardValue(string valueName, bool value)
         {
+            //Debug.Log(valueName);
             m_Blackboard.SetBoolValue(valueName, value);
         }
 
@@ -249,13 +250,16 @@ namespace AI
                 for (int i = 0; i < lookAtPositions[(int)GMController.instance.isCharacterPlaying].Length; i++)
                 {
                     if (lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position != null)
-                        distance = (lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position - eyes.position);
+                        distance = (transform.InverseTransformPoint(lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position) -
+                            transform.InverseTransformPoint(eyes.position));
                     else
                         continue;
 
                     angle_psi = Mathf.Abs(Mathf.Atan(distance.y / distance.z) * 180f / Mathf.PI);
                     angle_theta = Mathf.Abs(Mathf.Atan(distance.x / distance.z) * 180f / Mathf.PI);
-                    direction = distance.normalized;
+
+                    //direction = distance.normalized;
+                    direction = (lookAtPositions[(int)GMController.instance.isCharacterPlaying][i].position - eyes.position).normalized;
 
                     if (angle_psi <= m_Cone.max_psi_Angle && angle_theta <= m_Cone.max_theta_Angle && Vector3.Dot(direction, transform.forward) > 0f)
                     {
@@ -275,10 +279,13 @@ namespace AI
                 }
 
 
-                distance = (lookAtPositionCentral[(int)GMController.instance.isCharacterPlaying].position - eyes.position);
-                angle_psi = Mathf.Atan(distance.y / distance.z) * 180f / Mathf.PI;
-                angle_theta = Mathf.Atan(distance.x / distance.z) * 180f / Mathf.PI;
-                direction = distance.normalized;
+                distance = (transform.InverseTransformPoint(lookAtPositionCentral[(int)GMController.instance.isCharacterPlaying].position) -
+                    transform.InverseTransformPoint(eyes.position));
+                angle_psi = Mathf.Abs(Mathf.Atan(distance.y / distance.z) * 180f / Mathf.PI);
+                angle_theta = Mathf.Abs(Mathf.Atan(distance.x / distance.z) * 180f / Mathf.PI);
+                //direction = distance.normalized;
+                direction = (lookAtPositionCentral[(int)GMController.instance.isCharacterPlaying].position - eyes.position).normalized;
+                Debug.Log("Current: " + angle_theta + " - " + angle_psi);
 
                 if (angle_psi <= m_Cone.max_psi_Angle && angle_theta <= m_Cone.max_theta_Angle && Vector3.Dot(direction, transform.forward) > 0f)
                 {
@@ -333,6 +340,7 @@ namespace AI
         public IEnumerator CheckNextPointCO()
         {
             checkNavPointTime = wayPointList[checkingWayPoint].secondsStaying;
+            //m_NavMeshAgent.speed = 0;
 
             //Debug.Log("Started waiting coroutine: " + checkNavPointTime);
             while (navPointTimer <= checkNavPointTime)
@@ -340,6 +348,7 @@ namespace AI
                 navPointTimer += Time.deltaTime;
                 if (navPointTimer <= 2f)
                 {
+                    //Debug.Log("Start looking in direction");
                     //float step = normalStats.angularSpeed * Time.deltaTime;
                     float step = normalStats.spotRotatingSpeed * Time.deltaTime;
                     int wayPoint = (checkingWayPoint - 1);
@@ -355,7 +364,7 @@ namespace AI
                 }
                 else if (navPointTimer >= checkNavPointTime - 2f)
                 {
-                
+                    //Debug.Log("Start looking in new direction");
                     // start facing the next point of the navigation
                     //float step = normalStats.angularSpeed * Time.deltaTime;
                     float step = normalStats.spotRotatingSpeed * Time.deltaTime;
@@ -375,10 +384,13 @@ namespace AI
                     SetBlackboardValue("CheckingNavPoint", false);
                     SetBlackboardValue("WaitingCoroutineRunning", false);
 
+                    //m_NavMeshAgent.speed = stats.speed;
                     yield break;
 
                 }
 
+                //Debug.Log("navpoint timer " + navPointTimer);
+                //m_NavMeshAgent.speed = stats.speed;
                 yield return null;
             }
 
@@ -442,6 +454,7 @@ namespace AI
         // Updates the pointed nav point from the blackboard value
         public override void UpdateNavPoint()
         {
+            Debug.Log("Update navpoint");
             checkingWayPoint = m_Blackboard.GetIntValue("CurrentNavPoint");
             nextWayPoint = (m_Blackboard.GetIntValue("CurrentNavPoint") + 1) % wayPointListTransform.Length;
             SetBlackboardValue("NavigationPosition", wayPointListTransform[checkingWayPoint].position);
@@ -461,8 +474,8 @@ namespace AI
             
             if(GMController.instance.isCharacterPlaying == CharacterActive.Boy || GMController.instance.isCharacterPlaying == CharacterActive.Mother)
             {
-                Debug.Log("DefeatGuard");
-
+                //Debug.Log("DefeatGuard");
+                m_Brain.brainActive = false;
                 m_NavMeshAgent.speed = 0;
                 GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].DefeatPlayer();
             }
@@ -498,11 +511,18 @@ namespace AI
 
         public void ResetForReload(int wayPoint)
         {
+            Debug.Log("Reset For Reload guard");
             m_Brain.decisionMaker.m_Blackboard = new GuardBlackboard();
             m_Blackboard = m_Brain.decisionMaker.m_Blackboard;
             m_Blackboard.m_Agent = this;
 
             perceptionPercentage = 0;
+
+            m_NavMeshAgent.speed = stats.speed;
+            m_NavMeshAgent.destination = wayPointListTransform[wayPoint].position;
+
+            //Debug.Log("Restart Brain");
+            m_Brain.brainActive = true;
 
             SetBlackboardValue("CurrentNavPoint", wayPoint);
             SetBlackboardValue("RandomPick", randomPick);

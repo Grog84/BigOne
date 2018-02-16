@@ -19,7 +19,7 @@ namespace AI
             m_Mesh = GetComponent<MeshFilter>().sharedMesh;
             m_Guard = GetComponentInParent<Guard>();
             //Debug.Log("Called updateraycast");
-            UpdateRaycastParams();
+            // UpdateRaycastParams();
             
         }
 
@@ -27,6 +27,8 @@ namespace AI
         {
             if (other.tag == "Player" && other.transform.GetComponent<CharacterStateController>().thisCharacter == GMController.instance.isCharacterPlaying)
             {
+                
+                //Debug.Log("Player Enter Cone");
                 m_Guard.SetBlackboardValue("PlayerInCone", true);
             }
         }
@@ -35,6 +37,7 @@ namespace AI
         {
             if (other.tag == "Player" && other.transform.GetComponent<CharacterStateController>().thisCharacter == GMController.instance.isCharacterPlaying)
             {
+                //Debug.Log("Player EXIT Cone");
                 m_Guard.SetBlackboardValue("PlayerInCone", false);
                 //StartCoroutine(m_Guard.OutOfSightHysteresis());
             }
@@ -59,6 +62,8 @@ namespace AI
 
             max_theta_Angle = Mathf.Atan((bounds.x * transform.localScale.x) / raycastLength) * 180f / Mathf.PI;
             max_psi_Angle = Mathf.Atan((bounds.y * transform.localScale.y) / raycastLength) * 180f / Mathf.PI;
+
+            Debug.Log(max_theta_Angle + " - " + max_psi_Angle);
 
         }
 

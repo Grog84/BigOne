@@ -22,7 +22,7 @@ public class LeafParticleSettings : FootstepsParticle
     }
     public override void EmitParticle()
     {
-        Debug.Log(transform.parent.name);
+        //Debug.Log(transform.parent.name);
         //Get Particle Burst Info
         var emission = particle.emission;
         ParticleSystem.Burst[] bursts = new ParticleSystem.Burst[emission.burstCount];

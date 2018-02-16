@@ -94,6 +94,16 @@ public class GMController : MonoBehaviour {
         players = GameObject.FindGameObjectsWithTag("Player");
         m_CharacterInterfaces = new CharacterInterface[players.Length];
         m_QM = GameObject.Find("QuestManager").GetComponent<QuestManager.QuestManager>();
+        
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        allEnemiesTransform = new Transform[allEnemies.Length];
+        allGuards = new Guard[allEnemies.Length];
+        //Debug.Log("numero nemici: " + allEnemies.Length);
+        for (int i = 0; i < allEnemiesTransform.Length; i++)
+        {
+            allEnemiesTransform[i] = allEnemies[i].transform;
+            allGuards[i] = allEnemies[i].GetComponent<Guard>();
+        }
     }
 
     private void Start()
@@ -115,14 +125,7 @@ public class GMController : MonoBehaviour {
             }
         }
 
-        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-        allEnemiesTransform = new Transform[allEnemies.Length];
-        allGuards = new Guard[allEnemies.Length];
-        for (int i = 0; i < allEnemiesTransform.Length; i++)
-        {
-            allEnemiesTransform[i] = allEnemies[i].transform;
-            allGuards[i] = allEnemies[i].GetComponent<Guard>();
-        }
+        
 
         m_MainCamera = FindObjectsOfType<CameraScript>();
         //Debug.Log(m_MainCamera.Length);

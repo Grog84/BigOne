@@ -13,7 +13,7 @@ public class CharacterInterface : MonoBehaviour {
 
     public void DefeatPlayer()
     {
-        Debug.Log("DefeatCharacter");
+        //Debug.Log("DefeatCharacter");
         m_CharController.m_Animator.SetBool("isDead", true); // dovrebbe esser lo stato
         m_CharController.isDefeated = true;
     }
@@ -32,9 +32,11 @@ public class CharacterInterface : MonoBehaviour {
 
     private IEnumerator PlayerDefeatSequence()
     {
+        //Debug.Log("Defeat Sequence");
+
         //yield return null;
         GMController.instance.isCharacterPlaying = CharacterActive.None;
-        while (GMController.instance.deathTimer <=  GMController.instance.fadeOutTime - 1f)
+        while (GMController.instance.deathTimer <=  GMController.instance.fadeOutTime)
         {
             GMController.instance.deathTimer += Time.fixedDeltaTime;
             yield return null;

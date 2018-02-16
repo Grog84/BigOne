@@ -31,12 +31,12 @@ public class ParticleSystemManager : SerializedMonoBehaviour
        // player = GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].transform;
     }
 
-    public void EmitRightParticle(int texture, int state, Vector3 textureNormal)
+    public void EmitRightParticle(int texture, int state, Vector3 textureNormal, Vector3 position)
     {
         if (MyDB[texture, state] != null)
         {
             //Set Position and Rotation
-            MyDB[texture, state].transform.position = GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].transform.position + Vector3.up * 0.2f;
+            MyDB[texture, state].transform.position = position + Vector3.up * 0.2f;
             // MyDB[texture, state].transform.rotation = Quaternion.LookRotation(textureNormal);
             //Emit single burst of particles
             MyDB[texture, state].transform.GetChild(0).GetComponent<FootstepsParticle>().EmitParticle();

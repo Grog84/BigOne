@@ -23,22 +23,28 @@ namespace AI
 
         public DecisionMaker decisionMaker;
 
+        [HideInInspector] public bool brainActive;
+
         void Start()
         {
+            brainActive = true;
             StartCoroutine(BrainCO());
         }
 
-        IEnumerator BrainCO()
+        public IEnumerator BrainCO()
         {
             while (true)
             {
+                //Debug.Log("Thinking? " + brainActive);
                 yield return new WaitForSeconds(tickDelay);
-                TickBrain();
+                if(brainActive)
+                    TickBrain();
             }
         }
 
         void TickBrain()
         {
+            //Debug.Log("Thinking");
             decisionMaker.MakeDecision();
             UpdateTickDelay();
         }

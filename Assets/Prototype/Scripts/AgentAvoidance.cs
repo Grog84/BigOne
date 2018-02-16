@@ -38,8 +38,8 @@ public class AgentAvoidance : MonoBehaviour {
         else if (other.tag == "Player")
         {
             m_Guard.playerInCollisionArea = true;
-            m_Guard.UpdateLastPercievedDestination();
             m_Guard.GetAlarmed();
+            m_Guard.UpdateLastPercievedDestination();
         }
     }
 

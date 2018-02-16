@@ -37,10 +37,10 @@ public class EnemyRadar : MonoBehaviour
     {
         while (true)
         {
-            Debug.Log("Controllo");
+            //Debug.Log("Controllo");
             if (Vector3.Distance(transform.position, target.transform.position) > radarRadius)
             {
-                Debug.Log("Rompo");
+                //Debug.Log("Rompo");
                 if (enemyClose.GetComponent<EnemyClose>().pointers.Count == 1)
                 {
                     GMController.instance.SetBkgMusicState(0);

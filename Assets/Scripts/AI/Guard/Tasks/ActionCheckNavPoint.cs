@@ -9,13 +9,13 @@ namespace AI.BT
 
         public override TaskState Run()
         {
-            //Debug.Log("Check navpoint");
             if (m_BehaviourTree.m_Blackboard.GetBoolValue("WaitingCoroutineRunning"))
             {
                 return TaskState.SUCCESS;
             }
             else
             {
+                //Debug.Log("Check navpoint");
                 m_BehaviourTree.m_Blackboard.SetBoolValue("WaitingCoroutineRunning", true);
                 m_BehaviourTree.m_Blackboard.m_Agent.GetComponent<Guard>().CheckNextPoint();
                 return TaskState.SUCCESS;

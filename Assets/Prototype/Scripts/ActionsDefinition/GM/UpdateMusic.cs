@@ -22,6 +22,8 @@ namespace GM.Actions
                     detectionLevel = Mathf.Max(detectionLevel, GMController.instance.allGuards[i].GetPerceptionValue());
                 }
 
+                if(GMController.instance.GetBkgMusicState() == 101f)
+                    detectionLevel = Mathf.Max(detectionLevel, GMController.instance.GetBkgMusicState());
                 GMController.instance.SetBkgMusicState(detectionLevel);
             }
             else

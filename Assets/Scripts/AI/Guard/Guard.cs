@@ -285,7 +285,7 @@ namespace AI
                 angle_theta = Mathf.Abs(Mathf.Atan(distance.x / distance.z) * 180f / Mathf.PI);
                 //direction = distance.normalized;
                 direction = (lookAtPositionCentral[(int)GMController.instance.isCharacterPlaying].position - eyes.position).normalized;
-                Debug.Log("Current: " + angle_theta + " - " + angle_psi);
+                //Debug.Log("Current: " + angle_theta + " - " + angle_psi);
 
                 if (angle_psi <= m_Cone.max_psi_Angle && angle_theta <= m_Cone.max_theta_Angle && Vector3.Dot(direction, transform.forward) > 0f)
                 {

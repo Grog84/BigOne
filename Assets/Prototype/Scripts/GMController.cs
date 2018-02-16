@@ -213,6 +213,23 @@ public class GMController : MonoBehaviour {
         }
     }
 
+    public float GetBkgMusicState()
+    {
+        FMOD.Studio.ParameterInstance m_instance;
+        FMOD.RESULT res;
+        float param;
+        res = bkgMusic.getParameter("GuardStatus", out m_instance);
+        if (res == FMOD.RESULT.OK)
+        {
+            m_instance.getValue(out param);
+            return param;
+        }
+        else
+        {
+            return 0f;
+        }
+    }
+
     public void SetBkgMusicState(float value)
     {
         SetFMODParameter(bkgMusic, "GuardStatus", value);

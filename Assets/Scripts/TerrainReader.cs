@@ -7,6 +7,7 @@ public class TerrainReader : MonoBehaviour
 {
 
     public LayerMask groundMask;
+    public float raycastLength = 1.5f;
     [ReadOnly]
     public int surfaceIndex;
 
@@ -75,7 +76,7 @@ public class TerrainReader : MonoBehaviour
         alphamapHeight = m_TerrainData.alphamapHeight;
 
         m_TerrainRay = new Ray(transform.position + Vector3.up, Vector3.down);
-        if(Physics.Raycast(m_TerrainRay, out m_TerrainRayHit, 1.5f))
+        if(Physics.Raycast(m_TerrainRay, out m_TerrainRayHit, raycastLength))
         {
             splatmapData = m_TerrainData.GetAlphamaps(0, 0, alphamapWidth, alphamapHeight);
             cellMix = new float[splatmapData.GetUpperBound(2) + 1];
@@ -98,8 +99,10 @@ public class TerrainReader : MonoBehaviour
     void Update()
     {
         m_TerrainRay = new Ray(transform.position + Vector3.up, Vector3.down);
-        Physics.Raycast(m_TerrainRay, out m_TerrainRayHit, 1.5f);
-        Debug.DrawLine(m_TerrainRay.origin, m_TerrainRay.origin + m_TerrainRay.direction * 0.1f, Color.red);
+        Physics.Raycast(m_TerrainRay, out m_TerrainRayHit, raycastLength, groundMask);
+        Debug.DrawLine(m_TerrainRay.origin, m_TerrainRay.origin + m_TerrainRay.direction * raycastLength, Color.red);
+        if (gameObject.name == "Boy")
+            Debug.Log("cerco terreno");
 
         if (m_TerrainRayHit.collider != null && m_TerrainRayHit.collider.tag == "Ground")
         {

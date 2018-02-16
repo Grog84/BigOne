@@ -61,8 +61,8 @@ public class FootstepsEmitter : MonoBehaviour
             if (m_TerrainReader.surfaceIndex >= 1 && m_TerrainReader.surfaceIndex <= 3)
             {
                 // Particle
-                ParticleSystemManager.instance.EmitRightParticle(m_TerrainReader.surfaceIndex, (int)walkState, m_TerrainReader.terrainNormal, transform.position);
                 //Debug.Log("Emit");
+                ParticleSystemManager.instance.EmitRightParticle(m_TerrainReader.surfaceIndex, (int)walkState, m_TerrainReader.terrainNormal, transform.position);
             }
 
             //Debug.Log("SoundStart");

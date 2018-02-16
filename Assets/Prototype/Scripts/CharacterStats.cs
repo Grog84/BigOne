@@ -51,7 +51,9 @@ public class CharacterStats : ScriptableObject { // nope...here stats only shoul
     [Header("Character Collider Parameters")]
     public float crouchedColliderHeightDimension = 0.0f;
     public float crouchedColliderYOffset = 0.0f;
+    public float crouchedColliderRadius = 0.0f;
     public float standingColliderHeightDimension = 0.0f;
     public float standingColliderYOffset = 0.0f;
+    public float standingColliderRadius = 0.0f;
 
 }

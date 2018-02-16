@@ -17,7 +17,7 @@ namespace Character.Actions
 
         void ScaleCapsule(CharacterStateController controller)
         {
-
+            controller.m_CharacterController.m_CharController.radius = controller.characterStats.standingColliderRadius;
             controller.m_CharacterController.m_CharController.height = controller.characterStats.standingColliderHeightDimension;
             controller.m_CharacterController.m_CharController.center = new Vector3(0, controller.characterStats.standingColliderYOffset, 0);
 

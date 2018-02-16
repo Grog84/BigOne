@@ -18,6 +18,7 @@ namespace Character.Actions
         private void StartBalance(CharacterStateController controller)
         {
             controller.m_CharacterController.isInDanger= true;
+            controller.m_CharacterController.Crouch = false;
 
             if (Vector3.Distance(controller.m_CharacterController.CharacterTransform.position, controller.m_CharacterController.balanceCollider.transform.GetChild(0).position)
                < Vector3.Distance(controller.m_CharacterController.CharacterTransform.position, controller.m_CharacterController.balanceCollider.transform.GetChild(1).position))

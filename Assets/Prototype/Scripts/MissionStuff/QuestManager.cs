@@ -369,11 +369,7 @@ namespace QuestManager
                     {
                         if (m.completed)
                         {                           
-                            if (!m.isStriked)
-                            {
-                                Testo.text = StrikeThrough(Testo.text);
-                                m.isStriked = true;
-                            }
+                           
                         }
                     }
                 }

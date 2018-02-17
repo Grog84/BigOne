@@ -6,7 +6,6 @@ using Sirenix.OdinInspector;
 public class ParticleSystemManager : SerializedMonoBehaviour
 {
     public static ParticleSystemManager instance = null;
-    public ParticleDB particleData;
     //Transform player;
 
     [BoxGroup("ParticleDB")]

@@ -351,29 +351,35 @@ namespace QuestManager
 
         private void checkIFnewMissionIsAvailable()
         {
-           
+
             foreach (Quest m in QC.QuestList)
             {
                 if (m.active)
                 {
                     if (!m.Printed)
                     {
-                        Instantiate(QuestMenu.transform.GetChild(QuestMenu.transform.childCount - 1).gameObject,QuestMenu.transform).transform.position += Giu;
-                        m.Printed = true;                      
+                        Instantiate(QuestMenu.transform.GetChild(QuestMenu.transform.childCount - 1).gameObject, QuestMenu.transform).transform.position += Giu;
+                        m.Printed = true;
                         QuestMenu.transform.GetChild(index).gameObject.SetActive(true);
                         index++;
-                        Testo = QuestMenu.transform.GetChild(index - 1).GetComponent<Text>();                 
-                        Testo.text = m.questName;                 
+                        Testo = QuestMenu.transform.GetChild(index - 1).GetComponent<Text>();
+                        Testo.text = m.questName;
                     }
                     if (m.Printed)
                     {
                         if (m.completed)
-                        {                           
-                           
+                        {
+                            for (int i = 1; i < QuestMenu.transform.childCount; i++)
+                            {
+                                if (QuestMenu.transform.GetChild(i).GetComponent<Text>().text == m.questName)
+                                {
+                                    Destroy(QuestMenu.transform.GetChild(i).gameObject);
+                                }
+                            }
                         }
                     }
                 }
-                
+
             }
         }
 

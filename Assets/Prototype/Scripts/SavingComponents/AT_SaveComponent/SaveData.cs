@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
 using Convertitore;
+using QuestManager;
 using UnityEngine;
 
 public class SaveData  {
@@ -43,7 +44,7 @@ public class SaveData  {
     {
         OnBeforeSave();
         SaveActors(path, actors);
-      //  ClearActorList();
+
     }
 
     public static void addActorData(ActorData data)
@@ -63,28 +64,31 @@ public class SaveData  {
         string[] savedData;
         string save = "";
         savedData = json.Split(' ');
-        //for (int i = 0; i < savedData.Length; i++)
-        //{
-        //    save += (char)Convert.ToInt32(C.FromTo(16, 10, savedData[i]));
-        //}
-
+        
         return JsonUtility.FromJson<ActorContainer>(json);  
     }
-    public static void SaveQuestContainer(string path,string Container)
-    {
+    //public static void SaveQuestContainer(string path,string Container)
+    //{
 
-        string save = "";
-        StreamWriter sw = File.CreateText(path);
-        sw.Close();
-        foreach (char a in Container)
-        {
-            save += C.FromTo(10, 16, Convert.ToInt32(a).ToString()) + " ";
-        }
-        Container = save;
+    //    string save = "";
+    //    StreamWriter sw = File.CreateText(path);
+    //    sw.Close();
+    //    File.SetAttributes(path, FileAttributes.Hidden);
+    //    File.WriteAllText(path, Container);
 
-        File.WriteAllText(path, Container);
+    //}
+        
+    //public static QuestContainer LoadQuestContainer(string path)
+    //{
+    //    string json = File.ReadAllText(path);
+    //    string[] savedData;
+    //    string save = "";
+    //    savedData = json.Split(' ');
+        
+    //    return JsonUtility.FromJson<QuestContainer>(json);
 
-    }
+    //}
+
     private static void SaveActors(string path, ActorContainer actors)
     {
         string json = JsonUtility.ToJson(actors);
@@ -93,12 +97,7 @@ public class SaveData  {
         string save = "";
         StreamWriter sw = File.CreateText(path);
         sw.Close();
-        //foreach (char a in json)
-        //{
-        //    save += C.FromTo(10, 16, Convert.ToInt32(a).ToString()) + " ";
-        //}
-        //json = save;
-
+        File.SetAttributes(path, FileAttributes.Hidden);
         File.WriteAllText(path, json);
     }
 

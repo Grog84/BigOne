@@ -264,6 +264,7 @@ namespace QuestManager
                 Debug.Log("All field is valid, adding new mission, check MissionContainer for edit");
                 QC.QuestList.Add(new Quest(this.missionName, this.missionType, this.missionGrade, this.missionDescription, this.missionIndex, this.missionGiver, this.pointA, this.pointB, this.Obj, this.receiver, this.pointA_Timed, this.pointB_Timed, this.del_receiver, this.time, SceneIndexNumber));
                 missionIndex++;
+              
                 SaveQuestGameObjectName();
             }
 
@@ -296,6 +297,7 @@ namespace QuestManager
         {
             questPath = System.IO.Path.Combine(Application.persistentDataPath, "quest.json");
             dataPath = System.IO.Path.Combine(Application.persistentDataPath, "quest.json");
+            
             ActivatePrimaryQuests();
         }
 
@@ -307,8 +309,7 @@ namespace QuestManager
             InitializedQuestObject();
             InizializedQuestReceiver();
             InizializeDeliverQuest();
-            //Timer = GameObject.Find("Timer");
-            //Timer.SetActive(false);
+          
         }
 
 
@@ -607,6 +608,10 @@ namespace QuestManager
                             q.pointATimed_ObjName = q.pointA_Timed.name;
                         if (q.pointB_Timed != null)
                             q.pointBTimed_ObjName = q.pointB_Timed.name;
+                        break;
+                    case QUESTTYPE.CONSEGNA_OGGETTO:
+                        if (q.del_receiver != null)
+                            q.del_receiver = q.questDeliver_ObjName;
                         break;
                 }
 

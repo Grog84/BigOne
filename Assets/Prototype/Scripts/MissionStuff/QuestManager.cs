@@ -13,7 +13,7 @@ namespace QuestManager
     [Serializable]
     public class QuestManager : SerializedMonoBehaviour
     {
-        
+
         public bool CreateMission;
         #region MissionCreator
         [BoxGroup("MissionCreator")]
@@ -178,7 +178,7 @@ namespace QuestManager
                 isDel = false;
                 isABTi = true;
             }
-            if(missionType==QUESTTYPE.CONSEGNA_OGGETTO)
+            if (missionType == QUESTTYPE.CONSEGNA_OGGETTO)
             {
                 isDel = true;
                 isObj = false;
@@ -262,7 +262,7 @@ namespace QuestManager
             {
                 SceneIndexNumber = SceneManager.GetActiveScene().buildIndex;
                 Debug.Log("All field is valid, adding new mission, check MissionContainer for edit");
-                QC.QuestList.Add(new Quest(this.missionName, this.missionType, this.missionGrade, this.missionDescription, this.missionIndex, this.missionGiver, this.pointA, this.pointB, this.Obj, this.receiver, this.pointA_Timed, this.pointB_Timed,this.del_receiver, this.time, SceneIndexNumber));
+                QC.QuestList.Add(new Quest(this.missionName, this.missionType, this.missionGrade, this.missionDescription, this.missionIndex, this.missionGiver, this.pointA, this.pointB, this.Obj, this.receiver, this.pointA_Timed, this.pointB_Timed, this.del_receiver, this.time, SceneIndexNumber));
                 missionIndex++;
                 SaveQuestGameObjectName();
             }
@@ -278,12 +278,12 @@ namespace QuestManager
         [InfoBox("Collegare il Canvas: 'pause_Quest' Dentro Canvas =>Canvas_Pause")]
         [InfoBox("Non Valido", InfoMessageType.Error, "IsCorrect")]
         public GameObject QuestMenu;
-   
+
         [Space]
         [Space]
         [Header("Quest Container")]
-        [InfoBox("Inserire il proprio Contenitore di Quest, Scriptable object da creare",InfoMessageType.None)]
-        [AssetList(Path ="Prototype/ScriptableObjects/LevelQuest/")]
+        [InfoBox("Inserire il proprio Contenitore di Quest, Scriptable object da creare", InfoMessageType.None)]
+        [AssetList(Path = "Prototype/ScriptableObjects/LevelQuest/")]
         public QuestContainer QC;
         string dataPath;
 
@@ -291,7 +291,7 @@ namespace QuestManager
         GameObject Timer;
         public bool ResettoAllaChiusura;
         public Text Testo;
-      //  Use this for initialization
+        //  Use this for initialization
         private void Awake()
         {
             questPath = System.IO.Path.Combine(Application.persistentDataPath, "quest.json");
@@ -321,9 +321,9 @@ namespace QuestManager
 
         private void timerDown()
         {
-           
-          
-            foreach(Quest q in QC.QuestList)
+
+
+            foreach (Quest q in QC.QuestList)
             {
                 if (q.questType == QUESTTYPE.SPOSTAMENTO_AB_TIMED)
                 {
@@ -342,13 +342,15 @@ namespace QuestManager
                                 q.time = q.backUpTime;
                                 GMController.instance.LoadCheckpoint();
                             }
-                            Timer.GetComponent<Text>().text =Mathf.Round(q.time).ToString();
+                            Timer.GetComponent<Text>().text = Mathf.Round(q.time).ToString();
                         }
                     }
                 }
             }
         }
 
+        List<string> textlist = new List<string>();
+        string testino;
         private void checkIFnewMissionIsAvailable()
         {
 
@@ -358,31 +360,72 @@ namespace QuestManager
                 {
                     if (!m.Printed)
                     {
-                        Instantiate(QuestMenu.transform.GetChild(QuestMenu.transform.childCount /*- 1*/).gameObject, QuestMenu.transform).transform.position += Giu;
                         m.Printed = true;
-                        QuestMenu.transform.GetChild(index).gameObject.SetActive(true);
-                        Testo = QuestMenu.transform.GetChild(index).GetComponent<Text>();
-                        index++;
-                        Testo.text = m.questName;
+                        textlist.Add(m.questName + System.Environment.NewLine);
+                        //Instantiate(QuestMenu.transform.GetChild(QuestMenu.transform.childCount - 1).gameObject, QuestMenu.transform).transform.position += Giu;
+                        //QuestMenu.transform.GetChild(index).gameObject.SetActive(true);
+
+
+                        for (int i = 0; i < textlist.Count; i++)
+                        {
+                            testino += textlist[i];
+                        }
+                        QuestMenu.transform.GetChild(QuestMenu.transform.childCount - 1).GetComponent<Text>().text = testino;
+                        //Testo.text = m.questName;
+                        //index++;
                     }
                     if (m.Printed)
                     {
-                        if (m.completed)
+
+                        //if completed || turned in
+                        if (m.turnInStatus)
                         {
-                            for (int i = 1; i < QuestMenu.transform.childCount; i++)
+                                                      
+                            //cancellare quest completata dalla lista
+                            for (int i = 0; i < textlist.Count; i++)
                             {
-                                if (QuestMenu.transform.GetChild(i).GetComponent<Text>().text == m.questName)
+                                if (textlist[i] == m.questName + System.Environment.NewLine)
                                 {
-                                    Destroy(QuestMenu.transform.GetChild(i).gameObject);
+                                    textlist.RemoveAt(i);
                                 }
                             }
+
                         }
+                       
+                            testino = String.Empty;
+                            //rifare controllo
+                            for (int i = 0; i < textlist.Count; i++)
+                            {
+                                testino += textlist[i];
+                            }
+                        //riaggionrnare la grafica
+                            QuestMenu.transform.GetChild(QuestMenu.transform.childCount - 1).GetComponent<Text>().text = testino;
+                        
+                        
                     }
+
                 }
 
             }
         }
+        //void print()
+        //{
 
+        //    foreach (Quest m in QC.QuestList)
+        //    {
+        //        if (m.active)
+        //        {
+        //            if (m.Printed)
+        //            {
+        //                if (!m.completed)
+        //                {
+        //                    testino += m.questName + System.Environment.NewLine;
+        //                    QuestMenu.transform.GetChild(QuestMenu.transform.childCount - 1).GetComponent<Text>().text = testino;
+        //                }
+        //            }
+        //         }
+        //    }
+        //}
         public string StrikeThrough(string s)
         {
             string strikethrough = "";
@@ -406,13 +449,13 @@ namespace QuestManager
 
         private void AssignQuestToQuestGivers()
         {
-          
-            foreach (Quest m in  QC.QuestList)
-            {               
+
+            foreach (Quest m in QC.QuestList)
+            {
                 QuestGiver QG;
                 QG = m.questGiver.gameObject.GetComponent<QuestGiver>();
                 if (QG == null)
-                { QG = m.questGiver.gameObject.AddComponent<QuestGiver>();   }
+                { QG = m.questGiver.gameObject.AddComponent<QuestGiver>(); }
 
                 QG.myMission = m;
                 QG.missionIndex = m.questIndex;
@@ -422,15 +465,15 @@ namespace QuestManager
                 QNPC.m_QuestGiver = m.questGiver.gameObject.GetComponent<QuestGiver>();
                 QNPC.m_QuestGiver.myMission = m;
                 if (QNPC != null)
-                {     
+                {
                     QNPC.UpdateBlackBoard();
                 }
             }
         }
-            
+
         public void InitializedQuestObject()
         {
-            foreach (Quest m in  QC.QuestList)
+            foreach (Quest m in QC.QuestList)
             {
                 if (m.questType == QUESTTYPE.RICERCA_CONSEGNA_OGGETTO)
                 {
@@ -459,12 +502,12 @@ namespace QuestManager
                         m.del_receiver.AddComponent<QuestReceiver>();
                     }
                     m.del_receiver.GetComponent<QuestReceiver>().myMission = m;
-                  
+
                     QuestNpc QNPC;
                     QNPC = m.del_receiver.gameObject.GetComponent<QuestNpc>();
                     QNPC.m_QuestReceiver = m.del_receiver.gameObject.GetComponent<QuestReceiver>();
                     QNPC.m_QuestReceiver.myMission = m;
-                    
+
                     if (QNPC != null)
                     {
                         QNPC.UpdateBlackBoard();
@@ -476,7 +519,7 @@ namespace QuestManager
 
         public void InizializedQuestReceiver()
         {
-            foreach (Quest m in  QC.QuestList)
+            foreach (Quest m in QC.QuestList)
             {
                 if (m.questType == QUESTTYPE.RICERCA_CONSEGNA_OGGETTO)
                 {
@@ -501,17 +544,17 @@ namespace QuestManager
 
         public void InizializeQuestPoint()
         {
-            foreach(Quest m in QC.QuestList)
+            foreach (Quest m in QC.QuestList)
             {
-                if(m.questType== QUESTTYPE.SPOSTAMENTO_AB)
+                if (m.questType == QUESTTYPE.SPOSTAMENTO_AB)
                 {
                     if (m.pointA.GetComponent<QuestPoint>() == null)
                     {
                         m.pointA.AddComponent<QuestPoint>();
                     }
-                    m.pointA.GetComponent<QuestPoint>().m_Quest=m;
+                    m.pointA.GetComponent<QuestPoint>().m_Quest = m;
                     m.pointA.GetComponent<QuestPoint>().m_Point = POINT.POINT_A;
-                   
+
                     if (m.pointB.GetComponent<QuestPoint>() == null)
                     {
                         m.pointB.AddComponent<QuestPoint>();
@@ -542,13 +585,13 @@ namespace QuestManager
 
         public void SaveQuestGameObjectName()
         {
-            foreach(Quest q in QC.QuestList)
+            foreach (Quest q in QC.QuestList)
             {
                 q.questGiver_ObjName = q.questGiver.name;
-                switch(q.questType)
+                switch (q.questType)
                 {
                     case QUESTTYPE.RICERCA_CONSEGNA_OGGETTO:
-                        if(q.Obj != null)
+                        if (q.Obj != null)
                             q.Obj_ObjName = q.Obj.name;
                         if (q.receiver != null)
                             q.receiver_ObjName = q.receiver.name;
@@ -569,7 +612,7 @@ namespace QuestManager
 
             }
         }
-       
+
         public void LoadQuestGameObjectName()
         {
             foreach (Quest q in QC.QuestList)
@@ -582,11 +625,11 @@ namespace QuestManager
                         q.receiver = GameObject.Find(q.receiver_ObjName);
                         break;
                     case QUESTTYPE.SPOSTAMENTO_AB:
-                     q.pointA = GameObject.Find(q.pointA_ObjName);
+                        q.pointA = GameObject.Find(q.pointA_ObjName);
                         q.pointB = GameObject.Find(q.pointB_ObjName);
                         break;
                     case QUESTTYPE.SPOSTAMENTO_AB_TIMED:
-                      q.pointA_Timed = GameObject.Find(q.pointATimed_ObjName);
+                        q.pointA_Timed = GameObject.Find(q.pointATimed_ObjName);
                         q.pointB_Timed = GameObject.Find(q.pointBTimed_ObjName);
                         break;
                 }

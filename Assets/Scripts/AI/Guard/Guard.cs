@@ -569,6 +569,7 @@ namespace AI
         {
             LoadStats(normalStats);
             m_NavMeshAgent.destination = wayPointListTransform[0].position;
+            m_NavMeshAgent.speed = stats.speed;
             SetBlackboardValue("RandomPick", randomPick);
             SetBlackboardValue("NumberOfNavPoints", wayPointList.Count);
 

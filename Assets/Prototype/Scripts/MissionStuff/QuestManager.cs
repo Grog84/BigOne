@@ -338,7 +338,7 @@ namespace QuestManager
                             }
                             if (q.time < 0)
                             {
-                                Debug.Log("Snake, rispondimi Snake, SNAKE, SNAKEEEEEEEEEEEEEEE!!!");
+                                //Debug.Log("Snake, rispondimi Snake, SNAKE, SNAKEEEEEEEEEEEEEEE!!!");
                                 q.time = q.backUpTime;
                                 GMController.instance.LoadCheckpoint();
                             }
@@ -358,11 +358,11 @@ namespace QuestManager
                 {
                     if (!m.Printed)
                     {
-                        Instantiate(QuestMenu.transform.GetChild(QuestMenu.transform.childCount - 1).gameObject, QuestMenu.transform).transform.position += Giu;
+                        Instantiate(QuestMenu.transform.GetChild(QuestMenu.transform.childCount /*- 1*/).gameObject, QuestMenu.transform).transform.position += Giu;
                         m.Printed = true;
                         QuestMenu.transform.GetChild(index).gameObject.SetActive(true);
+                        Testo = QuestMenu.transform.GetChild(index).GetComponent<Text>();
                         index++;
-                        Testo = QuestMenu.transform.GetChild(index - 1).GetComponent<Text>();
                         Testo.text = m.questName;
                     }
                     if (m.Printed)

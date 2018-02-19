@@ -8,6 +8,7 @@ namespace AI.BT
     {
         public override TaskState Run()
         {
+			Debug.Log ("Switch navpoint");
             if (m_BehaviourTree.m_Blackboard.GetBoolValue("RandomPick"))
             {
                 int nextPoint = m_BehaviourTree.m_Blackboard.GetIntValue("CurrentNavPoint");

@@ -28,7 +28,7 @@ public class CharacterInterface : MonoBehaviour {
 
     public void ResetAnimator()
     {
-        Debug.Log("RESET");
+        //Debug.Log("RESET");
        // m_CharController.m_Animator.SetBool("isDead", false);
         foreach (AnimatorControllerParameter parameter in m_CharController.m_Animator.parameters)
         {

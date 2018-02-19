@@ -270,6 +270,7 @@ public class GMController : MonoBehaviour {
 
     public void SetBkgMusicState(float value)
     {
+        Debug.Log("Set bkg music to " + value);
         if (m_BkgMusicPath != "")
             SetFMODParameter(bkgMusic, "GuardStatus", value);
     }
@@ -307,6 +308,9 @@ public class GMController : MonoBehaviour {
         {
             gd.gameObject.SetActive(false);
         }
+
+        allGuards = new Guard[0];
+
     }
 
 }

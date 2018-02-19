@@ -454,7 +454,7 @@ namespace AI
         // Updates the pointed nav point from the blackboard value
         public override void UpdateNavPoint()
         {
-            Debug.Log("Update navpoint");
+            //Debug.Log("Update navpoint");
             checkingWayPoint = m_Blackboard.GetIntValue("CurrentNavPoint");
             nextWayPoint = (m_Blackboard.GetIntValue("CurrentNavPoint") + 1) % wayPointListTransform.Length;
             SetBlackboardValue("NavigationPosition", wayPointListTransform[checkingWayPoint].position);

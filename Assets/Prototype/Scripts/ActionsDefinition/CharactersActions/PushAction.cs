@@ -115,7 +115,7 @@ namespace Character.Actions
                 backward = 0;
                 forward = 0;
             }
-
+            Debug.Log("Ca make sound: " + canMakeSound);
             // SOUND
             if(forward > 0 && canMakeSound)
             {
@@ -136,7 +136,7 @@ namespace Character.Actions
                 canMakeSound = true;
             }
             //
-            Debug.Log("forward " + forward + " Backward " + backward + "canMakeSound " + canMakeSound);
+            //Debug.Log("forward " + forward + " Backward " + backward + "canMakeSound " + canMakeSound);
 
             if (controller.m_CharacterController.isPushLimit)
             {

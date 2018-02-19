@@ -15,16 +15,19 @@ namespace GM.Actions
         {
             if (GMController.instance.curiousGuards > 0 || GMController.instance.alarmedGuards > 0)
             {
-                float detectionLevel = 0;
-
-                for (int i = 0; i < GMController.instance.allGuards.Length; i++)
+                if (GMController.instance.allGuards.Length > 0)
                 {
-                    detectionLevel = Mathf.Max(detectionLevel, GMController.instance.allGuards[i].GetPerceptionValue());
-                }
+                    float detectionLevel = 0;
 
-                if(GMController.instance.GetBkgMusicState() == 101f)
-                    detectionLevel = Mathf.Max(detectionLevel, GMController.instance.GetBkgMusicState());
-                GMController.instance.SetBkgMusicState(detectionLevel);
+                    for (int i = 0; i < GMController.instance.allGuards.Length; i++)
+                    {
+                        detectionLevel = Mathf.Max(detectionLevel, GMController.instance.allGuards[i].GetPerceptionValue());
+                    }
+
+                    if(GMController.instance.GetBkgMusicState() == 101f)
+                        detectionLevel = Mathf.Max(detectionLevel, GMController.instance.GetBkgMusicState());
+                    GMController.instance.SetBkgMusicState(detectionLevel);
+                }
             }
             else
             {

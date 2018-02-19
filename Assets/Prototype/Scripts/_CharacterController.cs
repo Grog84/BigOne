@@ -86,7 +86,7 @@ namespace Character
         [HideInInspector] public CharacterController m_CharController; // A reference to the Character controller component
         [HideInInspector] public LookAtIK playerSight;
         [HideInInspector] public GrounderFBBIK playerGrounderIK;
-        [HideInInspector] public PlayFMODLoop playLoop;
+        public PlayFMODLoop playLoop;
 
         // COLLIDERS REFERENCES  
         [HideInInspector] public GameObject npcSightCollider;

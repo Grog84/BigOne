@@ -28,7 +28,7 @@ public class CutsceneManager : MonoBehaviour
             {
                 if(playableDirector.playableGraph.IsPlaying())
                 {
-                    Debug.Log("INIZIATO");
+                    //Debug.Log("INIZIATO");
                     GMController.instance.SetActive(false);
                 }
 
@@ -36,7 +36,7 @@ public class CutsceneManager : MonoBehaviour
 
                 if(playableDirector.state != PlayState.Playing)
                 {
-                    Debug.Log("FINITO");
+                    //Debug.Log("FINITO");
                     GMController.instance.SetActive(true);
                 }
             }

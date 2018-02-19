@@ -92,8 +92,6 @@ public class SaveData  {
     private static void SaveActors(string path, ActorContainer actors)
     {
         string json = JsonUtility.ToJson(actors);
-     
-    
         string save = "";
         StreamWriter sw = File.CreateText(path);
         sw.Close();

@@ -600,8 +600,8 @@ namespace QuestManager
                     case QUESTTYPE.SPOSTAMENTO_AB:
                         if (q.pointA != null)
                             q.pointA_ObjName = q.pointA.name;
-                        if (q.pointA != null)
-                            q.pointA_ObjName = q.pointA.name;
+                        if (q.pointB != null)
+                            q.pointB_ObjName = q.pointB.name;
                         break;
                     case QUESTTYPE.SPOSTAMENTO_AB_TIMED:
                         if (q.pointA_Timed != null)
@@ -611,7 +611,7 @@ namespace QuestManager
                         break;
                     case QUESTTYPE.CONSEGNA_OGGETTO:
                         if (q.del_receiver != null)
-                            q.del_receiver = q.questDeliver_ObjName;
+                            q.questDeliver_ObjName = q.del_receiver.name;
                         break;
                 }
 
@@ -636,6 +636,9 @@ namespace QuestManager
                     case QUESTTYPE.SPOSTAMENTO_AB_TIMED:
                         q.pointA_Timed = GameObject.Find(q.pointATimed_ObjName);
                         q.pointB_Timed = GameObject.Find(q.pointBTimed_ObjName);
+                        break;
+                    case QUESTTYPE.CONSEGNA_OGGETTO:
+                        q.del_receiver = GameObject.Find(q.questDeliver_ObjName);
                         break;
                 }
             }

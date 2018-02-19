@@ -15,6 +15,8 @@ public class MenuUIManager : MonoBehaviour
     bool isMouseActive;
 
     GameObject[] UiButton;
+    public Button continueButton;
+
     private void Awake()
     {
         UiButton = GameObject.FindGameObjectsWithTag("CanvasUI");
@@ -26,6 +28,7 @@ public class MenuUIManager : MonoBehaviour
         Time.timeScale = 1;
         SM = FindObjectOfType<SaveManager>();
         ReturnToMainMenu();
+
         ContinueButtonOnOff();
     }
 
@@ -192,6 +195,7 @@ public class MenuUIManager : MonoBehaviour
         SM.PlayerProfile.Continue = true;
         SM.LoadLastScene();
     }
+
     int ExitOrNewGame;
     public void StartNewGame()
     {
@@ -240,6 +244,7 @@ public class MenuUIManager : MonoBehaviour
     {
         if (File.Exists(SaveManager.dataPath))
         {
+            continueButton.interactable = true;
             foreach (GameObject a in UiButton)
             {
                 if (a.name == "EmptyMainMenu")
@@ -250,6 +255,7 @@ public class MenuUIManager : MonoBehaviour
         }
         else
         {
+            continueButton.interactable = false;
             foreach (GameObject a in UiButton)
             {
                 if (a.name == "EmptyMainMenu")

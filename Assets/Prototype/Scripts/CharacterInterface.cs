@@ -23,11 +23,17 @@ public class CharacterInterface : MonoBehaviour {
         //Debug.Log("CIAO");
         m_CharController.m_Animator.SetFloat("Forward", 0f);
         m_CharStateController.TransitionToState(m_CharStateController.gameStartState);
+        ResetAnimator();
     }
 
     public void ResetAnimator()
     {
-        m_CharController.m_Animator.SetBool("isDead", false);
+        Debug.Log("RESET");
+       // m_CharController.m_Animator.SetBool("isDead", false);
+        foreach (AnimatorControllerParameter parameter in m_CharController.m_Animator.parameters)
+        {
+            m_CharController.m_Animator.SetBool(parameter.name, false);
+        }
     }
 
     private IEnumerator PlayerDefeatSequence()

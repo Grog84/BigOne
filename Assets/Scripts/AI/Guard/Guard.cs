@@ -8,7 +8,7 @@ using Sirenix.OdinInspector;
 
 namespace AI
 {
-    enum GuardState { NORMAL, CURIOUS, ALARMED, DISTRACTED};
+    public enum GuardState { NORMAL, CURIOUS, ALARMED, DISTRACTED};
 
     public class Guard : AIAgent
     {
@@ -33,7 +33,7 @@ namespace AI
         [HideInInspector] public CharacterInterface[] characterInterfaces;
 
         // State
-        GuardState m_State = GuardState.NORMAL;
+        protected GuardState m_State = GuardState.NORMAL;
         GuardStats stats;
 
         //Patrols
@@ -57,7 +57,7 @@ namespace AI
         public bool hasRadio = false;
         [HideInInspector] public bool playerInCollisionArea = false;
 
-        float perceptionPercentage = 0f;
+        protected float perceptionPercentage = 0f;
         [HideInInspector] public bool isOtherAlarmed = false;
 
         public LayerMask visionLayerMask;
@@ -105,7 +105,7 @@ namespace AI
             statusColor = Color.green;
         }
 
-        public void GetCurious()
+        public virtual void GetCurious()
         {
             GMController.instance.curiousGuards++;
             m_State = GuardState.CURIOUS;
@@ -116,7 +116,7 @@ namespace AI
             statusColor = Color.yellow;
         }
 
-        public void GetAlarmed()
+        public virtual void GetAlarmed()
         {
             perceptionPercentage = 100;
             if (m_State == GuardState.CURIOUS)
@@ -210,7 +210,7 @@ namespace AI
 
         }
 
-        private void LoadStats(GuardStats thisStats)
+        protected void LoadStats(GuardStats thisStats)
         {
             stats = thisStats;
             m_NavMeshAgent.speed = stats.speed;

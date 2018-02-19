@@ -140,8 +140,8 @@ namespace AI
         public void CheckPlayerClimbing()
         {
             // TODO    mettere il riferimento all'altezza eccessiva anziche questo bool messo a caso come segnaposto
-            bool isPlayerClimbing = GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].m_CharController.isInDanger;
-            m_Blackboard.SetBoolValue("PlayerIsClimbing", isPlayerClimbing);
+            //bool isPlayerClimbing = GMController.instance.m_CharacterInterfaces[(int)GMController.instance.isCharacterPlaying].m_CharController.isInDanger;
+            //m_Blackboard.SetBoolValue("PlayerIsClimbing", isPlayerClimbing);
         }
 
         public void DefeatPlayer()

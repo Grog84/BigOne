@@ -268,6 +268,8 @@ public class BTDMStringConverter
                 return new ConditionPedestrianPlayerInRange();
             case TaskType.PEDESTRIAN_IS_PLAYER_VISIBLE:
                 return new ConditionPedestrianPlayerVisible();
+            case TaskType.GUARD_SHOOT_PLAYER:
+                return new ActionShootPlayer();
             default:
                 return null;
         }

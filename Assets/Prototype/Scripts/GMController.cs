@@ -38,6 +38,7 @@ public class GMController : MonoBehaviour {
     // Transform of all the agents who could hear or see the player
     [HideInInspector] public Transform[] allEnemiesTransform;
     [HideInInspector] public Guard[] allGuards;
+    [HideInInspector] public TurretGuard[] allTurretGuards;
 
     // Variables used in order to trigger transitions when the game is not active
     [ReadOnly] public bool isGameActive = false;
@@ -96,13 +97,36 @@ public class GMController : MonoBehaviour {
         m_QM = GameObject.Find("QuestManager").GetComponent<QuestManager.QuestManager>();
         
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+        List<GameObject> allGuardsGO = new List<GameObject>();
+        List<GameObject> allTurretGuardsGO = new List<GameObject>();
         allEnemiesTransform = new Transform[allEnemies.Length];
-        allGuards = new Guard[allEnemies.Length];
-        //Debug.Log("numero nemici: " + allEnemies.Length);
-        for (int i = 0; i < allEnemiesTransform.Length; i++)
+
+        for (int i = 0; i < allEnemies.Length; i++)
         {
+            if (GetComponent<TurretGuard>())
+            {
+                allTurretGuardsGO.Add(allEnemies[i]);
+            }
+            else
+            {
+                allGuardsGO.Add(allEnemies[i]);
+            }
+
             allEnemiesTransform[i] = allEnemies[i].transform;
-            allGuards[i] = allEnemies[i].GetComponent<Guard>();
+        }
+
+
+        allGuards = new Guard[allEnemies.Length];
+
+        //Debug.Log("numero nemici: " + allEnemies.Length);
+        for (int i = 0; i < allGuardsGO.Count; i++)
+        {
+            allGuards[i] = allGuardsGO[i].GetComponent<Guard>();
+        }
+
+        for (int i = 0; i < allTurretGuardsGO.Count; i++)
+        {
+            allGuards[i] = allTurretGuardsGO[i].GetComponent<TurretGuard>();
         }
     }
 
@@ -214,6 +238,10 @@ public class GMController : MonoBehaviour {
         {
             guard.SetBlackboardValue("PlayerInSight", false);
         }
+        foreach (var guard in allTurretGuards)
+        {
+            guard.SetBlackboardValue("PlayerInSight", false);
+        }
     }
 
     public float GetBkgMusicState()
@@ -263,11 +291,19 @@ public class GMController : MonoBehaviour {
         {
             gd.gameObject.SetActive(true);
         }
+        foreach (var gd in allTurretGuards)
+        {
+            gd.gameObject.SetActive(true);
+        }
     }
 
     public void DeactivateAllGuards()
     {
         foreach (var gd in allGuards)
+        {
+            gd.gameObject.SetActive(false);
+        }
+        foreach (var gd in allTurretGuards)
         {
             gd.gameObject.SetActive(false);
         }

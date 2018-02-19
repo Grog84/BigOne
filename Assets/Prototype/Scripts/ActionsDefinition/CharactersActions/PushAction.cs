@@ -16,6 +16,7 @@ namespace Character.Actions
         float offsetRaycast;
         int dir;
         int count;
+        bool canMakeSound = true;
         
 
 
@@ -115,7 +116,28 @@ namespace Character.Actions
                 forward = 0;
             }
 
-       
+            // SOUND
+            if(forward > 0 && canMakeSound)
+            {
+                canMakeSound = false;
+                controller.m_CharacterController.playLoop.StartSound("Push");
+                controller.m_CharacterController.playLoop.StopSound("Pull");
+            }
+            else if(backward < 0 && canMakeSound)
+            {
+                canMakeSound = false;
+                controller.m_CharacterController.playLoop.StartSound("Pull");
+                controller.m_CharacterController.playLoop.StopSound("Push");
+            }
+            else if (Input.GetAxis("Vertical") == 0)
+            {
+                controller.m_CharacterController.playLoop.StopSound("Pull");
+                controller.m_CharacterController.playLoop.StopSound("Push");
+                canMakeSound = true;
+            }
+            //
+            Debug.Log("forward " + forward + " Backward " + backward + "canMakeSound " + canMakeSound);
+
             if (controller.m_CharacterController.isPushLimit)
             {
                 if (dir < 0)

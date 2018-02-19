@@ -86,6 +86,7 @@ namespace Character
         [HideInInspector] public CharacterController m_CharController; // A reference to the Character controller component
         [HideInInspector] public LookAtIK playerSight;
         [HideInInspector] public GrounderFBBIK playerGrounderIK;
+        [HideInInspector] public PlayFMODLoop playLoop;
 
         // COLLIDERS REFERENCES  
         [HideInInspector] public GameObject npcSightCollider;
@@ -123,7 +124,7 @@ namespace Character
         [HideInInspector] public bool isDontLookAtDone = true;
         [HideInInspector] public GameObject cameraPoint;
         [HideInInspector] public bool isDefaultLookAt = false;
-
+      
         public Transform playerGaze;
         public GameObject LookAtItems;
         public Transform playerHead;
@@ -141,6 +142,7 @@ namespace Character
 
         private void Awake()
         {
+            playLoop = GetComponent<PlayFMODLoop>();
             playerGrounderIK = GetComponent<GrounderFBBIK>();
             CharacterTransform = GetComponent<Transform>();          // A reference to the character assigned to the state controller transform
             m_Animator = GetComponent<Animator>();

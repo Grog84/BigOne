@@ -257,6 +257,22 @@ public class GMController : MonoBehaviour {
         parameter.setValue(value);
     }
 
+    public void ActivateAllGuards()
+    {
+        foreach (var gd in allGuards)
+        {
+            gd.gameObject.SetActive(true);
+        }
+    }
+
+    public void DeactivateAllGuards()
+    {
+        foreach (var gd in allGuards)
+        {
+            gd.gameObject.SetActive(false);
+        }
+    }
+
 }
 
 

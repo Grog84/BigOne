@@ -97,7 +97,7 @@ public class SaveData  {
         string save = "";
         StreamWriter sw = File.CreateText(path);
         sw.Close();
-        File.SetAttributes(path, FileAttributes.Hidden);
+       // File.SetAttributes(path, FileAttributes.Hidden);
         File.WriteAllText(path, json);
     }
 

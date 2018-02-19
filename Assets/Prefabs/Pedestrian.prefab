@@ -2302,9 +2302,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EventPath: event:/SFX/Steps
-  m_Database: {fileID: 0}
   playStep: 0
+  footstepsDB: {fileID: 11400000, guid: a5fc6be96c8e12f43a0cbda0778463cd, type: 2}
   m_TerrainReader: {fileID: 0}
+  FMODWalkParam: status
+  FMODSurfaceParam: surface
 --- !u!114 &114590421190152578
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2338,6 +2340,7 @@ MonoBehaviour:
   midRangeTickDelay: 1
   longRangeTickDelay: 5
   decisionMaker: {fileID: 11400000, guid: 141a5983a9235a04d82384c89096ca64, type: 2}
+  brainActive: 0
 --- !u!136 &136675992213430866
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -2552,7 +2555,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
+  m_Speed: 0.3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120

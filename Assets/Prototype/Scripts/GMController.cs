@@ -134,9 +134,12 @@ public class GMController : MonoBehaviour {
         m_SaveManager = FindObjectOfType<SaveManager>();
         SaveCheckpoint();
 
-        bkgMusic = FMODUnity.RuntimeManager.CreateInstance(m_BkgMusicPath);
-        SetFMODParameter(bkgMusic, "GuardStatus", 0f);
-        bkgMusic.start();
+        if (m_BkgMusicPath != "")
+        {
+            bkgMusic = FMODUnity.RuntimeManager.CreateInstance(m_BkgMusicPath);
+            SetFMODParameter(bkgMusic, "GuardStatus", 0f);
+            bkgMusic.start();
+        }
 
         ambientMusic = FMODUnity.RuntimeManager.CreateInstance(m_AmbientMusicPath);
         ambientMusic.start();
@@ -215,14 +218,21 @@ public class GMController : MonoBehaviour {
 
     public float GetBkgMusicState()
     {
-        FMOD.Studio.ParameterInstance m_instance;
-        FMOD.RESULT res;
-        float param;
-        res = bkgMusic.getParameter("GuardStatus", out m_instance);
-        if (res == FMOD.RESULT.OK)
+        if (m_BkgMusicPath != "")
         {
-            m_instance.getValue(out param);
-            return param;
+            FMOD.Studio.ParameterInstance m_instance;
+            FMOD.RESULT res;
+            float param;
+            res = bkgMusic.getParameter("GuardStatus", out m_instance);
+            if (res == FMOD.RESULT.OK)
+            {
+                m_instance.getValue(out param);
+                return param;
+            }
+            else
+            {
+                return 0f;
+            }
         }
         else
         {
@@ -232,7 +242,8 @@ public class GMController : MonoBehaviour {
 
     public void SetBkgMusicState(float value)
     {
-        SetFMODParameter(bkgMusic, "GuardStatus", value);
+        if (m_BkgMusicPath != "")
+            SetFMODParameter(bkgMusic, "GuardStatus", value);
     }
 
     void SetFMODParameter(FMOD.Studio.EventInstance e, string name, float value)

@@ -115,16 +115,18 @@ namespace Character.Actions
                 backward = 0;
                 forward = 0;
             }
-            Debug.Log("Ca make sound: " + canMakeSound);
+            
             // SOUND
             if(forward > 0 && canMakeSound)
             {
+                Debug.Log("Ca make sound: " + canMakeSound);
                 canMakeSound = false;
                 controller.m_CharacterController.playLoop.StartSound("Push");
                 controller.m_CharacterController.playLoop.StopSound("Pull");
             }
             else if(backward < 0 && canMakeSound)
             {
+                Debug.Log("Ca make sound: " + canMakeSound);
                 canMakeSound = false;
                 controller.m_CharacterController.playLoop.StartSound("Pull");
                 controller.m_CharacterController.playLoop.StopSound("Push");

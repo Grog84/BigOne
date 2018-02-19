@@ -101,8 +101,8 @@ public class TerrainReader : MonoBehaviour
         m_TerrainRay = new Ray(transform.position + Vector3.up, Vector3.down);
         Physics.Raycast(m_TerrainRay, out m_TerrainRayHit, raycastLength, groundMask);
         Debug.DrawLine(m_TerrainRay.origin, m_TerrainRay.origin + m_TerrainRay.direction * raycastLength, Color.red);
-        if (gameObject.name == "Boy")
-            Debug.Log("cerco terreno");
+        //if (gameObject.name == "Boy")
+            //Debug.Log("cerco terreno");
 
         if (m_TerrainRayHit.collider != null && m_TerrainRayHit.collider.tag == "Ground")
         {

@@ -339,13 +339,32 @@ namespace AI
 
         public void CheckNextPoint()
         {
+            Debug.Log("Check Navpoint");
             StartCoroutine(CheckNextPointCO());
+        }
+
+        public float GetNavPointSecWaiting()
+        {
+            return wayPointList[checkingWayPoint].secondsStaying;
         }
 
         public IEnumerator CheckNextPointCO()
         {
-            checkNavPointTime = wayPointList[checkingWayPoint].secondsStaying;
+            checkNavPointTime = GetNavPointSecWaiting();
+            Debug.Log("Nav point time :" + checkNavPointTime);
+            yield return null;
             //m_NavMeshAgent.speed = 0;
+
+            if (checkNavPointTime == 0f)
+            {
+                Debug.Log("Solo passaggio");
+                SetBlackboardValue("CheckingNavPoint", false);
+                SetBlackboardValue("WaitingCoroutineRunning", false);
+                yield return null;
+                yield break;
+
+            }
+                
 
             //Debug.Log("Started waiting coroutine: " + checkNavPointTime);
             while (navPointTimer <= checkNavPointTime)
@@ -394,7 +413,6 @@ namespace AI
 
                 }
 
-                //Debug.Log("navpoint timer " + navPointTimer);
                 //m_NavMeshAgent.speed = stats.speed;
                 yield return null;
             }

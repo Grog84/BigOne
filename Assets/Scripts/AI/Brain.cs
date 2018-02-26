@@ -44,7 +44,7 @@ namespace AI
 
         void TickBrain()
         {
-            //Debug.Log("Thinking");
+            Debug.Log("Thinking");
             decisionMaker.MakeDecision();
             UpdateTickDelay();
         }

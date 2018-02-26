@@ -21,7 +21,8 @@ public class SwitchSceneMixerBehaviour : PlayableBehaviour
 
             if(inputWeight > 0.5f && !input.SceneSwitched)
             {
-                SceneManager.LoadScene(input.nextScene);
+                //SceneManager.LoadScene(input.nextScene);
+                LoadManager.instance.ChangeToLoadScene(SceneManager.GetActiveScene().buildIndex/*, input.fade, input.fadeTime*/ );
                 input.SceneSwitched = true;
             }
 

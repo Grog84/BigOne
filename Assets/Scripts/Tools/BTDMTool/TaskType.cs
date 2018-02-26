@@ -40,6 +40,7 @@
         GUARD_SHOOT_PLAYER,
         GUARD_IS_DISTRACTED,
         GUARD_STAY,
+        GUARD_IS_NAVPOINTTIMERZERO,
         SELECTOR,
         SEQUENCER
     }

@@ -48,19 +48,8 @@ namespace QuestManager
         [ReadOnly]
         public int SceneIndexNumber;
 
-        [BoxGroup("ObjectiveCreator")]
-        [ShowIf("CreateObjective")]
-        public int objectiveIndex;
+         private bool isStriked = false;
 
-        private bool isStriked = false;
-
-        [BoxGroup("ObjectiveCreator")]
-        [ShowIf("CreateObjective")]
-        [Button("Reset Index Missioni", ButtonSizes.Medium)]
-        public void resetIndex()
-        {
-            objectiveIndex = 0;
-        }     
 
         QuestManager QM;
         [BoxGroup("ObjectiveCreator")]
@@ -69,7 +58,7 @@ namespace QuestManager
         [Button("Aggiungi Quest", ButtonSizes.Gigantic)]
         public void CreateQuest()
         {
-            QC.QuestList.Add(new Quest(objectiveName, objectiveGiver, objectiveFinish, index));
+            QC.QuestList.Add(new Quest(objectiveName, objectiveGiver, objectiveFinish));
         }
         #endregion
 
@@ -84,7 +73,7 @@ namespace QuestManager
         public QuestContainer QC;
         string dataPath;
 
-        static int index = 1;
+     
         GameObject Timer;
         public bool ResettoAllaChiusura;
         public Text Testo;
@@ -97,8 +86,7 @@ namespace QuestManager
             dataPath = System.IO.Path.Combine(Application.persistentDataPath, "quest.json");            
             
         }
-
-      
+             
        
         public string StrikeThrough(string s)
         {
@@ -141,8 +129,7 @@ namespace QuestManager
                 }
 
                 QG.myMission = m;
-                QG.missionIndex = m.index;
-
+       
                 QuestNpc QNPC;
                 QNPC = m.questGiver.gameObject.GetComponent<QuestNpc>();
                 QNPC.m_QuestGiver = m.questGiver.gameObject.GetComponent<QuestGiver>();
@@ -177,12 +164,25 @@ namespace QuestManager
         {
             foreach (Quest Q in QC.QuestList)
             {
-                if(Q.active)
+                if (Q.active)
                 {
                     Q.SetCompleted();
                 }
             }
             QC.QuestList[missione].SetActive();
+
+        }
+        public void ActivateIndexQuest(int missione)
+        {
+            foreach (Quest Q in QC.QuestList)
+            {
+                if (Q.active)
+                {
+                    Q.SetInactive();
+                }
+            }
+            QC.QuestList[missione].SetActive();
+
 
         }
     }

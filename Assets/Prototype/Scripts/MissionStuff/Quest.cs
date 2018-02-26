@@ -16,14 +16,13 @@ namespace QuestManager
         public bool active;
         public bool inactive;
         public bool completed;
-        public int index;
 
-        public Quest(string _questName, GameObject _questGiver, GameObject _questFinisher, int _index)
+        public Quest(string _questName, GameObject _questGiver, GameObject _questFinisher)
         {
             questName = _questName;
             questGiver = _questGiver;
             questFinisher = _questFinisher;
-            index = _index;
+           
         }
         public void Reset()
         {

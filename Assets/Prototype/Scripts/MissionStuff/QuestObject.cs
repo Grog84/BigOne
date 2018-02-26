@@ -21,7 +21,7 @@ namespace QuestManager
         public void CompleteQuest()
         {
             Debug.Log("Complete Quest!");
-            m_Mission.SetCompleted();
+            //m_Mission.SetCompleted();
         }
 
     }

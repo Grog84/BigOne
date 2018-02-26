@@ -11,173 +11,44 @@ namespace QuestManager
     {
 
         public string questName;
-
-
-        public QUESTTYPE questType;
-
-        public QUESTGRADE questGrade;
-
-        public int questIndex;
-        public bool ShowDescription;
-
-        [ShowIf("ShowDescription")]
-
-        [TextArea]
-        public string questDescription;
-
-
-        public bool available;
-
-        public bool active;
-
-
-        public bool completed;
-
-        public bool turnInStatus;
-
-        [ReadOnly]
-        public int SceneIndexNumber;
-
         public GameObject questGiver;
+        public GameObject questFinisher;
+        public bool active;
+        public bool inactive;
+        public bool completed;
+        public int index;
 
-        public bool Printed = false;
-
-        [Space(3f)]
-
-        private bool isAB;
-        private bool isObj;
-        private bool isABTi;
-        private bool isDel;
-
-        public bool isStriked = false;
-        #region questType 0
-
-        [TabGroup("questTab", "AB_quest")]
-        //[ReadOnly]
-        public GameObject pointA;
-
-        [TabGroup("questTab", "AB_quest")]
-        //[ReadOnly]
-        public GameObject pointB;
-        #endregion
-
-        #region questType 1
-        [TabGroup("questTab", "Obj_quest")]
-        //[ReadOnly]
-        public GameObject Obj;
-        [TabGroup("questTab", "Obj_quest")]
-        //[ReadOnly]
-        public GameObject receiver;
-        #endregion
-
-        #region questType 2
-        [TabGroup("questTab", "ABTi_quest")]
-        //[ReadOnly]
-        public GameObject pointA_Timed;
-        [TabGroup("questTab", "ABTi_quest")]
-        //[ReadOnly]
-        public GameObject pointB_Timed;
-
-        [TabGroup("questTab", "ABTi_quest")]
-        //[ReadOnly]
-        public float time;
-        #endregion
-
-        #region questType 4
-
-
-        [TabGroup("questTab", "Del_quest")]
-        public GameObject del_receiver;
-        #endregion
-        [HideInInspector]
-        public int backUpTime;
-        [HideInInspector]
-        public string pointA_ObjName;
-        [HideInInspector]
-        public string pointB_ObjName;
-        [HideInInspector]
-        public string Obj_ObjName;
-        [HideInInspector]
-        public string receiver_ObjName;
-        [HideInInspector]
-        public string pointATimed_ObjName;
-        [HideInInspector]
-        public string pointBTimed_ObjName;
-        [HideInInspector]
-        public string questGiver_ObjName;
-        [HideInInspector]
-        public string questDeliver_ObjName;
-
-        public Quest(string _questName, QUESTTYPE _questType, QUESTGRADE _questGrade, string _questDescription, int _questIndex, GameObject _questGiver, GameObject _pointA, GameObject _pointB, GameObject _obj, GameObject _receiver, GameObject _pointATi, GameObject _pointBTi, GameObject _questDeliver, float _time, int _sceneIndexNumber)
+        public Quest(string _questName, GameObject _questGiver, GameObject _questFinisher, int _index)
         {
-
             questName = _questName;
-            questType = _questType;
-            questGrade = _questGrade;
-            questDescription = _questDescription;
-            questIndex = _questIndex;
             questGiver = _questGiver;
-            pointA = _pointA;
-            pointB = _pointB;
-            Obj = _obj;
-            receiver = _receiver;
-            pointA_Timed = _pointATi;
-            pointB_Timed = _pointBTi;
-            time = _time;
-            SceneIndexNumber = _sceneIndexNumber;
-            backUpTime = (int)time;
-            del_receiver = _questDeliver;
+            questFinisher = _questFinisher;
+            index = _index;
         }
-
-        public void SetCompleted()
-        {
-            switch (questType)
-            {
-
-                case QUESTTYPE.RICERCA_CONSEGNA_OGGETTO:
-                    completed = true;
-                    receiver.GetComponent<QuestNpc>().UpdateBlackBoard();
-                    Debug.Log(receiver.GetComponent<QuestNpc>().GetBlackboardBoolValue("questCompleted"));
-
-                    break;
-
-                case QUESTTYPE.CONSEGNA_OGGETTO:
-                    completed = true;
-                    del_receiver.GetComponent<QuestNpc>().UpdateBlackBoard();
-                    break;
-
-                case QUESTTYPE.SPOSTAMENTO_AB:
-                    completed = true;
-
-                    break;
-
-                case QUESTTYPE.SPOSTAMENTO_AB_TIMED:
-                    completed = true;
-
-                    break;
-                default: break;
-
-
-            }
-
-        }
-
         public void Reset()
         {
             completed = false;
             active = false;
-            turnInStatus = false;
-            isStriked = false;
-
+            inactive = false;
         }
         public void SetActive()
         {
             active = true;
-            if (this.questType == QUESTTYPE.CONSEGNA_OGGETTO)
-            {
-                SetCompleted();
-            }
+            inactive = false;
         }
+        public void SetInactive()
+        {
+            inactive = true;
+            active = false;
+        }
+        public void SetCompleted()
+        {
+            active = false;
+            inactive = false;
+            completed = true;
+        }
+
+
     }
 
 }

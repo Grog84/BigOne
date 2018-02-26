@@ -120,7 +120,7 @@ public class SaveManager :MonoBehaviour {
         {
             if (allActor.Length != 0)
                 SaveData.Load(dataPath, allActor);
-            //GMController.instance.isGameActive = true;
+         
         }
     }
 
@@ -130,16 +130,13 @@ public class SaveManager :MonoBehaviour {
         Profile.SaveProfile(profilePath, PlayerProfile);
         if (SaveOnClose)
         {
-           
-            
-            Save();
+          Save();
         }
     }
 
     public void LoadLastScene()
     {
-		
- PlayerProfile.Continue = Profile.LoadProfile(profilePath).Continue;
+	    PlayerProfile.Continue = Profile.LoadProfile(profilePath).Continue;
         SceneManager.LoadScene(PlayerProfile.LastScene);
     }
     

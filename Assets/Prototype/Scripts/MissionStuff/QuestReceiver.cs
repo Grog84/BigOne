@@ -3,11 +3,11 @@ using Sirenix.OdinInspector;
 
 namespace QuestManager
 {
-    public class QuestReceiver: SerializedMonoBehaviour
+    public class QuestReceiver : SerializedMonoBehaviour
     {
-      
+
         public Quest myMission;
-   
+
     }
 }
 

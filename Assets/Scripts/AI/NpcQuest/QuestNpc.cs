@@ -94,11 +94,11 @@ namespace AI
             if (m_QuestReceiver == null)
             {
                 //Debug.Log(m_QuestGiver.name);
-                SetBlackboardValue("questAvailable", m_QuestGiver.myMission.available);
+                //SetBlackboardValue("questAvailable", m_QuestGiver.myMission.available);
                 SetBlackboardValue("questCompleted", m_QuestGiver.myMission.completed);
                 SetBlackboardValue("questActive", m_QuestGiver.myMission.active);
 
-                SetBlackboardValue("questTurnInStatus", m_QuestGiver.myMission.turnInStatus);
+                //SetBlackboardValue("questTurnInStatus", m_QuestGiver.myMission.turnInStatus);
                 //Debug.Log(GetBlackboardBoolValue("questCompleted"));
                 //Debug.Log(GetBlackboardBoolValue("questAvailable"));
                 //Debug.Log(GetBlackboardBoolValue("questTurnInStatus"));
@@ -110,7 +110,7 @@ namespace AI
                 //SetBlackboardValue("questAvailable", m_QuestReceiver.myMission.available);
                 SetBlackboardValue("questCompleted", m_QuestReceiver.myMission.completed);
                 SetBlackboardValue("questActive", m_QuestReceiver.myMission.active);
-                SetBlackboardValue("questTurnInStatus", m_QuestReceiver.myMission.turnInStatus);
+                //SetBlackboardValue("questTurnInStatus", m_QuestReceiver.myMission.turnInStatus);
                 //Debug.Log(GetBlackboardBoolValue("questCompleted"));
                 //Debug.Log(GetBlackboardBoolValue("questAvailable"));
                 //Debug.Log(GetBlackboardBoolValue("questTurnInStatus"));
@@ -120,7 +120,7 @@ namespace AI
                 //Debug.Log(m_QuestReceiver.name);
                 SetBlackboardValue("questCompleted", m_QuestReceiver.myMission.completed);
                 SetBlackboardValue("questActive", m_QuestReceiver.myMission.active);
-                SetBlackboardValue("questTurnInStatus", m_QuestReceiver.myMission.turnInStatus);
+                //SetBlackboardValue("questTurnInStatus", m_QuestReceiver.myMission.turnInStatus);
             }
             
 
@@ -132,16 +132,16 @@ namespace AI
         {
             if(m_QuestGiver != null)
             {
-                m_QuestGiver.myMission.SetActive();
-                if (m_QuestGiver.myMission.questType == QUESTTYPE.RICERCA_CONSEGNA_OGGETTO)
-                {
-                    m_QuestGiver.myMission.receiver.GetComponent<QuestNpc>().UpdateBlackBoard();
-                }
+                //m_QuestGiver.myMission.SetActive();
+                //if (m_QuestGiver.myMission.questType == QUESTTYPE.RICERCA_CONSEGNA_OGGETTO)
+                //{
+                //    m_QuestGiver.myMission.receiver.GetComponent<QuestNpc>().UpdateBlackBoard();
+                //}
 
-                if (m_QuestGiver.myMission.questType == QUESTTYPE.CONSEGNA_OGGETTO)
-                {
-                    m_QuestGiver.myMission.del_receiver.GetComponent<QuestNpc>().UpdateBlackBoard();
-                }
+                //if (m_QuestGiver.myMission.questType == QUESTTYPE.CONSEGNA_OGGETTO)
+                //{
+                ////    m_QuestGiver.myMission.del_receiver.GetComponent<QuestNpc>().UpdateBlackBoard();
+                //}
             }
 
         }
@@ -150,11 +150,11 @@ namespace AI
         {
             if(m_QuestGiver != null)
             {
-                m_QuestGiver.myMission.turnInStatus = true;
+           //     m_QuestGiver.myMission.turnInStatus = true;
             }
             else if(m_QuestReceiver != null)
             {
-                m_QuestReceiver.myMission.turnInStatus = true;
+             //   m_QuestReceiver.myMission.turnInStatus = true;
             }
 
         }

@@ -30,6 +30,8 @@ public class TerrainReader : MonoBehaviour
         int mapX = (int)(((position.x - m_TerrainPosition.x) / m_TerrainData.size.x) * alphamapWidth);
         int mapZ = (int)(((position.z - m_TerrainPosition.z) / m_TerrainData.size.z) * alphamapHeight);
 
+        //if (mapX < 0 || mapZ < 0)
+        //    Debug.Log("Problem");
         // get the splat data for this cell as a 1x1xN 3d array (where N = number of textures)
         //float[,,] splatmapData = m_TerrainData.GetAlphamaps(mapX, mapZ, 1, 1);
 
@@ -38,6 +40,7 @@ public class TerrainReader : MonoBehaviour
 
         for (int i = 0; i < cellMix.Length; i++)
         {
+            //Debug.Log("Map Z: " + mapZ + " - Map X:" + mapX);
             cellMix[i] = splatmapData[mapZ, mapX, i]; // or the other way around ?
         }
 
@@ -71,7 +74,9 @@ public class TerrainReader : MonoBehaviour
     void Start()
     {
 
-        m_TerrainData = Terrain.activeTerrain.terrainData;
+        //m_TerrainData = Terrain.activeTerrain.terrainData;
+        m_TerrainData = FindObjectOfType<TerrainCollider>().terrainData;
+        m_TerrainPosition = FindObjectOfType<Terrain>().transform.position;
         alphamapWidth = m_TerrainData.alphamapWidth;
         alphamapHeight = m_TerrainData.alphamapHeight;
 
@@ -86,7 +91,6 @@ public class TerrainReader : MonoBehaviour
             if (m_TerrainRayHit.collider.tag == "Ground")
             {
                 m_Terrain = m_TerrainRayHit.collider.GetComponent<Terrain>();
-                m_TerrainPosition = m_Terrain.transform.position;
             }
             else
             {

@@ -63,7 +63,7 @@ namespace AI
             max_theta_Angle = Mathf.Atan((bounds.x * transform.localScale.x) / raycastLength) * 180f / Mathf.PI;
             max_psi_Angle = Mathf.Atan((bounds.y * transform.localScale.y) / raycastLength) * 180f / Mathf.PI;
 
-            Debug.Log(max_theta_Angle + " - " + max_psi_Angle);
+            //Debug.Log(max_theta_Angle + " - " + max_psi_Angle);
 
         }
 

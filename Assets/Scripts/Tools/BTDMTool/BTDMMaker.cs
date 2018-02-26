@@ -127,7 +127,7 @@ public class BTDMMaker : MonoBehaviour {
     {
         behaviourTree = ScriptableObject.CreateInstance<BehaviourTreeDM>();
 
-        AssetDatabase.CreateAsset(behaviourTree, "Assets/ScriptableObjects/AI/NewBDTM.asset");
+        AssetDatabase.CreateAsset(behaviourTree, "Assets/ScriptableObjects/AI/NewBTDM.asset");
         AssetDatabase.SaveAssets();
 
         AssignRoot();

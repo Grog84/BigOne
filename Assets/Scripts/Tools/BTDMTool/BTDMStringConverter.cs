@@ -274,6 +274,8 @@ public class BTDMStringConverter
                 return new ConditionDistracted();
             case TaskType.GUARD_STAY:
                 return new ActionStay();
+            case TaskType.GUARD_IS_NAVPOINTTIMERZERO:
+                return new ConditionNavPointTimerNoZero();
             default:
                 return null;
         }

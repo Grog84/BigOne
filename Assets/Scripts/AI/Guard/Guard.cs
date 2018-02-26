@@ -49,6 +49,7 @@ namespace AI
         PerceptionBar perceptionBar;
         Transform eyes;
         Cone m_Cone;
+        ConeScale m_ConeScale;
         bool hysteresisCORunning = false;
         bool noRaycastHitting = true;
 
@@ -103,6 +104,7 @@ namespace AI
             SetBlackboardValue("NavigationPosition", wayPointListTransform[m_Blackboard.GetIntValue("CurrentNavPoint")].position);
 
             statusColor = Color.green;
+            GrowCone();
         }
 
         public virtual void GetCurious()
@@ -114,6 +116,7 @@ namespace AI
             LoadStats(curiousStats);
 
             statusColor = Color.yellow;
+            GrowCone();
         }
 
         public virtual void GetAlarmed()
@@ -132,6 +135,7 @@ namespace AI
             SetBlackboardValue("IsRelaxing", false);
 
             statusColor = Color.red;
+            GrowCone();
         }
 
         public void GetDistracted()
@@ -141,6 +145,7 @@ namespace AI
             LoadStats(distractedStats);
 
             statusColor = Color.blue;
+            ShrinkCone();
         }
 
         public void SetOtherAlarmed(Guard otherGuard)
@@ -469,6 +474,11 @@ namespace AI
             m_NavMeshAgent.isStopped = false;
         }
 
+        public void Stay()
+        {
+            m_NavMeshAgent.isStopped = true;
+        }
+
         public void DefeatPlayer()
         {
             
@@ -537,6 +547,16 @@ namespace AI
         //    DefeatPlayer();
         //}
 
+        public void ShrinkCone()
+        {
+            m_ConeScale.Shrink();
+        }
+
+        public void GrowCone()
+        {
+            m_ConeScale.Grow();
+        }
+
         private void Awake()
         {
             // Get components reference
@@ -544,6 +564,7 @@ namespace AI
             perceptionBar = GetComponentInChildren<PerceptionBar>();
             eyes = TransformDeepChildExtension.FindDeepChild(transform, "eyes");
             m_Cone = TransformDeepChildExtension.FindDeepChild(transform, "Cone").GetComponent<Cone>();
+            m_ConeScale = GetComponent<ConeScale>();
             m_Animator = GetComponent<Animator>();
 
             m_Brain = GetComponent<Brain>();

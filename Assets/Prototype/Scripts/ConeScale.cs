@@ -15,35 +15,65 @@ public class ConeScale : MonoBehaviour {
     public float zScale = 4.0f;
 
     float oldXScale, oldYScale, oldZScale;
+    float fullXScale, fullYScale, fullZScale;
 
     private void Start()
     {
+        fullXScale = xScale;
+        fullYScale = xScale;
+        fullZScale = xScale;
+
         oldXScale = xScale;
         oldYScale = yScale;
         oldZScale = zScale;
 
         m_Cone.transform.localScale = new Vector3(xScale, yScale, zScale);
         m_Cone.GetComponent<Cone>().UpdateRaycastParams();
+
+        StartCoroutine(ResizeCO());
     }
 
-    private void Update()
+
+    IEnumerator ResizeCO()
     {
-        if (oldXScale != xScale || oldYScale != yScale || oldZScale != zScale)
+        for (; ;)
         {
-            oldXScale = xScale;
-            oldYScale = yScale;
-            oldZScale = zScale;
+            if (oldXScale != xScale || oldYScale != yScale || oldZScale != zScale)
+            {
+                oldXScale = xScale;
+                oldYScale = yScale;
+                oldZScale = zScale;
 
-            m_Cone.transform.localScale = new Vector3(xScale, yScale, zScale);
-            m_Cone.GetComponent<Cone>().UpdateRaycastParams();
+                m_Cone.transform.localScale = new Vector3(xScale, yScale, zScale);
+                m_Cone.GetComponent<Cone>().UpdateRaycastParams();
 
+            }
+            yield return new WaitForSeconds(1f);
         }
     }
 
-    // Commented in order to avoid errors in the console
-    //private void OnValidate()
-    //{
-    //    m_Cone.transform.localScale= new Vector3(xScale, yScale, zScale);
-    //    m_Cone.GetComponent<Cone>().UpdateRaycastParams();
-    //}
+    public void Shrink()
+    {
+        xScale = 0.01f;
+        yScale = 0.01f;
+        zScale = 0.01f;
+    }
+
+    public void Grow()
+    {
+        xScale = fullXScale;
+        yScale = fullYScale;
+        zScale = fullZScale;
+    }
+
+    private void OnValidate()
+    {
+        // Commented in order to avoid errors in the console
+        //m_Cone.transform.localScale = new Vector3(xScale, yScale, zScale);
+        //m_Cone.GetComponent<Cone>().UpdateRaycastParams();
+        
+        fullXScale = xScale;
+        fullYScale = yScale;
+        fullZScale = zScale;
+    }
 }

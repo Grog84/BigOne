@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
+using UnityEngine.UI;
 
 [TrackColor(0.855f, 0.8623f, 0.87f)]
 [TrackClipType(typeof(SwitchSceneClip))]
@@ -15,6 +16,7 @@ public class SwitchSceneTrack : TrackAsset
     {
 #if UNITY_EDITOR
         
+       
 #endif
         base.GatherProperties(director, driver);
     }

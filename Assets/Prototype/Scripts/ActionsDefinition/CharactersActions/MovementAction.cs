@@ -23,8 +23,9 @@ namespace Character.Actions
             float h = 0;
             float v = 0;
             //float get from the axis used in the vector3 m_Move
-            if ((int)InputManager.instance.GetInputState() == 1)
+            if ((int)InputManager.instance.GetInputState() == 0)
             {
+                
                 if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.3f)
                 {
                     h = Input.GetAxis("Horizontal");
@@ -48,6 +49,7 @@ namespace Character.Actions
                 v = Input.GetAxis("Vertical");
 
             }
+            
            
             //calculate move direction to pass to character
             if (controller.m_CharacterController.m_Camera != null)
@@ -63,7 +65,7 @@ namespace Character.Actions
                 m_Move = m_Move.normalized;
             }
 
-            // Debug.Log(m_Move);
+           // Debug.Log(m_Move);
             m_Move *= controller.characterStats.m_MovementSpeed;
 
 

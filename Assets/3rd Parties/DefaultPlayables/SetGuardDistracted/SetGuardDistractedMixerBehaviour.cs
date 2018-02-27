@@ -1,0 +1,43 @@
+using System;
+using UnityEngine;
+using UnityEngine.Playables;
+using UnityEngine.Timeline;
+using AI;
+
+public class SetGuardDistractedMixerBehaviour : PlayableBehaviour
+{
+    // NOTE: This function is called at runtime and edit time.  Keep that in mind when setting the values of properties.
+    public override void ProcessFrame(Playable playable, FrameData info, object playerData)
+    {
+
+        Guard trackBinding = playerData as Guard;
+
+        if (!trackBinding)
+            return;
+
+        int inputCount = playable.GetInputCount ();
+
+        for (int i = 0; i < inputCount; i++)
+        {
+            float inputWeight = playable.GetInputWeight(i);
+            ScriptPlayable<SetGuardDistractedBehaviour> inputPlayable = (ScriptPlayable<SetGuardDistractedBehaviour>)playable.GetInput(i);
+            SetGuardDistractedBehaviour input = inputPlayable.GetBehaviour ();
+
+            if(inputWeight > 0.5f && !input.guardDisabled)
+            {
+                if(input.disableGuard)
+                {
+                    trackBinding.GetDistracted();
+                }
+                else
+                {
+                    trackBinding.GetNormal();
+                }
+                input.guardDisabled = true;
+            }
+
+            // Use the above variables to process each frame of this playable.
+
+        }
+    }
+}

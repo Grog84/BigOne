@@ -86,8 +86,14 @@ namespace QuestManager
             dataPath = System.IO.Path.Combine(Application.persistentDataPath, "quest.json");            
             
         }
-             
-       
+        public void Start()
+        {
+            AssignQuestToObjectiveStarter();
+            AssignQuestToObjectiveFinisher();
+            ActivateIndexQuest(0);
+        }
+
+        
         public string StrikeThrough(string s)
         {
             string strikethrough = "";
@@ -129,14 +135,17 @@ namespace QuestManager
                 }
 
                 QG.myMission = m;
-       
-                QuestNpc QNPC;
-                QNPC = m.questGiver.gameObject.GetComponent<QuestNpc>();
-                QNPC.m_QuestGiver = m.questGiver.gameObject.GetComponent<QuestGiver>();
-                QNPC.m_QuestGiver.myMission = m;
-                if (QNPC != null)
+
+                if (m.questGiver.GetComponent<QuestNpc>() != null)
                 {
-                    QNPC.UpdateBlackBoard();
+                    QuestNpc QNPC;
+                    QNPC = m.questGiver.gameObject.GetComponent<QuestNpc>();
+                    QNPC.m_QuestGiver = m.questGiver.gameObject.GetComponent<QuestGiver>();
+                    QNPC.m_QuestGiver.myMission = m;
+                    if (QNPC != null)
+                    {
+                        QNPC.UpdateBlackBoard();
+                    }
                 }
             }
         }
@@ -147,10 +156,10 @@ namespace QuestManager
             foreach (Quest m in QC.QuestList)
             {
                 ObjectiveFinisher OF;
-                OF = m.questGiver.gameObject.GetComponent<ObjectiveFinisher>();
+                OF = m.questFinisher.gameObject.GetComponent<ObjectiveFinisher>();
                 if (OF == null)
                 {
-                    OF = m.questGiver.gameObject.AddComponent<ObjectiveFinisher>();
+                    OF = m.questFinisher.gameObject.AddComponent<ObjectiveFinisher>();
                 }
 
                 OF.myMission = m;
@@ -159,18 +168,20 @@ namespace QuestManager
                 
             }
         }
-
-        public void ActivateNextObjective(int missione)
+        int next;
+        public void ActivateNextObjective()
         {
-            foreach (Quest Q in QC.QuestList)
+            for (int i = 0; i <QC.QuestList.Count; i++)
             {
-                if (Q.active)
+                if (QC.QuestList[i].active)
                 {
-                    Q.SetCompleted();
-                }
-            }
-            QC.QuestList[missione].SetActive();
+                    QC.QuestList[i].SetCompleted();
+                    next = i;
 
+                }              
+
+            }
+            QC.QuestList[next++].SetActive();
         }
         public void ActivateIndexQuest(int missione)
         {
@@ -181,9 +192,11 @@ namespace QuestManager
                     Q.SetInactive();
                 }
             }
-            QC.QuestList[missione].SetActive();
-
-
+            if (missione <= QC.QuestList.Count)
+            {
+                QC.QuestList[missione].SetActive();
+                Testo.text = QC.QuestList[missione].questName;
+            }
         }
     }
 }

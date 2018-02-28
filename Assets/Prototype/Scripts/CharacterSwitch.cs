@@ -60,7 +60,7 @@ public class CharacterSwitch : MonoBehaviour
         if (other.tag == "Player")
         {
             players.Remove(other.gameObject);
-            transform.parent.GetComponent<CharacterSwitchIconsActivation>().HideIcons();
+            //transform.parent.GetComponent<CharacterSwitchIconsActivation>().HideIcons();
             character = CharacterActive.None;
             GMController.instance.canSwitch = false;
         }

@@ -16,6 +16,7 @@ namespace QuestManager
         public bool active;
         public bool inactive;
         public bool completed;
+        
 
         public Quest(string _questName, GameObject _questGiver, GameObject _questFinisher)
         {
@@ -34,6 +35,7 @@ namespace QuestManager
         {
             active = true;
             inactive = false;
+            completed = false;
         }
         public void SetInactive()
         {
@@ -45,6 +47,8 @@ namespace QuestManager
             active = false;
             inactive = false;
             completed = true;
+
+            Debug.Log("Completata");
         }
 
 

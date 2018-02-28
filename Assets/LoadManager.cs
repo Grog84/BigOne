@@ -7,8 +7,8 @@ using DG.Tweening;
 
 public class LoadManager : MonoBehaviour
 {
-    public static LoadManager instance = null;
-    int currentSceneIndex;
+    [HideInInspector] public static LoadManager instance = null;
+    [HideInInspector] public int currentSceneIndex;
 
 	void Awake ()
     {
@@ -22,23 +22,15 @@ public class LoadManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 	
-    public void ChangeToLoadScene(int currentScene/*, Image fade, float fadeTime*/)
+    public void ChangeToLoadScene(int currentScene)
     {
-        //fade.DOFade(255,fadeTime);
         currentSceneIndex = currentScene;
         Debug.Log(currentScene);
         Debug.Log(currentSceneIndex);
         AsyncOperation async = SceneManager.LoadSceneAsync("LoadScene");
-
-        //async.allowSceneActivation = false;
-
-        //if()
-        //{
-        //    async.allowSceneActivation = true;
-        //}
     }
 
-    public IEnumerator ChangeLevel(Animator anim)
+    public IEnumerator ChangeLevel(Animator anim, Text skip)
     {
         AsyncOperation async = SceneManager.LoadSceneAsync(currentSceneIndex + 1);
         async.allowSceneActivation = false;
@@ -49,9 +41,11 @@ public class LoadManager : MonoBehaviour
             yield return null;
         }
 
-        anim.speed = 0;
+        skip.gameObject.SetActive(true);
+        //anim.speed = 0;
+        anim.gameObject.SetActive(false);
 
-        while(!Input.GetButtonDown("Interact"))
+        while(!Input.anyKeyDown)
         {
             yield return null;
         }

@@ -1,19 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Loading : MonoBehaviour
 {
-    public Animator anim; 
+    public Animator anim;
+    public Text skipMessage;
 
-	// Use this for initialization
 	void Start ()
     {
-        StartCoroutine(LoadManager.instance.ChangeLevel(anim));
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+        StartCoroutine(LoadManager.instance.ChangeLevel(anim, skipMessage));
 	}
 }

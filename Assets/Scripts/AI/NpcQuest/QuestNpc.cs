@@ -12,9 +12,11 @@ namespace AI
     public class QuestNpc : AIAgent
     {
         [HideInInspector] public QuestGiver m_QuestGiver;
-        [HideInInspector] public QuestReceiver m_QuestReceiver;
+        //[HideInInspector] public QuestReceiver m_QuestReceiver;
+        [HideInInspector] public ObjectiveFinisher m_ObjectiveFinisher;
 
-        [HideInInspector]public PlayableDirector m_PlayableDirector;
+
+        [HideInInspector] public PlayableDirector m_PlayableDirector;
         public bool canInteract = true;
         LookAtIK lookAtComponent;
         public Transform lookAtTarget;
@@ -47,7 +49,7 @@ namespace AI
         }
 
         public bool GetBlackboardBoolValue(string valueName)
-        {       
+        {
             return m_Blackboard.GetBoolValue(valueName);
         }
 
@@ -66,13 +68,13 @@ namespace AI
         {
             throw new System.NotImplementedException();
         }
-            
+
 
         public void LookAtManager()
         {
             if (GetBlackboardBoolValue("playerSaw") == true)
             {
-                
+
                 lookAtComponent.solver.target = lookAtTarget;
                 // Turn head speed
                 if (lookAtComponent.solver.headWeight < headClamp)
@@ -84,80 +86,30 @@ namespace AI
             //{
             //    lookAtComponent.solver.headWeight -= Time.deltaTime;
             //}
-            
+
         }
 
         public void UpdateBlackBoard()
         {
-           
-
-            if (m_QuestReceiver == null)
+            if (m_QuestGiver != null)
             {
-                //Debug.Log(m_QuestGiver.name);
-                //SetBlackboardValue("questAvailable", m_QuestGiver.myMission.available);
-                SetBlackboardValue("questCompleted", m_QuestGiver.myMission.completed);
-                SetBlackboardValue("questActive", m_QuestGiver.myMission.active);
-
-                //SetBlackboardValue("questTurnInStatus", m_QuestGiver.myMission.turnInStatus);
-                //Debug.Log(GetBlackboardBoolValue("questCompleted"));
-                //Debug.Log(GetBlackboardBoolValue("questAvailable"));
-                //Debug.Log(GetBlackboardBoolValue("questTurnInStatus"));
+                SetBlackboardValue("nextQuestCompleted", m_QuestGiver.myMission.completed);
+                SetBlackboardValue("nextQuestActive", m_QuestGiver.myMission.active);
             }
-            else if (m_QuestGiver == null)
+            if (m_ObjectiveFinisher != null)
             {
-                //Debug.Log(m_QuestReceiver.name);
-
-                //SetBlackboardValue("questAvailable", m_QuestReceiver.myMission.available);
-                SetBlackboardValue("questCompleted", m_QuestReceiver.myMission.completed);
-                SetBlackboardValue("questActive", m_QuestReceiver.myMission.active);
-                //SetBlackboardValue("questTurnInStatus", m_QuestReceiver.myMission.turnInStatus);
-                //Debug.Log(GetBlackboardBoolValue("questCompleted"));
-                //Debug.Log(GetBlackboardBoolValue("questAvailable"));
-                //Debug.Log(GetBlackboardBoolValue("questTurnInStatus"));
+                SetBlackboardValue("questFinisherActive", m_ObjectiveFinisher.myMission.active);
+                SetBlackboardValue("questFinisherCompleted", m_ObjectiveFinisher.myMission.completed);
             }
-            else if(m_QuestGiver != null && m_QuestReceiver != null)
-            {
-                //Debug.Log(m_QuestReceiver.name);
-                SetBlackboardValue("questCompleted", m_QuestReceiver.myMission.completed);
-                SetBlackboardValue("questActive", m_QuestReceiver.myMission.active);
-                //SetBlackboardValue("questTurnInStatus", m_QuestReceiver.myMission.turnInStatus);
-            }
-            
-
-            //Debug.Log("Quest : " + m_QuestGiver.myMission.available + " - " + m_QuestGiver.myMission.completed + " - " + m_QuestGiver.myMission.turnInStatus);
-            //Debug.Log("Quest : " + GetBlackboardBoolValue("questAvailable") + " - " + GetBlackboardBoolValue("questCompleted") + " - " +
         }
 
         public void SetQuestActive()
         {
-            if(m_QuestGiver != null)
-            {
-                //m_QuestGiver.myMission.SetActive();
-                //if (m_QuestGiver.myMission.questType == QUESTTYPE.RICERCA_CONSEGNA_OGGETTO)
-                //{
-                //    m_QuestGiver.myMission.receiver.GetComponent<QuestNpc>().UpdateBlackBoard();
-                //}
-
-                //if (m_QuestGiver.myMission.questType == QUESTTYPE.CONSEGNA_OGGETTO)
-                //{
-                ////    m_QuestGiver.myMission.del_receiver.GetComponent<QuestNpc>().UpdateBlackBoard();
-                //}
-            }
-
+            m_ObjectiveFinisher.myMission.SetCompleted();
+            m_QuestGiver.myMission.SetActive();
+            UpdateBlackBoard();
         }
 
-        public void SetQuestTurnedIn()
-        {
-            if(m_QuestGiver != null)
-            {
-           //     m_QuestGiver.myMission.turnInStatus = true;
-            }
-            else if(m_QuestReceiver != null)
-            {
-             //   m_QuestReceiver.myMission.turnInStatus = true;
-            }
-
-        }
 
         public void StopWaving()
         {
@@ -173,8 +125,9 @@ namespace AI
             m_Brain.decisionMaker.m_Blackboard = new QuestNpcBlackboard();
             m_Blackboard = m_Brain.decisionMaker.m_Blackboard;
             m_Blackboard.m_Agent = this;
-            
-            // m_QuestGiver = GetComponent<QuestGiver>();
+
+            m_QuestGiver = GetComponent<QuestGiver>();
+            m_ObjectiveFinisher = GetComponent<ObjectiveFinisher>();
             m_PlayableDirector = GetComponent<PlayableDirector>();
             lookAtComponent = GetComponent<LookAtIK>();
         }
@@ -191,10 +144,10 @@ namespace AI
 
         private void Update()
         {
-            LookAtManager();     
+            LookAtManager();
         }
     }
 
-    
+
 }
 

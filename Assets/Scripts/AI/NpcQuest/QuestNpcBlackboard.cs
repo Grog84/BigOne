@@ -8,13 +8,14 @@ namespace AI
     [System.Serializable]
     public class QuestNpcBlackboard : Blackboard
     {
-        bool questTurnInStatus = false;
-        bool questAvailable = false;
-        bool questCompleted = false;
+        bool nextQuestActive = false;
+        bool nextQuestCompleted = false;
         bool playerHasInteracted = false;
         bool isLookingAtPlayer = false;
         bool playerSaw = false;
-        bool questActive = false;
+        bool questFinisherActive = false;
+
+        bool questFinisherCompleted = false;
 
         public override int GetIntValue(string valueName)
         {
@@ -67,14 +68,14 @@ namespace AI
                     return isLookingAtPlayer;
                 case "playerInteracted":
                     return playerHasInteracted;
-                case "questAvailable":
-                    return questAvailable;
-                case "questCompleted":
-                    return questCompleted;
-                case "questTurnInStatus":
-                    return questTurnInStatus;
-                case "questActive":
-                    return questActive;
+                case "questFinisherActive":
+                    return questFinisherActive;
+                case "nextQuestCompleted":
+                    return nextQuestCompleted;
+                case "questFinisherCompleted":
+                    return questFinisherCompleted;
+                case "nextQuestActive":
+                    return nextQuestActive;
                 default:
                     Debug.Log("Default");
                     return false;
@@ -94,17 +95,17 @@ namespace AI
                 case "playerInteracted":
                     playerHasInteracted = value;
                     break;
-                case "questAvailable":
-                    questAvailable = value;
+                case "questFinisherActive":
+                    questFinisherActive = value;
                     break;
-                case "questCompleted":
-                    questCompleted = value;
+                case "nextQuestCompleted":
+                    nextQuestCompleted = value;
                     break;
-                case "questTurnInStatus":
-                    questTurnInStatus = value;
+                case "questFinisherCompleted":
+                    questFinisherCompleted = value;
                     break;
-                case "questActive":
-                    questActive=value;
+                case "nextQuestActive":
+                    nextQuestActive=value;
                     break;
                 default:
                     break;

@@ -14,7 +14,7 @@ namespace Character.Decisions
         {
             if (controller.m_CharacterController.hasInteractedWithNPC)
             {
-                //if (GMController.instance.m_QM.QC.QuestList[controller.m_CharacterController.currentConsegnaOggetto].turnInStatus)
+                //if (Quest.isCompleted)
                 //{                
                 //    controller.m_CharacterController.hasInteractedWithNPC = false;                
                 //    return true;

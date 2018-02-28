@@ -7,7 +7,7 @@ namespace AI.BT
         public override TaskState Run()
         {
 
-            if (m_BehaviourTree.m_Blackboard.GetBoolValue("questTurnInStatus"))
+            if (m_BehaviourTree.m_Blackboard.GetBoolValue("questFinisherCompleted"))
             {
                 return TaskState.SUCCESS;
             }

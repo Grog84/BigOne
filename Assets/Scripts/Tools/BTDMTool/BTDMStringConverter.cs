@@ -236,6 +236,7 @@ public class BTDMStringConverter
                 return new ConditionPlayerReached();
             case TaskType.GUARD_IS_CHAR_VISIBLE:
                 return new ConditionPlayerVisible();
+
             case TaskType.QUEST_NPC_GIVE_REWARD:
                 return new ActionGiveReward();
             case TaskType.QUEST_NPC_IDLE:
@@ -253,11 +254,12 @@ public class BTDMStringConverter
             case TaskType.QUEST_NPC_HAS_SAW_PLAYER:
                 return new ConditionPlayerSaw();
             case TaskType.QUEST_NPC_IS_QUEST_AVAILABLE:
-                return new ConditionQuestAvailable();
+                return new ConditionCurrentQuestFinisher();
             case TaskType.QUEST_NPC_IS_QUEST_COMPLETED:
                 return new ConditionQuestCompleted();
             case TaskType.QUEST_NPC_IS_QUEST_TURNED_IN:
                 return new ConditionQuestTurnedIn();
+
             case TaskType.PEDESTRIAN_DEFEAT_PLAYER:
                 return new ActionPedestrianDefeatPlayer();
             case TaskType.PEDESTRIAN_PICK_NEW_DESTINATION:

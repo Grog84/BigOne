@@ -5,7 +5,7 @@ namespace QuestManager
 {
     public class QuestGiver:SerializedMonoBehaviour
     {
-        public int missionIndex;
+       // public int missionIndex;
        
         public Quest myMission;
       

@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
+using AI;
 
 namespace QuestManager
 {
@@ -13,9 +14,12 @@ namespace QuestManager
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == "Player")
+            if (GetComponent<QuestNpc>() == null)
             {
-                QM.ActivateNextObjective();
+                if (other.gameObject.tag == "Player")
+                {
+                    QM.ActivateNextObjective();
+                }
             }
         }
 

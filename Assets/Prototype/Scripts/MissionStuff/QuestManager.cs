@@ -122,29 +122,34 @@ namespace QuestManager
             SaveQuest();
         }
 
+        
+
         private void AssignQuestToObjectiveStarter()
         {
 
             foreach (Quest m in QC.QuestList)
             {
-                QuestGiver QG;
-                QG = m.questGiver.gameObject.GetComponent<QuestGiver>();
-                if (QG == null)
+                if (m.questGiver.gameObject != null)
                 {
-                    QG = m.questGiver.gameObject.AddComponent<QuestGiver>();
-                }
-
-                QG.myMission = m;
-
-                if (m.questGiver.GetComponent<QuestNpc>() != null)
-                {
-                    QuestNpc QNPC;
-                    QNPC = m.questGiver.gameObject.GetComponent<QuestNpc>();
-                    QNPC.m_QuestGiver = m.questGiver.gameObject.GetComponent<QuestGiver>();
-                    QNPC.m_QuestGiver.myMission = m;
-                    if (QNPC != null)
+                    QuestGiver QG;
+                    QG = m.questGiver.gameObject.GetComponent<QuestGiver>();
+                    if (QG == null)
                     {
-                        QNPC.UpdateBlackBoard();
+                        QG = m.questGiver.gameObject.AddComponent<QuestGiver>();
+                    }
+
+                    QG.myMission = m;
+
+                    if (m.questGiver.GetComponent<QuestNpc>() != null)
+                    {
+                        QuestNpc QNPC;
+                        QNPC = m.questGiver.gameObject.GetComponent<QuestNpc>();
+                        QNPC.m_QuestGiver = m.questGiver.gameObject.GetComponent<QuestGiver>();
+                        QNPC.m_QuestGiver.myMission = m;
+                        //if (QNPC != null)
+                        //{
+                        //    QNPC.UpdateBlackBoard();
+                        //}
                     }
                 }
             }
@@ -152,20 +157,34 @@ namespace QuestManager
 
         private void AssignQuestToObjectiveFinisher()
         {
-
             foreach (Quest m in QC.QuestList)
             {
-                ObjectiveFinisher OF;
-                OF = m.questFinisher.gameObject.GetComponent<ObjectiveFinisher>();
-                if (OF == null)
+                if (m.questFinisher.gameObject != null)
                 {
-                    OF = m.questFinisher.gameObject.AddComponent<ObjectiveFinisher>();
+                    ObjectiveFinisher OF;
+                    OF = m.questFinisher.gameObject.GetComponent<ObjectiveFinisher>();
+                    if (OF == null)
+                    {
+                        OF = m.questFinisher.gameObject.AddComponent<ObjectiveFinisher>();
+                    }
+
+                    OF.myMission = m;
+
+
+                    if (m.questFinisher.GetComponent<QuestNpc>() != null)
+                    {
+                        QuestNpc QNPC;
+                        QNPC = m.questFinisher.gameObject.GetComponent<QuestNpc>();
+                        QNPC.m_ObjectiveFinisher = m.questFinisher.gameObject.GetComponent<ObjectiveFinisher>();
+                        QNPC.m_ObjectiveFinisher.myMission = m;
+                        if (QNPC != null)
+                        {
+                            QNPC.UpdateBlackBoard();
+                        }
+                    }
+
                 }
-
-                OF.myMission = m;
-              
-
-                
+            
             }
         }
         int next;
@@ -195,7 +214,7 @@ namespace QuestManager
             if (missione <= QC.QuestList.Count)
             {
                 QC.QuestList[missione].SetActive();
-                Testo.text = QC.QuestList[missione].questName;
+              //  Testo.text = QC.QuestList[missione].questName;
             }
         }
     }

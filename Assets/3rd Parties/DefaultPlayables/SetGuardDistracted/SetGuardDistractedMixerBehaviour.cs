@@ -24,15 +24,8 @@ public class SetGuardDistractedMixerBehaviour : PlayableBehaviour
             SetGuardDistractedBehaviour input = inputPlayable.GetBehaviour ();
 
             if(inputWeight > 0.5f && !input.guardDisabled)
-            {
-                if(input.disableGuard)
-                {
-                    trackBinding.GetDistracted();
-                }
-                else
-                {
-                    trackBinding.GetNormal();
-                }
+            {         
+                trackBinding.GetDistracted();               
                 input.guardDisabled = true;
             }
 

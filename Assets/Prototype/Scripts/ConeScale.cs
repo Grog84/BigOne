@@ -20,8 +20,8 @@ public class ConeScale : MonoBehaviour {
     private void Start()
     {
         fullXScale = xScale;
-        fullYScale = xScale;
-        fullZScale = xScale;
+        fullYScale = yScale;
+        fullZScale = zScale;
 
         oldXScale = xScale;
         oldYScale = yScale;

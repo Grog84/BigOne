@@ -2,7 +2,7 @@
 using UnityEngine;
 using Sirenix.OdinInspector;
 using AI;
-
+using System.Collections;
 
 namespace QuestManager
 {
@@ -50,8 +50,7 @@ namespace QuestManager
 
             Debug.Log("Completata");
         }
-
-
+        
     }
 
 }

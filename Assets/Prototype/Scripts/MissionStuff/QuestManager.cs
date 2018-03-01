@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using AI;
 
+
+/*INSERIRE AGGIORNAMENTO QUEST*/
 namespace QuestManager
 {
     [Serializable]
@@ -51,7 +53,7 @@ namespace QuestManager
          private bool isStriked = false;
 
 
-        QuestManager QM;
+      
         [BoxGroup("ObjectiveCreator")]
         [ShowIf("CreateObjective")]
         [GUIColor(0.8f, 0.5f, 0.7f, 1f)]
@@ -65,15 +67,14 @@ namespace QuestManager
         private bool IsCorrect;
         private string questPath;
         private Vector3 Giu = new Vector3 { x = 0f, y = -80f, z = 0f };
-        [Space]      
-        
+        [Space]
+
         [Header("Objective Container")]
         [InfoBox("Inserire il proprio Contenitore di Quest, Scriptable object da creare", InfoMessageType.None)]
         [AssetList(Path = "Prototype/ScriptableObjects/LevelQuest/")]
         public QuestContainer QC;
         string dataPath;
 
-     
         GameObject Timer;
         public bool ResettoAllaChiusura;
         public Text Testo;
@@ -84,15 +85,16 @@ namespace QuestManager
         {
             questPath = System.IO.Path.Combine(Application.persistentDataPath, "quest.json");
             dataPath = System.IO.Path.Combine(Application.persistentDataPath, "quest.json");            
+            AssignQuestToObjectiveStarter();
+            AssignQuestToObjectiveFinisher();
+            ActivateIndexQuest(0);
             
         }
         public void Start()
         {
-            AssignQuestToObjectiveStarter();
-            AssignQuestToObjectiveFinisher();
-            ActivateIndexQuest(0);
+            ChangeNameOnUI();
+           
         }
-
         
         public string StrikeThrough(string s)
         {
@@ -104,10 +106,25 @@ namespace QuestManager
             return strikethrough;
         }
 
+      public void ChangeNameOnUI()
+        {
+            foreach (var v in QC.QuestList)
+            {
+                if (v.active)
+                {
+                    Testo.text = v.questName;
+                }
+            }
+        }
+        private void Update()
+        {
+            ChangeNameOnUI();
+        }
         public void SaveQuest()
         {
+
             string questSave = JsonUtility.ToJson(QC);
-            //SaveData.SaveQuestContainer(dataPath, questSave);
+            SaveData.SaveQuestContainer(dataPath, questSave);
         }
 
         private void OnApplicationQuit()
@@ -146,10 +163,6 @@ namespace QuestManager
                         QNPC = m.questGiver.gameObject.GetComponent<QuestNpc>();
                         QNPC.m_QuestGiver = m.questGiver.gameObject.GetComponent<QuestGiver>();
                         QNPC.m_QuestGiver.myMission = m;
-                        //if (QNPC != null)
-                        //{
-                        //    QNPC.UpdateBlackBoard();
-                        //}
                     }
                 }
             }
@@ -177,16 +190,23 @@ namespace QuestManager
                         QNPC = m.questFinisher.gameObject.GetComponent<QuestNpc>();
                         QNPC.m_ObjectiveFinisher = m.questFinisher.gameObject.GetComponent<ObjectiveFinisher>();
                         QNPC.m_ObjectiveFinisher.myMission = m;
-                        if (QNPC != null)
-                        {
-                            QNPC.UpdateBlackBoard();
-                        }
                     }
 
                 }
             
             }
         }
+
+       public static void updateallQuestNPC()
+        {
+            QuestNpc[] allQNPC = GameObject.FindObjectsOfType<QuestNpc>();
+            for (int i = 0; i < allQNPC.Length; i++)
+            {
+                allQNPC[i].UpdateBlackBoard();
+            }
+
+        }
+
         int next;
         public void ActivateNextObjective()
         {

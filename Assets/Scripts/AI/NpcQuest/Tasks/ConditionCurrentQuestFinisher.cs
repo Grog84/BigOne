@@ -11,7 +11,6 @@ namespace AI.BT
 
             if (m_BehaviourTree.m_Blackboard.GetBoolValue("questFinisherActive")==true)
             {
-                Debug.Log("ENTERD");
 
                 //m_BehaviourTree.m_Blackboard.SetBoolValue("nextQuestActive", true);
                 //m_BehaviourTree.m_Blackboard.SetBoolValue("questFinsherActive", false);
@@ -20,6 +19,7 @@ namespace AI.BT
             }
             else
             {
+                Debug.Log("ENTERD");
                 return TaskState.FAILURE;
             }
         }

@@ -8,6 +8,7 @@ namespace AI.BT
     {
         public override TaskState Run()
         {
+            Debug.Log("YEEE");
             m_BehaviourTree.m_Blackboard.m_Agent.GetComponent<QuestNpc>().SetQuestActive();
            
             //triggera booleano di animator

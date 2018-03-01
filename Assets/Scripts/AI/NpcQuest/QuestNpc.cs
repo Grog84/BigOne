@@ -14,7 +14,7 @@ namespace AI
         [HideInInspector] public QuestGiver m_QuestGiver;
         //[HideInInspector] public QuestReceiver m_QuestReceiver;
         [HideInInspector] public ObjectiveFinisher m_ObjectiveFinisher;
-
+        
 
         [HideInInspector] public PlayableDirector m_PlayableDirector;
         public bool canInteract = true;
@@ -107,6 +107,8 @@ namespace AI
         {
             m_ObjectiveFinisher.myMission.SetCompleted();
             m_QuestGiver.myMission.SetActive();
+          QuestManager.QuestManager.updateallQuestNPC();
+            
             UpdateBlackBoard();
         }
 
@@ -139,7 +141,7 @@ namespace AI
             //Debug.Log("Stop");
             //Debug.Log(m_QuestGiver.name);
             //Debug.Log(m_QuestReceiver.name);
-
+            UpdateBlackBoard();
         }
 
         private void Update()

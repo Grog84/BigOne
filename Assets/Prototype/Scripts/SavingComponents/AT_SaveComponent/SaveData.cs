@@ -18,7 +18,7 @@ public class SaveData  {
     public static event SerializeAction OnBeforeSave;
 
 
-  static  Converter C = new Converter();
+    static Converter C = new Converter();
     public static void Load(string path,Actor[] actors)
     {
         actorContainer = LoadActors(path);
@@ -67,27 +67,29 @@ public class SaveData  {
         
         return JsonUtility.FromJson<ActorContainer>(json);  
     }
-    //public static void SaveQuestContainer(string path,string Container)
-    //{
+    public static void SaveQuestContainer(string path, string Container)
+    {
 
-    //    string save = "";
-    //    StreamWriter sw = File.CreateText(path);
-    //    sw.Close();
-    //    File.SetAttributes(path, FileAttributes.Hidden);
-    //    File.WriteAllText(path, Container);
+        string save = "";
+        StreamWriter sw = File.CreateText(path);
+        sw.Close();
+        File.WriteAllText(path, Container);
 
-    //}
-        
-    //public static QuestContainer LoadQuestContainer(string path)
-    //{
-    //    string json = File.ReadAllText(path);
-    //    string[] savedData;
-    //    string save = "";
-    //    savedData = json.Split(' ');
-        
-    //    return JsonUtility.FromJson<QuestContainer>(json);
+    }
 
-    //}
+    public static string LoadQuestContainer(string path)
+    {
+        string json = File.ReadAllText(path);
+        //string[] savedData;
+        //string save = "";
+        //savedData = json.Split(' ');
+        if (json != "{}")
+        {
+            return json;
+        }
+        else
+            return null;
+    }
 
     private static void SaveActors(string path, ActorContainer actors)
     {

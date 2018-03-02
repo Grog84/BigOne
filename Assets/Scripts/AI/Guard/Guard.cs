@@ -143,6 +143,7 @@ namespace AI
             m_State = GuardState.DISTRACTED;
             SetBlackboardValue("GuardState", (int)GuardState.DISTRACTED);
             LoadStats(distractedStats);
+            
 
             statusColor = Color.blue;
             ShrinkCone();
@@ -663,6 +664,10 @@ namespace AI
 
         private void Update()
         {
+            if(m_State == GuardState.DISTRACTED)
+            {
+                return;
+            }
             LookAround();
             UpdatePerceptionUI();
             ChangeStateFromGauge();

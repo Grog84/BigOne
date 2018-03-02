@@ -10,7 +10,7 @@ public class SetGuardDistractedClip : PlayableAsset, ITimelineClipAsset
 
     public ClipCaps clipCaps
     {
-        get { return ClipCaps.None; }
+        get { return ClipCaps.Extrapolation; }
     }
 
     public override Playable CreatePlayable (PlayableGraph graph, GameObject owner)

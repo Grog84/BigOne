@@ -5,12 +5,11 @@ using UnityEngine.UI;
 
 using UnityEngine.Playables;
 
-public class Level1Quest : MonoBehaviour
+public class Level1Quest : CutsceneManager
 {
 
     public Text objectiveText;
     public Text objectiveProgress;
-    public PlayableDirector Cutscene;
     bool played = false;
     public enum QuestProgress { FreeFriends, SearchBall, HideFromMother, FindYourSon }
     public int friendsSaved = 0;
@@ -46,7 +45,7 @@ public class Level1Quest : MonoBehaviour
         {
             objectiveProgress.enabled = false;
             actualQuest = QuestProgress.SearchBall;
-            Cutscene.Play();
+            StartCoroutine(PlayTimeline(m_PlayableDirector));
             objectiveText.text = objectivesDescription[1];
         }
         if (newState == QuestProgress.HideFromMother)

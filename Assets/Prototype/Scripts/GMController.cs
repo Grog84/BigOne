@@ -270,6 +270,7 @@ public class GMController : MonoBehaviour {
 
     public void SetBkgMusicState(float value)
     {
+        Debug.Log("entrato in reset music");
         if (m_BkgMusicPath != "")
             SetFMODParameter(bkgMusic, "GuardStatus", value);
     }

@@ -21,6 +21,7 @@ public class ResetMusicMixerBehaviour : PlayableBehaviour
             if(inputWeight > 0.5f && !input.musicReset)
             {
                 GMController.instance.SetBkgMusicState(0f);
+                
                 input.musicReset = true;
             }
 

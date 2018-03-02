@@ -22,12 +22,13 @@ GameObject:
   - component: {fileID: 33471263015005740}
   - component: {fileID: 23668574997970810}
   - component: {fileID: 95339444776601992}
+  - component: {fileID: 65183526016163912}
   m_Layer: 0
   m_Name: roof_access
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4771644966877436
 Transform:
@@ -81,6 +82,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1216828336215804}
   m_Mesh: {fileID: 4300000, guid: 8eb0b412639c48346a3b8e77a934a0e6, type: 3}
+--- !u!65 &65183526016163912
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1216828336215804}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.000001, y: 2.9970176, z: 3.6896183}
+  m_Center: {x: 0.000000059604645, y: 0.00000017881398, z: 1.8448087}
 --- !u!95 &95339444776601992
 Animator:
   serializedVersion: 3

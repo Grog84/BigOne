@@ -23,8 +23,7 @@ public class Actor : SerializedMonoBehaviour
         data.pos = this.gameObject.transform.position;
 
     }
-
-
+    
     public virtual void LoadData()
     {
 

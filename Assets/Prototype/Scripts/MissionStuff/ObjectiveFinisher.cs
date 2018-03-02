@@ -18,7 +18,10 @@ namespace QuestManager
             {
                 if (other.gameObject.tag == "Player")
                 {
-                    QM.ActivateNextObjective();
+                    if (Input.GetButtonDown("Interact"))
+                    {
+                        QM.ActivateNextObjective();
+                    }
                 }
             }
         }

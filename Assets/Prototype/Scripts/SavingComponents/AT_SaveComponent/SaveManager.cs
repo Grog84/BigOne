@@ -37,6 +37,7 @@ public class SaveManager :MonoBehaviour {
 
     private List<ActorData> allActorData;
 
+    private QuestManager.QuestManager QM;
 
     private GameObject objPrefab;
     public static GameObject oPrefab;
@@ -65,7 +66,6 @@ public class SaveManager :MonoBehaviour {
     {
         //Caricamento attori (Dati salvati sul disco) 
         allActor = FindObjectsOfType<Actor>();
-
         //Inizializzazione livelli nuovi
         PlayerProfile.completedLevel = new bool[UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings-1];
         for (int i = 0; i < PlayerProfile.completedLevel.Length; i++)

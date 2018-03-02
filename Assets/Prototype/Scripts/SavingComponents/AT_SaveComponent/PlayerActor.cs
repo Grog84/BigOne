@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class PlayerActor : Actor
 {
-
-  
+      
     public override void Awake()
     {
         base.Awake();

@@ -84,7 +84,8 @@ namespace QuestManager
         private void Awake()
         {
             questPath = System.IO.Path.Combine(Application.persistentDataPath, "quest.json");
-            dataPath = System.IO.Path.Combine(Application.persistentDataPath, "quest.json");            
+            dataPath = System.IO.Path.Combine(Application.persistentDataPath, "quest.json");
+           LoadQuestGameObjectName();
             AssignQuestToObjectiveStarter();
             AssignQuestToObjectiveFinisher();
             ActivateIndexQuest(0);
@@ -123,7 +124,7 @@ namespace QuestManager
         public void SaveQuest()
         {
 
-            string questSave = JsonUtility.ToJson(QC);
+            string questSave = JsonUtility.ToJson(QC.QuestList);
             SaveData.SaveQuestContainer(dataPath, questSave);
         }
 
@@ -135,7 +136,8 @@ namespace QuestManager
                 {
                     m.Reset();
                 }             
-            }          
+            }
+            SaveQuestGameObjectName();
             SaveQuest();
         }
 
@@ -172,7 +174,7 @@ namespace QuestManager
         {
             foreach (Quest m in QC.QuestList)
             {
-                if (m.questFinisher.gameObject != null)
+                if (m.questFinisher != null)
                 {
                     ObjectiveFinisher OF;
                     OF = m.questFinisher.gameObject.GetComponent<ObjectiveFinisher>();
@@ -234,7 +236,26 @@ namespace QuestManager
             if (missione <= QC.QuestList.Count)
             {
                 QC.QuestList[missione].SetActive();
-              //  Testo.text = QC.QuestList[missione].questName;
+   
+            }
+        }
+        public void SaveQuestGameObjectName()
+        {
+            foreach (Quest q in QC.QuestList)
+            {
+                if(q.questGiver != null)
+                q.questGiver_ObjName = q.questGiver.name;
+                if (q.questFinisher != null)
+                    q.questFinisher_ObjName = q.questFinisher.name;                    
+            }
+        }
+        public void LoadQuestGameObjectName()
+        {
+            foreach (Quest q in QC.QuestList)
+            {
+                
+                    q.questGiver = GameObject.Find(q.questGiver_ObjName);
+                q.questFinisher = GameObject.Find(q.questFinisher_ObjName);
             }
         }
     }

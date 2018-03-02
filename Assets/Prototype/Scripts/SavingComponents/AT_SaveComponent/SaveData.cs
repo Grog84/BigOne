@@ -77,19 +77,15 @@ public class SaveData  {
 
     }
 
-    public static string LoadQuestContainer(string path)
-    {
-        string json = File.ReadAllText(path);
-        //string[] savedData;
-        //string save = "";
-        //savedData = json.Split(' ');
-        if (json != "{}")
-        {
-            return json;
-        }
-        else
-            return null;
-    }
+    //public static List<Quest> LoadQuestContainer(string path)
+    //{
+    //    string json = File.ReadAllText(path);
+    //    //string[] savedData;
+    //    List<Quest> save = "";
+    //    //savedData = json.Split(' ');
+    //    save = 
+    //    return  
+    //}
 
     private static void SaveActors(string path, ActorContainer actors)
     {

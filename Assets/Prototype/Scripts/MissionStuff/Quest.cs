@@ -16,13 +16,19 @@ namespace QuestManager
         public bool active;
         public bool inactive;
         public bool completed;
-        
+        [HideInInspector]
+        public string questGiver_ObjName;
+        [HideInInspector]
+        public string questFinisher_ObjName;
+
+
 
         public Quest(string _questName, GameObject _questGiver, GameObject _questFinisher)
         {
             questName = _questName;
             questGiver = _questGiver;
             questFinisher = _questFinisher;
+       
            
         }
         public void Reset()

@@ -11,22 +11,6 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1505722147122426}
   m_IsPrefabParent: 1
---- !u!1 &1141575798112874
-GameObject:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4526004694300580}
-  - component: {fileID: 135121078369920588}
-  m_Layer: 0
-  m_Name: CollisionObject0
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1505722147122426
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,7 +70,6 @@ GameObject:
   - component: {fileID: 4333985489965442}
   - component: {fileID: 33642170216797916}
   - component: {fileID: 23888619501896604}
-  - component: {fileID: 95236738459981138}
   - component: {fileID: 65189935054733222}
   m_Layer: 0
   m_Name: Bush_Destroyed_Pillar_01
@@ -121,19 +104,6 @@ Transform:
   m_Father: {fileID: 4975260262734712}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4526004694300580
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1141575798112874}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.54822546, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4957306651759050}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4957306651759050
 Transform:
   m_ObjectHideFlags: 1
@@ -145,7 +115,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4123677824522292}
-  - {fileID: 4526004694300580}
   m_Father: {fileID: 4975260262734712}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -156,7 +125,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1505722147122426}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 40.73352, y: 4.9990845, z: -49.960327}
+  m_LocalPosition: {x: 13.19, y: 0.00071372837, z: -4.115}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4957306651759050}
@@ -178,7 +147,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: ad9209549a6fd4eb69f402bda3b5dcfc, type: 2}
-  - {fileID: 2100000, guid: 6e5950c6c078940f7a756d20266061aa, type: 2}
+  - {fileID: 2100000, guid: 88e38a1e34c6bbe438bb6d18b1757418, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -256,35 +225,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 0.51600003, z: 1.2000008}
   m_Center: {x: 0, y: 0.25800002, z: 0}
---- !u!95 &95236738459981138
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1666450973201690}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 1244e99c782f74ad1a9c5399325602a6, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!135 &135121078369920588
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1141575798112874}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.6858
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!193 &193309434782534400
 Tree:
   m_ObjectHideFlags: 1

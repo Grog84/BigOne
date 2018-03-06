@@ -40,7 +40,7 @@ MonoBehaviour:
         stationaryBlending: 0.95
         motionBlending: 0.85
   ambientOcclusion:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       intensity: 1.5
       radius: 0.04
@@ -55,11 +55,11 @@ MonoBehaviour:
       reflection:
         blendType: 0
         reflectionQuality: 2
-        maxDistance: 100
-        iterationCount: 256
-        stepSize: 3
-        widthModifier: 0.5
-        reflectionBlur: 1
+        maxDistance: 278
+        iterationCount: 419
+        stepSize: 10
+        widthModifier: 7.53
+        reflectionBlur: 5.36
         reflectBackfaces: 0
       intensity:
         reflectionMultiplier: 1
@@ -100,8 +100,8 @@ MonoBehaviour:
     m_Enabled: 1
     m_Settings:
       bloom:
-        intensity: 0.2
-        threshold: 0.6
+        intensity: 0.4
+        threshold: 0.3
         softKnee: 0.245
         radius: 1.55
         antiFlicker: 0
@@ -284,7 +284,7 @@ MonoBehaviour:
     m_Enabled: 0
     m_Settings:
       spectralTexture: {fileID: 0}
-      intensity: 0.1
+      intensity: 0
   grain:
     m_Enabled: 0
     m_Settings:

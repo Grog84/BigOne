@@ -361,12 +361,13 @@ namespace AI
                 Debug.Log("Solo passaggio");
                 SetBlackboardValue("CheckingNavPoint", false);
                 SetBlackboardValue("WaitingCoroutineRunning", false);
+                m_NavMeshAgent.autoBraking = false;
                 yield return null;
                 yield break;
 
             }
-                
 
+            m_NavMeshAgent.autoBraking = true;
             //Debug.Log("Started waiting coroutine: " + checkNavPointTime);
             while (navPointTimer <= checkNavPointTime)
             {

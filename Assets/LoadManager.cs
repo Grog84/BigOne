@@ -9,8 +9,10 @@ public class LoadManager : MonoBehaviour
 {
     [HideInInspector] public static LoadManager instance = null;
     [HideInInspector] public int currentSceneIndex;
+    [HideInInspector] public int sceneToLoad;
+    [HideInInspector] public SaveManager SM;
 
-	void Awake ()
+    void Awake ()
     {
         //Singleton
         if (instance == null)
@@ -25,6 +27,7 @@ public class LoadManager : MonoBehaviour
     public void ChangeToLoadScene(int currentScene)
     {
         currentSceneIndex = currentScene;
+        sceneToLoad = SM.PlayerProfile.LastScene -1;
         Debug.Log(currentScene);
         Debug.Log(currentSceneIndex);
         AsyncOperation async = SceneManager.LoadSceneAsync("LoadScene");
@@ -32,27 +35,29 @@ public class LoadManager : MonoBehaviour
         GMController.instance.SetBkgMusicActive(false);
     }
 
-    public IEnumerator ChangeLevel(Animator anim, Text skip)
+    public IEnumerator ChangeLevel(/*Animator anim, Text skip*/)
     {
+        Debug.Log("PROVA");
         AsyncOperation async = SceneManager.LoadSceneAsync(currentSceneIndex + 1);
-        async.allowSceneActivation = false;
+        //async.allowSceneActivation = false;
 
-        while(async.progress < 0.9f)
-        {
-            Debug.Log("Progress: " + async.progress);
-            yield return null;
-        }
+        //while(async.progress < 0.9f)
+        //{
+        //    Debug.Log("Progress: " + async.progress);
+        //    yield return null;
+        //}
 
-        skip.gameObject.SetActive(true);
+        //skip.gameObject.SetActive(true);
         //anim.speed = 0;
-        anim.gameObject.SetActive(false);
+        //anim.gameObject.SetActive(false);
 
-        while(!Input.anyKeyDown)
-        {
-            yield return null;
-        }
+        //while(!Input.anyKeyDown)
+        //{
+        //    yield return null;
+        //}
 
-        async.allowSceneActivation = true;
+        //async.allowSceneActivation = true;
+        yield return null;
     }
 
 }

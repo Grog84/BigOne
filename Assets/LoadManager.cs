@@ -28,6 +28,8 @@ public class LoadManager : MonoBehaviour
         Debug.Log(currentScene);
         Debug.Log(currentSceneIndex);
         AsyncOperation async = SceneManager.LoadSceneAsync("LoadScene");
+        GMController.instance.SetAmbientMusicActive(false);
+        GMController.instance.SetBkgMusicActive(false);
     }
 
     public IEnumerator ChangeLevel(Animator anim, Text skip)

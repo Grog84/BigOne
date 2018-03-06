@@ -275,6 +275,22 @@ public class GMController : MonoBehaviour {
             SetFMODParameter(bkgMusic, "GuardStatus", value);
     }
 
+    public void SetBkgMusicActive(bool state)
+    {
+        if (state)
+            bkgMusic.start();
+        else
+            bkgMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
+    public void SetAmbientMusicActive(bool state)
+    {
+        if (state)
+            ambientMusic.start();
+        else
+            ambientMusic.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
     void SetFMODParameter(FMOD.Studio.EventInstance e, string name, float value)
     {
         FMOD.Studio.ParameterInstance parameter;

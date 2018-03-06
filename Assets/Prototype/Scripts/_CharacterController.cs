@@ -11,6 +11,7 @@ namespace Character
     public class _CharacterController : MonoBehaviour
     {
         [HideInInspector] public bool hasInteractedWithNPC = false;
+        [HideInInspector] public bool isCarrying = false;
         [HideInInspector] public int currentConsegnaOggetto;
         [HideInInspector] public bool firstCrouch = false;             // used to fill the bounds crouch array 1 time only
         [HideInInspector] public bool canStand = true;

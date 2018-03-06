@@ -12,14 +12,10 @@ namespace Character.Decisions
 
         public override bool Decide(CharacterStateController controller)
         {
-            if (controller.m_CharacterController.hasInteractedWithNPC)
+            if (controller.m_CharacterController.isCarrying == false)
             {
-                //if (Quest.isCompleted)
-                //{                
-                //    controller.m_CharacterController.hasInteractedWithNPC = false;                
-                //    return true;
-                //}
-                return false;
+                
+                return true;
             }
             return false;
         }

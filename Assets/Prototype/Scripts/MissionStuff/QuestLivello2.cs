@@ -2,57 +2,61 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Character;
 
 namespace QuestManager
 {
 
-    public class QuestLivello2 : MonoBehaviour {
-
-        public enum STATUSLEVELO2
-        {
-            Objective1, Objective2, Objective3, Objective4, Objective5, Objective6, Objective7, Objective8
-        }
-
-        STATUSLEVELO2 Level2;
-        // Use this for initialization
-        void Start() {
-            Level2 = STATUSLEVELO2.Objective1;
-            Text = GameObject.Find("ObjectiveName");
-         
-        }
+    public class QuestLivello2 : CutsceneManager
+    {
+        _CharacterController m_controller;
+        public enum STATUSLEVELO2 { Objective1, Objective2, Objective3, Objective4, Objective5, Objective6, Objective7, Objective8 }
+        [HideInInspector]public STATUSLEVELO2 Level2;
         GameObject Text;
-        // Update is called once per frame
+        public string[] objectivesDescription;
+
+        void Start()
+        {
+            m_controller = GetComponent<_CharacterController>();
+            Level2 = STATUSLEVELO2.Objective1;
+            Text = GameObject.Find("ObjectiveLvl1");
+        }
+        
+
         void Update() {
             switch (Level2)
             {
                 case STATUSLEVELO2.Objective1:
-                    Text.GetComponent<Text>().text = "Talk to your neighbour";
+                    Text.GetComponent<Text>().text = objectivesDescription[0];
                     break;
                 case STATUSLEVELO2.Objective2:
-                    Text.GetComponent<Text>().text = "Bring lunch to your neighbour’s husband";
+                    Text.GetComponent<Text>().text = objectivesDescription[1];
+                    m_controller.isCarrying = true;
                     break;
                 case STATUSLEVELO2.Objective3:
-                    Text.GetComponent<Text>().text = "Talk to the little girl";
+                    Text.GetComponent<Text>().text = objectivesDescription[2];
+                    m_controller.isCarrying = false;
                     break;
                 case STATUSLEVELO2.Objective4:
-                    Text.GetComponent<Text>().text = "Find the girl's toy";
+                    Text.GetComponent<Text>().text = objectivesDescription[3];
                     break;
                 case STATUSLEVELO2.Objective5:
-                    Text.GetComponent<Text>().text = "Bring the toy to the girl";
+                    Text.GetComponent<Text>().text = objectivesDescription[4];
                     break;
                 case STATUSLEVELO2.Objective6:
-                    Text.GetComponent<Text>().text = "Get to the park to find your son";
+                    Text.GetComponent<Text>().text = objectivesDescription[5];
                     break;
                 case STATUSLEVELO2.Objective7:
-                    Text.GetComponent<Text>().text = "Hide from your mom!";
+                    m_PlayableDirector.Play();
                     break;
-                case STATUSLEVELO2.Objective8:
-                    Text.GetComponent<Text>().text = "Find your hidden son";
-                    break;
+               
             }
-
+           
          
         }
+
+
+
         public void OnTriggerStay(Collider other)
         {
             if(Input.GetButton("Interact"))

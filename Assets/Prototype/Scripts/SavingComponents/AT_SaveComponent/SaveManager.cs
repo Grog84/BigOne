@@ -136,7 +136,7 @@ public class SaveManager :MonoBehaviour {
 
     public void LoadLastScene()
     {
-	    PlayerProfile.Continue = Profile.LoadProfile(profilePath).Continue;
+	    //PlayerProfile.Continue = ProfileData.LoadProfile(profilePath).Continue;
         SceneManager.LoadScene(PlayerProfile.LastScene);
     }
     

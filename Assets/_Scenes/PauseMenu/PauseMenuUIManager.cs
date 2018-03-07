@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
 
-// public class PauseMenuUIManager : MonoBehaviour
+
 public class PauseMenuUIManager : MonoBehaviour
 
 {

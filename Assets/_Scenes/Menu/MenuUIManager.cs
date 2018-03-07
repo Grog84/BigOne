@@ -192,7 +192,7 @@ public class MenuUIManager : MonoBehaviour
 
     public void Continue()
     {
-        SM.PlayerProfile.Continue = true;
+       // SM.PlayerProfile.Continue = true;
         SM.LoadLastScene();
     }
 

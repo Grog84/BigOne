@@ -30,7 +30,7 @@ public class AT_LoadSceneASync : MonoBehaviour
     private void Start()
     {
  
-        Profiler =Profile.LoadProfile(dataPath);
+      //  Profiler =Profile.LoadProfile(dataPath);
 
     }
   

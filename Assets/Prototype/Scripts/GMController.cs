@@ -131,8 +131,7 @@ public class GMController : MonoBehaviour {
     }
 
     private void Start()
-    {
-        
+    {       
         playerTransform = new Transform[players.Length];
 
         for (int i = 0; i < players.Length; i++)

@@ -9,6 +9,15 @@ public class SkipCutscene : MonoBehaviour
     public GameObject skip;
     bool loading = false;
 
+    public bool doneLoading = false;
+    [HideInInspector] public bool canSkip = false;
+
+    private void Start()
+    {
+        LoadManager.instance.currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        StartCoroutine(LoadManager.instance.SkipCutscene(gameObject));        
+    }
+
     IEnumerator skipFade()
     {
         yield return new WaitForSeconds(2f);
@@ -17,21 +26,23 @@ public class SkipCutscene : MonoBehaviour
 
     void Update ()
     {
-		if(Input.anyKeyDown)
+        if (doneLoading)
         {
-            if (!skip.activeSelf)
+            if (Input.anyKeyDown)
             {
-                skip.SetActive(true);
-                StartCoroutine(skipFade());
-            }
+                if (!skip.activeSelf && !loading)
+                {
+                    skip.SetActive(true);
+                    StartCoroutine(skipFade());
+                }
 
-            else if(skip.activeSelf && !loading)
-            {
-                loading = true;
-                LoadManager.instance.currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-                Debug.Log("Skip");
-                StartCoroutine(LoadManager.instance.ChangeLevel());
-                //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+                else if (skip.activeSelf && !loading)
+                {
+                    LoadManager.instance.PlayFade();
+                    loading = true;
+                    canSkip = true;
+                    Debug.Log("Skip");
+                }
             }
         }
 	}

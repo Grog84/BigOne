@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.Playables;
 
 public class LoadManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class LoadManager : MonoBehaviour
     [HideInInspector] public int currentSceneIndex;
     [HideInInspector] public int sceneToLoad;
     [HideInInspector] public SaveManager SM;
+
+    private PlayableDirector playable;
 
     void Awake ()
     {
@@ -22,42 +25,91 @@ public class LoadManager : MonoBehaviour
             Destroy(gameObject);
 
         DontDestroyOnLoad(gameObject);
+
+        playable = GetComponent<PlayableDirector>();
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
-	
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        StopFade();
+    }
+
+    public void PlayFade()
+    {
+        playable.Play();
+    }
+
+    public void StopFade()
+    {
+        Debug.Log("STOPPAH!");
+        playable.Stop();
+    }
+
     public void ChangeToLoadScene(int currentScene)
     {
-        currentSceneIndex = currentScene;
-        sceneToLoad = SM.PlayerProfile.LastScene -1;
-        Debug.Log(currentScene);
-        Debug.Log(currentSceneIndex);
-        AsyncOperation async = SceneManager.LoadSceneAsync("LoadScene");
-        GMController.instance.SetAmbientMusicActive(false);
-        GMController.instance.SetBkgMusicActive(false);
+            currentSceneIndex = currentScene;
+            sceneToLoad = SM.PlayerProfile.LastScene - 1;
+            Debug.Log(currentScene);
+            Debug.Log(currentSceneIndex);
+            AsyncOperation async = SceneManager.LoadSceneAsync("LoadScene");
+            GMController.instance.SetAmbientMusicActive(false);
+            GMController.instance.SetBkgMusicActive(false);
     }
 
-    public IEnumerator ChangeLevel(/*Animator anim, Text skip*/)
+    public IEnumerator ChangeLevel()
     {
-        Debug.Log("PROVA");
-        AsyncOperation async = SceneManager.LoadSceneAsync(currentSceneIndex + 1);
-        //async.allowSceneActivation = false;
+        AsyncOperation async;
 
-        //while(async.progress < 0.9f)
-        //{
-        //    Debug.Log("Progress: " + async.progress);
-        //    yield return null;
-        //}
-
-        //skip.gameObject.SetActive(true);
-        //anim.speed = 0;
-        //anim.gameObject.SetActive(false);
-
-        //while(!Input.anyKeyDown)
-        //{
-        //    yield return null;
-        //}
-
-        //async.allowSceneActivation = true;
+        if (currentSceneIndex == (SceneManager.sceneCountInBuildSettings - 2))
+        {
+            async = SceneManager.LoadSceneAsync(0);
+        }
+        else
+        {
+            async = SceneManager.LoadSceneAsync(currentSceneIndex + 1);
+        }     
         yield return null;
+    }
+
+    public IEnumerator SkipCutscene( GameObject skipCanvas)
+    {
+        AsyncOperation async = SceneManager.LoadSceneAsync(currentSceneIndex + 1);
+        async.allowSceneActivation = false;
+
+        while (async.progress < 0.9f)
+        {
+            yield return null;
+        }
+
+
+        skipCanvas.GetComponent<SkipCutscene>().doneLoading = true;
+        Debug.Log(async.progress); 
+
+        while (!skipCanvas.GetComponent<SkipCutscene>().canSkip)
+        {
+            yield return null;
+        }
+
+        async.allowSceneActivation = true;
+       // Debug.Log(async.isDone + " async is done"); 
+
+        while (true)
+        {
+            if (async.isDone)
+            {
+                Debug.Log("Async Done");
+                StopFade();
+                yield break;
+            }
+            else
+            {
+                Debug.Log("Async not Done");
+                yield return null;
+            }
+        }
+
     }
 
 }

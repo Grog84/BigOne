@@ -368,7 +368,7 @@ namespace AI
             }
 
             m_NavMeshAgent.autoBraking = true;
-            //Debug.Log("Started waiting coroutine: " + checkNavPointTime);
+            Debug.Log("Started waiting coroutine: " + checkNavPointTime);
             while (navPointTimer <= checkNavPointTime)
             {
                 navPointTimer += Time.deltaTime;

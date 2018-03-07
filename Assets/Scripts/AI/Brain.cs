@@ -16,10 +16,12 @@ namespace AI
         public Vector2 midRangeArea;
         [Space(10)]
         public float shortRangeTickDelay = 0.2f;
+        float shortRangeSQ;
 
         public float midRangeTickDelay = 1f;
 
         public float longRangeTickDelay = 5f;
+        float longRangeSQ;
 
         public DecisionMaker decisionMaker;
 
@@ -29,6 +31,8 @@ namespace AI
         {
             brainActive = true;
             StartCoroutine(BrainCO());
+            shortRangeSQ = midRangeArea.x * midRangeArea.x;
+            longRangeSQ = midRangeArea.y * midRangeArea.y;
         }
 
         public IEnumerator BrainCO()
@@ -44,7 +48,7 @@ namespace AI
 
         void TickBrain()
         {
-            //Debug.Log("Thinking");
+            Debug.Log("Thinking");
             decisionMaker.MakeDecision();
             UpdateTickDelay();
         }
@@ -55,11 +59,11 @@ namespace AI
             if (GMController.instance.isCharacterPlaying == CharacterActive.Boy || GMController.instance.isCharacterPlaying == CharacterActive.Mother)
             {
                 distance = (GMController.instance.playerTransform[(int)GMController.instance.isCharacterPlaying].position - transform.position).sqrMagnitude;
-                if (distance < midRangeArea.x)
+                if (distance < shortRangeSQ)
                 {
                     tickDelay = shortRangeTickDelay;
                 }
-                else if (distance >= midRangeArea.x && distance < midRangeArea.y)
+                else if (distance >= shortRangeSQ && distance < longRangeSQ)
                 {
                     tickDelay = midRangeTickDelay;
                 }

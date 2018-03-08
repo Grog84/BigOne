@@ -61,13 +61,17 @@ public class LoadManager : MonoBehaviour
 
     public void ChangeToLoadScene(int currentScene)
     {
-            currentSceneIndex = currentScene;
-            sceneToLoad = SM.PlayerProfile.LastScene;
-            Debug.Log(currentScene);
-            Debug.Log(currentSceneIndex);
-            AsyncOperation async = SceneManager.LoadSceneAsync("LoadScene");
+         currentSceneIndex = currentScene;
+         sceneToLoad = SM.PlayerProfile.LastScene;
+         Debug.Log(currentScene);
+         Debug.Log(currentSceneIndex);
+         AsyncOperation async = SceneManager.LoadSceneAsync("LoadScene");
+
+        if (GameObject.Find("GameManager") != null)
+        {
             GMController.instance.SetAmbientMusicActive(false);
             GMController.instance.SetBkgMusicActive(false);
+        }
     }
 
     public IEnumerator ChangeLevel()

@@ -41,7 +41,7 @@ public class SkipCutscene : MonoBehaviour
                     LoadManager.instance.PlayFade();
                     loading = true;
                     canSkip = true;
-                    Debug.Log("Skip");
+                    //Debug.Log("Skip");
                 }
             }
         }

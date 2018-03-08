@@ -9,7 +9,7 @@ public class Loading : MonoBehaviour
     public Text skipMessage;
 
 	void Start ()
-    {
-        StartCoroutine(LoadManager.instance.ChangeLevel(/*anim, skipMessage*/));
+    {    
+        StartCoroutine(LoadManager.instance.ChangeLevel());  
 	}
 }

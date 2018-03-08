@@ -349,9 +349,31 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1273342863}
-        m_MethodName: Continue
+      - m_Target: {fileID: 1396832161}
+        m_MethodName: PlayFade
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1396832161}
+        m_MethodName: EnableContinue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1396832161}
+        m_MethodName: ChangeToLoadScene
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1920,6 +1942,48 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 214035622}
+--- !u!1001 &251828427
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4477555871641194, guid: bdcea21004064174098404c4e753b4de, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0.8714583
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477555871641194, guid: bdcea21004064174098404c4e753b4de, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.7627917
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477555871641194, guid: bdcea21004064174098404c4e753b4de, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -35.65625
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477555871641194, guid: bdcea21004064174098404c4e753b4de, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477555871641194, guid: bdcea21004064174098404c4e753b4de, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477555871641194, guid: bdcea21004064174098404c4e753b4de, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477555871641194, guid: bdcea21004064174098404c4e753b4de, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4477555871641194, guid: bdcea21004064174098404c4e753b4de, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: bdcea21004064174098404c4e753b4de, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &252242359
 GameObject:
   m_ObjectHideFlags: 0
@@ -3503,48 +3567,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 511371170}
---- !u!1001 &535487950
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4332644134647656, guid: cd738eec5dc3a784286b7e030ecd5a92, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0.8714583
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332644134647656, guid: cd738eec5dc3a784286b7e030ecd5a92, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.7627917
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332644134647656, guid: cd738eec5dc3a784286b7e030ecd5a92, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -35.65625
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332644134647656, guid: cd738eec5dc3a784286b7e030ecd5a92, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332644134647656, guid: cd738eec5dc3a784286b7e030ecd5a92, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332644134647656, guid: cd738eec5dc3a784286b7e030ecd5a92, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332644134647656, guid: cd738eec5dc3a784286b7e030ecd5a92, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4332644134647656, guid: cd738eec5dc3a784286b7e030ecd5a92, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: cd738eec5dc3a784286b7e030ecd5a92, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &586664476
 GameObject:
   m_ObjectHideFlags: 0
@@ -9558,6 +9580,12 @@ WindZone:
   m_WindTurbulence: 0.09
   m_WindPulseMagnitude: 0.11
   m_WindPulseFrequency: 0.01
+--- !u!114 &1396832161 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114940559951063520, guid: bdcea21004064174098404c4e753b4de,
+    type: 2}
+  m_PrefabInternal: {fileID: 251828427}
+  m_Script: {fileID: 11500000, guid: 3e4605886736ebc45911cc4e0c73fde8, type: 3}
 --- !u!1 &1402787906
 GameObject:
   m_ObjectHideFlags: 0
@@ -11412,17 +11440,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1273342863}
-        m_MethodName: StartNewGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: FadeOut
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 101424069}
         m_MethodName: Play
         m_Mode: 1
@@ -11436,6 +11453,17 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1874610680}
         m_MethodName: Select
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1273342863}
+        m_MethodName: StartNewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

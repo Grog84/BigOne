@@ -8,10 +8,15 @@ using UnityEngine.Playables;
 
 public class LoadManager : MonoBehaviour
 {
+
     [HideInInspector] public static LoadManager instance = null;
     [HideInInspector] public int currentSceneIndex;
     [HideInInspector] public int sceneToLoad;
     [HideInInspector] public SaveManager SM;
+
+    [HideInInspector] public bool isContinue;
+
+    public Canvas fadeCanvas;
 
     private PlayableDirector playable;
 
@@ -27,7 +32,7 @@ public class LoadManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         playable = GetComponent<PlayableDirector>();
-
+        SM = GameObject.Find("SaveManager").GetComponent<SaveManager>();
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -38,19 +43,26 @@ public class LoadManager : MonoBehaviour
 
     public void PlayFade()
     {
+        Debug.Log("Start Fade");
+        fadeCanvas.sortingOrder = 1;
         playable.Play();
     }
 
     public void StopFade()
     {
-        Debug.Log("STOPPAH!");
         playable.Stop();
+        fadeCanvas.sortingOrder = 0;
+    }
+
+    public void EnableContinue()
+    {
+        isContinue = true;
     }
 
     public void ChangeToLoadScene(int currentScene)
     {
             currentSceneIndex = currentScene;
-            sceneToLoad = SM.PlayerProfile.LastScene - 1;
+            sceneToLoad = SM.PlayerProfile.LastScene;
             Debug.Log(currentScene);
             Debug.Log(currentSceneIndex);
             AsyncOperation async = SceneManager.LoadSceneAsync("LoadScene");
@@ -61,11 +73,18 @@ public class LoadManager : MonoBehaviour
     public IEnumerator ChangeLevel()
     {
         AsyncOperation async;
-
+        // If is in the end cutscene
         if (currentSceneIndex == (SceneManager.sceneCountInBuildSettings - 2))
         {
             async = SceneManager.LoadSceneAsync(0);
         }
+        // If is continuing the last game session
+        else if(isContinue)
+        {
+            isContinue = false;
+            async = SceneManager.LoadSceneAsync(sceneToLoad);
+        }
+        // Normal game progression
         else
         {
             async = SceneManager.LoadSceneAsync(currentSceneIndex + 1);
@@ -95,20 +114,20 @@ public class LoadManager : MonoBehaviour
         async.allowSceneActivation = true;
        // Debug.Log(async.isDone + " async is done"); 
 
-        while (true)
-        {
-            if (async.isDone)
-            {
-                Debug.Log("Async Done");
-                StopFade();
-                yield break;
-            }
-            else
-            {
-                Debug.Log("Async not Done");
-                yield return null;
-            }
-        }
+        //while (true)
+        //{
+        //    if (async.isDone)
+        //    {
+        //        Debug.Log("Async Done");
+        //        StopFade();
+        //        yield break;
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("Async not Done");
+        //        yield return null;
+        //    }
+        //}
 
     }
 

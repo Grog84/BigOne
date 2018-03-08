@@ -192,14 +192,18 @@ public class MenuUIManager : MonoBehaviour
 
     public void Continue()
     {
-       // SM.PlayerProfile.Continue = true;
-        SM.LoadLastScene();
+        // SM.PlayerProfile.Continue = true;
+        LoadManager.instance.PlayFade();
+        LoadManager.instance.isContinue = true;
+        LoadManager.instance.ChangeToLoadScene(SceneManager.sceneCountInBuildSettings);
+        //SM.LoadLastScene();
     }
 
     int ExitOrNewGame;
     public void StartNewGame()
     {
         SM.PlayerProfile.Continue = false;
+        LoadManager.instance.PlayFade();
         SceneManager.LoadSceneAsync(1);
 
     }

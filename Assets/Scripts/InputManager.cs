@@ -73,6 +73,23 @@ public class InputManager : MonoBehaviour {
         }
     }
 
+    public void HideCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void ShowCursor()
+    {
+        if(m_State == InputState.MouseKeyboard)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
     IEnumerator ResetUpdateTick()
     {
 

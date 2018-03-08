@@ -33,7 +33,7 @@ public class LoadManager : MonoBehaviour
 
         playable = GetComponent<PlayableDirector>();
 
-        if (GameObject.Find("SaveManager").GetComponent<SaveManager>() != null)
+        if (GameObject.Find("SaveManager") != null)
         {
             SM = GameObject.Find("SaveManager").GetComponent<SaveManager>();
         }

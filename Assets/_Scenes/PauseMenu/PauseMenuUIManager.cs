@@ -20,6 +20,16 @@ public class PauseMenuUIManager : MonoBehaviour
     {
         if (Input.GetButtonDown("Pause"))
         {
+            if(Cursor.lockState != CursorLockMode.None)
+            {
+                Debug.Log("unlock");
+                InputManager.instance.ShowCursor();
+            }
+            else
+            {
+                Debug.Log("lock");
+                InputManager.instance.HideCursor();
+            }
             Pause();
         }
 
@@ -84,6 +94,7 @@ public class PauseMenuUIManager : MonoBehaviour
     public void BackToGame() // Back to game function
     {
         Time.timeScale = 1;
+        InputManager.instance.HideCursor();
         //GMController.instance.isGameActive = true;
         //pauseCamera.Resume();
 
@@ -171,4 +182,5 @@ public class PauseMenuUIManager : MonoBehaviour
         SceneManager.LoadScene("Menu");
         //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
     }
+
 }

@@ -28,7 +28,7 @@ public class MenuUIManager : MonoBehaviour
         Time.timeScale = 1;
         SM = FindObjectOfType<SaveManager>();
         ReturnToMainMenu();
-
+       
         ContinueButtonOnOff();
     }
 
@@ -193,6 +193,7 @@ public class MenuUIManager : MonoBehaviour
     public void Continue()
     {
         // SM.PlayerProfile.Continue = true;
+        HideMouseCursor();
         LoadManager.instance.PlayFade();
         LoadManager.instance.isContinue = true;
         LoadManager.instance.ChangeToLoadScene(SceneManager.sceneCountInBuildSettings);
@@ -202,6 +203,8 @@ public class MenuUIManager : MonoBehaviour
     int ExitOrNewGame;
     public void StartNewGame()
     {
+        Debug.Log("Inizio");
+        HideMouseCursor();
         SM.PlayerProfile.Continue = false;
         LoadManager.instance.PlayFade();
         SceneManager.LoadSceneAsync(1);
@@ -272,6 +275,11 @@ public class MenuUIManager : MonoBehaviour
 
     }
 
+    public void HideMouseCursor()
+    {
+        Debug.Log("lock");
+        Cursor.lockState = CursorLockMode.Locked;
+    }
 
     private void Update()
     {

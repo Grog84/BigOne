@@ -32,7 +32,11 @@ public class LoadManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         playable = GetComponent<PlayableDirector>();
-        SM = GameObject.Find("SaveManager").GetComponent<SaveManager>();
+
+        if (GameObject.Find("SaveManager").GetComponent<SaveManager>() != null)
+        {
+            SM = GameObject.Find("SaveManager").GetComponent<SaveManager>();
+        }
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -51,7 +55,7 @@ public class LoadManager : MonoBehaviour
     public void StopFade()
     {
         playable.Stop();
-        fadeCanvas.sortingOrder = 0;
+        fadeCanvas.sortingOrder = -1;
     }
 
     public void EnableContinue()

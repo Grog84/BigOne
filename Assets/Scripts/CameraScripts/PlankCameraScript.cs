@@ -32,7 +32,7 @@ public class PlankCameraScript : CameraScript {
 
 
         cam = this.GetComponent<CinemachineVirtualCamera>();
-        //Cursor.lockState = CursorLockMode.Locked;
+      
         cam.m_Lens.NearClipPlane = nearClipPlaneDistance;
     }
 

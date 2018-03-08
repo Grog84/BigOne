@@ -192,46 +192,5 @@ public class CameraScript : MonoBehaviour
         yield return null;
     }
 
-    //protected IEnumerator EnableCollisions()
-    //{
-    //    int highestPriority = 0;
-
-    //    for (int i = 0; i < camerasInScene.Length; i++)
-    //    {
-    //        if(camerasInScene[i].gameObject.GetComponent<CameraCollision>() != null)
-    //        {
-    //            if(camerasInScene[i].m_Priority > highestPriority)
-    //            {
-    //                highestPriority = camerasInScene[i].m_Priority;
-                   
-    //            }
-    //            else
-    //            {
-    //                yield return null;
-    //            }
-    //        }
-    //        else
-    //        {
-    //            yield return null;
-    //        }
-    //    }
-
-    //    for (int i = 0; i < camerasInScene.Length; i++)
-    //    {
-    //        if (camerasInScene[i].gameObject.GetComponent<CameraCollision>() != null)
-    //        {
-    //            if(camerasInScene[i].m_Priority == highestPriority)
-    //            {
-    //                camerasInScene[i].GetComponent<CameraCollision>().enabled = true;
-    //            }
-    //            else
-    //            {
-    //                camerasInScene[i].GetComponent<CameraCollision>().enabled = false;
-    //            }
-    //        }
-    //    }
-
-    //    yield return null;
-    //}
-
+    
 }

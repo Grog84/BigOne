@@ -30,7 +30,7 @@ public class ThirdPersonCameraScript : CameraScript {
 
         camTransform = transform;
         cam = this.GetComponent<CinemachineVirtualCamera>();
-        //Cursor.lockState = CursorLockMode.Locked;
+       
         cam.m_Lens.NearClipPlane = nearClipPlaneDistance;
         controllerBoy = boyLookAt.GetComponent<CharacterStateController>();
     }

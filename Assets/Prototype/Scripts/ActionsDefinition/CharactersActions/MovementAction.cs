@@ -85,7 +85,7 @@ namespace Character.Actions
             if (v > 0 || h > 0)
             {
 
-                if (Mathf.Abs(v) > Mathf.Abs(h))
+                if (Mathf.Abs(v) >= Mathf.Abs(h))
                 {
                     controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(v);
                 }
@@ -97,7 +97,7 @@ namespace Character.Actions
             }
             else if (v < 0 || h < 0)
             {
-                if (Mathf.Abs(v) > Mathf.Abs(h))
+                if (Mathf.Abs(v) >= Mathf.Abs(h))
                 {
                     controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(v);
                    
@@ -110,7 +110,7 @@ namespace Character.Actions
             }
             else if (v > 0 || h < 0)
             {
-                if (Mathf.Abs(v) > Mathf.Abs(h))
+                if (Mathf.Abs(v) >= Mathf.Abs(h))
                 {
                     controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(v);
                    
@@ -123,7 +123,7 @@ namespace Character.Actions
             }
             else if (v < 0 || h > 0)
             {
-                if (Mathf.Abs(v) > Mathf.Abs(h))
+                if (Mathf.Abs(v) >= Mathf.Abs(h))
                 {
                     controller.m_CharacterController.m_ForwardAmount = Mathf.Abs(v);
                     

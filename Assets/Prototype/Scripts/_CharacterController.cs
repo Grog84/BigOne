@@ -12,6 +12,7 @@ namespace Character
     {
         [HideInInspector] public bool hasInteractedWithNPC = false;
         [HideInInspector] public bool isCarrying = false;
+        [HideInInspector] public GameObject bag;                       // used to show and hide the bag if needed in the carrying action
         [HideInInspector] public int currentConsegnaOggetto;
         [HideInInspector] public bool firstCrouch = false;             // used to fill the bounds crouch array 1 time only
         [HideInInspector] public bool canStand = true;
@@ -157,6 +158,12 @@ namespace Character
             playerSight = GetComponent<LookAtIK>();
             headClamp = playerSight.solver.headWeight;
             cameraPoint = m_Camera.Find("LookAtTarget").gameObject;
+
+            if (this.gameObject.name == "Mother")
+            {
+                bag = transform.FindDeepChild("shopping_bag").gameObject;
+            }
+
         }
 
         // Use this for initialization

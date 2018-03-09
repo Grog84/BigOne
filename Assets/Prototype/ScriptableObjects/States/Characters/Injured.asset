@@ -11,8 +11,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75ffedece9bcbbd4baec2ae9d1095f4c, type: 3}
   m_Name: Injured
   m_EditorClassIdentifier: 
-  actions: []
-  enterActions: []
-  exitActions: []
-  transitions: []
+  actions:
+  - {fileID: 11400000, guid: 0a39d3bdc3f871542820292ebcdaa873, type: 2}
+  - {fileID: 11400000, guid: 9bca15a300c21dd4caae041cec13be6c, type: 2}
+  enterActions:
+  - {fileID: 11400000, guid: 88957c581586f454c9928ec7809f0dbd, type: 2}
+  exitActions:
+  - {fileID: 11400000, guid: 311d6645eadfe174fa76cadba6b59794, type: 2}
+  transitions:
+  - decision:
+    - {fileID: 11400000, guid: 0f04b413310f3984cb65ed937d912bca, type: 2}
+    trueState: {fileID: 11400000, guid: 0671d112d18c20d43959d00b038f5c4a, type: 2}
+    falseState: {fileID: 11400000, guid: c519242003436ce44bccaa031abf04a2, type: 2}
   sceneGizmosColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

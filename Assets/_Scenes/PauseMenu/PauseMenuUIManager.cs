@@ -22,12 +22,12 @@ public class PauseMenuUIManager : MonoBehaviour
         {
             if(Cursor.lockState != CursorLockMode.None)
             {
-                Debug.Log("unlock");
+                //Debug.Log("unlock");
                 InputManager.instance.ShowCursor();
             }
             else
             {
-                Debug.Log("lock");
+                //Debug.Log("lock");
                 InputManager.instance.HideCursor();
             }
             Pause();

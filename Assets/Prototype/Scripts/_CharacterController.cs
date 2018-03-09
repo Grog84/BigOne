@@ -12,6 +12,7 @@ namespace Character
     {
         [HideInInspector] public bool hasInteractedWithNPC = false;
         [HideInInspector] public bool isCarrying = false;
+        [HideInInspector] public bool isInjured = false;
         [HideInInspector] public GameObject bag;                       // used to show and hide the bag if needed in the carrying action
         [HideInInspector] public int currentConsegnaOggetto;
         [HideInInspector] public bool firstCrouch = false;             // used to fill the bounds crouch array 1 time only

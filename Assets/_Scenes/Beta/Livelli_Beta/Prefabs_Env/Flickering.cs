@@ -4,39 +4,31 @@ using UnityEngine;
 
 public class Flickering : MonoBehaviour {
 
+	public GameObject emitter;
 	private Light[] lights;
-	private int roll;
 
+	public bool isAlwaysFlickering = false;
 	public float minFlickerSpeed = 0.1f;
 	public float maxFlickerSpeed = 0.1f;
+	public float flickerDuration = 3f;
 
-	bool lightsOff = false;
+	public int chance = 1000;
+	private int roll;
 
 	void Start () 
 	{
 		lights = GetComponentsInChildren<Light> ();
-		roll = Random.Range(1, 10);
 
-		if (roll > 0)   ///TODO: ALWAYS TRUE
-		{
+		if (isAlwaysFlickering)   
 			StartCoroutine (Flicker());
-		}
 	}
 
 
 	void Update()
 	{
-//		if (lightsOff == true) 
-//		{
-//			foreach(Light light in lights)
-//				light.enabled = false;
-//		} 
-//		else 
-//		{
-//			foreach (Light light in lights)
-//				light.enabled = true;
-//		}
-
+		roll = Random.Range (0, chance);
+		if (!isAlwaysFlickering && roll < 1) 
+			StartCoroutine(FlickerTimed());
 	}
 
 
@@ -45,9 +37,31 @@ public class Flickering : MonoBehaviour {
 		while(true)
 		{
 			yield return new WaitForSeconds(Random.Range(minFlickerSpeed, maxFlickerSpeed));
+			emitter.SetActive(false);
 			foreach(Light light in lights)
 				light.enabled = false;
 			yield return new WaitForSeconds(Random.Range(minFlickerSpeed, maxFlickerSpeed));
+			emitter.SetActive(true);
+			foreach (Light light in lights)
+				light.enabled = true;
+
+			yield return null;
+		}
+	}
+
+	IEnumerator FlickerTimed()
+	{
+		float startTime;
+		startTime = Time.time;
+
+		while(Time.time - startTime < flickerDuration)
+		{
+			yield return new WaitForSeconds(Random.Range(minFlickerSpeed, maxFlickerSpeed));
+			emitter.SetActive(false);
+			foreach(Light light in lights)
+				light.enabled = false;
+			yield return new WaitForSeconds(Random.Range(minFlickerSpeed, maxFlickerSpeed));
+			emitter.SetActive(true);
 			foreach (Light light in lights)
 				light.enabled = true;
 

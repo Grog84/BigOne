@@ -18,6 +18,7 @@ public class LoadManager : MonoBehaviour
     [HideInInspector] public bool isContinue;
     [HideInInspector] public bool isPreloading;
 
+    [HideInInspector] public bool isSceneSelected;
     public Canvas fadeCanvas;
 
     private PlayableDirector playable;
@@ -88,6 +89,7 @@ public class LoadManager : MonoBehaviour
         }
     }
 
+
     public IEnumerator ChangeLevel()
     {
         AsyncOperation async;
@@ -103,10 +105,16 @@ public class LoadManager : MonoBehaviour
         //    async = SceneManager.LoadSceneAsync(sceneToLoad);
         //}
         // Normal game progression
+        else if(isSceneSelected)
+        {
+            isSceneSelected = false;
+            async = SceneManager.LoadSceneAsync(currentSceneIndex);
+        }
         else
         {
             async = SceneManager.LoadSceneAsync(currentSceneIndex + 1);
         }     
+
         yield return null;
     }
 

@@ -19,7 +19,7 @@ public class ManipulateStateTriggerLVL2 : MonoBehaviour {
         if (other.tag == "Player" && triggered == false && level2Quest.Level2 == QuestLivello2.STATUSLEVELO2.Objective6)
         {
             triggered = true;
-            level2Quest.Level2 = QuestLivello2.STATUSLEVELO2.Objective7;
+            level2Quest.updateState(QuestLivello2.STATUSLEVELO2.Objective7);
         }
     }
 }

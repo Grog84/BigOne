@@ -7,7 +7,7 @@ using RootMotion.FinalIK;
 
 namespace Character
 {
-    public enum SoundStatus { WALK, CROUCH, RUN}
+    public enum SoundStatus { WALK, CROUCH, RUN }
     public class _CharacterController : MonoBehaviour
     {
         [HideInInspector] public bool hasInteractedWithNPC = false;
@@ -127,7 +127,7 @@ namespace Character
         [HideInInspector] public bool isDontLookAtDone = true;
         [HideInInspector] public GameObject cameraPoint;
         [HideInInspector] public bool isDefaultLookAt = false;
-      
+
         public Transform playerGaze;
         public GameObject LookAtItems;
         public Transform playerHead;
@@ -138,7 +138,7 @@ namespace Character
         public CharacterStats m_CharStats;
         public LayerMask m_WalkNoiseLayerMask;
         public List<GameObject> Keychain;                               // List of all the key items collected by the player
-        public Vector3[] BoundRaycasts = new Vector3[5];              
+        public Vector3[] BoundRaycasts = new Vector3[5];
 
         private bool oneStepCoroutineController = true;                 // used to make sure only one step coroutine is runnin at a given time
 
@@ -186,7 +186,7 @@ namespace Character
             {
                 if (Physics.Raycast(playerHead.position, playerHead.forward, out hit, m_CharStats.m_DistanceFromDoor))
                 {
-                    
+
                     if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Doors") &&
                         hit.transform == doorCollider.transform.parent.FindDeepChild("DoorBody"))
                     {
@@ -242,10 +242,10 @@ namespace Character
             {
                 RaycastHit hit;
 
-                    
+
                 if (Physics.Raycast(CharacterTransform.position + Vector3.up * m_CharController.bounds.size.y / 2.0f, CharacterTransform.forward, out hit, m_CharStats.m_DistanceFromPushableObject))
                 {
-            
+
 
 
                     if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Pushable") &&
@@ -283,7 +283,7 @@ namespace Character
             }
 
             if (other.tag == "Ladder_Top")
-            {           
+            {
                 climbingTop = true;
                 ActivateClimbingChoice();
                 climbCollider.transform.parent.GetComponent<ClimbableIconsActivation>().ShowIcon(this.gameObject);
@@ -306,14 +306,14 @@ namespace Character
                 doorCollider = other.gameObject;
                 ActivateDoors();
                 doorCollider.transform.parent.GetComponent<DoorIconsActivation>().ShowIcon(this.gameObject);
-                
+
             }
 
             if (other.gameObject.layer == LayerMask.NameToLayer("Interactable"))
             {
-                  ItemCollider = other.gameObject;
-                  isInItemArea = true;
-                  ItemCollider.GetComponent<CollectablesIconsActivation>().ShowIcon(this.gameObject);
+                ItemCollider = other.gameObject;
+                isInItemArea = true;
+                ItemCollider.GetComponent<CollectablesIconsActivation>().ShowIcon(this.gameObject);
             }
 
             if (other.gameObject.layer == LayerMask.NameToLayer("Balance"))
@@ -332,7 +332,14 @@ namespace Character
             if (other.tag == "NpcSight")
             {
                 npcSightCollider = other.gameObject;
-                other.transform.parent.GetComponent<NpcQuestIcons>().ShowIcon(this.gameObject);
+                if (other.transform.parent.GetComponent<NpcQuestIcons>().isActive)
+                {
+                    other.transform.parent.GetComponent<NpcQuestIcons>().ShowIcon(this.gameObject);
+                }
+                else
+                {
+                    other.transform.parent.GetComponent<NpcQuestIcons>().HideIcons();
+                }
             }
 
         }
@@ -347,7 +354,7 @@ namespace Character
                 climbingBottom = true;
             }
             else if (other.tag == "Ladder_Top")
-            {              
+            {
                 climbCollider = other.gameObject;
                 isInClimbArea = true;
                 climbingTop = true;
@@ -366,7 +373,7 @@ namespace Character
                 {
                     for (int i = 0; i < Keychain.Count; i++)
                     {
-                        if(Keychain[i].GetComponent<Keys>().ItemID == other.transform.parent.GetChild(0).GetChild(0).GetComponent<Doors>().doorID)
+                        if (Keychain[i].GetComponent<Keys>().ItemID == other.transform.parent.GetChild(0).GetChild(0).GetComponent<Doors>().doorID)
                         {
                             HideHUDIcons(Keychain[i].gameObject.GetComponent<Keys>().icon);
                             other.transform.parent.GetChild(0).GetChild(0).tag = "UnlockedDoor";
@@ -392,7 +399,7 @@ namespace Character
                 {
                     balanceCollider = other.gameObject;
                     isInBalanceArea = true;
-                }            
+                }
 
                 if (other.tag == "Joint")
                 {
@@ -418,7 +425,7 @@ namespace Character
                 isClimbDirectionRight = false;
             }
             if (other.tag == "Ladder_Top")
-            {             
+            {
                 climbCollider.transform.parent.GetComponent<ClimbableIconsActivation>().HideIcons(climbCollider.transform.parent.GetComponent<ClimbableIconsActivation>().topIcons);
                 climbCollider = null;
                 isInClimbArea = false;
@@ -446,8 +453,8 @@ namespace Character
             }
             if (other.gameObject.layer == LayerMask.NameToLayer("Balance"))
             {
-                if(other.tag == "Board")
-                {  
+                if (other.tag == "Board")
+                {
                     balanceCollider = null;
                     isInBalanceArea = false;
                 }
@@ -466,8 +473,15 @@ namespace Character
             }
             if (other.tag == "NpcSight")
             {
-                other.transform.parent.GetComponent<NpcQuestIcons>().HideIcons();
-               // npcSightCollider = null;
+                if (other.transform.parent.GetComponent<NpcQuestIcons>().isActive)
+                {
+                    other.transform.parent.GetComponent<NpcQuestIcons>().SetToObjective();
+                }
+                else
+                {
+                    other.transform.parent.GetComponent<NpcQuestIcons>().HideIcons();
+                }
+                // npcSightCollider = null;
             }
 
         }
@@ -494,7 +508,7 @@ namespace Character
         }
 
         private void UpdateSoundRange()  // This could be improved by updating only the data necessary
-        {   
+        {
             m_Soundrange_sq = m_SoundStatusRange * m_SoundStatusRange * m_ForwardAmount;
         }
 
@@ -517,9 +531,9 @@ namespace Character
 
 
             m_CharController.enabled = false;
-            CharacterTransform.DOBlendableMoveBy(new Vector3(0,difPos.y,0), 1f);
+            CharacterTransform.DOBlendableMoveBy(new Vector3(0, difPos.y, 0), 1f);
             CharacterTransform.DOBlendableMoveBy(new Vector3(difPos.x, 0, difPos.z), climbTime);
-          
+
             yield return new WaitForSeconds(climbTime);
             m_CharController.enabled = true;
             startClimbEnd = false;
@@ -612,7 +626,7 @@ namespace Character
 
         public void EndDoorInteraction()
         {
-            isEndAnim = true;   
+            isEndAnim = true;
         }
 
         private IEnumerator DoorInteraction()
@@ -649,7 +663,7 @@ namespace Character
 
             if (!isDoorOpen)
             {
-               doorObject.transform.Find("Hinge").DOLocalRotate(new Vector3(0, -90, 0), openDoorTime);
+                doorObject.transform.Find("Hinge").DOLocalRotate(new Vector3(0, -90, 0), openDoorTime);
             }
             else
             {
@@ -713,10 +727,10 @@ namespace Character
             CharacterTransform.DOMove(forwardBalance.transform.position, crTime);
             yield return new WaitForSeconds(crTime);
             isBalanceCRDone = true;
-          
+
         }
 
-#endregion
+        #endregion
 
         #region Rotate Toward Target Coroutine
 
@@ -739,7 +753,7 @@ namespace Character
 
         public void IconPriority(Transform icons, int degrees)
         {
-            if (Vector3.Angle(m_Camera.forward, icons.forward) > degrees )
+            if (Vector3.Angle(m_Camera.forward, icons.forward) > degrees)
             {
                 m_Camera.GetChild(0).gameObject.SetActive(false);
 
@@ -801,7 +815,7 @@ namespace Character
             }
 
             yield return isDontLookAtDone = true;
-            
+
         }
 
         IEnumerator CanLookAt()
@@ -813,9 +827,9 @@ namespace Character
             {
                 playerSight.solver.headWeight += Time.deltaTime;
             }
-          
-             yield return isCanLookAtDone = true;
-            
+
+            yield return isCanLookAtDone = true;
+
         }
 
         IEnumerator ResetLookAtTarget()
@@ -825,15 +839,15 @@ namespace Character
             yield return null;
         }
 
-#endregion
+        #endregion
 
         private void OnAnimatorIK(int layerIndex)
         {
-            
+
             if (useEndClimbIk)
             {
                 ikWeight -= Time.deltaTime;
-             
+
                 m_Animator.SetIKPositionWeight(AvatarIKGoal.RightHand, ikWeight);
                 m_Animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, ikWeight);
 
@@ -845,7 +859,7 @@ namespace Character
 
         void Update()
         {
-           
+
             UpdateSoundRange();
 
             if (startClimbAnimationEnd)
@@ -888,12 +902,12 @@ namespace Character
                 StartCoroutine(OnBalanceBoard());
             }
 
-            if(startBalanceLedge)
+            if (startBalanceLedge)
             {
                 StartCoroutine(OnBalanceLedge(ledgeCRTime));
             }
 
-            if(canLookAt)
+            if (canLookAt)
             {
                 StartCoroutine(CanLookAt());
             }

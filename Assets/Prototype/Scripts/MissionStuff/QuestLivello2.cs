@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Character;
+using UnityEngine.SceneManagement;
 
 
 namespace QuestManager
@@ -21,7 +22,11 @@ namespace QuestManager
         {
             m_controller = GetComponent<_CharacterController>();
             Text = GameObject.Find("ObjectiveLvl1");
-            updateState(STATUSLEVELO2.Objective1);
+            if(SceneManager.GetActiveScene().buildIndex == 2)
+            {
+                updateState(STATUSLEVELO2.Objective1);
+            }
+
         }
 
 
@@ -127,7 +132,7 @@ namespace QuestManager
             if (newState == STATUSLEVELO2.Objective7)
             {
                 Level2 = STATUSLEVELO2.Objective7;
-                Text.GetComponent<Text>().text = "";
+              //  Text.GetComponent<Text>().text = "";
                 m_PlayableDirector.Play();
 
             }

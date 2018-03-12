@@ -16,7 +16,7 @@ public class ManipulateStateTriggerLVL2 : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player" && triggered == false)
+        if (other.tag == "Player" && triggered == false && level2Quest.Level2 == QuestLivello2.STATUSLEVELO2.Objective6)
         {
             triggered = true;
             level2Quest.Level2 = QuestLivello2.STATUSLEVELO2.Objective7;

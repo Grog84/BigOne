@@ -31,8 +31,6 @@ public class Profile : ScriptableObject
 
     public bool[] completedLevel;
 
-
-
     public void Save()
     {
 
@@ -40,6 +38,25 @@ public class Profile : ScriptableObject
         {
             LastScene = SceneManager.GetActiveScene().buildIndex;
             SavedScene = SceneManager.GetActiveScene().name;
+            switch(SceneManager.GetActiveScene().buildIndex)
+            {
+
+                case 2:
+                    completedLevel = new bool[5] { true,false,false,false,false};
+                    break;
+                case 3:
+                    completedLevel = new bool[5] { true, true, false, false, false };
+                    break;
+                case 5:
+                    completedLevel = new bool[5] { true, true, true, false, false };
+                    break;
+                case 6:
+                    completedLevel = new bool[5] { true, true, true, true, false }; break;
+                case 7:
+                    completedLevel = new bool[5] { true, true, true, true, true }; break;
+                default:
+                    completedLevel = new bool[5] { true, false, false, false, false }; break;
+            }
         }
     }
     public static void SaveProfile(string path, Profile profile)
@@ -49,11 +66,7 @@ public class Profile : ScriptableObject
         string save = "";
         StreamWriter sw = File.CreateText(path); 
         sw.Close();
-        //foreach (char a in json)
-        //{
-        //    save += C.FromTo(10, 16, Convert.ToInt32(a).ToString()) + " ";
-        //}
-        //json = save;
+     
         File.WriteAllText(path, json);
     }
     public static Profile LoadProfile(string path)

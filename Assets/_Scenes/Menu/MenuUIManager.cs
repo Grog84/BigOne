@@ -27,8 +27,10 @@ public class MenuUIManager : MonoBehaviour
     {
         Time.timeScale = 1;
         SM = FindObjectOfType<SaveManager>();
-        ReturnToMainMenu();      
-       // ContinueButtonOnOff();
+        ReturnToMainMenu();
+
+
+        // ContinueButtonOnOff();
     }
 
     public void ReturnToMainMenu()
@@ -191,7 +193,7 @@ public class MenuUIManager : MonoBehaviour
         LoadManager.instance.ChangeToLoadScene(indexValue);
 
         //Chiamare Singletone
-        
+
 
     }
 
@@ -262,7 +264,7 @@ public class MenuUIManager : MonoBehaviour
                 if (a.name == "EmptyMainMenu")
                 {
                     a.transform.GetChild(0).gameObject.SetActive(true);
-                }            
+                }
             }
         }
         else
@@ -274,7 +276,7 @@ public class MenuUIManager : MonoBehaviour
                 {
                     a.transform.GetChild(0).gameObject.SetActive(false);
                 }
-                
+
             }
         }
 
@@ -298,5 +300,7 @@ public class MenuUIManager : MonoBehaviour
             isMouseActive = true;
             m_Canvas.GetComponent<GraphicRaycaster>().enabled = true;
         }
+
     }
 }
+

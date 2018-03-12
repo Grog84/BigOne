@@ -67,11 +67,7 @@ public class SaveManager :MonoBehaviour {
         //Caricamento attori (Dati salvati sul disco) 
         allActor = FindObjectsOfType<Actor>();
         //Inizializzazione livelli nuovi
-        PlayerProfile.completedLevel = new bool[UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings-1];
-        for (int i = 0; i < PlayerProfile.completedLevel.Length; i++)
-        {
-            PlayerProfile.completedLevel[i] = false;
-        }
+       
 
         if (PlayerProfile.SavedScene == SceneManager.GetActiveScene().name)
         {

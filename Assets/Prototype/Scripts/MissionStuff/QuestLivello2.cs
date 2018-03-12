@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Character;
+using UnityEngine.SceneManagement;
+
 
 namespace QuestManager
 {
@@ -24,6 +26,12 @@ namespace QuestManager
         
 
         void Update() {
+
+            if(SceneManager.GetActiveScene().buildIndex != 2)
+            {
+                return;
+            }
+
             switch (Level2)
             {
                 case STATUSLEVELO2.Objective1:

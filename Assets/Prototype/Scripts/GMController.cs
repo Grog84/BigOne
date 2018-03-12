@@ -52,6 +52,8 @@ public class GMController : MonoBehaviour {
     [Range(0.5f, 5f)]
     public float deathAnimationTime = 1f;
 
+    [HideInInspector] public bool fadeOutFinished = false;
+
     [ReadOnly] public float deathTimer = 0f;
 
     // Save game references and variables

@@ -20,7 +20,7 @@ public class CharacterInterface : MonoBehaviour {
 
     public void RevivePlayer()
     {
-        //Debug.Log("CIAO");
+        //Debug.Log("RevivePlayer");
         m_CharController.m_Animator.SetFloat("Forward", 0f);
         m_CharStateController.TransitionToState(m_CharStateController.gameStartState);
         ResetAnimator();
@@ -42,14 +42,22 @@ public class CharacterInterface : MonoBehaviour {
 
         //yield return null;
         GMController.instance.isCharacterPlaying = CharacterActive.None;
-        while (GMController.instance.deathTimer <=  GMController.instance.fadeOutTime)
+        //while (GMController.instance.deathTimer <=  GMController.instance.fadeOutTime)
+        //{
+        //    GMController.instance.deathTimer += Time.deltaTime;
+        //    yield return null;
+        //}
+
+        while (!GMController.instance.fadeOutFinished)
         {
-            GMController.instance.deathTimer += Time.fixedDeltaTime;
+            GMController.instance.deathTimer += Time.deltaTime;
             yield return null;
         }
 
         m_CharController.m_Animator.SetBool("isDead", false);
         yield return null;
+        GMController.instance.deathTimer = 0;
+        GMController.instance.fadeOutFinished = false;
 
         // Temporary checks given the current animator structure
         if (m_CharController.m_Animator.GetBool("isClimbing"))

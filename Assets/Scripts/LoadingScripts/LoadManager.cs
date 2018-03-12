@@ -72,7 +72,8 @@ public class LoadManager : MonoBehaviour
        
         if (!isPreloading)
         {
-            AsyncOperation async = SceneManager.LoadSceneAsync("LoadScene");
+            // AsyncOperation async = SceneManager.LoadSceneAsync("LoadScene");
+            SceneManager.LoadScene("LoadScene");
         }
         else
         {

@@ -27,9 +27,8 @@ public class MenuUIManager : MonoBehaviour
     {
         Time.timeScale = 1;
         SM = FindObjectOfType<SaveManager>();
-        ReturnToMainMenu();
-       
-        ContinueButtonOnOff();
+        ReturnToMainMenu();      
+       // ContinueButtonOnOff();
     }
 
     public void ReturnToMainMenu()
@@ -187,7 +186,13 @@ public class MenuUIManager : MonoBehaviour
 
     public void LoadLevel(int indexValue)
     {
-        SceneManager.LoadSceneAsync(indexValue);
+        //SceneManager.LoadSceneAsync(indexValue);
+        LoadManager.instance.isSceneSelected = true;
+        LoadManager.instance.ChangeToLoadScene(indexValue);
+
+        //Chiamare Singletone
+        
+
     }
 
     public void Continue()
@@ -195,7 +200,7 @@ public class MenuUIManager : MonoBehaviour
         // SM.PlayerProfile.Continue = true;
         HideMouseCursor();
         LoadManager.instance.PlayFade();
-        LoadManager.instance.isContinue = true;
+        //LoadManager.instance.isContinue = true;
         LoadManager.instance.ChangeToLoadScene(SceneManager.sceneCountInBuildSettings);
         //SM.LoadLastScene();
     }

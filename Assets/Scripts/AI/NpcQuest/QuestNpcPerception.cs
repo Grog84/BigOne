@@ -7,7 +7,7 @@ using AI;
 public class QuestNpcPerception : MonoBehaviour {
 
     GameObject m_Npc;
-    QuestNpc m_QuestGiver;
+    NpcQuest npcQuest;
     private Transform target;
     private Transform raycastTarget;
     public Transform origin;
@@ -17,7 +17,7 @@ public class QuestNpcPerception : MonoBehaviour {
     private void Awake()
     {
         m_Npc = transform.parent.gameObject;
-        m_QuestGiver = m_Npc.GetComponent<QuestNpc>();
+        npcQuest = m_Npc.GetComponent<NpcQuest>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,10 +25,9 @@ public class QuestNpcPerception : MonoBehaviour {
         if(other.tag == "Player")
         {
             target = other.transform;
+            npcQuest.playerSaw = true;
             raycastTarget = target.FindDeepChildByTag("LookAtPositionCentral");
             m_Npc.GetComponent<Animator>().SetBool("PlayerSaw",true);
-
-            m_QuestGiver.lookAtTarget = target;
         }
 
     }
@@ -45,11 +44,13 @@ public class QuestNpcPerception : MonoBehaviour {
             if (Physics.Raycast(ray ,Mathf.Infinity,visionLayerMask))
             {
                 Debug.DrawRay(origin.position, (raycastTarget.position - origin.position).normalized);
-                m_QuestGiver.SetBlackboardValue("playerSaw", true);                
+                //npcQuest.playerSaw = true;
+                //npcQuest.m_Animator.SetBool("PlayerSaw", true);
             }                  
             else
             {
-                m_QuestGiver.SetBlackboardValue("playerSaw", false);
+                //npcQuest.playerSaw = false;
+                npcQuest.m_Animator.SetBool("PlayerSaw", false);
             }
         }
     }
@@ -58,8 +59,8 @@ public class QuestNpcPerception : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            m_QuestGiver.SetBlackboardValue("playerSaw", false);
-            m_QuestGiver.SetBlackboardValue("lookAtPlayer", false);
+            npcQuest.playerSaw = false;
+            npcQuest.m_Animator.SetBool("PlayerSaw", false);
         }
     }
 }

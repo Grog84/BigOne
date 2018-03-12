@@ -18,6 +18,7 @@ public class LoadManager : MonoBehaviour
     [HideInInspector] public bool isContinue;
     [HideInInspector] public bool isPreloading;
 
+    [HideInInspector] public bool isSceneSelected;
     public Canvas fadeCanvas;
 
     private PlayableDirector playable;
@@ -72,8 +73,7 @@ public class LoadManager : MonoBehaviour
        
         if (!isPreloading)
         {
-            // AsyncOperation async = SceneManager.LoadSceneAsync("LoadScene");
-            SceneManager.LoadScene("LoadScene");
+            AsyncOperation async = SceneManager.LoadSceneAsync("LoadScene");
         }
         else
         {
@@ -87,6 +87,7 @@ public class LoadManager : MonoBehaviour
             GMController.instance.SetBkgMusicActive(false);
         }
     }
+
 
     public IEnumerator ChangeLevel()
     {
@@ -103,10 +104,16 @@ public class LoadManager : MonoBehaviour
         //    async = SceneManager.LoadSceneAsync(sceneToLoad);
         //}
         // Normal game progression
+        else if(isSceneSelected)
+        {
+            isSceneSelected = false;
+            async = SceneManager.LoadSceneAsync(currentSceneIndex);
+        }
         else
         {
             async = SceneManager.LoadSceneAsync(currentSceneIndex + 1);
         }     
+
         yield return null;
     }
 

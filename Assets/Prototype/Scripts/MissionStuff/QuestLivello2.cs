@@ -127,6 +127,7 @@ namespace QuestManager
             if (newState == STATUSLEVELO2.Objective7)
             {
                 Level2 = STATUSLEVELO2.Objective7;
+                Text.GetComponent<Text>().text = "";
                 m_PlayableDirector.Play();
 
             }

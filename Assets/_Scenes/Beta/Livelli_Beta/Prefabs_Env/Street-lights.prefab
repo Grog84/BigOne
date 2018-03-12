@@ -258,6 +258,7 @@ GameObject:
   - component: {fileID: 4886301928307274}
   - component: {fileID: 33351844979850084}
   - component: {fileID: 23284762101029734}
+  - component: {fileID: 114119392873949040}
   m_Layer: 0
   m_Name: wall_lamp (7)
   m_TagString: Untagged
@@ -29111,6 +29112,23 @@ MonoBehaviour:
   NoiseIntensityOffset: 0.3
   NoiseVelocity: {x: 3, y: 3}
   MaxRayLength: 400
+--- !u!114 &114119392873949040
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1036625808736138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a244f621048b424683864383c4e0be0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emitter: {fileID: 1497555795549312}
+  isAlwaysFlickering: 1
+  minFlickerSpeed: 0.05
+  maxFlickerSpeed: 0.05
+  flickerDuration: 3
+  chance: 1000
 --- !u!114 &114124028216981400
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -13,8 +13,10 @@ public class LoadManager : MonoBehaviour
     [HideInInspector] public int currentSceneIndex;
     [HideInInspector] public int sceneToLoad;
     [HideInInspector] public SaveManager SM;
+    [HideInInspector] public GameObject skipTimeline;
 
     [HideInInspector] public bool isContinue;
+    [HideInInspector] public bool isPreloading;
 
     public Canvas fadeCanvas;
 
@@ -66,10 +68,17 @@ public class LoadManager : MonoBehaviour
     public void ChangeToLoadScene(int currentScene)
     {
          currentSceneIndex = currentScene;
-         sceneToLoad = SM.PlayerProfile.LastScene;
-         Debug.Log(currentScene);
-         Debug.Log(currentSceneIndex);
-         AsyncOperation async = SceneManager.LoadSceneAsync("LoadScene");
+         //sceneToLoad = SM.PlayerProfile.LastScene;
+       
+        if (!isPreloading)
+        {
+            AsyncOperation async = SceneManager.LoadSceneAsync("LoadScene");
+        }
+        else
+        {
+            skipTimeline.GetComponent<SkipCutscene>().canSkip = true;
+           // Debug.Log(" can skip " + skipTimeline.GetComponent<SkipCutscene>().canSkip);
+        }
 
         if (GameObject.Find("GameManager") != null)
         {
@@ -87,11 +96,11 @@ public class LoadManager : MonoBehaviour
             async = SceneManager.LoadSceneAsync(0);
         }
         // If is continuing the last game session
-        else if(isContinue)
-        {
-            isContinue = false;
-            async = SceneManager.LoadSceneAsync(sceneToLoad);
-        }
+        //else if(isContinue)
+        //{
+        //    isContinue = false;
+        //    async = SceneManager.LoadSceneAsync(sceneToLoad);
+        //}
         // Normal game progression
         else
         {
@@ -100,9 +109,12 @@ public class LoadManager : MonoBehaviour
         yield return null;
     }
 
-    public IEnumerator SkipCutscene( GameObject skipCanvas)
+    public IEnumerator SkipCutscene(GameObject skipCanvas)
     {
-        AsyncOperation async = SceneManager.LoadSceneAsync(currentSceneIndex + 1);
+        skipTimeline = skipCanvas;
+        isPreloading = true;
+
+        AsyncOperation async = SceneManager.LoadSceneAsync("LoadScene");
         async.allowSceneActivation = false;
 
         while (async.progress < 0.9f)
@@ -111,32 +123,15 @@ public class LoadManager : MonoBehaviour
         }
 
 
-        skipCanvas.GetComponent<SkipCutscene>().doneLoading = true;
-        Debug.Log(async.progress); 
+        skipTimeline.GetComponent<SkipCutscene>().doneLoading = true;
 
-        while (!skipCanvas.GetComponent<SkipCutscene>().canSkip)
+        while (!skipTimeline.GetComponent<SkipCutscene>().canSkip)
         {
             yield return null;
         }
 
         async.allowSceneActivation = true;
-       // Debug.Log(async.isDone + " async is done"); 
-
-        //while (true)
-        //{
-        //    if (async.isDone)
-        //    {
-        //        Debug.Log("Async Done");
-        //        StopFade();
-        //        yield break;
-        //    }
-        //    else
-        //    {
-        //        Debug.Log("Async not Done");
-        //        yield return null;
-        //    }
-        //}
-
+        isPreloading = false;
     }
 
 }

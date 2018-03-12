@@ -8,8 +8,7 @@ using UnityEngine.UI;
 public class SwitchSceneBehaviour : PlayableBehaviour
 {
     [HideInInspector] public bool SceneSwitched;
-    public float fadeTime;
-    public Image fade;
+    
     //public string nextScene;
 
     public override void OnGraphStart (Playable playable)

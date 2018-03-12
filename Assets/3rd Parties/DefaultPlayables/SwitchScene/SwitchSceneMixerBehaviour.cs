@@ -23,7 +23,7 @@ public class SwitchSceneMixerBehaviour : PlayableBehaviour
             {
                // Debug.Log(SceneManager.GetActiveScene().buildIndex);
                 //SceneManager.LoadScene(input.nextScene);
-                LoadManager.instance.ChangeToLoadScene(SceneManager.GetActiveScene().buildIndex/*, input.fade, input.fadeTime*/ );
+                LoadManager.instance.ChangeToLoadScene(SceneManager.GetActiveScene().buildIndex);
                 input.SceneSwitched = true;
             }
 

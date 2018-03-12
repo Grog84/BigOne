@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class waterFloating : MonoBehaviour {
+public class Floating : MonoBehaviour {
 
 	public float waterLevel = -1f;
 	public float floatHeight = 2f; 

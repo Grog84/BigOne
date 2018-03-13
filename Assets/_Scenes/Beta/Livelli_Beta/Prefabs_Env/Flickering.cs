@@ -37,8 +37,9 @@ public class Flickering : MonoBehaviour {
 		while(true)
 		{
 			yield return new WaitForSeconds(Random.Range(minFlickerSpeed, maxFlickerSpeed));
-			emitter.SetActive(false);
-			foreach(Light light in lights)
+            if (emitter != null)
+                emitter.SetActive(false);
+            foreach (Light light in lights)
 				light.enabled = false;
 			
 			int otherRoll = 0;
@@ -50,7 +51,8 @@ public class Flickering : MonoBehaviour {
 
 
 			yield return new WaitForSeconds(Random.Range(minFlickerSpeed, maxFlickerSpeed));
-			emitter.SetActive(true);
+            if (emitter != null)
+			    emitter.SetActive(true);
 			foreach (Light light in lights)
 				light.enabled = true;
 

@@ -86,7 +86,7 @@ public class InputManager : MonoBehaviour {
         }
         else
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            HideCursor();
         }
     }
 

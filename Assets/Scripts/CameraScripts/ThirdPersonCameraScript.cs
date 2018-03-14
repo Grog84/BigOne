@@ -30,9 +30,9 @@ public class ThirdPersonCameraScript : CameraScript {
 
         camTransform = transform;
         cam = this.GetComponent<CinemachineVirtualCamera>();
-       
         cam.m_Lens.NearClipPlane = nearClipPlaneDistance;
         controllerBoy = boyLookAt.GetComponent<CharacterStateController>();
+        currentX = -lookAt.eulerAngles.y;
     }
 
     protected void Update()
@@ -44,6 +44,8 @@ public class ThirdPersonCameraScript : CameraScript {
         currentY -= Input.GetAxis("Mouse Y") * InputManager.instance.MouseYSensitivity;
         currentY -= Input.GetAxis("Joystick Y") * InputManager.instance.JoystickYSensitivity;
         currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
+
+        Debug.Log(currentX);
 
         //camera management of the bound to the player, movement, rotation and look direction
         dir.Set(0, 0, -distance);

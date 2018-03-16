@@ -10,8 +10,10 @@ public class CollectablesIconsActivation : MonoBehaviour
 {
 
     public Transform CollectableCanvas;
-    public Sprite collectableIcon;
-    public Sprite keyIcon;
+    public Sprite collectableIconKeyboard;
+    public Sprite collectableIconJoyStick;
+    public Sprite keyIconKeyboard;
+    public Sprite keyIconJoyStick;
     public int degrees;
     
 
@@ -40,13 +42,29 @@ public class CollectablesIconsActivation : MonoBehaviour
     {
         if (gameObject.tag == "Key" && playerState.thisCharacter == CharacterActive.Mother)
         {
-            icons.GetChild(0).GetComponent<Image>().sprite = keyIcon;
-            icons.GetChild(0).GetComponent<Image>().color = alphaMax;
+            if (InputManager.instance.GetInputState() == InputManager.InputState.MouseKeyboard)
+            {
+                icons.GetChild(0).GetComponent<Image>().sprite = keyIconKeyboard;
+                icons.GetChild(0).GetComponent<Image>().color = alphaMax;
+            }
+            else if (InputManager.instance.GetInputState() == InputManager.InputState.Controller)
+            {
+                icons.GetChild(0).GetComponent<Image>().sprite = keyIconJoyStick;
+                icons.GetChild(0).GetComponent<Image>().color = alphaMax;
+            }
         }
         else if (gameObject.tag != "Key")
         {
-            icons.GetChild(0).GetComponent<Image>().sprite = collectableIcon;
-            icons.GetChild(0).GetComponent<Image>().color = alphaMax;
+            if (InputManager.instance.GetInputState() == InputManager.InputState.MouseKeyboard)
+            {
+                icons.GetChild(0).GetComponent<Image>().sprite = collectableIconKeyboard;
+                icons.GetChild(0).GetComponent<Image>().color = alphaMax;
+            }
+            else if(InputManager.instance.GetInputState() == InputManager.InputState.Controller)
+            {
+                icons.GetChild(0).GetComponent<Image>().sprite = collectableIconJoyStick;
+                icons.GetChild(0).GetComponent<Image>().color = alphaMax;
+            }
         }
     }
 

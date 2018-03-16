@@ -132,9 +132,12 @@ namespace Character
         public GameObject LookAtItems;
         public Transform playerHead;
         public Transform playerCanvas;
-        public Sprite cantCancelClimbIcon;
-        public Sprite stopPush;
-        public Sprite stopClimb;
+        public Sprite cantCancelClimbIconKeyboard;
+        public Sprite cantCancelClimbIconJoyStick;
+        public Sprite stopPushKeyboard;
+        public Sprite stopPushJoyStick;
+        public Sprite stopClimbKeyboard;
+        public Sprite stopClimbJoyStick;
         public CharacterStats m_CharStats;
         public LayerMask m_WalkNoiseLayerMask;
         public List<GameObject> Keychain;                               // List of all the key items collected by the player
@@ -766,20 +769,44 @@ namespace Character
 
         public void ShowStopPushIcon()
         {
-            playerIcon.GetChild(0).GetComponent<Image>().sprite = stopPush;
-            playerIcon.GetChild(0).GetComponent<Image>().color = alphaMax;
+            if (InputManager.instance.GetInputState() == InputManager.InputState.MouseKeyboard)
+            {
+                playerIcon.GetChild(0).GetComponent<Image>().sprite = stopPushKeyboard;
+                playerIcon.GetChild(0).GetComponent<Image>().color = alphaMax;
+            }
+            else if (InputManager.instance.GetInputState() == InputManager.InputState.Controller)
+            {
+                playerIcon.GetChild(0).GetComponent<Image>().sprite = stopPushJoyStick;
+                playerIcon.GetChild(0).GetComponent<Image>().color = alphaMax;
+            }
         }
 
         public void ShowStopClimbIcon()
         {
-            playerIcon.GetChild(0).GetComponent<Image>().sprite = stopClimb;
-            playerIcon.GetChild(0).GetComponent<Image>().color = alphaMax;
+            if (InputManager.instance.GetInputState() == InputManager.InputState.MouseKeyboard)
+            {
+                playerIcon.GetChild(0).GetComponent<Image>().sprite = stopClimbKeyboard;
+                playerIcon.GetChild(0).GetComponent<Image>().color = alphaMax;
+            }
+            else if (InputManager.instance.GetInputState() == InputManager.InputState.Controller)
+            {
+                playerIcon.GetChild(0).GetComponent<Image>().sprite = stopClimbJoyStick;
+                playerIcon.GetChild(0).GetComponent<Image>().color = alphaMax;
+            }
         }
 
         public void ShowDisabledCancelIcon()
         {
-            playerIcon.GetChild(0).GetComponent<Image>().sprite = cantCancelClimbIcon;
-            playerIcon.GetChild(0).GetComponent<Image>().color = alphaMax;
+            if (InputManager.instance.GetInputState() == InputManager.InputState.MouseKeyboard)
+            {
+                playerIcon.GetChild(0).GetComponent<Image>().sprite = cantCancelClimbIconKeyboard;
+                playerIcon.GetChild(0).GetComponent<Image>().color = alphaMax;
+            }
+            else if (InputManager.instance.GetInputState() == InputManager.InputState.Controller)
+            {
+                playerIcon.GetChild(0).GetComponent<Image>().sprite = cantCancelClimbIconJoyStick;
+                playerIcon.GetChild(0).GetComponent<Image>().color = alphaMax;
+            }
         }
 
         public void HideIcon()

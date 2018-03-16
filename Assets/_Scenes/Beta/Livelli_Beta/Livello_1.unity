@@ -310,87 +310,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4201360759474218, guid: a1554840d658de44d99c84dc8cb0de0c,
     type: 2}
   m_PrefabInternal: {fileID: 38310751}
---- !u!1 &58440649
-GameObject:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 58440650}
-  - component: {fileID: 58440653}
-  - component: {fileID: 58440652}
-  - component: {fileID: 58440651}
-  m_Layer: 0
-  m_Name: cm
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &58440650
-Transform:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 58440649}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1445544519}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &58440651
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 58440649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FollowOffset: {x: 0, y: 0, z: -10}
-  m_XDamping: 1
-  m_YDamping: 1
-  m_ZDamping: 1
-  m_BindingMode: 1
---- !u!114 &58440652
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 58440649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4044717213e31446939f7bd49c896ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ShowGuides: 1
-  m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_HorizontalDamping: 0.5
-  m_VerticalDamping: 0.5
-  m_ScreenX: 0.5
-  m_ScreenY: 0.5
-  m_DeadZoneWidth: 0.1
-  m_DeadZoneHeight: 0.1
-  m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 0.8
-  m_BiasX: 0
-  m_BiasY: 0
---- !u!114 &58440653
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 58440649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &60365195
 Mesh:
   m_ObjectHideFlags: 0
@@ -7944,7 +7863,7 @@ GameObject:
   - component: {fileID: 118058466}
   - component: {fileID: 118058465}
   m_Layer: 0
-  m_Name: Cutscene_Intro_Home
+  m_Name: Cutscene1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11885,7 +11804,6 @@ Transform:
   - {fileID: 1732539365}
   - {fileID: 1888091950}
   - {fileID: 792328986}
-  - {fileID: 1296995882}
   - {fileID: 2087994029}
   - {fileID: 582383930}
   m_Father: {fileID: 0}
@@ -13503,7 +13421,7 @@ Transform:
   - {fileID: 1802352371}
   - {fileID: 324806069}
   m_Father: {fileID: 405423408}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &586150282
 Mesh:
@@ -15363,7 +15281,7 @@ GameObject:
   m_Component:
   - component: {fileID: 792328986}
   m_Layer: 0
-  m_Name: Cutscene3
+  m_Name: Cutscene4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15379,8 +15297,8 @@ Transform:
   m_LocalPosition: {x: -74.408035, y: 13.657894, z: 8.7075615}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1177560011}
-  - {fileID: 1445544519}
+  - {fileID: 1326562694}
+  - {fileID: 1684340680}
   m_Father: {fileID: 405423408}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -16461,7 +16379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08c98b8b76ec383419302e1ca750f00e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PlayableDirector: {fileID: 1177560010}
+  m_PlayableDirector: {fileID: 0}
   characterControlEnabled: 0
   repeatable: 0
 --- !u!1 &875733133
@@ -17997,7 +17915,7 @@ GameObject:
   - component: {fileID: 1006369222}
   - component: {fileID: 1006369221}
   m_Layer: 0
-  m_Name: Livello_1_Quest2_Return_Object
+  m_Name: Livello_1Cutscene5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18909,7 +18827,7 @@ GameObject:
   - component: {fileID: 1049425685}
   - component: {fileID: 1049425684}
   m_Layer: 0
-  m_Name: Livello1_Quest1
+  m_Name: Livello1_Cutscene3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21357,75 +21275,6 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
---- !u!1 &1177560008
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1177560011}
-  - component: {fileID: 1177560010}
-  - component: {fileID: 1177560009}
-  m_Layer: 0
-  m_Name: Livello1_Quest2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!95 &1177560009
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1177560008}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!320 &1177560010
-PlayableDirector:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1177560008}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 1baaddd6d7729c14682175d1a7aceebc, type: 2}
-  m_InitialState: 0
-  m_WrapMode: 2
-  m_DirectorUpdateMode: 1
-  m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: 114748139336747758, guid: 1baaddd6d7729c14682175d1a7aceebc, type: 2}
-    value: {fileID: 1177560008}
-  - key: {fileID: 114757882127364624, guid: 1baaddd6d7729c14682175d1a7aceebc, type: 2}
-    value: {fileID: 763883704}
-  m_ExposedReferences:
-    m_References:
-    - 12eff5d0693932d49837c90627573a31: {fileID: 0}
-    - 7d85d25d63692934bb61c589caa8f05f: {fileID: 1445544518}
---- !u!4 &1177560011
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1177560008}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.165833, y: -27.502949, z: -136.44519}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 792328986}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1183400403
 Prefab:
   m_ObjectHideFlags: 0
@@ -23605,36 +23454,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityType: 0
---- !u!1 &1296995881
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1296995882}
-  m_Layer: 0
-  m_Name: Cutscene4
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1296995882
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1296995881}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -74.408035, y: 13.657894, z: 8.7075615}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1326562694}
-  - {fileID: 1684340680}
-  m_Father: {fileID: 405423408}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1298919320
 Mesh:
   m_ObjectHideFlags: 0
@@ -23952,7 +23771,7 @@ GameObject:
   - component: {fileID: 1326562693}
   - component: {fileID: 1326562692}
   m_Layer: 0
-  m_Name: Livello_1Quest2_Object
+  m_Name: Livello_1Cutscene4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24010,7 +23829,7 @@ Transform:
   m_LocalPosition: {x: 2.4396057, y: 35.157364, z: -69.594055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1296995882}
+  m_Father: {fileID: 792328986}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1335534083
@@ -29816,61 +29635,6 @@ NavMeshAgent:
   m_PrefabParentObject: {fileID: 195133980152714638, guid: 8a5bb2f683ae2224198ff52d46330962,
     type: 2}
   m_PrefabInternal: {fileID: 1443378273}
---- !u!1 &1445544517
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1445544519}
-  - component: {fileID: 1445544518}
-  m_Layer: 0
-  m_Name: CM vcam5
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1445544518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1445544517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HideHeaderInInspector: 0
-  m_ExcludedPropertiesInInspector:
-  - m_Script
-  m_LockStageInInspector: 
-  m_Priority: 0
-  m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
-  m_Lens:
-    FieldOfView: 60
-    OrthographicSize: 10
-    NearClipPlane: 0.1
-    FarClipPlane: 5000
-    Dutch: 0
-  m_ComponentOwner: {fileID: 58440650}
---- !u!4 &1445544519
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1445544517}
-  m_LocalRotation: {x: -0.004471535, y: 0.98519194, z: -0.16250585, w: -0.05448624}
-  m_LocalPosition: {x: 4.9400024, y: 42.12, z: -59.98}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 58440650}
-  m_Father: {fileID: 792328986}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 18.704, y: 186.42, z: 0.53800005}
 --- !u!43 &1456768307
 Mesh:
   m_ObjectHideFlags: 0
@@ -30394,7 +30158,7 @@ GameObject:
   - component: {fileID: 1485470055}
   - component: {fileID: 1485470054}
   m_Layer: 0
-  m_Name: Livello_1_Intro
+  m_Name: Livello1_Cutscene2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34058,7 +33822,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 875733134}
-  m_Father: {fileID: 1296995882}
+  m_Father: {fileID: 792328986}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 7.656, y: -26.991001, z: 0.606}
 --- !u!43 &1705289078
@@ -34203,7 +33967,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1732539365}
   m_Layer: 0
-  m_Name: Cutscene1
+  m_Name: Cutscene2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37109,7 +36873,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1888091950}
   m_Layer: 0
-  m_Name: Cutscene2
+  m_Name: Cutscene3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40113,7 +39877,7 @@ Transform:
   - {fileID: 1363279654}
   - {fileID: 721294100}
   m_Father: {fileID: 405423408}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &2105527241
 Mesh:

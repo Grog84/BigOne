@@ -9,8 +9,9 @@ using DG.Tweening;
 public class ClimbableIconsActivation : MonoBehaviour
 {
     public Transform ClimbableCanvas;
-    public Sprite startClimbIcon;
-    public Sprite endClimbIcon;
+    public Sprite startClimbIconJoystick;
+    public Sprite startClimbIconKeyboard;
+    //public Sprite endClimbIcon;
     public Collider Top;
     public Collider Bottom;
     public int degrees;
@@ -40,8 +41,16 @@ public class ClimbableIconsActivation : MonoBehaviour
 
     public void SwapIcons(Transform position)
     {
-        position.GetChild(0).GetComponent<Image>().sprite = startClimbIcon;
-        position.GetChild(0).GetComponent<Image>().color = alphaMax;
+        if (InputManager.instance.GetInputState() == InputManager.InputState.MouseKeyboard)
+        {
+            position.GetChild(0).GetComponent<Image>().sprite = startClimbIconKeyboard;
+            position.GetChild(0).GetComponent<Image>().color = alphaMax;
+        }
+        else if (InputManager.instance.GetInputState() == InputManager.InputState.Controller)
+        {
+            position.GetChild(0).GetComponent<Image>().sprite = startClimbIconJoystick;
+            position.GetChild(0).GetComponent<Image>().color = alphaMax;
+        }
     }
 
     public void ShowIcon(GameObject player)

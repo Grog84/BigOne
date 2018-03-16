@@ -10,7 +10,8 @@ public class DoorIconsActivation : MonoBehaviour
 {
 
     public Transform DoorCanvas;
-    public Sprite openDoor;
+    public Sprite openDoorKeyboard;
+    public Sprite openDoorJoyStick;
     public Sprite cantOpenDoor;
     public Collider outside;
     public Collider inside;
@@ -46,8 +47,16 @@ public class DoorIconsActivation : MonoBehaviour
     {
         if (hasKey.GetComponent<Doors>().hasKey && playerState.thisCharacter == CharacterActive.Mother)
         {
-            orientation.GetChild(0).GetComponent<Image>().sprite = openDoor;
-            orientation.GetChild(0).GetComponent<Image>().color = alphaMax;
+            if (InputManager.instance.GetInputState() == InputManager.InputState.MouseKeyboard)
+            {
+                orientation.GetChild(0).GetComponent<Image>().sprite = openDoorKeyboard;
+                orientation.GetChild(0).GetComponent<Image>().color = alphaMax;
+            }
+            else if (InputManager.instance.GetInputState() == InputManager.InputState.Controller)
+            {
+                orientation.GetChild(0).GetComponent<Image>().sprite = openDoorJoyStick;
+                orientation.GetChild(0).GetComponent<Image>().color = alphaMax;
+            }
         }
         else
         {

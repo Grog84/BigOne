@@ -9,7 +9,8 @@ using DG.Tweening;
 public class PushableIconsActivation : MonoBehaviour
 {
     public Transform PushableCanvas;
-    public Sprite startPush;
+    public Sprite startPushKeyboard;
+    public Sprite startPushJoyStick;
     public Collider trigger1;
     public Collider trigger2;
     public Collider trigger3;
@@ -46,8 +47,16 @@ public class PushableIconsActivation : MonoBehaviour
 	
     public void SwapIcons(Transform trigger)
     {
-        trigger.GetChild(0).GetComponent<Image>().sprite = startPush;
-        trigger.GetChild(0).GetComponent<Image>().color = alphaMax;
+        if (InputManager.instance.GetInputState() == InputManager.InputState.MouseKeyboard)
+        {
+            trigger.GetChild(0).GetComponent<Image>().sprite = startPushKeyboard;
+            trigger.GetChild(0).GetComponent<Image>().color = alphaMax;
+        }
+        else if (InputManager.instance.GetInputState() == InputManager.InputState.Controller)
+        {
+            trigger.GetChild(0).GetComponent<Image>().sprite = startPushJoyStick;
+            trigger.GetChild(0).GetComponent<Image>().color = alphaMax;
+        }
     }
 
     public void ShowIcon(GameObject player)

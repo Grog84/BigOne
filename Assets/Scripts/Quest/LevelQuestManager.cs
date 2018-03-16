@@ -35,9 +35,9 @@ public class LevelQuestManager : MonoBehaviour
 
     public IEnumerator CompleteQuest(string nextObjective, string myObjectiveProgress)
     {
-        objectiveComplete.DOFade(255f, 2f);
+        objectiveComplete.DOColor(new Color(objectiveComplete.color.r, objectiveComplete.color.g, objectiveComplete.color.b, 255f), 2f);
         yield return new WaitForSeconds(2.5f);
-        objectiveComplete.DOFade(0f, 1f);
+        objectiveComplete.DOColor(new Color(objectiveComplete.color.r, objectiveComplete.color.g, objectiveComplete.color.b, 0f), 1f);
         yield return new WaitForSeconds(1f);
         objectiveText.text = nextObjective;
         objectiveProgress.text = myObjectiveProgress;

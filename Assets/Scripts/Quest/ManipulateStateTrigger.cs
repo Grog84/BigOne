@@ -5,12 +5,12 @@ using UnityEngine;
 public class ManipulateStateTrigger : MonoBehaviour {
 
     bool triggered;
-    Level1Quest level1quest;
-    public Level1Quest.QuestProgress questProgress;
+    LevelQuestManager levelquests;
+    public LevelQuestManager.QuestProgress questProgress;
 
     private void Start()
     {
-        level1quest = FindObjectOfType<Level1Quest>();
+        levelquests = FindObjectOfType<LevelQuestManager>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -18,7 +18,7 @@ public class ManipulateStateTrigger : MonoBehaviour {
         if (other.tag == "Player" && triggered == false)
         {
             triggered = true;
-            level1quest.updateState(questProgress);
+            levelquests.updateState(questProgress);
         }
     }
 }

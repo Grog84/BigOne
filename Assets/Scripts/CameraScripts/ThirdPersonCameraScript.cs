@@ -45,7 +45,7 @@ public class ThirdPersonCameraScript : CameraScript {
         currentY -= Input.GetAxis("Joystick Y") * InputManager.instance.JoystickYSensitivity;
         currentY = Mathf.Clamp(currentY, yAngleMin, yAngleMax);
 
-        Debug.Log(currentX);
+//Debug.Log(currentX);
 
         //camera management of the bound to the player, movement, rotation and look direction
         dir.Set(0, 0, -distance);

@@ -109,7 +109,6 @@ namespace QuestManager
                 myNpcs[1].isActive = false;
                 myNpcs[2].isActive = false;
                 updateIcions();
-
             }
             if (newState == STATUSLEVELO2.Objective5)
             {

@@ -21,14 +21,13 @@ GameObject:
   - component: {fileID: 4842566868613488}
   - component: {fileID: 33687543182119730}
   - component: {fileID: 23095981357483264}
-  - component: {fileID: 65407883071167856}
-  - component: {fileID: 65173797223214878}
+  - component: {fileID: 136533267820150678}
   m_Layer: 0
   m_Name: broken_water well
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4842566868613488
 Transform:
@@ -36,8 +35,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1183404355593210}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 35.378304, y: 0.06902349, z: -68.694595}
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -3.2315426, y: -3.564642, z: 7.6185684}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,8 +81,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1183404355593210}
   m_Mesh: {fileID: 4300000, guid: f980a8ed02adb7a4f98f287601ef9b9a, type: 3}
---- !u!65 &65173797223214878
-BoxCollider:
+--- !u!136 &136533267820150678
+CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -91,18 +90,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.51104736, y: 0.678865, z: 0.35710526}
-  m_Center: {x: -0.20397949, y: 1.6605684, z: 0.1785522}
---- !u!65 &65407883071167856
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1183404355593210}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.4347115, y: 2.6271122, z: 3.2142007}
-  m_Center: {x: -0.052930832, y: 0.028826952, z: 1.6071002}
+  m_Radius: 2.2634223
+  m_Height: 4.5268445
+  m_Direction: 1
+  m_Center: {x: -0.09264898, y: -0.15127635, z: 0.6517494}

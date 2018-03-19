@@ -20,7 +20,7 @@ public class ManipulateStateTrigger : MonoBehaviour
     {
         if (isNpc)
         {
-            if (other.tag == "Player" && triggered == false && Input.GetButtonDown("Interact"))
+            if (other.tag == "Player" && triggered == false && Input.GetButtonDown("Interact") && levelquests.actualQuest == questProgress - 1)
             {
                 triggered = true;
                 levelquests.updateState(questProgress);
@@ -32,7 +32,7 @@ public class ManipulateStateTrigger : MonoBehaviour
     {
         if (!isNpc)
         {
-            if (other.tag == "Player" && triggered == false)
+            if (other.tag == "Player" && triggered == false && levelquests.actualQuest == questProgress - 1)
             {
                 triggered = true;
                 levelquests.updateState(questProgress);

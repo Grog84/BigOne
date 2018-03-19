@@ -96,7 +96,7 @@ public class GMController : MonoBehaviour {
         isCharacterPlaying = activePlayerAtStart;
         players = GameObject.FindGameObjectsWithTag("Player");
         m_CharacterInterfaces = new CharacterInterface[players.Length];
-        m_QM = GameObject.Find("QuestManager").GetComponent<QuestManager.QuestManager>();
+        //m_QM = GameObject.Find("QuestManager").GetComponent<QuestManager.QuestManager>();
         
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         List<GameObject> allGuardsGO = new List<GameObject>();

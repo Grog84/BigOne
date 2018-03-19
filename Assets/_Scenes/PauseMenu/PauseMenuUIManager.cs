@@ -179,6 +179,7 @@ public class PauseMenuUIManager : MonoBehaviour
 
     private void ReturnToMainMenu()
     {
+        
         SceneManager.LoadScene("Menu");
         //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
     }

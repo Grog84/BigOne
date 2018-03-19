@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.IO;
+using System;
 
 public class MenuUIManager : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class MenuUIManager : MonoBehaviour
     private Canvas m_Canvas;
 
     bool isMouseActive;
+
+    int State;
 
     GameObject[] UiButton;
     public Button continueButton;
@@ -25,6 +28,7 @@ public class MenuUIManager : MonoBehaviour
 
     private void Start()
     {
+        State = 0;
         Time.timeScale = 1;
         SM = FindObjectOfType<SaveManager>();
         ReturnToMainMenu();
@@ -46,6 +50,7 @@ public class MenuUIManager : MonoBehaviour
                 a.SetActive(false);
             }
         }
+        State = 0;
     }
 
     public void OpenLevelSelect()
@@ -61,6 +66,7 @@ public class MenuUIManager : MonoBehaviour
                 a.SetActive(false);
             }
         }
+        State = 1;
     }
 
     public void CloseLevelSelect()
@@ -235,7 +241,7 @@ public class MenuUIManager : MonoBehaviour
                 a.SetActive(false);
             }
         }
-
+        State = 2;
     }
     public void QuitGame()
     {
@@ -281,7 +287,7 @@ public class MenuUIManager : MonoBehaviour
         }
 
     }
-
+   
     public void HideMouseCursor()
     {
         Debug.Log("lock");
@@ -300,7 +306,21 @@ public class MenuUIManager : MonoBehaviour
             isMouseActive = true;
             m_Canvas.GetComponent<GraphicRaycaster>().enabled = true;
         }
-
+        if (EventSystem.current.currentSelectedGameObject==null)
+        {
+            switch(State)
+            {
+                case 0:
+                    GameObject.Find("NewGameButton_Beta").GetComponent<Button>().Select();
+                    break;
+                case 1:
+                    GameObject.Find("CloseSelectLevelMenu").GetComponent<Button>().Select();
+                    break;
+                case 2:
+                    GameObject.Find("ExitUnconfirmed").GetComponent<Button>().Select();
+                    break;
+            }
+        }
     }
 }
 

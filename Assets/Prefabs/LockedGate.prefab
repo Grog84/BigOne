@@ -169,7 +169,7 @@ GameObject:
   - component: {fileID: 114220369370281398}
   - component: {fileID: 54047901455516828}
   - component: {fileID: 114722425039570688}
-  - component: {fileID: 64608053652115766}
+  - component: {fileID: 65678369035672072}
   m_Layer: 11
   m_Name: DoorBody
   m_TagString: LockedDoor
@@ -308,7 +308,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1897851052756830}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.318, y: -1.5, z: -0.168}
+  m_LocalPosition: {x: -0.318, y: -1.5, z: -0.049}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4377606741444340}
@@ -390,7 +390,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1829600121915864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 97.77936, y: 1.431, z: -8.077103}
+  m_LocalPosition: {x: 73.681, y: 1.431, z: -13.651}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4057982550890056}
@@ -571,20 +571,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &64608053652115766
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1718933740180906}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 1
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 0}
 --- !u!65 &65158544590972388
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -597,6 +583,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65678369035672072
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1718933740180906}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4000006, y: 2.513, z: 0.19999886}
+  m_Center: {x: -0.31800032, y: -0.24350005, z: -0.16499996}
 --- !u!65 &65798257662592748
 BoxCollider:
   m_ObjectHideFlags: 1

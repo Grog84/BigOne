@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 114055783100515484}
   - component: {fileID: 54836213831321584}
   - component: {fileID: 114860049488070432}
-  - component: {fileID: 64905100658800414}
+  - component: {fileID: 65896483097758008}
   m_Layer: 11
   m_Name: DoorBody
   m_TagString: UnlockedDoor
@@ -267,7 +267,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1471658473345598}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 93.4285, y: 1.66, z: -12.896851}
+  m_LocalPosition: {x: 73.691, y: 1.66, z: -13.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4125519760261186}
@@ -339,7 +339,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1971529044473516}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.318, y: -1.5, z: -0.168}
+  m_LocalPosition: {x: -0.318, y: -1.5, z: -0.037}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4177878298915150}
@@ -571,20 +571,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &64905100658800414
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1124687347930342}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 1
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 0}
 --- !u!65 &65426218328610840
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -609,6 +595,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65896483097758008
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1124687347930342}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4000006, y: 2.513, z: 0.19999886}
+  m_Center: {x: -0.31800032, y: -0.24350005, z: -0.16499996}
 --- !u!114 &114055783100515484
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 114413171054697450}
   - component: {fileID: 54568239173349288}
   - component: {fileID: 114028279236220550}
-  - component: {fileID: 64822468384817830}
+  - component: {fileID: 65572860058539944}
   m_Layer: 11
   m_Name: DoorBody
   m_TagString: LockedDoor
@@ -364,7 +364,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1802375885123536}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.318, y: -1.5, z: -0.168}
+  m_LocalPosition: {x: -0.318, y: -1.5, z: -0.038}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4393534010585588}
@@ -390,7 +390,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1479698605851058}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 96.703186, y: 1.59, z: -12.158524}
+  m_LocalPosition: {x: 74.1476, y: 1.5000001, z: -13.437592}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4148499787663620}
@@ -571,8 +571,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &64822468384817830
-MeshCollider:
+--- !u!65 &65572860058539944
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -581,10 +581,8 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 0}
+  m_Size: {x: 1.4000006, y: 2.513, z: 0.19999886}
+  m_Center: {x: -0.31800032, y: -0.24350005, z: -0.16499996}
 --- !u!65 &65580345535219848
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1001,8 +999,16 @@ MonoBehaviour:
     areaError: 15
   asset_guid: 
   dontDestroyMeshOnDelete: 0
-  m_selectedFaces: 04000000
+  m_selectedFaces: 0000000004000000
   m_SelectedEdges:
+  - x: 0
+    y: 1
+  - x: 2
+    y: 0
+  - x: 1
+    y: 3
+  - x: 3
+    y: 2
   - x: 16
     y: 17
   - x: 18
@@ -1011,7 +1017,7 @@ MonoBehaviour:
     y: 19
   - x: 19
     y: 18
-  m_selectedTriangles: 100000001100000012000000110000001300000012000000
+  m_selectedTriangles: 000000000100000002000000010000000300000002000000100000001100000012000000110000001300000012000000
 --- !u!114 &114754210851539004
 MonoBehaviour:
   m_ObjectHideFlags: 1

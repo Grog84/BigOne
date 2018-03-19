@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 114390501348950766}
   - component: {fileID: 54055144164384098}
   - component: {fileID: 114087948348365196}
-  - component: {fileID: 64741690320388960}
+  - component: {fileID: 65635810952481704}
   m_Layer: 11
   m_Name: DoorBody
   m_TagString: UnlockedDoor
@@ -336,7 +336,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1019040813850428}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.318, y: -1.5, z: -0.168}
+  m_LocalPosition: {x: -0.318, y: -1.5, z: -0.055}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4127479061197014}
@@ -377,7 +377,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1536646706236314}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 93.785614, y: 1.52, z: -8.227997}
+  m_LocalPosition: {x: 73.679, y: 1.52, z: -13.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4267471083648200}
@@ -571,20 +571,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!64 &64741690320388960
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1400589501886188}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 1
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 0}
 --- !u!65 &65232673821010040
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -597,6 +583,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &65635810952481704
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1400589501886188}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.4000006, y: 2.513, z: 0.19999886}
+  m_Center: {x: -0.31800032, y: -0.24350005, z: -0.16499996}
 --- !u!65 &65744995321379770
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1007,7 +1005,7 @@ MonoBehaviour:
     y: 19
   - x: 19
     y: 18
-  m_selectedTriangles: 100000001100000012000000110000001300000012000000
+  m_selectedTriangles: 
 --- !u!114 &114577455875410994
 MonoBehaviour:
   m_ObjectHideFlags: 1

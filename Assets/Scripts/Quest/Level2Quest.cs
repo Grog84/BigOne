@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Character;
 
 using UnityEngine.Playables;
 
 public class Level2Quest : LevelQuestManager
 {
     bool played = false;
+
 
 
     public override void updateState(QuestProgress newState)
@@ -26,11 +28,13 @@ public class Level2Quest : LevelQuestManager
         if (newState == QuestProgress.Objective3)
         {
             actualQuest = QuestProgress.Objective3;
+            Mother.GetComponent<_CharacterController>().isCarrying = true;
             StartCoroutine(CompleteQuest(Objectives[2], ""));
         }
         if (newState == QuestProgress.Objective4)
         {
             actualQuest = QuestProgress.Objective4;
+            Mother.GetComponent<_CharacterController>().isCarrying = false;
             StartCoroutine(CompleteQuest(Objectives[0], ""));
         }
         if (newState == QuestProgress.Objective5)

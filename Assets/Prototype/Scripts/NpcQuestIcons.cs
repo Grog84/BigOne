@@ -53,7 +53,7 @@ public class NpcQuestIcons : MonoBehaviour
     {
        orientation.GetChild(0).GetComponent<Image>().sprite = talk;
        orientation.GetChild(0).GetComponent<Image>().color = alphaMax;
-        talkIcon.GetChild(0).GetComponent<Image>().rectTransform.sizeDelta = new Vector2(talkSize, talkSize);
+       talkIcon.GetChild(0).GetComponent<Image>().rectTransform.sizeDelta = new Vector2(talkSize, talkSize);
     }
 
     public void ShowIcon(GameObject player)

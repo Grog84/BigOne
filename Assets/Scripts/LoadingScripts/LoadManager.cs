@@ -19,6 +19,8 @@ public class LoadManager : MonoBehaviour
     [HideInInspector] public bool isPreloading;
 
     [HideInInspector] public bool isSceneSelected;
+    [HideInInspector] public bool returningToMainMenu;
+
     public Canvas fadeCanvas;
 
     private PlayableDirector playable;
@@ -40,6 +42,7 @@ public class LoadManager : MonoBehaviour
         {
             SM = GameObject.Find("SaveManager").GetComponent<SaveManager>();
         }
+
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -108,6 +111,12 @@ public class LoadManager : MonoBehaviour
         {
             isSceneSelected = false;
             async = SceneManager.LoadSceneAsync(currentSceneIndex);
+        }
+        // Returning to Main Menu from Pause
+        else if(returningToMainMenu)
+        {
+            returningToMainMenu = false;
+            async = SceneManager.LoadSceneAsync(0);
         }
         else
         {

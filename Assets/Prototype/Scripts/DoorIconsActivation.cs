@@ -81,9 +81,8 @@ public class DoorIconsActivation : MonoBehaviour
                     if (playerState.m_CharacterController.doorCollider.transform == outside.transform)
                     {
                         SwapIcons(hasKey, frontIcons, playerState);
-                        player.GetComponent<_CharacterController>().IconPriority(frontIcons, degrees);
+                        player.GetComponent<_CharacterController>().IconPriority(frontIcons, degrees);                       
                         frontIcons.DOLookAt(activePlayer.position, 0.1f);
-
                     }
                     else if (playerState.m_CharacterController.doorCollider.transform == inside.transform)
                     {

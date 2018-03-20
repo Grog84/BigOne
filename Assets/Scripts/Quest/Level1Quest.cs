@@ -32,9 +32,9 @@ public class Level1Quest : LevelQuestManager
         {
             objectiveProgress.enabled = false;
             actualQuest = QuestProgress.Objective2;
-            Cutscenes[0].Play();
             
             StartCoroutine(CompleteQuest(Objectives[1], ""));
+            WaitForCutscene(Cutscenes[0]);
         }
         if (newState == QuestProgress.Objective3)
         {

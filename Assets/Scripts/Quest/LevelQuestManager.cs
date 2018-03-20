@@ -43,4 +43,23 @@ public class LevelQuestManager : MonoBehaviour
         objectiveProgress.text = myObjectiveProgress;
         yield return null;
     }
+
+    public IEnumerator WaitForCutscene(PlayableDirector currentCutscene)
+    {
+        currentCutscene.Play();
+        if (currentCutscene.playableGraph.IsPlaying())
+        {
+            //Debug.Log("INIZIATO");
+            GMController.instance.SetActive(false);
+        }
+
+        yield return new WaitForSeconds((float)currentCutscene.duration);
+
+        if (currentCutscene.state != PlayState.Playing)
+        {
+            //Debug.Log("FINITO");
+            GMController.instance.SetActive(true);
+        }
+    }
+
 }

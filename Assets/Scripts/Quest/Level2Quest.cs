@@ -22,15 +22,15 @@ public class Level2Quest : LevelQuestManager
         }
         if (newState == QuestProgress.Objective2)
         {
-            actualQuest = QuestProgress.Objective2;      
-            StartCoroutine(CompleteQuest(Objectives[1], ""));
+            actualQuest = QuestProgress.Objective2;
+            objectiveText.text = Objectives[1];
         }
         if (newState == QuestProgress.Objective3)
         {
             actualQuest = QuestProgress.Objective3;
-            Cutscenes[0].Play();
             Mother.GetComponent<_CharacterController>().isCarrying = true;
             StartCoroutine(CompleteQuest(Objectives[2], ""));
+            StartCoroutine(WaitForCutscene(Cutscenes[0]));
         }
         if (newState == QuestProgress.Objective4)
         {
@@ -41,20 +41,20 @@ public class Level2Quest : LevelQuestManager
         if (newState == QuestProgress.Objective5)
         {
             actualQuest = QuestProgress.Objective5;
-            Cutscenes[1].Play();
             StartCoroutine(CompleteQuest(Objectives[3], ""));
+            StartCoroutine(WaitForCutscene(Cutscenes[1]));
         }
         if (newState == QuestProgress.Objective6)
         {
             actualQuest = QuestProgress.Objective6;
-            Cutscenes[2].Play();
             StartCoroutine(CompleteQuest(Objectives[4], ""));
+            StartCoroutine(WaitForCutscene(Cutscenes[2]));
         }
         if (newState == QuestProgress.Objective7)
         {
             actualQuest = QuestProgress.Objective7;
-            Cutscenes[3].Play();
             StartCoroutine(CompleteQuest(Objectives[5], ""));
+            StartCoroutine(WaitForCutscene(Cutscenes[3]));
         }
     }
 

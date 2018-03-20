@@ -34,7 +34,7 @@ public class Level1Quest : LevelQuestManager
             actualQuest = QuestProgress.Objective2;
             
             StartCoroutine(CompleteQuest(Objectives[1], ""));
-            WaitForCutscene(Cutscenes[0]);
+            StartCoroutine(WaitForCutscene(Cutscenes[0]));
         }
         if (newState == QuestProgress.Objective3)
         {

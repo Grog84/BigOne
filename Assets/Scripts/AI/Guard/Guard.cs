@@ -388,22 +388,26 @@ namespace AI
                     //m_Animator.SetFloat("Forward", step*5f);
                     transform.rotation = Quaternion.LookRotation(newDir);
                 }
-                else if (navPointTimer >= checkNavPointTime - 2f)
-                {
-                    //Debug.Log("Start looking in new direction");
-                    // start facing the next point of the navigation
-                    //float step = normalStats.angularSpeed * Time.deltaTime;
-                    float step = normalStats.spotRotatingSpeed * Time.deltaTime;
-                    Vector3 targetDir = wayPointListTransform[checkingWayPoint].position - transform.position;
-                    targetDir = new Vector3(targetDir.x, transform.position.y, targetDir.z);
-                    Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
-                    //m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
-                    m_TurnAmount = (transform.forward - newDir).magnitude * 10f;
-                    //m_Animator.SetFloat("Turn", step);
-                    m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
-                    //m_Animator.SetFloat("Forward", step*5f);
-                    transform.rotation = Quaternion.LookRotation(newDir);
-                }
+
+                // REMOVED. SEEMS RESPONSIBLE OF THE GUARD FLICKERING DURING THE ROTATION
+                //else if (navPointTimer >= checkNavPointTime - 2f)
+                //{
+                //    //Debug.Log("Start looking in new direction");
+                //    // start facing the next point of the navigation
+                //    //float step = normalStats.angularSpeed * Time.deltaTime;
+                //    float step = normalStats.spotRotatingSpeed * Time.deltaTime;
+                //    Vector3 targetDir = wayPointListTransform[checkingWayPoint].position - transform.position;
+                //    targetDir = new Vector3(targetDir.x, transform.position.y, targetDir.z);
+                //    Vector3 newDir = Vector3.RotateTowards(transform.forward, targetDir, step, 0.0F);
+                //    //m_TurnAmount = Mathf.Atan2(newDir.x, newDir.z);
+                //    m_TurnAmount = (transform.forward - newDir).magnitude * 10f;
+                    
+                //    //m_Animator.SetFloat("Turn", step);
+                //    m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
+                //    //m_Animator.SetFloat("Forward", step*5f);
+                //    transform.rotation = Quaternion.LookRotation(newDir);
+
+                //}
 
                 if (m_State == GuardState.ALARMED || m_State == GuardState.CURIOUS)
                 {

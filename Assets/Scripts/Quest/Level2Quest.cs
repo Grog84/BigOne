@@ -12,7 +12,7 @@ public class Level2Quest : LevelQuestManager
 
 
 
-    public override void updateState(QuestProgress newState)
+    public override void UpdateState(QuestProgress newState)
     {
         if (newState == QuestProgress.Objective1)
         {

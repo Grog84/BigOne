@@ -20,7 +20,7 @@ public class LevelQuestManager : MonoBehaviour
 
     public QuestProgress actualQuest;
 
-    public virtual void updateState(QuestProgress newState) { }
+    public virtual void UpdateState(QuestProgress newState) { }
 
     private void Start()
     {
@@ -29,7 +29,7 @@ public class LevelQuestManager : MonoBehaviour
         objectiveText = GameObject.Find("Objective").GetComponent<Text>();
         objectiveProgress = GameObject.Find("ObjectiveProgress").GetComponent<Text>();
         objectiveComplete = GameObject.Find("ObjectiveComplete").GetComponent<Image>();
-        updateState(QuestProgress.Objective1);
+        UpdateState(QuestProgress.Objective1);
     }
 
 

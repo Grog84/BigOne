@@ -16,11 +16,12 @@ public class Level1Quest : LevelQuestManager
         if (friendsSaved == 3 && played == false)
         {
             played = true;
-            updateState(QuestProgress.Objective2);
+            Cutscenes[0].Play();
+            UpdateState(QuestProgress.Objective2);
         }
     }
 
-    public override void updateState(QuestProgress newState)
+    public override void UpdateState(QuestProgress newState)
     {
         if (newState == QuestProgress.Objective1)
         {

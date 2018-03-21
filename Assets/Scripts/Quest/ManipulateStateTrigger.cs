@@ -23,7 +23,7 @@ public class ManipulateStateTrigger : MonoBehaviour
             if (other.tag == "Player" && triggered == false && Input.GetButtonDown("Interact") && levelquests.actualQuest == questProgress - 1)
             {
                 triggered = true;
-                levelquests.updateState(questProgress);
+                levelquests.UpdateState(questProgress);
             }
         }
     }
@@ -35,7 +35,7 @@ public class ManipulateStateTrigger : MonoBehaviour
             if (other.tag == "Player" && triggered == false && levelquests.actualQuest == questProgress - 1)
             {
                 triggered = true;
-                levelquests.updateState(questProgress);
+                levelquests.UpdateState(questProgress);
             }
         }
     }

@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 54342401175732566}
   - component: {fileID: 114155311594160062}
   - component: {fileID: 114472145394700630}
+  - component: {fileID: 208105044371924346}
   m_Layer: 10
   m_Name: TrashBinPushable
   m_TagString: Untagged
@@ -443,7 +444,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1253030799069550}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 105.08, y: 0.943, z: -15.82}
+  m_LocalPosition: {x: 80.2, y: 0.943, z: -21.36}
   m_LocalScale: {x: 2.0294304, y: 1.7948072, z: 1.6571759}
   m_Children:
   - {fileID: 4637232508175498}
@@ -1303,6 +1304,21 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!208 &208105044371924346
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1253030799069550}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!222 &222799353936043932
 CanvasRenderer:
   m_ObjectHideFlags: 1

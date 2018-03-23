@@ -496,7 +496,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &1568700524385102
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
@@ -999,6 +999,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4875241521570846}
   - component: {fileID: 95224981884469044}
+  - component: {fileID: 136745708965642056}
   m_Layer: 0
   m_Name: YoungGuy
   m_TagString: Untagged
@@ -1939,12 +1940,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1925233376421296}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 78.293, y: 0.06902349, z: -58.857}
+  m_LocalPosition: {x: 71.2534, y: 0.06902349, z: -57.724}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4410431004408410}
   - {fileID: 4971118540233424}
-  - {fileID: 4907113959866004}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2001,6 +2001,7 @@ Transform:
   m_LocalScale: {x: 0.9, y: 0.8, z: 0.8}
   m_Children:
   - {fileID: 4002210379206236}
+  - {fileID: 4907113959866004}
   m_Father: {fileID: 4881581746976034}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2023,15 +2024,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1568700524385102}
-  m_LocalRotation: {x: -0.21817183, y: -0, z: -0, w: 0.97591037}
-  m_LocalPosition: {x: -0.08899689, y: 1.6577765, z: 0.13299942}
-  m_LocalScale: {x: 3.5730715, y: 3.1804116, z: 2.7419627}
+  m_LocalRotation: {x: -0.21817179, y: -0, z: -0, w: 0.9759104}
+  m_LocalPosition: {x: -0.08989585, y: 0.12740406, z: 0.21148784}
+  m_LocalScale: {x: 3.6091633, y: 3.6141038, z: 3.1158664}
   m_Children:
   - {fileID: 4402674673720434}
   - {fileID: 4911584062646816}
   - {fileID: 4803985539315546}
-  m_Father: {fileID: 4875241521570846}
-  m_RootOrder: 2
+  m_Father: {fileID: 4895661935119312}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -25.203001, y: 0, z: 0}
 --- !u!4 &4911584062646816
 Transform:
@@ -2207,6 +2208,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!136 &136745708965642056
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1925233376421296}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.25
+  m_Height: 2.17
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.84, z: 0}
 --- !u!137 &137994443082497358
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

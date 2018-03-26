@@ -306,12 +306,12 @@ public class MenuUIManager : MonoBehaviour
     int ExitOrNewGame;
     public void StartNewGame()
     {
-        Debug.Log("Inizio");
+     //   Debug.Log("Inizio");
         HideMouseCursor();
         SM.PlayerProfile.Continue = false;
         LoadManager.instance.PlayFade();
-        SceneManager.LoadSceneAsync(1);
-
+        //SceneManager.LoadSceneAsync(1);
+        LoadManager.instance.ChangeToLoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void OverwriteProgress()
     {

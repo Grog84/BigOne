@@ -985,7 +985,6 @@ GameObject:
   - component: {fileID: 199171132}
   - component: {fileID: 199171134}
   - component: {fileID: 199171135}
-  - component: {fileID: 199171136}
   m_Layer: 5
   m_Name: ControllerButton
   m_TagString: Untagged
@@ -1058,7 +1057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 734355843}
+    m_SelectOnUp: {fileID: 683165702}
     m_SelectOnDown: {fileID: 1483137550}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -1188,18 +1187,6 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!114 &199171136
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 199171130}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22b68a732b0c87348a12c2fba655d3b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Manager: {fileID: 1273342863}
 --- !u!1 &203527613
 GameObject:
   m_ObjectHideFlags: 0
@@ -2686,7 +2673,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_SelectOnUp: {fileID: 1013366579}
-    m_SelectOnDown: {fileID: 723068353}
+    m_SelectOnDown: {fileID: 1609441950}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -3727,7 +3714,6 @@ GameObject:
   - component: {fileID: 683165703}
   - component: {fileID: 683165702}
   - component: {fileID: 683165706}
-  - component: {fileID: 683165707}
   m_Layer: 5
   m_Name: AudioButton
   m_TagString: Untagged
@@ -3748,14 +3734,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 734355843}
+    m_SelectOnUp: {fileID: 1483137550}
+    m_SelectOnDown: {fileID: 199171134}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.69803923, g: 0.69803923, b: 0.69803923, a: 1}
+    m_NormalColor: {r: 0.69803923, g: 0.69803923, b: 0.69803923, a: 1}
+    m_HighlightedColor: {r: 1, g: 1, b: 1, a: 1}
     m_PressedColor: {r: 0.5647059, g: 0.54509807, b: 0.48235294, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
@@ -3930,18 +3916,6 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!114 &683165707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 683165701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22b68a732b0c87348a12c2fba655d3b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Manager: {fileID: 1273342863}
 --- !u!1001 &697741898
 Prefab:
   m_ObjectHideFlags: 0
@@ -4277,7 +4251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 472640655}
+    m_SelectOnUp: {fileID: 1609441950}
     m_SelectOnDown: {fileID: 1013366579}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -4487,7 +4461,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 734355841}
   m_OnClick:
     m_PersistentCalls:
@@ -8484,7 +8458,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_SelectOnUp: {fileID: 199171134}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 683165702}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -8542,7 +8516,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1013366579}
         m_MethodName: Select
         m_Mode: 1
         m_Arguments:
@@ -9228,8 +9202,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnUp: {fileID: 472640655}
+    m_SelectOnDown: {fileID: 723068353}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1

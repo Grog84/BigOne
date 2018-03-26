@@ -13,7 +13,15 @@ public class ManipulateStateTrigger : MonoBehaviour
     private void Start()
     {
         levelquests = FindObjectOfType<LevelQuestManager>();
-        isNpc = transform.parent.name.Contains("NpcQuest");       
+        if(transform.parent)
+        {
+            isNpc = transform.parent.name.Contains("NpcQuest");
+        }
+        else
+        {
+            isNpc = transform.name.Contains("NpcQuest");
+        }
+
     }
 
     private void OnTriggerStay(Collider other)

@@ -60,6 +60,9 @@ public class GMController : MonoBehaviour {
     //[HideInInspector] public CheckPointManager m_CheckpointManager;
     [HideInInspector] public SaveManager m_SaveManager;
 
+    // QuestManager reference
+    [HideInInspector] public LevelQuestManager questManager;
+
     // Character interface used to acces those methods requiring both Character controller and character stte machine controller
     [HideInInspector] public CharacterInterface[] m_CharacterInterfaces;
     [HideInInspector] public Transform[] playerTransform;
@@ -96,7 +99,11 @@ public class GMController : MonoBehaviour {
         isCharacterPlaying = activePlayerAtStart;
         players = GameObject.FindGameObjectsWithTag("Player");
         m_CharacterInterfaces = new CharacterInterface[players.Length];
-        //m_QM = GameObject.Find("QuestManager").GetComponent<QuestManager.QuestManager>();
+
+        if(FindObjectOfType<LevelQuestManager>())
+        {
+            questManager = FindObjectOfType<LevelQuestManager>();
+        }
         
         GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
         List<GameObject> allGuardsGO = new List<GameObject>();

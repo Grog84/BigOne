@@ -48,7 +48,7 @@ public class Level2Quest : LevelQuestManager
         {
             actualQuest = QuestProgress.Objective6;
             StartCoroutine(CompleteQuest(Objectives[4], ""));
-            StartCoroutine(WaitForCutscene(Cutscenes[2]));
+            Cutscenes[2].Play();
         }
         if (newState == QuestProgress.Objective7)
         {

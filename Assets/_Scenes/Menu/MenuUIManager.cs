@@ -20,10 +20,25 @@ public class MenuUIManager : MonoBehaviour
     GameObject[] UiButton;
     public Button continueButton;
 
+
+    FMOD.Studio.Bus Music;
+    FMOD.Studio.Bus SFX;
+    //FMOD.Studio.Bus Master;
+
+    float MusicVolume = 0.5f;
+    float SFXVolume = 0.5f;
+    //float MasterVolume = 0.5f;
+    FMOD.Studio.EventInstance SFXVoumeTestEvent;
+    
+
     private void Awake()
     {
         UiButton = GameObject.FindGameObjectsWithTag("CanvasUI");
         m_Canvas = FindObjectOfType<Canvas>();
+        Music = FMODUnity.RuntimeManager.GetBus("bus:/Music");
+        SFX = FMODUnity.RuntimeManager.GetBus("bus:/SFX");
+        //Master = FMODUnity.RuntimeManager.GetBus("bus:");
+    //    SFXVoumeTestEvent = FMODUnity.RuntimeManager.CreateInstance("");
     }
 
     private void Start()
@@ -35,6 +50,79 @@ public class MenuUIManager : MonoBehaviour
 
 
         // ContinueButtonOnOff();
+    }
+    private void Update()
+    {
+        Music.setVolume(MusicVolume);
+        SFX.setVolume(SFXVolume);
+        //Master.setVolume(MasterVolume);
+
+
+        if (isMouseActive && Input.GetAxis("Vertical") != 0 && Input.GetAxis("Horizontal") != 0)
+        {
+            isMouseActive = false;
+            m_Canvas.GetComponent<GraphicRaycaster>().enabled = false;
+        }
+        else if (!isMouseActive && (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0))
+        {
+            isMouseActive = true;
+            m_Canvas.GetComponent<GraphicRaycaster>().enabled = true;
+        }
+        if (EventSystem.current.currentSelectedGameObject==null)
+        {
+            switch(State)
+            {
+                case 0:
+                    GameObject.Find("NewGameButton_Beta").GetComponent<Button>().Select();
+                    break;
+                case 1:
+                    GameObject.Find("CloseSelectLevelMenu").GetComponent<Button>().Select();
+                    break;
+                case 2:
+                    GameObject.Find("ExitUnconfirmed").GetComponent<Button>().Select();
+                    break;
+                case 3:
+                    GameObject.Find("BackMainMenuButton").GetComponent<Button>().Select();
+                    break;
+                case 4:
+                    GameObject.Find("CloseAudioMenu").GetComponent<Button>().Select();
+                    break;
+
+                default: break;
+            }
+        }
+    }
+
+
+    //public void MasterVolumeLevel(float newMasterVolume)
+    //{
+    //    MasterVolume = newMasterVolume;
+    //}
+
+    public void MusicVolumeLevel(float newMusicVolume)
+    {
+
+        MusicVolume = newMusicVolume;
+        if(MusicVolume==0)
+        {
+            Music.setMute(true);
+        }
+        else
+        {
+            Music.setMute(false);
+        }
+    }
+    public void SFXVolumeLevel(float newSFXVolume)
+    {
+        SFXVolume = newSFXVolume;
+        if (SFXVolume == 0)
+        {
+            SFX.setMute(true);
+        }
+        else
+        {
+            SFX.setMute(false);
+        }
     }
 
     public void ReturnToMainMenu()
@@ -95,6 +183,7 @@ public class MenuUIManager : MonoBehaviour
                 a.SetActive(false);
             }
         }
+        State = 3;
     }
 
     public void CloseSettings()
@@ -122,6 +211,7 @@ public class MenuUIManager : MonoBehaviour
                 a.SetActive(false);
             }
         }
+        State = 4;
     }
 
     public void CloseAudioSettings()
@@ -294,33 +384,5 @@ public class MenuUIManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void Update()
-    {
-        if (isMouseActive && Input.GetAxis("Vertical") != 0 && Input.GetAxis("Horizontal") != 0)
-        {
-            isMouseActive = false;
-            m_Canvas.GetComponent<GraphicRaycaster>().enabled = false;
-        }
-        else if (!isMouseActive && (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0))
-        {
-            isMouseActive = true;
-            m_Canvas.GetComponent<GraphicRaycaster>().enabled = true;
-        }
-        if (EventSystem.current.currentSelectedGameObject==null)
-        {
-            switch(State)
-            {
-                case 0:
-                    GameObject.Find("NewGameButton_Beta").GetComponent<Button>().Select();
-                    break;
-                case 1:
-                    GameObject.Find("CloseSelectLevelMenu").GetComponent<Button>().Select();
-                    break;
-                case 2:
-                    GameObject.Find("ExitUnconfirmed").GetComponent<Button>().Select();
-                    break;
-            }
-        }
-    }
 }
 

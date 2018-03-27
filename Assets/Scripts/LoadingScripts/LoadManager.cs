@@ -60,6 +60,7 @@ public class LoadManager : MonoBehaviour
 
     public void StopFade()
     {
+       // Debug.Log("mannaggia a lorenzo");
         playable.Stop();
         fadeCanvas.sortingOrder = -1;
     }

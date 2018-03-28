@@ -19,6 +19,7 @@ public class LoadManager : MonoBehaviour
     [HideInInspector] public bool isPreloading;
 
     [HideInInspector] public bool isSceneSelected;
+    [HideInInspector] public bool loadSelected;
     [HideInInspector] public bool returningToMainMenu;
 
     public Canvas fadeCanvas;
@@ -111,6 +112,7 @@ public class LoadManager : MonoBehaviour
         else if(isSceneSelected)
         {
             isSceneSelected = false;
+            loadSelected = true;
             async = SceneManager.LoadSceneAsync(currentSceneIndex);
         }
         // Returning to Main Menu from Pause

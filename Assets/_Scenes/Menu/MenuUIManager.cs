@@ -380,7 +380,7 @@ public class MenuUIManager : MonoBehaviour
    
     public void HideMouseCursor()
     {
-        Debug.Log("lock");
+        //Debug.Log("lock");
         Cursor.lockState = CursorLockMode.Locked;
     }
 

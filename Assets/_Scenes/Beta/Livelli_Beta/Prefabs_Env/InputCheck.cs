@@ -15,17 +15,17 @@ public class InputCheck : MonoBehaviour {
 	}
 	
 
-	void Update () 
-	{
-		if(InputManager.instance.GetInputState() == InputManager.InputState.MouseKeyboard)
-		{
-			keyboardIcon.SetActive () = true;
-			joystickIcon.SetActive () = false;
-		}
-		if(InputManager.instance.GetInputState() == InputManager.InputState.Controller)
-		{
-			keyboardIcon.SetActive () = false;
-			joystickIcon.SetActive () = true;
-		}
-	}
+	//void Update () 
+	//{
+	//	if(InputManager.instance.GetInputState() == InputManager.InputState.MouseKeyboard)
+	//	{
+	//		keyboardIcon.SetActive () = true;
+	//		joystickIcon.SetActive () = false;
+	//	}
+	//	if(InputManager.instance.GetInputState() == InputManager.InputState.Controller)
+	//	{
+	//		keyboardIcon.SetActive () = false;
+	//		joystickIcon.SetActive () = true;
+	//	}
+	//}
 }

@@ -181,8 +181,7 @@ public class PauseMenuUIManager : MonoBehaviour
     {
         LoadManager.instance.returningToMainMenu = true;
         LoadManager.instance.ChangeToLoadScene(SceneManager.GetActiveScene().buildIndex);
-        //SceneManager.LoadScene("Menu");
-        //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+      
     }
 
 }

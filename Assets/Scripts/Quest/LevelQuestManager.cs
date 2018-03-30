@@ -10,7 +10,7 @@ public class LevelQuestManager : MonoBehaviour
 
     public string[] Objectives;
     public PlayableDirector[] Cutscenes;
-    public enum QuestProgress { Objective1, Objective2, Objective3, Objective4, Objective5, Objective6, Objective7 }
+    public enum QuestProgress { Objective1, Objective2, Objective3, Objective4, Objective5, Objective6, Objective7, Objective8 }
     protected Text objectiveText;
     protected Text objectiveProgress;
     protected Image objectiveComplete;

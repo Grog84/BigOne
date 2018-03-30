@@ -335,14 +335,14 @@ namespace Character
             if (other.tag == "NpcSight")
             {
                 npcSightCollider = other.gameObject;
-                if (other.transform.parent.GetComponent<NpcQuestIcons>().isActive)
-                {
-                    other.transform.parent.GetComponent<NpcQuestIcons>().ShowIcon(this.gameObject);
-                }
-                else
-                {
-                    other.transform.parent.GetComponent<NpcQuestIcons>().HideIcons();
-                }
+                //if (other.transform.parent.GetComponent<NpcQuestIcons>().isActive)
+                //{
+                //    other.transform.parent.GetComponent<NpcQuestIcons>().ShowIcon(this.gameObject);
+                //}
+                //else
+                //{
+                //    other.transform.parent.GetComponent<NpcQuestIcons>().HideIcons();
+                //}
             }
 
         }
@@ -474,18 +474,18 @@ namespace Character
                     isLedgeLimit = false;
                 }
             }
-            if (other.tag == "NpcSight")
-            {
-                if (other.transform.parent.GetComponent<NpcQuestIcons>().isActive)
-                {
-                    other.transform.parent.GetComponent<NpcQuestIcons>().SetToObjective();
-                }
-                else
-                {
-                    other.transform.parent.GetComponent<NpcQuestIcons>().HideIcons();
-                }
-                // npcSightCollider = null;
-            }
+            //if (other.tag == "NpcSight")
+            //{
+            //    if (other.transform.parent.GetComponent<NpcQuestIcons>().isActive)
+            //    {
+            //        other.transform.parent.GetComponent<NpcQuestIcons>().SetToObjective();
+            //    }
+            //    else
+            //    {
+            //        other.transform.parent.GetComponent<NpcQuestIcons>().HideIcons();
+            //    }
+            //    // npcSightCollider = null;
+            //}
 
         }
 

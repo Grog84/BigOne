@@ -10,13 +10,14 @@ public class LevelQuestManager : MonoBehaviour
 
     public string[] Objectives;
     public PlayableDirector[] Cutscenes;
+    ManipulateStateTrigger[] ObjectiveTriggers;
     public enum QuestProgress { Objective1, Objective2, Objective3, Objective4, Objective5, Objective6, Objective7, Objective8 }
     protected Text objectiveText;
     protected Text objectiveProgress;
     protected Image objectiveComplete;
 
-    protected GameObject Mother;
-    protected GameObject Boy;
+    public GameObject Mother;
+    public GameObject Boy;
 
     public QuestProgress actualQuest;
 
@@ -29,6 +30,7 @@ public class LevelQuestManager : MonoBehaviour
         objectiveText = GameObject.Find("Objective").GetComponent<Text>();
         objectiveProgress = GameObject.Find("ObjectiveProgress").GetComponent<Text>();
         objectiveComplete = GameObject.Find("ObjectiveComplete").GetComponent<Image>();
+        ObjectiveTriggers = FindObjectsOfType<ManipulateStateTrigger>();
         UpdateState(QuestProgress.Objective1);
     }
 
@@ -59,6 +61,17 @@ public class LevelQuestManager : MonoBehaviour
         {
             //Debug.Log("FINITO");
             GMController.instance.SetActive(true);
+        }
+    }
+
+    public void CheckActualObjective()
+    {
+        for (int i = 0; i < ObjectiveTriggers.Length; i++)
+        {
+            if(ObjectiveTriggers[i].questProgress - 1 == actualQuest)
+            {
+                ObjectiveTriggers[i].isActive = true;
+            }
         }
     }
 

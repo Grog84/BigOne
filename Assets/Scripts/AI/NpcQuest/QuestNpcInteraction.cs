@@ -26,18 +26,18 @@ public class QuestNpcInteraction : MonoBehaviour {
                 //m_QuestNpc.StopWaving();
                 m_QuestNpc.canInteract = false;
 
-                if(m_Npc.GetComponent<NpcQuestIcons>().isActive)
-                {
-                    m_QuestNpc.m_Animator.SetTrigger("isGivingQuest");
-                    m_QuestNpc.StopWaving();
+                //if(m_Npc.GetComponent<NpcQuestIcons>().isActive)
+                //{
+                //    m_QuestNpc.m_Animator.SetTrigger("isGivingQuest");
+                //    m_QuestNpc.StopWaving();
 
-                }
-                else if (!m_Npc.GetComponent<NpcQuestIcons>().isActive)
-                {
-                    m_QuestNpc.m_Animator.SetTrigger("isNegative");
-                    m_QuestNpc.StopWaving();
+                //}
+                //else if (!m_Npc.GetComponent<NpcQuestIcons>().isActive)
+                //{
+                //    m_QuestNpc.m_Animator.SetTrigger("isNegative");
+                //    m_QuestNpc.StopWaving();
 
-                }
+                //}
             }
         }
     }

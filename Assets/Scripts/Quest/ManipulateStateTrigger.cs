@@ -27,6 +27,7 @@ public class ManipulateStateTrigger : MonoBehaviour
     float objectiveSize = 1f;
     [HideInInspector]
     public bool isActive = false;
+    bool isInside = false;
 
     [HideInInspector]
     public Color alphaZero;
@@ -63,12 +64,12 @@ public class ManipulateStateTrigger : MonoBehaviour
     {
         talkIcon.DOLookAt(Camera.main.transform.position, 0.1f);
         isActive = levelquests.actualQuest == questProgress - 1;
-        if (isActive && GMController.instance.isCharacterPlaying == CharacterActive.Mother)
+        if (isActive && GMController.instance.isCharacterPlaying == CharacterActive.Mother && !isInside)
         {
             SetToObjective();
             //ShowIcon(levelquests.Mother);
         }
-        else if (isActive && GMController.instance.isCharacterPlaying == CharacterActive.Boy)
+        else if (isActive && GMController.instance.isCharacterPlaying == CharacterActive.Boy && !isInside)
         {
             SetToObjective();
             //ShowIcon(levelquests.Boy);
@@ -94,7 +95,15 @@ public class ManipulateStateTrigger : MonoBehaviour
 
     public void SwapIcons()
     {
-        talkIcon.GetChild(0).GetComponent<Image>().sprite = talk;
+        if(InputManager.instance.GetInputState() == InputManager.InputState.MouseKeyboard)
+        {
+            talkIcon.GetChild(0).GetComponent<Image>().sprite = talk;
+        }
+        else if(InputManager.instance.GetInputState() == InputManager.InputState.Controller)
+        {
+            talkIcon.GetChild(0).GetComponent<Image>().sprite = talkJoystick;
+        }
+
         talkIcon.GetChild(0).GetComponent<Image>().color = alphaMax;
         talkIcon.GetChild(0).GetComponent<Image>().rectTransform.sizeDelta = new Vector2(talkSize, talkSize);
     }
@@ -122,10 +131,14 @@ public class ManipulateStateTrigger : MonoBehaviour
     {
         if (isNpc)
         {
-            if (other.tag == "Player" && triggered == false && Input.GetButtonDown("Interact") && isActive)
+            if (other.tag == "Player" && triggered == false && isActive)
             {
-                triggered = true;
-                levelquests.UpdateState(questProgress);
+                ShowIcon(other.gameObject);
+                if (Input.GetButtonDown("Interact"))
+                {
+                    triggered = true;
+                    levelquests.UpdateState(questProgress);
+                }
             }
         }
     }
@@ -142,7 +155,7 @@ public class ManipulateStateTrigger : MonoBehaviour
         }
         if (isNpc && isActive && other.tag == "Player")
         {
-            
+            isInside = true;
             ShowIcon(other.gameObject);
         }
     }
@@ -150,7 +163,8 @@ public class ManipulateStateTrigger : MonoBehaviour
     {
         if (isNpc && isActive && other.tag == "Player")
         {
-            ShowIcon(other.gameObject);
+            isInside = false;
+            //ShowIcon(other.gameObject);
         }
     }
 }

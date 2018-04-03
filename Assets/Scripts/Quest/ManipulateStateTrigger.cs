@@ -42,6 +42,7 @@ public class ManipulateStateTrigger : MonoBehaviour
     {
         alphaZero = new Color(0, 0, 0, 0);
         alphaMax = new Color(100, 100, 100, 255);
+        levelquests = FindObjectOfType<LevelQuestManager>();
     }
 
     private void Start()
@@ -49,7 +50,6 @@ public class ManipulateStateTrigger : MonoBehaviour
         perception = GetComponent<BoxCollider>();
         IconCanvas = transform.GetChild(0).transform;
         talkIcon = IconCanvas.GetChild(0);
-        levelquests = FindObjectOfType<LevelQuestManager>();
         if (transform.parent)
         {
             isNpc = transform.parent.name.Contains("NpcQuest");

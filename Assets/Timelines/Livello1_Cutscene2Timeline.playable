@@ -12,19 +12,43 @@ MonoBehaviour:
   m_Name: Livello1_Cutscene2Timeline
   m_EditorClassIdentifier: 
   m_Id: 0
-  m_NextId: 13
+  m_NextId: 15
   m_Tracks:
   - {fileID: 114559649524202122}
   - {fileID: 114102468327124562}
   - {fileID: 114429025138763170}
   - {fileID: 114076387919887278}
   - {fileID: 114128160253184602}
+  - {fileID: 114651120871947224}
+  - {fileID: 114383320676691704}
   m_FixedDuration: 0
   m_EditorSettings:
     fps: 60
   m_UpdateMode: 0
   m_ParameterName: 
   m_DurationMode: 0
+--- !u!114 &114012228345319484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1670381969, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Name: ControlPlayableAsset
+  m_EditorClassIdentifier: 
+  sourceGameObject:
+    exposedName: 6e2e9360c65ca9d40b1683c909e90d75
+    defaultValue: {fileID: 0}
+  prefabGameObject: {fileID: 0}
+  updateParticle: 1
+  particleRandomSeed: 5688
+  updateDirector: 1
+  updateITimeControl: 1
+  searchHierarchy: 1
+  active: 1
+  postPlayback: 2
 --- !u!114 &114050291555696472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -363,6 +387,92 @@ MonoBehaviour:
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_UseTrackMatchFields: 0
   m_MatchTargetFields: 63
+--- !u!114 &114383320676691704
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6635c419e219224cae3a9484270daa3, type: 3}
+  m_Name: Fade In Image Track
+  m_EditorClassIdentifier: 
+  m_Locked: 0
+  m_Muted: 0
+  m_Soloed: 0
+  m_Height: 0
+  m_InlineAnimationCurveHeight: 100
+  m_CustomPlayableFullTypename: 
+  m_AnimClip: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips:
+  - m_Start: 0.13333333333333333
+    m_ClipIn: 0
+    m_Asset: {fileID: 114887945594935542}
+    m_UnderlyingAsset: {fileID: 114887945594935542}
+    m_Duration: 11.633333333333328
+    m_ParentID: 0
+    m_TimeScale: 1
+    m_BlendCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ParentTrack: {fileID: 114383320676691704}
+    m_EaseInDuration: 4
+    m_EaseOutDuration: 4
+    m_BlendInDuration: -1
+    m_BlendOutDuration: -1
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_ID: -1638707459
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: FadeInImageClip
 --- !u!114 &114429025138763170
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -384,7 +494,7 @@ MonoBehaviour:
   m_Parent: {fileID: 11400000}
   m_Children: []
   m_Clips:
-  - m_Start: 0
+  - m_Start: 0.4
     m_ClipIn: 0
     m_Asset: {fileID: 114539918956261068}
     m_UnderlyingAsset: {fileID: 114539918956261068}
@@ -449,7 +559,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: TextSwitcherClip
-  - m_Start: 3.4
+  - m_Start: 3.799999999999999
     m_ClipIn: 0
     m_Asset: {fileID: 114625000849507798}
     m_UnderlyingAsset: {fileID: 114539918956261068}
@@ -514,7 +624,7 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: TextSwitcherClip
-  - m_Start: 6.833333333333333
+  - m_Start: 7.233333333333332
     m_ClipIn: 0
     m_Asset: {fileID: 114571905602290438}
     m_UnderlyingAsset: {fileID: 114539918956261068}
@@ -625,7 +735,7 @@ MonoBehaviour:
   m_Name: TextSwitcherClip
   m_EditorClassIdentifier: 
   template:
-    color: {r: 0, g: 0, b: 0, a: 1}
+    color: {r: 1, g: 1, b: 1, a: 1}
     fontSize: 30
     text: Our neighbourhood was full of life
 --- !u!114 &114559649524202122
@@ -653,7 +763,7 @@ MonoBehaviour:
     m_ClipIn: 0
     m_Asset: {fileID: 114050291555696472}
     m_UnderlyingAsset: {fileID: 114050291555696472}
-    m_Duration: 7.783333333333333
+    m_Duration: 8.516666666666667
     m_ParentID: 0
     m_TimeScale: 1
     m_BlendCurve:
@@ -663,10 +773,10 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     m_ParentTrack: {fileID: 114559649524202122}
-    m_EaseInDuration: 1.8783333333333327
+    m_EaseInDuration: 2
     m_EaseOutDuration: 1.8783333333333327
     m_BlendInDuration: -1
-    m_BlendOutDuration: 2.4333333333333336
+    m_BlendOutDuration: 4.733333333333336
     m_MixInCurve:
       serializedVersion: 2
       m_Curve:
@@ -702,11 +812,11 @@ MonoBehaviour:
     m_PostExtrapolationTime: 0
     m_PreExtrapolationTime: 0
     m_DisplayName: CM vcam2
-  - m_Start: 5.366666666666666
+  - m_Start: 3.799999999999999
     m_ClipIn: 0
     m_Asset: {fileID: 114915927345078494}
     m_UnderlyingAsset: {fileID: 114915927345078494}
-    m_Duration: 6.566666666666666
+    m_Duration: 8.000000000000002
     m_ParentID: 0
     m_TimeScale: 1
     m_BlendCurve:
@@ -718,7 +828,7 @@ MonoBehaviour:
     m_ParentTrack: {fileID: 114559649524202122}
     m_EaseInDuration: 0
     m_EaseOutDuration: 1
-    m_BlendInDuration: 2.4333333333333336
+    m_BlendInDuration: 4.733333333333336
     m_BlendOutDuration: -1
     m_MixInCurve:
       serializedVersion: 2
@@ -781,7 +891,7 @@ MonoBehaviour:
   m_Name: TextSwitcherClip
   m_EditorClassIdentifier: 
   template:
-    color: {r: 0, g: 0, b: 0, a: 1}
+    color: {r: 1, g: 1, b: 1, a: 1}
     fontSize: 30
     text: I think everyone liked her
 --- !u!114 &114625000849507798
@@ -796,7 +906,7 @@ MonoBehaviour:
   m_Name: TextSwitcherClip
   m_EditorClassIdentifier: 
   template:
-    color: {r: 0, g: 0, b: 0, a: 1}
+    color: {r: 1, g: 1, b: 1, a: 1}
     fontSize: 30
     text: mom always tried to be helpful
 --- !u!114 &114629106450931460
@@ -815,6 +925,92 @@ MonoBehaviour:
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_UseTrackMatchFields: 0
   m_MatchTargetFields: 63
+--- !u!114 &114651120871947224
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1095772578, guid: 6a10b2909283487f913b00d94cd3faf5, type: 3}
+  m_Name: Control Track
+  m_EditorClassIdentifier: 
+  m_Locked: 0
+  m_Muted: 0
+  m_Soloed: 0
+  m_Height: 0
+  m_InlineAnimationCurveHeight: 100
+  m_CustomPlayableFullTypename: 
+  m_AnimClip: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips:
+  - m_Start: 0
+    m_ClipIn: 0
+    m_Asset: {fileID: 114012228345319484}
+    m_UnderlyingAsset: {fileID: 114012228345319484}
+    m_Duration: 11.75
+    m_ParentID: 0
+    m_TimeScale: 1
+    m_BlendCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ParentTrack: {fileID: 114651120871947224}
+    m_EaseInDuration: 0
+    m_EaseOutDuration: 0
+    m_BlendInDuration: 0
+    m_BlendOutDuration: 0
+    m_MixInCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_MixOutCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 2
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      - serializedVersion: 2
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_BlendInCurveMode: 0
+    m_BlendOutCurveMode: 0
+    m_ExposedParameterNames: []
+    m_AnimationCurves: {fileID: 0}
+    m_ID: -1638707460
+    m_Recordable: 0
+    m_PostExtrapolationMode: 0
+    m_PreExtrapolationMode: 0
+    m_PostExtrapolationTime: 0
+    m_PreExtrapolationTime: 0
+    m_DisplayName: ControlPlayableAsset
 --- !u!114 &114740318200183682
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -849,6 +1045,19 @@ MonoBehaviour:
   endLocation:
     exposedName: 4d7e1bfacf166444fa51f76aace72266
     defaultValue: {fileID: 0}
+--- !u!114 &114887945594935542
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9091fb7835bb0b244842ccadefade379, type: 3}
+  m_Name: FadeInImageClip
+  m_EditorClassIdentifier: 
+  template:
+    color: {r: 1, g: 1, b: 1, a: 0.697}
 --- !u!114 &114915927345078494
 MonoBehaviour:
   m_ObjectHideFlags: 1

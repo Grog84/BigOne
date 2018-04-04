@@ -34,7 +34,7 @@ public class ThirdPersonCameraScript : CameraScript {
         controllerBoy = boyLookAt.GetComponent<CharacterStateController>();
         currentX = -lookAt.eulerAngles.y;
     }
-
+  
     protected void LateUpdate()
     {
 

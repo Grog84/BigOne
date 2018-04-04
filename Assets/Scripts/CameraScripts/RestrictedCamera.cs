@@ -43,7 +43,7 @@ public class RestrictedCamera : CameraScript
         motherCharacter = motherLookAt.GetComponent<_CharacterController>();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         //Debug.Log("Angolo " + boyCharacter.balanceCollider.transform.eulerAngles.y); 
         //Debug.Log("Dot: " + Vector3.Dot(boyLookAt.right, camTransform.forward));

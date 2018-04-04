@@ -33,7 +33,7 @@ public class PauseCamera : CameraScript
 
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         //if (Input.GetButtonDown("Pause") && !paused)
         //{

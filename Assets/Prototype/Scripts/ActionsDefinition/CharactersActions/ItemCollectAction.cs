@@ -31,7 +31,7 @@ namespace Character.Actions
                 controller.m_CharacterController.isItemCREnd = false;
                 controller.m_CharacterController.startItemAnimation = true;
                 controller.m_CharacterController.Keychain.Add(controller.m_CharacterController.ItemCollider.gameObject);
-                controller.m_CharacterController.ItemCollider.GetComponent<Keys>().PickUp();
+                //controller.m_CharacterController.ItemCollider.GetComponent<Keys>().PickUp();
                 controller.m_CharacterController.ItemCollider.gameObject.SetActive(false);
                 controller.m_CharacterController.isInItemArea = false;
             }

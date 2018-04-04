@@ -89,19 +89,19 @@ public class CameraScript : MonoBehaviour
         MotherSkin = MSkin.GetComponent<Renderer>();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         //StartCoroutine(EnableCollisions());
 
         //check which camera is active
-        if (thirdPersonVirtualCamera.m_Priority > firstPersonVirtualCamera.m_Priority)
-        {
-            GMController.instance.activeCamera = 0;
-        }
-        else if (firstPersonVirtualCamera.m_Priority > thirdPersonVirtualCamera.m_Priority)
-        {
-            GMController.instance.activeCamera = (CameraActive)1;
-        }
+        //if (thirdPersonVirtualCamera.m_Priority > firstPersonVirtualCamera.m_Priority)
+        //{
+        //    GMController.instance.activeCamera = 0;
+        //}
+        //else if (firstPersonVirtualCamera.m_Priority > thirdPersonVirtualCamera.m_Priority)
+        //{
+        //    GMController.instance.activeCamera = (CameraActive)1;
+        //}
 
         #region Fade
         //trigger the switch to fps or tps using the distance of the camera from the player

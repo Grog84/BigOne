@@ -36,7 +36,7 @@ public class PlankCameraScript : CameraScript {
         cam.m_Lens.NearClipPlane = nearClipPlaneDistance;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
 
         // camera movement by axis

@@ -378,7 +378,7 @@ namespace Character
                     {
                         if (Keychain[i].GetComponent<Keys>().ItemID == other.transform.parent.GetChild(0).GetChild(0).GetComponent<Doors>().doorID)
                         {
-                            HideHUDIcons(Keychain[i].gameObject.GetComponent<Keys>().icon);
+                           // HideHUDIcons(Keychain[i].gameObject.GetComponent<Keys>().icon);
                             other.transform.parent.GetChild(0).GetChild(0).tag = "UnlockedDoor";
                             other.transform.parent.GetChild(0).GetChild(0).GetComponent<Doors>().hasKey = true;
                         }

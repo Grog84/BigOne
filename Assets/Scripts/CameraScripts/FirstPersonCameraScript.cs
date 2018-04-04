@@ -21,7 +21,7 @@ public class FirstPersonCameraScript : CameraScript {
         SwitchLookAt();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         //myCamera.m_Lens.FieldOfView = Fov;
         transform.position = myFollow.position;

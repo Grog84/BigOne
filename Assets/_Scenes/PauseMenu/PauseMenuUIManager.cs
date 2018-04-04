@@ -43,8 +43,14 @@ public class PauseMenuUIManager : MonoBehaviour
             isMouseActive = true;
             m_Canvas.GetComponent<GraphicRaycaster>().enabled = true;
         }
-
-    }
+        if (GameObject.Find("PauseMenuPanel").activeSelf)
+        {
+            if (EventSystem.current.currentSelectedGameObject == null)
+            {
+                GameObject.Find("BackToGameButton").GetComponent<Button>().Select();
+            }
+        }
+        }
 
     public void Awake()
     {

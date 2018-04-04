@@ -594,7 +594,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1273342863}
-        m_MethodName: CloseControllerMenu
+        m_MethodName: ReturnToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -855,7 +855,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &170505530
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1003,12 +1003,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2059157241}
-  m_Father: {fileID: 1563769649}
-  m_RootOrder: 3
+  m_Father: {fileID: 832845846}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -598, y: -14.999992}
+  m_AnchoredPosition: {x: -434, y: 53.896034}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &199171132
@@ -1057,8 +1057,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 683165702}
-    m_SelectOnDown: {fileID: 1483137550}
+    m_SelectOnUp: {fileID: 472640655}
+    m_SelectOnDown: {fileID: 1609441950}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1078,7 +1078,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 199171132}
   m_OnClick:
     m_PersistentCalls:
@@ -2129,7 +2129,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Settings
+  m_Text: Audio
 --- !u!222 &389019579
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2586,7 +2586,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -422, y: 111}
+  m_AnchoredPosition: {x: -417, y: 117}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &472640653
@@ -2673,7 +2673,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_SelectOnUp: {fileID: 1013366579}
-    m_SelectOnDown: {fileID: 1609441950}
+    m_SelectOnDown: {fileID: 199171134}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -2882,7 +2882,7 @@ RectTransform:
   m_Children:
   - {fileID: 1145015059}
   m_Father: {fileID: 832845846}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3144,7 +3144,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1273342863}
-        m_MethodName: CloseAudioSettings
+        m_MethodName: ReturnToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4161,11 +4161,11 @@ RectTransform:
   m_Children:
   - {fileID: 1061114160}
   m_Father: {fileID: 832845846}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -465, y: -9}
+  m_AnchoredPosition: {x: -472, y: -76.999985}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &723068351
@@ -5106,6 +5106,7 @@ RectTransform:
   m_Children:
   - {fileID: 1013366577}
   - {fileID: 472640652}
+  - {fileID: 199171131}
   - {fileID: 1609441948}
   - {fileID: 723068350}
   - {fileID: 586664477}
@@ -5992,7 +5993,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -404, y: 165}
+  m_AnchoredPosition: {x: -399, y: 182}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1013366578
@@ -8404,7 +8405,7 @@ RectTransform:
   m_Children:
   - {fileID: 275506402}
   m_Father: {fileID: 1563769649}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -8671,7 +8672,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1563769649
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8685,7 +8686,6 @@ RectTransform:
   - {fileID: 1058592927}
   - {fileID: 683165705}
   - {fileID: 734355840}
-  - {fileID: 199171131}
   - {fileID: 1483137547}
   m_Father: {fileID: 340391049}
   m_RootOrder: 3
@@ -9106,7 +9106,7 @@ GameObject:
   - component: {fileID: 1609441950}
   - component: {fileID: 1609441949}
   m_Layer: 5
-  m_Name: SettingsButton_Inactive
+  m_Name: SettingsAudio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9124,11 +9124,11 @@ RectTransform:
   m_Children:
   - {fileID: 389019577}
   m_Father: {fileID: 832845846}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -440, y: 57}
+  m_AnchoredPosition: {x: -447, y: -11}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1609441949
@@ -9202,7 +9202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 472640655}
+    m_SelectOnUp: {fileID: 199171134}
     m_SelectOnDown: {fileID: 723068353}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -9229,7 +9229,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1273342863}
-        m_MethodName: OpenSettings
+        m_MethodName: OpenAudioSettings
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -82,7 +82,7 @@ public class ManipulateStateTrigger : MonoBehaviour
 
     public void HideIcons()
     {
-        talkIcon.GetChild(0).GetComponent<Image>().color = alphaZero;
+
         talkIcon.GetChild(0).GetComponent<Image>().sprite = null;
     }
 

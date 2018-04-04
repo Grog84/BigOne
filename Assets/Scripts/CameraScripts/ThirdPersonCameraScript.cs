@@ -35,7 +35,7 @@ public class ThirdPersonCameraScript : CameraScript {
         currentX = -lookAt.eulerAngles.y;
     }
 
-    protected void Update()
+    protected void LateUpdate()
     {
 
         // camera movement by axis
@@ -60,15 +60,15 @@ public class ThirdPersonCameraScript : CameraScript {
     {
         if ((int)GMController.instance.isCharacterPlaying == 0)
         {
-           
             StartCoroutine(ResetCameraPriority());
             lookAt = boyLookAtByTag;
+            currentX = -lookAt.eulerAngles.y;
         }
         else if ((int)GMController.instance.isCharacterPlaying == 1)
         {
-            
             StartCoroutine(ResetCameraPriority());
             lookAt = motherLookAtByTag;
+            currentX = -lookAt.eulerAngles.y;
         }
     }
 

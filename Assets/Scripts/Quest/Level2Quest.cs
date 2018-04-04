@@ -39,6 +39,7 @@ public class Level2Quest : LevelQuestManager
             actualQuest = QuestProgress.Objective4;
             Mother.GetComponent<_CharacterController>().isCarrying = false;
             StartCoroutine(CompleteQuest(Objectives[0], ""));
+            StartCoroutine(WaitForCutscene(Cutscenes[6]));
             CheckActualObjective();
         }
         if (newState == QuestProgress.Objective5)

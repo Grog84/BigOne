@@ -20,7 +20,7 @@ public class CameraCollision : MonoBehaviour
         cam = this.GetComponent<CinemachineVirtualCamera>();
         myCameraScript = this.GetComponent<CameraScript>();
         clipPointPositionArray = new Vector3[5];
-    } 
+    }
 
     private void Update()
     {
@@ -45,7 +45,7 @@ public class CameraCollision : MonoBehaviour
             if (Physics.Raycast(ray, out hit, myCameraScript.maxDistance, layerIgnored))
             {
                 finalDist = Mathf.Min(hit.distance, finalDist);
-                myCameraScript.distance = finalDist;
+                myCameraScript.distance = finalDist - 0.1f;
             }
             else
             {
@@ -62,11 +62,11 @@ public class CameraCollision : MonoBehaviour
 
         float z = Camera.main.nearClipPlane;
         float x = Mathf.Tan(cam.m_Lens.FieldOfView / collisionOffesetX) * z;
-        float y = (x / cam.m_Lens.Aspect)+collisionOffsetY;
+        float y = (x / cam.m_Lens.Aspect) + collisionOffsetY;
 
 
         //top left
-        clipArray[0] = (atRotation * new Vector3(-x, y, (z+collisionOffsetZ))) + cameraPosition;
+        clipArray[0] = (atRotation * new Vector3(-x, y, (z + collisionOffsetZ))) + cameraPosition;
         //top right
         clipArray[1] = (atRotation * new Vector3(x, y, (z + collisionOffsetZ))) + cameraPosition;
         //bottom left

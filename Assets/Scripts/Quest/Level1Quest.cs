@@ -40,6 +40,7 @@ public class Level1Quest : LevelQuestManager
         if (newState == QuestProgress.Objective3)
         {
             actualQuest = QuestProgress.Objective3;
+            StartCoroutine(WaitForCutscene(Cutscenes[1]));
             StartCoroutine(CompleteQuest(Objectives[2], ""));
            
         }

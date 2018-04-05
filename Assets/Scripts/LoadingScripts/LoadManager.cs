@@ -23,7 +23,7 @@ public class LoadManager : MonoBehaviour
     [HideInInspector] public bool returningToMainMenu;
 
     public Canvas fadeCanvas;
-
+    public float timer;
     private PlayableDirector playable;
 
     void Awake ()
@@ -37,7 +37,7 @@ public class LoadManager : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
 
-        playable = GetComponent<PlayableDirector>();
+       // playable = GetComponent<PlayableDirector>();
 
         if (GameObject.Find("SaveManager") != null)
         {
@@ -61,7 +61,8 @@ public class LoadManager : MonoBehaviour
 
     public void StopFade()
     {
-       // Debug.Log("mannaggia a lorenzo");
+        // Debug.Log("mannaggia a lorenzo");
+        playable = GetComponent<PlayableDirector>();
         playable.Stop();
         fadeCanvas.sortingOrder = -1;
     }
@@ -101,6 +102,9 @@ public class LoadManager : MonoBehaviour
         if (currentSceneIndex == (SceneManager.sceneCountInBuildSettings - 2))
         {
             async = SceneManager.LoadSceneAsync(0);
+            async.allowSceneActivation = false;
+            yield return new WaitForSeconds(timer);
+            async.allowSceneActivation = true;
         }
         // If is continuing the last game session
         //else if(isContinue)
@@ -114,16 +118,25 @@ public class LoadManager : MonoBehaviour
             isSceneSelected = false;
             loadSelected = true;
             async = SceneManager.LoadSceneAsync(currentSceneIndex);
+            async.allowSceneActivation = false;
+            yield return new WaitForSeconds(timer);
+            async.allowSceneActivation = true;
         }
         // Returning to Main Menu from Pause
         else if(returningToMainMenu)
         {
             returningToMainMenu = false;
             async = SceneManager.LoadSceneAsync(0);
+            async.allowSceneActivation = false;
+            yield return new WaitForSeconds(timer);
+            async.allowSceneActivation = true;
         }
         else
         {
             async = SceneManager.LoadSceneAsync(currentSceneIndex + 1);
+            async.allowSceneActivation = false;
+            yield return new WaitForSeconds(timer);
+            async.allowSceneActivation = true;
         }     
 
         yield return null;

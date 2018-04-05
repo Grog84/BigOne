@@ -87,7 +87,9 @@ public class MenuUIManager : MonoBehaviour
                 case 4:
                     GameObject.Find("CloseAudioMenu").GetComponent<Button>().Select();
                     break;
-
+                case 5:
+                    GameObject.Find("CloseControllerMenu").GetComponent<Button>().Select();
+                    break;
                 default: break;
             }
         }
@@ -268,6 +270,7 @@ public class MenuUIManager : MonoBehaviour
                 a.SetActive(false);
             }
         }
+        State = 5;
     }
 
     public void CloseControllerMenu()

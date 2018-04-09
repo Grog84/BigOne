@@ -11,7 +11,10 @@ namespace Character.Decisions
 
         public override bool Decide(CharacterStateController controller)
         {
-            return Input.GetButton("Run");
+            if (controller.m_CharacterController.canStand && Input.GetButton("Run"))
+                return true;
+            else
+                return false;
         }
 
     }

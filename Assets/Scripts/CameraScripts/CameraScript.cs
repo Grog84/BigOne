@@ -24,11 +24,11 @@ public class CameraScript : MonoBehaviour
     [HideInInspector]public bool boyInTrigger = false;
 
     // objects of the characters that the camera fades when too close to them 
-    private Renderer boySkin;
+    private SkinnedMeshRenderer boySkin;
     private GameObject BSkin;
 
     
-    private Renderer MotherSkin;
+    private SkinnedMeshRenderer MotherSkin;
     private GameObject MSkin;
     
 
@@ -36,7 +36,7 @@ public class CameraScript : MonoBehaviour
     protected CinemachineVirtualCamera[] camerasInScene;
 
     //check if the camera is in a different state from the normal gameplay Camera
-    [HideInInspector]public bool activatedByTrigger = false;
+    public bool activatedByTrigger = false;
     //variables initialized at start 
     [HideInInspector] public Transform motherLookAt;
     [HideInInspector] public Transform boyLookAt;
@@ -51,7 +51,7 @@ public class CameraScript : MonoBehaviour
     //public int Fov = 60;
     //camera variables for the position 
     [HideInInspector] public float nearClipPlaneDistance = 0.1f;
-    [HideInInspector] public float distance = 2.5f;
+     public float distance = 2.5f;
     //maximum distance from the character
     public float maxDistance = 2.5f;
     // position of the camera assigned in the camera movement
@@ -76,6 +76,7 @@ public class CameraScript : MonoBehaviour
 
     private void Start()
     {
+        activatedByTrigger = false;
         firstPersonCamera = GameObject.Find("FirstPersonCamera");
         firstPersonVirtualCamera = firstPersonCamera.GetComponent<CinemachineVirtualCamera>();
         firstPersonCameraScript = firstPersonCamera.GetComponent<FirstPersonCameraScript>();
@@ -84,9 +85,9 @@ public class CameraScript : MonoBehaviour
         thirdPersonCameraScript = thirdPersonCamera.GetComponent<ThirdPersonCameraScript>();
         ledgeCamera = GameObject.Find("LedgeCamera");
         BSkin = GameObject.Find("BoySkin");
-        boySkin = BSkin.GetComponent<Renderer>(); 
+        boySkin = BSkin.GetComponent<SkinnedMeshRenderer>(); 
         MSkin = GameObject.Find("MotherSkin");
-        MotherSkin = MSkin.GetComponent<Renderer>();
+        MotherSkin = MSkin.GetComponent<SkinnedMeshRenderer>();
     }
 
     private void LateUpdate()
@@ -178,6 +179,10 @@ public class CameraScript : MonoBehaviour
         yield return null;
     }
 
+    void PlayerInvisible(Renderer mat)
+    {
+
+    }
 
     protected IEnumerator ResetCameraPriority()
     {

@@ -67,8 +67,13 @@ public class SaveManager :MonoBehaviour {
         //Caricamento attori (Dati salvati sul disco) 
         allActor = FindObjectsOfType<Actor>();
         //Inizializzazione livelli nuovi
-       
-
+        foreach (var a in allActor)
+        {
+            if (a is GuardActor)
+            {
+                a.StoreData();
+            }
+        } 
         if (PlayerProfile.SavedScene == SceneManager.GetActiveScene().name)
         {
             //Caricamento on Open [continue]

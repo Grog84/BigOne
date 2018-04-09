@@ -15,13 +15,14 @@ public class GuardActor : Actor
     public override void StoreData()
     {
         base.StoreData();
-        wayPoint = m_Guard.GetBlackboardIntValue("CurrentNavPoint");
+        //wayPoint = m_Guard.GetBlackboardIntValue("CurrentNavPoint");
     }
 
 
     public override void LoadData()
     {
         base.LoadData();
+
         m_Guard.ResetForReload(wayPoint);
     }
     public override void ApplyData()

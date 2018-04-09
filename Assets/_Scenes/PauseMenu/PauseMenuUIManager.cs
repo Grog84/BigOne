@@ -16,6 +16,14 @@ public class PauseMenuUIManager : MonoBehaviour
     bool isMouseActive;
     public Canvas m_Canvas;
 
+    GameObject PausePanel;
+    GameObject BackToMenu;
+
+    private void Start()
+    {
+      PausePanel=  GameObject.Find("PauseMenuPanel");
+        BackToMenu = GameObject.Find("ExitToMainMenuButton");
+    }
     void Update()
     {
         if (Input.GetButtonDown("Pause"))
@@ -43,11 +51,14 @@ public class PauseMenuUIManager : MonoBehaviour
             isMouseActive = true;
             m_Canvas.GetComponent<GraphicRaycaster>().enabled = true;
         }
-        if (GameObject.Find("PauseMenuPanel").activeSelf)
+        if(Time.timeScale==0)
         {
-            if (EventSystem.current.currentSelectedGameObject == null)
+            if (PausePanel.activeSelf)
             {
-                GameObject.Find("BackToGameButton").GetComponent<Button>().Select();
+                if (EventSystem.current.currentSelectedGameObject == null)
+                {
+                   BackToMenu.GetComponent<Button>().Select();
+                }
             }
         }
         }

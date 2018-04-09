@@ -15,7 +15,21 @@ public class CharacterInterface : MonoBehaviour {
     {
         //Debug.Log("DefeatCharacter");
         m_CharController.m_Animator.SetBool("isDead", true); // dovrebbe esser lo stato
-        m_CharController.isDefeated = true;
+        StartCoroutine(DefeatPlayerCO());
+    }
+
+    IEnumerator DefeatPlayerCO()
+    {
+        while(!m_CharController.isDefeated)
+        {
+            if (!m_CharController.startClimbEnd && m_CharController.isClimbCRDone && m_CharController.isBottomClimbCRDone)
+            {
+                m_CharController.isDefeated = true;
+            }
+
+
+            yield return null;
+        }
     }
 
     public void RevivePlayer()

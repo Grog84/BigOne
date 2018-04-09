@@ -5,9 +5,11 @@ using UnityEngine.UI;
 using UnityEngine.Playables;
 using DG.Tweening;
 
+
 public class LevelQuestManager : MonoBehaviour
 {
-
+    [FMODUnity.EventRef]
+    public string soundEffect;
     public string[] Objectives;
     public PlayableDirector[] Cutscenes;
     ManipulateStateTrigger[] ObjectiveTriggers;
@@ -16,8 +18,10 @@ public class LevelQuestManager : MonoBehaviour
     protected Text objectiveProgress;
     protected Image objectiveComplete;
 
-    public GameObject Mother;
-    public GameObject Boy;
+
+
+    protected GameObject Mother;
+    protected GameObject Boy;
 
     public QuestProgress actualQuest;
 
@@ -37,6 +41,9 @@ public class LevelQuestManager : MonoBehaviour
 
     public IEnumerator CompleteQuest(string nextObjective, string myObjectiveProgress)
     {
+        FMOD.Studio.EventInstance fmodEvent = FMODUnity.RuntimeManager.CreateInstance(soundEffect);
+        fmodEvent.start();
+        fmodEvent.release();
         objectiveComplete.DOColor(new Color(objectiveComplete.color.r, objectiveComplete.color.g, objectiveComplete.color.b, 255f), 2f);
         yield return new WaitForSeconds(2.5f);
         objectiveComplete.DOColor(new Color(objectiveComplete.color.r, objectiveComplete.color.g, objectiveComplete.color.b, 0f), 1f);

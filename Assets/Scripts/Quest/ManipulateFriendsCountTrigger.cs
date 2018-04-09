@@ -18,6 +18,9 @@ public class ManipulateFriendsCountTrigger : MonoBehaviour {
     {
         if (other.tag == "Player" && triggered == false)
         {
+            FMOD.Studio.EventInstance fmodEvent = FMODUnity.RuntimeManager.CreateInstance(level1quest.soundEffect);
+            fmodEvent.start();
+            fmodEvent.release();
             triggered = true;
             playableDirector.Play();
             level1quest.friendsSaved++;

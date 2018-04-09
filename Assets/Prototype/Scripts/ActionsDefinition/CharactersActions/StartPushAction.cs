@@ -19,6 +19,7 @@ namespace Character.Actions
         private void StartPush(CharacterStateController controller)
         {
             controller.m_CharacterController.pushObject = controller.m_CharacterController.pushCollider.transform.parent.gameObject;
+            controller.m_CharacterController.isPushCREnd = false;
             controller.m_CharacterController.isPushing = true;
 
         }

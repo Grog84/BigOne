@@ -17,7 +17,7 @@ namespace Character.Decisions
         private bool CheckIfEndPushing(CharacterStateController controller)
         {
 
-            if (!controller.m_CharacterController.isPushing)
+            if (!controller.m_CharacterController.isPushing && controller.m_CharacterController.isPushCREnd)
             {
 
                 return true;

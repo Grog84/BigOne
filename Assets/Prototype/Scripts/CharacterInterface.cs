@@ -22,7 +22,7 @@ public class CharacterInterface : MonoBehaviour {
     {
         while(!m_CharController.isDefeated)
         {
-            if (!m_CharController.startClimbEnd && m_CharController.isClimbCRDone && m_CharController.isBottomClimbCRDone)
+            if (!m_CharController.startClimbEnd && m_CharController.isClimbCRDone && m_CharController.isBottomClimbCRDone && m_CharController.isPushCREnd)
             {
                 m_CharController.isDefeated = true;
             }

@@ -55,6 +55,7 @@ namespace Character
         [HideInInspector] public bool isPushDirectionRight;            // The player is facing the pushable object
         [HideInInspector] public bool isPushLimit;                      // Detect push limits like obstacles
         [HideInInspector] public bool isPushing;                       // Define the start push actions
+        [HideInInspector] public bool isPushCREnd = true;
         [HideInInspector] public bool isExitPush;                      // Indicates if the DetachFormPushable coroutine is finished
         //
         // DOORS VARIABLES
@@ -594,6 +595,8 @@ namespace Character
 
         public IEnumerator GrabPushable()
         {
+            isPushCREnd = false;
+            isPushing = false;
             float positionTime = 0.5f;
 
             Vector3 dir = pushObject.transform.position - pushCollider.transform.position;
@@ -602,13 +605,13 @@ namespace Character
 
             yield return StartCoroutine(RotateToward(dir));
 
-
+            Debug.Log("entro");
 
             CharacterTransform.DOMove(pushCollider.transform.GetChild(0).position, positionTime);
             yield return new WaitForSeconds(positionTime);
             pushObject.transform.SetParent(CharacterTransform);  // Set the pushable object as Child
             pushObject.GetComponent<Rigidbody>().isKinematic = false;
-            isPushing = false;
+            isPushCREnd = true;
             yield return null;
         }
 

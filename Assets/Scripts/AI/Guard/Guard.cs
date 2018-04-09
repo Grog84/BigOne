@@ -340,7 +340,6 @@ namespace AI
 
         public void CheckNextPoint()
         {
-            Debug.Log("Check Navpoint");
             StartCoroutine(CheckNextPointCO());
         }
 
@@ -352,7 +351,6 @@ namespace AI
         public IEnumerator CheckNextPointCO()
         {
             checkNavPointTime = GetNavPointSecWaiting();
-            Debug.Log("Nav point time :" + checkNavPointTime);
             yield return null;
             //m_NavMeshAgent.speed = 0;
 

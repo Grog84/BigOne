@@ -34,7 +34,7 @@ public class ParticleSystemManager : SerializedMonoBehaviour
     {
         if (MyDB[texture, state] != null)
         {
-            Debug.Log("Emit");
+            //Debug.Log("Emit");
             //Set Position and Rotation
             MyDB[texture, state].transform.position = position + Vector3.up * 0.2f;
             // MyDB[texture, state].transform.rotation = Quaternion.LookRotation(textureNormal);

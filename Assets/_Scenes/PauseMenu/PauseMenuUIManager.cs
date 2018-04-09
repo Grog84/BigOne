@@ -21,8 +21,10 @@ public class PauseMenuUIManager : MonoBehaviour
 
     private void Start()
     {
-      PausePanel=  GameObject.Find("PauseMenuPanel");
-        BackToMenu = GameObject.Find("ExitToMainMenuButton");
+         PausePanel=  GameObject.Find("PauseMenuPanel");
+         BackToMenu = GameObject.Find("ExitToMainMenuButton");
+        CloseMenu();
+
     }
     void Update()
     {
@@ -67,7 +69,6 @@ public class PauseMenuUIManager : MonoBehaviour
     {
         pauseCamera = FindObjectOfType<PauseCamera>();
         PauseMenuCanvas = GameObject.FindGameObjectsWithTag("Pause Menu");
-        CloseMenu();
     }
 
     public void CloseMenu()

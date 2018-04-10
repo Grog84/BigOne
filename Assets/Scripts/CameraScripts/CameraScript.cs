@@ -77,6 +77,7 @@ public class CameraScript : MonoBehaviour
     private void Start()
     {
         activatedByTrigger = false;
+        boyInTrigger = false;
         firstPersonCamera = GameObject.Find("FirstPersonCamera");
         firstPersonVirtualCamera = firstPersonCamera.GetComponent<CinemachineVirtualCamera>();
         firstPersonCameraScript = firstPersonCamera.GetComponent<FirstPersonCameraScript>();

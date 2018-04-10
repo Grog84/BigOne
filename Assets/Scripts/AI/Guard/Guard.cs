@@ -5,6 +5,7 @@ using UnityEngine.AI;
 using SaveGame;
 using StateMachine;
 using Sirenix.OdinInspector;
+using DG.Tweening;
 
 namespace AI
 {
@@ -12,7 +13,6 @@ namespace AI
 
     public class Guard : AIAgent
     {
-
         [Header("Agent Navigation")]
         public bool randomPick;
         [SerializeField]
@@ -28,6 +28,12 @@ namespace AI
         [Space(10)]
         [Header("Agent Perception Component")]
         [HideInInspector]public GameObject guardAllert;
+
+        [Space(10)]
+        [Header("LookAt Parameters")]
+        public float distance;
+         public Transform guardGaze;
+         public Transform defaultGaze;
 
         // Player
         [HideInInspector] public CharacterInterface[] characterInterfaces;
@@ -46,6 +52,7 @@ namespace AI
         // Perception
         Transform[][] lookAtPositions;
         Transform[] lookAtPositionCentral;
+        Transform player;
         PerceptionBar perceptionBar;
         Transform eyes;
         Cone m_Cone;
@@ -588,6 +595,8 @@ namespace AI
             m_Cone = TransformDeepChildExtension.FindDeepChild(transform, "Cone").GetComponent<Cone>();
             m_ConeScale = GetComponent<ConeScale>();
             m_Animator = GetComponent<Animator>();
+            //guardGaze = transform.Find("GuardLookAt");
+            //defaultGaze = transform.Find("GuardDefaultLook");
 
             m_Brain = GetComponent<Brain>();
             m_Brain.decisionMaker = Instantiate(m_Brain.decisionMaker);
@@ -634,12 +643,14 @@ namespace AI
                 if (lookAt.root.gameObject.name == "Boy")
                 {
                     lookAtPositions[(int)CharacterActive.Boy][boyIdx] = lookAt;
+                    player=lookAt;
                     boyIdx++;
 
                 }
                 else if (lookAt.root.gameObject.name == "Mother")
                 {
                     lookAtPositions[(int)CharacterActive.Mother][motherIdx] = lookAt;
+                    player = lookAt;
                     motherIdx++;
                 }
 
@@ -675,6 +686,19 @@ namespace AI
             UpdatePerceptionUI();
             ChangeStateFromGauge();
             //m_Animator.SetFloat("Forward", m_NavMeshAgent.speed);
+
+            //if (m_State == GuardState.ALARMED || m_State == GuardState.CURIOUS)
+            //{
+            //    if (Vector3.Distance(gameObject.transform.position, player.position) < distance)
+            //        guardGaze.DOMove(player.position, 1f);
+            //    else
+            //        guardGaze.DOMove(defaultGaze.position, 1f);
+            //}
+            //else if (guardGaze.position != defaultGaze.position)
+            //{
+            //    guardGaze.DOMove(defaultGaze.position, 1f);
+            //}
+
 
             Vector3 move = m_NavMeshAgent.velocity;
             if (move.magnitude > 1f) move.Normalize();

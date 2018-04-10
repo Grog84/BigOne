@@ -10,7 +10,8 @@ public class CameraScript : MonoBehaviour
     //references to other virtual cameras
     private GameObject firstPersonCamera;
     private GameObject thirdPersonCamera;
-    private GameObject ledgeCamera;
+    private CinemachineVirtualCamera plankCamera;
+    private CinemachineVirtualCamera balanceCamera;
     private CinemachineVirtualCamera firstPersonVirtualCamera;
     private CinemachineVirtualCamera thirdPersonVirtualCamera;
     private FirstPersonCameraScript firstPersonCameraScript;
@@ -20,17 +21,17 @@ public class CameraScript : MonoBehaviour
     protected InputManager inputManager;
 
     //check wich character is in trigger
-    [HideInInspector]public bool motherInTrigger = false;
-    [HideInInspector]public bool boyInTrigger = false;
+    [HideInInspector] public bool motherInTrigger = false;
+    [HideInInspector] public bool boyInTrigger = false;
 
     // objects of the characters that the camera fades when too close to them 
     private SkinnedMeshRenderer boySkin;
     private GameObject BSkin;
 
-    
+
     private SkinnedMeshRenderer MotherSkin;
     private GameObject MSkin;
-    
+
 
     //Array of cameras used to reset the priority to default on swtich
     protected CinemachineVirtualCamera[] camerasInScene;
@@ -51,7 +52,7 @@ public class CameraScript : MonoBehaviour
     //public int Fov = 60;
     //camera variables for the position 
     [HideInInspector] public float nearClipPlaneDistance = 0.1f;
-     public float distance = 2.5f;
+    public float distance = 2.5f;
     //maximum distance from the character
     public float maxDistance = 2.5f;
     // position of the camera assigned in the camera movement
@@ -84,9 +85,10 @@ public class CameraScript : MonoBehaviour
         thirdPersonCamera = GameObject.Find("ThirdPersonCamera");
         thirdPersonVirtualCamera = thirdPersonCamera.GetComponent<CinemachineVirtualCamera>();
         thirdPersonCameraScript = thirdPersonCamera.GetComponent<ThirdPersonCameraScript>();
-        ledgeCamera = GameObject.Find("LedgeCamera");
+        plankCamera = GameObject.Find("PlankCamera").GetComponent<CinemachineVirtualCamera>();
+        balanceCamera = GameObject.Find("RestrictedCamera").GetComponent<CinemachineVirtualCamera>();
         BSkin = GameObject.Find("BoySkin");
-        boySkin = BSkin.GetComponent<SkinnedMeshRenderer>(); 
+        boySkin = BSkin.GetComponent<SkinnedMeshRenderer>();
         MSkin = GameObject.Find("MotherSkin");
         MotherSkin = MSkin.GetComponent<SkinnedMeshRenderer>();
     }
@@ -106,44 +108,38 @@ public class CameraScript : MonoBehaviour
         //}
 
         #region Fade
-        //trigger the switch to fps or tps using the distance of the camera from the player
-        if (activatedByTrigger == false && thirdPersonCameraScript.distance < minCamDistance)
+        if (plankCamera.m_Priority < 15 && balanceCamera.m_Priority < 15)
         {
-            //firstPersonVirtualCamera.m_Priority = 100;
-        }
-        else if (activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance + 0.2f)
-        {
-            //firstPersonVirtualCamera.m_Priority = 0;
-        }
+            Debug.Log("as");
+            // fade of the boy when camera too close
+            if (((int)GMController.instance.isCharacterPlaying == 0 && boyInTrigger == true)
+                || activatedByTrigger == false && thirdPersonCameraScript.distance < minCamDistance && (int)GMController.instance.isCharacterPlaying == 0)
 
-        // fade of the boy when camera too close
-        if (((int)GMController.instance.isCharacterPlaying == 0 && boyInTrigger == true) 
-            ||activatedByTrigger == false && thirdPersonCameraScript.distance < minCamDistance && (int)GMController.instance.isCharacterPlaying == 0)
+            {
+                StartCoroutine(SetMaterialTrasparent(boySkin));
 
-        {
-            StartCoroutine(SetMaterialTrasparent(boySkin));
+            }
+            else if ((int)GMController.instance.isCharacterPlaying != 0
+                || activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance + 0.2f)
+            {
+                StartCoroutine(SetMaterialOpaque(boySkin));
+            }
 
+            //fade of the mother if camera too close
+            if (((int)GMController.instance.isCharacterPlaying == 1 && motherInTrigger == true)
+                || activatedByTrigger == false && thirdPersonCameraScript.distance < minCamDistance && (int)GMController.instance.isCharacterPlaying == 1)
+            {
+
+                StartCoroutine(SetMaterialTrasparent(MotherSkin));
+
+            }
+            else if ((int)GMController.instance.isCharacterPlaying != 1
+                 || activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance + 0.2f)
+            {
+                StartCoroutine(SetMaterialOpaque(MotherSkin));
+            }
         }
-        else if ((int)GMController.instance.isCharacterPlaying != 0
-            || activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance + 0.2f)
-        {
-            StartCoroutine(SetMaterialOpaque(boySkin));
-        }
-
-        //fade of the mother if camera too close
-        if (((int)GMController.instance.isCharacterPlaying == 1 && motherInTrigger == true)
-            || activatedByTrigger == false && thirdPersonCameraScript.distance < minCamDistance && (int)GMController.instance.isCharacterPlaying == 1)
-        {
-
-            StartCoroutine(SetMaterialTrasparent(MotherSkin));
-
-        }
-        else if ((int)GMController.instance.isCharacterPlaying != 1
-             || activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance + 0.2f)
-        {
-            StartCoroutine(SetMaterialOpaque(MotherSkin));
-        }
-#endregion
+        #endregion
 
     }
 
@@ -189,7 +185,7 @@ public class CameraScript : MonoBehaviour
     {
         for (int c = 0; c < camerasInScene.Length; c++)
         {
-            if(camerasInScene[c].gameObject.name != "ThirdPersonCamera")
+            if (camerasInScene[c].gameObject.name != "ThirdPersonCamera")
             {
                 camerasInScene[c].m_Priority = 0;
             }
@@ -198,5 +194,5 @@ public class CameraScript : MonoBehaviour
         yield return null;
     }
 
-    
+
 }

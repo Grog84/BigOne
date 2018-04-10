@@ -19,10 +19,10 @@ public class PauseMenuUIManager : MonoBehaviour
     GameObject PausePanel;
     GameObject BackToMenu;
 
-    float SFXVolume = 0.5f;
+    public float SFXVolume = 0.5f;
     FMOD.Studio.Bus SFX;
 
-    float MusicVolume = 0.5f;
+    public float MusicVolume = 0.5f;
     FMOD.Studio.Bus Music;
     private void Start()
     {

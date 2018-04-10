@@ -23,7 +23,7 @@ namespace AI
 
         public override void GetCurious()
         {
-           
+            base.GetCurious();
         }
 
         public void Shoot()

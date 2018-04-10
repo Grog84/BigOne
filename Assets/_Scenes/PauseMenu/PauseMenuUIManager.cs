@@ -19,6 +19,11 @@ public class PauseMenuUIManager : MonoBehaviour
     GameObject PausePanel;
     GameObject BackToMenu;
 
+    float SFXVolume = 0.5f;
+    FMOD.Studio.Bus SFX;
+
+    float MusicVolume = 0.5f;
+    FMOD.Studio.Bus Music;
     private void Start()
     {
          PausePanel=  GameObject.Find("PauseMenuPanel");
@@ -69,6 +74,9 @@ public class PauseMenuUIManager : MonoBehaviour
     {
         pauseCamera = FindObjectOfType<PauseCamera>();
         PauseMenuCanvas = GameObject.FindGameObjectsWithTag("Pause Menu");
+        SFX = FMODUnity.RuntimeManager.GetBus("bus:/SFX");
+        Music = FMODUnity.RuntimeManager.GetBus("bus:/Music");
+
     }
 
     public void CloseMenu()
@@ -84,6 +92,8 @@ public class PauseMenuUIManager : MonoBehaviour
 
     }
 
+
+    float musicvalue;
     public void Pause()
     {
         pauseCamera.Resume();
@@ -94,14 +104,20 @@ public class PauseMenuUIManager : MonoBehaviour
                 if (!a.gameObject.activeSelf)
                 {
                     a.gameObject.SetActive(true);
+                    SFX.getVolume(out SFXVolume,out SFXVolume);
+                    SFX.setVolume(0);
+                    Music.getVolume(out musicvalue, out musicvalue);
+                    musicvalue -= 0.3f;
+                    Music.setVolume(musicvalue);
 
                     Time.timeScale = 0;
                     OpenDiary();
-                    //pauseCamera.Resume();
                 }
                 else
                 {
-                    //pauseCamera.Resume();
+                    SFX.setVolume(SFXVolume);
+                    musicvalue += 0.3f;
+                    Music.setVolume(musicvalue);
                     BackToGame();
                 }
             }

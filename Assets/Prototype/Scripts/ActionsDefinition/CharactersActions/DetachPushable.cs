@@ -16,12 +16,13 @@ namespace Character.Actions
 
         private void DetachChild(CharacterStateController controller)
         {
-            Debug.Log("isDefeated "+controller.m_CharacterController.isDefeated);
            if(controller.m_CharacterController.isDefeated)
            {
-               controller.m_CharacterController.pushObject.transform.parent = null;                       
-               controller.m_CharacterController.pushObject.GetComponent<Rigidbody>().isKinematic = true;
+                Debug.Log("isDefeated "+controller.m_CharacterController.isDefeated);
+                controller.m_CharacterController.pushObject.transform.parent = null;                       
+                controller.m_CharacterController.pushObject.GetComponent<Rigidbody>().isKinematic = true;
            }
         }
     }
+
 }

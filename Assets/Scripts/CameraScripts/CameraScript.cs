@@ -108,12 +108,12 @@ public class CameraScript : MonoBehaviour
         //}
 
         #region Fade
-        if (plankCamera.m_Priority < 15 && balanceCamera.m_Priority < 15)
+        if (Vector3.Distance(Camera.main.transform.position, thirdPersonCameraScript.lookAt.transform.position) < minCamDistance)
         {
             Debug.Log("as");
             // fade of the boy when camera too close
             if (((int)GMController.instance.isCharacterPlaying == 0 && boyInTrigger == true)
-                || activatedByTrigger == false && thirdPersonCameraScript.distance < minCamDistance && (int)GMController.instance.isCharacterPlaying == 0)
+                || activatedByTrigger == false &&  (int)GMController.instance.isCharacterPlaying == 0)
 
             {
                 StartCoroutine(SetMaterialTrasparent(boySkin));
@@ -123,7 +123,7 @@ public class CameraScript : MonoBehaviour
 
             //fade of the mother if camera too close
             if (((int)GMController.instance.isCharacterPlaying == 1 && motherInTrigger == true)
-                || activatedByTrigger == false && thirdPersonCameraScript.distance < minCamDistance && (int)GMController.instance.isCharacterPlaying == 1)
+                || activatedByTrigger == false  && (int)GMController.instance.isCharacterPlaying == 1)
             {
 
                 StartCoroutine(SetMaterialTrasparent(MotherSkin));
@@ -131,15 +131,15 @@ public class CameraScript : MonoBehaviour
             }
 
         }
-        else if (plankCamera.m_Priority > 15 && balanceCamera.m_Priority > 15)
+        else if (Vector3.Distance(Camera.main.transform.position, thirdPersonCameraScript.lookAt.transform.position) > minCamDistance + 0.3f)
         {
             if ((int)GMController.instance.isCharacterPlaying != 1
-                     || activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance + 0.2f)
+                     || activatedByTrigger == false)
             {
                 StartCoroutine(SetMaterialOpaque(MotherSkin));
             }
             if ((int)GMController.instance.isCharacterPlaying != 0
-                    || activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance + 0.2f)
+                    || activatedByTrigger == false)
             {
                 StartCoroutine(SetMaterialOpaque(boySkin));
             }

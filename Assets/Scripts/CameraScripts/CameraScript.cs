@@ -119,11 +119,7 @@ public class CameraScript : MonoBehaviour
                 StartCoroutine(SetMaterialTrasparent(boySkin));
 
             }
-            else if ((int)GMController.instance.isCharacterPlaying != 0
-                || activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance + 0.2f)
-            {
-                StartCoroutine(SetMaterialOpaque(boySkin));
-            }
+
 
             //fade of the mother if camera too close
             if (((int)GMController.instance.isCharacterPlaying == 1 && motherInTrigger == true)
@@ -133,12 +129,22 @@ public class CameraScript : MonoBehaviour
                 StartCoroutine(SetMaterialTrasparent(MotherSkin));
 
             }
-            else if ((int)GMController.instance.isCharacterPlaying != 1
-                 || activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance + 0.2f)
+
+        }
+        else if (plankCamera.m_Priority > 15 && balanceCamera.m_Priority > 15)
+        {
+            if ((int)GMController.instance.isCharacterPlaying != 1
+                     || activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance + 0.2f)
             {
                 StartCoroutine(SetMaterialOpaque(MotherSkin));
             }
+            if ((int)GMController.instance.isCharacterPlaying != 0
+                    || activatedByTrigger == false && thirdPersonCameraScript.distance > minCamDistance + 0.2f)
+            {
+                StartCoroutine(SetMaterialOpaque(boySkin));
+            }
         }
+
         #endregion
 
     }

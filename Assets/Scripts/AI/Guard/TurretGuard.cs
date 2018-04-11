@@ -16,7 +16,7 @@ namespace AI
             SetBlackboardValue("GuardState", (int)GuardState.ALARMED);
             LoadStats(alarmedStats);
             guardAllert.SetActive(false);
-            SetBlackboardValue("IsRelaxing", false);
+            SetBlackboardValue("IsRelaxing", true);
 
             statusColor = Color.red;
         }
@@ -24,6 +24,7 @@ namespace AI
         public override void GetCurious()
         {
             base.GetCurious();
+            SetBlackboardValue("IsRelaxing", true);
         }
 
         public void Shoot()

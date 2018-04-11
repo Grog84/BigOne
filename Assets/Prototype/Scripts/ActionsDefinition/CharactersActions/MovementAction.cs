@@ -20,65 +20,67 @@ namespace Character.Actions
 
         private void Walk(CharacterStateController controller)
         {
-            float h = 0;
-            float v = 0;
-            //float get from the axis used in the vector3 m_Move
-            if ((int)InputManager.instance.GetInputState() == 0)
+            if (GMController.instance.isGameActive)
             {
+                float h = 0;
+                float v = 0;
+                //float get from the axis used in the vector3 m_Move
+                if ((int)InputManager.instance.GetInputState() == 0)
+                {
                 
-                if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.3f)
+                    if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.3f)
+                    {
+                        h = Input.GetAxis("Horizontal");
+                    }
+                    else
+                    {
+                        h = 0;
+                    }
+                    if (Mathf.Abs(Input.GetAxis("Vertical")) > 0.3f)
+                    {
+                        v = Input.GetAxis("Vertical");
+                    }
+                    else
+                    {
+                        v = 0;
+                    }
+                }
+                else
                 {
                     h = Input.GetAxis("Horizontal");
-                }
-                else
-                {
-                    h = 0;
-                }
-                if (Mathf.Abs(Input.GetAxis("Vertical")) > 0.3f)
-                {
                     v = Input.GetAxis("Vertical");
-                }
-                else
-                {
-                    v = 0;
-                }
-            }
-            else
-            {
-                h = Input.GetAxis("Horizontal");
-                v = Input.GetAxis("Vertical");
 
-            }
+                }
             
            
-            //calculate move direction to pass to character
-            if (controller.m_CharacterController.m_Camera != null)
-            {
-                // calculate camera relative direction to move:
-                m_CamForward = Vector3.Scale(controller.m_CharacterController.m_Camera.forward, new Vector3(1, 0, 1)).normalized;
-                m_Move = (v * m_CamForward + h * controller.m_CharacterController.m_Camera.right);
-            }
+                //calculate move direction to pass to character
+                if (controller.m_CharacterController.m_Camera != null)
+                {
+                    // calculate camera relative direction to move:
+                    m_CamForward = Vector3.Scale(controller.m_CharacterController.m_Camera.forward, new Vector3(1, 0, 1)).normalized;
+                    m_Move = (v * m_CamForward + h * controller.m_CharacterController.m_Camera.right);
+                }
 
 
-            if (m_Move.sqrMagnitude > 1)
-            {
-                m_Move = m_Move.normalized;
-            }
+                if (m_Move.sqrMagnitude > 1)
+                {
+                    m_Move = m_Move.normalized;
+                }
 
-           // Debug.Log(m_Move);
-            m_Move *= controller.characterStats.m_MovementSpeed;
+               // Debug.Log(m_Move);
+                m_Move *= controller.characterStats.m_MovementSpeed;
 
 
 
-            //make the model face the camera direction
-            if (m_Move != Vector3.zero)
-                controller.m_CharacterController.CharacterTransform.forward = m_Move;
+                //make the model face the camera direction
+                if (m_Move != Vector3.zero)
+                    controller.m_CharacterController.CharacterTransform.forward = m_Move;
 
-            //apply gravity if needed when walking
-            m_Move.y -= controller.characterStats.m_Gravity;
-            controller.m_CharacterController.m_CharController.Move(m_Move * Time.deltaTime);
+                //apply gravity if needed when walking
+                m_Move.y -= controller.characterStats.m_Gravity;
+                controller.m_CharacterController.m_CharController.Move(m_Move * Time.deltaTime);
 
-            #region For Animator
+                #region For Animator
 
 
 
@@ -139,6 +141,7 @@ namespace Character.Actions
                 controller.m_CharacterController.m_ForwardAmount = 0;
             }
 #endregion
+            }
 
         }
     }
